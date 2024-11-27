@@ -1,8 +1,8 @@
-/************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3546.gsc
-************************/
+ * Script: scripts\mp\equipment\blackhat.gsc
+*********************************************/
 
 func_2B29() {
 	scripts\mp\powerloot::func_DF06("power_blackhat",["passive_increased_radius"]);

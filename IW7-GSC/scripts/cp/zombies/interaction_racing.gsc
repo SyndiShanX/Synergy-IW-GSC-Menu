@@ -1,8 +1,8 @@
-/************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3386.gsc
-************************/
+ * Script: scripts\cp\zombies\interaction_racing.gsc
+*****************************************************/
 
 init_all_race_games() {
 	scripts\engine\utility::flag_init("arcade_race_pregame");

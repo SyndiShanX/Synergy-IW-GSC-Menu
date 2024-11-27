@@ -1,8 +1,8 @@
-/************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3332.gsc
-************************/
+ * Script: scripts\cp\powers\coop_blackholegrenade.gsc
+*******************************************************/
 
 blackholegrenadeinit() {
 	level.var_2ABC = [];

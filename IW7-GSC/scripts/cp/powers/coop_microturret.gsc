@@ -1,8 +1,8 @@
-/************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3343.gsc
-************************/
+ * Script: scripts\cp\powers\coop_microturret.gsc
+**************************************************/
 
 init() {
 	if(!isdefined(level.sentrysettings)) {

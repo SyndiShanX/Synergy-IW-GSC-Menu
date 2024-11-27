@@ -1,8 +1,8 @@
-/************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3429.gsc
-************************/
+ * Script: scripts\mp\agents\agent_utility.gsc
+***********************************************/
 
 agentfunc(param_00) {
 	return level.agent_funcs[self.agent_type][param_00];

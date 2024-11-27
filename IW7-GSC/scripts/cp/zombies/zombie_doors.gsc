@@ -1,8 +1,8 @@
-/************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3404.gsc
-************************/
+ * Script: scripts\cp\zombies\zombie_doors.gsc
+***********************************************/
 
 func_97B1() {
 	scripts\engine\utility::flag_init("doors_initialized");

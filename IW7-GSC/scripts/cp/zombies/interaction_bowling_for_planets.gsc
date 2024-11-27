@@ -1,8 +1,8 @@
-/************************
+/******************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3377.gsc
-************************/
+ * Script: scripts\cp\zombies\interaction_bowling_for_planets.gsc
+******************************************************************/
 
 init_bfp_game() {
 	var_00 = scripts\engine\utility::getstructarray("bowling_for_planets","script_noteworthy");

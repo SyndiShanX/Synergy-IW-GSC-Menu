@@ -1,8 +1,8 @@
-/************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3419.gsc
-************************/
+ * Script: scripts\cp\zombies\zombies_loadout.gsc
+**************************************************/
 
 init() {
 	level.available_player_characters = [];

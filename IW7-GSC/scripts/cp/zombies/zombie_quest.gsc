@@ -1,8 +1,8 @@
-/************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3410.gsc
-************************/
+ * Script: scripts\cp\zombies\zombie_quest.gsc
+***********************************************/
 
 func_9700() {
 	level.var_13F4D = [];

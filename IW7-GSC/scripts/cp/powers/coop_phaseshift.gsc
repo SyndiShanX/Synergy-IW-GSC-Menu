@@ -1,8 +1,8 @@
-/************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3346.gsc
-************************/
+ * Script: scripts\cp\powers\coop_phaseshift.gsc
+*************************************************/
 
 init() {
 	level._effect["vfx_phase_shift_start"] = loadfx("vfx\old\_requests\archetypes\vfx_phase_shift_start_volume");

@@ -1,8 +1,8 @@
-/************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3382.gsc
-************************/
+ * Script: scripts\cp\zombies\interaction_laughingclown.gsc
+************************************************************/
 
 laughing_clown(param_00,param_01) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);

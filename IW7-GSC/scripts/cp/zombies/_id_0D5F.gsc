@@ -1,8 +1,8 @@
-/************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3423.gsc
-************************/
+ * Script: scripts\cp\zombies\_id_0D5F.gsc
+*******************************************/
 
 func_9758() {
 	if(!isdefined(level.var_10680)) {

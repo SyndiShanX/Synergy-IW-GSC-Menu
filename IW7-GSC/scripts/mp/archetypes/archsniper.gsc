@@ -1,8 +1,8 @@
-/************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3440.gsc
-************************/
+ * Script: scripts\mp\archetypes\archsniper.gsc
+************************************************/
 
 func_97D0() {
 	level.var_37D3 = [];

@@ -1,8 +1,8 @@
-/************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3956.gsc
-************************/
+ * Script: scripts\mp\agents\zombie\zombie_util.gsc
+****************************************************/
 
 func_38C2(param_00,param_01,param_02) {
 	if(!isdefined(param_02)) {

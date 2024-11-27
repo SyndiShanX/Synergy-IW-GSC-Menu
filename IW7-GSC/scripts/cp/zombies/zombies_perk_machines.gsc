@@ -1,8 +1,8 @@
-/************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3421.gsc
-************************/
+ * Script: scripts\cp\zombies\zombies_perk_machines.gsc
+********************************************************/
 
 register_interactions() {
 	level.interaction_hintstrings["perk_machine_revive"] = &"COOP_PERK_MACHINES_1500";

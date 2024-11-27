@@ -1,8 +1,8 @@
-/************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3379.gsc
-************************/
+ * Script: scripts\cp\zombies\interaction_clowntooth.gsc
+*********************************************************/
 
 init_clowntooth_game() {
 	var_00 = 4;

@@ -1,8 +1,8 @@
-/************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3358.gsc
-************************/
+ * Script: scripts\cp\powers\coop_transponder.gsc
+**************************************************/
 
 init() {
 	level._effect["transponder_activate"] = loadfx("vfx\iw7\_requests\mp\vfx_transponder_activate.vfx");

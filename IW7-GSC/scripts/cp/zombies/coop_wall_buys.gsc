@@ -1,8 +1,8 @@
-/************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3372.gsc
-************************/
+ * Script: scripts\cp\zombies\coop_wall_buys.gsc
+*************************************************/
 
 init() {
 	level.var_138A1 = [];

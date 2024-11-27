@@ -1,8 +1,8 @@
-/************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3374.gsc
-************************/
+ * Script: scripts\cp\zombies\interaction_basketball.gsc
+*********************************************************/
 
 init_basketball_game() {
 	var_00 = scripts\engine\utility::getstructarray("basketball_game","script_noteworthy");

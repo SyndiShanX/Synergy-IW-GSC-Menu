@@ -1,8 +1,8 @@
-/************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3348.gsc
-************************/
+ * Script: scripts\cp\powers\coop_portal_generator.gsc
+*******************************************************/
 
 portalgeneratorinit() {
 	level._effect["portal_open"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_portal_generator.vfx");

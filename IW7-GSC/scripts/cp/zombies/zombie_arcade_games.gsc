@@ -1,8 +1,8 @@
-/************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3398.gsc
-************************/
+ * Script: scripts\cp\zombies\zombie_arcade_games.gsc
+******************************************************/
 
 func_211C() {
 	wait(10);

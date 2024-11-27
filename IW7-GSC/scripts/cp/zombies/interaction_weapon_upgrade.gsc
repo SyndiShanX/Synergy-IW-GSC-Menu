@@ -1,8 +1,8 @@
-/************************
+/*************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3393.gsc
-************************/
+ * Script: scripts\cp\zombies\interaction_weapon_upgrade.gsc
+*************************************************************/
 
 init_all_weapon_upgrades() {
 	var_00 = scripts\engine\utility::getstructarray("weapon_upgrade","script_noteworthy");

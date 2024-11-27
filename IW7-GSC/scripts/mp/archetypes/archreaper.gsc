@@ -1,8 +1,8 @@
-/************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3438.gsc
-************************/
+ * Script: scripts\mp\archetypes\archreaper.gsc
+************************************************/
 
 func_97D0() {
 	level._effect["swipe_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_swipe_trail");

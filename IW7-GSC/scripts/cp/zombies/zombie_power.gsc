@@ -1,8 +1,8 @@
-/************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 3409.gsc
-************************/
+ * Script: scripts\cp\zombies\zombie_power.gsc
+***********************************************/
 
 func_96F4() {
 	wait(5);
