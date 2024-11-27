@@ -135,8 +135,15 @@ check_option(player, menu, cursor) {
 	return false;
 }
 
+fade_hud(alpha, time) {
+	self endon("stop_hud_fade");
+	self fadeOverTime(time);
+	self.alpha = alpha;
+	wait time;
+}
+
 create_text(text, font, font_scale, align_x, align_y, x, y, color, alpha, z_index, hide_when_in_menu, archive) {
-	textElement = newHudElem();
+	textElement = newClientHudElem(self);
 	textElement.font = font;
 	textElement.fontscale = font_scale;
 	textElement.alpha = alpha;
@@ -187,7 +194,7 @@ set_text(text) {
 }
 
 create_shader(shader, align_x, align_y, x, y, width, height, color, alpha, z_index) {
-	shaderElement = newHudElem();
+	shaderElement = newClientHudElem(self);
 	shaderElement.elemType = "icon";
 	shaderElement.children = [];
 	shaderElement.alpha = alpha;
@@ -1091,8 +1098,10 @@ iPrintString(string) {
 	} else {
 		self.syn["string"] set_text(string);
 	}
-	wait 5;
-	self.syn["string"] set_text("");
+	self.syn["string"] notify("stop_hud_fade");
+	self.syn["string"].alpha = 1;
+	self.syn["string"] setText(string);
+	self.syn["string"] thread fade_hud(0, 4);
 }
 
 modify_x_position(offset) {
