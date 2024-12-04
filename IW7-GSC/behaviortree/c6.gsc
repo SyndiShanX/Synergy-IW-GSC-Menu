@@ -1,8 +1,8 @@
-/************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 936.gsc
-************************/
+ * Script: behaviortree\c6.gsc
+*******************************/
 
 func_33C0(param_00) {
   return lib_0A09::func_5AEA(param_00, 5);

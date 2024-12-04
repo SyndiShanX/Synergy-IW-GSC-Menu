@@ -1,8 +1,8 @@
-/************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 946.gsc
-************************/
+ * Script: behaviortree\zombie.gsc
+***********************************/
 
 func_13F5E(param_00) {
   return lib_0A09::func_5AEA(param_00, 200);

@@ -1,8 +1,8 @@
-/************************************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\cp\crafted_trap_electric.gsc
-************************************************/
+ * Script: scripts\cp\zombies\craftables\_electric_trap.gsc
+************************************************************/
 
 init() {
   level._effect["electric_trap_idle"] = loadfx("vfx\iw7\_requests\coop\generator_idle.vfx");

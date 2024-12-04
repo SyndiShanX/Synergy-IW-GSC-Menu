@@ -1,8 +1,8 @@
-/**********************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\cp\crafted_trap_gascan.gsc
-**********************************************/
+ * Script: scripts\cp\zombies\craftables\_gascan.gsc
+*****************************************************/
 
 init() {
   level._effect["candypile_fire"] = loadfx("vfx\iw7\_requests\coop\zmb_candypile_fire.vfx");

@@ -1,8 +1,8 @@
-/************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 940.gsc
-************************/
+ * Script: behaviortree\c12.gsc
+********************************/
 
 func_3643(param_00) {
   return lib_0C08::func_8C25(param_00, 1);

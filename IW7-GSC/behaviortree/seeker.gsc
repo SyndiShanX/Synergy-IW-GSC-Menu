@@ -1,8 +1,8 @@
-/************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 944.gsc
-************************/
+ * Script: behaviortree\seeker.gsc
+***********************************/
 
 func_F170(param_00) {
   return scripts\aitypes\melee::melee_init(param_00, self.var_3135.var_F15D);

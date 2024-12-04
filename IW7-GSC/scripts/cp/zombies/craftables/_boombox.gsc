@@ -1,8 +1,8 @@
-/***********************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\cp\crafted_trap_boombox.gsc
-***********************************************/
+ * Script: scripts\cp\zombies\craftables\_boombox.gsc
+******************************************************/
 
 init() {
   level._effect["boombox_c4light"] = loadfx("vfx\iw7\_requests\coop\vfx_boombox_blink");

@@ -1,8 +1,8 @@
-/*************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\cp\crafted_trap_revocator.gsc
-*************************************************/
+ * Script: scripts\cp\zombies\craftables\_revocator.gsc
+********************************************************/
 
 init() {
   level._effect["revocator_idle"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_revocator_idle.vfx");

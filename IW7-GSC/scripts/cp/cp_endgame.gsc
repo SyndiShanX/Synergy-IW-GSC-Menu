@@ -1,8 +1,8 @@
-/***********************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\cp\_endgame.gsc
-***********************************/
+ * Script: scripts\cp\cp_endgame.gsc
+*************************************/
 
 init() {
   func_DEB3();

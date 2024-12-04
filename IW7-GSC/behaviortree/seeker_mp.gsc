@@ -1,8 +1,8 @@
-/************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 945.gsc
-************************/
+ * Script: behaviortree\seeker_mp.gsc
+**************************************/
 
 func_2AD0() {
   if(isdefined(level.var_119E["seeker_mp"])) {

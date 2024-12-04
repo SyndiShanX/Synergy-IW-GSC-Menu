@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: 943.gsc
+ * Script: behaviortree\jackal.gsc
 ***************************************/
 
 func_A3C3(var_00) {

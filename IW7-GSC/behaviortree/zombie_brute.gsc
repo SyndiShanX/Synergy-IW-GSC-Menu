@@ -1,8 +1,8 @@
-/************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 947.gsc
-************************/
+ * Script: behaviortree\zombie_brute.gsc
+*****************************************/
 
 func_2AD0() {
   if(isdefined(level.var_119E["zombie_brute"])) {

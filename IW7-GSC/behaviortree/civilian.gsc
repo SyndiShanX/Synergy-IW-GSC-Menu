@@ -1,8 +1,8 @@
-/************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: 941.gsc
-************************/
+ * Script: behaviortree\civilian.gsc
+*************************************/
 
 func_2AD0() {
   if(isdefined(level.var_119E["civilian"])) {
