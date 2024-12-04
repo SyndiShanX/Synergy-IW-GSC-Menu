@@ -179,12 +179,12 @@ init() {
   level.scriptperks["flare_mp"] = 1;
   var_00 = scripts\mp\passives::_meth_8239();
 
-  foreach (var_02 in var_00) {
-  level.scriptperks[var_02] = 1;
-  var_03 = scripts\mp\passives::getpassivemessage(var_02);
+  foreach(var_02 in var_00) {
+    level.scriptperks[var_02] = 1;
+    var_03 = scripts\mp\passives::getpassivemessage(var_02);
 
-  if (isdefined(var_03))
-  level.extraperkmap[var_02] = [var_03];
+    if(isdefined(var_03))
+      level.extraperkmap[var_02] = [var_03];
   }
 
   level.scriptperks["specialty_null"] = 1;
@@ -515,91 +515,91 @@ init() {
 }
 
 menurigperkparsetable() {
-  if (!isdefined(level.menurigperks))
-  level.menurigperks = [];
+  if(!isdefined(level.menurigperks))
+    level.menurigperks = [];
 
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 0);
+    var_01 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 0);
 
-  if (var_01 == "")
-  break;
+    if(var_01 == "") {
+      break;
+    }
+    var_02 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 1);
+    var_03 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 2);
+    var_04 = spawnstruct();
+    var_4.id = var_01;
+    var_4.ref = var_03;
+    var_4.archetype = var_02;
 
-  var_02 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 1);
-  var_03 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 2);
-  var_04 = spawnstruct();
-  var_4.id = var_01;
-  var_4.ref = var_03;
-  var_4.archetype = var_02;
+    if(!isdefined(level.menurigperks[var_03]))
+      level.menurigperks[var_03] = var_04;
 
-  if (!isdefined(level.menurigperks[var_03]))
-  level.menurigperks[var_03] = var_04;
-
-  var_0++;
+    var_0++;
   }
 }
 
 menuperkparsetable() {
-  if (!isdefined(level.menuperks))
-  level.menuperks = [];
+  if(!isdefined(level.menuperks))
+    level.menuperks = [];
 
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp\menuPerks.csv", var_00, 0);
+    var_01 = tablelookupbyrow("mp\menuPerks.csv", var_00, 0);
 
-  if (var_01 == "")
-  break;
+    if(var_01 == "") {
+      break;
+    }
+    var_02 = tablelookupbyrow("mp\menuPerks.csv", var_00, 1);
+    var_03 = tablelookupbyrow("mp\menuPerks.csv", var_00, 2);
+    var_04 = spawnstruct();
+    var_4.name = var_03;
+    var_4.ref = var_03;
+    var_4.slot = var_02;
 
-  var_02 = tablelookupbyrow("mp\menuPerks.csv", var_00, 1);
-  var_03 = tablelookupbyrow("mp\menuPerks.csv", var_00, 2);
-  var_04 = spawnstruct();
-  var_4.name = var_03;
-  var_4.ref = var_03;
-  var_4.slot = var_02;
+    if(!isdefined(level.menuperks[var_03]))
+      level.menuperks[var_03] = var_04;
 
-  if (!isdefined(level.menuperks[var_03]))
-  level.menuperks[var_03] = var_04;
-
-  var_0++;
+    var_0++;
   }
 }
 
 func_98B2() {
-  if (!isdefined(level.perksuseslot))
-  level.perksuseslot = [];
+  if(!isdefined(level.perksuseslot))
+    level.perksuseslot = [];
 
   level.func_CA5E = [];
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp\perkTable.csv", var_00, 0);
+    var_01 = tablelookupbyrow("mp\perkTable.csv", var_00, 0);
 
-  if (var_01 == "")
-  break;
+    if(var_01 == "") {
+      break;
+    }
+    var_02 = tablelookupbyrow("mp\perkTable.csv", var_00, 1);
+    var_03 = spawnstruct();
+    var_3.ref = var_02;
+    var_3.id = int(var_01);
 
-  var_02 = tablelookupbyrow("mp\perkTable.csv", var_00, 1);
-  var_03 = spawnstruct();
-  var_3.ref = var_02;
-  var_3.id = int(var_01);
+    if(!isdefined(level.perksuseslot[var_02]))
+      level.perksuseslot[var_02] = var_03;
 
-  if (!isdefined(level.perksuseslot[var_02]))
-  level.perksuseslot[var_02] = var_03;
-
-  level.func_CA5E[var_3.id] = var_3.ref;
-  var_0++;
+    level.func_CA5E[var_3.id] = var_3.ref;
+    var_0++;
   }
 }
 
 func_7DE8() {
   var_00 = [];
 
-  foreach (var_02 in level.menuperks) {
-  if (scripts\mp\utility\game::_hasperk(var_2.name))
-  continue;
-
-  var_0[var_0.size] = var_2.name;
+  foreach(var_02 in level.menuperks) {
+    if(scripts\mp\utility\game::_hasperk(var_2.name)) {
+      continue;
+    }
+    var_0[var_0.size] = var_2.name;
   }
 
   return var_00;
@@ -608,67 +608,66 @@ func_7DE8() {
 _meth_805C(var_00) {
   var_01 = level.menuperks[var_00];
 
-  if (!isdefined(var_01))
-  return undefined;
+  if(!isdefined(var_01))
+    return undefined;
 
   return int(var_1.slot);
 }
 
 func_13144(var_00) {
-  if (!scripts\mp\utility\game::perksenabled())
-  var_00 = "specialty_null";
-  else
-  {
-  switch (var_00) {
-  case "specialty_deadeye":
-  case "specialty_scavenger":
-  case "specialty_bulletaccuracy":
-  case "specialty_selectivehearing":
-  case "specialty_lightweight":
-  case "specialty_gpsjammer":
-  case "specialty_detectexplosive":
-  case "specialty_reducedsway":
-  case "specialty_silentkill":
-  case "specialty_chain_reaction":
-  case "specialty_corpse_steal":
-  case "specialty_extra_deadly":
-  case "specialty_gambler":
-  case "specialty_explosivedamage":
-  case "specialty_paint":
-  case "specialty_comexp":
-  case "specialty_superpack":
-  case "specialty_scorestreakpack":
-  case "specialty_batterypack":
-  case "specialty_extend_dodge":
-  case "specialty_extra_dodge":
-  case "specialty_gung_ho":
-  case "specialty_activereload":
-  case "specialty_twoprimaries":
-  case "specialty_pitcher":
-  case "specialty_falldamage":
-  case "specialty_extraammo":
-  case "specialty_battleslide":
-  case "specialty_blindeye":
-  case "specialty_sixth_sense":
-  case "specialty_quieter":
-  case "specialty_stun_resistance":
-  case "specialty_blastshield":
-  case "specialty_regenfaster":
-  case "specialty_boom":
-  case "specialty_sharp_focus":
-  case "specialty_null":
-  case "specialty_stalker":
-  case "specialty_quickswap":
-  case "specialty_marathon":
-  case "specialty_fastsprintrecovery":
-  case "specialty_quickdraw":
-  case "specialty_fastreload":
-  case "specialty_hardline":
-  break;
-  default:
-  var_00 = "specialty_null";
-  break;
-  }
+  if(!scripts\mp\utility\game::perksenabled())
+    var_00 = "specialty_null";
+  else {
+    switch (var_00) {
+      case "specialty_deadeye":
+      case "specialty_scavenger":
+      case "specialty_bulletaccuracy":
+      case "specialty_selectivehearing":
+      case "specialty_lightweight":
+      case "specialty_gpsjammer":
+      case "specialty_detectexplosive":
+      case "specialty_reducedsway":
+      case "specialty_silentkill":
+      case "specialty_chain_reaction":
+      case "specialty_corpse_steal":
+      case "specialty_extra_deadly":
+      case "specialty_gambler":
+      case "specialty_explosivedamage":
+      case "specialty_paint":
+      case "specialty_comexp":
+      case "specialty_superpack":
+      case "specialty_scorestreakpack":
+      case "specialty_batterypack":
+      case "specialty_extend_dodge":
+      case "specialty_extra_dodge":
+      case "specialty_gung_ho":
+      case "specialty_activereload":
+      case "specialty_twoprimaries":
+      case "specialty_pitcher":
+      case "specialty_falldamage":
+      case "specialty_extraammo":
+      case "specialty_battleslide":
+      case "specialty_blindeye":
+      case "specialty_sixth_sense":
+      case "specialty_quieter":
+      case "specialty_stun_resistance":
+      case "specialty_blastshield":
+      case "specialty_regenfaster":
+      case "specialty_boom":
+      case "specialty_sharp_focus":
+      case "specialty_null":
+      case "specialty_stalker":
+      case "specialty_quickswap":
+      case "specialty_marathon":
+      case "specialty_fastsprintrecovery":
+      case "specialty_quickdraw":
+      case "specialty_fastreload":
+      case "specialty_hardline":
+        break;
+      default:
+        var_00 = "specialty_null";
+        break;
+    }
   }
 
   return var_00;
@@ -676,8 +675,8 @@ func_13144(var_00) {
 
 onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_00);
-  var_00 thread onplayerspawned();
+    level waittill("connected", var_00);
+    var_00 thread onplayerspawned();
   }
 }
 
@@ -690,9 +689,9 @@ onplayerspawned() {
   self.func_C47E = 0;
 
   for (;;) {
-  self waittill("spawned_player");
-  self.func_C47E = 0;
-  thread scripts\mp\killstreaks\portableaoegenerator::func_7737();
+    self waittill("spawned_player");
+    self.func_C47E = 0;
+    thread scripts\mp\killstreaks\portableaoegenerator::func_7737();
   }
 }
 
@@ -719,94 +718,94 @@ func_98B0() {
   level.minspeedsq = level.func_B7CB * level.func_B7CB;
   level.func_B75E = level.func_B75C * level.func_B75C;
 
-  if (isdefined(level.hardcoremode) && level.hardcoremode) {
-  level.func_2B68 = scripts\mp\utility\game::getintproperty("perk_blastShieldScale_HC", 20) / 100;
-  level.func_2B67 = scripts\mp\utility\game::getintproperty("perk_blastShieldClampHP_HC", 20);
+  if(isdefined(level.hardcoremode) && level.hardcoremode) {
+    level.func_2B68 = scripts\mp\utility\game::getintproperty("perk_blastShieldScale_HC", 20) / 100;
+    level.func_2B67 = scripts\mp\utility\game::getintproperty("perk_blastShieldClampHP_HC", 20);
   }
 
-  if (level.tactical) {
-  level.func_2B68 = 0.65;
-  level.func_2B67 = 50;
+  if(level.tactical) {
+    level.func_2B68 = 0.65;
+    level.func_2B67 = 50;
   }
 }
 
 giveperks(var_00, var_01) {
   var_01 = scripts\engine\utility::ter_op(isdefined(var_01), var_01, 1);
 
-  foreach (var_03 in var_00) {
-  if (var_01)
-  var_03 = func_13144(var_03);
+  foreach(var_03 in var_00) {
+    if(var_01)
+      var_03 = func_13144(var_03);
 
-  scripts\mp\utility\game::giveperk(var_03);
+    scripts\mp\utility\game::giveperk(var_03);
   }
 }
 
 _setperk(var_00) {
-  if (!isdefined(self.perks[var_00]))
-  self.perks[var_00] = 1;
+  if(!isdefined(self.perks[var_00]))
+    self.perks[var_00] = 1;
   else
-  self.perks[var_00]++;
+    self.perks[var_00]++;
 
-  if (self.perks[var_00] == 1 && !isdefined(self.perksblocked[var_00]))
-  func_13D2(var_00);
+  if(self.perks[var_00] == 1 && !isdefined(self.perksblocked[var_00]))
+    func_13D2(var_00);
 }
 
 func_13D2(var_00) {
   var_01 = level.perksetfuncs[var_00];
 
-  if (isdefined(var_01))
-  self thread [[var_01]]();
+  if(isdefined(var_01))
+    self thread[[var_01]]();
 
   self setperk(var_00, !isdefined(level.scriptperks[var_00]));
 }
 
 _setextraperks(var_00) {
-  foreach (var_06, var_02 in level.extraperkmap) {
-  if (var_00 == var_06) {
-  foreach (var_04 in var_02)
-  _setperk(var_04);
+  foreach(var_06, var_02 in level.extraperkmap) {
+    if(var_00 == var_06) {
+      foreach(var_04 in var_02)
+      _setperk(var_04);
 
-  break;
-  }
+      break;
+    }
   }
 }
 
 func_142F(var_00) {
-  foreach (var_06, var_02 in level.extraperkmap) {
-  if (var_00 == var_06) {
-  foreach (var_04 in var_02)
-  _unsetperk(var_04);
+  foreach(var_06, var_02 in level.extraperkmap) {
+    if(var_00 == var_06) {
+      foreach(var_04 in var_02)
+      _unsetperk(var_04);
 
-  break;
-  }
+      break;
+    }
   }
 }
 
 _unsetperk(var_00) {
-  if (!isdefined(self.perks[var_00]))
-  return;
-
+  if(!isdefined(self.perks[var_00])) {
+    return;
+  }
   self.perks[var_00]--;
 
-  if (self.perks[var_00] == 0) {
-  if (!isdefined(self.perksblocked[var_00]))
-  func_1431(var_00);
+  if(self.perks[var_00] == 0) {
+    if(!isdefined(self.perksblocked[var_00]))
+      func_1431(var_00);
 
-  self.perks[var_00] = undefined;
+    self.perks[var_00] = undefined;
   }
 }
 
 func_1431(var_00) {
-  if (isdefined(level.perkunsetfuncs[var_00]))
-  self thread [[level.perkunsetfuncs[var_00]]]();
+  if(isdefined(level.perkunsetfuncs[var_00]))
+    self thread[[level.perkunsetfuncs[var_00]]]();
 
   self unsetperk(var_00, !isdefined(level.scriptperks[var_00]));
 }
 
 _clearperks() {
-  foreach (var_02, var_01 in self.perks) {
-  if (isdefined(level.perkunsetfuncs[var_02]))
-  self [[level.perkunsetfuncs[var_02]]]();
+  foreach(var_02, var_01 in self.perks) {
+    if(isdefined(level.perkunsetfuncs[var_02]))
+      self[[level.perkunsetfuncs[var_02]]]();
   }
 
   self.perks = [];
@@ -817,9 +816,9 @@ _clearperks() {
 func_E130(var_00) {
   var_01 = [];
 
-  foreach (var_03 in var_00) {
-  if (func_13144(var_03) != "specialty_null")
-  var_1[var_1.size] = var_03;
+  foreach(var_03 in var_00) {
+    if(func_13144(var_03) != "specialty_null")
+      var_1[var_1.size] = var_03;
   }
 
   return var_01;
@@ -834,18 +833,17 @@ giveperksafterspawn() {
   scripts\mp\utility\game::giveperk("specialty_noscopeoutline");
 
   while (self.avoidkillstreakonspawntimer > 0) {
-  self.avoidkillstreakonspawntimer = self.avoidkillstreakonspawntimer - 0.05;
-  wait 0.05;
+    self.avoidkillstreakonspawntimer = self.avoidkillstreakonspawntimer - 0.05;
+    wait 0.05;
   }
 
-  if (scripts\mp\utility\game::func_9EF0(self) && isdefined(self.playerproxyagent) && isalive(self.playerproxyagent))
-  return;
-  else
-  {
-  scripts\mp\utility\game::removeperk("specialty_blindeye");
-  scripts\mp\utility\game::removeperk("specialty_gpsjammer");
-  scripts\mp\utility\game::removeperk("specialty_noscopeoutline");
-  self notify("removed_spawn_perks");
+  if(scripts\mp\utility\game::func_9EF0(self) && isdefined(self.playerproxyagent) && isalive(self.playerproxyagent))
+    return;
+  else {
+    scripts\mp\utility\game::removeperk("specialty_blindeye");
+    scripts\mp\utility\game::removeperk("specialty_gpsjammer");
+    scripts\mp\utility\game::removeperk("specialty_noscopeoutline");
+    self notify("removed_spawn_perks");
   }
 }
 
@@ -856,81 +854,81 @@ updateactiveperks(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07
   var_11 = var_10 && isdefined(var_00) && isdefined(var_0.classname) && var_0.classname == "grenade";
   var_12 = isdefined(var_01) && isplayer(var_01) && var_01 != var_02;
 
-  if (var_12 && (var_08 || var_11)) {
-  thread scripts\mp\perks\weaponpassives::func_12F61(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07);
+  if(var_12 && (var_08 || var_11)) {
+    thread scripts\mp\perks\weaponpassives::func_12F61(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07);
 
-  if (var_01 scripts\mp\utility\game::_hasperk("specialty_triggerhappy"))
-  var_01 thread scripts\mp\perks\perkfunctions::settriggerhappyinternal();
+    if(var_01 scripts\mp\utility\game::_hasperk("specialty_triggerhappy"))
+      var_01 thread scripts\mp\perks\perkfunctions::settriggerhappyinternal();
 
-  if (var_01 scripts\mp\utility\game::_hasperk("specialty_boom"))
-  var_02 thread scripts\mp\perks\perkfunctions::setboominternal(var_01);
+    if(var_01 scripts\mp\utility\game::_hasperk("specialty_boom"))
+      var_02 thread scripts\mp\perks\perkfunctions::setboominternal(var_01);
 
-  if (var_01 scripts\mp\utility\game::_hasperk("specialty_deadeye"))
-  var_1.func_4DF0++;
+    if(var_01 scripts\mp\utility\game::_hasperk("specialty_deadeye"))
+      var_1.func_4DF0++;
 
-  var_13 = var_1.pers["abilityRecharging"];
+    var_13 = var_1.pers["abilityRecharging"];
 
-  if (isdefined(var_13) && var_13)
-  var_01 notify("abilityFastRecharge");
+    if(isdefined(var_13) && var_13)
+      var_01 notify("abilityFastRecharge");
 
-  var_14 = var_1.pers["abilityOn"];
+    var_14 = var_1.pers["abilityOn"];
 
-  if (isdefined(var_14) && var_14)
-  var_01 notify("abilityExtraTime");
+    if(isdefined(var_14) && var_14)
+      var_01 notify("abilityExtraTime");
   }
 }
 
 func_F7C5(var_00, var_01) {
   var_02 = [];
 
-  foreach (var_04 in var_01) {
-  if (!isdefined(level.perksuseslot[var_04]))
-  continue;
+  foreach(var_04 in var_01) {
+    if(!isdefined(level.perksuseslot[var_04])) {
+      continue;
+    }
+    var_05 = _meth_805C(var_04);
 
-  var_05 = _meth_805C(var_04);
+    if(!isdefined(var_05)) {
+      continue;
+    }
+    if(!isdefined(var_2[var_05]))
+      var_2[var_05] = [];
 
-  if (!isdefined(var_05))
-  continue;
-
-  if (!isdefined(var_2[var_05]))
-  var_2[var_05] = [];
-
-  var_2[var_05][var_2[var_05].size] = level.perksuseslot[var_04].id;
+    var_2[var_05][var_2[var_05].size] = level.perksuseslot[var_04].id;
   }
 
   var_07 = [];
 
   for (var_05 = 1; var_05 < 4; var_5++) {
-  if (isdefined(var_2[var_05])) {
-  foreach (var_04 in var_2[var_05])
-  var_7[var_7.size] = var_04;
-  }
+    if(isdefined(var_2[var_05])) {
+      foreach(var_04 in var_2[var_05])
+      var_7[var_7.size] = var_04;
+    }
   }
 
   for (var_10 = 0; var_10 < 6; var_10++) {
-  var_11 = var_7[var_10];
+    var_11 = var_7[var_10];
 
-  if (!isdefined(var_11))
-  var_11 = -1;
+    if(!isdefined(var_11))
+      var_11 = -1;
 
-  self setclientomnvar(var_00 + var_10, var_11);
+    self setclientomnvar(var_00 + var_10, var_11);
   }
 }
 
 func_9EDF(var_00) {
   var_01 = self.pers["loadoutPerks"];
 
-  foreach (var_03 in var_01) {
-  if (var_03 == var_00)
-  return 1;
+  foreach(var_03 in var_01) {
+    if(var_03 == var_00)
+      return 1;
   }
 
   return 0;
 }
 
 getequipmenttableinfo(var_00) {
-  if (!isdefined(var_00) || !isdefined(level.perksuseslot[var_00]))
-  return 0;
+  if(!isdefined(var_00) || !isdefined(level.perksuseslot[var_00]))
+    return 0;
 
   return level.perksuseslot[var_00].id;
 }

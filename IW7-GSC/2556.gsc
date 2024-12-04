@@ -5,5 +5,5 @@
 ************************/
 
 func_57DF(param_00) {
-	return level.failure;
+  return level.failure;
 }

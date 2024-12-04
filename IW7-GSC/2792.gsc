@@ -88,19 +88,19 @@ func_ECE1() {
   setomnvar("ui_screenshot_ready", 1);
 
   for (;;) {
-  self waittill("luinotifyserver", var_03, var_04);
+    self waittill("luinotifyserver", var_03, var_04);
 
-  if (var_03 == "take_screenshot") {
-  if (var_04 == -1) {
-  setomnvar("ui_screenshot_ready", 0);
-  wait 0.1;
-  setomnvar("ui_screenshot_ready", 1);
-  continue;
-  }
+    if(var_03 == "take_screenshot") {
+      if(var_04 == -1) {
+        setomnvar("ui_screenshot_ready", 0);
+        wait 0.1;
+        setomnvar("ui_screenshot_ready", 1);
+        continue;
+      }
 
-  setomnvar("ui_screenshot_ready", 0);
-  func_11452(var_04);
-  setomnvar("ui_screenshot_ready", 1);
-  }
+      setomnvar("ui_screenshot_ready", 0);
+      func_11452(var_04);
+      setomnvar("ui_screenshot_ready", 1);
+    }
   }
 }

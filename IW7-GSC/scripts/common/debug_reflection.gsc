@@ -5,9 +5,9 @@
 ***********************************************/
 
 func_9707(param_00) {
-	precachemodel("test_sphere_silver");
-	precachemodel("test_sphere_redchrome");
-	level.var_4F12 = 0;
+  precachemodel("test_sphere_silver");
+  precachemodel("test_sphere_redchrome");
+  level.var_4F12 = 0;
 }
 
 func_10AA0() {}

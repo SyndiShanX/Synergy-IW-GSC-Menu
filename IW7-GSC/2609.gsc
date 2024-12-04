@@ -16,21 +16,21 @@ bcs_trigs_assign_aliases() {
   var_00 = getentarray();
   var_01 = [];
 
-  foreach (var_03 in var_00) {
-  if (isdefined(var_3.classname) && issubstr(var_3.classname, "trigger_multiple_bcs"))
-  var_1[var_1.size] = var_03;
+  foreach(var_03 in var_00) {
+    if(isdefined(var_3.classname) && issubstr(var_3.classname, "trigger_multiple_bcs"))
+      var_1[var_1.size] = var_03;
   }
 
-  foreach (var_03 in var_01) {
-  if (!isdefined(level.bcs_location_mappings[var_3.classname]))
-  continue;
+  foreach(var_03 in var_01) {
+    if(!isdefined(level.bcs_location_mappings[var_3.classname])) {
+      continue;
+    }
+    var_06 = parselocationaliases(level.bcs_location_mappings[var_3.classname]);
 
-  var_06 = parselocationaliases(level.bcs_location_mappings[var_3.classname]);
+    if(var_6.size > 1)
+      var_06 = scripts\engine\utility::array_randomize(var_06);
 
-  if (var_6.size > 1)
-  var_06 = scripts\engine\utility::array_randomize(var_06);
-
-  var_3.locationaliases = var_06;
+    var_3.locationaliases = var_06;
   }
 
   anim.bcs_locations = var_01;
@@ -42,43 +42,42 @@ parselocationaliases(var_00) {
 }
 
 add_bcs_location_mapping(var_00, var_01) {
-  if (isdefined(level.bcs_location_mappings[var_00])) {
-  var_02 = level.bcs_location_mappings[var_00];
-  var_03 = parselocationaliases(var_02);
-  var_04 = parselocationaliases(var_01);
+  if(isdefined(level.bcs_location_mappings[var_00])) {
+    var_02 = level.bcs_location_mappings[var_00];
+    var_03 = parselocationaliases(var_02);
+    var_04 = parselocationaliases(var_01);
 
-  foreach (var_06 in var_04) {
-  foreach (var_08 in var_03) {
-  if (var_06 == var_08)
-  return;
-  }
-  }
+    foreach(var_06 in var_04) {
+      foreach(var_08 in var_03) {
+        if(var_06 == var_08)
+          return;
+      }
+    }
 
-  var_02 = var_02 + (" " + var_01);
-  level.bcs_location_mappings[var_00] = var_02;
-  return;
+    var_02 = var_02 + (" " + var_01);
+    level.bcs_location_mappings[var_00] = var_02;
+    return;
   }
 
   level.bcs_location_mappings[var_00] = var_01;
 }
 
 bcs_location_trigger_mapping() {
-  if (scripts\engine\utility::issp())
-  sp();
-  else
-  {
-  metropolis();
-  quarry();
-  breakneck();
-  desert();
-  divide();
-  fallen();
-  frontier();
-  parkour();
-  riot();
-  rivet();
-  proto();
-  skyway();
+  if(scripts\engine\utility::issp())
+    sp();
+  else {
+    metropolis();
+    quarry();
+    breakneck();
+    desert();
+    divide();
+    fallen();
+    frontier();
+    parkour();
+    riot();
+    rivet();
+    proto();
+    skyway();
   }
 }
 

@@ -6,57 +6,56 @@
 setupminimap(var_00, var_01) {
   level.func_B7AE = var_00;
 
-  if (!isdefined(level.func_1307) && !isdefined(var_01)) {}
+  if(!isdefined(level.func_1307) && !isdefined(var_01)) {}
 
-  if (!isdefined(var_01))
-  var_01 = "minimap_corner";
+  if(!isdefined(var_01))
+    var_01 = "minimap_corner";
 
   var_02 = getdvarfloat("scr_requiredMapAspectRatio", 1);
   var_03 = getentarray(var_01, "targetname");
 
-  if (var_3.size != 2)
-  return;
-
+  if(var_3.size != 2) {
+    return;
+  }
   var_04 = (var_3[0].origin[0], var_3[0].origin[1], 0);
   var_05 = (var_3[1].origin[0], var_3[1].origin[1], 0);
   var_06 = var_05 - var_04;
   var_07 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   var_08 = (0 - var_7[1], var_7[0], 0);
 
-  if (vectordot(var_06, var_08) > 0) {
-  if (vectordot(var_06, var_07) > 0) {
-  var_09 = var_05;
-  var_10 = var_04;
+  if(vectordot(var_06, var_08) > 0) {
+    if(vectordot(var_06, var_07) > 0) {
+      var_09 = var_05;
+      var_10 = var_04;
+    } else {
+      var_11 = vecscale(var_07, vectordot(var_06, var_07));
+      var_09 = var_05 - var_11;
+      var_10 = var_04 + var_11;
+    }
+  } else if(vectordot(var_06, var_07) > 0) {
+    var_11 = vecscale(var_07, vectordot(var_06, var_07));
+    var_09 = var_04 + var_11;
+    var_10 = var_05 - var_11;
   } else {
-  var_11 = vecscale(var_07, vectordot(var_06, var_07));
-  var_09 = var_05 - var_11;
-  var_10 = var_04 + var_11;
-  }
-  }
-  else if (vectordot(var_06, var_07) > 0) {
-  var_11 = vecscale(var_07, vectordot(var_06, var_07));
-  var_09 = var_04 + var_11;
-  var_10 = var_05 - var_11;
-  } else {
-  var_09 = var_04;
-  var_10 = var_05;
+    var_09 = var_04;
+    var_10 = var_05;
   }
 
-  if (var_02 > 0) {
-  var_12 = vectordot(var_09 - var_10, var_07);
-  var_13 = vectordot(var_09 - var_10, var_08);
-  var_14 = var_13 / var_12;
+  if(var_02 > 0) {
+    var_12 = vectordot(var_09 - var_10, var_07);
+    var_13 = vectordot(var_09 - var_10, var_08);
+    var_14 = var_13 / var_12;
 
-  if (var_14 < var_02) {
-  var_15 = var_02 / var_14;
-  var_16 = vecscale(var_08, var_13 * (var_15 - 1) * 0.5);
-  } else {
-  var_15 = var_14 / var_02;
-  var_16 = vecscale(var_07, var_12 * (var_15 - 1) * 0.5);
-  }
+    if(var_14 < var_02) {
+      var_15 = var_02 / var_14;
+      var_16 = vecscale(var_08, var_13 * (var_15 - 1) * 0.5);
+    } else {
+      var_15 = var_14 / var_02;
+      var_16 = vecscale(var_07, var_12 * (var_15 - 1) * 0.5);
+    }
 
-  var_09 = var_09 + var_16;
-  var_10 = var_10 - var_16;
+    var_09 = var_09 + var_16;
+    var_10 = var_10 - var_16;
   }
 
   level.func_B322 = [];

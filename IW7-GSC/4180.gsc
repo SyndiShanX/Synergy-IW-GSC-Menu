@@ -51,39 +51,39 @@ main() {
   level._effect["vfx_sc_moon_space_debris_field_02_dense"] = loadfx("vfx\iw7\levels\ship_crib\moon\vfx_sc_moon_space_debris_field_02_dense.vfx");
   level._effect["vfx_destroyer_death_cheap"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_explosion_cheap.vfx");
 
-  if (!getdvarint("r_reflectionProbeGenerate")) {
-  scripts\sp\maps\phspace\gen\phspace_fx::main();
-  scripts\sp\maps\phspace\gen\phspace_sound::main();
-  level._effect["vfx_big_explosion_spaceship_low_g"] = loadfx("vfx\iw7\levels\moon\vfx_big_explosion_spaceship_low_g.vfx");
-  level._effect["vfx_ph_launch_clouds_scattered_mid_02"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_clouds_scattered_mid_02.vfx");
-  level._effect["vfx_ph_launch_player_local_clouds_thick"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_player_local_clouds_thick.vfx");
-  level._effect["vfx_ph_launch_player_local_clouds_thin"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_player_local_clouds_thin.vfx");
-  level._effect["thrust_cloud_glow_tigris"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_thrust_cloud_glow_tigris.vfx");
-  level._effect["launch_sky_bounce_light"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_bounce_light.vfx");
-  level._effect["launch_sky_bounce_light_fade"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_bounce_light_fade_out.vfx");
-  level._effect["vfx_ph_jackal_canopy_drops"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_jackal_canopy_drops.vfx");
-  level._effect["vfx_ph_building_fire_periph_02"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_building_fire_periph_02.vfx");
-  level._effect["vfx_ph_building_fire_periph_01"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_building_fire_periph_01.vfx");
-  level._effect["vfx_flare_capship_launch_enemy_hero"] = loadfx("vfx\iw7\core\flare\vfx_flare_capship_launch_enemy_hero.vfx");
-  level._effect["vfx_flare_capship_launch_friendly_hero"] = loadfx("vfx\iw7\core\flare\vfx_flare_capship_launch_friendly_hero.vfx");
-  level._effect["vfx_sunflare"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_sunfx.vfx");
-  level._effect["vfx_sunflare_fadeout"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_sunfx_fadeout.vfx");
-  level._effect["vfx_ethan_cockpit_light"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_cockpit_light_ethan.vfx");
-  level._effect["vfx_mons_fspar_impact"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_dragon_imp_lense_flare.vfx");
-  level._effect["mons_bridge_piece_debris"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_mons_bridge_debris.vfx");
-  level._effect["mons_bridge_piece_fire"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_fire_md.vfx");
-  level._effect["mons_bridge_piece_explo"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_mons_bridge_explo.vfx");
-  level._effect["ret_ram_initial_impact"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_initial_impact.vfx");
-  level._effect["ret_ram_drag_churn_debris"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_drag_churn.vfx");
-  level._effect["ret_ram_drag_end"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_drag_end.vfx");
-  level._effect["ret_ram_slam_churn_debris"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_slam_churn.vfx");
-  level._effect["ret_ram_mons_impact"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_mons_impact.vfx");
-  level._effect["ret_damage_linger"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_retribution_damage_linger.vfx");
-  level._effect["mons_damage_linger"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_mons_damage_linger.vfx");
-  level._effect["vfx_ca_destroyer_ambient_debris"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_ambient_debris.vfx");
-  level._effect["vfx_ph_space_dust_cloud_01"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_space_dust_cloud_01.vfx");
-  level._effect["vfx_ph_space_dust_cloud_01_thick"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_space_dust_cloud_01_thick.vfx");
-  thread func_1DB7();
+  if(!getdvarint("r_reflectionProbeGenerate")) {
+    scripts\sp\maps\phspace\gen\phspace_fx::main();
+    scripts\sp\maps\phspace\gen\phspace_sound::main();
+    level._effect["vfx_big_explosion_spaceship_low_g"] = loadfx("vfx\iw7\levels\moon\vfx_big_explosion_spaceship_low_g.vfx");
+    level._effect["vfx_ph_launch_clouds_scattered_mid_02"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_clouds_scattered_mid_02.vfx");
+    level._effect["vfx_ph_launch_player_local_clouds_thick"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_player_local_clouds_thick.vfx");
+    level._effect["vfx_ph_launch_player_local_clouds_thin"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_player_local_clouds_thin.vfx");
+    level._effect["thrust_cloud_glow_tigris"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_thrust_cloud_glow_tigris.vfx");
+    level._effect["launch_sky_bounce_light"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_bounce_light.vfx");
+    level._effect["launch_sky_bounce_light_fade"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_bounce_light_fade_out.vfx");
+    level._effect["vfx_ph_jackal_canopy_drops"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_jackal_canopy_drops.vfx");
+    level._effect["vfx_ph_building_fire_periph_02"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_building_fire_periph_02.vfx");
+    level._effect["vfx_ph_building_fire_periph_01"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_building_fire_periph_01.vfx");
+    level._effect["vfx_flare_capship_launch_enemy_hero"] = loadfx("vfx\iw7\core\flare\vfx_flare_capship_launch_enemy_hero.vfx");
+    level._effect["vfx_flare_capship_launch_friendly_hero"] = loadfx("vfx\iw7\core\flare\vfx_flare_capship_launch_friendly_hero.vfx");
+    level._effect["vfx_sunflare"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_sunfx.vfx");
+    level._effect["vfx_sunflare_fadeout"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_launch_sunfx_fadeout.vfx");
+    level._effect["vfx_ethan_cockpit_light"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_cockpit_light_ethan.vfx");
+    level._effect["vfx_mons_fspar_impact"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_dragon_imp_lense_flare.vfx");
+    level._effect["mons_bridge_piece_debris"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_mons_bridge_debris.vfx");
+    level._effect["mons_bridge_piece_fire"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_fire_md.vfx");
+    level._effect["mons_bridge_piece_explo"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_mons_bridge_explo.vfx");
+    level._effect["ret_ram_initial_impact"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_initial_impact.vfx");
+    level._effect["ret_ram_drag_churn_debris"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_drag_churn.vfx");
+    level._effect["ret_ram_drag_end"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_drag_end.vfx");
+    level._effect["ret_ram_slam_churn_debris"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_slam_churn.vfx");
+    level._effect["ret_ram_mons_impact"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_ram_mons_impact.vfx");
+    level._effect["ret_damage_linger"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_retribution_damage_linger.vfx");
+    level._effect["mons_damage_linger"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_mons_damage_linger.vfx");
+    level._effect["vfx_ca_destroyer_ambient_debris"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_ambient_debris.vfx");
+    level._effect["vfx_ph_space_dust_cloud_01"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_space_dust_cloud_01.vfx");
+    level._effect["vfx_ph_space_dust_cloud_01_thick"] = loadfx("vfx\iw7\levels\pearl_harbor\vfx_ph_space_dust_cloud_01_thick.vfx");
+    thread func_1DB7();
   }
 }
 
@@ -94,17 +94,17 @@ func_1DB7() {
 
 func_1326B(var_00) {
   switch (var_00) {
-  case 0:
-  _setsaveddvar("r_veilFalloffWeight1", (1, 0.95, 0.75));
-  _setsaveddvar("r_veilFalloffWeight2", (0.25, 0.0875, 0.02));
-  break;
-  case 1:
-  _setsaveddvar("r_veilFalloffWeight1", (1, 0.9, 0.6));
-  _setsaveddvar("r_veilFalloffWeight2", (0.3, 0.05, 0.02));
-  break;
-  case 2:
-  _setsaveddvar("r_veilFalloffWeight1", (1, 0.6875, 0.375));
-  _setsaveddvar("r_veilFalloffWeight2", (0.1875, 0.1013, 0.0228));
-  break;
+    case 0:
+      _setsaveddvar("r_veilFalloffWeight1", (1, 0.95, 0.75));
+      _setsaveddvar("r_veilFalloffWeight2", (0.25, 0.0875, 0.02));
+      break;
+    case 1:
+      _setsaveddvar("r_veilFalloffWeight1", (1, 0.9, 0.6));
+      _setsaveddvar("r_veilFalloffWeight2", (0.3, 0.05, 0.02));
+      break;
+    case 2:
+      _setsaveddvar("r_veilFalloffWeight1", (1, 0.6875, 0.375));
+      _setsaveddvar("r_veilFalloffWeight2", (0.1875, 0.1013, 0.0228));
+      break;
   }
 }

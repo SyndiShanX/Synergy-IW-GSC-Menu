@@ -23,31 +23,31 @@ init_agent(var_00) {
   var_03 = 50;
 
   for (var_04 = var_02; var_04 <= var_03; var_4++) {
-  var_05 = tablelookupbyrow(var_00, var_04, 2);
+    var_05 = tablelookupbyrow(var_00, var_04, 2);
 
-  if (var_05 == "")
-  break;
+    if(var_05 == "") {
+      break;
+    }
+    var_06 = [];
 
-  var_06 = [];
+    foreach(var_11, var_08 in var_01) {
+      var_09 = tablelookupbyrow(var_00, var_04, var_08);
 
-  foreach (var_11, var_08 in var_01) {
-  var_09 = tablelookupbyrow(var_00, var_04, var_08);
+      if(var_09 == "0")
+        var_09 = 0;
+      else if(int(var_09) != 0) {
+        var_10 = var_09 + "";
 
-  if (var_09 == "0")
-  var_09 = 0;
-  else if (int(var_09) != 0) {
-  var_10 = var_09 + "";
+        if(issubstr(var_10, "."))
+          var_09 = float(var_09);
+        else
+          var_09 = int(var_09);
+      }
 
-  if (issubstr(var_10, "."))
-  var_09 = float(var_09);
-  else
-  var_09 = int(var_09);
-  }
+      var_6[var_11] = var_09;
+    }
 
-  var_6[var_11] = var_09;
-  }
-
-  level.agent_definition[var_05] = var_06;
+    level.agent_definition[var_05] = var_06;
   }
 
   level notify("scripted_agents_initialized");
@@ -56,9 +56,9 @@ init_agent(var_00) {
 func_F8ED() {
   var_00 = level.agent_definition[self.agent_type];
 
-  if (!isdefined(var_0["behaviorTree"]) || var_0["behaviorTree"] == "")
-  return;
-
+  if(!isdefined(var_0["behaviorTree"]) || var_0["behaviorTree"] == "") {
+    return;
+  }
   scripts\anim\notetracks_mp::func_197F(var_0["behaviorTree"], var_0["asm"]);
 }
 
@@ -77,51 +77,51 @@ setup_spawn_struct(var_00) {
 spawnnewagent(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = getfreeagent(var_00);
 
-  if (isdefined(var_06)) {
-  if (!isdefined(var_03))
-  var_03 = (0, 0, 0);
+  if(isdefined(var_06)) {
+    if(!isdefined(var_03))
+      var_03 = (0, 0, 0);
 
-  var_6.connecttime = gettime();
+    var_6.connecttime = gettime();
 
-  if (isdefined(var_05))
-  var_06 setup_spawn_struct(var_05);
+    if(isdefined(var_05))
+      var_06 setup_spawn_struct(var_05);
 
-  var_06 set_agent_model(var_06, var_00);
-  var_06 set_agent_species(var_06, var_00);
+    var_06 set_agent_model(var_06, var_00);
+    var_06 set_agent_species(var_06, var_00);
 
-  if (is_scripted_agent(var_00))
-  var_06 = spawn_scripted_agent(var_06, var_00, var_02, var_03);
-  else
-  var_06 = spawn_regular_agent(var_06, var_02, var_03);
+    if(is_scripted_agent(var_00))
+      var_06 = spawn_scripted_agent(var_06, var_00, var_02, var_03);
+    else
+      var_06 = spawn_regular_agent(var_06, var_02, var_03);
 
-  var_06 setup_agent(var_00);
-  var_06 set_agent_team(var_01);
-  var_06 set_agent_spawn_health(var_06, var_00);
-  var_06 set_agent_traversal_unit_type(var_06, var_00);
-  var_06 addtocharactersarray();
+    var_06 setup_agent(var_00);
+    var_06 set_agent_team(var_01);
+    var_06 set_agent_spawn_health(var_06, var_00);
+    var_06 set_agent_traversal_unit_type(var_06, var_00);
+    var_06 addtocharactersarray();
 
-  if (isdefined(var_04))
-  var_06 func_FAFA(var_04);
+    if(isdefined(var_04))
+      var_06 func_FAFA(var_04);
 
-  if (func_9CF8(var_00))
-  var_06 func_F8ED();
+    if(func_9CF8(var_00))
+      var_06 func_F8ED();
 
-  var_06 activateagent();
+    var_06 activateagent();
   }
 
   return var_06;
 }
 
 set_agent_traversal_unit_type(var_00, var_01) {
-  if (!can_set_traversal_unit_type(var_00))
-  return;
-
+  if(!can_set_traversal_unit_type(var_00)) {
+    return;
+  }
   var_00 _meth_828C(level.agent_definition[var_01]["traversal_unit_type"]);
 }
 
 can_set_traversal_unit_type(var_00) {
-  if (is_agent_scripted(var_00))
-  return 1;
+  if(is_agent_scripted(var_00))
+    return 1;
 
   return 0;
 }
@@ -129,9 +129,9 @@ can_set_traversal_unit_type(var_00) {
 set_agent_model(var_00, var_01) {
   var_02 = level.agent_definition[var_01]["setup_model_func"];
 
-  if (isdefined(var_02)) {
-  var_00 [[var_02]](var_01);
-  return;
+  if(isdefined(var_02)) {
+    var_00[[var_02]](var_01);
+    return;
   }
 
   var_00 detachall();
@@ -144,8 +144,8 @@ is_scripted_agent(var_00) {
 }
 
 func_9CF8(var_00) {
-  if (!isdefined(level.agent_definition[var_00]))
-  return 0;
+  if(!isdefined(level.agent_definition[var_00]))
+    return 0;
 
   return level.agent_definition[var_00]["behaviorTree"] != "";
 }
@@ -155,13 +155,13 @@ spawn_scripted_agent(var_00, var_01, var_02, var_03) {
   var_0.is_scripted_agent = 1;
   var_04 = level.agent_definition[var_01]["radius"];
 
-  if (!isdefined(var_04))
-  var_04 = 15;
+  if(!isdefined(var_04))
+    var_04 = 15;
 
   var_05 = level.agent_definition[var_01]["height"];
 
-  if (!isdefined(var_05))
-  var_05 = 50;
+  if(!isdefined(var_05))
+    var_05 = 50;
 
   var_00 spawnagent(var_02, var_03, level.agent_definition[var_01]["animclass"], var_04, var_05);
   var_0.func_18F4 = var_05;
@@ -180,35 +180,35 @@ is_agent_scripted(var_00) {
 }
 
 agent_go_to_pos(var_00, var_01, var_02, var_03, var_04) {
-  if (is_agent_scripted(self))
-  self ghostskulls_complete_status(var_00);
+  if(is_agent_scripted(self))
+    self ghostskulls_complete_status(var_00);
   else
-  self botsetscriptgoal(var_00, var_01, var_02, var_03, var_04);
+    self botsetscriptgoal(var_00, var_01, var_02, var_03, var_04);
 }
 
 setup_agent(var_00) {
   var_01 = level.agent_definition[var_00];
 
-  if (!isdefined(var_01))
-  return;
-
+  if(!isdefined(var_01)) {
+    return;
+  }
   var_02 = var_1["setup_func"];
 
-  if (!isdefined(var_02))
-  return;
-
-  self [[var_02]]();
+  if(!isdefined(var_02)) {
+    return;
+  }
+  self[[var_02]]();
 }
 
 set_agent_species(var_00, var_01) {
-  if (!isdefined(level.agent_funcs[var_01]))
-  level.agent_funcs[var_01] = [];
+  if(!isdefined(level.agent_funcs[var_01]))
+    level.agent_funcs[var_01] = [];
 
   var_0.species = level.agent_definition[var_01]["species"];
 
-  if (!isdefined(level.species_funcs[var_0.species]) || !isdefined(level.species_funcs[var_0.species]["on_enter_animstate"])) {
-  level.species_funcs[var_0.species] = [];
-  level.species_funcs[var_0.species]["on_enter_animstate"] = ::func_5005;
+  if(!isdefined(level.species_funcs[var_0.species]) || !isdefined(level.species_funcs[var_0.species]["on_enter_animstate"])) {
+    level.species_funcs[var_0.species] = [];
+    level.species_funcs[var_0.species]["on_enter_animstate"] = ::func_5005;
   }
 
   assign_agent_func("spawn", ::default_spawn_func);
@@ -220,11 +220,11 @@ set_agent_species(var_00, var_01) {
 assign_agent_func(var_00, var_01) {
   var_02 = self.agent_type;
 
-  if (!isdefined(level.agent_funcs[var_02][var_00])) {
-  if (!isdefined(level.species_funcs[self.species]) || !isdefined(level.species_funcs[self.species][var_00]))
-  level.agent_funcs[var_02][var_00] = var_01;
-  else
-  level.agent_funcs[var_02][var_00] = level.species_funcs[self.species][var_00];
+  if(!isdefined(level.agent_funcs[var_02][var_00])) {
+    if(!isdefined(level.species_funcs[self.species]) || !isdefined(level.species_funcs[self.species][var_00]))
+      level.agent_funcs[var_02][var_00] = var_01;
+    else
+      level.agent_funcs[var_02][var_00] = level.species_funcs[self.species][var_00];
   }
 }
 
@@ -237,24 +237,24 @@ get_agent_type(var_00) {
 }
 
 getfreeagentcount() {
-  if (!isdefined(level.agentarray))
-  return 0;
+  if(!isdefined(level.agentarray))
+    return 0;
 
   var_00 = gettime();
   var_01 = 0;
 
-  foreach (var_03 in level.agentarray) {
-  if (!isdefined(var_3.isactive) || !var_3.isactive) {
-  if (isdefined(var_3.waitingtodeactivate) && var_3.waitingtodeactivate)
-  continue;
+  foreach(var_03 in level.agentarray) {
+    if(!isdefined(var_3.isactive) || !var_3.isactive) {
+      if(isdefined(var_3.waitingtodeactivate) && var_3.waitingtodeactivate) {
+        continue;
+      }
+      var_04 = var_03 getentitynumber();
 
-  var_04 = var_03 getentitynumber();
-
-  if (isdefined(level.agent_available_to_spawn_time) && isdefined(level.agent_available_to_spawn_time[var_04]) && var_00 < level.agent_available_to_spawn_time[var_04])
-  continue;
-
-  var_1++;
-  }
+      if(isdefined(level.agent_available_to_spawn_time) && isdefined(level.agent_available_to_spawn_time[var_04]) && var_00 < level.agent_available_to_spawn_time[var_04]) {
+        continue;
+      }
+      var_1++;
+    }
   }
 
   return var_01;
@@ -264,25 +264,25 @@ getfreeagent(var_00) {
   var_01 = undefined;
   var_02 = gettime();
 
-  if (isdefined(level.agentarray)) {
-  foreach (var_04 in level.agentarray) {
-  if (!isdefined(var_4.isactive) || !var_4.isactive) {
-  if (isdefined(var_4.waitingtodeactivate) && var_4.waitingtodeactivate)
-  continue;
+  if(isdefined(level.agentarray)) {
+    foreach(var_04 in level.agentarray) {
+      if(!isdefined(var_4.isactive) || !var_4.isactive) {
+        if(isdefined(var_4.waitingtodeactivate) && var_4.waitingtodeactivate) {
+          continue;
+        }
+        var_05 = var_04 getentitynumber();
 
-  var_05 = var_04 getentitynumber();
-
-  if (isdefined(level.agent_available_to_spawn_time) && isdefined(level.agent_available_to_spawn_time[var_05]) && var_02 < level.agent_available_to_spawn_time[var_05])
-  continue;
-
-  level.agent_available_to_spawn_time[var_05] = undefined;
-  var_01 = var_04;
-  var_1.agent_type = var_00;
-  var_01 initagentscriptvariables();
-  var_01 notify("agent_in_use");
-  break;
-  }
-  }
+        if(isdefined(level.agent_available_to_spawn_time) && isdefined(level.agent_available_to_spawn_time[var_05]) && var_02 < level.agent_available_to_spawn_time[var_05]) {
+          continue;
+        }
+        level.agent_available_to_spawn_time[var_05] = undefined;
+        var_01 = var_04;
+        var_1.agent_type = var_00;
+        var_01 initagentscriptvariables();
+        var_01 notify("agent_in_use");
+        break;
+      }
+    }
   }
 
   return var_01;
@@ -323,8 +323,8 @@ initplayerscriptvariables() {
   self.current_icon = undefined;
   self.do_immediate_ragdoll = undefined;
 
-  if (isdefined(level.func_768B))
-  self [[level.func_768B]]();
+  if(isdefined(level.func_768B))
+    self[[level.func_768B]]();
 }
 
 set_agent_team(var_00, var_01) {
@@ -338,8 +338,8 @@ set_agent_team(var_00, var_01) {
 
 addtocharactersarray() {
   for (var_00 = 0; var_00 < level.characters.size; var_0++) {
-  if (level.characters[var_00] == self)
-  return;
+    if(level.characters[var_00] == self)
+      return;
   }
 
   level.characters[level.characters.size] = self;
@@ -354,11 +354,11 @@ speciesfunc(var_00) {
 }
 
 validateattacker(var_00) {
-  if (isagent(var_00) && (!isdefined(var_0.isactive) || !var_0.isactive))
-  return undefined;
+  if(isagent(var_00) && (!isdefined(var_0.isactive) || !var_0.isactive))
+    return undefined;
 
-  if (isagent(var_00) && !isdefined(var_0.classname))
-  return undefined;
+  if(isagent(var_00) && !isdefined(var_0.classname))
+    return undefined;
 
   return var_00;
 }
@@ -372,12 +372,12 @@ set_agent_health(var_00) {
 default_spawn_func(var_00, var_01, var_02) {}
 
 is_friendly_damage(var_00, var_01) {
-  if (isdefined(var_01)) {
-  if (isdefined(var_1.team) && var_1.team == var_0.team)
-  return 1;
+  if(isdefined(var_01)) {
+    if(isdefined(var_1.team) && var_1.team == var_0.team)
+      return 1;
 
-  if (isdefined(var_1.owner) && isdefined(var_1.owner.team) && var_1.owner.team == var_0.team)
-  return 1;
+    if(isdefined(var_1.owner) && isdefined(var_1.owner.team) && var_1.owner.team == var_0.team)
+      return 1;
   }
 
   return 0;
@@ -387,25 +387,24 @@ default_on_damage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07
   var_12 = self;
   var_13 = level.agent_funcs[self.agent_type]["gametype_on_damaged"];
 
-  if (isdefined(var_13))
-  [[var_13]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+  if(isdefined(var_13))
+    [[var_13]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
 
-  if (is_friendly_damage(var_12, var_00))
-  return;
-
-  var_12 [[level.agent_funcs[var_12.agent_type]["on_damaged_finished"]]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, 0.0, var_10, var_11);
+  if(is_friendly_damage(var_12, var_00)) {
+    return;
+  }
+  var_12[[level.agent_funcs[var_12.agent_type]["on_damaged_finished"]]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, 0.0, var_10, var_11);
 }
 
 default_on_damage_finished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12) {
   var_13 = self.health;
 
-  if (isdefined(var_07)) {
-  var_14 = vectortoyaw(var_07);
-  var_15 = self.angles[1];
-  self.damageyaw = angleclamp180(var_14 - var_15);
-  }
-  else
-  self.damageyaw = 0;
+  if(isdefined(var_07)) {
+    var_14 = vectortoyaw(var_07);
+    var_15 = self.angles[1];
+    self.damageyaw = angleclamp180(var_14 - var_15);
+  } else
+    self.damageyaw = 0;
 
   self.damagelocation = var_08;
   self.damagemod = var_04;
@@ -416,27 +415,27 @@ default_on_damage_finished(var_00, var_01, var_02, var_03, var_04, var_05, var_0
   self.func_4D62 = var_06;
   self finishagentdamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, 0.0, var_11, var_12);
 
-  if (self.health > 0 && self.health < var_13)
-  self notify("pain");
+  if(self.health > 0 && self.health < var_13)
+    self notify("pain");
 
-  if (isalive(self) && isdefined(self.agent_type)) {
-  var_16 = level.agent_funcs[self.agent_type]["gametype_on_damage_finished"];
+  if(isalive(self) && isdefined(self.agent_type)) {
+    var_16 = level.agent_funcs[self.agent_type]["gametype_on_damage_finished"];
 
-  if (isdefined(var_16))
-  [[var_16]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
+    if(isdefined(var_16))
+      [[var_16]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
   }
 }
 
 default_on_killed(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
-  if (isdefined(level.func_C4BD))
-  self [[level.func_C4BD]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, 0);
+  if(isdefined(level.func_C4BD))
+    self[[level.func_C4BD]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, 0);
   else
-  on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, 0);
+    on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, 0);
 
   var_09 = level.agent_funcs[self.agent_type]["gametype_on_killed"];
 
-  if (isdefined(var_09))
-  [[var_09]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08);
+  if(isdefined(var_09))
+    [[var_09]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08);
 
   deactivateagent();
 }
@@ -445,13 +444,13 @@ func_5005(var_00, var_01) {
   self.aistate = var_01;
 
   switch (var_01) {
-  case "traverse":
-  self.do_immediate_ragdoll = 1;
-  func_0F3C::func_5AC0();
-  self.do_immediate_ragdoll = 0;
-  break;
-  default:
-  break;
+    case "traverse":
+      self.do_immediate_ragdoll = 1;
+      func_0F3C::func_5AC0();
+      self.do_immediate_ragdoll = 0;
+      break;
+    default:
+      break;
   }
 
   cleardamagehistory();
@@ -468,8 +467,8 @@ deactivateagent() {
 }
 
 getnumactiveagents(var_00) {
-  if (!isdefined(var_00))
-  var_00 = "all";
+  if(!isdefined(var_00))
+    var_00 = "all";
 
   var_01 = getactiveagentsoftype(var_00);
   return var_1.size;
@@ -478,14 +477,14 @@ getnumactiveagents(var_00) {
 getactiveagentsoftype(var_00) {
   var_01 = [];
 
-  if (!isdefined(level.agentarray))
-  return var_01;
+  if(!isdefined(level.agentarray))
+    return var_01;
 
-  foreach (var_03 in level.agentarray) {
-  if (isdefined(var_3.isactive) && var_3.isactive) {
-  if (var_00 == "all" || var_3.agent_type == var_00)
-  var_1[var_1.size] = var_03;
-  }
+  foreach(var_03 in level.agentarray) {
+    if(isdefined(var_3.isactive) && var_3.isactive) {
+      if(var_00 == "all" || var_3.agent_type == var_00)
+        var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -494,9 +493,9 @@ getactiveagentsoftype(var_00) {
 getaliveagentsofteam(var_00) {
   var_01 = [];
 
-  foreach (var_03 in level.agentarray) {
-  if (isalive(var_03) && isdefined(var_3.team) && var_3.team == var_00)
-  var_1[var_1.size] = var_03;
+  foreach(var_03 in level.agentarray) {
+    if(isalive(var_03) && isdefined(var_3.team) && var_3.team == var_00)
+      var_1[var_1.size] = var_03;
   }
 
   return var_01;
@@ -505,14 +504,14 @@ getaliveagentsofteam(var_00) {
 getactiveagentsofspecies(var_00) {
   var_01 = [];
 
-  if (!isdefined(level.agentarray))
-  return var_01;
+  if(!isdefined(level.agentarray))
+    return var_01;
 
-  foreach (var_03 in level.agentarray) {
-  if (isdefined(var_3.isactive) && var_3.isactive) {
-  if (var_3.species == var_00)
-  var_1[var_1.size] = var_03;
-  }
+  foreach(var_03 in level.agentarray) {
+    if(isdefined(var_3.isactive) && var_3.isactive) {
+      if(var_3.species == var_00)
+        var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -521,9 +520,9 @@ getactiveagentsofspecies(var_00) {
 getaliveagents() {
   var_00 = [];
 
-  foreach (var_02 in level.agentarray) {
-  if (isalive(var_02))
-  var_0[var_0.size] = var_02;
+  foreach(var_02 in level.agentarray) {
+    if(isalive(var_02))
+      var_0[var_0.size] = var_02;
   }
 
   return var_00;
@@ -538,75 +537,75 @@ on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, 
   var_10 = self.func_164D[self.asmname].func_4BC0;
   var_11 = anim.asm[self.asmname].states[var_10];
 
-  if (scripts\asm\asm_mp::func_2382(self.asmname, var_11))
-  scripts\asm\asm::func_231E(self.asmname, var_11, var_10);
+  if(scripts\asm\asm_mp::func_2382(self.asmname, var_11))
+    scripts\asm\asm::func_231E(self.asmname, var_11, var_10);
 
-  if (isdefined(self.nocorpse))
-  return;
-
+  if(isdefined(self.nocorpse)) {
+    return;
+  }
   var_12 = self;
   self.body = self cloneagent(var_08);
 
-  if (should_do_immediate_ragdoll(self))
-  do_immediate_ragdoll(self.body);
+  if(should_do_immediate_ragdoll(self))
+    do_immediate_ragdoll(self.body);
   else
-  thread delaystartragdoll(self.body, var_06, var_05, var_04, var_00, var_03);
+    thread delaystartragdoll(self.body, var_06, var_05, var_04, var_00, var_03);
 }
 
 should_do_immediate_ragdoll(var_00) {
-  if (isdefined(var_0.do_immediate_ragdoll) && var_0.do_immediate_ragdoll)
-  return 1;
+  if(isdefined(var_0.do_immediate_ragdoll) && var_0.do_immediate_ragdoll)
+    return 1;
 
   return 0;
 }
 
 do_immediate_ragdoll(var_00) {
-  if (isdefined(var_00))
-  var_00 startragdoll();
+  if(isdefined(var_00))
+    var_00 startragdoll();
 }
 
 delaystartragdoll(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if (isdefined(var_00)) {
-  var_06 = var_00 _meth_8112();
+  if(isdefined(var_00)) {
+    var_06 = var_00 _meth_8112();
 
-  if (animhasnotetrack(var_06, "ignore_ragdoll"))
-  return;
+    if(animhasnotetrack(var_06, "ignore_ragdoll"))
+      return;
   }
 
-  if (isdefined(level.noragdollents) && level.noragdollents.size) {
-  foreach (var_08 in level.noragdollents) {
-  if (distancesquared(var_0.origin, var_8.origin) < 65536)
-  return;
-  }
+  if(isdefined(level.noragdollents) && level.noragdollents.size) {
+    foreach(var_08 in level.noragdollents) {
+      if(distancesquared(var_0.origin, var_8.origin) < 65536)
+        return;
+    }
   }
 
   wait 0.2;
 
-  if (!isdefined(var_00))
-  return;
-
-  if (var_00 _meth_81B7())
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
+  if(var_00 _meth_81B7()) {
+    return;
+  }
   var_06 = var_00 _meth_8112();
   var_10 = 0.35;
 
-  if (animhasnotetrack(var_06, "start_ragdoll")) {
-  var_11 = getnotetracktimes(var_06, "start_ragdoll");
+  if(animhasnotetrack(var_06, "start_ragdoll")) {
+    var_11 = getnotetracktimes(var_06, "start_ragdoll");
 
-  if (isdefined(var_11))
-  var_10 = var_11[0];
+    if(isdefined(var_11))
+      var_10 = var_11[0];
   }
 
   var_12 = var_10 * getanimlength(var_06) - 0.2;
 
-  if (var_12 > 0)
-  wait(var_12);
+  if(var_12 > 0)
+    wait(var_12);
 
-  if (isdefined(var_00)) {
-  if (isdefined(var_0.ragdollhitloc) && isdefined(var_0.ragdollimpactvector))
-  var_00 giverankxp_regularmp(var_0.ragdollhitloc, var_0.ragdollimpactvector);
-  else
-  var_00 startragdoll();
+  if(isdefined(var_00)) {
+    if(isdefined(var_0.ragdollhitloc) && isdefined(var_0.ragdollimpactvector))
+      var_00 giverankxp_regularmp(var_0.ragdollhitloc, var_0.ragdollimpactvector);
+    else
+      var_00 startragdoll();
   }
 }

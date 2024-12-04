@@ -16,13 +16,13 @@ func_13A12() {
 }
 
 onweapondamage(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_00))
-  return;
-  else if (var_02 == "MOD_IMPACT")
-  return;
-
-  if (issubstr(self.weapon_name, "iw7_tacburst_mpl"))
-  func_20BF(var_00, var_04);
+  if(!isdefined(var_00))
+    return;
+  else if(var_02 == "MOD_IMPACT") {
+    return;
+  }
+  if(issubstr(self.weapon_name, "iw7_tacburst_mpl"))
+    func_20BF(var_00, var_04);
 
   func_20C3(var_00, var_04, var_01);
 }
@@ -30,63 +30,63 @@ onweapondamage(var_00, var_01, var_02, var_03, var_04) {
 func_0118(var_00, var_01, var_02, var_03) {
   var_04 = "gltacburst";
 
-  if (issubstr(self.weapon_name, "iw7_tacburst_mpl"))
-  var_04 = "gltacburst_big";
+  if(issubstr(self.weapon_name, "iw7_tacburst_mpl"))
+    var_04 = "gltacburst_big";
 
   var_05 = scripts\mp\weapons::getempdamageents(var_00, var_01, 0);
 
-  foreach (var_07 in var_05) {
-  if (!isdefined(var_07))
-  continue;
+  foreach(var_07 in var_05) {
+    if(!isdefined(var_07)) {
+      continue;
+    }
+    var_08 = scripts\engine\utility::ter_op(isdefined(var_7.owner), var_7.owner, var_07);
 
-  var_08 = scripts\engine\utility::ter_op(isdefined(var_7.owner), var_7.owner, var_07);
-
-  if (!scripts\mp\weapons::friendlyfirecheck(var_02, var_08) && var_08 != var_02)
-  continue;
-
-  var_07 notify("emp_damage", var_02, 3, var_00, var_04, "MOD_EXPLOSIVE");
+    if(!scripts\mp\weapons::friendlyfirecheck(var_02, var_08) && var_08 != var_02) {
+      continue;
+    }
+    var_07 notify("emp_damage", var_02, 3, var_00, var_04, "MOD_EXPLOSIVE");
   }
 
   var_10 = scripts\mp\utility\game::clearscrambler(var_00, var_01);
 
-  foreach (var_12 in var_10) {
-  if (!isdefined(var_12))
-  continue;
+  foreach(var_12 in var_10) {
+    if(!isdefined(var_12)) {
+      continue;
+    }
+    if(!scripts\mp\utility\game::isreallyalive(var_12)) {
+      continue;
+    }
+    if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_12)) {
+      continue;
+    }
+    if(var_12 != var_02 && scripts\mp\utility\game::func_9E05(var_2.team, var_12)) {
+      continue;
+    }
+    if(!var_12 scripts\mp\killstreaks\emp_common::func_FFC5()) {
+      continue;
+    }
+    var_12 getrandomarmkillstreak(1, var_2.origin, var_02, var_03, "MOD_EXPLOSIVE", var_04);
+    var_12 scripts\mp\killstreaks\emp_common::func_20C7(3);
 
-  if (!scripts\mp\utility\game::isreallyalive(var_12))
-  continue;
+    if(var_04 == "gltacburst_big")
+      var_12 func_20BF(self, var_02);
 
-  if (scripts\mp\equipment\phase_shift::isentityphaseshifted(var_12))
-  continue;
-
-  if (var_12 != var_02 && scripts\mp\utility\game::func_9E05(var_2.team, var_12))
-  continue;
-
-  if (!var_12 scripts\mp\killstreaks\emp_common::func_FFC5())
-  continue;
-
-  var_12 getrandomarmkillstreak(1, var_2.origin, var_02, var_03, "MOD_EXPLOSIVE", var_04);
-  var_12 scripts\mp\killstreaks\emp_common::func_20C7(3);
-
-  if (var_04 == "gltacburst_big")
-  var_12 func_20BF(self, var_02);
-
-  thread scripts\mp\gamescore::func_11ACF(var_02, var_12, var_04, 3);
+    thread scripts\mp\gamescore::func_11ACF(var_02, var_12, var_04, 3);
   }
 }
 
 func_20C3(var_00, var_01, var_02) {
-  if (!scripts\mp\killstreaks\emp_common::func_FFC5()) {
-  if (var_01 != self)
-  var_01 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
+  if(!scripts\mp\killstreaks\emp_common::func_FFC5()) {
+    if(var_01 != self)
+      var_01 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
 
-  return;
+    return;
   }
 
   var_03 = 3;
 
-  if (self == var_01)
-  var_03 = 1;
+  if(self == var_01)
+    var_03 = 1;
 
   scripts\mp\killstreaks\emp_common::func_20C7(var_03);
   thread scripts\mp\gamescore::func_11ACF(var_01, self, scripts\engine\utility::ter_op(issubstr(var_02, "iw7_tacburst_mpl"), "gltacburst_big", "gltacburst"), var_03);
@@ -96,15 +96,15 @@ func_20BF(var_00, var_01) {
   var_02 = 2;
   var_03 = 4;
 
-  if (self == var_01) {
-  var_02 = 0.75;
-  var_03 = 1.5;
+  if(self == var_01) {
+    var_02 = 0.75;
+    var_03 = 1.5;
   }
 
   var_04 = 1 - distance(self.origin, var_0.origin) / 256;
 
-  if (var_04 < 0)
-  var_04 = 0;
+  if(var_04 < 0)
+    var_04 = 0;
 
   var_05 = var_02 + var_03 * var_04;
   var_05 = scripts\mp\perks\perkfunctions::applystunresistence(var_01, self, var_05);
@@ -125,8 +125,8 @@ empsitewatcher(var_00) {
   var_01 = gettime() + var_00 * 1000;
 
   while (gettime() < var_01) {
-  self playrumbleonentity("damage_light");
-  wait 0.05;
+    self playrumbleonentity("damage_light");
+    wait 0.05;
   }
 }
 
@@ -138,17 +138,17 @@ func_A639(var_00) {
 }
 
 func_B92C(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_03) || !isdefined(var_04) || !isdefined(var_01) || !isdefined(var_02))
-  return var_00;
+  if(!isdefined(var_03) || !isdefined(var_04) || !isdefined(var_01) || !isdefined(var_02))
+    return var_00;
 
-  if (var_04 != "gltacburst")
-  return var_00;
+  if(var_04 != "gltacburst")
+    return var_00;
 
-  if (var_01 != var_02)
-  return var_00;
+  if(var_01 != var_02)
+    return var_00;
 
-  if (distancesquared(var_2.origin, var_3.origin) <= 16384)
-  return var_00;
+  if(distancesquared(var_2.origin, var_3.origin) <= 16384)
+    return var_00;
 
   return 0;
 }

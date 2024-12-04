@@ -11,14 +11,14 @@ main(var_00, var_01, var_02) {
   precachemodel("veh_mil_air_ca_destroyer_details");
   precachemodel("veh_mil_air_ca_destroyer_engines");
 
-  if (issubstr(var_02, "cheap")) {
-  precachemodel("veh_mil_air_ca_destroyer_periph");
-  precachemodel("ship_exterior_ca_cannon_a_rig");
-  precacheturret("cap_turret_cannon_large_ca");
-  level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
-  level._effect["capital_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_turret_small_cheap.vfx");
-  level._effect["capital_turret_flak_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_flack_cannon_cheap.vfx");
-  return;
+  if(issubstr(var_02, "cheap")) {
+    precachemodel("veh_mil_air_ca_destroyer_periph");
+    precachemodel("ship_exterior_ca_cannon_a_rig");
+    precacheturret("cap_turret_cannon_large_ca");
+    level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
+    level._effect["capital_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_turret_small_cheap.vfx");
+    level._effect["capital_turret_flak_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_flack_cannon_cheap.vfx");
+    return;
   }
 
   precachemodel("veh_mil_air_ca_destroyer_details_scr");
@@ -37,8 +37,8 @@ main(var_00, var_01, var_02) {
 #using_animtree("vehicles");
 
 func_317C(var_00) {
-  if (!isdefined(level.func_3979))
-  level.func_3979 = [];
+  if(!isdefined(level.func_3979))
+    level.func_3979 = [];
 
   level._effect["capship_death_linger_sparks_bg"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_sparks_bg.vfx");
   level._effect["capship_death_linger_sparks_md"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_sparks_md.vfx");
@@ -62,11 +62,11 @@ func_317C(var_00) {
   var_1.func_E505 = "ph_mil_air_ca_destroyer_space_explosion_rig";
   var_1.func_CB56 = "veh_mil_air_ca_destroyer_dst_piece_big_";
   var_1.func_C1FB = 40;
-  var_1.func_1FAF = %ph_mil_air_ca_destroyer_space_explosion;
+  var_1.func_1FAF = % ph_mil_air_ca_destroyer_space_explosion;
   var_1.func_7570 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_debris.vfx");
 
-  if (getdvarint("e3", 0))
-  var_1.func_7571 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_debris_e3.vfx");
+  if(getdvarint("e3", 0))
+    var_1.func_7571 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_debris_e3.vfx");
 
   var_1.func_7582 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_explosion.vfx");
   var_1.func_FB8C = "capital_ship_explo";
@@ -104,9 +104,9 @@ init_location() {
   self.func_12A08 = func_12A08();
   self.func_539B = ["veh_mil_air_ca_destroyer_engines", "veh_mil_air_ca_destroyer_details", "veh_mil_air_ca_destroyer_details_scr"];
 
-  if (issubstr(self.classname, "cheap"))
-  return;
-
+  if(issubstr(self.classname, "cheap")) {
+    return;
+  }
   thread func_1EDC();
   self.func_24C4 = ["tag_origin", "amb_special_m_1", "amb_turret_sml_r_ts_5", "amb_turret_sml_m_2", "amb_turret_sml_l_ts_2", "amb_turret_sml_m_4", "amb_turret_sml_l_b_3", "amb_turret_l_3"];
   self.func_7482 = "destroyer_ca_warp";
@@ -144,19 +144,19 @@ func_12A08() {
 func_1EDC() {
   level.func_EC87["ftl_model"] = #animtree;
   level.func_EC8C["ftl_model"] = "vfx_ftl_ca_destroyer";
-  level.func_EC85["ftl_model"]["ftl_in"] = %vfx_ftl_ca_destroyer_in;
-  level.func_EC85["ftl_model"]["ftl_out"] = %vfx_ftl_ca_destroyer_out;
+  level.func_EC85["ftl_model"]["ftl_in"] = % vfx_ftl_ca_destroyer_in;
+  level.func_EC85["ftl_model"]["ftl_out"] = % vfx_ftl_ca_destroyer_out;
 }
 
 func_F030(var_00, var_01, var_02) {
   while (isdefined(self.func_74A6))
-  wait 0.05;
+    wait 0.05;
 
-  if (!isdefined(level.func_F033))
-  level.func_F033 = [];
+  if(!isdefined(level.func_F033))
+    level.func_F033 = [];
 
-  if (!isdefined(level.func_F02D))
-  level.func_F02D = [];
+  if(!isdefined(level.func_F02D))
+    level.func_F02D = [];
 
   level.func_F033 = scripts\engine\utility::array_add(level.func_F033, self);
   level.func_F02D = scripts\engine\utility::array_add(level.func_F02D, self);
@@ -168,23 +168,23 @@ func_F030(var_00, var_01, var_02) {
   self.func_10250 = 1;
   self.func_D436 = 0;
 
-  if (scripts\sp\utility::func_B324())
-  self [[level.func_A056.func_11543]]("capitalship", "JACKAL_SDF_DESTROYER", "none", "none", 0, 1, 1);
+  if(scripts\sp\utility::func_B324())
+    self[[level.func_A056.func_11543]]("capitalship", "JACKAL_SDF_DESTROYER", "none", "none", 0, 1, 1);
 
   self.team = "axis";
   func_0BB6::func_39E1();
 
-  if (isdefined(var_02))
-  self.func_EEF9 = var_02;
+  if(isdefined(var_02))
+    self.func_EEF9 = var_02;
   else
-  self.func_EEF9 = "cannon_missile_ca_hardpoint cannon_small_ca,3,1,amb_turret_sml_l_ts_1,amb_turret_sml_l_ts_5,amb_turret_sml_r_ts_1,amb_turret_sml_r_ts_5,amb_turret_sml_r_ts_6,amb_turret_sml_r_ts_7,amb_turret_sml_l_ts_6,amb_turret_sml_l_ts_7 cannon_flak_ca,3,1 cannon_phalanx";
+    self.func_EEF9 = "cannon_missile_ca_hardpoint cannon_small_ca,3,1,amb_turret_sml_l_ts_1,amb_turret_sml_l_ts_5,amb_turret_sml_r_ts_1,amb_turret_sml_r_ts_5,amb_turret_sml_r_ts_6,amb_turret_sml_r_ts_7,amb_turret_sml_l_ts_6,amb_turret_sml_l_ts_7 cannon_flak_ca,3,1 cannon_phalanx";
 
   func_0BB6::func_39E8();
   self solid();
   self setcandamage(1);
 
-  if (scripts\engine\utility::is_true(var_00))
-  thread func_0BA9::func_39C9();
+  if(scripts\engine\utility::is_true(var_00))
+    thread func_0BA9::func_39C9();
 
   func_0BB8::func_39CE("high");
   thread func_0BB8::func_39D0("idle");
@@ -202,8 +202,8 @@ func_F030(var_00, var_01, var_02) {
   thread func_52FB();
   func_0BA9::func_52FD();
 
-  if (!isdefined(var_01) || !var_01)
-  self.func_12FBA = 1;
+  if(!isdefined(var_01) || !var_01)
+    self.func_12FBA = 1;
 
   thread func_0BA9::func_396F(var_01);
 }
@@ -221,12 +221,12 @@ func_52FB() {
   var_05 = 0.3;
 
   for (;;) {
-  var_06 = func_52FA() * var_02 + func_52F9() * var_03;
+    var_06 = func_52FA() * var_02 + func_52F9() * var_03;
 
-  if (var_06 / var_04 <= var_05)
-  break;
-
-  wait 0.25;
+    if(var_06 / var_04 <= var_05) {
+      break;
+    }
+    wait 0.25;
   }
 
   self _meth_81D0();
@@ -235,14 +235,14 @@ func_52FB() {
 func_52FA() {
   var_00 = 0;
 
-  if (isdefined(self.turrets) && isdefined(self.turrets["cap_turret_med_flak"]))
-  var_00 = scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_med_flak"]).size;
+  if(isdefined(self.turrets) && isdefined(self.turrets["cap_turret_med_flak"]))
+    var_00 = scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_med_flak"]).size;
 
-  if (isdefined(self.turrets) && isdefined(self.turrets["cap_turret_phalanx"]))
-  var_00 = var_00 + scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_phalanx"]).size;
+  if(isdefined(self.turrets) && isdefined(self.turrets["cap_turret_phalanx"]))
+    var_00 = var_00 + scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_phalanx"]).size;
 
-  if (isdefined(self.turrets) && isdefined(self.turrets["cap_turret_small_constant"]))
-  var_00 = var_00 + scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_small_constant"]).size;
+  if(isdefined(self.turrets) && isdefined(self.turrets["cap_turret_small_constant"]))
+    var_00 = var_00 + scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_small_constant"]).size;
 
   return var_00;
 }
@@ -250,8 +250,8 @@ func_52FA() {
 func_52F9() {
   var_00 = 0;
 
-  if (isdefined(self.func_8B4F) && isdefined(self.func_8B4F["cap_hardpoint_missile_barrage"]))
-  var_00 = scripts\engine\utility::array_removeundefined(self.func_8B4F["cap_hardpoint_missile_barrage"]).size;
+  if(isdefined(self.func_8B4F) && isdefined(self.func_8B4F["cap_hardpoint_missile_barrage"]))
+    var_00 = scripts\engine\utility::array_removeundefined(self.func_8B4F["cap_hardpoint_missile_barrage"]).size;
 
   return var_00;
 }

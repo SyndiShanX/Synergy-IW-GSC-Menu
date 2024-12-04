@@ -51,18 +51,16 @@ init() {
 }
 
 onuse(var_00, var_01) {
-  if (isdefined(level.a10strafeactive)) {
-  self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
-  return 0;
-  }
-  else if (scripts\mp\utility\game::isusingremote() || scripts\mp\utility\game::iskillstreakdenied())
-  return 0;
-  else if (getcsplinecount() < 2)
-  return 0;
-  else
-  {
-  thread dostrike(var_00, "a10_strafe");
-  return 1;
+  if(isdefined(level.a10strafeactive)) {
+    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    return 0;
+  } else if(scripts\mp\utility\game::isusingremote() || scripts\mp\utility\game::iskillstreakdenied())
+    return 0;
+  else if(getcsplinecount() < 2)
+    return 0;
+  else {
+    thread dostrike(var_00, "a10_strafe");
+    return 1;
   }
 }
 
@@ -73,47 +71,47 @@ dostrike(var_00, var_01) {
   var_02 = getpathindex();
   var_03 = startstrafesequence(var_01, var_00);
 
-  if (var_03) {
-  var_04 = spawnaircraft(var_01, var_00, level.a10splinesin[var_02]);
+  if(var_03) {
+    var_04 = spawnaircraft(var_01, var_00, level.a10splinesin[var_02]);
 
-  if (isdefined(var_04)) {
-  var_04 dooneflyby();
-  switchaircraft(var_04, var_01);
-  var_04 = spawnaircraft(var_01, var_00, level.a10splinesin[var_02]);
+    if(isdefined(var_04)) {
+      var_04 dooneflyby();
+      switchaircraft(var_04, var_01);
+      var_04 = spawnaircraft(var_01, var_00, level.a10splinesin[var_02]);
 
-  if (isdefined(var_04)) {
-  thread scripts\mp\killstreaks\killstreaks::clearrideintro(1.0, 0.75);
-  var_04 dooneflyby();
-  var_04 thread endflyby(var_01);
-  endstrafesequence(var_01);
-  }
-  }
+      if(isdefined(var_04)) {
+        thread scripts\mp\killstreaks\killstreaks::clearrideintro(1.0, 0.75);
+        var_04 dooneflyby();
+        var_04 thread endflyby(var_01);
+        endstrafesequence(var_01);
+      }
+    }
   }
 }
 
 startstrafesequence(var_00, var_01) {
   scripts\mp\utility\game::setusingremote("a10_strafe");
 
-  if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::setthirdpersondof(0);
+  if(getdvarint("camera_thirdPerson"))
+    scripts\mp\utility\game::setthirdpersondof(0);
 
   self.restoreangles = self.angles;
   scripts\mp\utility\game::freezecontrolswrapper(1);
   var_02 = scripts\mp\killstreaks\killstreaks::initridekillstreak("a10_strafe");
 
-  if (var_02 != "success") {
-  if (var_02 != "disconnect")
-  scripts\mp\utility\game::clearusingremote();
+  if(var_02 != "success") {
+    if(var_02 != "disconnect")
+      scripts\mp\utility\game::clearusingremote();
 
-  if (isdefined(self.disabledweapon) && self.disabledweapon)
-  scripts\engine\utility::allow_weapon(1);
+    if(isdefined(self.disabledweapon) && self.disabledweapon)
+      scripts\engine\utility::allow_weapon(1);
 
-  self notify("death");
-  return 0;
+    self notify("death");
+    return 0;
   }
 
-  if (scripts\mp\utility\game::isjuggernaut() && isdefined(self.juggernautoverlay))
-  self.juggernautoverlay.alpha = 0;
+  if(scripts\mp\utility\game::isjuggernaut() && isdefined(self.juggernautoverlay))
+    self.juggernautoverlay.alpha = 0;
 
   scripts\mp\utility\game::freezecontrolswrapper(0);
   level.a10strafeactive = 1;
@@ -125,11 +123,11 @@ startstrafesequence(var_00, var_01) {
 endstrafesequence(var_00) {
   scripts\mp\utility\game::clearusingremote();
 
-  if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::setthirdpersondof(1);
+  if(getdvarint("camera_thirdPerson"))
+    scripts\mp\utility\game::setthirdpersondof(1);
 
-  if (scripts\mp\utility\game::isjuggernaut() && isdefined(self.juggernautoverlay))
-  self.juggernautoverlay.alpha = 1;
+  if(scripts\mp\utility\game::isjuggernaut() && isdefined(self.juggernautoverlay))
+    self.juggernautoverlay.alpha = 1;
 
   self setplayerangles(self.restoreangles);
   self.restoreangles = undefined;
@@ -144,15 +142,15 @@ switchaircraft(var_00, var_01) {
   thread scripts\mp\utility\game::set_visionset_for_watching_players("black_bw", 0.75, 0.75);
   wait 0.75;
 
-  if (isdefined(var_00))
-  var_00 thread endflyby(var_01);
+  if(isdefined(var_00))
+    var_00 thread endflyby(var_01);
 }
 
 spawnaircraft(var_00, var_01, var_02) {
   var_03 = createplaneasheli(var_00, var_01, var_02);
 
-  if (!isdefined(var_03))
-  return undefined;
+  if(!isdefined(var_03))
+    return undefined;
 
   var_3.streakname = var_00;
   self remotecontrolvehicle(var_03);
@@ -183,14 +181,14 @@ attachturret(var_00) {
 }
 
 cleanupaircraft() {
-  if (isdefined(self.turret))
-  self.turret delete();
+  if(isdefined(self.turret))
+    self.turret delete();
 
-  foreach (var_01 in self.targetlist) {
-  if (isdefined(var_1["icon"])) {
-  var_1["icon"] destroy();
-  var_1["icon"] = undefined;
-  }
+  foreach(var_01 in self.targetlist) {
+    if(isdefined(var_1["icon"])) {
+      var_1["icon"] destroy();
+      var_1["icon"] = undefined;
+    }
   }
 
   self delete();
@@ -205,23 +203,23 @@ dooneflyby() {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("splinePlaneReachedNode", var_00);
+    self waittill("splinePlaneReachedNode", var_00);
 
-  if (isdefined(var_00) && var_00 == "End") {
-  self notify("a10_end_strafe");
-  break;
-  }
+    if(isdefined(var_00) && var_00 == "End") {
+      self notify("a10_end_strafe");
+      break;
+    }
   }
 }
 
 endflyby(var_00) {
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   self.owner remotecontrolvehicleoff(self);
 
-  if (isdefined(self.turret))
-  self.owner remotecontrolturretoff(self.turret);
+  if(isdefined(self.turret))
+    self.owner remotecontrolturretoff(self.turret);
 
   self notify("end_remote");
   self.owner thermalvisionfofoverlayoff();
@@ -230,9 +228,9 @@ endflyby(var_00) {
   scripts\mp\killstreaks\plane::stoptrackingplane(self);
   wait 5;
 
-  if (isdefined(self)) {
-  self stoploopsound(var_1.sfxengine_1p);
-  cleanupaircraft();
+  if(isdefined(self)) {
+    self stoploopsound(var_1.sfxengine_1p);
+    cleanupaircraft();
   }
 }
 
@@ -243,8 +241,8 @@ createplaneasheli(var_00, var_01, var_02) {
   var_06 = vectortoangles(var_05);
   var_07 = spawnhelicopter(self, var_04, var_06, var_3.vehicle, var_3.func_B923[self.team]);
 
-  if (!isdefined(var_07))
-  return undefined;
+  if(!isdefined(var_07))
+    return undefined;
 
   var_07 makevehiclesolidcapsule(18, -9, 18);
   var_7.owner = self;
@@ -282,13 +280,13 @@ monitorrocketfire(var_00, var_01) {
   self notifyonplayercommand("rocket_fire_pressed", "+speed_throw");
   self notifyonplayercommand("rocket_fire_pressed", "+ads_akimbo_accessible");
 
-  if (!level.console)
-  self notifyonplayercommand("rocket_fire_pressed", "+toggleads_throw");
+  if(!level.console)
+    self notifyonplayercommand("rocket_fire_pressed", "+toggleads_throw");
 
   while (var_1.numrocketsleft > 0) {
-  self waittill("rocket_fire_pressed");
-  var_01 onfirerocket(var_00);
-  wait(var_2.delaybetweenrockets);
+    self waittill("rocket_fire_pressed");
+    var_01 onfirerocket(var_00);
+    wait(var_2.delaybetweenrockets);
   }
 }
 
@@ -302,38 +300,38 @@ monitorrocketfire2(var_00, var_01) {
   self notifyonplayercommand("rocket_fire_pressed", "+speed_throw");
   self notifyonplayercommand("rocket_fire_pressed", "+ads_akimbo_accessible");
 
-  if (!level.console)
-  self notifyonplayercommand("rocket_fire_pressed", "+toggleads_throw");
+  if(!level.console)
+    self notifyonplayercommand("rocket_fire_pressed", "+toggleads_throw");
 
   var_1.targetlist = [];
 
   while (var_1.numrocketsleft > 0) {
-  if (!self adsbuttonpressed())
-  self waittill("rocket_fire_pressed");
+    if(!self adsbuttonpressed())
+      self waittill("rocket_fire_pressed");
 
-  var_01 missileacquiretargets();
+    var_01 missileacquiretargets();
 
-  if (var_1.targetlist.size > 0)
-  var_01 thread firemissiles();
+    if(var_1.targetlist.size > 0)
+      var_01 thread firemissiles();
   }
 }
 
 missilegetbesttarget() {
   var_00 = [];
 
-  foreach (var_02 in level.players) {
-  if (missileisgoodtarget(var_02))
-  var_0[var_0.size] = var_02;
+  foreach(var_02 in level.players) {
+    if(missileisgoodtarget(var_02))
+      var_0[var_0.size] = var_02;
   }
 
-  foreach (var_05 in level.uplinks) {
-  if (missileisgoodtarget(var_05))
-  var_0[var_0.size] = var_05;
+  foreach(var_05 in level.uplinks) {
+    if(missileisgoodtarget(var_05))
+      var_0[var_0.size] = var_05;
   }
 
-  if (var_0.size > 0) {
-  var_07 = sortbydistance(var_00, self.origin);
-  return var_7[0];
+  if(var_0.size > 0) {
+    var_07 = sortbydistance(var_00, self.origin);
+    return var_7[0];
   }
 
   return undefined;
@@ -360,18 +358,18 @@ missileacquiretargets() {
   var_01 = undefined;
 
   while (self.targetlist.size < self.numrocketsleft) {
-  if (!isdefined(var_01)) {
-  var_01 = missilegetbesttarget();
+    if(!isdefined(var_01)) {
+      var_01 = missilegetbesttarget();
 
-  if (isdefined(var_01)) {
-  thread missilelocktarget(var_01);
-  wait(var_0.delaybetweenlockon);
-  var_01 = undefined;
-  continue;
-  }
-  }
+      if(isdefined(var_01)) {
+        thread missilelocktarget(var_01);
+        wait(var_0.delaybetweenlockon);
+        var_01 = undefined;
+        continue;
+      }
+    }
 
-  wait 0.1;
+    wait 0.1;
   }
 
   self.owner setclientomnvar("ui_a10_rocket_lock", 0);
@@ -387,8 +385,8 @@ missilewaitfortriggerrelease() {
   var_00 notifyonplayercommand("rocket_fire_released", "-speed_throw");
   var_00 notifyonplayercommand("rocket_fire_released", "-ads_akimbo_accessible");
 
-  if (!level.console)
-  var_00 notifyonplayercommand("rocket_fire_released", "-toggleads_throw");
+  if(!level.console)
+    var_00 notifyonplayercommand("rocket_fire_released", "-toggleads_throw");
 
   self.owner waittill("rocket_fire_released");
   var_00 setclientomnvar("ui_a10_rocket_lock", 0);
@@ -413,20 +411,20 @@ firemissiles() {
   level endon("game_ended");
   var_00 = level.planeconfigs[self.streakname];
 
-  foreach (var_02 in self.targetlist) {
-  if (self.numrocketsleft > 0) {
-  var_03 = onfirehomingmissile(self.streakname, var_2["target"], (0, 0, -70));
+  foreach(var_02 in self.targetlist) {
+    if(self.numrocketsleft > 0) {
+      var_03 = onfirehomingmissile(self.streakname, var_2["target"], (0, 0, -70));
 
-  if (isdefined(var_2["icon"])) {
-  var_3.icon = var_2["icon"];
-  var_2["icon"] = undefined;
-  }
+      if(isdefined(var_2["icon"])) {
+        var_3.icon = var_2["icon"];
+        var_2["icon"] = undefined;
+      }
 
-  wait(var_0.delaybetweenrockets);
-  continue;
-  }
+      wait(var_0.delaybetweenrockets);
+      continue;
+    }
 
-  break;
+    break;
   }
 
   var_05 = [];
@@ -437,17 +435,17 @@ onfirehomingmissile(var_00, var_01, var_02) {
   var_04 = "tag_missile_" + (var_03 + 1);
   var_05 = self gettagorigin(var_04);
 
-  if (isdefined(var_05)) {
-  var_06 = self.owner;
-  var_07 = level.planeconfigs[var_00];
-  var_08 = scripts\mp\utility\game::_magicbullet(var_7.rocketmodelname, var_05, var_05 + 100 * anglestoforward(self.angles), self.owner);
-  var_08 thread a10_missile_set_target(var_01, var_02);
-  earthquake(0.25, 0.05, self.origin, 512);
-  self.numrocketsleft--;
-  var_07 = level.planeconfigs[var_00];
-  var_08 playsoundonmovingent(var_7.sfxmissilefire_1p[var_03]);
-  var_08 playloopsound(var_7.sfxmissile);
-  return var_08;
+  if(isdefined(var_05)) {
+    var_06 = self.owner;
+    var_07 = level.planeconfigs[var_00];
+    var_08 = scripts\mp\utility\game::_magicbullet(var_7.rocketmodelname, var_05, var_05 + 100 * anglestoforward(self.angles), self.owner);
+    var_08 thread a10_missile_set_target(var_01, var_02);
+    earthquake(0.25, 0.05, self.origin, 512);
+    self.numrocketsleft--;
+    var_07 = level.planeconfigs[var_00];
+    var_08 playsoundonmovingent(var_7.sfxmissilefire_1p[var_03]);
+    var_08 playloopsound(var_7.sfxmissile);
+    return var_08;
   }
 
   return undefined;
@@ -457,15 +455,15 @@ onfirerocket(var_00) {
   var_01 = "tag_missile_" + self.numrocketsleft;
   var_02 = self gettagorigin(var_01);
 
-  if (isdefined(var_02)) {
-  var_03 = self.owner;
-  var_04 = level.planeconfigs[var_00];
-  var_05 = scripts\mp\utility\game::_magicbullet(var_4.rocketmodelname, var_02, var_02 + 100 * anglestoforward(self.angles), self.owner);
-  earthquake(0.25, 0.05, self.origin, 512);
-  self.numrocketsleft--;
-  var_05 playsoundonmovingent(var_4.sfxmissilefire_1p[self.numrocketsleft]);
-  var_05 playloopsound(var_4.sfxmissile);
-  self playsoundonmovingent("a10p_missile_launch");
+  if(isdefined(var_02)) {
+    var_03 = self.owner;
+    var_04 = level.planeconfigs[var_00];
+    var_05 = scripts\mp\utility\game::_magicbullet(var_4.rocketmodelname, var_02, var_02 + 100 * anglestoforward(self.angles), self.owner);
+    earthquake(0.25, 0.05, self.origin, 512);
+    self.numrocketsleft--;
+    var_05 playsoundonmovingent(var_4.sfxmissilefire_1p[self.numrocketsleft]);
+    var_05 playloopsound(var_4.sfxmissile);
+    self playsoundonmovingent("a10p_missile_launch");
   }
 }
 
@@ -478,8 +476,8 @@ a10_missile_set_target(var_00, var_01) {
 a10_missile_cleanup() {
   self waittill("death");
 
-  if (isdefined(self.icon))
-  self.icon destroy();
+  if(isdefined(self.icon))
+    self.icon destroy();
 }
 
 monitorweaponfire(var_00, var_01) {
@@ -495,22 +493,22 @@ monitorweaponfire(var_00, var_01) {
   self notifyonplayercommand("a10_cannon_stop", "-attack_akimbo_accessible");
 
   while (var_1.ammocount > 0) {
-  if (!self attackbuttonpressed())
-  self waittill("a10_cannon_start");
+    if(!self attackbuttonpressed())
+      self waittill("a10_cannon_start");
 
-  var_03 = gettime() + var_2.sfxcannonfireburptime;
-  var_01 playloopsound(var_2.sfxcannonfireloop_1p);
-  var_01 thread updatecannonshake(var_00);
-  self waittill("a10_cannon_stop");
-  var_01 stoploopsound(var_2.sfxcannonfireloop_1p);
-  var_01 playsoundonmovingent(var_2.sfxcannonfirestop_1p);
+    var_03 = gettime() + var_2.sfxcannonfireburptime;
+    var_01 playloopsound(var_2.sfxcannonfireloop_1p);
+    var_01 thread updatecannonshake(var_00);
+    self waittill("a10_cannon_stop");
+    var_01 stoploopsound(var_2.sfxcannonfireloop_1p);
+    var_01 playsoundonmovingent(var_2.sfxcannonfirestop_1p);
 
-  if (gettime() < var_03) {
-  playloopsound(var_1.origin, var_2.sfxcannonfireburpshort_3p);
-  continue;
-  }
+    if(gettime() < var_03) {
+      playloopsound(var_1.origin, var_2.sfxcannonfireburpshort_3p);
+      continue;
+    }
 
-  playloopsound(var_1.origin, var_2.sfxcannonfireburplong_3p);
+    playloopsound(var_1.origin, var_2.sfxcannonfireburplong_3p);
   }
 }
 
@@ -521,12 +519,12 @@ updatecannonshake(var_00) {
   var_01 = level.planeconfigs[var_00];
 
   while (self.ammocount > 0) {
-  earthquake(0.2, 0.5, self.origin, 512);
-  self.ammocount = self.ammocount - 10;
-  var_02 = self gettagorigin("tag_flash_attach") + 20 * anglestoforward(self.angles);
-  playfx(var_1.cannonfirevfx, var_02);
-  self playrumbleonentity(var_1.cannonrumble);
-  wait 0.1;
+    earthquake(0.2, 0.5, self.origin, 512);
+    self.ammocount = self.ammocount - 10;
+    var_02 = self gettagorigin("tag_flash_attach") + 20 * anglestoforward(self.angles);
+    playfx(var_1.cannonfirevfx, var_02);
+    self playrumbleonentity(var_1.cannonrumble);
+    wait 0.1;
   }
 
   self.turret turretfiredisable();
@@ -540,19 +538,18 @@ monitoraltitude(var_00, var_01) {
   self setclientomnvar("ui_a10_alt_warn", 0);
 
   for (;;) {
-  var_02 = int(clamp(var_1.origin[2], 0, 16383));
-  self setclientomnvar("ui_a10_alt", var_02);
+    var_02 = int(clamp(var_1.origin[2], 0, 16383));
+    self setclientomnvar("ui_a10_alt", var_02);
 
-  if (var_02 <= 1000 && !isdefined(var_1.altwarning)) {
-  var_1.altwarning = 1;
-  self setclientomnvar("ui_a10_alt_warn", 1);
-  }
-  else if (var_02 > 1000 && isdefined(var_1.altwarning)) {
-  var_1.altwarning = undefined;
-  self setclientomnvar("ui_a10_alt_warn", 0);
-  }
+    if(var_02 <= 1000 && !isdefined(var_1.altwarning)) {
+      var_1.altwarning = 1;
+      self setclientomnvar("ui_a10_alt_warn", 1);
+    } else if(var_02 > 1000 && isdefined(var_1.altwarning)) {
+      var_1.altwarning = undefined;
+      self setclientomnvar("ui_a10_alt_warn", 0);
+    }
 
-  wait 0.1;
+    wait 0.1;
   }
 }
 
@@ -611,7 +608,7 @@ a10_cockpit_breathing() {
   level endon("remove_player_control");
 
   for (;;)
-  wait(randomfloatrange(3.0, 7.0));
+    wait(randomfloatrange(3.0, 7.0));
 }
 
 watchearlyexit(var_00) {

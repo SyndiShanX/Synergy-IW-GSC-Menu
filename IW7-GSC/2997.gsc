@@ -14,15 +14,15 @@ main(var_00, var_01, var_02) {
   level._effect["retribution_thrust_vert_large_idle"] = loadfx("vfx\iw7\core\vehicle\retr\vfx_veh_retr_thrust_vert_large_idle.vfx");
   level._effect["retribution_thrust_vert_large_heavy"] = loadfx("vfx\iw7\core\vehicle\retr\vfx_veh_retr_thrust_vert_large_max.vfx");
 
-  if (issubstr(var_02, "periph")) {
-  precachemodel("veh_mil_air_un_retribution_periph");
-  precachemodel("veh_mil_air_un_retribution_rig");
-  precachemodel("vfx_ftl_ca_destroyer");
-  precachemodel("ship_exterior_un_cannon_b_rig");
-  precacheturret("cap_turret_cannon_large_un");
-  level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
-  level._effect["capital_un_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_un_turret_small_cheap.vfx");
-  return;
+  if(issubstr(var_02, "periph")) {
+    precachemodel("veh_mil_air_un_retribution_periph");
+    precachemodel("veh_mil_air_un_retribution_rig");
+    precachemodel("vfx_ftl_ca_destroyer");
+    precachemodel("ship_exterior_un_cannon_b_rig");
+    precacheturret("cap_turret_cannon_large_un");
+    level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
+    level._effect["capital_un_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_un_turret_small_cheap.vfx");
+    return;
   }
 
   precachemodel("veh_mil_air_un_retribution_rig");
@@ -30,13 +30,13 @@ main(var_00, var_01, var_02) {
   precachemodel("veh_mil_air_un_retribution_details");
   precachemodel("vfx_ftl_ca_destroyer");
 
-  if (issubstr(var_02, "cheap")) {
-  precachemodel("veh_mil_air_un_retribution_periph");
-  precachemodel("ship_exterior_un_cannon_b_rig");
-  precacheturret("cap_turret_cannon_large_un");
-  level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
-  level._effect["capital_un_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_un_turret_small_cheap.vfx");
-  return;
+  if(issubstr(var_02, "cheap")) {
+    precachemodel("veh_mil_air_un_retribution_periph");
+    precachemodel("ship_exterior_un_cannon_b_rig");
+    precacheturret("cap_turret_cannon_large_un");
+    level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
+    level._effect["capital_un_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_un_turret_small_cheap.vfx");
+    return;
   }
 
   precachemodel("veh_mil_air_un_retribution");
@@ -44,10 +44,10 @@ main(var_00, var_01, var_02) {
   precacheturret("cap_turret_cannon_large_un_zerog");
   precachemodel("veh_mil_air_un_retribution_interior_01");
 
-  if (issubstr(var_02, "_damaged"))
-  precachemodel("veh_mil_air_un_retribution_repair");
-  else if (issubstr(var_02, "_repaired"))
-  precachemodel("veh_mil_air_un_retribution_repair");
+  if(issubstr(var_02, "_damaged"))
+    precachemodel("veh_mil_air_un_retribution_repair");
+  else if(issubstr(var_02, "_repaired"))
+    precachemodel("veh_mil_air_un_retribution_repair");
 
   level._effect["retribution_un_warp_pre"] = loadfx("vfx\iw7\core\vehicle\retr\vfx_vehicle_retr_warp_in_anticipation.vfx");
   level._effect["retribution_un_warp_in"] = loadfx("vfx\iw7\core\vehicle\retr\vfx_vehicle_retr_warp_in.vfx");
@@ -61,10 +61,10 @@ main(var_00, var_01, var_02) {
 }
 
 init_location() {
-  if (issubstr(self.classname, "_damaged"))
-  self.func_B210 = "veh_mil_air_un_retribution_repair";
-  else if (issubstr(self.classname, "_repaired"))
-  self.func_B210 = "veh_mil_air_un_retribution_repair";
+  if(issubstr(self.classname, "_damaged"))
+    self.func_B210 = "veh_mil_air_un_retribution_repair";
+  else if(issubstr(self.classname, "_repaired"))
+    self.func_B210 = "veh_mil_air_un_retribution_repair";
 
   self.func_24C4 = ["tag_origin", "amb_turret_sml_t_l_4", "tag_engine_bottom_rear_a", "amb_missile_l_2", "tag_engine_bottom_midlf_a", "mdl_ftl_a_al", "amb_turret_sml_t_l_2", "mdl_ftl_b_el", "mdl_ftl_b_bl", "amb_turret_sml_t_r_1", "mdl_ftl_b_gr", "mdl_ftl_a_ar", "tag_lockon", "amb_missile_r_3", "amb_turret_sml_t_r_4"];
   thread func_0BA9::func_396E("un");
@@ -83,14 +83,14 @@ init_location() {
   self.func_539B = ["veh_mil_air_un_retribution_engines", "veh_mil_air_un_retribution_details"];
   self.func_539A = "veh_mil_air_un_retribution_interior_01";
 
-  if (issubstr(self.classname, "periph")) {
-  self.func_B210 = "veh_mil_air_un_retribution_periph";
-  return;
+  if(issubstr(self.classname, "periph")) {
+    self.func_B210 = "veh_mil_air_un_retribution_periph";
+    return;
   }
 
-  if (issubstr(self.classname, "cheap"))
-  return;
-
+  if(issubstr(self.classname, "cheap")) {
+    return;
+  }
   thread func_1EDC();
   self.func_7482 = "retribution_un_warp";
   self.func_748F = "vfx_ftl_ca_destroyer";
@@ -104,6 +104,6 @@ init_location() {
 func_1EDC() {
   level.func_EC87["ftl_model"] = #animtree;
   level.func_EC8C["ftl_model"] = "vfx_ftl_ca_destroyer";
-  level.func_EC85["ftl_model"]["ftl_in"] = %vfx_ftl_ca_destroyer_in;
-  level.func_EC85["ftl_model"]["ftl_out"] = %vfx_ftl_ca_destroyer_out;
+  level.func_EC85["ftl_model"]["ftl_in"] = % vfx_ftl_ca_destroyer_in;
+  level.func_EC85["ftl_model"]["ftl_out"] = % vfx_ftl_ca_destroyer_out;
 }

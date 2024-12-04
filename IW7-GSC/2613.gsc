@@ -43,18 +43,17 @@ func_48BE(var_00) {
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
 
-  if (!isdefined(level.func_4EE9))
-  level.func_4EE9 = [var_01];
-  else if (level.func_4EE9.size > 50) {
-  var_02 = [];
-  level.func_4EE9[0] delete();
+  if(!isdefined(level.func_4EE9))
+    level.func_4EE9 = [var_01];
+  else if(level.func_4EE9.size > 50) {
+    var_02 = [];
+    level.func_4EE9[0] delete();
 
-  for (var_03 = 1; var_03 < level.func_4EE9.size; var_3++)
-  var_2[var_2.size] = level.func_4EE9[var_03];
+    for (var_03 = 1; var_03 < level.func_4EE9.size; var_3++)
+      var_2[var_2.size] = level.func_4EE9[var_03];
 
-  var_2[var_2.size] = var_01;
-  level.func_4EE9 = var_02;
-  }
-  else
-  level.func_4EE9[level.func_4EE9.size] = var_01;
+    var_2[var_2.size] = var_01;
+    level.func_4EE9 = var_02;
+  } else
+    level.func_4EE9[level.func_4EE9.size] = var_01;
 }

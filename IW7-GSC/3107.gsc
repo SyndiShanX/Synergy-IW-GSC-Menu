@@ -4,9 +4,9 @@
 ***************************************/
 
 func_BE5C() {
-  if (func_09FF::bt_nativeistreeregistered("jackal\jackal_native_api"))
-  return;
-
+  if(func_09FF::bt_nativeistreeregistered("jackal\jackal_native_api")) {
+    return;
+  }
   func_09FF::bt_nativeregistertree("jackal\jackal_native_api", "Root", "selector", ["AnimScripted", "sequence", "ShouldFollow", "sequence", "ShouldHover", "sequence", "ShouldGotoAndFollowSpline", "sequence", "ShouldEscape", "sequence", "ShouldCombat", "sequence", "ShouldPatrol", "sequence", "jk_doNothing4", "action"]);
   func_09FF::bt_nativesetregistrar("jackal\jackal_native_api");
   func_09FF::bt_nativeregisterbehavior("AnimScripted", "sequence", ["jk_isAnimscripted4", "action", "jk_doNothing4", "action"], 4);

@@ -12,8 +12,8 @@ init() {
   level.func_C73F["escort_airdrop"].func_11415 = "tag_le_door_attach";
   level.func_C73F["escort_airdrop"].func_11416 = "tag_ri_door_attach";
   level.func_C73F["escort_airdrop"].func_113F0 = "tag_turret_attach";
-  level.func_C73F["escort_airdrop"].func_DA71 = &"KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
-  level.func_C73F["escort_airdrop"].name = &"KILLSTREAKS_ESCORT_AIRDROP";
+  level.func_C73F["escort_airdrop"].func_DA71 = & "KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
+  level.func_C73F["escort_airdrop"].name = & "KILLSTREAKS_ESCORT_AIRDROP";
   level.func_C73F["escort_airdrop"].weaponinfo = "osprey_minigun_mp";
   level.func_C73F["escort_airdrop"].helitype = "osprey";
   level.func_C73F["escort_airdrop"].droptype = "airdrop_escort";
@@ -26,29 +26,29 @@ init() {
   level.func_C73F["osprey_gunner"].func_11415 = "tag_le_door_attach";
   level.func_C73F["osprey_gunner"].func_11416 = "tag_ri_door_attach";
   level.func_C73F["osprey_gunner"].func_113F0 = "tag_turret_attach";
-  level.func_C73F["osprey_gunner"].func_DA71 = &"KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
-  level.func_C73F["osprey_gunner"].name = &"KILLSTREAKS_OSPREY_GUNNER";
+  level.func_C73F["osprey_gunner"].func_DA71 = & "KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
+  level.func_C73F["osprey_gunner"].name = & "KILLSTREAKS_OSPREY_GUNNER";
   level.func_C73F["osprey_gunner"].weaponinfo = "osprey_player_minigun_mp";
   level.func_C73F["osprey_gunner"].helitype = "osprey_gunner";
   level.func_C73F["osprey_gunner"].droptype = "airdrop_osprey_gunner";
   level.func_C73F["osprey_gunner"].maxhealth = level.func_8D73 * 2;
   level.func_C73F["osprey_gunner"].timeout = 75.0;
 
-  foreach (var_01 in level.func_C73F) {
-  level.chopper_fx["explode"]["death"][var_1.modelbase] = loadfx("vfx\core\expl\helicopter_explosion_osprey");
-  level.chopper_fx["explode"]["air_death"][var_1.modelbase] = loadfx("vfx\core\expl\helicopter_explosion_osprey_air_mp");
-  level.chopper_fx["anim"]["blades_anim_up"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_anim_up");
-  level.chopper_fx["anim"]["blades_anim_down"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_anim_down");
-  level.chopper_fx["anim"]["blades_static_up"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_up");
-  level.chopper_fx["anim"]["blades_static_down"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_default");
-  level.chopper_fx["anim"]["hatch_left_static_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_default");
-  level.chopper_fx["anim"]["hatch_left_anim_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_anim_open");
-  level.chopper_fx["anim"]["hatch_left_static_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_up");
-  level.chopper_fx["anim"]["hatch_left_anim_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_anim_close");
-  level.chopper_fx["anim"]["hatch_right_static_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_default");
-  level.chopper_fx["anim"]["hatch_right_anim_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_anim_open");
-  level.chopper_fx["anim"]["hatch_right_static_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_up");
-  level.chopper_fx["anim"]["hatch_right_anim_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_anim_close");
+  foreach(var_01 in level.func_C73F) {
+    level.chopper_fx["explode"]["death"][var_1.modelbase] = loadfx("vfx\core\expl\helicopter_explosion_osprey");
+    level.chopper_fx["explode"]["air_death"][var_1.modelbase] = loadfx("vfx\core\expl\helicopter_explosion_osprey_air_mp");
+    level.chopper_fx["anim"]["blades_anim_up"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_anim_up");
+    level.chopper_fx["anim"]["blades_anim_down"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_anim_down");
+    level.chopper_fx["anim"]["blades_static_up"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_up");
+    level.chopper_fx["anim"]["blades_static_down"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_default");
+    level.chopper_fx["anim"]["hatch_left_static_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_default");
+    level.chopper_fx["anim"]["hatch_left_anim_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_anim_open");
+    level.chopper_fx["anim"]["hatch_left_static_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_up");
+    level.chopper_fx["anim"]["hatch_left_anim_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_anim_close");
+    level.chopper_fx["anim"]["hatch_right_static_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_default");
+    level.chopper_fx["anim"]["hatch_right_anim_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_anim_open");
+    level.chopper_fx["anim"]["hatch_right_static_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_up");
+    level.chopper_fx["anim"]["hatch_right_anim_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_anim_close");
   }
 
   level.func_1A6F = [];
@@ -59,18 +59,18 @@ init() {
 tryuseescortairdrop(var_00, var_01) {
   var_02 = 1;
 
-  if (isdefined(level.chopper)) {
-  self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
-  return 0;
+  if(isdefined(level.chopper)) {
+    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    return 0;
   }
 
-  if (scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility\game::maxvehiclesallowed()) {
-  self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
-  return 0;
+  if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility\game::maxvehiclesallowed()) {
+    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    return 0;
   }
 
-  if (scripts\mp\utility\game::iskillstreakdenied())
-  return 0;
+  if(scripts\mp\utility\game::iskillstreakdenied())
+    return 0;
 
   scripts\mp\utility\game::incrementfauxvehiclecount();
   return 1;
@@ -79,22 +79,22 @@ tryuseescortairdrop(var_00, var_01) {
 func_128F3(var_00, var_01) {
   var_02 = 1;
 
-  if (isdefined(level.chopper)) {
-  self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
-  return 0;
+  if(isdefined(level.chopper)) {
+    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    return 0;
   }
 
-  if (scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility\game::maxvehiclesallowed()) {
-  self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
-  return 0;
+  if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility\game::maxvehiclesallowed()) {
+    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    return 0;
   }
 
   scripts\mp\utility\game::incrementfauxvehiclecount();
-  var_04 = func_F1AD(var_00, "osprey_gunner", "compass_objpoint_osprey_friendly", "compass_objpoint_osprey_enemy", &"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
+  var_04 = func_F1AD(var_00, "osprey_gunner", "compass_objpoint_osprey_friendly", "compass_objpoint_osprey_enemy", & "KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
 
-  if (!isdefined(var_04) || !var_04) {
-  scripts\mp\utility\game::decrementfauxvehiclecount();
-  return 0;
+  if(!isdefined(var_04) || !var_04) {
+    scripts\mp\utility\game::decrementfauxvehiclecount();
+    return 0;
   }
 
   scripts\mp\matchdata::logkillstreakevent("osprey_gunner", self.origin);
@@ -140,13 +140,13 @@ func_11089() {
   self waittill("stop_location_selection", var_00);
 
   switch (var_00) {
-  case "emp":
-  case "weapon_change":
-  case "cancel_location":
-  case "disconnect":
-  case "death":
-  self notify("customCancelLocation");
-  break;
+    case "emp":
+    case "weapon_change":
+    case "cancel_location":
+    case "disconnect":
+    case "death":
+      self notify("customCancelLocation");
+      break;
   }
 }
 
@@ -155,8 +155,8 @@ func_F1AD(var_00, var_01, var_02, var_03, var_04) {
   var_05 = undefined;
   var_06 = level.mapsize / 6.46875;
 
-  if (level.splitscreen)
-  var_06 = var_06 * 1.5;
+  if(level.splitscreen)
+    var_06 = var_06 * 1.5;
 
   scripts\mp\utility\game::_beginlocationselection(var_01, "map_artillery_selector", 0, 500);
   thread func_11089();
@@ -165,22 +165,21 @@ func_F1AD(var_00, var_01, var_02, var_03, var_04) {
   scripts\mp\utility\game::setusingremote(var_01);
   var_09 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_01);
 
-  if (var_09 != "success") {
-  if (var_09 != "disconnect")
-  scripts\mp\utility\game::clearusingremote();
+  if(var_09 != "success") {
+    if(var_09 != "disconnect")
+      scripts\mp\utility\game::clearusingremote();
 
-  return 0;
+    return 0;
   }
 
-  if (isdefined(level.chopper)) {
-  scripts\mp\utility\game::clearusingremote();
-  self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
-  return 0;
-  }
-  else if (scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility\game::maxvehiclesallowed()) {
-  scripts\mp\utility\game::clearusingremote();
-  self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
-  return 0;
+  if(isdefined(level.chopper)) {
+    scripts\mp\utility\game::clearusingremote();
+    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    return 0;
+  } else if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility\game::maxvehiclesallowed()) {
+    scripts\mp\utility\game::clearusingremote();
+    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    return 0;
   }
 
   thread func_6CDF(var_00, var_07, var_08, var_01);
@@ -194,35 +193,35 @@ func_1012E(var_00, var_01, var_02, var_03) {
   self.locationobjectives = [];
 
   for (var_05 = 0; var_05 < var_03; var_5++) {
-  self.locationobjectives[var_05] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.locationobjectives[var_05] = scripts\mp\objidpoolmanager::requestminimapid(1);
 
-  if (self.locationobjectives[var_05] != -1) {
-  scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_05], "invisible", (0, 0, 0));
-  scripts\mp\objidpoolmanager::minimap_objective_position(self.locationobjectives[var_05], level.func_1A6F[level.script][var_05]["origin"]);
-  scripts\mp\objidpoolmanager::minimap_objective_state(self.locationobjectives[var_05], "active");
-  scripts\mp\objidpoolmanager::minimap_objective_player(self.locationobjectives[var_05], self getentitynumber());
+    if(self.locationobjectives[var_05] != -1) {
+      scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_05], "invisible", (0, 0, 0));
+      scripts\mp\objidpoolmanager::minimap_objective_position(self.locationobjectives[var_05], level.func_1A6F[level.script][var_05]["origin"]);
+      scripts\mp\objidpoolmanager::minimap_objective_state(self.locationobjectives[var_05], "active");
+      scripts\mp\objidpoolmanager::minimap_objective_player(self.locationobjectives[var_05], self getentitynumber());
 
-  if (level.func_1A6F[level.script][var_05]["in_use"] == 1) {
-  scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_05], var_01);
-  continue;
-  }
+      if(level.func_1A6F[level.script][var_05]["in_use"] == 1) {
+        scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_05], var_01);
+        continue;
+      }
 
-  scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_05], var_00);
-  }
+      scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_05], var_00);
+    }
   }
 
   scripts\engine\utility::waittill_any("cancel_location", "picked_location", "stop_location_selection");
   var_04 scripts\mp\hud_util::destroyelem();
 
   for (var_05 = 0; var_05 < var_03; var_5++)
-  scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_05]);
+    scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_05]);
 }
 
 func_4983(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = spawnhelicopter(var_00, var_02, var_03, level.func_C73F[var_05].vehicle, level.func_C73F[var_05].modelbase);
 
-  if (!isdefined(var_06))
-  return undefined;
+  if(!isdefined(var_06))
+    return undefined;
 
   var_6.func_C740 = var_05;
   var_6.func_8DA0 = level.func_C73F[var_05].modelbase;
@@ -256,11 +255,11 @@ func_4983(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 thread func_1AE8();
   var_06 thread func_1AEA();
 
-  if (var_05 == "escort_airdrop") {
-  var_08 = var_6.origin + (anglestoforward(var_6.angles) * -200 + anglestoright(var_6.angles) * -200) + (0, 0, 200);
-  var_6.killcament = spawn("script_model", var_08);
-  var_6.killcament setscriptmoverkillcam("explosive");
-  var_6.killcament linkto(var_06, "tag_origin");
+  if(var_05 == "escort_airdrop") {
+    var_08 = var_6.origin + (anglestoforward(var_6.angles) * -200 + anglestoright(var_6.angles) * -200) + (0, 0, 200);
+    var_6.killcament = spawn("script_model", var_08);
+    var_6.killcament setscriptmoverkillcam("explosive");
+    var_6.killcament linkto(var_06, "tag_origin");
   }
 
   return var_06;
@@ -285,8 +284,8 @@ func_1AEA() {
   level endon("game_ended");
 
   for (;;) {
-  level waittill("connected", var_00);
-  thread func_1AE9(var_00);
+    level waittill("connected", var_00);
+    thread func_1AE9(var_00);
   }
 }
 
@@ -299,36 +298,36 @@ func_1AE9(var_00) {
   wait 0.05;
   playfxontagforclients(level.chopper_fx["light"]["belly"], self, "tag_light_belly", var_00);
 
-  if (isdefined(self.func_DA9F)) {
-  if (self.func_DA9F == "up") {
-  wait 0.05;
-  playfxontagforclients(level.chopper_fx["anim"]["blades_static_up"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH", var_00);
+  if(isdefined(self.func_DA9F)) {
+    if(self.func_DA9F == "up") {
+      wait 0.05;
+      playfxontagforclients(level.chopper_fx["anim"]["blades_static_up"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH", var_00);
+    } else {
+      wait 0.05;
+      playfxontagforclients(level.chopper_fx["anim"]["blades_static_down"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH", var_00);
+    }
   } else {
-  wait 0.05;
-  playfxontagforclients(level.chopper_fx["anim"]["blades_static_down"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH", var_00);
-  }
-  } else {
-  wait 0.05;
-  playfxontagforclients(level.chopper_fx["anim"]["blades_static_down"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH", var_00);
+    wait 0.05;
+    playfxontagforclients(level.chopper_fx["anim"]["blades_static_down"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH", var_00);
   }
 
-  if (isdefined(self.func_8C42)) {
-  if (self.func_8C42 == "down") {
-  wait 0.05;
-  playfxontagforclients(level.chopper_fx["anim"]["hatch_left_static_down"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415, var_00);
-  wait 0.05;
-  playfxontagforclients(level.chopper_fx["anim"]["hatch_right_static_down"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416, var_00);
+  if(isdefined(self.func_8C42)) {
+    if(self.func_8C42 == "down") {
+      wait 0.05;
+      playfxontagforclients(level.chopper_fx["anim"]["hatch_left_static_down"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415, var_00);
+      wait 0.05;
+      playfxontagforclients(level.chopper_fx["anim"]["hatch_right_static_down"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416, var_00);
+    } else {
+      wait 0.05;
+      playfxontagforclients(level.chopper_fx["anim"]["hatch_left_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415, var_00);
+      wait 0.05;
+      playfxontagforclients(level.chopper_fx["anim"]["hatch_right_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416, var_00);
+    }
   } else {
-  wait 0.05;
-  playfxontagforclients(level.chopper_fx["anim"]["hatch_left_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415, var_00);
-  wait 0.05;
-  playfxontagforclients(level.chopper_fx["anim"]["hatch_right_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416, var_00);
-  }
-  } else {
-  wait 0.05;
-  playfxontagforclients(level.chopper_fx["anim"]["hatch_left_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415, var_00);
-  wait 0.05;
-  playfxontagforclients(level.chopper_fx["anim"]["hatch_right_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416, var_00);
+    wait 0.05;
+    playfxontagforclients(level.chopper_fx["anim"]["hatch_left_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415, var_00);
+    wait 0.05;
+    playfxontagforclients(level.chopper_fx["anim"]["hatch_right_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416, var_00);
   }
 }
 
@@ -348,8 +347,8 @@ func_E4F8(var_00, var_01) {
   scripts\mp\utility\game::_giveweapon("heli_remote_mp");
   scripts\mp\utility\game::_switchtoweapon("heli_remote_mp");
 
-  if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::setthirdpersondof(0);
+  if(getdvarint("camera_thirdPerson"))
+    scripts\mp\utility\game::setthirdpersondof(0);
 
   var_01 _meth_83ED(self);
   self getwholescenedurationmax(var_01, "tag_player", 1.0, 0, 0, 0, 0, 1);
@@ -362,9 +361,9 @@ func_E4F8(var_00, var_01) {
   thread scripts\mp\utility\game::reinitializethermal(var_01);
 
   for (;;) {
-  var_01 waittill("turret_fire");
-  var_01 fireweapon();
-  earthquake(0.2, 1, var_1.origin, 1000);
+    var_01 waittill("turret_fire");
+    var_01 fireweapon();
+    earthquake(0.2, 1, var_1.origin, 1000);
   }
 }
 
@@ -389,8 +388,8 @@ func_1011E(var_00) {
   self.func_6741 give_zap_perk(level.func_C73F[var_0.func_C740].func_DA71);
   wait 6;
 
-  if (isdefined(self.func_6741))
-  self.func_6741 scripts\mp\hud_util::destroyelem();
+  if(isdefined(self.func_6741))
+    self.func_6741 scripts\mp\hud_util::destroyelem();
 }
 
 func_1AEE() {
@@ -400,9 +399,9 @@ func_1AEE() {
   playfxontag(level.chopper_fx["anim"]["blades_anim_up"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH");
   wait 1.0;
 
-  if (isdefined(self)) {
-  playfxontag(level.chopper_fx["anim"]["blades_static_up"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH");
-  self.func_DA9F = "up";
+  if(isdefined(self)) {
+    playfxontag(level.chopper_fx["anim"]["blades_static_up"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH");
+    self.func_DA9F = "up";
   }
 }
 
@@ -413,9 +412,9 @@ func_1AED() {
   playfxontag(level.chopper_fx["anim"]["blades_anim_down"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH");
   wait 1.0;
 
-  if (isdefined(self)) {
-  playfxontag(level.chopper_fx["anim"]["blades_static_down"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH");
-  self.func_DA9F = "down";
+  if(isdefined(self)) {
+    playfxontag(level.chopper_fx["anim"]["blades_static_down"][level.func_C73F[self.func_C740].modelbase], self, "TAG_BLADES_ATTACH");
+    self.func_DA9F = "down";
   }
 }
 
@@ -428,10 +427,10 @@ func_1AEC() {
   playfxontag(level.chopper_fx["anim"]["hatch_right_anim_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416);
   wait 1.0;
 
-  if (isdefined(self)) {
-  playfxontag(level.chopper_fx["anim"]["hatch_left_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415);
-  playfxontag(level.chopper_fx["anim"]["hatch_right_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416);
-  self.func_8C42 = "up";
+  if(isdefined(self)) {
+    playfxontag(level.chopper_fx["anim"]["hatch_left_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415);
+    playfxontag(level.chopper_fx["anim"]["hatch_right_static_up"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416);
+    self.func_8C42 = "up";
   }
 }
 
@@ -444,10 +443,10 @@ func_1AEB() {
   playfxontag(level.chopper_fx["anim"]["hatch_right_anim_down"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416);
   wait 1.0;
 
-  if (isdefined(self)) {
-  playfxontag(level.chopper_fx["anim"]["hatch_left_static_down"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415);
-  playfxontag(level.chopper_fx["anim"]["hatch_right_static_down"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416);
-  self.func_8C42 = "down";
+  if(isdefined(self)) {
+    playfxontag(level.chopper_fx["anim"]["hatch_left_static_down"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11415);
+    playfxontag(level.chopper_fx["anim"]["hatch_right_static_down"][level.func_C73F[self.func_C740].modelbase], self, level.func_C73F[self.func_C740].func_11416);
+    self.func_8C42 = "down";
   }
 
   self notify("hatch_down");
@@ -458,12 +457,12 @@ func_7DFC(var_00) {
   self endon("heightReturned");
   var_01 = getent("airstrikeheight", "targetname");
 
-  if (isdefined(var_01))
-  var_02 = var_1.origin[2];
-  else if (isdefined(level.airstrikeheightscale))
-  var_02 = 850 * level.airstrikeheightscale;
+  if(isdefined(var_01))
+    var_02 = var_1.origin[2];
+  else if(isdefined(level.airstrikeheightscale))
+    var_02 = 850 * level.airstrikeheightscale;
   else
-  var_02 = 850;
+    var_02 = 850;
 
   self.func_2A95 = var_02;
   var_03 = 200;
@@ -471,76 +470,76 @@ func_7DFC(var_00) {
   var_05 = 0;
 
   for (var_06 = 0; var_06 < 125; var_6++) {
-  wait 0.05;
-  var_07 = var_06 % 8;
-  var_08 = var_06 * 3;
+    wait 0.05;
+    var_07 = var_06 % 8;
+    var_08 = var_06 * 3;
 
-  switch (var_07) {
-  case 0:
-  var_04 = var_08;
-  var_05 = var_08;
-  break;
-  case 1:
-  var_04 = var_08 * -1;
-  var_05 = var_08 * -1;
-  break;
-  case 2:
-  var_04 = var_08 * -1;
-  var_05 = var_08;
-  break;
-  case 3:
-  var_04 = var_08;
-  var_05 = var_08 * -1;
-  break;
-  case 4:
-  var_04 = 0;
-  var_05 = var_08 * -1;
-  break;
-  case 5:
-  var_04 = var_08 * -1;
-  var_05 = 0;
-  break;
-  case 6:
-  var_04 = var_08;
-  var_05 = 0;
-  break;
-  case 7:
-  var_04 = 0;
-  var_05 = var_08;
-  break;
-  default:
-  break;
-  }
+    switch (var_07) {
+      case 0:
+        var_04 = var_08;
+        var_05 = var_08;
+        break;
+      case 1:
+        var_04 = var_08 * -1;
+        var_05 = var_08 * -1;
+        break;
+      case 2:
+        var_04 = var_08 * -1;
+        var_05 = var_08;
+        break;
+      case 3:
+        var_04 = var_08;
+        var_05 = var_08 * -1;
+        break;
+      case 4:
+        var_04 = 0;
+        var_05 = var_08 * -1;
+        break;
+      case 5:
+        var_04 = var_08 * -1;
+        var_05 = 0;
+        break;
+      case 6:
+        var_04 = var_08;
+        var_05 = 0;
+        break;
+      case 7:
+        var_04 = 0;
+        var_05 = var_08;
+        break;
+      default:
+        break;
+    }
 
-  var_09 = bullettrace(var_00 + (var_04, var_05, 1000), var_00 + (var_04, var_05, -10000), 1, self);
+    var_09 = bullettrace(var_00 + (var_04, var_05, 1000), var_00 + (var_04, var_05, -10000), 1, self);
 
-  if (var_9["position"][2] > var_03)
-  var_03 = var_9["position"][2];
+    if(var_9["position"][2] > var_03)
+      var_03 = var_9["position"][2];
   }
 
   self.func_2A95 = var_03 + 300;
 
   switch (getdvar("mapname")) {
-  case "mp_morningwood":
-  self.func_2A95 = self.func_2A95 + 600;
-  break;
-  case "mp_overwatch":
-  var_10 = level.spawnpoints;
-  var_11 = var_10[0];
-  var_12 = var_10[0];
+    case "mp_morningwood":
+      self.func_2A95 = self.func_2A95 + 600;
+      break;
+    case "mp_overwatch":
+      var_10 = level.spawnpoints;
+      var_11 = var_10[0];
+      var_12 = var_10[0];
 
-  foreach (var_14 in var_10) {
-  if (var_14.origin[2] < var_11.origin[2])
-  var_11 = var_14;
+      foreach(var_14 in var_10) {
+        if(var_14.origin[2] < var_11.origin[2])
+          var_11 = var_14;
 
-  if (var_14.origin[2] > var_12.origin[2])
-  var_12 = var_14;
-  }
+        if(var_14.origin[2] > var_12.origin[2])
+          var_12 = var_14;
+      }
 
-  if (var_03 < var_11.origin[2] - 100)
-  self.func_2A95 = var_12.origin[2] + 900;
+      if(var_03 < var_11.origin[2] - 100)
+        self.func_2A95 = var_12.origin[2] + 900;
 
-  break;
+      break;
   }
 }
 
@@ -578,8 +577,8 @@ func_1AE6(var_00, var_01, var_02, var_03, var_04, var_05) {
   func_C73E(1, level.func_C73F[self.func_C740].func_113F0, var_12);
   thread func_A663(var_05);
 
-  if (isdefined(var_00))
-  var_00 scripts\engine\utility::waittill_any_timeout(self.timeout, "disconnect");
+  if(isdefined(var_00))
+    var_00 scripts\engine\utility::waittill_any_timeout(self.timeout, "disconnect");
 
   self waittill("leaving");
   self notify("osprey_leaving");
@@ -600,30 +599,30 @@ func_A663(var_00) {
   var_01 = var_00;
 
   for (;;) {
-  foreach (var_03 in level.players) {
-  wait 0.05;
+    foreach(var_03 in level.players) {
+      wait 0.05;
 
-  if (!isdefined(self))
-  return;
-
-  if (!isdefined(var_03))
-  continue;
-
-  if (!scripts\mp\utility\game::isreallyalive(var_03))
-  continue;
-
-  if (!self.owner scripts\mp\utility\game::isenemy(var_03))
-  continue;
-
-  if (var_03 scripts\mp\utility\game::_hasperk("specialty_blindeye"))
-  continue;
-
-  if (distancesquared(var_01, var_3.origin) > 500000)
-  continue;
-
-  thread func_1B01(var_03, var_01);
-  func_136B2();
-  }
+      if(!isdefined(self)) {
+        return;
+      }
+      if(!isdefined(var_03)) {
+        continue;
+      }
+      if(!scripts\mp\utility\game::isreallyalive(var_03)) {
+        continue;
+      }
+      if(!self.owner scripts\mp\utility\game::isenemy(var_03)) {
+        continue;
+      }
+      if(var_03 scripts\mp\utility\game::_hasperk("specialty_blindeye")) {
+        continue;
+      }
+      if(distancesquared(var_01, var_3.origin) > 500000) {
+        continue;
+      }
+      thread func_1B01(var_03, var_01);
+      func_136B2();
+    }
   }
 }
 
@@ -640,21 +639,21 @@ func_1B01(var_00, var_01) {
   var_03 = 2;
 
   for (;;) {
-  var_2--;
-  self fireweapon("tag_flash", var_00);
-  wait 0.15;
+    var_2--;
+    self fireweapon("tag_flash", var_00);
+    wait 0.15;
 
-  if (var_02 <= 0) {
-  var_3--;
-  var_02 = 6;
+    if(var_02 <= 0) {
+      var_3--;
+      var_02 = 6;
 
-  if (distancesquared(var_0.origin, var_01) > 500000 || var_03 <= 0 || !scripts\mp\utility\game::isreallyalive(var_00)) {
-  self notify("abandon_target");
-  return;
-  }
+      if(distancesquared(var_0.origin, var_01) > 500000 || var_03 <= 0 || !scripts\mp\utility\game::isreallyalive(var_00)) {
+        self notify("abandon_target");
+        return;
+      }
 
-  wait 1;
-  }
+      wait 1;
+    }
   }
 }
 
@@ -673,7 +672,7 @@ func_136B2() {
   self endon("abandon_target");
 
   for (;;)
-  wait 0.05;
+    wait 0.05;
 }
 
 func_1AE7(var_00, var_01, var_02, var_03, var_04) {
@@ -709,8 +708,8 @@ func_1AE7(var_00, var_01, var_02, var_03, var_04) {
   func_C73D(1, level.func_C73F[self.func_C740].func_113F0, var_11);
   var_12 = 1.0;
 
-  if (isdefined(var_00))
-  var_00 scripts\engine\utility::waittill_any_timeout(var_12, "disconnect");
+  if(isdefined(var_00))
+    var_00 scripts\engine\utility::waittill_any_timeout(var_12, "disconnect");
 
   self.timeout = self.timeout - var_12;
   self setvehgoalpos(var_02, 1);
@@ -721,10 +720,10 @@ func_1AE7(var_00, var_01, var_02, var_03, var_04) {
   var_13 = getentarray("heli_attack_area", "targetname");
   var_14 = level.heli_loop_nodes[randomint(level.heli_loop_nodes.size)];
 
-  if (var_13.size)
-  thread scripts\mp\killstreaks\helicopter::func_8D55(var_13);
+  if(var_13.size)
+    thread scripts\mp\killstreaks\helicopter::func_8D55(var_13);
   else
-  thread scripts\mp\killstreaks\helicopter::heli_fly_loop_path(var_14);
+    thread scripts\mp\killstreaks\helicopter::heli_fly_loop_path(var_14);
 
   self waittill("leaving");
   thread func_1AED();
@@ -781,8 +780,8 @@ func_C73D(var_00, var_01, var_02) {
 }
 
 func_6380(var_00) {
-  if (isdefined(self.func_6741))
-  self.func_6741 scripts\mp\hud_util::destroyelem();
+  if(isdefined(self.func_6741))
+    self.func_6741 scripts\mp\hud_util::destroyelem();
 
   self _meth_8258();
   self thermalvisionoff();
@@ -790,13 +789,13 @@ func_6380(var_00) {
   self unlink();
   scripts\mp\utility\game::clearusingremote();
 
-  if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::setthirdpersondof(1);
+  if(getdvarint("camera_thirdPerson"))
+    scripts\mp\utility\game::setthirdpersondof(1);
 
   self visionsetthermalforplayer(game["thermal_vision"], 0);
 
-  if (isdefined(var_00))
-  var_00 _meth_83EC(self);
+  if(isdefined(var_00))
+    var_00 _meth_83EC(self);
 
   self notify("heliPlayer_removed");
   scripts\mp\utility\game::_switchtoweapon(scripts\engine\utility::getlastweapon());

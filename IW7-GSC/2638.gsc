@@ -34,17 +34,16 @@ func_position_player_get(var_00) {
 callback_playerconnect() {
   self waittill("begin");
 
-  if (!isdefined(level.player)) {
-  var_00 = getentarray("mp_global_intermission", "classname");
-  self spawn(var_0[0].origin, var_0[0].angles);
-  scripts\cp\utility::updatesessionstate("playing", "");
-  self.maxhealth = 10000000;
-  self.health = 10000000;
-  level.player = self;
-  thread scripts\common\createfx::createfxlogic();
-  }
-  else
-  kick(self getentitynumber());
+  if(!isdefined(level.player)) {
+    var_00 = getentarray("mp_global_intermission", "classname");
+    self spawn(var_0[0].origin, var_0[0].angles);
+    scripts\cp\utility::updatesessionstate("playing", "");
+    self.maxhealth = 10000000;
+    self.health = 10000000;
+    level.player = self;
+    thread scripts\common\createfx::createfxlogic();
+  } else
+    kick(self getentitynumber());
 }
 
 func_player_speed() {

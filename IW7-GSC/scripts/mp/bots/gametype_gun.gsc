@@ -5,14 +5,14 @@
 ********************************************/
 
 main() {
-	level.bot_funcs["gametype_think"] = ::bot_gun_think;
+  level.bot_funcs["gametype_think"] = ::bot_gun_think;
 }
 
 bot_gun_think() {
-	var_00 = self botgetdifficultysetting("throwKnifeChance");
-	if(var_00 < 0.25) {
-		self getpassivestruct("throwKnifeChance",0.25);
-	}
+  var_00 = self botgetdifficultysetting("throwKnifeChance");
+  if(var_00 < 0.25) {
+    self getpassivestruct("throwKnifeChance", 0.25);
+  }
 
-	self getpassivestruct("allowGrenades",1);
+  self getpassivestruct("allowGrenades", 1);
 }

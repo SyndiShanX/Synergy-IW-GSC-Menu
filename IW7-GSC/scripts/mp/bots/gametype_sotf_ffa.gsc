@@ -5,6 +5,6 @@
 *************************************************/
 
 main() {
-	scripts\mp\bots\gametype_sotf::setup_callbacks();
-	scripts\mp\bots\gametype_sotf::setup_bot_sotf();
+  scripts\mp\bots\gametype_sotf::setup_callbacks();
+  scripts\mp\bots\gametype_sotf::setup_bot_sotf();
 }

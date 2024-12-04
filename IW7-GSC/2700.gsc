@@ -4,20 +4,20 @@
 ***************************************/
 
 init() {
-  if (level.teambased && !isdefined(level.nobuddyspawns)) {
-  if (!isdefined(level.func_28CE))
-  level.func_28CE = [];
+  if(level.teambased && !isdefined(level.nobuddyspawns)) {
+    if(!isdefined(level.func_28CE))
+      level.func_28CE = [];
 
-  level thread onplayerspawned();
-  level thread onplayerconnect();
+    level thread onplayerspawned();
+    level thread onplayerconnect();
   }
 }
 
 onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_00);
-  var_00 thread onbegincarrying();
-  var_00 thread ondisconnect();
+    level waittill("connected", var_00);
+    var_00 thread onbegincarrying();
+    var_00 thread ondisconnect();
   }
 }
 
@@ -25,29 +25,29 @@ onplayerspawned() {
   level endon("game_ended");
 
   for (;;) {
-  level waittill("player_spawned", var_00);
+    level waittill("player_spawned", var_00);
 
-  if (!isai(var_00)) {
-  if (isdefined(var_0.isspawningonbattlebuddy)) {
-  var_0.isspawningonbattlebuddy = undefined;
+    if(!isai(var_00)) {
+      if(isdefined(var_0.isspawningonbattlebuddy)) {
+        var_0.isspawningonbattlebuddy = undefined;
 
-  if (isdefined(var_0.battlebuddy) && isalive(var_0.battlebuddy)) {
-  if (var_0.battlebuddy getstance() != "stand")
-  var_00 setstance("crouch");
-  }
-  }
+        if(isdefined(var_0.battlebuddy) && isalive(var_0.battlebuddy)) {
+          if(var_0.battlebuddy getstance() != "stand")
+            var_00 setstance("crouch");
+        }
+      }
 
-  if (var_00 func_138DE()) {
-  if (!var_00 func_8BD4()) {
-  var_0.firstspawn = 0;
-  var_00 finalkillcam_victim();
-  }
+      if(var_00 func_138DE()) {
+        if(!var_00 func_8BD4()) {
+          var_0.firstspawn = 0;
+          var_00 finalkillcam_victim();
+        }
 
-  continue;
-  }
+        continue;
+      }
 
-  var_00 func_AB2B();
-  }
+      var_00 func_AB2B();
+    }
   }
 }
 
@@ -56,25 +56,25 @@ onbegincarrying() {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("luinotifyserver", var_00, var_01);
+    self waittill("luinotifyserver", var_00, var_01);
 
-  if (var_00 == "battlebuddy_update") {
-  var_02 = !func_138DE();
-  self setrankedplayerdata("common", "enableBattleBuddy", var_02);
+    if(var_00 == "battlebuddy_update") {
+      var_02 = !func_138DE();
+      self setrankedplayerdata("common", "enableBattleBuddy", var_02);
 
-  if (var_02)
-  finalkillcam_victim();
-  else
-  func_AB2B();
+      if(var_02)
+        finalkillcam_victim();
+      else
+        func_AB2B();
 
-  continue;
-  }
+      continue;
+    }
 
-  if (var_00 == "team_select" && self.hasspawned) {
-  var_03 = func_138DE();
-  func_AB2B();
-  self setrankedplayerdata("common", "enableBattleBuddy", var_03);
-  }
+    if(var_00 == "team_select" && self.hasspawned) {
+      var_03 = func_138DE();
+      func_AB2B();
+      self setrankedplayerdata("common", "enableBattleBuddy", var_03);
+    }
   }
 }
 
@@ -120,41 +120,38 @@ func_136AE() {
   self.isspawningonbattlebuddy = undefined;
   thread func_13A5F();
 
-  if (isdefined(self.func_28CD)) {
-  var_00 = 4000 - (gettime() - self.func_28CD);
+  if(isdefined(self.func_28CD)) {
+    var_00 = 4000 - (gettime() - self.func_28CD);
 
-  if (var_00 < 2000)
-  var_00 = 2000;
-  }
-  else
-  var_00 = 4000;
+    if(var_00 < 2000)
+      var_00 = 2000;
+  } else
+    var_00 = 4000;
 
   var_01 = checkbuddyspawn();
 
-  if (var_1.status == 0)
-  self.battlebuddy setclientomnvar("ui_battlebuddy_status", "incoming");
-  else if (var_1.status == -1 || var_1.status == -3)
-  self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_combat");
+  if(var_1.status == 0)
+    self.battlebuddy setclientomnvar("ui_battlebuddy_status", "incoming");
+  else if(var_1.status == -1 || var_1.status == -3)
+    self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_combat");
   else
-  self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_pos");
+    self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_pos");
 
   func_12F43(var_00);
 
   for (var_01 = checkbuddyspawn(); var_1.status != 0; var_01 = checkbuddyspawn()) {
-  if (var_1.status == -1 || var_1.status == -3) {
-  self setclientomnvar("ui_battlebuddy_status", "wait_combat");
-  self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_combat");
-  }
-  else if (var_1.status == -2) {
-  self setclientomnvar("ui_battlebuddy_status", "wait_pos");
-  self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_pos");
-  }
-  else if (var_1.status == -4) {
-  cleanupbuddyspawn();
-  return;
-  }
+    if(var_1.status == -1 || var_1.status == -3) {
+      self setclientomnvar("ui_battlebuddy_status", "wait_combat");
+      self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_combat");
+    } else if(var_1.status == -2) {
+      self setclientomnvar("ui_battlebuddy_status", "wait_pos");
+      self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_pos");
+    } else if(var_1.status == -4) {
+      cleanupbuddyspawn();
+      return;
+    }
 
-  wait 0.5;
+    wait 0.5;
   }
 
   self.isspawningonbattlebuddy = 1;
@@ -167,8 +164,8 @@ func_419E() {
   self setclientomnvar("ui_battlebuddy_status", "none");
   self setclientomnvar("ui_battlebuddy_showButtonPrompt", 0);
 
-  if (isdefined(self.battlebuddy))
-  self.battlebuddy setclientomnvar("ui_battlebuddy_status", "none");
+  if(isdefined(self.battlebuddy))
+    self.battlebuddy setclientomnvar("ui_battlebuddy_status", "none");
 }
 
 func_56D6(var_00) {
@@ -178,19 +175,19 @@ func_56D6(var_00) {
 func_56D5() {
   func_419E();
 
-  if (isdefined(self.battlebuddy)) {
-  self.battlebuddy setclientomnvar("ui_battlebuddy_status", "on_you");
-  wait 1.5;
-  self.battlebuddy setclientomnvar("ui_battlebuddy_status", "none");
+  if(isdefined(self.battlebuddy)) {
+    self.battlebuddy setclientomnvar("ui_battlebuddy_status", "on_you");
+    wait 1.5;
+    self.battlebuddy setclientomnvar("ui_battlebuddy_status", "none");
   }
 }
 
 checkbuddyspawn() {
   var_00 = spawnstruct();
 
-  if (!isdefined(self.battlebuddy) || !isalive(self.battlebuddy)) {
-  var_0.status = -4;
-  return var_00;
+  if(!isdefined(self.battlebuddy) || !isalive(self.battlebuddy)) {
+    var_0.status = -4;
+    return var_00;
   }
 
   return var_00;
@@ -249,75 +246,74 @@ motionblurhqenable() {
 }
 
 func_1848(var_00) {
-  if (!isdefined(level.func_28CE[var_0.team]))
-  level.func_28CE[var_0.team] = var_00;
-  else if (level.func_28CE[var_0.team] != var_00)
-  return;
+  if(!isdefined(level.func_28CE[var_0.team]))
+    level.func_28CE[var_0.team] = var_00;
+  else if(level.func_28CE[var_0.team] != var_00)
+    return;
 }
 
 func_E103(var_00) {
-  if (isdefined(var_0.team) && isdefined(level.func_28CE[var_0.team]) && var_00 == level.func_28CE[var_0.team])
-  level.func_28CE[var_0.team] = undefined;
+  if(isdefined(var_0.team) && isdefined(level.func_28CE[var_0.team]) && var_00 == level.func_28CE[var_0.team])
+    level.func_28CE[var_0.team] = undefined;
 }
 
 finalkillcam_victim() {
-  if (level.onlinegame) {
-  self.func_6D95 = self getfireteammembers();
+  if(level.onlinegame) {
+    self.func_6D95 = self getfireteammembers();
 
-  if (self.func_6D95.size >= 1) {
-  foreach (var_01 in self.func_6D95) {
-  if (func_9FD1(var_01))
-  func_C88C(var_01);
-  }
-  }
+    if(self.func_6D95.size >= 1) {
+      foreach(var_01 in self.func_6D95) {
+        if(func_9FD1(var_01))
+          func_C88C(var_01);
+      }
+    }
   }
 
-  if (!func_8BD4()) {
-  var_01 = motionblurhqenable();
+  if(!func_8BD4()) {
+    var_01 = motionblurhqenable();
 
-  if (isdefined(var_01) && func_9FD1(var_01))
-  func_C88C(var_01);
-  else
-  {
-  func_1848(self);
-  self setclientomnvar("ui_battlebuddy_idx", -1);
-  }
+    if(isdefined(var_01) && func_9FD1(var_01))
+      func_C88C(var_01);
+    else {
+      func_1848(self);
+      self setclientomnvar("ui_battlebuddy_idx", -1);
+    }
   }
 }
 
 func_419D() {
-  if (!isalive(self))
-  func_FAAF();
+  if(!isalive(self))
+    func_FAAF();
 
   self setclientomnvar("ui_battlebuddy_idx", -1);
   self.battlebuddy = undefined;
 }
 
 func_AB2B() {
-  if (func_8BD4()) {
-  var_00 = self.battlebuddy;
-  func_419D();
-  self setrankedplayerdata("common", "enableBattleBuddy", 0);
-  var_00 func_419D();
-  var_00 finalkillcam_victim();
+  if(func_8BD4()) {
+    var_00 = self.battlebuddy;
+    func_419D();
+    self setrankedplayerdata("common", "enableBattleBuddy", 0);
+    var_00 func_419D();
+    var_00 finalkillcam_victim();
   } else {
-  func_E103(self);
-  self setclientomnvar("ui_battlebuddy_idx", -1);
+    func_E103(self);
+    self setclientomnvar("ui_battlebuddy_idx", -1);
   }
 }
 
 func_AB2C() {
-  if (func_8BD4()) {
-  var_00 = self.battlebuddy;
-  var_00 func_419D();
-  var_00 finalkillcam_victim();
-  var_00 func_419E();
+  if(func_8BD4()) {
+    var_00 = self.battlebuddy;
+    var_00 func_419D();
+    var_00 finalkillcam_victim();
+    var_00 func_419E();
   } else {
-  foreach (var_03, var_02 in level.func_28CE) {
-  if (var_02 == self) {
-  level.func_28CE[var_03] = undefined;
-  break;
-  }
-  }
+    foreach(var_03, var_02 in level.func_28CE) {
+      if(var_02 == self) {
+        level.func_28CE[var_03] = undefined;
+        break;
+      }
+    }
   }
 }

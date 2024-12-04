@@ -4,19 +4,19 @@
 ***************************************/
 
 setparent(var_00) {
-  if (isdefined(self.parent) && self.parent == var_00)
-  return;
-
-  if (isdefined(self.parent))
-  self.parent removechild(self);
+  if(isdefined(self.parent) && self.parent == var_00) {
+    return;
+  }
+  if(isdefined(self.parent))
+    self.parent removechild(self);
 
   self.parent = var_00;
   self.parent addchild(self);
 
-  if (isdefined(self.point))
-  setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
+  if(isdefined(self.point))
+    setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
   else
-  setpoint("TOPLEFT");
+    setpoint("TOPLEFT");
 }
 
 getparent() {
@@ -24,18 +24,18 @@ getparent() {
 }
 
 removedestroyedchildren() {
-  if (isdefined(self.childchecktime) && self.childchecktime == gettime())
-  return;
-
+  if(isdefined(self.childchecktime) && self.childchecktime == gettime()) {
+    return;
+  }
   self.childchecktime = gettime();
   var_00 = [];
 
-  foreach (var_03, var_02 in self.children) {
-  if (!isdefined(var_02))
-  continue;
-
-  var_2.index = var_0.size;
-  var_0[var_0.size] = var_02;
+  foreach(var_03, var_02 in self.children) {
+    if(!isdefined(var_02)) {
+      continue;
+    }
+    var_2.index = var_0.size;
+    var_0[var_0.size] = var_02;
   }
 
   self.children = var_00;
@@ -50,9 +50,9 @@ addchild(var_00) {
 removechild(var_00) {
   var_0.parent = undefined;
 
-  if (self.children[self.children.size - 1] != var_00) {
-  self.children[var_0.index] = self.children[self.children.size - 1];
-  self.children[var_0.index].index = var_0.index;
+  if(self.children[self.children.size - 1] != var_00) {
+    self.children[var_0.index] = self.children[self.children.size - 1];
+    self.children[var_0.index].index = var_0.index;
   }
 
   self.children[self.children.size - 1] = undefined;
@@ -60,106 +60,104 @@ removechild(var_00) {
 }
 
 setpoint(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_04))
-  var_04 = 0;
+  if(!isdefined(var_04))
+    var_04 = 0;
 
   var_05 = getparent();
 
-  if (var_04)
-  self moveovertime(var_04);
+  if(var_04)
+    self moveovertime(var_04);
 
-  if (!isdefined(var_02))
-  var_02 = 0;
+  if(!isdefined(var_02))
+    var_02 = 0;
 
   self.xoffset = var_02;
 
-  if (!isdefined(var_03))
-  var_03 = 0;
+  if(!isdefined(var_03))
+    var_03 = 0;
 
   self.yoffset = var_03;
   self.point = var_00;
   self.alignx = "center";
   self.aligny = "middle";
 
-  if (issubstr(var_00, "TOP"))
-  self.aligny = "top";
+  if(issubstr(var_00, "TOP"))
+    self.aligny = "top";
 
-  if (issubstr(var_00, "BOTTOM"))
-  self.aligny = "bottom";
+  if(issubstr(var_00, "BOTTOM"))
+    self.aligny = "bottom";
 
-  if (issubstr(var_00, "LEFT"))
-  self.alignx = "left";
+  if(issubstr(var_00, "LEFT"))
+    self.alignx = "left";
 
-  if (issubstr(var_00, "RIGHT"))
-  self.alignx = "right";
+  if(issubstr(var_00, "RIGHT"))
+    self.alignx = "right";
 
-  if (!isdefined(var_01))
-  var_01 = var_00;
+  if(!isdefined(var_01))
+    var_01 = var_00;
 
   self.relativepoint = var_01;
   var_06 = "center";
   var_07 = "middle";
 
-  if (issubstr(var_01, "TOP"))
-  var_07 = "top";
+  if(issubstr(var_01, "TOP"))
+    var_07 = "top";
 
-  if (issubstr(var_01, "BOTTOM"))
-  var_07 = "bottom";
+  if(issubstr(var_01, "BOTTOM"))
+    var_07 = "bottom";
 
-  if (issubstr(var_01, "LEFT"))
-  var_06 = "left";
+  if(issubstr(var_01, "LEFT"))
+    var_06 = "left";
 
-  if (issubstr(var_01, "RIGHT"))
-  var_06 = "right";
+  if(issubstr(var_01, "RIGHT"))
+    var_06 = "right";
 
-  if (var_05 == level.uiparent) {
-  self.horzalign = var_06;
-  self.vertalign = var_07;
+  if(var_05 == level.uiparent) {
+    self.horzalign = var_06;
+    self.vertalign = var_07;
   } else {
-  self.horzalign = var_5.horzalign;
-  self.vertalign = var_5.vertalign;
+    self.horzalign = var_5.horzalign;
+    self.vertalign = var_5.vertalign;
   }
 
-  if (var_06 == var_5.alignx) {
-  var_08 = 0;
-  var_09 = 0;
-  }
-  else if (var_06 == "center" || var_5.alignx == "center") {
-  var_08 = int(var_5.width / 2);
+  if(var_06 == var_5.alignx) {
+    var_08 = 0;
+    var_09 = 0;
+  } else if(var_06 == "center" || var_5.alignx == "center") {
+    var_08 = int(var_5.width / 2);
 
-  if (var_06 == "left" || var_5.alignx == "right")
-  var_09 = -1;
-  else
-  var_09 = 1;
+    if(var_06 == "left" || var_5.alignx == "right")
+      var_09 = -1;
+    else
+      var_09 = 1;
   } else {
-  var_08 = var_5.width;
+    var_08 = var_5.width;
 
-  if (var_06 == "left")
-  var_09 = -1;
-  else
-  var_09 = 1;
+    if(var_06 == "left")
+      var_09 = -1;
+    else
+      var_09 = 1;
   }
 
   self.x = var_5.x + var_08 * var_09;
 
-  if (var_07 == var_5.aligny) {
-  var_10 = 0;
-  var_11 = 0;
-  }
-  else if (var_07 == "middle" || var_5.aligny == "middle") {
-  var_10 = int(var_5.height / 2);
+  if(var_07 == var_5.aligny) {
+    var_10 = 0;
+    var_11 = 0;
+  } else if(var_07 == "middle" || var_5.aligny == "middle") {
+    var_10 = int(var_5.height / 2);
 
-  if (var_07 == "top" || var_5.aligny == "bottom")
-  var_11 = -1;
-  else
-  var_11 = 1;
+    if(var_07 == "top" || var_5.aligny == "bottom")
+      var_11 = -1;
+    else
+      var_11 = 1;
   } else {
-  var_10 = var_5.height;
+    var_10 = var_5.height;
 
-  if (var_07 == "top")
-  var_11 = -1;
-  else
-  var_11 = 1;
+    if(var_07 == "top")
+      var_11 = -1;
+    else
+      var_11 = 1;
   }
 
   self.y = var_5.y + var_10 * var_11;
@@ -167,9 +165,9 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
   self.y = self.y + self.yoffset;
 
   switch (self.elemtype) {
-  case "bar":
-  setpointbar(var_00, var_01, var_02, var_03);
-  break;
+    case "bar":
+      setpointbar(var_00, var_01, var_02, var_03);
+      break;
   }
 
   updatechildren(var_04);
@@ -182,12 +180,12 @@ setpointbar(var_00, var_01, var_02, var_03) {
   self.bar.aligny = self.aligny;
   self.bar.y = self.y;
 
-  if (self.alignx == "left")
-  self.bar.x = self.x + self.func_13E1E;
-  else if (self.alignx == "right")
-  self.bar.x = self.x - (self.width - self.func_13E1E);
+  if(self.alignx == "left")
+    self.bar.x = self.x + self.func_13E1E;
+  else if(self.alignx == "right")
+    self.bar.x = self.x - (self.width - self.func_13E1E);
   else
-  self.bar.x = self.x - int((self.width - self.func_13E1E * 2) / 2);
+    self.bar.x = self.x - int((self.width - self.func_13E1E * 2) / 2);
 
   updatebar(self.bar.frac);
 }
@@ -195,8 +193,8 @@ setpointbar(var_00, var_01, var_02, var_03) {
 updatebar(var_00) {
   var_01 = int((self.width - self.func_13E1E * 2) * var_00);
 
-  if (!var_01)
-  var_01 = 1;
+  if(!var_01)
+    var_01 = 1;
 
   self.bar.frac = var_00;
   self.bar setshader(self.bar.shader, var_01, self.height - self.func_13E5D * 2);
@@ -205,9 +203,9 @@ updatebar(var_00) {
 func_8EB9(var_00) {
   var_00 = scripts\engine\utility::ter_op(isdefined(var_00), var_00, 1);
 
-  if (var_00 || !isdefined(self.func_C708) || !isdefined(self.bar.func_C708)) {
-  self.func_C708 = self.alpha;
-  self.bar.func_C708 = self.bar.alpha;
+  if(var_00 || !isdefined(self.func_C708) || !isdefined(self.bar.func_C708)) {
+    self.func_C708 = self.alpha;
+    self.bar.func_C708 = self.bar.alpha;
   }
 
   self.alpha = scripts\engine\utility::ter_op(var_00, 0, self.func_C708);
@@ -315,24 +313,24 @@ createicon_hudelem(var_00, var_01, var_02, var_03) {
   var_0.children = [];
   var_00 setparent(level.uiparent);
 
-  if (isdefined(var_01))
-  var_00 setshader(var_01, var_02, var_03);
+  if(isdefined(var_01))
+    var_00 setshader(var_01, var_02, var_03);
 
   return var_00;
 }
 
 createbar(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_00))
-  var_00 = "white";
+  if(!isdefined(var_00))
+    var_00 = "white";
 
-  if (!isdefined(var_01))
-  var_01 = "black";
+  if(!isdefined(var_01))
+    var_01 = "black";
 
-  if (!isdefined(var_02))
-  var_02 = 100;
+  if(!isdefined(var_02))
+    var_02 = 100;
 
-  if (!isdefined(var_03))
-  var_03 = 9;
+  if(!isdefined(var_03))
+    var_03 = 9;
 
   var_05 = newhudelem();
   var_5.x = 2;
@@ -342,9 +340,9 @@ createbar(var_00, var_01, var_02, var_03, var_04) {
   var_5.sort = -1;
   var_05 setshader(var_00, var_02 - 2, var_03 - 2);
 
-  if (isdefined(var_04)) {
-  var_5.flashfrac = var_04;
-  var_05 thread flashthread();
+  if(isdefined(var_04)) {
+    var_5.flashfrac = var_04;
+    var_05 thread flashthread();
   }
 
   var_06 = newhudelem();
@@ -380,11 +378,11 @@ func_499C(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 }
 
 func_4997(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  if (!isdefined(var_05))
-  var_05 = 2;
+  if(!isdefined(var_05))
+    var_05 = 2;
 
-  if (!isdefined(var_06))
-  var_06 = 2;
+  if(!isdefined(var_06))
+    var_06 = 2;
 
   var_07 = newclienthudelem(self);
   var_7.x = 0 - var_05;
@@ -394,9 +392,9 @@ func_4997(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_7.sort = -1;
   var_07 setshader(var_00, var_02 - var_05 * 2, var_03 - var_06 * 2);
 
-  if (isdefined(var_04)) {
-  var_7.flashfrac = var_04;
-  var_07 thread flashthread();
+  if(isdefined(var_04)) {
+    var_7.flashfrac = var_04;
+    var_07 thread flashthread();
   }
 
   var_08 = newclienthudelem(self);
@@ -423,13 +421,13 @@ setflashfrac(var_00) {
 }
 
 func_6AAB(var_00, var_01) {
-  if (isdefined(var_01) && var_01 > 0)
-  self fadeovertime(var_01);
+  if(isdefined(var_01) && var_01 > 0)
+    self fadeovertime(var_01);
 
   self.alpha = var_00;
 
-  if (isdefined(var_01) && var_01 > 0)
-  wait(var_01);
+  if(isdefined(var_01) && var_01 > 0)
+    wait(var_01);
 }
 
 flashthread() {
@@ -437,34 +435,34 @@ flashthread() {
   self.alpha = 1;
 
   for (;;) {
-  if (self.frac >= self.flashfrac) {
-  self fadeovertime(0.3);
-  self.alpha = 0.2;
-  wait 0.35;
-  self fadeovertime(0.3);
-  self.alpha = 1;
-  wait 0.7;
-  continue;
-  }
+    if(self.frac >= self.flashfrac) {
+      self fadeovertime(0.3);
+      self.alpha = 0.2;
+      wait 0.35;
+      self fadeovertime(0.3);
+      self.alpha = 1;
+      wait 0.7;
+      continue;
+    }
 
-  self.alpha = 1;
-  wait 0.05;
+    self.alpha = 1;
+    wait 0.05;
   }
 }
 
 destroyelem() {
-  if (isdefined(self.children) && self.children.size) {
-  var_00 = [];
+  if(isdefined(self.children) && self.children.size) {
+    var_00 = [];
 
-  for (var_01 = 0; var_01 < self.children.size; var_1++)
-  var_0[var_01] = self.children[var_01];
+    for (var_01 = 0; var_01 < self.children.size; var_1++)
+      var_0[var_01] = self.children[var_01];
 
-  for (var_01 = 0; var_01 < var_0.size; var_1++)
-  var_0[var_01] setparent(getparent());
+    for (var_01 = 0; var_01 < var_0.size; var_1++)
+      var_0[var_01] setparent(getparent());
   }
 
-  if (isdefined(self.elemtype) && self.elemtype == "bar")
-  self.bar destroy();
+  if(isdefined(self.elemtype) && self.elemtype == "bar")
+    self.bar destroy();
 
   self destroy();
 }
@@ -488,28 +486,28 @@ setsize(var_00, var_01) {
 
 updatechildren(var_00) {
   for (var_01 = 0; var_01 < self.children.size; var_1++) {
-  var_02 = self.children[var_01];
-  var_02 setpoint(var_2.point, var_2.relativepoint, var_2.xoffset, var_2.yoffset, var_00);
+    var_02 = self.children[var_01];
+    var_02 setpoint(var_2.point, var_2.relativepoint, var_2.xoffset, var_2.yoffset, var_00);
   }
 }
 
 func_10B56(var_00) {
-  if (isdefined(var_00) && var_00 == 0) {
-  func_10B55();
-  return;
+  if(isdefined(var_00) && var_00 == 0) {
+    func_10B55();
+    return;
   }
 
-  if (isdefined(level.func_10B54))
-  level.func_10B54 destroy();
+  if(isdefined(level.func_10B54))
+    level.func_10B54 destroy();
 
   _setsaveddvar("hud_showStance", "0");
   level.func_10B54 = newhudelem();
   level.func_10B54.x = -75;
 
-  if (level.console)
-  level.func_10B54.y = -20;
+  if(level.console)
+    level.func_10B54.y = -20;
   else
-  level.func_10B54.y = -10;
+    level.func_10B54.y = -10;
 
   level.func_10B54 setshader("stance_carry", 64, 64);
   level.func_10B54.alignx = "right";
@@ -523,30 +521,30 @@ func_10B56(var_00) {
 }
 
 func_10B55() {
-  if (isdefined(level.func_10B54)) {
-  level.func_10B54 fadeovertime(0.5);
-  level.func_10B54.alpha = 0;
-  level.func_10B54 destroy();
+  if(isdefined(level.func_10B54)) {
+    level.func_10B54 fadeovertime(0.5);
+    level.func_10B54.alpha = 0;
+    level.func_10B54 destroy();
   }
 
   _setsaveddvar("hud_showStance", "1");
 }
 
 func_491A() {
-  if (level.console) {
-  var_00 = createfontstring("default", 1.8);
-  var_00 setpoint("CENTER", undefined, -23, 115);
-  var_00 give_zap_perk(level.func_1114E["mantle"]);
-  var_01 = createicon("hint_mantle", 40, 40);
-  var_01 setpoint("CENTER", undefined, 73, 0);
-  var_01 setparent(var_00);
+  if(level.console) {
+    var_00 = createfontstring("default", 1.8);
+    var_00 setpoint("CENTER", undefined, -23, 115);
+    var_00 give_zap_perk(level.func_1114E["mantle"]);
+    var_01 = createicon("hint_mantle", 40, 40);
+    var_01 setpoint("CENTER", undefined, 73, 0);
+    var_01 setparent(var_00);
   } else {
-  var_00 = createfontstring("default", 1.6);
-  var_00 setpoint("CENTER", undefined, 0, 115);
-  var_00 give_zap_perk(level.func_1114E["mantle"]);
-  var_01 = createicon("hint_mantle", 40, 40);
-  var_01 setpoint("CENTER", undefined, 0, 30);
-  var_01 setparent(var_00);
+    var_00 = createfontstring("default", 1.6);
+    var_00 setpoint("CENTER", undefined, 0, 115);
+    var_00 give_zap_perk(level.func_1114E["mantle"]);
+    var_01 = createicon("hint_mantle", 40, 40);
+    var_01 setpoint("CENTER", undefined, 0, 30);
+    var_01 setparent(var_00);
   }
 
   var_1.alpha = 0;
@@ -557,30 +555,30 @@ func_491A() {
 }
 
 func_78E6(var_00, var_01, var_02, var_03) {
-  if (!isdefined(var_03))
-  var_03 = 0;
+  if(!isdefined(var_03))
+    var_03 = 0;
 
   var_04 = undefined;
 
-  if (!level.console)
-  var_04 = -250;
-  else if (!isdefined(var_00))
-  var_04 = -225;
+  if(!level.console)
+    var_04 = -250;
+  else if(!isdefined(var_00))
+    var_04 = -225;
   else
-  var_04 = var_00;
+    var_04 = var_00;
 
-  if (var_03)
-  var_04 = var_00;
+  if(var_03)
+    var_04 = var_00;
 
-  if (!isdefined(var_01))
-  var_05 = 100;
+  if(!isdefined(var_01))
+    var_05 = 100;
   else
-  var_05 = var_01;
+    var_05 = var_01;
 
-  if (isdefined(var_02))
-  var_06 = newclienthudelem(var_02);
+  if(isdefined(var_02))
+    var_06 = newclienthudelem(var_02);
   else
-  var_06 = newhudelem();
+    var_06 = newhudelem();
 
   var_6.alignx = "left";
   var_6.aligny = "middle";
@@ -600,30 +598,30 @@ func_78E6(var_00, var_01, var_02, var_03) {
 }
 
 func_7956(var_00, var_01, var_02, var_03) {
-  if (!isdefined(var_03))
-  var_03 = 0;
+  if(!isdefined(var_03))
+    var_03 = 0;
 
   var_04 = undefined;
 
-  if (!level.console)
-  var_04 = -250;
-  else if (!isdefined(var_00))
-  var_04 = -170;
+  if(!level.console)
+    var_04 = -250;
+  else if(!isdefined(var_00))
+    var_04 = -170;
   else
-  var_04 = var_00;
+    var_04 = var_00;
 
-  if (var_03)
-  var_04 = var_00;
+  if(var_03)
+    var_04 = var_00;
 
-  if (!isdefined(var_01))
-  var_05 = 100;
+  if(!isdefined(var_01))
+    var_05 = 100;
   else
-  var_05 = var_01;
+    var_05 = var_01;
 
-  if (isdefined(var_02))
-  var_06 = newclienthudelem(var_02);
+  if(isdefined(var_02))
+    var_06 = newclienthudelem(var_02);
   else
-  var_06 = newhudelem();
+    var_06 = newhudelem();
 
   var_6.alignx = "right";
   var_6.aligny = "middle";
@@ -643,10 +641,10 @@ func_7956(var_00, var_01, var_02, var_03) {
 }
 
 func_48B7(var_00, var_01, var_02) {
-  if (isdefined(var_02))
-  var_03 = newclienthudelem(var_02);
+  if(isdefined(var_02))
+    var_03 = newclienthudelem(var_02);
   else
-  var_03 = newhudelem();
+    var_03 = newhudelem();
 
   var_3.x = 0;
   var_3.y = 0;
@@ -665,14 +663,14 @@ func_48B8(var_00, var_01, var_02, var_03, var_04) {
   var_05 = scripts\sp\utility::func_7B92();
   var_06 = newclienthudelem(var_05);
 
-  if (!isdefined(var_04))
-  var_04 = 1;
+  if(!isdefined(var_04))
+    var_04 = 1;
 
-  if (!isdefined(var_02))
-  var_02 = 0;
+  if(!isdefined(var_02))
+    var_02 = 0;
 
-  if (!isdefined(var_03))
-  var_03 = 0;
+  if(!isdefined(var_03))
+    var_03 = 0;
 
   var_6.x = var_02;
   var_6.y = var_03;
@@ -691,8 +689,8 @@ func_48B9(var_00, var_01, var_02, var_03, var_04) {
   var_05 = scripts\sp\utility::func_7B92();
   var_06 = newclienthudelem(var_05);
 
-  if (!isdefined(var_04))
-  var_04 = 1;
+  if(!isdefined(var_04))
+    var_04 = 1;
 
   var_6.x = var_02;
   var_6.y = var_03;
@@ -708,11 +706,11 @@ func_48B9(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_6A99(var_00, var_01) {
-  if (level.func_B8D0)
-  return;
-
-  if (!isdefined(var_00))
-  var_00 = 0.3;
+  if(level.func_B8D0) {
+    return;
+  }
+  if(!isdefined(var_00))
+    var_00 = 0.3;
 
   var_02 = func_7B4F(var_01);
   var_02 fadeovertime(var_00);
@@ -721,20 +719,20 @@ func_6A99(var_00, var_01) {
 }
 
 func_7B4F(var_00) {
-  if (!isdefined(var_00))
-  var_00 = "black";
+  if(!isdefined(var_00))
+    var_00 = "black";
 
   return func_7B5D(var_00);
 }
 
 func_6AA3(var_00, var_01) {
-  if (!isdefined(var_00))
-  var_00 = 0.3;
+  if(!isdefined(var_00))
+    var_00 = 0.3;
 
   var_02 = func_7B4F(var_01);
 
-  if (var_00 > 0)
-  var_02 fadeovertime(var_00);
+  if(var_00 > 0)
+    var_02 fadeovertime(var_00);
 
   var_2.alpha = 1;
   wait(var_00);
@@ -746,16 +744,16 @@ func_10CCC(var_00) {
 }
 
 func_7B5D(var_00) {
-  if (isplayer(self))
-  var_01 = self;
+  if(isplayer(self))
+    var_01 = self;
   else
-  var_01 = level.player;
+    var_01 = level.player;
 
-  if (!isdefined(var_1.func_C7FD))
-  var_1.func_C7FD = [];
+  if(!isdefined(var_1.func_C7FD))
+    var_1.func_C7FD = [];
 
-  if (!isdefined(var_1.func_C7FD[var_00]))
-  var_1.func_C7FD[var_00] = func_48B7(var_00, 0, var_01);
+  if(!isdefined(var_1.func_C7FD[var_00]))
+    var_1.func_C7FD[var_00] = func_48B7(var_00, 0, var_01);
 
   var_1.func_C7FD[var_00].sort = 0;
   var_1.func_C7FD[var_00].foreground = 1;

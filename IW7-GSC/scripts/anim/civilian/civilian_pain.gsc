@@ -5,5 +5,5 @@
 ***************************************************/
 
 main() {
-	scripts\anim\pain::main();
+  scripts\anim\pain::main();
 }

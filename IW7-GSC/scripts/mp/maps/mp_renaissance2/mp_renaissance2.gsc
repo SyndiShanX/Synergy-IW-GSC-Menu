@@ -59,16 +59,16 @@ apex_not_outofbounds() {
   level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_00;
   level waittill("game_ended");
 
-  foreach (var_00 in level.outofboundstriggerpatches) {
-  if (isdefined(var_00))
-  var_00 delete();
+  foreach(var_00 in level.outofboundstriggerpatches) {
+    if(isdefined(var_00))
+      var_00 delete();
   }
 }
 
 oceaninmotion() {
   var_00 = getentarray("bobbing_boat", "targetname");
 
-  foreach (var_02 in var_00)
+  foreach(var_02 in var_00)
   thread bobbingboat(var_02);
 }
 
@@ -76,11 +76,11 @@ bobbingboat(var_00) {
   var_0.startpos = var_0.origin;
   var_0.func_10D6C = var_0.angles;
 
-  if (isdefined(var_0.target)) {
-  var_0.func_BE10 = getentarray(var_0.target, "targetname");
+  if(isdefined(var_0.target)) {
+    var_0.func_BE10 = getentarray(var_0.target, "targetname");
 
-  foreach (var_02 in var_0.func_BE10)
-  var_2.deltapos = var_2.origin - var_0.origin;
+    foreach(var_02 in var_0.func_BE10)
+    var_2.deltapos = var_2.origin - var_0.origin;
   }
 
   thread boatbob(var_00);
@@ -90,18 +90,18 @@ boatbob(var_00) {
   level endon("game_ended");
 
   for (;;) {
-  var_01 = randomfloatrange(4, 7);
-  var_0.goalpos = var_0.startpos + (randomintrange(-2, 2), randomintrange(-2, 2), randomintrange(-3, 3));
-  var_00 moveto(var_0.goalpos, var_01, var_01 * 0.25, var_01 * 0.25);
+    var_01 = randomfloatrange(4, 7);
+    var_0.goalpos = var_0.startpos + (randomintrange(-2, 2), randomintrange(-2, 2), randomintrange(-3, 3));
+    var_00 moveto(var_0.goalpos, var_01, var_01 * 0.25, var_01 * 0.25);
 
-  if (isdefined(var_0.target)) {
-  foreach (var_03 in var_0.func_BE10) {
-  var_3.goalpos = var_0.goalpos + var_3.deltapos;
-  var_03 moveto(var_3.goalpos, var_01, var_01 * 0.25, var_01 * 0.25);
-  }
-  }
+    if(isdefined(var_0.target)) {
+      foreach(var_03 in var_0.func_BE10) {
+        var_3.goalpos = var_0.goalpos + var_3.deltapos;
+        var_03 moveto(var_3.goalpos, var_01, var_01 * 0.25, var_01 * 0.25);
+      }
+    }
 
-  wait(var_01);
+    wait(var_01);
   }
 }
 
@@ -111,15 +111,15 @@ setup_vista_driving_boats() {
   var_02 = 0.0166667;
   wait 5.0;
 
-  foreach (var_04 in var_00) {
-  if (isdefined(var_4.script_label)) {
-  thread vista_boat_drive(var_04, var_02);
-  playfxontag(scripts\engine\utility::getfx("vfx_gn_bg_sail_boat_wake"), var_04, "tag_origin");
-  continue;
-  }
+  foreach(var_04 in var_00) {
+    if(isdefined(var_4.script_label)) {
+      thread vista_boat_drive(var_04, var_02);
+      playfxontag(scripts\engine\utility::getfx("vfx_gn_bg_sail_boat_wake"), var_04, "tag_origin");
+      continue;
+    }
 
-  thread vista_boat_drive(var_04, var_01);
-  playfxontag(scripts\engine\utility::getfx("vfx_gn_bg_boat_wake_rear"), var_04, "tag_origin");
+    thread vista_boat_drive(var_04, var_01);
+    playfxontag(scripts\engine\utility::getfx("vfx_gn_bg_boat_wake_rear"), var_04, "tag_origin");
   }
 }
 
@@ -128,11 +128,11 @@ vista_boat_drive(var_00, var_01) {
   var_02 = scripts\engine\utility::getstruct(var_0.target, "targetname");
 
   for (;;) {
-  var_03 = abs(distance(var_0.origin, var_2.origin) * var_01);
-  var_00 moveto(var_2.origin, var_03, 0, 0);
-  var_00 rotateto(var_2.angles, var_03, 0, 0);
-  var_02 = scripts\engine\utility::getstruct(var_2.target, "targetname");
-  wait(var_03);
+    var_03 = abs(distance(var_0.origin, var_2.origin) * var_01);
+    var_00 moveto(var_2.origin, var_03, 0, 0);
+    var_00 rotateto(var_2.angles, var_03, 0, 0);
+    var_02 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    wait(var_03);
   }
 }
 
@@ -142,7 +142,7 @@ func_F9BA() {
   level.func_BF47 = -1.0;
   var_00 = getentarray("wine_keg", "targetname");
 
-  foreach (var_02 in var_00)
+  foreach(var_02 in var_00)
   var_02 thread func_13957();
 }
 
@@ -150,23 +150,23 @@ func_13957() {
   self setcandamage(1);
 
   for (;;) {
-  self waittill("damage", var_00, var_01, var_02, var_03, var_04);
+    self waittill("damage", var_00, var_01, var_02, var_03, var_04);
 
-  if (!issubstr(var_04, "BULLET"))
-  continue;
+    if(!issubstr(var_04, "BULLET")) {
+      continue;
+    }
+    if(!func_3827()) {
+      continue;
+    }
+    var_05 = func_7A63(var_01, var_02, var_03);
 
-  if (!func_3827())
-  continue;
-
-  var_05 = func_7A63(var_01, var_02, var_03);
-
-  if (!isdefined(var_05))
-  continue;
-
-  func_B27C();
-  var_05 = vectortoangles(var_05);
-  playfx(level._effect["vfx_gn_imp_wine_cask"], var_03, anglestoforward(var_05), anglestoup(var_05));
-  playfx(level._effect["vfx_gn_wine_barrel_stream"], var_03, anglestoforward(var_05), anglestoup(var_05));
+    if(!isdefined(var_05)) {
+      continue;
+    }
+    func_B27C();
+    var_05 = vectortoangles(var_05);
+    playfx(level._effect["vfx_gn_imp_wine_cask"], var_03, anglestoforward(var_05), anglestoup(var_05));
+    playfx(level._effect["vfx_gn_wine_barrel_stream"], var_03, anglestoforward(var_05), anglestoup(var_05));
   }
 }
 
@@ -175,15 +175,15 @@ func_7A63(var_00, var_01, var_02) {
   var_04 = var_02 - var_03;
   var_05 = bullettrace(var_03, var_03 + 1.5 * var_04, 0, var_00, 0);
 
-  if (isdefined(var_5["normal"]) && isdefined(var_5["entity"]) && var_5["entity"] == self)
-  return var_5["normal"];
+  if(isdefined(var_5["normal"]) && isdefined(var_5["entity"]) && var_5["entity"] == self)
+    return var_5["normal"];
 
   return undefined;
 }
 
 func_3827() {
-  if (gettime() < level.func_BF47)
-  return 0;
+  if(gettime() < level.func_BF47)
+    return 0;
 
   return 1;
 }

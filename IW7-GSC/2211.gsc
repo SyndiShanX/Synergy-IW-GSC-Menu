@@ -17,8 +17,8 @@ main() {
   self.voice = "unitednations";
   self give_explosive_touch_on_revived("vestlight");
 
-  if (issentient(self))
-  self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
+  if(issentient(self))
+    self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 
   self.func_8E1A = level.func_7649["iw7\core\human\helmet_un_marines_broken"];
   self glinton(#animtree);

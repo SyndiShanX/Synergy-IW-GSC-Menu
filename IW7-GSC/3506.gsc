@@ -26,17 +26,16 @@ init() {
   level.func_C6D7["orbital_deployment"].func_1352D = "odin_target_killed";
   level.func_C6D7["orbital_deployment"].func_1352C = "odin_targets_killed";
   level.func_C6D7["orbital_deployment"].func_12B20 = 3;
-  level.func_C6D7["orbital_deployment"].func_12B80 = &"KILLSTREAKS_ODIN_UNAVAILABLE";
+  level.func_C6D7["orbital_deployment"].func_12B80 = & "KILLSTREAKS_ODIN_UNAVAILABLE";
   level.func_C6D7["orbital_deployment"].weapon["juggernaut"] = spawnstruct();
   level.func_C6D7["orbital_deployment"].weapon["juggernaut"].func_D5E4 = "null";
   level.func_C6D7["orbital_deployment"].weapon["juggernaut"].func_D5DD = "odin_jugg_launch";
 
-  if (!isdefined(level.heli_pilot_mesh)) {
-  level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
+  if(!isdefined(level.heli_pilot_mesh)) {
+    level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
 
-  if (!isdefined(level.heli_pilot_mesh)) {}
-  else
-  level.heli_pilot_mesh.origin = level.heli_pilot_mesh.origin + scripts\mp\utility\game::gethelipilotmeshoffset();
+    if(!isdefined(level.heli_pilot_mesh)) {} else
+      level.heli_pilot_mesh.origin = level.heli_pilot_mesh.origin + scripts\mp\utility\game::gethelipilotmeshoffset();
   }
 
   level.func_163A = [];
@@ -46,13 +45,13 @@ func_128F2(var_00) {
   self endon("disconnect");
   var_01 = var_0.func_98F2;
 
-  if (isdefined(self.underwater) && self.underwater)
-  return 0;
+  if(isdefined(self.underwater) && self.underwater)
+    return 0;
 
   var_02 = func_10DD3(var_0.streakname);
 
-  if (!isdefined(var_02))
-  var_02 = 0;
+  if(!isdefined(var_02))
+    var_02 = 0;
 
   return var_02;
 }
@@ -60,38 +59,38 @@ func_128F2(var_00) {
 func_10DD3(var_00, var_01) {
   level endon("game_ended");
 
-  if (!isdefined(var_01))
-  var_01 = 0;
+  if(!isdefined(var_01))
+    var_01 = 0;
 
   self.restoreangles = vectortoangles(anglestoforward(self.angles));
   func_C6CB();
 
-  if (var_01 == 1) {
-  scripts\engine\utility::allow_usability(0);
-  scripts\engine\utility::allow_weapon_switch(0);
-  scripts\mp\utility\game::incrementfauxvehiclecount();
-  var_02 = func_49FB();
+  if(var_01 == 1) {
+    scripts\engine\utility::allow_usability(0);
+    scripts\engine\utility::allow_weapon_switch(0);
+    scripts\mp\utility\game::incrementfauxvehiclecount();
+    var_02 = func_49FB();
 
-  if (!isdefined(var_02)) {
-  scripts\engine\utility::allow_weapon_switch(1);
-  scripts\mp\utility\game::decrementfauxvehiclecount();
-  return 0;
-  }
+    if(!isdefined(var_02)) {
+      scripts\engine\utility::allow_weapon_switch(1);
+      scripts\mp\utility\game::decrementfauxvehiclecount();
+      return 0;
+    }
 
-  self remotecontrolvehicle(var_02);
+    self remotecontrolvehicle(var_02);
   } else {
-  scripts\engine\utility::allow_usability(0);
-  scripts\engine\utility::allow_weapon_switch(0);
-  var_03 = scripts\mp\killstreaks\mapselect::_meth_8112(var_00);
+    scripts\engine\utility::allow_usability(0);
+    scripts\engine\utility::allow_weapon_switch(0);
+    var_03 = scripts\mp\killstreaks\mapselect::_meth_8112(var_00);
 
-  if (!isdefined(var_03)) {
-  func_C6C4();
-  scripts\engine\utility::allow_usability(1);
-  scripts\engine\utility::allow_weapon_switch(1);
-  return 0;
-  }
+    if(!isdefined(var_03)) {
+      func_C6C4();
+      scripts\engine\utility::allow_usability(1);
+      scripts\engine\utility::allow_weapon_switch(1);
+      return 0;
+    }
 
-  func_10DD4(var_3[0].location, var_3[0].location + (0, 0, 10000), var_00);
+    func_10DD4(var_3[0].location, var_3[0].location + (0, 0, 10000), var_00);
   }
 
   return 1;
@@ -102,9 +101,9 @@ func_49FB() {
   var_01 = self.origin * (1, 1, 0) + (level.heli_pilot_mesh.origin - scripts\mp\utility\game::gethelipilotmeshoffset()) * (0, 0, 1);
   var_02 = spawnhelicopter(self, var_01, var_00, level.func_C6D7["orbital_deployment"].vehicleinfo, level.func_C6D7["orbital_deployment"].modelbase);
 
-  if (!isdefined(var_02))
-  return;
-
+  if(!isdefined(var_02)) {
+    return;
+  }
   var_2.speed = 40;
   var_2.owner = self;
   var_2.team = self.team;
@@ -127,38 +126,37 @@ func_C6D4() {
   var_00 endon("disconnect");
   var_00 endon("juggernaut_dead");
 
-  if (!isai(var_00)) {
-  var_00 notifyonplayercommand("orbital_deployment_action", "+attack");
-  var_00 notifyonplayercommand("orbital_deployment_action", "+attack_akimbo_accessible");
+  if(!isai(var_00)) {
+    var_00 notifyonplayercommand("orbital_deployment_action", "+attack");
+    var_00 notifyonplayercommand("orbital_deployment_action", "+attack_akimbo_accessible");
   }
 
   for (;;) {
-  var_00 waittill("orbital_deployment_action");
+    var_00 waittill("orbital_deployment_action");
 
-  if (scripts\mp\utility\game::istrue(self.targeting_marker.func_EA21)) {
-  var_00 setclientomnvar("ui_odin", -1);
-  var_00 func_10DD4(self.targeting_marker.origin, self.origin, self.streakname);
-  var_00 remotecontrolvehicleoff(self);
-  func_4074();
-  self notify("death");
-  break;
-  }
-  else
-  var_00 scripts\mp\utility\game::func_13A7("odin_negative_action");
+    if(scripts\mp\utility\game::istrue(self.targeting_marker.func_EA21)) {
+      var_00 setclientomnvar("ui_odin", -1);
+      var_00 func_10DD4(self.targeting_marker.origin, self.origin, self.streakname);
+      var_00 remotecontrolvehicleoff(self);
+      func_4074();
+      self notify("death");
+      break;
+    } else
+      var_00 scripts\mp\utility\game::func_13A7("odin_negative_action");
 
-  wait 1.1;
+    wait 1.1;
   }
 }
 
 func_7E6A(var_00) {
-  if (!isdefined(var_00))
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
   var_01 = getnodesinradiussorted(var_00, 256, 0, 128, "Path");
 
-  if (!isdefined(var_1[0]))
-  return;
-
+  if(!isdefined(var_1[0])) {
+    return;
+  }
   return var_1[0];
 }
 
@@ -211,42 +209,42 @@ func_B9F2(var_00) {
   var_01 = [];
 
   for (;;) {
-  var_02 = func_7E6A(self.origin);
+    var_02 = func_7E6A(self.origin);
 
-  if (isdefined(var_02)) {
-  self.func_EA21 = 1;
-  stopfxontag(level._effect["odin_targeting_bad"], self, "tag_origin");
-  wait 0.05;
-  playfxontag(level._effect["odin_targeting"], self, "tag_origin");
-  } else {
-  self.func_EA21 = 0;
-  stopfxontag(level._effect["odin_targeting"], self, "tag_origin");
-  wait 0.05;
-  playfxontag(level._effect["odin_targeting_bad"], self, "tag_origin");
-  }
+    if(isdefined(var_02)) {
+      self.func_EA21 = 1;
+      stopfxontag(level._effect["odin_targeting_bad"], self, "tag_origin");
+      wait 0.05;
+      playfxontag(level._effect["odin_targeting"], self, "tag_origin");
+    } else {
+      self.func_EA21 = 0;
+      stopfxontag(level._effect["odin_targeting"], self, "tag_origin");
+      wait 0.05;
+      playfxontag(level._effect["odin_targeting_bad"], self, "tag_origin");
+    }
 
-  var_03 = var_00 scripts\mp\utility\game::get_players_watching();
+    var_03 = var_00 scripts\mp\utility\game::get_players_watching();
 
-  foreach (var_05 in var_01) {
-  if (!scripts\engine\utility::array_contains(var_03, var_05)) {
-  var_01 = scripts\engine\utility::array_remove(var_01, var_05);
-  self hide();
-  self giveperkequipment(var_00);
-  }
-  }
+    foreach(var_05 in var_01) {
+      if(!scripts\engine\utility::array_contains(var_03, var_05)) {
+        var_01 = scripts\engine\utility::array_remove(var_01, var_05);
+        self hide();
+        self giveperkequipment(var_00);
+      }
+    }
 
-  foreach (var_05 in var_03) {
-  self giveperkequipment(var_05);
+    foreach(var_05 in var_03) {
+      self giveperkequipment(var_05);
 
-  if (!scripts\engine\utility::array_contains(var_01, var_05)) {
-  var_01 = scripts\engine\utility::array_add(var_01, var_05);
-  stopfxontag(level._effect["odin_targeting"], self, "tag_origin");
-  wait 0.05;
-  playfxontag(level._effect["odin_targeting"], self, "tag_origin");
-  }
-  }
+      if(!scripts\engine\utility::array_contains(var_01, var_05)) {
+        var_01 = scripts\engine\utility::array_add(var_01, var_05);
+        stopfxontag(level._effect["odin_targeting"], self, "tag_origin");
+        wait 0.05;
+        playfxontag(level._effect["odin_targeting"], self, "tag_origin");
+      }
+    }
 
-  wait 0.05;
+    wait 0.05;
   }
 }
 
@@ -255,10 +253,10 @@ func_10129() {
   wait 1.0;
   var_00 = func_7E6A(self.targeting_marker.origin);
 
-  if (isdefined(var_00))
-  playfxontag(level._effect["odin_targeting"], self.targeting_marker, "tag_origin");
+  if(isdefined(var_00))
+    playfxontag(level._effect["odin_targeting"], self.targeting_marker, "tag_origin");
   else
-  playfxontag(level._effect["odin_targeting_bad"], self.targeting_marker, "tag_origin");
+    playfxontag(level._effect["odin_targeting_bad"], self.targeting_marker, "tag_origin");
 }
 
 func_C6C7(var_00) {
@@ -267,8 +265,8 @@ func_C6C7(var_00) {
   var_01 = level.func_C6D7["orbital_deployment"];
   scripts\mp\utility\game::leaderdialog(var_1.votimedout);
 
-  if (isdefined(self.owner))
-  self.owner func_C6C5(self, var_00);
+  if(isdefined(self.owner))
+    self.owner func_C6C5(self, var_00);
 
   self notify("gone");
   func_4074();
@@ -279,97 +277,96 @@ func_C6C7(var_00) {
 }
 
 func_4074() {
-  if (isdefined(self.targeting_marker))
-  self.targeting_marker delete();
+  if(isdefined(self.targeting_marker))
+    self.targeting_marker delete();
 
-  if (isdefined(self.func_C6CA))
-  self.func_C6CA delete();
+  if(isdefined(self.func_C6CA))
+    self.func_C6CA delete();
 }
 
 func_C6CC(var_00) {
   while (isdefined(self.func_9BE2) && var_00 > 0) {
-  wait 0.05;
-  var_00 = var_00 - 0.05;
+    wait 0.05;
+    var_00 = var_00 - 0.05;
   }
 }
 
 func_C6C5(var_00, var_01) {
-  if (isdefined(var_00)) {
-  self setclientomnvar("ui_odin", -1);
-  var_00 notify("end_remote");
-  self notify("odin_ride_ended");
-  func_C6C4();
+  if(isdefined(var_00)) {
+    self setclientomnvar("ui_odin", -1);
+    var_00 notify("end_remote");
+    self notify("odin_ride_ended");
+    func_C6C4();
 
-  if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::setthirdpersondof(1);
+    if(getdvarint("camera_thirdPerson"))
+      scripts\mp\utility\game::setthirdpersondof(1);
 
-  self thermalvisionfofoverlayoff();
-  self remotecontrolvehicleoff(var_00);
-  self setplayerangles(self.restoreangles);
+    self thermalvisionfofoverlayoff();
+    self remotecontrolvehicleoff(var_00);
+    self setplayerangles(self.restoreangles);
 
-  if (isdefined(var_01) && var_01) {
-  func_108F5();
-  self.func_A641 = 0;
-  scripts\engine\utility::allow_weapon(1);
-  self notify("weapon_change", self getcurrentweapon());
-  }
+    if(isdefined(var_01) && var_01) {
+      func_108F5();
+      self.func_A641 = 0;
+      scripts\engine\utility::allow_weapon(1);
+      self notify("weapon_change", self getcurrentweapon());
+    }
 
-  self stopolcalsound("odin_negative_action");
-  self stopolcalsound("odin_positive_action");
+    self stopolcalsound("odin_negative_action");
+    self stopolcalsound("odin_positive_action");
 
-  foreach (var_03 in level.func_C6D7["orbital_deployment"].weapon) {
-  if (isdefined(var_3.func_D5E4))
-  self stopolcalsound(var_3.func_D5E4);
+    foreach(var_03 in level.func_C6D7["orbital_deployment"].weapon) {
+      if(isdefined(var_3.func_D5E4))
+        self stopolcalsound(var_3.func_D5E4);
 
-  if (isdefined(var_3.func_D5DD))
-  self stopolcalsound(var_3.func_D5DD);
-  }
+      if(isdefined(var_3.func_D5DD))
+        self stopolcalsound(var_3.func_D5DD);
+    }
 
-  if (isdefined(var_0.func_A4A3))
-  var_0.func_A4A3 scripts\mp\bots\bots_strategy::bot_guard_player(self, 350);
+    if(isdefined(var_0.func_A4A3))
+      var_0.func_A4A3 scripts\mp\bots\bots_strategy::bot_guard_player(self, 350);
 
-  self notify("stop_odin");
+    self notify("stop_odin");
   }
 }
 
 func_108F5() {
   self.func_98FF = 0;
-  var_00 = self [[level.getspawnpoint]]();
+  var_00 = self[[level.getspawnpoint]]();
   var_01 = var_0.origin;
   var_02 = var_0.angles;
   self.angles = var_02;
   self setorigin(var_01, 1);
 
-  foreach (var_04 in level.players) {
-  if (var_04 != self)
-  self giveperkequipment(var_04);
+  foreach(var_04 in level.players) {
+    if(var_04 != self)
+      self giveperkequipment(var_04);
   }
 }
 
 func_10DD8() {
   var_00 = undefined;
 
-  if (self.team == "allies")
-  var_00 = "axis";
-  else if (self.team == "axis")
-  var_00 = "allies";
-  else
-  {}
+  if(self.team == "allies")
+    var_00 = "axis";
+  else if(self.team == "axis")
+    var_00 = "allies";
+  else {}
 
   var_01 = anglestoforward(self.angles);
   var_02 = anglestoup(self.angles);
 
-  foreach (var_04 in level.players) {
-  if (var_04 != self) {
-  self hidefromplayer(var_04);
+  foreach(var_04 in level.players) {
+    if(var_04 != self) {
+      self hidefromplayer(var_04);
 
-  if (var_4.team == self.team) {
-  playfx(level._effect["phase_out_friendly"], self.origin, var_01, var_02);
-  continue;
-  }
+      if(var_4.team == self.team) {
+        playfx(level._effect["phase_out_friendly"], self.origin, var_01, var_02);
+        continue;
+      }
 
-  playfx(level._effect["phase_out_enemy"], self.origin, var_01, var_02);
-  }
+      playfx(level._effect["phase_out_enemy"], self.origin, var_01, var_02);
+    }
   }
 }
 
@@ -378,8 +375,8 @@ func_C6CB() {
 }
 
 func_C6C4() {
-  if (isdefined(self))
-  scripts\mp\utility\game::clearusingremote();
+  if(isdefined(self))
+    scripts\mp\utility\game::clearusingremote();
 }
 
 func_10DD4(var_00, var_01, var_02) {
@@ -391,14 +388,13 @@ func_10DD4(var_00, var_01, var_02) {
   level thread monitorobjectivecamera(self);
   var_03 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_02);
 
-  if (var_03 == "success")
-  level thread func_1285(var_00, var_01, self, var_02);
-  else
-  {
-  self notify("end_kill_streak");
-  func_C6C4();
-  scripts\engine\utility::allow_usability(1);
-  scripts\engine\utility::allow_weapon_switch(1);
+  if(var_03 == "success")
+    level thread func_1285(var_00, var_01, self, var_02);
+  else {
+    self notify("end_kill_streak");
+    func_C6C4();
+    scripts\engine\utility::allow_usability(1);
+    scripts\engine\utility::allow_weapon_switch(1);
   }
 
   level thread scripts\mp\utility\game::teamplayercardsplash(level.func_C6D7["orbital_deployment"].teamsplash, self);
@@ -421,13 +417,13 @@ func_1285(var_00, var_01, var_02, var_03) {
   var_9.owner = var_02;
   var_09 scripts\mp\killstreaks\utility::func_1843(var_03, "Killstreak_Air", var_9.owner, 1);
 
-  if (scripts\mp\utility\game::isreallyalive(var_02))
-  var_02 func_10DD8();
+  if(scripts\mp\utility\game::isreallyalive(var_02))
+    var_02 func_10DD8();
 
-  if (isdefined(var_2.fauxdeath) && var_2.fauxdeath) {
-  var_2.faux_spawn_stance = var_02 getstance();
-  var_02 thread scripts\mp\playerlogic::spawnplayer(0);
-  var_04 = 1;
+  if(isdefined(var_2.fauxdeath) && var_2.fauxdeath) {
+    var_2.faux_spawn_stance = var_02 getstance();
+    var_02 thread scripts\mp\playerlogic::spawnplayer(0);
+    var_04 = 1;
   }
 
   var_02 setorigin(var_8.origin + (0, 0, 10), 1);
@@ -448,21 +444,22 @@ func_1285(var_00, var_01, var_02, var_03) {
   var_08 thread func_13AA3(var_02);
 
   for (;;) {
-  var_10 = var_08 scripts\engine\utility::waittill_any_return("death", "missileTargetSet");
-  scripts\mp\hostmigration::waittillhostmigrationdone();
+    var_10 = var_08 scripts\engine\utility::waittill_any_return("death", "missileTargetSet");
+    scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if (var_10 == "death")
-  break;
-
-  if (!isdefined(var_08))
-  break;
+    if(var_10 == "death") {
+      break;
+    }
+    if(!isdefined(var_08)) {
+      break;
+    }
   }
 
-  if (isdefined(var_08)) {
-  var_00 = var_8.origin;
+  if(isdefined(var_08)) {
+    var_00 = var_8.origin;
 
-  if (isdefined(var_02))
-  var_02 scripts\mp\matchdata::logkillstreakevent(var_03, var_8.origin);
+    if(isdefined(var_02))
+      var_02 scripts\mp\matchdata::logkillstreakevent(var_03, var_8.origin);
   }
 
   level thread func_E474(var_02, undefined, var_00, var_09, var_04);
@@ -472,8 +469,8 @@ monitorboost(var_00) {
   var_00 endon("death");
 
   for (;;) {
-  var_0.owner waittill("missileTargetSet");
-  var_00 notify("missileTargetSet");
+    var_0.owner waittill("missileTargetSet");
+    var_00 notify("missileTargetSet");
   }
 }
 
@@ -498,13 +495,12 @@ delayedfofoverlay() {
 func_13A22(var_00) {
   self waittill("explode", var_01);
 
-  if (var_00 == "small_rod") {
-  playrumbleonentity("grenade_rumble", var_01);
-  earthquake(0.7, 1.0, var_01, 1000);
-  }
-  else if (var_00 == "large_rod") {
-  playrumbleonentity("artillery_rumble", var_01);
-  earthquake(1.0, 1.0, var_01, 2000);
+  if(var_00 == "small_rod") {
+    playrumbleonentity("grenade_rumble", var_01);
+    earthquake(0.7, 1.0, var_01, 1000);
+  } else if(var_00 == "large_rod") {
+    playrumbleonentity("artillery_rumble", var_01);
+    earthquake(1.0, 1.0, var_01, 2000);
   }
 }
 
@@ -515,16 +511,16 @@ func_13AA4(var_00) {
   self endon("death");
 
   for (;;) {
-  level waittill("host_migration_begin");
+    level waittill("host_migration_begin");
 
-  if (isdefined(self)) {
-  var_00 visionsetmissilecamforplayer(game["thermal_vision"], 0);
-  var_00 scripts\mp\utility\game::set_visionset_for_watching_players("default", 0, undefined, 1);
-  var_00 thermalvisionfofoverlayon();
-  continue;
-  }
+    if(isdefined(self)) {
+      var_00 visionsetmissilecamforplayer(game["thermal_vision"], 0);
+      var_00 scripts\mp\utility\game::set_visionset_for_watching_players("default", 0, undefined, 1);
+      var_00 thermalvisionfofoverlayon();
+      continue;
+    }
 
-  var_00 setclientomnvar("ui_predator_missile", 2);
+    var_00 setclientomnvar("ui_predator_missile", 2);
   }
 }
 
@@ -535,14 +531,14 @@ func_13AA3(var_00) {
   self endon("death");
 
   for (;;) {
-  level waittill("host_migration_end");
+    level waittill("host_migration_end");
 
-  if (isdefined(self)) {
-  var_00 setclientomnvar("ui_predator_missile", 3);
-  continue;
-  }
+    if(isdefined(self)) {
+      var_00 setclientomnvar("ui_predator_missile", 3);
+      continue;
+    }
 
-  var_00 setclientomnvar("ui_predator_missile", 2);
+    var_00 setclientomnvar("ui_predator_missile", 2);
   }
 }
 
@@ -571,22 +567,22 @@ monitordeath(var_00, var_01) {
   var_00 waittill("death");
   scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if (isdefined(var_0.func_114F1))
-  var_0.func_114F1 delete();
+  if(isdefined(var_0.func_114F1))
+    var_0.func_114F1 delete();
 
-  if (isdefined(var_0.entitynumber))
-  level.rockets[var_0.entitynumber] = undefined;
+  if(isdefined(var_0.entitynumber))
+    level.rockets[var_0.entitynumber] = undefined;
 
-  if (var_01)
-  level.remotemissileinprogress = undefined;
+  if(var_01)
+    level.remotemissileinprogress = undefined;
 }
 
 func_E474(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_00)) {
-  if (isdefined(var_03))
-  var_03 thread func_51B1();
+  if(!isdefined(var_00)) {
+    if(isdefined(var_03))
+      var_03 thread func_51B1();
 
-  return;
+    return;
   }
 
   var_00 setclientomnvar("ui_predator_missile", 2);
@@ -595,27 +591,27 @@ func_E474(var_00, var_01, var_02, var_03, var_04) {
   var_00 thermalvisionfofoverlayoff();
   var_00 controlsunlink();
 
-  if (!isdefined(var_01))
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.95);
+  if(!isdefined(var_01))
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.95);
 
   var_00 cameraunlink();
   var_00 setclientomnvar("ui_predator_missile", 0);
 
-  if (!var_04) {
-  var_00 func_C6C4();
-  var_00 scripts\engine\utility::allow_weapon_switch(1);
+  if(!var_04) {
+    var_00 func_C6C4();
+    var_00 scripts\engine\utility::allow_weapon_switch(1);
   } else {
-  var_00 scripts\engine\utility::allow_offhand_weapons(0);
-  var_00 scripts\engine\utility::allow_weapon_switch(0);
-  var_00 func_C6C4();
-  var_00 scripts\engine\utility::allow_weapon_switch(1);
+    var_00 scripts\engine\utility::allow_offhand_weapons(0);
+    var_00 scripts\engine\utility::allow_weapon_switch(0);
+    var_00 func_C6C4();
+    var_00 scripts\engine\utility::allow_weapon_switch(1);
   }
 
   var_00 scripts\mp\utility\game::freezecontrolswrapper(0);
   var_00 scripts\engine\utility::allow_usability(1);
 
-  if (isdefined(var_02))
-  var_00 func_10D89(var_02, var_03);
+  if(isdefined(var_02))
+    var_00 func_10D89(var_02, var_03);
 }
 
 func_10D89(var_00, var_01) {
@@ -626,9 +622,9 @@ func_10D89(var_00, var_01) {
   self.func_98FF = 0;
   self setorigin(var_00 + (0, 0, 15), 1);
 
-  foreach (var_04 in level.players) {
-  if (var_04 != self)
-  self giveperkequipment(var_04);
+  foreach(var_04 in level.players) {
+    if(var_04 != self)
+      self giveperkequipment(var_04);
   }
 
   self notify("weapon_change", self getcurrentweapon());
@@ -682,10 +678,10 @@ func_D39C(var_00) {
   var_01 = self.pers["killstreaks"];
 
   for (var_02 = 0; var_02 <= 3; var_2++) {
-  var_03 = var_1[var_02];
+    var_03 = var_1[var_02];
 
-  if (isdefined(var_03) && var_3.streakname == var_00 && var_3.func_269A)
-  return 1;
+    if(isdefined(var_03) && var_3.streakname == var_00 && var_3.func_269A)
+      return 1;
   }
 
   return 0;

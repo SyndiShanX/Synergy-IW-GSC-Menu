@@ -13,16 +13,16 @@ init() {
   level thread onplayerconnect();
 
   for (;;) {
-  updatefriendiconsettings();
-  wait 5;
+    updatefriendiconsettings();
+    wait 5;
   }
 }
 
 onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_00);
-  var_00 thread onplayerspawned();
-  var_00 thread onplayerkilled();
+    level waittill("connected", var_00);
+    var_00 thread onplayerspawned();
+    var_00 thread onplayerkilled();
   }
 }
 
@@ -30,8 +30,8 @@ onplayerspawned() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("spawned_player");
-  thread showfriendicon();
+    self waittill("spawned_player");
+    thread showfriendicon();
   }
 }
 
@@ -39,29 +39,29 @@ onplayerkilled() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("killed_player");
-  self.headicon = "";
+    self waittill("killed_player");
+    self.headicon = "";
   }
 }
 
 showfriendicon() {
-  if (level.drawfriend) {
-  if (self.pers["team"] == "allies") {
-  self.headicon = game["headicon_allies"];
-  self.headiconteam = "allies";
-  } else {
-  self.headicon = game["headicon_axis"];
-  self.headiconteam = "axis";
-  }
+  if(level.drawfriend) {
+    if(self.pers["team"] == "allies") {
+      self.headicon = game["headicon_allies"];
+      self.headiconteam = "allies";
+    } else {
+      self.headicon = game["headicon_axis"];
+      self.headiconteam = "axis";
+    }
   }
 }
 
 updatefriendiconsettings() {
   var_00 = scripts\mp\utility\game::getintproperty("scr_drawfriend", level.drawfriend);
 
-  if (level.drawfriend != var_00) {
-  level.drawfriend = var_00;
-  updatefriendicons();
+  if(level.drawfriend != var_00) {
+    level.drawfriend = var_00;
+    updatefriendicons();
   }
 }
 
@@ -69,29 +69,29 @@ updatefriendicons() {
   var_00 = level.players;
 
   for (var_01 = 0; var_01 < var_0.size; var_1++) {
-  var_02 = var_0[var_01];
+    var_02 = var_0[var_01];
 
-  if (isdefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
-  if (level.drawfriend) {
-  if (var_2.pers["team"] == "allies") {
-  var_2.headicon = game["headicon_allies"];
-  var_2.headiconteam = "allies";
-  } else {
-  var_2.headicon = game["headicon_axis"];
-  var_2.headiconteam = "axis";
-  }
+    if(isdefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
+      if(level.drawfriend) {
+        if(var_2.pers["team"] == "allies") {
+          var_2.headicon = game["headicon_allies"];
+          var_2.headiconteam = "allies";
+        } else {
+          var_2.headicon = game["headicon_axis"];
+          var_2.headiconteam = "axis";
+        }
 
-  continue;
-  }
+        continue;
+      }
 
-  var_00 = level.players;
+      var_00 = level.players;
 
-  for (var_01 = 0; var_01 < var_0.size; var_1++) {
-  var_02 = var_0[var_01];
+      for (var_01 = 0; var_01 < var_0.size; var_1++) {
+        var_02 = var_0[var_01];
 
-  if (isdefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing")
-  var_2.headicon = "";
-  }
-  }
+        if(isdefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing")
+          var_2.headicon = "";
+      }
+    }
   }
 }

@@ -18,34 +18,34 @@ blackholemineexplode() {}
 blackholegrenadeused(var_00, var_01) {
   var_00 endon("death");
 
-  if (!isdefined(var_01))
-  var_01 = 0;
+  if(!isdefined(var_01))
+    var_01 = 0;
 
   scripts\mp\utility\game::printgameaction("black hole grenade spawned", self);
   thread bhg_deleteondisowned(var_00);
   var_0.state = 0;
   thread func_12EB1(var_00, var_01);
 
-  if (!var_01) {
-  var_00 waittill("blackhole_grenade_stuck");
+  if(!var_01) {
+    var_00 waittill("blackhole_grenade_stuck");
 
-  if (!isdefined(var_00))
-  return;
+    if(!isdefined(var_00))
+      return;
   }
 
   var_0.state = 1;
   thread func_12F29(var_00);
   var_00 waittill("blackhole_grenade_active");
 
-  if (!isdefined(var_00))
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
   var_0.state = 2;
   thread func_12E56(var_00);
   var_00 waittill("blackhole_grenade_finished");
 
-  if (!isdefined(var_00))
-  return;
+  if(!isdefined(var_00))
+    return;
 }
 
 func_2B3E(var_00) {
@@ -74,8 +74,8 @@ func_12EB1(var_00, var_01) {
   self endon("disconnect");
   var_00 endon("death");
 
-  if (!var_01)
-  var_00 waittill("missile_stuck", var_02);
+  if(!var_01)
+    var_00 waittill("missile_stuck", var_02);
 
   self notify("powers_blackholeGrenade_used", 1);
   playloopsound(var_0.origin, "blackhole_plant");
@@ -86,8 +86,8 @@ func_12EB1(var_00, var_01) {
   var_00 give_player_tickets(1);
   var_03 = scripts\mp\utility\game::_hasperk("specialty_rugged_eqp");
 
-  if (var_03)
-  var_0.hasruggedeqp = 1;
+  if(var_03)
+    var_0.hasruggedeqp = 1;
 
   var_04 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_03), 30, 15);
   var_05 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_03), "hitequip", "");
@@ -143,45 +143,45 @@ func_13A58(var_00, var_01) {
   var_04 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_sky", "physicscontents_water", "physicscontents_item"]);
 
   while (isdefined(var_03)) {
-  var_03 waittill("trigger", var_05);
+    var_03 waittill("trigger", var_05);
 
-  if (!isdefined(var_05))
-  continue;
+    if(!isdefined(var_05)) {
+      continue;
+    }
+    if(var_05 func_9FAF(var_00)) {
+      continue;
+    }
+    if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_05)) {
+      continue;
+    }
+    if(!isplayer(var_05) || isagent(var_05)) {
+      continue;
+    }
+    if(!scripts\mp\utility\game::isreallyalive(var_05)) {
+      continue;
+    }
+    if(scripts\mp\utility\game::func_9F72(var_05)) {
+      continue;
+    }
+    if(!level.friendlyfire && var_05 != self && !scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self, var_05))) {
+      continue;
+    }
+    var_06 = "tag_eye";
+    var_07 = getblackholecenter(var_00);
+    var_08 = var_05 gettagorigin(var_06);
+    var_09 = physics_raycast(var_07, var_08, var_04, [var_00, var_05], 0, "physicsquery_closest", 1);
 
-  if (var_05 func_9FAF(var_00))
-  continue;
+    if(isdefined(var_09) && var_9.size > 0) {
+      var_06 = "tag_origin";
+      var_08 = var_05 gettagorigin(var_06);
+      var_09 = physics_raycast(var_07, var_08, var_04, [var_00, var_05], 0, "physicsquery_closest", 1);
 
-  if (scripts\mp\equipment\phase_shift::isentityphaseshifted(var_05))
-  continue;
+      if(isdefined(var_09) && var_9.size > 0)
+        continue;
+    }
 
-  if (!isplayer(var_05) || isagent(var_05))
-  continue;
-
-  if (!scripts\mp\utility\game::isreallyalive(var_05))
-  continue;
-
-  if (scripts\mp\utility\game::func_9F72(var_05))
-  continue;
-
-  if (!level.friendlyfire && var_05 != self && !scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self, var_05)))
-  continue;
-
-  var_06 = "tag_eye";
-  var_07 = getblackholecenter(var_00);
-  var_08 = var_05 gettagorigin(var_06);
-  var_09 = physics_raycast(var_07, var_08, var_04, [var_00, var_05], 0, "physicsquery_closest", 1);
-
-  if (isdefined(var_09) && var_9.size > 0) {
-  var_06 = "tag_origin";
-  var_08 = var_05 gettagorigin(var_06);
-  var_09 = physics_raycast(var_07, var_08, var_04, [var_00, var_05], 0, "physicsquery_closest", 1);
-
-  if (isdefined(var_09) && var_9.size > 0)
-  continue;
-  }
-
-  var_05 thread func_11AD5(var_00);
-  var_05 getrandomarmkillstreak(140, var_0.origin, var_0.owner, var_00, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
+    var_05 thread func_11AD5(var_00);
+    var_05 getrandomarmkillstreak(140, var_0.origin, var_0.owner, var_00, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
   }
 }
 
@@ -192,23 +192,23 @@ watchforempents(var_00, var_01) {
   var_03 = getblackholecenter(var_00);
 
   for (;;) {
-  var_04 = scripts\mp\weapons::getempdamageents(var_01, 60, 0);
+    var_04 = scripts\mp\weapons::getempdamageents(var_01, 60, 0);
 
-  foreach (var_06 in var_04) {
-  if (var_06 func_9FAF(var_00) || var_06 == var_00)
-  continue;
+    foreach(var_06 in var_04) {
+      if(var_06 func_9FAF(var_00) || var_06 == var_00) {
+        continue;
+      }
+      var_07 = var_06 gettagorigin("tag_origin");
+      var_08 = physics_raycast(var_03, var_07, var_02, [var_00, var_06], 0, "physicsquery_closest", 1);
 
-  var_07 = var_06 gettagorigin("tag_origin");
-  var_08 = physics_raycast(var_03, var_07, var_02, [var_00, var_06], 0, "physicsquery_closest", 1);
+      if(isdefined(var_08) && var_8.size > 0) {
+        continue;
+      }
+      var_06 thread func_11AD5(var_00);
+      var_06 getrandomarmkillstreak(140, var_0.origin, var_0.owner, var_00, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
+    }
 
-  if (isdefined(var_08) && var_8.size > 0)
-  continue;
-
-  var_06 thread func_11AD5(var_00);
-  var_06 getrandomarmkillstreak(140, var_0.origin, var_0.owner, var_00, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
-  }
-
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -229,19 +229,19 @@ bhg_handlefataldamage(var_00, var_01, var_02, var_03, var_04) {
 }
 
 bhg_handledamage(var_00, var_01, var_02, var_03, var_04) {
-  if (!scripts\mp\equipment\phase_shift::areentitiesinphase(var_00, self))
-  return 0;
+  if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_00, self))
+    return 0;
 
-  if (var_02 == "MOD_MELEE")
-  return self.maxhealth + 1;
+  if(var_02 == "MOD_MELEE")
+    return self.maxhealth + 1;
 
   var_05 = 15;
   var_06 = 1;
 
-  if (scripts\mp\utility\game::isfmjdamage(var_01, var_02))
-  var_06 = 2;
-  else if (var_03 >= scripts\mp\weapons::minegettwohitthreshold())
-  var_06 = 2;
+  if(scripts\mp\utility\game::isfmjdamage(var_01, var_02))
+    var_06 = 2;
+  else if(var_03 >= scripts\mp\weapons::minegettwohitthreshold())
+    var_06 = 2;
 
   scripts\mp\powers::equipmenthit(self.owner, var_00, var_01, var_02);
   return var_06 * var_05;
@@ -270,20 +270,19 @@ spawnblackholephysicsvolume(var_00, var_01, var_02, var_03) {
   var_06 = 0;
 
   for (var_07 = 0; var_07 < 7; var_7++) {
-  var_08 = level.func_2ABC[var_07];
+    var_08 = level.func_2ABC[var_07];
 
-  if (!isdefined(var_08)) {
-  var_06 = var_07;
-  break;
-  }
-  else if (!isdefined(var_05) || isdefined(var_05) && var_5.time > var_8.time) {
-  var_05 = var_08;
-  var_06 = var_07;
-  }
+    if(!isdefined(var_08)) {
+      var_06 = var_07;
+      break;
+    } else if(!isdefined(var_05) || isdefined(var_05) && var_5.time > var_8.time) {
+      var_05 = var_08;
+      var_06 = var_07;
+    }
   }
 
-  if (isdefined(var_05))
-  var_05 delete();
+  if(isdefined(var_05))
+    var_05 delete();
 
   level.func_2ABC[var_06] = var_04;
   var_04 thread func_139AD();
@@ -295,12 +294,12 @@ func_139AD() {
   var_00 = self.origin;
 
   for (;;) {
-  if (var_00 != self.origin) {
-  self physics_volumesetasfocalforce(1, self.origin, self.func_720E);
-  var_00 = self.origin;
-  }
+    if(var_00 != self.origin) {
+      self physics_volumesetasfocalforce(1, self.origin, self.func_720E);
+      var_00 = self.origin;
+    }
 
-  wait 0.1;
+    wait 0.1;
   }
 }
 
@@ -322,8 +321,8 @@ func_CB0D(var_00) {
   self endon("death");
 
   for (;;) {
-  var_0.pos = self.origin;
-  scripts\engine\utility::waitframe();
+    var_0.pos = self.origin;
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -339,19 +338,19 @@ bhg_destroyonemp() {
   self.owner endon("disconnect");
   self waittill("emp_damage", var_00, var_01, var_02, var_03, var_04);
 
-  if (isdefined(var_03) && var_03 == "emp_grenade_mp") {
-  if (scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00)))
-  var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
+  if(isdefined(var_03) && var_03 == "emp_grenade_mp") {
+    if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00)))
+      var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
   }
 
   bhg_awardpoints(var_00);
   var_05 = "";
 
-  if (scripts\mp\utility\game::istrue(self.hasruggedeqp))
-  var_05 = "hitequip";
+  if(scripts\mp\utility\game::istrue(self.hasruggedeqp))
+    var_05 = "hitequip";
 
-  if (isplayer(var_00))
-  var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_05);
+  if(isplayer(var_00))
+    var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_05);
 
   thread bhg_destroy();
 }
@@ -367,11 +366,11 @@ cleanuponparentdeath(var_00, var_01) {
   self notify("cleanupOnParentDeath");
   self endon("cleanupOnParentDeath");
 
-  if (isdefined(var_00))
-  var_00 waittill("death");
+  if(isdefined(var_00))
+    var_00 waittill("death");
 
-  if (isdefined(var_01))
-  wait(var_01);
+  if(isdefined(var_01))
+    wait(var_01);
 
   self delete();
 }
@@ -397,9 +396,9 @@ func_11AD6() {
 bhg_addtoglobalarr() {
   var_00 = self getentitynumber();
 
-  if (isdefined(level.func_2ABD[var_00]))
-  return;
-
+  if(isdefined(level.func_2ABD[var_00])) {
+    return;
+  }
   level.func_2ABD[var_00] = self;
   thread bhg_removefromglobalarrondeath();
 }
@@ -407,8 +406,8 @@ bhg_addtoglobalarr() {
 bhg_removefromglobalarr(var_00) {
   self notify("blackHoleGrenade_removeFromGlobalArr");
 
-  if (!isdefined(var_00))
-  var_00 = self getentitynumber();
+  if(!isdefined(var_00))
+    var_00 = self getentitynumber();
 
   level.func_2ABD[var_00] = undefined;
 }
@@ -425,11 +424,11 @@ bhg_trackimpulsefielddebuff(var_00, var_01) {
   var_2.players = [];
   bhg_trackimpulsefielddebuffend(var_00, var_01, var_02);
 
-  if (isdefined(var_01)) {
-  foreach (var_04 in var_2.players) {
-  if (isdefined(var_04) && scripts\mp\utility\game::isreallyalive(var_04))
-  scripts\mp\gamescore::untrackdebuffassist(var_01, var_04, "blackhole_grenade_mp");
-  }
+  if(isdefined(var_01)) {
+    foreach(var_04 in var_2.players) {
+      if(isdefined(var_04) && scripts\mp\utility\game::isreallyalive(var_04))
+        scripts\mp\gamescore::untrackdebuffassist(var_01, var_04, "blackhole_grenade_mp");
+    }
   }
 }
 
@@ -438,39 +437,39 @@ bhg_trackimpulsefielddebuffend(var_00, var_01, var_02) {
   var_01 endon("disconnect");
 
   for (;;) {
-  var_03 = [];
-  var_04 = undefined;
+    var_03 = [];
+    var_04 = undefined;
 
-  if (level.teambased)
-  var_04 = scripts\mp\utility\game::clearscrambler(var_0.origin, 256, scripts\mp\utility\game::getotherteam(var_1.team), var_01);
-  else
-  var_04 = scripts\mp\utility\game::clearscrambler(var_0.origin, 256, undefined, var_01);
+    if(level.teambased)
+      var_04 = scripts\mp\utility\game::clearscrambler(var_0.origin, 256, scripts\mp\utility\game::getotherteam(var_1.team), var_01);
+    else
+      var_04 = scripts\mp\utility\game::clearscrambler(var_0.origin, 256, undefined, var_01);
 
-  foreach (var_06 in var_04) {
-  var_07 = var_06 getentitynumber();
+    foreach(var_06 in var_04) {
+      var_07 = var_06 getentitynumber();
 
-  if (!scripts\mp\utility\game::isreallyalive(var_06)) {
-  var_2.players[var_07] = undefined;
-  continue;
-  }
+      if(!scripts\mp\utility\game::isreallyalive(var_06)) {
+        var_2.players[var_07] = undefined;
+        continue;
+      }
 
-  if (isdefined(var_2.players[var_07])) {
-  var_2.players[var_07] = undefined;
-  var_3[var_07] = var_06;
-  continue;
-  }
+      if(isdefined(var_2.players[var_07])) {
+        var_2.players[var_07] = undefined;
+        var_3[var_07] = var_06;
+        continue;
+      }
 
-  var_3[var_07] = var_06;
-  scripts\mp\gamescore::func_11ACE(var_01, var_06, "blackhole_grenade_mp");
-  }
+      var_3[var_07] = var_06;
+      scripts\mp\gamescore::func_11ACE(var_01, var_06, "blackhole_grenade_mp");
+    }
 
-  foreach (var_06 in var_2.players) {
-  if (isdefined(var_06) && scripts\mp\utility\game::isreallyalive(var_06))
-  scripts\mp\gamescore::untrackdebuffassist(var_01, var_06, "blackhole_grenade_mp");
-  }
+    foreach(var_06 in var_2.players) {
+      if(isdefined(var_06) && scripts\mp\utility\game::isreallyalive(var_06))
+        scripts\mp\gamescore::untrackdebuffassist(var_01, var_06, "blackhole_grenade_mp");
+    }
 
-  var_2.players = var_03;
-  scripts\engine\utility::waitframe();
+    var_2.players = var_03;
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -489,29 +488,28 @@ bhg_delete(var_00) {
 }
 
 bhg_awardpoints(var_00) {
-  if (scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00))) {
-  var_00 notify("destroyed_equipment");
-  var_00 thread scripts\mp\utility\game::giveunifiedpoints("destroyed_equipment");
+  if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00))) {
+    var_00 notify("destroyed_equipment");
+    var_00 thread scripts\mp\utility\game::giveunifiedpoints("destroyed_equipment");
   }
 }
 
 getblackholecenter(var_00) {
-  if (scripts\mp\utility\game::istrue(var_0.func_9935))
-  return var_0.origin;
+  if(scripts\mp\utility\game::istrue(var_0.func_9935))
+    return var_0.origin;
 
-  if (!isdefined(var_0.centeroffset)) {
-  var_01 = anglestoup(var_0.angles);
-  var_02 = var_0.origin;
-  var_03 = var_02 + var_01 * 55.0;
-  var_04 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_sky", "physicscontents_water", "physicscontents_item"]);
-  var_05 = physics_raycast(var_02, var_03, var_04, [self], 0, "physicsquery_closest");
+  if(!isdefined(var_0.centeroffset)) {
+    var_01 = anglestoup(var_0.angles);
+    var_02 = var_0.origin;
+    var_03 = var_02 + var_01 * 55.0;
+    var_04 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_sky", "physicscontents_water", "physicscontents_item"]);
+    var_05 = physics_raycast(var_02, var_03, var_04, [self], 0, "physicsquery_closest");
 
-  if (isdefined(var_05) && var_5.size > 0) {
-  var_03 = var_5[0]["position"];
-  var_0.centeroffset = max(3, vectordot(var_01, var_03 - var_02) - 2);
-  }
-  else
-  var_0.centeroffset = 55.0;
+    if(isdefined(var_05) && var_5.size > 0) {
+      var_03 = var_5[0]["position"];
+      var_0.centeroffset = max(3, vectordot(var_01, var_03 - var_02) - 2);
+    } else
+      var_0.centeroffset = 55.0;
   }
 
   return var_0.origin + anglestoup(var_0.angles) * var_0.centeroffset;

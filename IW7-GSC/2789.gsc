@@ -18,9 +18,9 @@ func_E4E9(var_00) {
   self endon("spawned_player");
   self endon("disconnect");
 
-  if (!isalive(self)) {
-  var_00 delete();
-  return;
+  if(!isalive(self)) {
+    var_00 delete();
+    return;
   }
 
   var_00 waittill("missile_stuck", var_01);
@@ -42,16 +42,16 @@ func_E4E9(var_00) {
   var_3.trigger linkto(var_03);
   var_03 setcandamage(1);
   var_03 thread func_E4E0(self);
-  var_03 thread [[level.func_E4DF[var_0.weapon_name].func_B9DC]](self);
+  var_03 thread[[level.func_E4DF[var_0.weapon_name].func_B9DC]](self);
   var_03 setotherent(self);
 }
 
 func_E4E8() {
-  if (isdefined(self.grenade))
-  self.grenade delete();
+  if(isdefined(self.grenade))
+    self.grenade delete();
 
-  if (isdefined(self.fx))
-  self.fx delete();
+  if(isdefined(self.fx))
+    self.fx delete();
 
   self delete();
   self notify("death");
@@ -61,7 +61,7 @@ func_E4E7() {
   self endon("death");
 
   while (getdvarint("scr_ric_debug", 0) == 1)
-  wait 1;
+    wait 1;
 
   wait 6.0;
   func_E4E8();
@@ -76,8 +76,8 @@ func_E4E4(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_E4E2(var_00, var_01, var_02, var_03) {
-  if (isdefined(self.owner) && var_00 != self.owner)
-  var_00 notify("destroyed_equipment");
+  if(isdefined(self.owner) && var_00 != self.owner)
+    var_00 notify("destroyed_equipment");
 
   self notify("detonateExplosive");
 }
@@ -88,20 +88,20 @@ func_E4E5(var_00) {
   thread func_E4E7();
 
   for (;;) {
-  self waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
-  var_11 = func_E4E1(var_04, var_03);
+    self waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
+    var_11 = func_E4E1(var_04, var_03);
 
-  if (isdefined(var_11)) {
-  var_12 = var_04 + var_11 * 5000;
+    if(isdefined(var_11)) {
+      var_12 = var_04 + var_11 * 5000;
 
-  if (getdvarint("scr_ric_debug", 0) == 1) {}
+      if(getdvarint("scr_ric_debug", 0) == 1) {}
 
-  if (getdvarint("scr_ric_debug", 0) != 1)
-  scripts\mp\utility\game::_magicbullet(var_10, var_04, var_12, var_00);
+      if(getdvarint("scr_ric_debug", 0) != 1)
+        scripts\mp\utility\game::_magicbullet(var_10, var_04, var_12, var_00);
 
-  var_13 = scripts\engine\utility::getfx("proto_ricochet_shot_temp");
-  playfx(var_13, var_04, var_11 * -1, (0, 0, 1));
-  }
+      var_13 = scripts\engine\utility::getfx("proto_ricochet_shot_temp");
+      playfx(var_13, var_04, var_11 * -1, (0, 0, 1));
+    }
   }
 }
 
@@ -111,40 +111,40 @@ func_E4E1(var_00, var_01) {
   var_04 = undefined;
   var_05 = 50000;
 
-  foreach (var_07 in level.players) {
-  if (!scripts\mp\utility\game::isreallyalive(var_07))
-  continue;
+  foreach(var_07 in level.players) {
+    if(!scripts\mp\utility\game::isreallyalive(var_07)) {
+      continue;
+    }
+    if(var_7.team == self.team) {
+      continue;
+    }
+    var_08 = (var_7.origin[0], var_7.origin[1], var_7.origin[2] + 36);
+    var_09 = var_08 - var_00;
+    var_10 = distance(var_7.origin, var_00);
+    var_09 = var_09 * (1.0 / var_10);
+    var_11 = vectordot(var_09, var_01);
 
-  if (var_7.team == self.team)
-  continue;
-
-  var_08 = (var_7.origin[0], var_7.origin[1], var_7.origin[2] + 36);
-  var_09 = var_08 - var_00;
-  var_10 = distance(var_7.origin, var_00);
-  var_09 = var_09 * (1.0 / var_10);
-  var_11 = vectordot(var_09, var_01);
-
-  if (abs(var_11) < 0.707) {
-  if (var_10 < 500) {
-  if (var_10 < var_05) {
-  var_04 = var_08;
-  var_05 = var_10;
-  }
-  }
-  }
+    if(abs(var_11) < 0.707) {
+      if(var_10 < 500) {
+        if(var_10 < var_05) {
+          var_04 = var_08;
+          var_05 = var_10;
+        }
+      }
+    }
   }
 
-  if (isdefined(var_04)) {
-  var_09 = var_04 - var_00;
-  var_09 = var_09 * (1.0 / var_05);
-  var_13 = randomfloatrange(-180, 180);
-  var_14 = vectorcross((0, 0, 1), var_09);
-  var_15 = vectorcross(var_09, var_14);
-  var_16 = sin(var_13);
-  var_17 = cos(var_13);
-  var_18 = randomfloatrange(var_03 * -1, var_03);
-  var_18 = _tan(var_18);
-  var_19 = (var_14 * var_17 + var_15 * var_16) * var_18 + var_09;
-  return var_19;
+  if(isdefined(var_04)) {
+    var_09 = var_04 - var_00;
+    var_09 = var_09 * (1.0 / var_05);
+    var_13 = randomfloatrange(-180, 180);
+    var_14 = vectorcross((0, 0, 1), var_09);
+    var_15 = vectorcross(var_09, var_14);
+    var_16 = sin(var_13);
+    var_17 = cos(var_13);
+    var_18 = randomfloatrange(var_03 * -1, var_03);
+    var_18 = _tan(var_18);
+    var_19 = (var_14 * var_17 + var_15 * var_16) * var_18 + var_09;
+    return var_19;
   }
 }

@@ -6,23 +6,23 @@
 spawnnewagent(var_00, var_01, var_02, var_03, var_04) {
   var_05 = getfreeagent(var_00);
 
-  if (isdefined(var_05)) {
-  var_5.connecttime = gettime();
-  var_05 set_agent_model(var_05, var_00);
-  var_05 set_agent_species(var_05, var_00);
-  var_05 species_pre_spawn_init();
+  if(isdefined(var_05)) {
+    var_5.connecttime = gettime();
+    var_05 set_agent_model(var_05, var_00);
+    var_05 set_agent_species(var_05, var_00);
+    var_05 species_pre_spawn_init();
 
-  if (is_scripted_agent(var_00))
-  var_05 = spawn_scripted_agent(var_05, var_00, var_02, var_03);
-  else
-  var_05 = spawn_regular_agent(var_05, var_02, var_03);
+    if(is_scripted_agent(var_00))
+      var_05 = spawn_scripted_agent(var_05, var_00, var_02, var_03);
+    else
+      var_05 = spawn_regular_agent(var_05, var_02, var_03);
 
-  var_05 setup_agent(var_00);
-  var_05 set_agent_team(var_01);
-  var_05 set_agent_spawn_health(var_05, var_00);
-  var_05 set_agent_traversal_unit_type(var_05, var_00);
-  var_05 addtocharactersarray();
-  var_05 activateagent();
+    var_05 setup_agent(var_00);
+    var_05 set_agent_team(var_01);
+    var_05 set_agent_spawn_health(var_05, var_00);
+    var_05 set_agent_traversal_unit_type(var_05, var_00);
+    var_05 addtocharactersarray();
+    var_05 activateagent();
   }
 
   return var_05;
@@ -31,15 +31,14 @@ spawnnewagent(var_00, var_01, var_02, var_03, var_04) {
 set_agent_model(var_00, var_01) {
   var_00 detachall();
 
-  if (isdefined(level.zombieattachfunction) && level.agent_definition[var_01]["traversal_unit_type"] == "zombie")
-  var_00 [[level.zombieattachfunction]](var_01);
-  else
-  {
-  var_00 setmodel(level.agent_definition[var_01]["body_model"]);
-  var_02 = strtok(level.agent_definition[var_01]["other_body_parts"], " ");
+  if(isdefined(level.zombieattachfunction) && level.agent_definition[var_01]["traversal_unit_type"] == "zombie")
+    var_00[[level.zombieattachfunction]](var_01);
+  else {
+    var_00 setmodel(level.agent_definition[var_01]["body_model"]);
+    var_02 = strtok(level.agent_definition[var_01]["other_body_parts"], " ");
 
-  foreach (var_04 in var_02)
-  var_00 attach(var_04, "", 1);
+    foreach(var_04 in var_02)
+    var_00 attach(var_04, "", 1);
   }
 
   var_00 show();
@@ -73,27 +72,27 @@ is_alien_agent() {
 setup_agent(var_00) {
   var_01 = level.agent_definition[var_00];
 
-  if (!isdefined(var_01))
-  return;
-
+  if(!isdefined(var_01)) {
+    return;
+  }
   var_02 = var_1["setup_func"];
 
-  if (!isdefined(var_02))
-  return;
-
-  self [[var_02]]();
+  if(!isdefined(var_02)) {
+    return;
+  }
+  self[[var_02]]();
 }
 
 agent_go_to_pos(var_00, var_01, var_02, var_03, var_04) {
-  if (is_agent_scripted(self))
-  self ghostskulls_complete_status(var_00);
+  if(is_agent_scripted(self))
+    self ghostskulls_complete_status(var_00);
   else
-  self botsetscriptgoal(var_00, var_01, var_02, var_03, var_04);
+    self botsetscriptgoal(var_00, var_01, var_02, var_03, var_04);
 }
 
 set_agent_species(var_00, var_01) {
-  if (!isdefined(level.agent_funcs[var_01]))
-  level.agent_funcs[var_01] = [];
+  if(!isdefined(level.agent_funcs[var_01]))
+    level.agent_funcs[var_01] = [];
 
   var_0.species = level.agent_definition[var_01]["species"];
   assign_agent_func("spawn", ::default_spawn_func);
@@ -105,11 +104,11 @@ set_agent_species(var_00, var_01) {
 assign_agent_func(var_00, var_01) {
   var_02 = self.agent_type;
 
-  if (!isdefined(level.agent_funcs[var_02][var_00])) {
-  if (!isdefined(level.species_funcs[self.species]) || !isdefined(level.species_funcs[self.species][var_00]))
-  level.agent_funcs[var_02][var_00] = var_01;
-  else
-  level.agent_funcs[var_02][var_00] = level.species_funcs[self.species][var_00];
+  if(!isdefined(level.agent_funcs[var_02][var_00])) {
+    if(!isdefined(level.species_funcs[self.species]) || !isdefined(level.species_funcs[self.species][var_00]))
+      level.agent_funcs[var_02][var_00] = var_01;
+    else
+      level.agent_funcs[var_02][var_00] = level.species_funcs[self.species][var_00];
   }
 }
 
@@ -118,39 +117,39 @@ set_agent_spawn_health(var_00, var_01) {
 }
 
 set_agent_traversal_unit_type(var_00, var_01) {
-  if (!can_set_traversal_unit_type(var_00))
-  return;
-
+  if(!can_set_traversal_unit_type(var_00)) {
+    return;
+  }
   var_00 _meth_828C(level.agent_definition[var_01]["traversal_unit_type"]);
 }
 
 can_set_traversal_unit_type(var_00) {
-  if (is_agent_scripted(var_00))
-  return 1;
+  if(is_agent_scripted(var_00))
+    return 1;
 
   return 0;
 }
 
 species_pre_spawn_init() {
-  if (isdefined(level.species_funcs[self.species]) && isdefined(level.species_funcs[self.species]["pre_spawn_init"]))
-  self [[level.species_funcs[self.species]["pre_spawn_init"]]]();
+  if(isdefined(level.species_funcs[self.species]) && isdefined(level.species_funcs[self.species]["pre_spawn_init"]))
+    self[[level.species_funcs[self.species]["pre_spawn_init"]]]();
 }
 
 getfreeagent(var_00) {
   var_01 = undefined;
 
-  if (isdefined(level.agentarray)) {
-  foreach (var_03 in level.agentarray) {
-  if (!isdefined(var_3.isactive) || !var_3.isactive) {
-  if (isdefined(var_3.waitingtodeactivate) && var_3.waitingtodeactivate)
-  continue;
-
-  var_01 = var_03;
-  var_1.agent_type = var_00;
-  var_01 initagentscriptvariables();
-  break;
-  }
-  }
+  if(isdefined(level.agentarray)) {
+    foreach(var_03 in level.agentarray) {
+      if(!isdefined(var_3.isactive) || !var_3.isactive) {
+        if(isdefined(var_3.waitingtodeactivate) && var_3.waitingtodeactivate) {
+          continue;
+        }
+        var_01 = var_03;
+        var_1.agent_type = var_00;
+        var_01 initagentscriptvariables();
+        break;
+      }
+    }
   }
 
   return var_01;
@@ -217,8 +216,8 @@ set_agent_team(var_00, var_01) {
 
 addtocharactersarray() {
   for (var_00 = 0; var_00 < level.characters.size; var_0++) {
-  if (level.characters[var_00] == self)
-  return;
+    if(level.characters[var_00] == self)
+      return;
   }
 
   level.characters[level.characters.size] = self;
@@ -233,11 +232,11 @@ speciesfunc(var_00) {
 }
 
 validateattacker(var_00) {
-  if (isagent(var_00) && (!isdefined(var_0.isactive) || !var_0.isactive))
-  return undefined;
+  if(isagent(var_00) && (!isdefined(var_0.isactive) || !var_0.isactive))
+    return undefined;
 
-  if (isagent(var_00) && !isdefined(var_0.classname))
-  return undefined;
+  if(isagent(var_00) && !isdefined(var_0.classname))
+    return undefined;
 
   return var_00;
 }
@@ -251,17 +250,17 @@ set_agent_health(var_00) {
 default_spawn_func(var_00, var_01, var_02) {
   var_03 = spawnnewagent("soldier", "axis", var_00, var_01);
 
-  if (!isdefined(var_03))
-  return undefined;
+  if(!isdefined(var_03))
+    return undefined;
 
   var_03 botsetscriptgoal(var_3.origin, 0, "hunt");
   var_03 botsetstance("stand");
   var_03 takeallweapons();
 
-  if (isdefined(var_02))
-  var_03 giveweapon(var_02);
+  if(isdefined(var_02))
+    var_03 giveweapon(var_02);
   else
-  var_03 giveweapon("iw6_dlcweap02_mp");
+    var_03 giveweapon("iw6_dlcweap02_mp");
 
   var_03 botsetdifficultysetting("maxInaccuracy", 4.5);
   var_03 botsetdifficultysetting("minInaccuracy", 2.25);
@@ -271,14 +270,14 @@ default_spawn_func(var_00, var_01, var_02) {
 default_on_damage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
   var_12 = self;
 
-  if (is_friendly_damage(var_12, var_00))
-  return;
-
+  if(is_friendly_damage(var_12, var_00)) {
+    return;
+  }
   var_02 = scripts\cp\cp_damage::func_F29B(var_04, var_05, var_02, var_01, var_03, var_06, var_07, var_08, var_09, var_00);
 
-  if (isplayer(var_01) && !scripts\cp\utility::is_trap(var_00, var_05)) {
-  var_02 = scripts\cp\cp_damage::scale_alien_damage_by_perks(var_01, var_02, var_04, var_05);
-  var_02 = scripts\cp\cp_damage::scale_alien_damage_by_weapon_type(var_01, var_02, var_04, var_05, var_08);
+  if(isplayer(var_01) && !scripts\cp\utility::is_trap(var_00, var_05)) {
+    var_02 = scripts\cp\cp_damage::scale_alien_damage_by_perks(var_01, var_02, var_04, var_05);
+    var_02 = scripts\cp\cp_damage::scale_alien_damage_by_weapon_type(var_01, var_02, var_04, var_05, var_08);
   }
 
   var_02 = riot_shield_damage_adjustment(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_12);
@@ -287,46 +286,46 @@ default_on_damage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07
   process_damage_score(var_01, var_02, var_04);
   process_damage_rewards(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_12);
   process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_12);
-  var_12 [[level.agent_funcs[var_12.agent_type]["on_damaged_finished"]]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, 0.0, var_10, var_11);
+  var_12[[level.agent_funcs[var_12.agent_type]["on_damaged_finished"]]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, 0.0, var_10, var_11);
 }
 
 riot_shield_damage_adjustment(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
   var_10.riotblock = undefined;
 
-  if (var_08 == "shield") {
-  var_10.riotblock = 1;
-  var_02 = 0;
+  if(var_08 == "shield") {
+    var_10.riotblock = 1;
+    var_02 = 0;
   }
 
   return var_02;
 }
 
 process_damage_score(var_00, var_01, var_02) {
-  if (isdefined(level.update_agent_damage_performance))
-  [[level.update_agent_damage_performance]](var_00, var_01, var_02);
+  if(isdefined(level.update_agent_damage_performance))
+    [[level.update_agent_damage_performance]](var_00, var_01, var_02);
 }
 
 default_on_damage_finished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12) {
   self finishagentdamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
   var_13 = scripts\cp\utility::is_trap(var_00, var_05);
 
-  if (isdefined(var_01)) {
-  if (isplayer(var_01) || isdefined(var_1.owner) && isplayer(var_1.owner)) {
-  if (!var_13)
-  var_01 scripts\cp\cp_damage::check_for_special_damage(self, var_05, var_04);
-  }
+  if(isdefined(var_01)) {
+    if(isplayer(var_01) || isdefined(var_1.owner) && isplayer(var_1.owner)) {
+      if(!var_13)
+        var_01 scripts\cp\cp_damage::check_for_special_damage(self, var_05, var_04);
+    }
   }
 
   return 1;
 }
 
 is_friendly_damage(var_00, var_01) {
-  if (isdefined(var_01)) {
-  if (isdefined(var_1.team) && var_1.team == var_0.team)
-  return 1;
+  if(isdefined(var_01)) {
+    if(isdefined(var_1.team) && var_1.team == var_0.team)
+      return 1;
 
-  if (isdefined(var_1.owner) && isdefined(var_1.owner.team) && var_1.owner.team == var_0.team)
-  return 1;
+    if(isdefined(var_1.owner) && isdefined(var_1.owner.team) && var_1.owner.team == var_0.team)
+      return 1;
   }
 
   return 0;
@@ -338,8 +337,8 @@ default_on_killed(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07
 }
 
 getnumactiveagents(var_00) {
-  if (!isdefined(var_00))
-  var_00 = "all";
+  if(!isdefined(var_00))
+    var_00 = "all";
 
   var_01 = getactiveagentsoftype(var_00);
   return var_1.size;
@@ -348,14 +347,14 @@ getnumactiveagents(var_00) {
 getactiveagentsoftype(var_00) {
   var_01 = [];
 
-  if (!isdefined(level.agentarray))
-  return var_01;
+  if(!isdefined(level.agentarray))
+    return var_01;
 
-  foreach (var_03 in level.agentarray) {
-  if (isdefined(var_3.isactive) && var_3.isactive) {
-  if (var_00 == "all" || var_3.agent_type == var_00)
-  var_1[var_1.size] = var_03;
-  }
+  foreach(var_03 in level.agentarray) {
+    if(isdefined(var_3.isactive) && var_3.isactive) {
+      if(var_00 == "all" || var_3.agent_type == var_00)
+        var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -364,9 +363,9 @@ getactiveagentsoftype(var_00) {
 getaliveagentsofteam(var_00) {
   var_01 = [];
 
-  foreach (var_03 in level.agentarray) {
-  if (isalive(var_03) && isdefined(var_3.team) && var_3.team == var_00)
-  var_1[var_1.size] = var_03;
+  foreach(var_03 in level.agentarray) {
+    if(isalive(var_03) && isdefined(var_3.team) && var_3.team == var_00)
+      var_1[var_1.size] = var_03;
   }
 
   return var_01;
@@ -375,14 +374,14 @@ getaliveagentsofteam(var_00) {
 getactiveagentsofspecies(var_00) {
   var_01 = [];
 
-  if (!isdefined(level.agentarray))
-  return var_01;
+  if(!isdefined(level.agentarray))
+    return var_01;
 
-  foreach (var_03 in level.agentarray) {
-  if (isdefined(var_3.isactive) && var_3.isactive) {
-  if (var_3.species == var_00)
-  var_1[var_1.size] = var_03;
-  }
+  foreach(var_03 in level.agentarray) {
+    if(isdefined(var_3.isactive) && var_3.isactive) {
+      if(var_3.species == var_00)
+        var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -391,9 +390,9 @@ getactiveagentsofspecies(var_00) {
 getaliveagents() {
   var_00 = [];
 
-  foreach (var_02 in level.agentarray) {
-  if (isalive(var_02))
-  var_0[var_0.size] = var_02;
+  foreach(var_02 in level.agentarray) {
+    if(isalive(var_02))
+      var_0[var_0.size] = var_02;
   }
 
   return var_00;
@@ -404,36 +403,36 @@ activateagent() {
 }
 
 on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
-  if (scripts\engine\utility::is_true(self.hasriotshieldequipped)) {
-  scripts\cp\utility::launchshield(var_02, var_03);
+  if(scripts\engine\utility::is_true(self.hasriotshieldequipped)) {
+    scripts\cp\utility::launchshield(var_02, var_03);
 
-  if (!var_09) {
-  var_10 = self dropitem(self getcurrentweapon());
+    if(!var_09) {
+      var_10 = self dropitem(self getcurrentweapon());
 
-  if (isdefined(var_10)) {
-  var_10 thread deletepickupafterawhile();
-  var_10.owner = self;
-  var_10.ownersattacker = var_01;
-  var_10 makeunusable();
+      if(isdefined(var_10)) {
+        var_10 thread deletepickupafterawhile();
+        var_10.owner = self;
+        var_10.ownersattacker = var_01;
+        var_10 makeunusable();
+      }
+    }
   }
-  }
-  }
 
-  if (isdefined(self.nocorpse))
-  return;
-
+  if(isdefined(self.nocorpse)) {
+    return;
+  }
   var_11 = self;
   self.body = self cloneagent(var_08);
 
-  if (should_do_immediate_ragdoll(self))
-  do_immediate_ragdoll(self.body);
+  if(should_do_immediate_ragdoll(self))
+    do_immediate_ragdoll(self.body);
   else
-  thread delaystartragdoll(self.body, var_06, var_05, var_04, var_00, var_03);
+    thread delaystartragdoll(self.body, var_06, var_05, var_04, var_00, var_03);
 
   process_kill_rewards(var_01, var_11, var_06, var_04, var_03);
 
-  if (isdefined(level.update_humanoid_death_challenges))
-  [[level.update_humanoid_death_challenges]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08);
+  if(isdefined(level.update_humanoid_death_challenges))
+    [[level.update_humanoid_death_challenges]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08);
 }
 
 should_do_immediate_ragdoll(var_00) {
@@ -441,57 +440,57 @@ should_do_immediate_ragdoll(var_00) {
 }
 
 do_immediate_ragdoll(var_00) {
-  if (isdefined(var_00))
-  var_00 startragdoll();
+  if(isdefined(var_00))
+    var_00 startragdoll();
 }
 
 delaystartragdoll(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if (isdefined(var_00)) {
-  var_06 = var_00 _meth_8112();
+  if(isdefined(var_00)) {
+    var_06 = var_00 _meth_8112();
 
-  if (animhasnotetrack(var_06, "ignore_ragdoll"))
-  return;
+    if(animhasnotetrack(var_06, "ignore_ragdoll"))
+      return;
   }
 
-  if (isdefined(level.noragdollents) && level.noragdollents.size) {
-  foreach (var_08 in level.noragdollents) {
-  if (distancesquared(var_0.origin, var_8.origin) < 65536)
-  return;
-  }
+  if(isdefined(level.noragdollents) && level.noragdollents.size) {
+    foreach(var_08 in level.noragdollents) {
+      if(distancesquared(var_0.origin, var_8.origin) < 65536)
+        return;
+    }
   }
 
   wait 0.2;
 
-  if (!isdefined(var_00))
-  return;
-
-  if (var_00 _meth_81B7())
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
+  if(var_00 _meth_81B7()) {
+    return;
+  }
   var_06 = var_00 _meth_8112();
   var_10 = 0.35;
 
-  if (animhasnotetrack(var_06, "start_ragdoll")) {
-  var_11 = getnotetracktimes(var_06, "start_ragdoll");
+  if(animhasnotetrack(var_06, "start_ragdoll")) {
+    var_11 = getnotetracktimes(var_06, "start_ragdoll");
 
-  if (isdefined(var_11))
-  var_10 = var_11[0];
+    if(isdefined(var_11))
+      var_10 = var_11[0];
   }
 
   var_12 = var_10 * getanimlength(var_06);
   wait(var_12);
 
-  if (isdefined(var_00))
-  var_00 startragdoll();
+  if(isdefined(var_00))
+    var_00 startragdoll();
 }
 
 deletepickupafterawhile() {
   self endon("death");
   wait 60;
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   self delete();
 }
 
@@ -499,8 +498,8 @@ func_179E(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = func_E08D(var_03);
   var_07 = spawnnewagent(var_06, var_00, var_01, var_02);
 
-  if (isdefined(var_07))
-  var_07 thread [[var_07 speciesfunc("spawn")]](var_01, var_02, var_03, var_04, var_05);
+  if(isdefined(var_07))
+    var_07 thread[[var_07 speciesfunc("spawn")]](var_01, var_02, var_03, var_04, var_05);
 
   return var_07;
 }
@@ -508,10 +507,10 @@ func_179E(var_00, var_01, var_02, var_03, var_04, var_05) {
 func_E08D(var_00) {
   var_01 = strtok(var_00, " ");
 
-  if (isdefined(var_01) && var_1.size == 2)
-  return var_1[1];
+  if(isdefined(var_01) && var_1.size == 2)
+    return var_1[1];
   else
-  return var_00;
+    return var_00;
 }
 
 process_damage_rewards(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
@@ -519,28 +518,28 @@ process_damage_rewards(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
 }
 
 process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
-  if (!scripts\engine\utility::isbulletdamage(var_04)) {
-  if (scripts\cp\utility::is_trap(var_00, var_05))
-  return;
+  if(!scripts\engine\utility::isbulletdamage(var_04)) {
+    if(scripts\cp\utility::is_trap(var_00, var_05)) {
+      return;
+    }
+    var_11 = gettime();
 
-  var_11 = gettime();
-
-  if (isdefined(var_1.nexthittime) && var_1.nexthittime > var_11)
-  return;
-  else
-  var_1.nexthittime = var_11 + 250;
+    if(isdefined(var_1.nexthittime) && var_1.nexthittime > var_11)
+      return;
+    else
+      var_1.nexthittime = var_11 + 250;
   }
 
   var_12 = "standard";
   var_13 = undefined;
 
-  if (var_10.health <= var_02)
-  var_13 = 1;
+  if(var_10.health <= var_02)
+    var_13 = 1;
 
   var_14 = scripts\cp\utility::isheadshot(var_05, var_08, var_04, var_01);
 
-  if (var_14)
-  var_12 = "hitcritical";
+  if(var_14)
+    var_12 = "hitcritical";
 
   var_15 = scripts\engine\utility::isbulletdamage(var_04);
   var_16 = var_14 && var_01 scripts\cp\utility::is_consumable_active("sharp_shooter_upgrade");
@@ -552,34 +551,34 @@ process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, 
   var_22 = var_04 == "MOD_EXPLOSIVE_BULLET" || var_04 == "MOD_EXPLOSIVE" || var_04 == "MOD_GRENADE_SPLASH" || var_04 == "MOD_PROJECTILE" || var_04 == "MOD_PROJECTILE_SPLASH";
   var_23 = var_04 == "MOD_MELEE";
 
-  if (scripts\cp\cp_damage::func_A010(var_05))
-  var_12 = "special_weapon";
-  else if (var_16 || var_17 || var_18 || var_20)
-  var_12 = "card_boosted";
-  else if (issubstr(var_05, "arkyellow") && var_04 == "MOD_EXPLOSIVE_BULLET" && var_08 == "none")
-  var_12 = "yellow_arcane_cp";
-  else if (isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_22)
-  var_12 = "high_damage";
-  else if (isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_23)
-  var_12 = "high_damage";
-  else if (isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15)
-  var_12 = "high_damage";
-  else if (isplayer(var_01) && scripts\engine\utility::is_true(var_1.deadeye_charge) && var_15)
-  var_12 = "dewdrops_cp";
-  else if (scripts\engine\utility::is_true(level.insta_kill))
-  var_12 = "high_damage";
-  else if (var_05 == "incendiary_ammo_mp")
-  var_12 = "red_arcane_cp";
-  else if (var_05 == "stun_ammo_mp")
-  var_12 = "blue_arcane_cp";
-  else if (var_05 == "slayer_ammo_mp")
-  var_12 = "pink_arcane_cp";
+  if(scripts\cp\cp_damage::func_A010(var_05))
+    var_12 = "special_weapon";
+  else if(var_16 || var_17 || var_18 || var_20)
+    var_12 = "card_boosted";
+  else if(issubstr(var_05, "arkyellow") && var_04 == "MOD_EXPLOSIVE_BULLET" && var_08 == "none")
+    var_12 = "yellow_arcane_cp";
+  else if(isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_22)
+    var_12 = "high_damage";
+  else if(isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_23)
+    var_12 = "high_damage";
+  else if(isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15)
+    var_12 = "high_damage";
+  else if(isplayer(var_01) && scripts\engine\utility::is_true(var_1.deadeye_charge) && var_15)
+    var_12 = "dewdrops_cp";
+  else if(scripts\engine\utility::is_true(level.insta_kill))
+    var_12 = "high_damage";
+  else if(var_05 == "incendiary_ammo_mp")
+    var_12 = "red_arcane_cp";
+  else if(var_05 == "stun_ammo_mp")
+    var_12 = "blue_arcane_cp";
+  else if(var_05 == "slayer_ammo_mp")
+    var_12 = "pink_arcane_cp";
 
-  if (isdefined(var_01)) {
-  if (isdefined(var_1.owner))
-  var_1.owner thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
-  else
-  var_01 thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
+  if(isdefined(var_01)) {
+    if(isdefined(var_1.owner))
+      var_1.owner thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
+    else
+      var_01 thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
   }
 }
 
@@ -588,11 +587,11 @@ process_kill_rewards(var_00, var_01, var_02, var_03, var_04) {
   var_05 = get_agent_type(var_01);
   var_06 = scripts\cp\utility::get_attacker_as_player(var_00);
 
-  if (isdefined(var_06)) {
-  scripts\cp\cp_persistence::record_player_kills(var_03, var_02, var_04, var_06);
+  if(isdefined(var_06)) {
+    scripts\cp\cp_persistence::record_player_kills(var_03, var_02, var_04, var_06);
 
-  if (isdefined(level.loot_func) && isdefined(var_05))
-  [[level.loot_func]](var_05, self.origin, var_00);
+    if(isdefined(level.loot_func) && isdefined(var_05))
+      [[level.loot_func]](var_05, self.origin, var_00);
   }
 }
 
@@ -600,8 +599,10 @@ get_alive_enemies() {
   var_00 = getaliveagentsofteam("axis");
   var_01 = [];
 
-  if (isdefined(level.dlc_get_non_agent_enemies))
-  var_01 = [[level.dlc_get_non_agent_enemies]]();
+  if(isdefined(level.dlc_get_non_agent_enemies))
+    var_01 = [
+      [level.dlc_get_non_agent_enemies]
+    ]();
 
   var_00 = scripts\engine\utility::array_combine(var_00, var_01);
   return var_00;
@@ -614,17 +615,17 @@ get_agent_type(var_00) {
 store_attacker_info(var_00, var_01) {
   var_00 = scripts\cp\utility::get_attacker_as_player(var_00);
 
-  if (!isdefined(var_00))
-  return;
-
-  if (!isdefined(self.attacker_damage))
-  self.attacker_damage = [];
-
-  foreach (var_03 in self.attacker_damage) {
-  if (var_3.player == var_00) {
-  var_3.damage = var_3.damage + var_01;
-  return;
+  if(!isdefined(var_00)) {
+    return;
   }
+  if(!isdefined(self.attacker_damage))
+    self.attacker_damage = [];
+
+  foreach(var_03 in self.attacker_damage) {
+    if(var_3.player == var_00) {
+      var_3.damage = var_3.damage + var_01;
+      return;
+    }
   }
 
   var_05 = spawnstruct();
@@ -634,8 +635,8 @@ store_attacker_info(var_00, var_01) {
 }
 
 deactivateagent() {
-  if (scripts\cp\utility::isgameparticipant(self))
-  scripts\cp\utility::removefromparticipantsarray();
+  if(scripts\cp\utility::isgameparticipant(self))
+    scripts\cp\utility::removefromparticipantsarray();
 
   scripts\cp\utility::removefromcharactersarray();
   scripts\cp\utility::removefromspawnedgrouparray();
@@ -651,17 +652,17 @@ deactivateagent() {
   self.stun_hit = undefined;
   self.mutations = undefined;
 
-  foreach (var_01 in level.characters) {
-  if (isdefined(var_1.attackers)) {
-  foreach (var_04, var_03 in var_1.attackers) {
-  if (var_03 == self)
-  var_1.attackers[var_04] = undefined;
-  }
-  }
+  foreach(var_01 in level.characters) {
+    if(isdefined(var_1.attackers)) {
+      foreach(var_04, var_03 in var_1.attackers) {
+        if(var_03 == self)
+          var_1.attackers[var_04] = undefined;
+      }
+    }
   }
 
-  if (isdefined(self.headmodel))
-  self.headmodel = undefined;
+  if(isdefined(self.headmodel))
+    self.headmodel = undefined;
 
   scripts\mp\mp_agent::deactivateagent();
   self notify("disconnect");

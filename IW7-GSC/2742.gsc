@@ -22,8 +22,8 @@ init() {
   level.showingfinalkillcam = 0;
   level.tispawndelay = getdvarint("scr_tispawndelay");
 
-  if (!isdefined(level.func_12AC9))
-  scripts\mp\tweakables::init();
+  if(!isdefined(level.func_12AC9))
+    scripts\mp\tweakables::init();
 
   level.func_8865 = "halftime";
   level.func_AA1E = 0;
@@ -36,17 +36,17 @@ init() {
   level.func_D420 = [];
   func_DEEC();
 
-  if (scripts\mp\utility\game::matchmakinggame()) {
-  var_00 = " LB_MAP_" + getdvar("ui_mapname");
-  var_01 = "";
-  var_02 = "";
-  var_02 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
-  var_01 = " LB_GM_" + level.gametype;
+  if(scripts\mp\utility\game::matchmakinggame()) {
+    var_00 = " LB_MAP_" + getdvar("ui_mapname");
+    var_01 = "";
+    var_02 = "";
+    var_02 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
+    var_01 = " LB_GM_" + level.gametype;
 
-  if (getdvarint("g_hardcore"))
-  var_01 = var_01 + "_HC";
+    if(getdvarint("g_hardcore"))
+      var_01 = var_01 + "_HC";
 
-  precacheleaderboards(var_02 + var_01 + var_00);
+    precacheleaderboards(var_02 + var_01 + var_00);
   }
 
   level.teamcount["allies"] = 0;
@@ -68,12 +68,12 @@ endmatchonhostdisconnect() {
   level endon("game_ended");
 
   for (;;) {
-  level waittill("connected", var_00);
+    level waittill("connected", var_00);
 
-  if (var_00 ishost()) {
-  var_01 = var_00;
-  break;
-  }
+    if(var_00 ishost()) {
+      var_01 = var_00;
+      break;
+    }
   }
 
   var_01 waittill("disconnect");
@@ -82,20 +82,20 @@ endmatchonhostdisconnect() {
 
 func_9694(var_00) {
   for (var_01 = 0; var_01 < var_00; var_1++) {
-  var_02 = "team_" + var_01;
-  level.placement[var_02] = [];
-  level.teamcount[var_02] = 0;
-  level.alivecount[var_02] = 0;
-  level.livescount[var_02] = 0;
-  level.hasspawned[var_02] = 0;
+    var_02 = "team_" + var_01;
+    level.placement[var_02] = [];
+    level.teamcount[var_02] = 0;
+    level.alivecount[var_02] = 0;
+    level.livescount[var_02] = 0;
+    level.hasspawned[var_02] = 0;
   }
 }
 
 func_DEEC() {
   setomnvar("ui_bomb_timer", 0);
 
-  if (getdvar("r_reflectionProbeGenerate") != "1")
-  setomnvar("ui_nuke_end_milliseconds", 0);
+  if(getdvar("r_reflectionProbeGenerate") != "1")
+    setomnvar("ui_nuke_end_milliseconds", 0);
 
   setdvar("ui_danger_team", "");
   setdvar("ui_inhostmigration", 0);
@@ -150,18 +150,18 @@ func_11757() {
   self endon("disconnect");
 
   for (;;) {
-  wait 3.0;
-  var_00 = randomint(6);
+    wait 3.0;
+    var_00 = randomint(6);
 
-  for (var_01 = 0; var_01 < var_00; var_1++) {
-  iprintlnbold(var_00);
-  self shellshock("frag_grenade_mp", 0.2);
-  wait 0.1;
-  }
+    for (var_01 = 0; var_01 < var_00; var_1++) {
+      iprintlnbold(var_00);
+      self shellshock("frag_grenade_mp", 0.2);
+      wait 0.1;
+    }
   }
 }
 
 debugline(var_00, var_01) {
   for (var_02 = 0; var_02 < 50; var_2++)
-  wait 0.05;
+    wait 0.05;
 }

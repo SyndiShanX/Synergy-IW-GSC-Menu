@@ -35,11 +35,11 @@ main(var_00, var_01, var_02) {
   precachemodel("veh_mil_air_ca_olympus_mons_engines");
   precachemodel("vfx_ftl_mons");
 
-  if (issubstr(var_02, "periph")) {
-  precacheitem("cap_turret_proj_small_constant");
-  precacheturret("cap_turret_cannon_large_ca");
-  precacheturret("cap_turret_cannon_large_ca_zerog");
-  return;
+  if(issubstr(var_02, "periph")) {
+    precacheitem("cap_turret_proj_small_constant");
+    precacheturret("cap_turret_cannon_large_ca");
+    precacheturret("cap_turret_cannon_large_ca_zerog");
+    return;
   }
 
   precachemodel("veh_mil_air_ca_olympus_mons_gun_rig");
@@ -53,11 +53,11 @@ main(var_00, var_01, var_02) {
   precacheturret("cap_turret_cannon_large_ca_zerog");
   precachemodel("veh_mil_air_ca_olympus_mons_gun_rig");
 
-  if (issubstr(var_02, "_damaged"))
-  precachemodel("veh_mil_air_ca_olympus_mons_dmg");
+  if(issubstr(var_02, "_damaged"))
+    precachemodel("veh_mil_air_ca_olympus_mons_dmg");
 
-  if (issubstr(var_02, "_heistspace_end"))
-  precachemodel("veh_mil_air_ca_olympus_mons_heist_space");
+  if(issubstr(var_02, "_heistspace_end"))
+    precachemodel("veh_mil_air_ca_olympus_mons_heist_space");
 
   func_0BB6::func_12A89();
   scripts\sp\vehicle_build::func_31C6(var_02, "default", "vfx\iw7\core\tread\tread_airship_mons_titan.vfx", 0);
@@ -73,11 +73,11 @@ main(var_00, var_01, var_02) {
 }
 
 init_location() {
-  if (issubstr(self.classname, "_damaged"))
-  self.func_B210 = "veh_mil_air_ca_olympus_mons_dmg";
+  if(issubstr(self.classname, "_damaged"))
+    self.func_B210 = "veh_mil_air_ca_olympus_mons_dmg";
 
-  if (issubstr(self.classname, "_heistspace_end"))
-  self.func_B210 = "veh_mil_air_ca_olympus_mons_heist_space";
+  if(issubstr(self.classname, "_heistspace_end"))
+    self.func_B210 = "veh_mil_air_ca_olympus_mons_heist_space";
 
   self.func_24C4 = ["tag_origin", "amb_turret_r_6", "amb_turret_sml_r_1", "amb_turret_l_5", "amb_turret_sml_r_6", "amb_turret_l_1", "amb_turret_sml_r_16", "amb_turret_sml_l_14", "fx_light_main_a_1", "fx_light_running_lrg_b3_4", "fx_light_running_lrg_b3_2", "amb_missile_l_4", "amb_missile_r_16", "amb_missile_r_25", "fx_entryburn_1"];
   thread func_0BA9::func_396E("ca");
@@ -104,16 +104,16 @@ init_location() {
   func_0BB8::func_7561("thrust_vert", "tag_engine_bottom_rear", "mons_thrust_bottom_rear", self.func_5020);
   func_0BB8::func_7561("thrust_rear", "tag_engine_rear", "mons_thrust_rear", self.func_501F);
 
-  if (self.classname != "script_vehicle_capitalship_mons_heistspace") {
-  self.func_539B = ["veh_mil_air_ca_olympus_mons_engines", "veh_mil_air_ca_olympus_mons_details", "veh_mil_air_ca_olympus_mons_details_scr"];
-  self.func_539A = "veh_mil_air_ca_olympus_mons_interior_01";
+  if(self.classname != "script_vehicle_capitalship_mons_heistspace") {
+    self.func_539B = ["veh_mil_air_ca_olympus_mons_engines", "veh_mil_air_ca_olympus_mons_details", "veh_mil_air_ca_olympus_mons_details_scr"];
+    self.func_539A = "veh_mil_air_ca_olympus_mons_interior_01";
   }
 
   thread func_7479();
 
-  if (issubstr(self.classname, "periph"))
-  return;
-
+  if(issubstr(self.classname, "periph")) {
+    return;
+  }
   self.func_129C4 = func_129C4();
   self.func_12A08 = func_12A08();
   self.func_7482 = "mons_ca_warp";
@@ -122,15 +122,15 @@ init_location() {
   self.func_7499 = "mons_ca_warp_in";
   self.func_749A = 0.195;
 
-  if (self.classname != "script_vehicle_capitalship_mons_heistspace" && self.classname != "script_vehicle_capitalship_mons_damaged")
-  thread func_245B();
+  if(self.classname != "script_vehicle_capitalship_mons_heistspace" && self.classname != "script_vehicle_capitalship_mons_damaged")
+    thread func_245B();
 }
 
 func_7479() {
   wait 0.5;
 
-  if (isdefined(self.delay_warp_core))
-  self waittill(self.delay_warp_core);
+  if(isdefined(self.delay_warp_core))
+    self waittill(self.delay_warp_core);
 
   self.func_7479 = 1;
   playfxontag(level._effect["vfx_vehicle_mons_warp_out_ftldrive_core"], self, "TAG_ORIGIN");
@@ -162,10 +162,10 @@ func_245B() {
   wait 0.1;
   var_00 = "veh_mil_air_ca_olympus_mons_bridge";
 
-  if (isdefined(self.script_label) && self.script_label == "damaged") {
-  self.func_2FEC = 1;
-  var_00 = "veh_mil_air_ca_olympus_mons_bridge_dmg";
-  stopfxontag(level._effect["light_red_small"], self, "fx_light_running_lrg_b3_1");
+  if(isdefined(self.script_label) && self.script_label == "damaged") {
+    self.func_2FEC = 1;
+    var_00 = "veh_mil_air_ca_olympus_mons_bridge_dmg";
+    stopfxontag(level._effect["light_red_small"], self, "fx_light_running_lrg_b3_1");
   }
 
   self attach(var_00, "TAG_ORIGIN");
@@ -176,16 +176,16 @@ func_245B() {
 func_1EDC() {
   level.func_EC87["ftl_model"] = #animtree;
   level.func_EC8C["ftl_model"] = "vfx_ftl_mons";
-  level.func_EC85["ftl_model"]["ftl_in"] = %vfx_ftl_mons_in;
-  level.func_EC85["ftl_model"]["ftl_out"] = %vfx_ftl_mons_out;
+  level.func_EC85["ftl_model"]["ftl_in"] = % vfx_ftl_mons_in;
+  level.func_EC85["ftl_model"]["ftl_out"] = % vfx_ftl_mons_out;
 }
 
 func_10770() {
   self endon("death");
 
-  if (isdefined(self.cannon))
-  return;
-
+  if(isdefined(self.cannon)) {
+    return;
+  }
   var_00 = 0.5;
   self hidepart("tag_main_cannon_hood");
   self.cannon = spawnturret("misc_turret", self gettagorigin("tag_main_cannon"), "cap_turret_cannon_large_ca");
@@ -202,16 +202,16 @@ func_10770() {
   self.cannon setrightarc(180);
   self.cannon settoparc(80);
   self.cannon give_crafted_gascan(0);
-  self give_attacker_kill_rewards(%veh_mil_air_ca_mons_main_cannon_open);
-  wait(getanimlength(%veh_mil_air_ca_mons_main_cannon_open) * var_00);
+  self give_attacker_kill_rewards( % veh_mil_air_ca_mons_main_cannon_open);
+  wait(getanimlength( % veh_mil_air_ca_mons_main_cannon_open) * var_00);
 }
 
 func_E058() {
   self endon("death");
 
-  if (!isdefined(self.cannon))
-  return;
-
+  if(!isdefined(self.cannon)) {
+    return;
+  }
   var_00 = 1;
   level notify("removing_mons_cannon");
   var_01 = self gettagorigin("tag_main_cannon");
@@ -220,18 +220,18 @@ func_E058() {
   var_04 = spawn("script_origin", var_03);
   var_04 linkto(self);
   self.cannon _meth_8535(0);
-  self aiclearanim(%veh_mil_air_ca_mons_main_cannon_open, 0);
-  self give_attacker_kill_rewards(%veh_mil_air_ca_mons_main_cannon_close);
-  wait(getanimlength(%veh_mil_air_ca_mons_main_cannon_close));
+  self aiclearanim( % veh_mil_air_ca_mons_main_cannon_open, 0);
+  self give_attacker_kill_rewards( % veh_mil_air_ca_mons_main_cannon_close);
+  wait(getanimlength( % veh_mil_air_ca_mons_main_cannon_close));
   self giveperk("tag_main_cannon_hood");
   self.cannon delete();
   var_04 delete();
 }
 
 func_5171() {
-  if (!isdefined(self.cannon))
-  return;
-
+  if(!isdefined(self.cannon)) {
+    return;
+  }
   self.cannon delete();
 }
 
@@ -261,30 +261,30 @@ func_BA6A(var_00, var_01, var_02) {
   level endon("mons_cannon_targeting");
   level endon("removing_mons_cannon");
 
-  if (!isdefined(var_02))
-  var_02 = 1;
+  if(!isdefined(var_02))
+    var_02 = 1;
 
   var_03 = "tag_fx";
 
-  if (!isdefined(self.func_38D7)) {
-  self.func_38D7 = spawn("script_origin", self.cannon gettagorigin(var_03));
-  self.func_38D7 linkto(self.cannon, "tag_fx");
-  self.func_38D7 thread func_B2DF();
-  self.func_38D7 thread func_BA6B();
+  if(!isdefined(self.func_38D7)) {
+    self.func_38D7 = spawn("script_origin", self.cannon gettagorigin(var_03));
+    self.func_38D7 linkto(self.cannon, "tag_fx");
+    self.func_38D7 thread func_B2DF();
+    self.func_38D7 thread func_BA6B();
   }
 
-  if (var_00 > 0) {
-  var_04 = gettime();
-  var_05 = var_04 + var_00 * 1000;
-  playfxontag(level._effect["vfx_heist_mons_steeldragon_chargeup"], self.cannon, var_03);
+  if(var_00 > 0) {
+    var_04 = gettime();
+    var_05 = var_04 + var_00 * 1000;
+    playfxontag(level._effect["vfx_heist_mons_steeldragon_chargeup"], self.cannon, var_03);
 
-  while (gettime() < var_05) {
-  earthquake(0.1, 0.05, self.origin, 150000);
-  wait 0.05;
-  }
+    while (gettime() < var_05) {
+      earthquake(0.1, 0.05, self.origin, 150000);
+      wait 0.05;
+    }
 
-  self.func_38D7 notify("chargeup_over");
-  stopfxontag(level._effect["vfx_heist_mons_steeldragon_chargeup"], self.cannon, var_03);
+    self.func_38D7 notify("chargeup_over");
+    stopfxontag(level._effect["vfx_heist_mons_steeldragon_chargeup"], self.cannon, var_03);
   }
 
   playfxontag(level._effect["vfx_heist_mons_steeldragon_loop"], self.cannon, var_03);
@@ -292,24 +292,24 @@ func_BA6A(var_00, var_01, var_02) {
   var_01 = var_04 + var_01 * 1000;
 
   while (gettime() < var_01) {
-  if (var_02)
-  var_06 = self.cannon getturrettarget(0).origin;
-  else
-  var_06 = self.cannon.func_11512.origin;
+    if(var_02)
+      var_06 = self.cannon getturrettarget(0).origin;
+    else
+      var_06 = self.cannon.func_11512.origin;
 
-  var_07 = self.cannon gettagorigin(var_03);
-  var_08 = self.cannon gettagangles(var_03);
-  playfxbetweenpoints(level._effect["vfx_heist_mons_steeldragon_beam"], var_07, var_08, var_06);
-  earthquake(0.3, 0.1, self.origin, 150000);
-  wait 0.1;
+    var_07 = self.cannon gettagorigin(var_03);
+    var_08 = self.cannon gettagangles(var_03);
+    playfxbetweenpoints(level._effect["vfx_heist_mons_steeldragon_beam"], var_07, var_08, var_06);
+    earthquake(0.3, 0.1, self.origin, 150000);
+    wait 0.1;
   }
 
   stopfxontag(level._effect["vfx_heist_mons_steeldragon_loop"], self.cannon, var_03);
   level notify("mons_cannon_fired");
 
-  if (var_02) {
-  self.cannon cleartargetentity();
-  self.cannon _meth_8535(1);
+  if(var_02) {
+    self.cannon cleartargetentity();
+    self.cannon _meth_8535(1);
   }
 }
 

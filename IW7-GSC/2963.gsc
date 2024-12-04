@@ -4,12 +4,12 @@
 ***************************************/
 
 func_979A() {
-  if (isdefined(level.func_5619) && level.func_5619)
-  return;
-
-  if (!scripts\engine\utility::add_init_script("vehicles", ::func_979A))
-  return;
-
+  if(isdefined(level.func_5619) && level.func_5619) {
+    return;
+  }
+  if(!scripts\engine\utility::add_init_script("vehicles", ::func_979A)) {
+    return;
+  }
   thread func_979B();
   scripts\sp\utility::func_D6D9(::func_40D9);
 }
@@ -28,9 +28,9 @@ func_979B() {
   var_00 = scripts\sp\vehicle_code::func_D808();
   scripts\sp\vehicle_code::func_FA7A(var_00);
   level.vehicle.func_8BBA = getentarray("script_vehicle", "code_classname").size > 0;
-  scripts\sp\utility::func_16EB("invulerable_frags", &"SCRIPT_INVULERABLE_FRAGS", undefined);
-  scripts\sp\utility::func_16EB("invulerable_bullets", &"SCRIPT_INVULERABLE_BULLETS", undefined);
-  scripts\sp\utility::func_16EB("c12_bullets", &"SCRIPT_C12_BULLETS");
+  scripts\sp\utility::func_16EB("invulerable_frags", & "SCRIPT_INVULERABLE_FRAGS", undefined);
+  scripts\sp\utility::func_16EB("invulerable_bullets", & "SCRIPT_INVULERABLE_BULLETS", undefined);
+  scripts\sp\utility::func_16EB("c12_bullets", & "SCRIPT_C12_BULLETS");
 }
 
 func_1321A(var_00, var_01, var_02) {
@@ -97,7 +97,7 @@ func_1080D(var_00) {
 func_1080F(var_00) {
   var_01 = func_1080E(var_00);
 
-  foreach (var_03 in var_01)
+  foreach(var_03 in var_01)
   thread scripts\sp\vehicle_paths::setsuit(var_03);
 
   return var_01;
@@ -120,8 +120,8 @@ func_9BC7() {
 }
 
 func_1320F(var_00, var_01, var_02) {
-  if (!isarray(var_00))
-  var_00 = [var_00];
+  if(!isarray(var_00))
+    var_00 = [var_00];
 
   scripts\sp\vehicle_aianim::func_ADA7(var_00, undefined, var_02);
 }
@@ -129,9 +129,9 @@ func_1320F(var_00, var_01, var_02) {
 func_1080B() {
   var_00 = scripts\sp\utility::func_10808();
 
-  if (isdefined(self.script_speed)) {
-  if (!func_9E2C())
-  var_00 _meth_83F4(self.script_speed);
+  if(isdefined(self.script_speed)) {
+    if(!func_9E2C())
+      var_00 _meth_83F4(self.script_speed);
   }
 
   thread scripts\sp\vehicle_paths::setsuit(var_00);
@@ -141,9 +141,9 @@ func_1080B() {
 func_2470(var_00) {
   self vehicle_teleport(var_0.origin, var_0.angles);
 
-  if (!func_9E2C()) {
-  scripts\engine\utility::waitframe();
-  self attachpath(var_00);
+  if(!func_9E2C()) {
+    scripts\engine\utility::waitframe();
+    self attachpath(var_00);
   }
 
   thread func_1321A(var_00, 1);
@@ -153,8 +153,8 @@ func_2471(var_00) {
   self vehicle_teleport(var_0.origin, var_0.angles);
   scripts\engine\utility::waitframe();
 
-  if (!func_9E2C())
-  self attachpath(var_00);
+  if(!func_9E2C())
+    self attachpath(var_00);
 
   thread func_1321A(var_00);
   scripts\sp\vehicle_paths::setsuit(self);
@@ -164,19 +164,19 @@ func_131DF(var_00) {
   var_01 = [];
   var_02 = self.classname;
 
-  if (!isdefined(level.vehicle.func_116CE.func_12BCF[var_02]))
-  return var_01;
+  if(!isdefined(level.vehicle.func_116CE.func_12BCF[var_02]))
+    return var_01;
 
   var_03 = level.vehicle.func_116CE.func_12BCF[var_02];
 
-  if (!isdefined(var_00))
-  return var_01;
+  if(!isdefined(var_00))
+    return var_01;
 
-  foreach (var_05 in self.func_E4FB) {
-  foreach (var_07 in var_3[var_00]) {
-  if (var_5.func_1321D == var_07)
-  var_1[var_1.size] = var_05;
-  }
+  foreach(var_05 in self.func_E4FB) {
+    foreach(var_07 in var_3[var_00]) {
+      if(var_5.func_1321D == var_07)
+        var_1[var_1.size] = var_05;
+    }
   }
 
   return var_01;
@@ -195,36 +195,36 @@ func_131DD() {
   var_00 = [];
   var_01 = self.func_247E;
 
-  if (!isdefined(self.func_247E))
-  return var_00;
+  if(!isdefined(self.func_247E))
+    return var_00;
 
   var_02 = var_01;
   var_2.func_46B3 = 0;
 
   while (isdefined(var_02)) {
-  if (isdefined(var_2.func_46B3) && var_2.func_46B3 == 1)
-  break;
+    if(isdefined(var_2.func_46B3) && var_2.func_46B3 == 1) {
+      break;
+    }
+    var_00 = scripts\engine\utility::array_add(var_00, var_02);
+    var_2.func_46B3 = 1;
 
-  var_00 = scripts\engine\utility::array_add(var_00, var_02);
-  var_2.func_46B3 = 1;
+    if(!isdefined(var_2.target)) {
+      break;
+    }
+    if(!func_9E2C()) {
+      var_02 = getvehiclenode(var_2.target, "targetname");
+      continue;
+    }
 
-  if (!isdefined(var_2.target))
-  break;
-
-  if (!func_9E2C()) {
-  var_02 = getvehiclenode(var_2.target, "targetname");
-  continue;
-  }
-
-  var_02 = scripts\sp\utility::func_7E96(var_2.target, "targetname");
+    var_02 = scripts\sp\utility::func_7E96(var_2.target, "targetname");
   }
 
   return var_00;
 }
 
 func_1320C(var_00, var_01) {
-  if (!isdefined(var_00))
-  var_00 = "all";
+  if(!isdefined(var_00))
+    var_00 = "all";
 
   scripts\sp\vehicle_lights::lights_on(var_00, var_01);
 }
@@ -256,8 +256,8 @@ func_9D34() {
 }
 
 func_3182(var_00) {
-  if (!isdefined(level.vehicle.func_116CE.func_4E12))
-  level.vehicle.func_116CE.func_4E12 = [];
+  if(!isdefined(level.vehicle.func_116CE.func_4E12))
+    level.vehicle.func_116CE.func_4E12 = [];
 
   var_01 = spawnstruct();
   var_1.delay = var_00;

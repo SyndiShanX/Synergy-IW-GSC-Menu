@@ -4,11 +4,11 @@
 ***************************************/
 
 init() {
-  if (!isdefined(level.planes))
-  level.planes = [];
+  if(!isdefined(level.planes))
+    level.planes = [];
 
-  if (!isdefined(level.planeconfigs))
-  level.planeconfigs = [];
+  if(!isdefined(level.planeconfigs))
+    level.planeconfigs = [];
 
   level.fighter_deathfx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   level.fx_airstrike_afterburner = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
@@ -21,9 +21,9 @@ getflightpath(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   var_08 = var_00 + var_01 * (-1 * var_02);
   var_09 = var_00 + var_01 * var_02;
 
-  if (var_03) {
-  var_08 = var_08 * (1, 1, 0);
-  var_09 = var_09 * (1, 1, 0);
+  if(var_03) {
+    var_08 = var_08 * (1, 1, 0);
+    var_09 = var_09 * (1, 1, 0);
   }
 
   var_08 = var_08 + (0, 0, var_04);
@@ -49,9 +49,9 @@ doflyby(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) 
 }
 
 planespawn(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_01))
-  return;
-
+  if(!isdefined(var_01)) {
+    return;
+  }
   var_05 = 100;
   var_06 = var_02 + ((randomfloat(2) - 1) * var_05, (randomfloat(2) - 1) * var_05, 0);
   var_07 = level.planeconfigs[var_04];
@@ -65,15 +65,15 @@ planespawn(var_00, var_01, var_02, var_03, var_04) {
   var_8.owner = var_01;
   var_08 setmodel(var_7.func_B923[var_1.team]);
 
-  if (isdefined(var_7.compassiconfriendly))
-  var_08 setobjectiveicons(var_7.compassiconfriendly, var_7.compassiconenemy);
+  if(isdefined(var_7.compassiconfriendly))
+    var_08 setobjectiveicons(var_7.compassiconfriendly, var_7.compassiconenemy);
 
   var_08 thread handledamage();
   var_08 thread handledeath();
   starttrackingplane(var_08);
 
-  if (!isdefined(var_7.nolightfx))
-  var_08 thread playplanefx();
+  if(!isdefined(var_7.nolightfx))
+    var_08 thread playplanefx();
 
   var_08 playloopsound(var_7.inboundsfx);
   var_08 createkillcam(var_04);
@@ -84,21 +84,21 @@ planemove(var_00, var_01, var_02, var_03) {
   var_04 = level.planeconfigs[var_03];
   self moveto(var_00, var_01, 0, 0);
 
-  if (isdefined(var_4.onattackdelegate))
-  self thread [[var_4.onattackdelegate]](var_00, var_01, var_02, self.owner, var_03);
+  if(isdefined(var_4.onattackdelegate))
+    self thread[[var_4.onattackdelegate]](var_00, var_01, var_02, self.owner, var_03);
 
-  if (isdefined(var_4.sonicboomsfx))
-  thread playsonicboom(var_4.sonicboomsfx, 0.5 * var_01);
+  if(isdefined(var_4.sonicboomsfx))
+    thread playsonicboom(var_4.sonicboomsfx, 0.5 * var_01);
 
   wait(0.65 * var_01);
 
-  if (isdefined(var_4.outboundsfx)) {
-  self stoploopsound();
-  self playloopsound(var_4.outboundsfx);
+  if(isdefined(var_4.outboundsfx)) {
+    self stoploopsound();
+    self playloopsound(var_4.outboundsfx);
   }
 
-  if (isdefined(var_4.outboundflightanim))
-  self scriptmodelplayanimdeltamotion(var_4.outboundflightanim);
+  if(isdefined(var_4.outboundflightanim))
+    self scriptmodelplayanimdeltamotion(var_4.outboundflightanim);
 
   wait(0.35 * var_01);
 }
@@ -106,16 +106,16 @@ planemove(var_00, var_01, var_02, var_03) {
 planecleanup() {
   var_00 = level.planeconfigs[self.streakname];
 
-  if (isdefined(var_0.onflybycompletedelegate))
-  thread [[var_0.onflybycompletedelegate]](self.owner, self, self.streakname);
+  if(isdefined(var_0.onflybycompletedelegate))
+    thread[[var_0.onflybycompletedelegate]](self.owner, self, self.streakname);
 
-  if (isdefined(self.friendlyteamid)) {
-  scripts\mp\objidpoolmanager::returnminimapid(self.friendlyteamid);
-  scripts\mp\objidpoolmanager::returnminimapid(self.enemyteamid);
+  if(isdefined(self.friendlyteamid)) {
+    scripts\mp\objidpoolmanager::returnminimapid(self.friendlyteamid);
+    scripts\mp\objidpoolmanager::returnminimapid(self.enemyteamid);
   }
 
-  if (isdefined(self.killcament))
-  self.killcament delete();
+  if(isdefined(self.killcament))
+    self.killcament delete();
 
   stoptrackingplane(self);
   self notify("delete");
@@ -126,12 +126,12 @@ handleemp(var_00) {
   self endon("death");
 
   for (;;) {
-  if (var_00 scripts\mp\killstreaks\emp_common::isemped()) {
-  self notify("death");
-  return;
-  }
+    if(var_00 scripts\mp\killstreaks\emp_common::isemped()) {
+      self notify("death");
+      return;
+    }
 
-  level waittill("emp_update");
+    level waittill("emp_update");
   }
 }
 
@@ -181,16 +181,15 @@ playplanefx() {
 _meth_806A() {
   var_00 = getent("airstrikeheight", "targetname");
 
-  if (isdefined(var_00))
-  return var_0.origin[2];
-  else
-  {
-  var_01 = 950;
+  if(isdefined(var_00))
+    return var_0.origin[2];
+  else {
+    var_01 = 950;
 
-  if (isdefined(level.airstrikeheightscale))
-  var_01 = var_01 * level.airstrikeheightscale;
+    if(isdefined(level.airstrikeheightscale))
+      var_01 = var_01 * level.airstrikeheightscale;
 
-  return var_01;
+    return var_01;
   }
 }
 
@@ -199,17 +198,17 @@ _meth_8069(var_00) {
   var_1.height = _meth_806A();
   var_02 = getent("airstrikeheight", "targetname");
 
-  if (isdefined(var_02) && isdefined(var_2.script_noteworthy) && var_2.script_noteworthy == "fixedposition") {
-  var_1.targetpos = var_2.origin;
-  var_1.func_6F25 = anglestoforward(var_2.angles);
+  if(isdefined(var_02) && isdefined(var_2.script_noteworthy) && var_2.script_noteworthy == "fixedposition") {
+    var_1.targetpos = var_2.origin;
+    var_1.func_6F25 = anglestoforward(var_2.angles);
 
-  if (randomint(2) == 0)
-  var_1.func_6F25 = var_1.func_6F25 * -1;
+    if(randomint(2) == 0)
+      var_1.func_6F25 = var_1.func_6F25 * -1;
   } else {
-  var_03 = anglestoforward(self.angles);
-  var_04 = anglestoright(self.angles);
-  var_1.targetpos = self.origin + var_00 * var_03;
-  var_1.func_6F25 = -1 * var_04;
+    var_03 = anglestoforward(self.angles);
+    var_04 = anglestoright(self.angles);
+    var_1.targetpos = self.origin + var_00 * var_03;
+    var_1.func_6F25 = -1 * var_04;
   }
 
   return var_01;
@@ -236,62 +235,62 @@ stoptrackingplane(var_00) {
 selectairstrikelocation(var_00, var_01, var_02) {
   var_03 = level.mapsize / 6.46875;
 
-  if (level.splitscreen)
-  var_03 = var_03 * 1.5;
+  if(level.splitscreen)
+    var_03 = var_03 * 1.5;
 
   var_04 = level.planeconfigs[var_01];
 
-  if (isdefined(var_4.selectlocationvo))
-  self playlocalsound(game["voice"][self.team] + var_4.selectlocationvo);
+  if(isdefined(var_4.selectlocationvo))
+    self playlocalsound(game["voice"][self.team] + var_4.selectlocationvo);
 
   scripts\mp\utility\game::_beginlocationselection(var_01, "map_artillery_selector", var_4.choosedirection, var_03);
   self endon("stop_location_selection");
   self waittill("confirm_location", var_05, var_06);
 
-  if (!var_4.choosedirection)
-  var_06 = randomint(360);
+  if(!var_4.choosedirection)
+    var_06 = randomint(360);
 
   self setblurforplayer(0, 0.3);
 
-  if (isdefined(var_4.inboundvo))
-  self playlocalsound(game["voice"][self.team] + var_4.inboundvo);
+  if(isdefined(var_4.inboundvo))
+    self playlocalsound(game["voice"][self.team] + var_4.inboundvo);
 
-  self thread [[var_02]](var_00, var_05, var_06, var_01);
+  self thread[[var_02]](var_00, var_05, var_06, var_01);
   return 1;
 }
 
 setobjectiveicons(var_00, var_01) {
   var_02 = scripts\mp\objidpoolmanager::requestminimapid(1);
 
-  if (var_02 != -1) {
-  scripts\mp\objidpoolmanager::minimap_objective_add(var_02, "active", (0, 0, 0), var_00);
-  scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_02, self);
+  if(var_02 != -1) {
+    scripts\mp\objidpoolmanager::minimap_objective_add(var_02, "active", (0, 0, 0), var_00);
+    scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_02, self);
   }
 
   self.friendlyteamid = var_02;
   var_03 = scripts\mp\objidpoolmanager::requestminimapid(1);
 
-  if (var_03 != -1) {
-  scripts\mp\objidpoolmanager::minimap_objective_add(var_03, "active", (0, 0, 0), var_01);
-  scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_03, self);
+  if(var_03 != -1) {
+    scripts\mp\objidpoolmanager::minimap_objective_add(var_03, "active", (0, 0, 0), var_01);
+    scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_03, self);
   }
 
   self.enemyteamid = var_03;
 
-  if (level.teambased) {
-  if (var_02 != -1)
-  scripts\mp\objidpoolmanager::minimap_objective_team(var_02, self.team);
+  if(level.teambased) {
+    if(var_02 != -1)
+      scripts\mp\objidpoolmanager::minimap_objective_team(var_02, self.team);
 
-  if (var_03 != -1)
-  scripts\mp\objidpoolmanager::minimap_objective_team(var_03, scripts\mp\utility\game::getotherteam(self.team));
+    if(var_03 != -1)
+      scripts\mp\objidpoolmanager::minimap_objective_team(var_03, scripts\mp\utility\game::getotherteam(self.team));
   } else {
-  var_04 = self.owner getentitynumber();
+    var_04 = self.owner getentitynumber();
 
-  if (var_02 != -1)
-  scripts\mp\objidpoolmanager::minimap_objective_playerteam(var_02, var_04);
+    if(var_02 != -1)
+      scripts\mp\objidpoolmanager::minimap_objective_playerteam(var_02, var_04);
 
-  if (var_03 != -1)
-  scripts\mp\objidpoolmanager::minimap_objective_playerenemyteam(var_03, var_04);
+    if(var_03 != -1)
+      scripts\mp\objidpoolmanager::minimap_objective_playerenemyteam(var_03, var_04);
   }
 }
 
@@ -304,12 +303,12 @@ playsonicboom(var_00, var_01) {
 createkillcam(var_00) {
   var_01 = level.planeconfigs[var_00];
 
-  if (isdefined(var_1.killcamoffset)) {
-  var_02 = anglestoforward(self.angles);
-  var_03 = spawn("script_model", self.origin + (0, 0, 100) - var_02 * 200);
-  var_3.starttime = gettime();
-  var_03 setscriptmoverkillcam("airstrike");
-  var_03 linkto(self, "tag_origin", var_1.killcamoffset, (0, 0, 0));
-  self.killcament = var_03;
+  if(isdefined(var_1.killcamoffset)) {
+    var_02 = anglestoforward(self.angles);
+    var_03 = spawn("script_model", self.origin + (0, 0, 100) - var_02 * 200);
+    var_3.starttime = gettime();
+    var_03 setscriptmoverkillcam("airstrike");
+    var_03 linkto(self, "tag_origin", var_1.killcamoffset, (0, 0, 0));
+    self.killcament = var_03;
   }
 }

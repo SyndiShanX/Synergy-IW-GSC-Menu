@@ -17,8 +17,8 @@ init() {
 
 onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_00);
-  var_00 thread onplayerspawned();
+    level waittill("connected", var_00);
+    var_00 thread onplayerspawned();
   }
 }
 
@@ -26,9 +26,9 @@ onplayerspawned() {
   self.func_1468 = [];
 
   for (;;) {
-  self waittill("spawned_player");
-  thread func_13D18();
-  thread func_13D11();
+    self waittill("spawned_player");
+    thread func_13D18();
+    thread func_13D11();
   }
 }
 
@@ -39,24 +39,24 @@ func_13D18() {
   var_00 = gettime();
 
   for (;;) {
-  self waittill("bulletwhizby", var_01, var_02);
+    self waittill("bulletwhizby", var_01, var_02);
 
-  if (!scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_01))
-  continue;
-
-  if (gettime() - var_00 > 190 && !scripts\mp\utility\game::isusingremote() && getdvar("scr_whizby_off") == "") {
-  thread func_13D17(var_01);
-  var_00 = gettime();
-  }
+    if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_01)) {
+      continue;
+    }
+    if(gettime() - var_00 > 190 && !scripts\mp\utility\game::isusingremote() && getdvar("scr_whizby_off") == "") {
+      thread func_13D17(var_01);
+      var_00 = gettime();
+    }
   }
 }
 
 func_13D11() {
   scripts\engine\utility::waittill_any("death", "disconnect");
 
-  foreach (var_01 in self.func_1468) {
-  if (isalive(var_01))
-  var_01 delete();
+  foreach(var_01 in self.func_1468) {
+    if(isalive(var_01))
+      var_01 delete();
   }
 }
 
@@ -69,8 +69,8 @@ func_13D17(var_00) {
   var_06 = 2;
   var_07 = var_5[2] - var_4[2];
 
-  if (abs(var_07) > 10)
-  var_06 = var_07 <= 0;
+  if(abs(var_07) > 10)
+    var_06 = var_07 <= 0;
 
   var_08 = 2;
   var_09 = anglestoforward(self.angles);
@@ -80,16 +80,15 @@ func_13D17(var_00) {
   var_11 = (var_11[0], var_11[1], 0);
   var_12 = scripts\engine\utility::anglebetweenvectorssigned(var_10, var_11, (0, 0, 1));
 
-  if (abs(var_12) > 21 || 180.0 - abs(var_12) < 21)
-  var_08 = var_12 > 0;
+  if(abs(var_12) > 21 || 180.0 - abs(var_12) < 21)
+    var_08 = var_12 > 0;
 
   var_13 = func_13D15(var_06, var_08);
 
-  if (!isdefined(self.func_1468[var_13])) {
-  if (isdefined(level._effect[var_13]))
-  self.func_1468[var_13] = spawnfxforclient(level._effect[var_13], self geteye(), self);
-  else
-  {}
+  if(!isdefined(self.func_1468[var_13])) {
+    if(isdefined(level._effect[var_13]))
+      self.func_1468[var_13] = spawnfxforclient(level._effect[var_13], self geteye(), self);
+    else {}
   }
 
   triggerfx(self.func_1468[var_13]);
@@ -100,18 +99,18 @@ func_13D17(var_00) {
 func_13D15(var_00, var_01) {
   var_02 = "whizzby";
 
-  if (var_00 == 0)
-  var_02 = var_02 + "_bottom";
-  else if (var_00 == 1)
-  var_02 = var_02 + "_top";
+  if(var_00 == 0)
+    var_02 = var_02 + "_bottom";
+  else if(var_00 == 1)
+    var_02 = var_02 + "_top";
 
-  if (var_01 == 0)
-  var_02 = var_02 + "_right";
-  else if (var_01 == 1)
-  var_02 = var_02 + "_left";
+  if(var_01 == 0)
+    var_02 = var_02 + "_right";
+  else if(var_01 == 1)
+    var_02 = var_02 + "_left";
 
-  if (var_00 == 2 && var_01 == 2)
-  var_02 = var_02 + "_top";
+  if(var_00 == 2 && var_01 == 2)
+    var_02 = var_02 + "_top";
 
   return var_02;
 }
@@ -119,8 +118,8 @@ func_13D15(var_00, var_01) {
 func_13D12(var_00, var_01) {
   var_02 = var_00;
 
-  if (var_01 == "left")
-  var_02 = var_02 + 90;
+  if(var_01 == "left")
+    var_02 = var_02 + 90;
 
   return var_02;
 }

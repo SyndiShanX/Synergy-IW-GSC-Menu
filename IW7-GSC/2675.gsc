@@ -10,10 +10,10 @@ init() {
   var_0.modelbase = "park_fireworks_trap";
   var_0.modelplacement = "park_fireworks_trap_good";
   var_0.modelplacementfailed = "park_fireworks_trap_bad";
-  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
-  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
-  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.hintstring = & "COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = & "COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_0.lifespan = 120.0;
   var_0.func_DDAC = 2;
   var_0._meth_8487 = 0.4;
@@ -42,19 +42,20 @@ watch_dpad() {
   self notifyonplayercommand("pullout_ims", "+actionslot 3");
 
   for (;;) {
-  self waittill("pullout_ims");
+    self waittill("pullout_ims");
 
-  if (scripts\engine\utility::is_true(self.iscarrying))
-  continue;
-
-  if (scripts\engine\utility::is_true(self.linked_to_coaster))
-  continue;
-
-  if (isdefined(self.allow_carry) && self.allow_carry == 0)
-  continue;
-
-  if (scripts\cp\utility::is_valid_player())
-  break;
+    if(scripts\engine\utility::is_true(self.iscarrying)) {
+      continue;
+    }
+    if(scripts\engine\utility::is_true(self.linked_to_coaster)) {
+      continue;
+    }
+    if(isdefined(self.allow_carry) && self.allow_carry == 0) {
+      continue;
+    }
+    if(scripts\cp\utility::is_valid_player()) {
+      break;
+    }
   }
 
   thread _meth_82CA("crafted_ims");
@@ -82,49 +83,49 @@ func_F684(var_00, var_01, var_02) {
   self notifyonplayercommand("place_ims", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_ims", "+actionslot 3");
 
-  if (!level.console) {
-  self notifyonplayercommand("cancel_ims", "+actionslot 5");
-  self notifyonplayercommand("cancel_ims", "+actionslot 6");
-  self notifyonplayercommand("cancel_ims", "+actionslot 7");
+  if(!level.console) {
+    self notifyonplayercommand("cancel_ims", "+actionslot 5");
+    self notifyonplayercommand("cancel_ims", "+actionslot 6");
+    self notifyonplayercommand("cancel_ims", "+actionslot 7");
   }
 
   for (;;) {
-  var_03 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
+    var_03 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
 
-  if (!isdefined(var_03))
-  var_03 = "force_cancel_placement";
+    if(!isdefined(var_03))
+      var_03 = "force_cancel_placement";
 
-  if (var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart") {
-  if (!var_01 && var_03 == "cancel_ims")
-  continue;
+    if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart") {
+      if(!var_01 && var_03 == "cancel_ims") {
+        continue;
+      }
+      var_00 func_6D9F(var_03 == "force_cancel_placement" && !isdefined(var_0.firstplacement));
 
-  var_00 func_6D9F(var_03 == "force_cancel_placement" && !isdefined(var_0.firstplacement));
+      if(var_03 != "force_cancel_placement")
+        thread watch_dpad();
+      else if(var_01)
+        scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
-  if (var_03 != "force_cancel_placement")
-  thread watch_dpad();
-  else if (var_01)
-  scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      return 0;
+    }
 
-  return 0;
-  }
+    if(!var_0.canbeplaced) {
+      continue;
+    }
+    if(var_01)
+      scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
-  if (!var_0.canbeplaced)
-  continue;
-
-  if (var_01)
-  scripts\cp\utility::remove_crafted_item_from_inventory(self);
-
-  var_00 thread func_6DA2(var_02);
-  self notify("IMS_placed");
-  scripts\engine\utility::allow_weapon(1);
-  return 1;
+    var_00 thread func_6DA2(var_02);
+    self notify("IMS_placed");
+    scripts\engine\utility::allow_weapon(1);
+    return 1;
   }
 }
 
 func_48EB(var_00, var_01) {
-  if (isdefined(var_1.iscarrying) && var_1.iscarrying)
-  return;
-
+  if(isdefined(var_1.iscarrying) && var_1.iscarrying) {
+    return;
+  }
   var_02 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_1.angles;
   var_2.func_6DA4 = var_00;
@@ -159,10 +160,10 @@ func_48EA(var_00, var_01) {
   var_4.config = level.func_6DA3[var_03];
   var_04 thread func_6D9D();
 
-  if (isdefined(var_01))
-  var_04 thread scripts\cp\utility::item_timeout(var_01);
+  if(isdefined(var_01))
+    var_04 thread scripts\cp\utility::item_timeout(var_01);
   else
-  var_04 thread scripts\cp\utility::item_timeout(undefined, level.func_6DA3[self.func_6DA4].lifespan);
+    var_04 thread scripts\cp\utility::item_timeout(undefined, level.func_6DA3[self.func_6DA4].lifespan);
 
   return var_04;
 }
@@ -176,15 +177,15 @@ func_9367(var_00) {
   self endon("carried");
   self waittill("death");
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   func_6DA1();
 
-  if (isdefined(self.inuseby)) {
-  self.inuseby scripts\cp\utility::restore_player_perk();
-  self notify("deleting");
-  wait 1.0;
+  if(isdefined(self.inuseby)) {
+    self.inuseby scripts\cp\utility::restore_player_perk();
+    self notify("deleting");
+    wait 1.0;
   }
 
   func_66A7();
@@ -203,27 +204,27 @@ func_6D9D() {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_00);
+    self waittill("trigger", var_00);
 
-  if (!var_00 scripts\cp\utility::is_valid_player())
-  continue;
+    if(!var_00 scripts\cp\utility::is_valid_player()) {
+      continue;
+    }
+    if(scripts\engine\utility::is_true(var_0.iscarrying)) {
+      continue;
+    }
+    var_01 = func_48EB(self.func_6DA4, var_00);
 
-  if (scripts\engine\utility::is_true(var_0.iscarrying))
-  continue;
+    if(!isdefined(var_01)) {
+      continue;
+    }
+    func_6DA1();
 
-  var_01 = func_48EB(self.func_6DA4, var_00);
+    if(isdefined(self getlinkedparent()))
+      self unlink();
 
-  if (!isdefined(var_01))
-  continue;
-
-  func_6DA1();
-
-  if (isdefined(self getlinkedparent()))
-  self unlink();
-
-  var_00 thread func_F684(var_01, 0, self.lifespan);
-  self delete();
-  break;
+    var_00 thread func_F684(var_01, 0, self.lifespan);
+    self delete();
+    break;
   }
 }
 
@@ -231,13 +232,13 @@ func_6DA2(var_00) {
   self endon("death");
   level endon("game_ended");
 
-  if (isdefined(self.carriedby))
-  self.carriedby getrigindexfromarchetyperef();
+  if(isdefined(self.carriedby))
+    self.carriedby getrigindexfromarchetyperef();
 
   self.carriedby = undefined;
 
-  if (isdefined(self.owner))
-  self.owner.iscarrying = 0;
+  if(isdefined(self.owner))
+    self.owner.iscarrying = 0;
 
   self.firstplacement = undefined;
   var_01 = func_48EA(self, var_00);
@@ -248,8 +249,8 @@ func_6DA2(var_00) {
   var_01 thread func_6D9E();
   var_02 = spawnstruct();
 
-  if (isdefined(self.moving_platform))
-  var_2.linkparent = self.moving_platform;
+  if(isdefined(self.moving_platform))
+    var_2.linkparent = self.moving_platform;
 
   var_2.endonstring = "carried";
   var_2.deathoverridecallback = ::func_936D;
@@ -259,16 +260,16 @@ func_6DA2(var_00) {
 }
 
 func_6D9F(var_00) {
-  if (isdefined(self.carriedby)) {
-  var_01 = self.carriedby;
-  var_01 getrigindexfromarchetyperef();
-  var_1.iscarrying = undefined;
-  var_1.carrieditem = undefined;
-  var_01 scripts\engine\utility::allow_weapon(1);
+  if(isdefined(self.carriedby)) {
+    var_01 = self.carriedby;
+    var_01 getrigindexfromarchetyperef();
+    var_1.iscarrying = undefined;
+    var_1.carrieditem = undefined;
+    var_01 scripts\engine\utility::allow_weapon(1);
   }
 
-  if (isdefined(var_00) && var_00)
-  func_66A7();
+  if(isdefined(var_00) && var_00)
+    func_66A7();
 
   self.carried_fireworks_trap delete();
   self delete();
@@ -285,8 +286,8 @@ func_6DA0(var_00) {
   thread func_936F(var_00);
   thread func_9371(var_00);
 
-  if (isdefined(level.func_5CF2))
-  self thread [[level.func_5CF2]](var_00);
+  if(isdefined(level.func_5CF2))
+    self thread[[level.func_5CF2]](var_00);
 
   self notify("carried");
 }
@@ -326,12 +327,12 @@ func_6D9E() {
   var_06 = var_05;
   self.func_2514 = var_6["position"] - (0, 0, 20) - self.origin;
 
-  if (self.func_2514[2] < 250)
-  self.func_AA7B = "launch_low";
-  else if (self.func_2514[2] < 450)
-  self.func_AA7B = "launch_med";
+  if(self.func_2514[2] < 250)
+    self.func_AA7B = "launch_low";
+  else if(self.func_2514[2] < 450)
+    self.func_AA7B = "launch_med";
   else
-  self.func_AA7B = "launch_high";
+    self.func_AA7B = "launch_high";
 
   var_07 = spawn("trigger_radius", self.origin, 0, 256, 100);
   self.func_2536 = var_07;
@@ -347,12 +348,12 @@ func_6D9E() {
 func_6DA1() {
   self makeunusable();
 
-  if (isdefined(self.func_2536))
-  self.func_2536 delete();
+  if(isdefined(self.func_2536))
+    self.func_2536 delete();
 
-  if (isdefined(self.func_69F6)) {
-  self.func_69F6 delete();
-  self.func_69F6 = undefined;
+  if(isdefined(self.func_69F6)) {
+    self.func_69F6 delete();
+    self.func_69F6 = undefined;
   }
 
   scripts\cp\utility::removefromtraplist();
@@ -363,44 +364,45 @@ func_6D9C() {
   level endon("game_ended");
 
   for (;;) {
-  if (!isdefined(self.func_2536))
-  break;
+    if(!isdefined(self.func_2536)) {
+      break;
+    }
+    self.func_2536 waittill("trigger", var_00);
 
-  self.func_2536 waittill("trigger", var_00);
+    if(isplayer(var_00) || isdefined(var_0.pet) || isdefined(var_0.agent_type) && var_0.agent_type == "the_hoff") {
+      continue;
+    }
+    var_01 = var_0.origin + (0, 0, 50);
 
-  if (isplayer(var_00) || isdefined(var_0.pet) || isdefined(var_0.agent_type) && var_0.agent_type == "the_hoff")
-  continue;
+    if(!sighttracepassed(self.func_2514 + self.origin, var_01, 0, self)) {
+      continue;
+    }
+    if(!isdefined(self.func_2536)) {
+      break;
+    }
+    if(!isdefined(self.func_8BF0[self.func_252E])) {
+      self.func_8BF0[self.func_252E] = 1;
+      thread func_AA75(var_00, self.func_252E);
+      self.func_252E++;
+    }
 
-  var_01 = var_0.origin + (0, 0, 50);
+    if(self.func_252E > self.config.func_C228) {
+      self setscriptablepartstate("firework", "off");
+      break;
+    }
 
-  if (!sighttracepassed(self.func_2514 + self.origin, var_01, 0, self))
-  continue;
+    self waittill("firework_exploded");
+    self setscriptablepartstate("firework", "off");
+    wait(self.config.func_DDAC);
 
-  if (!isdefined(self.func_2536))
-  break;
-
-  if (!isdefined(self.func_8BF0[self.func_252E])) {
-  self.func_8BF0[self.func_252E] = 1;
-  thread func_AA75(var_00, self.func_252E);
-  self.func_252E++;
+    if(!isdefined(self.owner)) {
+      break;
+    }
   }
 
-  if (self.func_252E > self.config.func_C228) {
-  self setscriptablepartstate("firework", "off");
-  break;
+  if(isdefined(self.carriedby) && isdefined(self.owner) && self.carriedby == self.owner) {
+    return;
   }
-
-  self waittill("firework_exploded");
-  self setscriptablepartstate("firework", "off");
-  wait(self.config.func_DDAC);
-
-  if (!isdefined(self.owner))
-  break;
-  }
-
-  if (isdefined(self.carriedby) && isdefined(self.owner) && self.carriedby == self.owner)
-  return;
-
   self notify("death");
 }
 
@@ -417,10 +419,10 @@ func_AA75(var_00, var_01) {
   var_02 setscriptablepartstate("rocket", "explode");
   wait 0.1;
 
-  if (isdefined(var_04))
-  magicbullet(var_03, var_2.origin, var_0.origin, var_04);
+  if(isdefined(var_04))
+    magicbullet(var_03, var_2.origin, var_0.origin, var_04);
   else
-  magicbullet(var_03, var_2.origin, var_0.origin, level.players[0]);
+    magicbullet(var_03, var_2.origin, var_0.origin, level.players[0]);
 
   var_02 delete();
   self notify("firework_exploded");

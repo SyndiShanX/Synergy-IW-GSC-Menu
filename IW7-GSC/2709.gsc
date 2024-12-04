@@ -8,8 +8,8 @@ shouldlogcodcasterclientmatchdata() {
 }
 
 canlogclient(var_00) {
-  if (isagent(var_00))
-  return 0;
+  if(isagent(var_00))
+    return 0;
 
   return var_0.clientid < level.maxlogclients;
 }
@@ -17,7 +17,7 @@ canlogclient(var_00) {
 createcodcastermatchdataforplayer(var_00) {
   var_01 = [];
 
-  foreach (var_03 in level.codcastermatchdata.playerfields)
+  foreach(var_03 in level.codcastermatchdata.playerfields)
   var_1[var_3[0]] = var_3[1];
 
   return var_01;
@@ -27,30 +27,35 @@ removeplayerdataafterleavinggame(var_00) {
   level endon("game_ended");
   var_00 waittill("disconnect");
 
-  if (!isdefined(level.codcastermatchdata.players[var_0.clientid]))
-  return;
-
+  if(!isdefined(level.codcastermatchdata.players[var_0.clientid])) {
+    return;
+  }
   level.codcastermatchdata.players[var_0.clientid] = undefined;
 }
 
 checkcodcasterplayerdataexists(var_00) {
-  if (!isdefined(level.codcastermatchdata.players[var_0.clientid])) {
-  var_01 = createcodcastermatchdataforplayer(var_00);
-  level.codcastermatchdata.players[var_0.clientid] = var_01;
-  thread removeplayerdataafterleavinggame(var_00);
+  if(!isdefined(level.codcastermatchdata.players[var_0.clientid])) {
+    var_01 = createcodcastermatchdataforplayer(var_00);
+    level.codcastermatchdata.players[var_0.clientid] = var_01;
+    thread removeplayerdataafterleavinggame(var_00);
   }
 }
 
 init() {
   setcodcasterclientmatchdata("map", level.script);
   var_00 = spawnstruct();
-  var_0.playerfields = [["damageDone", 0], ["longestKillstreak", 0], ["shutdowns", 0], ["gametypePoints", 0]];
+  var_0.playerfields = [
+    ["damageDone", 0],
+    ["longestKillstreak", 0],
+    ["shutdowns", 0],
+    ["gametypePoints", 0]
+  ];
   var_0.players = [];
   level.codcastermatchdata = var_00;
 }
 
 setddlfieldsforplayer(var_00) {
-  foreach (var_02 in level.codcastermatchdata.playerfields)
+  foreach(var_02 in level.codcastermatchdata.playerfields)
   setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, var_2[0], level.codcastermatchdata.players[var_0.clientid][var_2[0]]);
 
   setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, "username", var_0.name);
@@ -59,38 +64,38 @@ setddlfieldsforplayer(var_00) {
 sendcodcastermatchdata() {
   var_00 = 0;
 
-  foreach (var_02 in level.players) {
-  checkcodcasterplayerdataexists(var_02);
-  var_2.codcastermatchdataid = var_00;
-  setddlfieldsforplayer(var_02);
-  var_0++;
+  foreach(var_02 in level.players) {
+    checkcodcasterplayerdataexists(var_02);
+    var_2.codcastermatchdataid = var_00;
+    setddlfieldsforplayer(var_02);
+    var_0++;
   }
 
   sendcodcasterclientmatchdata();
 }
 
 setcodcasterplayervalue(var_00, var_01, var_02) {
-  if (!canlogclient(var_00))
-  return;
-
+  if(!canlogclient(var_00)) {
+    return;
+  }
   checkcodcasterplayerdataexists(var_00);
   var_03 = level.codcastermatchdata.players[var_0.clientid];
 
-  if (!isdefined(var_03) || !isdefined(var_3[var_01]))
-  return;
-
+  if(!isdefined(var_03) || !isdefined(var_3[var_01])) {
+    return;
+  }
   level.codcastermatchdata.players[var_0.clientid][var_01] = var_02;
 }
 
 getcodcasterplayervalue(var_00, var_01) {
-  if (!canlogclient(var_00))
-  return;
-
+  if(!canlogclient(var_00)) {
+    return;
+  }
   checkcodcasterplayerdataexists(var_00);
   var_02 = level.codcastermatchdata.players[var_0.clientid];
 
-  if (!isdefined(var_02) || !isdefined(var_2[var_01]))
-  return;
-
+  if(!isdefined(var_02) || !isdefined(var_2[var_01])) {
+    return;
+  }
   return var_2[var_01];
 }

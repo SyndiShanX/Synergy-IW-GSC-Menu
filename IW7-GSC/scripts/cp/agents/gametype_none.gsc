@@ -5,5 +5,5 @@
 ***********************************************/
 
 main() {
-	scripts\cp\cp_globallogic::init();
+  scripts\cp\cp_globallogic::init();
 }

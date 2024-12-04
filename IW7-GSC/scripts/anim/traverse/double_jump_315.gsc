@@ -5,15 +5,15 @@
 *****************************************************/
 
 main() {
-	func_5AD0();
+  func_5AD0();
 }
 
 func_5AD0() {
-	var_00 = [];
-	var_00["traverseAnim"] = func_7814();
-	scripts\anim\traverse\shared::func_5AC3(var_00);
+  var_00 = [];
+  var_00["traverseAnim"] = func_7814();
+  scripts\anim\traverse\shared::func_5AC3(var_00);
 }
 
 func_7814() {
-	return %traverse_doublejump_315;
+  return % traverse_doublejump_315;
 }

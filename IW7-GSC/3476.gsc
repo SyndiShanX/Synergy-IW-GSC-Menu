@@ -9,8 +9,8 @@ init() {
   var_0.weaponinfo = "deployable_vest_marker_mp";
   var_0.modelbase = "prop_ballistic_vest_iw6";
   var_0.modelbombsquad = "prop_ballistic_vest_iw6_bombsquad";
-  var_0.hintstring = &"KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
-  var_0.func_3A41 = &"KILLSTREAKS_BOX_GETTING_VEST";
+  var_0.hintstring = & "KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
+  var_0.func_3A41 = & "KILLSTREAKS_BOX_GETTING_VEST";
   var_0.func_67E5 = "deployable_vest_taken";
   var_0.streakname = "deployable_vest";
   var_0.func_10A38 = "used_deployable_vest";
@@ -40,8 +40,8 @@ init() {
 func_128E1(var_00, var_01) {
   var_02 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_00, "deployable_vest");
 
-  if (!isdefined(var_02) || !var_02)
-  return 0;
+  if(!isdefined(var_02) || !var_02)
+    return 0;
 
   scripts\mp\matchdata::logkillstreakevent("deployable_vest", self.origin);
   return 1;
@@ -50,8 +50,8 @@ func_128E1(var_00, var_01) {
 func_3937(var_00) {
   return !scripts\mp\lightarmor::haslightarmor(self) && !scripts\mp\utility\game::isjuggernaut();
 
-  if (isdefined(var_00) && var_0.owner == self && !isdefined(var_0.func_1A64))
-  return 0;
+  if(isdefined(var_00) && var_0.owner == self && !isdefined(var_0.func_1A64))
+    return 0;
 
   return !scripts\mp\utility\game::isjuggernaut();
 }
@@ -61,8 +61,8 @@ onusedeployable(var_00) {
 }
 
 get_adjusted_armor(var_00, var_01) {
-  if (var_00 + level.deployablebox_vest_rank[var_01] > level.deployablebox_vest_max)
-  return level.deployablebox_vest_max;
+  if(var_00 + level.deployablebox_vest_rank[var_01] > level.deployablebox_vest_max)
+    return level.deployablebox_vest_max;
 
   return var_00 + level.deployablebox_vest_rank[var_01];
 }

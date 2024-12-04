@@ -4,22 +4,22 @@
 ***************************************/
 
 script_print_fx() {
-  if (!isdefined(self.script_fxid) || !isdefined(self.script_fxcommand) || !isdefined(self.script_delay)) {
-  self delete();
-  return;
+  if(!isdefined(self.script_fxid) || !isdefined(self.script_fxcommand) || !isdefined(self.script_delay)) {
+    self delete();
+    return;
   }
 
-  if (isdefined(self.target))
-  var_00 = getent(self.target).origin;
+  if(isdefined(self.target))
+    var_00 = getent(self.target).origin;
   else
-  var_00 = "undefined";
+    var_00 = "undefined";
 
-  if (self.script_fxcommand == "OneShotfx") {}
+  if(self.script_fxcommand == "OneShotfx") {}
 
-  if (self.script_fxcommand == "loopfx") {}
+  if(self.script_fxcommand == "loopfx") {}
 
-  if (self.script_fxcommand == "loopsound")
-  return;
+  if(self.script_fxcommand == "loopsound")
+    return;
 }
 
 grenadeexplosionfx(var_00) {
@@ -32,8 +32,8 @@ soundfx(var_00, var_01, var_02) {
   var_3.origin = var_01;
   var_03 playloopsound(var_00);
 
-  if (isdefined(var_02))
-  var_03 thread soundfxdelete(var_02);
+  if(isdefined(var_02))
+    var_03 thread soundfxdelete(var_02);
 }
 
 soundfxdelete(var_00) {
@@ -46,15 +46,15 @@ func_glass_handler() {
   var_01 = [];
   var_02 = getentarray("vfx_custom_glass", "targetname");
 
-  foreach (var_04 in var_02) {
-  if (isdefined(var_4.script_noteworthy)) {
-  var_05 = getglass(var_4.script_noteworthy);
+  foreach(var_04 in var_02) {
+    if(isdefined(var_4.script_noteworthy)) {
+      var_05 = getglass(var_4.script_noteworthy);
 
-  if (isdefined(var_05)) {
-  var_1[var_05] = var_04;
-  var_0[var_0.size] = var_05;
-  }
-  }
+      if(isdefined(var_05)) {
+        var_1[var_05] = var_04;
+        var_0[var_0.size] = var_05;
+      }
+    }
   }
 
   var_07 = var_0.size;
@@ -63,30 +63,30 @@ func_glass_handler() {
   var_10 = 0;
 
   while (var_07 != 0) {
-  var_11 = var_10 + var_09 - 1;
+    var_11 = var_10 + var_09 - 1;
 
-  if (var_11 > var_08)
-  var_11 = var_08;
+    if(var_11 > var_08)
+      var_11 = var_08;
 
-  if (var_10 == var_08)
-  var_10 = 0;
+    if(var_10 == var_08)
+      var_10 = 0;
 
-  while (var_10 < var_11) {
-  var_12 = var_0[var_10];
-  var_04 = var_1[var_12];
+    while (var_10 < var_11) {
+      var_12 = var_0[var_10];
+      var_04 = var_1[var_12];
 
-  if (isdefined(var_04)) {
-  if (isglassdestroyed(var_12)) {
-  var_04 delete();
-  var_7--;
-  var_1[var_12] = undefined;
-  }
-  }
+      if(isdefined(var_04)) {
+        if(isglassdestroyed(var_12)) {
+          var_04 delete();
+          var_7--;
+          var_1[var_12] = undefined;
+        }
+      }
 
-  var_10++;
-  }
+      var_10++;
+    }
 
-  wait 0.05;
+    wait 0.05;
   }
 }
 

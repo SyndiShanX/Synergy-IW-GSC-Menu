@@ -13,9 +13,9 @@ func_98D5() {
 }
 
 resetmissilelauncherlocking() {
-  if (!isdefined(self.func_10FAE))
-  return;
-
+  if(!isdefined(self.func_10FAE)) {
+    return;
+  }
   self.func_10FAE = undefined;
   self notify("stop_javelin_locking_feedback");
   self notify("stop_javelin_locked_feedback");
@@ -33,8 +33,8 @@ func_E273() {
   self endon("ResetStingerLockingOnDeath");
 
   for (;;) {
-  self waittill("death");
-  resetmissilelauncherlocking();
+    self waittill("death");
+    resetmissilelauncherlocking();
   }
 }
 
@@ -42,15 +42,15 @@ func_B06A() {
   self endon("stop_javelin_locking_feedback");
 
   for (;;) {
-  if (isdefined(level.chopper) && isdefined(level.chopper.gunner) && isdefined(self.func_10FAA) && self.func_10FAA == level.chopper.gunner)
-  level.ac130player playlocalsound("maaws_incoming_lp");
+    if(isdefined(level.chopper) && isdefined(level.chopper.gunner) && isdefined(self.func_10FAA) && self.func_10FAA == level.chopper.gunner)
+      level.ac130player playlocalsound("maaws_incoming_lp");
 
-  if (isdefined(level.ac130player) && isdefined(self.func_10FAA) && self.func_10FAA == level.ac130.planemodel)
-  level.ac130player playlocalsound("maaws_incoming_lp");
+    if(isdefined(level.ac130player) && isdefined(self.func_10FAA) && self.func_10FAA == level.ac130.planemodel)
+      level.ac130player playlocalsound("maaws_incoming_lp");
 
-  self playlocalsound("maaws_reticle_tracking");
-  self playrumbleonentity("ac130_25mm_fire");
-  wait 0.6;
+    self playlocalsound("maaws_reticle_tracking");
+    self playrumbleonentity("ac130_25mm_fire");
+    wait 0.6;
   }
 }
 
@@ -58,204 +58,202 @@ func_B069() {
   self endon("stop_javelin_locked_feedback");
 
   for (;;) {
-  if (isdefined(level.chopper) && isdefined(level.chopper.gunner) && isdefined(self.func_10FAA) && self.func_10FAA == level.chopper.gunner)
-  level.ac130player playlocalsound("maaws_incoming_lp");
+    if(isdefined(level.chopper) && isdefined(level.chopper.gunner) && isdefined(self.func_10FAA) && self.func_10FAA == level.chopper.gunner)
+      level.ac130player playlocalsound("maaws_incoming_lp");
 
-  if (isdefined(level.ac130player) && isdefined(self.func_10FAA) && self.func_10FAA == level.ac130.planemodel)
-  level.ac130player playlocalsound("maaws_incoming_lp");
+    if(isdefined(level.ac130player) && isdefined(self.func_10FAA) && self.func_10FAA == level.ac130.planemodel)
+      level.ac130player playlocalsound("maaws_incoming_lp");
 
-  self playlocalsound("maaws_reticle_locked");
-  self playrumbleonentity("ac130_25mm_fire");
-  wait 0.25;
+    self playlocalsound("maaws_reticle_locked");
+    self playrumbleonentity("ac130_25mm_fire");
+    wait 0.25;
   }
 }
 
 softsighttest(var_00) {
   var_01 = 500;
 
-  if (var_00 stingtargstruct_isinlos()) {
-  self.func_10FA7 = 0;
-  return 1;
+  if(var_00 stingtargstruct_isinlos()) {
+    self.func_10FA7 = 0;
+    return 1;
   }
 
-  if (self.func_10FA7 == 0)
-  self.func_10FA7 = gettime();
+  if(self.func_10FA7 == 0)
+    self.func_10FA7 = gettime();
 
   var_02 = gettime() - self.func_10FA7;
 
-  if (var_02 >= var_01) {
-  resetmissilelauncherlocking();
-  return 0;
+  if(var_02 >= var_01) {
+    resetmissilelauncherlocking();
+    return 0;
   }
 
   return 1;
 }
 
 func_10FAD() {
-  if (!isplayer(self))
-  return;
-
+  if(!isplayer(self)) {
+    return;
+  }
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
   func_98D5();
 
   for (;;) {
-  wait 0.05;
+    wait 0.05;
 
-  if (self playerads() < 0.95) {
-  resetmissilelauncherlocking();
-  continue;
-  }
+    if(self playerads() < 0.95) {
+      resetmissilelauncherlocking();
+      continue;
+    }
 
-  var_00 = scripts\mp\utility\game::getweaponbasedsmokegrenadecount(self getcurrentweapon());
+    var_00 = scripts\mp\utility\game::getweaponbasedsmokegrenadecount(self getcurrentweapon());
 
-  if (var_00 != "iw7_lockon_mp") {
-  resetmissilelauncherlocking();
-  continue;
-  }
+    if(var_00 != "iw7_lockon_mp") {
+      resetmissilelauncherlocking();
+      continue;
+    }
 
-  self.func_10FAE = 1;
+    self.func_10FAE = 1;
 
-  if (!isdefined(self.func_10FA9))
-  self.func_10FA9 = 0;
+    if(!isdefined(self.func_10FA9))
+      self.func_10FA9 = 0;
 
-  if (self.func_10FA9 == 0) {
-  var_01 = scripts\mp\weapons::func_AF2B(0);
+    if(self.func_10FA9 == 0) {
+      var_01 = scripts\mp\weapons::func_AF2B(0);
 
-  if (var_1.size == 0)
-  continue;
+      if(var_1.size == 0) {
+        continue;
+      }
+      var_01 = sortbydistance(var_01, self.origin);
+      var_02 = undefined;
+      var_03 = 0;
 
-  var_01 = sortbydistance(var_01, self.origin);
-  var_02 = undefined;
-  var_03 = 0;
+      foreach(var_05 in var_01) {
+        if(!isdefined(var_05)) {
+          continue;
+        }
+        var_02 = stingtargstruct_create(self, var_05);
+        var_02 stingtargstruct_getoffsets();
+        var_02 stingtargstruct_getorigins();
+        var_02 stingtargstruct_getinreticle();
 
-  foreach (var_05 in var_01) {
-  if (!isdefined(var_05))
-  continue;
+        if(var_02 stingtargstruct_isinreticle()) {
+          var_03 = 1;
+          break;
+        }
+      }
 
-  var_02 = stingtargstruct_create(self, var_05);
-  var_02 stingtargstruct_getoffsets();
-  var_02 stingtargstruct_getorigins();
-  var_02 stingtargstruct_getinreticle();
+      if(!var_03) {
+        continue;
+      }
+      var_02 stingtargstruct_getinlos();
 
-  if (var_02 stingtargstruct_isinreticle()) {
-  var_03 = 1;
-  break;
-  }
-  }
+      if(!var_02 stingtargstruct_isinlos()) {
+        continue;
+      }
+      self.func_10FAA = var_2.target;
+      self.func_10FA6 = gettime();
+      self.func_10FA9 = 1;
+      self.func_10FA7 = 0;
+      func_17D0(self.func_10FAA);
+      thread func_B06A();
+    }
 
-  if (!var_03)
-  continue;
+    if(self.func_10FA9 == 1) {
+      if(!isdefined(self.func_10FAA)) {
+        resetmissilelauncherlocking();
+        continue;
+      }
 
-  var_02 stingtargstruct_getinlos();
+      var_02 = stingtargstruct_create(self, self.func_10FAA);
+      var_02 stingtargstruct_getoffsets();
+      var_02 stingtargstruct_getorigins();
+      var_02 stingtargstruct_getinreticle();
 
-  if (!var_02 stingtargstruct_isinlos())
-  continue;
+      if(!var_02 stingtargstruct_isinreticle()) {
+        resetmissilelauncherlocking();
+        continue;
+      }
 
-  self.func_10FAA = var_2.target;
-  self.func_10FA6 = gettime();
-  self.func_10FA9 = 1;
-  self.func_10FA7 = 0;
-  func_17D0(self.func_10FAA);
-  thread func_B06A();
-  }
+      var_02 stingtargstruct_getinlos();
 
-  if (self.func_10FA9 == 1) {
-  if (!isdefined(self.func_10FAA)) {
-  resetmissilelauncherlocking();
-  continue;
-  }
+      if(!softsighttest(var_02)) {
+        continue;
+      }
+      var_07 = gettime() - self.func_10FA6;
 
-  var_02 = stingtargstruct_create(self, self.func_10FAA);
-  var_02 stingtargstruct_getoffsets();
-  var_02 stingtargstruct_getorigins();
-  var_02 stingtargstruct_getinreticle();
+      if(scripts\mp\utility\game::_hasperk("specialty_fasterlockon")) {
+        if(var_07 < 375.0)
+          continue;
+      } else if(var_07 < 750) {
+        continue;
+      }
+      self notify("stop_javelin_locking_feedback");
+      thread func_B069();
+      var_08 = undefined;
+      stinger_finalizelock(var_02);
+      self.func_10FA9 = 2;
+    }
 
-  if (!var_02 stingtargstruct_isinreticle()) {
-  resetmissilelauncherlocking();
-  continue;
-  }
+    if(self.func_10FA9 == 2) {
+      if(!isdefined(self.func_10FAA)) {
+        resetmissilelauncherlocking();
+        continue;
+      }
 
-  var_02 stingtargstruct_getinlos();
+      var_02 = stingtargstruct_create(self, self.func_10FAA);
+      var_02 stingtargstruct_getoffsets();
+      var_02 stingtargstruct_getorigins();
+      var_02 stingtargstruct_getinreticle();
+      var_02 stingtargstruct_getinlos();
 
-  if (!softsighttest(var_02))
-  continue;
+      if(!softsighttest(var_02))
+        continue;
+      else
+        stinger_finalizelock(var_02);
 
-  var_07 = gettime() - self.func_10FA6;
-
-  if (scripts\mp\utility\game::_hasperk("specialty_fasterlockon")) {
-  if (var_07 < 375.0)
-  continue;
-  }
-  else if (var_07 < 750)
-  continue;
-
-  self notify("stop_javelin_locking_feedback");
-  thread func_B069();
-  var_08 = undefined;
-  stinger_finalizelock(var_02);
-  self.func_10FA9 = 2;
-  }
-
-  if (self.func_10FA9 == 2) {
-  if (!isdefined(self.func_10FAA)) {
-  resetmissilelauncherlocking();
-  continue;
-  }
-
-  var_02 = stingtargstruct_create(self, self.func_10FAA);
-  var_02 stingtargstruct_getoffsets();
-  var_02 stingtargstruct_getorigins();
-  var_02 stingtargstruct_getinreticle();
-  var_02 stingtargstruct_getinlos();
-
-  if (!softsighttest(var_02))
-  continue;
-  else
-  stinger_finalizelock(var_02);
-
-  if (!var_02 stingtargstruct_isinreticle()) {
-  resetmissilelauncherlocking();
-  continue;
-  }
-  }
+      if(!var_02 stingtargstruct_isinreticle()) {
+        resetmissilelauncherlocking();
+        continue;
+      }
+    }
   }
 }
 
 stinger_finalizelock(var_00) {
   var_01 = undefined;
 
-  if (isdefined(var_0.inlosid)) {
-  var_01 = var_0.offsets[var_0.inlosid];
-  var_01 = (var_1[1], -1 * var_1[0], var_1[2]);
-  }
-  else
-  var_01 = (0, 0, 0);
+  if(isdefined(var_0.inlosid)) {
+    var_01 = var_0.offsets[var_0.inlosid];
+    var_01 = (var_1[1], -1 * var_1[0], var_1[2]);
+  } else
+    var_01 = (0, 0, 0);
 
   self _meth_8402(self.func_10FAA, var_01);
 }
 
 func_17D0(var_00) {
-  if (!isdefined(var_00))
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
   var_01 = var_00;
 
-  if (isdefined(var_0.owner) && !scripts\mp\utility\game::func_9EF0(var_00))
-  var_01 = var_0.owner;
+  if(isdefined(var_0.owner) && !scripts\mp\utility\game::func_9EF0(var_00))
+    var_01 = var_0.owner;
 
   var_01 setclientomnvar("ui_killstreak_missile_warn", 1);
 }
 
 func_E12E(var_00) {
-  if (!isdefined(var_00))
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
   var_01 = var_00;
 
-  if (isdefined(var_0.owner) && !scripts\mp\utility\game::func_9EF0(var_00))
-  var_01 = var_0.owner;
+  if(isdefined(var_0.owner) && !scripts\mp\utility\game::func_9EF0(var_00))
+    var_01 = var_0.owner;
 
   var_01 setclientomnvar("ui_killstreak_missile_warn", 0);
 }
@@ -276,35 +274,30 @@ stingtargstruct_create(var_00, var_01) {
 stingtargstruct_getoffsets() {
   self.offsets = [];
 
-  if (scripts\mp\utility\game::isjackal(self.target)) {
-  self.offsets[self.offsets.size] = (0, 0, 125);
-  self.offsets[self.offsets.size] = (0, 250, 125);
-  self.offsets[self.offsets.size] = (0, -425, 125);
-  self.offsets[self.offsets.size] = (-250, -215, 140);
-  self.offsets[self.offsets.size] = (250, -215, 140);
-  self.useoldlosverification = 0;
-  }
-  else if (scripts\mp\utility\game::func_9F8C(self.target)) {
-  self.offsets[self.offsets.size] = (0, 0, 30);
-  self.offsets[self.offsets.size] = (0, 0, 5);
-  self.useoldlosverification = 0;
-  }
-  else if (scripts\mp\utility\game::ismicroturret(self.target)) {
-  self.offsets[self.offsets.size] = (0, 0, 15);
-  self.useoldlosverification = 0;
-  }
-  else if (scripts\mp\utility\game::isturret(self.target)) {
-  self.offsets[self.offsets.size] = (0, 0, 42);
-  self.offsets[self.offsets.size] = (0, 0, 5);
-  self.useoldlosverification = 0;
-  }
-  else if (scripts\mp\utility\game::func_9F22(self.target)) {
-  self.offsets[self.offsets.size] = (0, 0, 70);
-  self.offsets[self.offsets.size] = (0, 0, 5);
-  self.useoldlosverification = 0;
-  }
-  else
-  self.offsets[self.offsets.size] = (0, 0, 0);
+  if(scripts\mp\utility\game::isjackal(self.target)) {
+    self.offsets[self.offsets.size] = (0, 0, 125);
+    self.offsets[self.offsets.size] = (0, 250, 125);
+    self.offsets[self.offsets.size] = (0, -425, 125);
+    self.offsets[self.offsets.size] = (-250, -215, 140);
+    self.offsets[self.offsets.size] = (250, -215, 140);
+    self.useoldlosverification = 0;
+  } else if(scripts\mp\utility\game::func_9F8C(self.target)) {
+    self.offsets[self.offsets.size] = (0, 0, 30);
+    self.offsets[self.offsets.size] = (0, 0, 5);
+    self.useoldlosverification = 0;
+  } else if(scripts\mp\utility\game::ismicroturret(self.target)) {
+    self.offsets[self.offsets.size] = (0, 0, 15);
+    self.useoldlosverification = 0;
+  } else if(scripts\mp\utility\game::isturret(self.target)) {
+    self.offsets[self.offsets.size] = (0, 0, 42);
+    self.offsets[self.offsets.size] = (0, 0, 5);
+    self.useoldlosverification = 0;
+  } else if(scripts\mp\utility\game::func_9F22(self.target)) {
+    self.offsets[self.offsets.size] = (0, 0, 70);
+    self.offsets[self.offsets.size] = (0, 0, 5);
+    self.useoldlosverification = 0;
+  } else
+    self.offsets[self.offsets.size] = (0, 0, 0);
 }
 
 stingtargstruct_getorigins() {
@@ -315,42 +308,42 @@ stingtargstruct_getorigins() {
   var_04 = anglestoup(var_01);
 
   for (var_05 = 0; var_05 < self.offsets.size; var_5++) {
-  var_06 = self.offsets[var_05];
-  self.origins[var_05] = var_00 + var_03 * var_6[0] + var_02 * var_6[1] + var_04 * var_6[2];
+    var_06 = self.offsets[var_05];
+    self.origins[var_05] = var_00 + var_03 * var_6[0] + var_02 * var_6[1] + var_04 * var_6[2];
   }
 }
 
 stingtargstruct_getinreticle() {
-  foreach (var_05, var_01 in self.origins) {
-  for (var_02 = 0; var_02 < self.origins.size; var_2++) {
-  var_03 = self.player _meth_840B(self.origins[var_02], 65);
+  foreach(var_05, var_01 in self.origins) {
+    for (var_02 = 0; var_02 < self.origins.size; var_2++) {
+      var_03 = self.player _meth_840B(self.origins[var_02], 65);
 
-  if (isdefined(var_03)) {
-  var_04 = length2dsquared(var_03);
+      if(isdefined(var_03)) {
+        var_04 = length2dsquared(var_03);
 
-  if (var_04 <= 7225) {
-  self.inreticlesortedids[self.inreticlesortedids.size] = var_02;
-  self.inreticledistssqr[var_02] = var_04;
-  }
-  }
-  }
+        if(var_04 <= 7225) {
+          self.inreticlesortedids[self.inreticlesortedids.size] = var_02;
+          self.inreticledistssqr[var_02] = var_04;
+        }
+      }
+    }
   }
 
-  if (self.inreticlesortedids.size > 1) {
-  for (var_02 = 0; var_02 < self.inreticlesortedids.size; var_2++) {
-  for (var_06 = var_02 + 1; var_06 < self.inreticlesortedids.size; var_6++) {
-  var_07 = self.inreticlesortedids[var_02];
-  var_08 = self.inreticlesortedids[var_06];
-  var_09 = self.inreticledistssqr[var_07];
-  var_10 = self.inreticledistssqr[var_08];
+  if(self.inreticlesortedids.size > 1) {
+    for (var_02 = 0; var_02 < self.inreticlesortedids.size; var_2++) {
+      for (var_06 = var_02 + 1; var_06 < self.inreticlesortedids.size; var_6++) {
+        var_07 = self.inreticlesortedids[var_02];
+        var_08 = self.inreticlesortedids[var_06];
+        var_09 = self.inreticledistssqr[var_07];
+        var_10 = self.inreticledistssqr[var_08];
 
-  if (var_10 < var_09) {
-  var_11 = var_07;
-  self.inreticlesortedids[var_02] = var_08;
-  self.inreticlesortedids[var_06] = var_11;
-  }
-  }
-  }
+        if(var_10 < var_09) {
+          var_11 = var_07;
+          self.inreticlesortedids[var_02] = var_08;
+          self.inreticlesortedids[var_06] = var_11;
+        }
+      }
+    }
   }
 }
 
@@ -360,43 +353,43 @@ stingtargstruct_getinlos() {
   var_02 = [self.player, self.target];
   var_03 = self.target getlinkedchildren();
 
-  if (isdefined(var_03) && var_3.size > 0)
-  var_02 = scripts\engine\utility::array_combine(var_02, var_03);
+  if(isdefined(var_03) && var_3.size > 0)
+    var_02 = scripts\engine\utility::array_combine(var_02, var_03);
 
-  if (!self.useoldlosverification) {
-  for (var_04 = 0; var_04 < self.inreticlesortedids.size; var_4++) {
-  var_05 = self.inreticlesortedids[var_04];
-  var_06 = self.origins[var_05];
-  var_07 = physics_raycast(var_00, var_06, var_01, var_02, 0, "physicsquery_closest", 1);
+  if(!self.useoldlosverification) {
+    for (var_04 = 0; var_04 < self.inreticlesortedids.size; var_4++) {
+      var_05 = self.inreticlesortedids[var_04];
+      var_06 = self.origins[var_05];
+      var_07 = physics_raycast(var_00, var_06, var_01, var_02, 0, "physicsquery_closest", 1);
 
-  if (!isdefined(var_07) || var_7.size == 0) {
-  self.inlosid = var_05;
-  return;
-  }
-  }
+      if(!isdefined(var_07) || var_7.size == 0) {
+        self.inlosid = var_05;
+        return;
+      }
+    }
   } else {
-  var_08 = scripts\engine\trace::ray_trace(var_00, self.origins[0], var_02, var_01, 0);
+    var_08 = scripts\engine\trace::ray_trace(var_00, self.origins[0], var_02, var_01, 0);
 
-  if (var_8["fraction"] == 1) {
-  self.inlosid = 0;
-  return;
-  }
+    if(var_8["fraction"] == 1) {
+      self.inlosid = 0;
+      return;
+    }
 
-  var_09 = self.target getpointinbounds(1, 0, 0);
-  var_08 = scripts\engine\trace::ray_trace(var_00, var_09, var_02, var_01, 0);
+    var_09 = self.target getpointinbounds(1, 0, 0);
+    var_08 = scripts\engine\trace::ray_trace(var_00, var_09, var_02, var_01, 0);
 
-  if (var_8["fraction"] == 1) {
-  self.inlosid = 0;
-  return;
-  }
+    if(var_8["fraction"] == 1) {
+      self.inlosid = 0;
+      return;
+    }
 
-  var_10 = self.target getpointinbounds(-1, 0, 0);
-  var_08 = scripts\engine\trace::ray_trace(var_00, var_10, var_02, var_01, 0);
+    var_10 = self.target getpointinbounds(-1, 0, 0);
+    var_08 = scripts\engine\trace::ray_trace(var_00, var_10, var_02, var_01, 0);
 
-  if (var_8["fraction"] == 1) {
-  self.inlosid = 0;
-  return;
-  }
+    if(var_8["fraction"] == 1) {
+      self.inlosid = 0;
+      return;
+    }
   }
 }
 

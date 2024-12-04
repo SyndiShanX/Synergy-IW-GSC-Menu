@@ -8,9 +8,9 @@ portalgeneratorinit() {
 }
 
 portalgeneratorused(var_00) {
-  if (!isalive(self)) {
-  var_00 delete();
-  return;
+  if(!isalive(self)) {
+    var_00 delete();
+    return;
   }
 
   var_00 waittill("missile_stuck", var_01);
@@ -33,8 +33,8 @@ portalgeneratorused(var_00) {
   scripts\mp\weapons::ontacticalequipmentplanted(var_03, "power_portalGenerator");
   scripts\engine\utility::waitframe();
 
-  if (isdefined(var_00))
-  var_00 delete();
+  if(isdefined(var_00))
+    var_00 delete();
 }
 
 func_D684(var_00) {
@@ -42,9 +42,9 @@ func_D684(var_00) {
 }
 
 func_D686(var_00, var_01, var_02, var_03) {
-  if (isdefined(self.owner) && var_00 != self.owner) {
-  var_00 scripts\mp\killstreaks\killstreaks::_meth_83A0();
-  var_00 notify("destroyed_equipment");
+  if(isdefined(self.owner) && var_00 != self.owner) {
+    var_00 scripts\mp\killstreaks\killstreaks::_meth_83A0();
+    var_00 notify("destroyed_equipment");
   }
 
   self notify("detonateExplosive");
@@ -67,12 +67,12 @@ func_D68C() {
   var_00 = self.origin;
   wait 3;
 
-  if (isdefined(self)) {
-  if (isdefined(self.killcament))
-  self.killcament delete();
+  if(isdefined(self)) {
+    if(isdefined(self.killcament))
+      self.killcament delete();
 
-  scripts\mp\weapons::equipmentdeletevfx();
-  scripts\mp\weapons::deleteexplosive();
+    scripts\mp\weapons::equipmentdeletevfx();
+    scripts\mp\weapons::deleteexplosive();
   }
 }
 
@@ -108,9 +108,9 @@ func_D683(var_00) {
   triggerfx(var_1.func_D682);
   var_1.objid = scripts\mp\objidpoolmanager::requestminimapid(1);
 
-  if (var_1.objid != -1)
-  return;
-
+  if(var_1.objid != -1) {
+    return;
+  }
   scripts\mp\objidpoolmanager::minimap_objective_add(var_1.objid, "active", var_1.origin, "weapon_portal_generator_sm");
   scripts\mp\objidpoolmanager::minimap_objective_icon(var_1.objid, "weapon_portal_generator_sm");
 }
@@ -121,17 +121,17 @@ func_13B15(var_00) {
   var_02 = 1.5;
 
   for (;;) {
-  self waittill("trigger", var_03);
+    self waittill("trigger", var_03);
 
-  if (isdefined(var_3.func_DDCA) && var_3.func_DDCA)
-  continue;
+    if(isdefined(var_3.func_DDCA) && var_3.func_DDCA) {
+      continue;
+    }
+    if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_03))
+      var_03 thread func_10DDD(var_01);
+    else
+      var_03 scripts\mp\equipment\phase_shift::exitphaseshift(1);
 
-  if (!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_03))
-  var_03 thread func_10DDD(var_01);
-  else
-  var_03 scripts\mp\equipment\phase_shift::exitphaseshift(1);
-
-  var_03 thread func_10DDE(var_02);
+    var_03 thread func_10DDE(var_02);
   }
 }
 

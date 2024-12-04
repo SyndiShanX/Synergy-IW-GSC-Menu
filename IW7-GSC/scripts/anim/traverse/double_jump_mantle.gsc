@@ -5,9 +5,9 @@
 ********************************************************/
 
 main() {
-	func_5ADF();
+  func_5ADF();
 }
 
 func_5ADF() {
-	self waittill("killanimscript");
+  self waittill("killanimscript");
 }

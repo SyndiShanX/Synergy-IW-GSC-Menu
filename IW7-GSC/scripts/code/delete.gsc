@@ -5,8 +5,8 @@
 ***********************************/
 
 main() {
-	wait(0);
-	if(isdefined(self)) {
-		self delete();
-	}
+  wait(0);
+  if(isdefined(self)) {
+    self delete();
+  }
 }

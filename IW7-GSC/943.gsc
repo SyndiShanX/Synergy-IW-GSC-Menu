@@ -64,9 +64,9 @@ func_A3D1(var_00) {
 }
 
 func_2AD0() {
-  if (isdefined(level.func_119E["jackal"]))
-  return;
-
+  if(isdefined(level.func_119E["jackal"])) {
+    return;
+  }
   var_00 = spawnstruct();
   var_0.func_1581 = [];
   var_0.func_1581[0] = func_0A0D::func_9D44;

@@ -12,19 +12,19 @@ init() {
   var_0.modelbase = "zom_machinery_generator_portable_01";
   var_0.modelplacement = "zom_machinery_generator_portable_01";
   var_0.modelplacementfailed = "zom_machinery_generator_portable_01_red";
-  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = & "COOP_CRAFTABLES_PICKUP";
   var_0.func_9F43 = 0;
-  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
-  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
-  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.hintstring = & "COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = & "COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_0.placementheighttolerance = 30.0;
   var_0.placementradius = 32.0;
   var_0.carriedtrapoffset = (0, 0, 25);
   var_0.carriedtrapangles = (0, 0, 0);
 
-  if (!isdefined(level.func_47B3))
-  level.func_47B3 = [];
+  if(!isdefined(level.func_47B3))
+    level.func_47B3 = [];
 
   level.func_47B3["crafted_electric_trap"] = var_00;
 }
@@ -45,19 +45,20 @@ watch_dpad() {
   self notifyonplayercommand("pullout_trap", "+actionslot 3");
 
   for (;;) {
-  self waittill("pullout_trap");
+    self waittill("pullout_trap");
 
-  if (scripts\engine\utility::is_true(self.iscarrying))
-  continue;
-
-  if (scripts\engine\utility::is_true(self.linked_to_coaster))
-  continue;
-
-  if (isdefined(self.allow_carry) && self.allow_carry == 0)
-  continue;
-
-  if (scripts\cp\utility::is_valid_player())
-  break;
+    if(scripts\engine\utility::is_true(self.iscarrying)) {
+      continue;
+    }
+    if(scripts\engine\utility::is_true(self.linked_to_coaster)) {
+      continue;
+    }
+    if(isdefined(self.allow_carry) && self.allow_carry == 0) {
+      continue;
+    }
+    if(scripts\cp\utility::is_valid_player()) {
+      break;
+    }
   }
 
   thread _meth_8342(1);
@@ -71,18 +72,18 @@ _meth_8342(var_00, var_01) {
   removeperks();
   self.carriedsentry = var_02;
 
-  if (var_00)
-  var_2.firstplacement = 1;
+  if(var_00)
+    var_2.firstplacement = 1;
 
   var_03 = func_F68A(var_02, var_00, var_01);
   self.carriedsentry = undefined;
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if (isdefined(var_02))
-  return 1;
+  if(isdefined(var_02))
+    return 1;
   else
-  return 0;
+    return 0;
 }
 
 func_F68A(var_00, var_01, var_02) {
@@ -93,83 +94,83 @@ func_F68A(var_00, var_01, var_02) {
   self notifyonplayercommand("place_trap", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_trap", "+actionslot 3");
 
-  if (!level.console) {
-  self notifyonplayercommand("cancel_trap", "+actionslot 5");
-  self notifyonplayercommand("cancel_trap", "+actionslot 6");
-  self notifyonplayercommand("cancel_trap", "+actionslot 7");
+  if(!level.console) {
+    self notifyonplayercommand("cancel_trap", "+actionslot 5");
+    self notifyonplayercommand("cancel_trap", "+actionslot 6");
+    self notifyonplayercommand("cancel_trap", "+actionslot 7");
   }
 
   for (;;) {
-  var_03 = scripts\engine\utility::waittill_any_return("place_trap", "cancel_trap", "force_cancel_placement");
+    var_03 = scripts\engine\utility::waittill_any_return("place_trap", "cancel_trap", "force_cancel_placement");
 
-  if (!isdefined(var_00)) {
-  scripts\engine\utility::allow_weapon(1);
-  return 1;
-  }
+    if(!isdefined(var_00)) {
+      scripts\engine\utility::allow_weapon(1);
+      return 1;
+    }
 
-  if (!isdefined(var_03))
-  var_03 = "force_cancel_placement";
+    if(!isdefined(var_03))
+      var_03 = "force_cancel_placement";
 
-  if (var_03 == "cancel_trap" || var_03 == "force_cancel_placement") {
-  if (!var_01 && var_03 == "cancel_trap")
-  continue;
+    if(var_03 == "cancel_trap" || var_03 == "force_cancel_placement") {
+      if(!var_01 && var_03 == "cancel_trap") {
+        continue;
+      }
+      scripts\engine\utility::allow_weapon(1);
+      var_00 func_126A7();
 
-  scripts\engine\utility::allow_weapon(1);
-  var_00 func_126A7();
+      if(var_03 != "force_cancel_placement")
+        thread watch_dpad();
+      else if(var_01)
+        scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
-  if (var_03 != "force_cancel_placement")
-  thread watch_dpad();
-  else if (var_01)
-  scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      return 0;
+    }
 
-  return 0;
-  }
+    if(!var_0.canbeplaced) {
+      continue;
+    }
+    if(var_01)
+      scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
-  if (!var_0.canbeplaced)
-  continue;
-
-  if (var_01)
-  scripts\cp\utility::remove_crafted_item_from_inventory(self);
-
-  var_00 func_126AA(var_02, self);
-  scripts\engine\utility::allow_weapon(1);
-  return 1;
+    var_00 func_126AA(var_02, self);
+    scripts\engine\utility::allow_weapon(1);
+    return 1;
   }
 }
 
 removeweapons() {
-  if (self.hasriotshield) {
-  var_00 = scripts\cp\utility::riotshieldname();
-  self.restoreweapon = var_00;
-  self.riotshieldammo = self getammocount(var_00);
-  self giveuponsuppressiontime(var_00);
+  if(self.hasriotshield) {
+    var_00 = scripts\cp\utility::riotshieldname();
+    self.restoreweapon = var_00;
+    self.riotshieldammo = self getammocount(var_00);
+    self giveuponsuppressiontime(var_00);
   }
 }
 
 removeperks() {
-  if (scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
-  self.restoreperk = "specialty_explosivebullets";
-  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
+  if(scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
+    self.restoreperk = "specialty_explosivebullets";
+    scripts\cp\utility::_unsetperk("specialty_explosivebullets");
   }
 }
 
 restoreweapons() {
-  if (isdefined(self.restoreweapon)) {
-  scripts\cp\utility::_giveweapon(self.restoreweapon);
+  if(isdefined(self.restoreweapon)) {
+    scripts\cp\utility::_giveweapon(self.restoreweapon);
 
-  if (self.hasriotshield) {
-  var_00 = scripts\cp\utility::riotshieldname();
-  self setweaponammoclip(var_00, self.riotshieldammo);
-  }
+    if(self.hasriotshield) {
+      var_00 = scripts\cp\utility::riotshieldname();
+      self setweaponammoclip(var_00, self.riotshieldammo);
+    }
   }
 
   self.restoreweapon = undefined;
 }
 
 restoreperks() {
-  if (isdefined(self.restoreperk)) {
-  scripts\cp\utility::giveperk(self.restoreperk);
-  self.restoreperk = undefined;
+  if(isdefined(self.restoreperk)) {
+    scripts\cp\utility::giveperk(self.restoreperk);
+    self.restoreperk = undefined;
   }
 }
 
@@ -204,24 +205,24 @@ func_126A2(var_00) {
 func_126A0(var_00) {
   self waittill("death");
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   func_126A9();
   self playsound("sentry_explode");
   scripts\cp\utility::removefromtraplist();
 
-  if (isdefined(self)) {
-  playfxontag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_origin");
-  self playsound("sentry_explode_smoke");
-  wait 0.1;
+  if(isdefined(self)) {
+    playfxontag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_origin");
+    self playsound("sentry_explode_smoke");
+    wait 0.1;
 
-  if (isdefined(self)) {
-  if (isdefined(self.carried_trap))
-  self.carried_trap delete();
+    if(isdefined(self)) {
+      if(isdefined(self.carried_trap))
+        self.carried_trap delete();
 
-  self delete();
-  }
+      self delete();
+    }
   }
 }
 
@@ -230,21 +231,21 @@ func_126A1() {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_00);
+    self waittill("trigger", var_00);
 
-  if (!var_00 scripts\cp\utility::is_valid_player())
-  continue;
+    if(!var_00 scripts\cp\utility::is_valid_player()) {
+      continue;
+    }
+    if(scripts\engine\utility::is_true(var_0.iscarrying)) {
+      continue;
+    }
+    var_00 thread _meth_8342(0, self.lifespan);
 
-  if (scripts\engine\utility::is_true(var_0.iscarrying))
-  continue;
+    if(isdefined(self.charge_fx))
+      self.charge_fx delete();
 
-  var_00 thread _meth_8342(0, self.lifespan);
-
-  if (isdefined(self.charge_fx))
-  self.charge_fx delete();
-
-  scripts\cp\utility::removefromtraplist();
-  self delete();
+    scripts\cp\utility::removefromtraplist();
+    self delete();
   }
 }
 
@@ -268,8 +269,8 @@ func_126AA(var_00, var_01) {
 func_126A7() {
   self.carriedby getrigindexfromarchetyperef();
 
-  if (isdefined(self.owner))
-  self.owner.iscarrying = 0;
+  if(isdefined(self.owner))
+    self.owner.iscarrying = 0;
 
   self.carried_trap delete();
   self delete();
@@ -316,27 +317,27 @@ func_126AF() {
   wait 1;
 
   for (;;) {
-  var_01 = scripts\cp\cp_agent_utils::getaliveagents();
-  var_01 = scripts\engine\utility::get_array_of_closest(self.origin, var_01);
+    var_01 = scripts\cp\cp_agent_utils::getaliveagents();
+    var_01 = scripts\engine\utility::get_array_of_closest(self.origin, var_01);
 
-  foreach (var_03 in var_01) {
-  if (!scripts\cp\utility::should_be_affected_by_trap(var_03, undefined, 1) || scripts\engine\utility::is_true(var_3.is_electrified))
-  continue;
+    foreach(var_03 in var_01) {
+      if(!scripts\cp\utility::should_be_affected_by_trap(var_03, undefined, 1) || scripts\engine\utility::is_true(var_3.is_electrified)) {
+        continue;
+      }
+      if(distancesquared(self.origin + (0, 0, 20), var_3.origin + (0, 0, 20)) < var_00) {
+        self playsound("trap_electric_shock");
+        thread electrocute_zombie(var_03);
 
-  if (distancesquared(self.origin + (0, 0, 20), var_3.origin + (0, 0, 20)) < var_00) {
-  self playsound("trap_electric_shock");
-  thread electrocute_zombie(var_03);
+        if(scripts\engine\utility::is_true(var_3.dismember_crawl))
+          var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 1, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
+        else
+          var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 3, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
 
-  if (scripts\engine\utility::is_true(var_3.dismember_crawl))
-  var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 1, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
-  else
-  var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 3, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
+        wait 1.5;
+      }
+    }
 
-  wait 1.5;
-  }
-  }
-
-  wait 0.1;
+    wait 0.1;
   }
 }
 
@@ -348,14 +349,14 @@ electrocute_zombie(var_00) {
   var_03 = ["J_SpineLower", "J_Chest", "J_Head", "J_Neck", "J_Crotch"];
   var_04 = [scripts\engine\utility::random(var_01), scripts\engine\utility::random(var_02), scripts\engine\utility::random(var_03)];
 
-  foreach (var_06 in var_04) {
-  if (!scripts\cp\utility::has_tag(var_0.model, var_06))
-  continue;
-
-  var_07 = var_00 gettagorigin(var_06);
-  playfxbetweenpoints(level._effect["electric_trap_attack"], self.origin + (0, 0, 24), vectortoangles(var_07 - self.origin + (0, 0, 24)), var_07);
-  scripts\engine\utility::waitframe();
-  playfxontag(level._effect["electric_trap_shock"], var_00, var_06);
-  scripts\engine\utility::waitframe();
+  foreach(var_06 in var_04) {
+    if(!scripts\cp\utility::has_tag(var_0.model, var_06)) {
+      continue;
+    }
+    var_07 = var_00 gettagorigin(var_06);
+    playfxbetweenpoints(level._effect["electric_trap_attack"], self.origin + (0, 0, 24), vectortoangles(var_07 - self.origin + (0, 0, 24)), var_07);
+    scripts\engine\utility::waitframe();
+    playfxontag(level._effect["electric_trap_shock"], var_00, var_06);
+    scripts\engine\utility::waitframe();
   }
 }

@@ -4,8 +4,8 @@
 ***************************************/
 
 init() {
-  if (!isdefined(level.placeableconfigs))
-  level.placeableconfigs = [];
+  if(!isdefined(level.placeableconfigs))
+    level.placeableconfigs = [];
 }
 
 giveplaceable(var_00, var_01) {
@@ -19,9 +19,9 @@ giveplaceable(var_00, var_01) {
 }
 
 createplaceable(var_00) {
-  if (isdefined(self.iscarrying) && self.iscarrying)
-  return;
-
+  if(isdefined(self.iscarrying) && self.iscarrying) {
+    return;
+  }
   var_01 = level.placeableconfigs[var_00];
   var_02 = spawn("script_model", self.origin);
   var_02 setmodel(var_1.modelbase);
@@ -31,8 +31,8 @@ createplaceable(var_00) {
   var_2.config = var_01;
   var_2.firstplacement = 1;
 
-  if (isdefined(var_1.func_C4DE))
-  var_02 [[var_1.func_C4DE]](var_00);
+  if(isdefined(var_1.func_C4DE))
+    var_02[[var_1.func_C4DE]](var_00);
 
   var_02 deactivate(var_00);
   var_02 thread timeout(var_00);
@@ -48,15 +48,15 @@ func_89FA(var_00) {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_01);
+    self waittill("trigger", var_01);
 
-  if (!scripts\mp\utility\game::isreallyalive(var_01))
-  continue;
+    if(!scripts\mp\utility\game::isreallyalive(var_01)) {
+      continue;
+    }
+    if(isdefined(self getlinkedparent()))
+      self unlink();
 
-  if (isdefined(self getlinkedparent()))
-  self unlink();
-
-  var_01 onbeginnewmode(var_00, self, 0);
+    var_01 onbeginnewmode(var_00, self, 0);
   }
 }
 
@@ -66,64 +66,61 @@ onbeginnewmode(var_00, var_01, var_02, var_03) {
   var_01 thread oncarried(var_00, self);
   scripts\engine\utility::allow_weapon(0);
 
-  if (!isai(self)) {
-  self notifyonplayercommand("placePlaceable", "+attack");
-  self notifyonplayercommand("placePlaceable", "+attack_akimbo_accessible");
-  self notifyonplayercommand("cancelPlaceable", "+actionslot 4");
+  if(!isai(self)) {
+    self notifyonplayercommand("placePlaceable", "+attack");
+    self notifyonplayercommand("placePlaceable", "+attack_akimbo_accessible");
+    self notifyonplayercommand("cancelPlaceable", "+actionslot 4");
 
-  if (!level.console) {
-  self notifyonplayercommand("cancelPlaceable", "+actionslot 5");
-  self notifyonplayercommand("cancelPlaceable", "+actionslot 6");
-  self notifyonplayercommand("cancelPlaceable", "+actionslot 7");
-  }
+    if(!level.console) {
+      self notifyonplayercommand("cancelPlaceable", "+actionslot 5");
+      self notifyonplayercommand("cancelPlaceable", "+actionslot 6");
+      self notifyonplayercommand("cancelPlaceable", "+actionslot 7");
+    }
   }
 
   for (;;) {
-  if (isdefined(var_03) && var_03 == 1 && !self isonladder() && self isonground() && !self ismantling())
-  var_04 = "placePlaceable";
-  else
-  var_04 = scripts\engine\utility::waittill_any_return("placePlaceable", "cancelPlaceable", "force_cancel_placement");
+    if(isdefined(var_03) && var_03 == 1 && !self isonladder() && self isonground() && !self ismantling())
+      var_04 = "placePlaceable";
+    else
+      var_04 = scripts\engine\utility::waittill_any_return("placePlaceable", "cancelPlaceable", "force_cancel_placement");
 
-  if (!isdefined(var_01)) {
-  scripts\engine\utility::allow_weapon(1);
-  return 1;
-  }
-  else if (var_04 == "cancelPlaceable" && var_02 || var_04 == "force_cancel_placement") {
-  var_01 oncancel(var_00, var_04 == "force_cancel_placement" && !isdefined(var_1.firstplacement));
-  return 0;
-  }
-  else if (var_1.canbeplaced) {
-  var_01 thread onplaced(var_00);
-  scripts\engine\utility::allow_weapon(1);
-  return 1;
-  }
-  else
-  wait 0.05;
+    if(!isdefined(var_01)) {
+      scripts\engine\utility::allow_weapon(1);
+      return 1;
+    } else if(var_04 == "cancelPlaceable" && var_02 || var_04 == "force_cancel_placement") {
+      var_01 oncancel(var_00, var_04 == "force_cancel_placement" && !isdefined(var_1.firstplacement));
+      return 0;
+    } else if(var_1.canbeplaced) {
+      var_01 thread onplaced(var_00);
+      scripts\engine\utility::allow_weapon(1);
+      return 1;
+    } else
+      wait 0.05;
   }
 }
 
 oncancel(var_00, var_01) {
-  if (isdefined(self.carriedby)) {
-  var_02 = self.carriedby;
-  var_02 getrigindexfromarchetyperef();
-  var_2.iscarrying = undefined;
-  var_2.carrieditem = undefined;
-  var_02 scripts\engine\utility::allow_weapon(1);
+  if(isdefined(self.carriedby)) {
+    var_02 = self.carriedby;
+    var_02 getrigindexfromarchetyperef();
+    var_2.iscarrying = undefined;
+    var_2.carrieditem = undefined;
+    var_02 scripts\engine\utility::allow_weapon(1);
   }
 
-  if (isdefined(self.bombsquadmodel))
-  self.bombsquadmodel delete();
+  if(isdefined(self.bombsquadmodel))
+    self.bombsquadmodel delete();
 
-  if (isdefined(self.carriedobj))
-  self.carriedobj delete();
+  if(isdefined(self.carriedobj))
+    self.carriedobj delete();
 
   var_03 = level.placeableconfigs[var_00];
 
-  if (isdefined(var_3.oncanceldelegate))
-  self [[var_3.oncanceldelegate]](var_00);
+  if(isdefined(var_3.oncanceldelegate))
+    self[[var_3.oncanceldelegate]](var_00);
 
-  if (isdefined(var_01) && var_01)
-  scripts\mp\weapons::equipmentdeletevfx();
+  if(isdefined(var_01) && var_01)
+    scripts\mp\weapons::equipmentdeletevfx();
 
   self delete();
 }
@@ -135,8 +132,8 @@ onplaced(var_00) {
   self playsound(var_1.func_CC15);
   showplacedmodel(var_00);
 
-  if (isdefined(var_1.onplaceddelegate))
-  self [[var_1.onplaceddelegate]](var_00);
+  if(isdefined(var_1.onplaceddelegate))
+    self[[var_1.onplaceddelegate]](var_00);
 
   self setcursorhint("HINT_NOICON");
   self sethintstring(var_1.hintstring);
@@ -147,11 +144,11 @@ onplaced(var_00) {
   self.isplaced = 1;
   self.firstplacement = undefined;
 
-  if (isdefined(var_1.func_8C79)) {
-  if (level.teambased)
-  scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, var_1.func_8C79));
-  else
-  scripts\mp\entityheadicons::setplayerheadicon(var_02, (0, 0, var_1.func_8C79));
+  if(isdefined(var_1.func_8C79)) {
+    if(level.teambased)
+      scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, var_1.func_8C79));
+    else
+      scripts\mp\entityheadicons::setplayerheadicon(var_02, (0, 0, var_1.func_8C79));
   }
 
   thread handledamage(var_00);
@@ -159,18 +156,18 @@ onplaced(var_00) {
   self makeusable();
   scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", self.owner);
 
-  foreach (var_04 in level.players) {
-  if (var_04 == var_02) {
-  self enableplayeruse(var_04);
-  continue;
+  foreach(var_04 in level.players) {
+    if(var_04 == var_02) {
+      self enableplayeruse(var_04);
+      continue;
+    }
+
+    self disableplayeruse(var_04);
   }
 
-  self disableplayeruse(var_04);
-  }
-
-  if (isdefined(self.shouldsplash)) {
-  level thread scripts\mp\utility\game::teamplayercardsplash(var_1.func_10A38, var_02);
-  self.shouldsplash = 0;
+  if(isdefined(self.shouldsplash)) {
+    level thread scripts\mp\utility\game::teamplayercardsplash(var_1.func_10A38, var_02);
+    self.shouldsplash = 0;
   }
 
   var_06 = spawnstruct();
@@ -178,8 +175,8 @@ onplaced(var_00) {
   var_6.playdeathfx = 1;
   var_6.endonstring = "carried";
 
-  if (isdefined(var_1.func_C55B))
-  var_6.deathoverridecallback = var_1.func_C55B;
+  if(isdefined(var_1.func_C55B))
+    var_6.deathoverridecallback = var_1.func_C55B;
 
   thread scripts\mp\movers::handle_moving_platforms(var_06);
   thread watchplayerconnected();
@@ -197,8 +194,8 @@ oncarried(var_00, var_01) {
   deactivate(var_00);
   hideplacedmodel(var_00);
 
-  if (isdefined(var_2.oncarrieddelegate))
-  self [[var_2.oncarrieddelegate]](var_00);
+  if(isdefined(var_2.oncarrieddelegate))
+    self[[var_2.oncarrieddelegate]](var_00);
 
   thread updateplacement(var_00, var_01);
   thread oncarrierdeath(var_00, var_01);
@@ -216,35 +213,35 @@ updateplacement(var_00, var_01) {
   var_03 = level.placeableconfigs[var_00];
   var_04 = (0, 0, 0);
 
-  if (isdefined(var_3.func_CC23))
-  var_04 = (0, 0, var_3.func_CC23);
+  if(isdefined(var_3.func_CC23))
+    var_04 = (0, 0, var_3.func_CC23);
 
   var_05 = self.carriedobj;
 
   for (;;) {
-  var_06 = var_01 canplayerplacesentry(1, var_3.placementradius);
-  self.func_CC24 = var_6["origin"];
-  var_5.origin = self.func_CC24 + var_04;
-  var_5.angles = var_6["angles"];
-  self.canbeplaced = var_01 isonground() && var_6["result"] && abs(self.func_CC24[2] - var_1.origin[2]) < var_3.placementheighttolerance;
+    var_06 = var_01 canplayerplacesentry(1, var_3.placementradius);
+    self.func_CC24 = var_6["origin"];
+    var_5.origin = self.func_CC24 + var_04;
+    var_5.angles = var_6["angles"];
+    self.canbeplaced = var_01 isonground() && var_6["result"] && abs(self.func_CC24[2] - var_1.origin[2]) < var_3.placementheighttolerance;
 
-  if (isdefined(var_6["entity"]))
-  self.moving_platform = var_6["entity"];
-  else
-  self.moving_platform = undefined;
+    if(isdefined(var_6["entity"]))
+      self.moving_platform = var_6["entity"];
+    else
+      self.moving_platform = undefined;
 
-  if (self.canbeplaced != var_02) {
-  if (self.canbeplaced) {
-  var_05 setmodel(var_3.modelplacement);
-  var_01 forceusehinton(var_3.placestring);
-  } else {
-  var_05 setmodel(var_3.modelplacementfailed);
-  var_01 forceusehinton(var_3.cannotplacestring);
-  }
-  }
+    if(self.canbeplaced != var_02) {
+      if(self.canbeplaced) {
+        var_05 setmodel(var_3.modelplacement);
+        var_01 forceusehinton(var_3.placestring);
+      } else {
+        var_05 setmodel(var_3.modelplacementfailed);
+        var_01 forceusehinton(var_3.cannotplacestring);
+      }
+    }
 
-  var_02 = self.canbeplaced;
-  wait 0.05;
+    var_02 = self.canbeplaced;
+    wait 0.05;
   }
 }
 
@@ -253,15 +250,15 @@ deactivate(var_00) {
   hideheadicons();
   var_01 = level.placeableconfigs[var_00];
 
-  if (isdefined(var_1.ondeactivedelegate))
-  self [[var_1.ondeactivedelegate]](var_00);
+  if(isdefined(var_1.ondeactivedelegate))
+    self[[var_1.ondeactivedelegate]](var_00);
 }
 
 hideheadicons() {
-  if (level.teambased)
-  scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  else if (isdefined(self.owner))
-  scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
+  if(level.teambased)
+    scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
+  else if(isdefined(self.owner))
+    scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
 }
 
 handledamage(var_00) {
@@ -274,18 +271,18 @@ modifydamage(var_00, var_01, var_02, var_03, var_04) {
   var_05 = var_03;
   var_06 = self.config;
 
-  if (isdefined(var_6.allowmeleedamage) && var_6.allowmeleedamage)
-  var_05 = scripts\mp\damage::handlemeleedamage(var_01, var_02, var_05);
+  if(isdefined(var_6.allowmeleedamage) && var_6.allowmeleedamage)
+    var_05 = scripts\mp\damage::handlemeleedamage(var_01, var_02, var_05);
 
-  if (isdefined(var_6.func_1C8F) && var_6.func_1C8F)
-  var_05 = scripts\mp\damage::handleempdamage(var_01, var_02, var_05);
+  if(isdefined(var_6.func_1C8F) && var_6.func_1C8F)
+    var_05 = scripts\mp\damage::handleempdamage(var_01, var_02, var_05);
 
   var_05 = scripts\mp\damage::handlemissiledamage(var_01, var_02, var_05);
   var_05 = scripts\mp\damage::handlegrenadedamage(var_01, var_02, var_05);
   var_05 = scripts\mp\damage::handleapdamage(var_01, var_02, var_05);
 
-  if (isdefined(var_6.modifydamage))
-  var_05 = self [[var_6.modifydamage]](var_01, var_02, var_05);
+  if(isdefined(var_6.modifydamage))
+    var_05 = self[[var_6.modifydamage]](var_01, var_02, var_05);
 
   return var_05;
 }
@@ -294,8 +291,8 @@ handledeathdamage(var_00, var_01, var_02, var_03) {
   var_04 = self.config;
   var_05 = scripts\mp\damage::onkillstreakkilled(self.streakname, var_00, var_01, var_02, var_03, var_4.scorepopup, var_4.func_52DA);
 
-  if (var_05 && isdefined(var_4.func_C4F3))
-  self [[var_4.func_C4F3]](self.streakname, var_00, self.owner, var_02);
+  if(var_05 && isdefined(var_4.func_C4F3))
+    self[[var_4.func_C4F3]](self.streakname, var_00, self.owner, var_02);
 }
 
 handledeath(var_00) {
@@ -303,16 +300,16 @@ handledeath(var_00) {
   self waittill("death");
   var_01 = level.placeableconfigs[var_00];
 
-  if (isdefined(self)) {
-  deactivate(var_00);
+  if(isdefined(self)) {
+    deactivate(var_00);
 
-  if (isdefined(var_1.modeldestroyed))
-  self setmodel(var_1.modeldestroyed);
+    if(isdefined(var_1.modeldestroyed))
+      self setmodel(var_1.modeldestroyed);
 
-  if (isdefined(var_1.ondeathdelegate))
-  self [[var_1.ondeathdelegate]](var_00);
+    if(isdefined(var_1.ondeathdelegate))
+      self[[var_1.ondeathdelegate]](var_00);
 
-  self delete();
+    self delete();
   }
 }
 
@@ -322,10 +319,10 @@ oncarrierdeath(var_00, var_01) {
   var_01 endon("disconnect");
   var_01 waittill("death");
 
-  if (self.canbeplaced)
-  thread onplaced(var_00);
+  if(self.canbeplaced)
+    thread onplaced(var_00);
   else
-  oncancel(var_00);
+    oncancel(var_00);
 }
 
 func_C547(var_00) {
@@ -342,18 +339,18 @@ ongameended(var_00) {
 }
 
 cleanup(var_00) {
-  if (isdefined(self.isplaced))
-  self notify("death");
+  if(isdefined(self.isplaced))
+    self notify("death");
   else
-  oncancel(var_00);
+    oncancel(var_00);
 }
 
 watchplayerconnected() {
   self endon("death");
 
   for (;;) {
-  level waittill("connected", var_00);
-  thread onplayerconnected(var_00);
+    level waittill("connected", var_00);
+    thread onplayerconnected(var_00);
   }
 }
 
@@ -371,88 +368,88 @@ timeout(var_00) {
   var_02 = var_1.lifespan;
 
   while (var_02 > 0.0) {
-  wait 1.0;
-  scripts\mp\hostmigration::waittillhostmigrationdone();
+    wait 1.0;
+    scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if (!isdefined(self.carriedby))
-  var_02 = var_02 - 1.0;
+    if(!isdefined(self.carriedby))
+      var_02 = var_02 - 1.0;
   }
 
-  if (isdefined(self.owner) && isdefined(var_1.gonevo))
-  self.owner thread scripts\mp\utility\game::leaderdialogonplayer(var_1.gonevo);
+  if(isdefined(self.owner) && isdefined(var_1.gonevo))
+    self.owner thread scripts\mp\utility\game::leaderdialogonplayer(var_1.gonevo);
 
   self notify("death");
 }
 
 removeweapons() {
-  if (self hasweapon("iw6_riotshield_mp")) {
-  self.restoreweapon = "iw6_riotshield_mp";
-  scripts\mp\utility\game::_takeweapon("iw6_riotshield_mp");
+  if(self hasweapon("iw6_riotshield_mp")) {
+    self.restoreweapon = "iw6_riotshield_mp";
+    scripts\mp\utility\game::_takeweapon("iw6_riotshield_mp");
   }
 }
 
 removeperks() {
-  if (scripts\mp\utility\game::_hasperk("specialty_explosivebullets")) {
-  self.restoreperk = "specialty_explosivebullets";
-  scripts\mp\utility\game::removeperk("specialty_explosivebullets");
+  if(scripts\mp\utility\game::_hasperk("specialty_explosivebullets")) {
+    self.restoreperk = "specialty_explosivebullets";
+    scripts\mp\utility\game::removeperk("specialty_explosivebullets");
   }
 }
 
 restoreweapons() {
-  if (isdefined(self.restoreweapon)) {
-  scripts\mp\utility\game::_giveweapon(self.restoreweapon);
-  self.restoreweapon = undefined;
+  if(isdefined(self.restoreweapon)) {
+    scripts\mp\utility\game::_giveweapon(self.restoreweapon);
+    self.restoreweapon = undefined;
   }
 }
 
 restoreperks() {
-  if (isdefined(self.restoreperk)) {
-  scripts\mp\utility\game::giveperk(self.restoreperk);
-  self.restoreperk = undefined;
+  if(isdefined(self.restoreperk)) {
+    scripts\mp\utility\game::giveperk(self.restoreperk);
+    self.restoreperk = undefined;
   }
 }
 
 createbombsquadmodel(var_00) {
   var_01 = level.placeableconfigs[var_00];
 
-  if (isdefined(var_1.modelbombsquad)) {
-  var_02 = spawn("script_model", self.origin);
-  var_2.angles = self.angles;
-  var_02 hide();
-  var_02 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
-  var_02 setmodel(var_1.modelbombsquad);
-  var_02 linkto(self);
-  var_02 setcontents(0);
-  self.bombsquadmodel = var_02;
-  self waittill("death");
+  if(isdefined(var_1.modelbombsquad)) {
+    var_02 = spawn("script_model", self.origin);
+    var_2.angles = self.angles;
+    var_02 hide();
+    var_02 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
+    var_02 setmodel(var_1.modelbombsquad);
+    var_02 linkto(self);
+    var_02 setcontents(0);
+    self.bombsquadmodel = var_02;
+    self waittill("death");
 
-  if (isdefined(var_02)) {
-  var_02 delete();
-  self.bombsquadmodel = undefined;
-  }
+    if(isdefined(var_02)) {
+      var_02 delete();
+      self.bombsquadmodel = undefined;
+    }
   }
 }
 
 showplacedmodel(var_00) {
   self show();
 
-  if (isdefined(self.bombsquadmodel)) {
-  self.bombsquadmodel show();
-  level notify("update_bombsquad");
+  if(isdefined(self.bombsquadmodel)) {
+    self.bombsquadmodel show();
+    level notify("update_bombsquad");
   }
 }
 
 hideplacedmodel(var_00) {
   self hide();
 
-  if (isdefined(self.bombsquadmodel))
-  self.bombsquadmodel hide();
+  if(isdefined(self.bombsquadmodel))
+    self.bombsquadmodel hide();
 }
 
 createcarriedobject(var_00) {
-  if (isdefined(self.iscarrying) && self.iscarrying)
-  return;
-
+  if(isdefined(self.iscarrying) && self.iscarrying) {
+    return;
+  }
   var_01 = spawnturret("misc_turret", self.origin + (0, 0, 25), "sentry_minigun_mp");
   var_1.angles = self.angles;
   var_1.owner = self;

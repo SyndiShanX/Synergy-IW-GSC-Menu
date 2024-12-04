@@ -5,5 +5,5 @@
 ****************************************************/
 
 main() {
-	self waittill("killanimscript");
+  self waittill("killanimscript");
 }

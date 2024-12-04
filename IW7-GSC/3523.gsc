@@ -12,12 +12,12 @@ _meth_819B(var_00, var_01) {
   scripts\mp\utility\game::func_1C47(0);
   var_02 = undefined;
 
-  if (var_0.streakname == "dronedrop")
-  var_02 = "deploy_dronepackage_mp";
-  else if (var_0.streakname == "remote_c8")
-  var_02 = "deploy_rc8_mp";
+  if(var_0.streakname == "dronedrop")
+    var_02 = "deploy_dronepackage_mp";
+  else if(var_0.streakname == "remote_c8")
+    var_02 = "deploy_rc8_mp";
   else
-  var_02 = "deploy_warden_mp";
+    var_02 = "deploy_warden_mp";
 
   var_03 = undefined;
   thread func_13A47(var_02);
@@ -25,45 +25,43 @@ _meth_819B(var_00, var_01) {
   thread watchforphaseshiftuse(var_02);
   thread watchforempapply(var_02);
 
-  if (!isai(self)) {
-  self notifyonplayercommand("equip_deploy_end", "+actionslot 4");
+  if(!isai(self)) {
+    self notifyonplayercommand("equip_deploy_end", "+actionslot 4");
 
-  if (!level.console) {
-  self notifyonplayercommand("equip_deploy_end", "+actionslot 5");
-  self notifyonplayercommand("equip_deploy_end", "+actionslot 6");
-  self notifyonplayercommand("equip_deploy_end", "+actionslot 7");
-  }
+    if(!level.console) {
+      self notifyonplayercommand("equip_deploy_end", "+actionslot 5");
+      self notifyonplayercommand("equip_deploy_end", "+actionslot 6");
+      self notifyonplayercommand("equip_deploy_end", "+actionslot 7");
+    }
   }
 
   for (;;) {
-  var_03 = func_13808("equip_deploy_succeeded", "equip_deploy_failed", "equip_deploy_end");
+    var_03 = func_13808("equip_deploy_succeeded", "equip_deploy_failed", "equip_deploy_end");
 
-  if (var_3.string == "equip_deploy_failed")
-  continue;
-  else if (var_3.string == "equip_deploy_succeeded") {
-  if (isdefined(var_01)) {
-  if (!self [[var_01]]())
-  continue;
-  else
-  break;
-  }
-  else
-  break;
-  }
-  else
-  break;
+    if(var_3.string == "equip_deploy_failed")
+      continue;
+    else if(var_3.string == "equip_deploy_succeeded") {
+      if(isdefined(var_01)) {
+        if(!self[[var_01]]())
+          continue;
+        else
+          break;
+      } else
+        break;
+    } else
+      break;
   }
 
-  if (isdefined(var_3.location) && isdefined(var_3.angles)) {
-  var_3.func_1349C = spawn("script_model", var_3.location);
-  var_3.func_1349C setmodel("ks_marker_mp");
-  var_3.func_1349C setotherent(self);
-  var_3.func_1349C setscriptablepartstate("target", "placed", 0);
-  var_3.func_1349C _meth_85C8(1);
+  if(isdefined(var_3.location) && isdefined(var_3.angles)) {
+    var_3.func_1349C = spawn("script_model", var_3.location);
+    var_3.func_1349C setmodel("ks_marker_mp");
+    var_3.func_1349C setotherent(self);
+    var_3.func_1349C setscriptablepartstate("target", "placed", 0);
+    var_3.func_1349C _meth_85C8(1);
   }
 
-  if (scripts\mp\utility\game::isreallyalive(self))
-  self notify("killstreak_finished_with_weapon_" + var_02);
+  if(scripts\mp\utility\game::isreallyalive(self))
+    self notify("killstreak_finished_with_weapon_" + var_02);
 
   self setscriptablepartstate("killstreak", "neutral", 0);
   scripts\mp\utility\game::func_11DB();
@@ -77,12 +75,12 @@ func_13A47(var_00) {
   self endon("killstreak_finished_with_weapon_" + var_00);
 
   for (;;) {
-  if (self getcurrentweapon() != var_00) {
-  self notify("equip_deploy_end");
-  break;
-  }
+    if(self getcurrentweapon() != var_00) {
+      self notify("equip_deploy_end");
+      break;
+    }
 
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -92,10 +90,10 @@ func_13A2F(var_00) {
   var_01 = self getweaponammoclip(var_00);
 
   for (;;) {
-  self waittill("weapon_fired", var_02);
+    self waittill("weapon_fired", var_02);
 
-  if (var_02 == var_00)
-  self setweaponammoclip(var_02, var_01);
+    if(var_02 == var_00)
+      self setweaponammoclip(var_02, var_01);
   }
 }
 
@@ -104,12 +102,12 @@ watchforphaseshiftuse(var_00) {
   self endon("killstreak_finished_with_weapon_" + var_00);
 
   for (;;) {
-  if (self isinphase()) {
-  self notify("equip_deploy_end");
-  break;
-  }
+    if(self isinphase()) {
+      self notify("equip_deploy_end");
+      break;
+    }
 
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -123,14 +121,14 @@ watchforempapply(var_00) {
 func_13808(var_00, var_01, var_02) {
   var_03 = spawnstruct();
 
-  if (isdefined(var_00))
-  childthread func_137F9(var_00, var_03);
+  if(isdefined(var_00))
+    childthread func_137F9(var_00, var_03);
 
-  if (isdefined(var_01))
-  childthread func_137F9(var_01, var_03);
+  if(isdefined(var_01))
+    childthread func_137F9(var_01, var_03);
 
-  if (isdefined(var_02))
-  childthread func_137F9(var_02, var_03);
+  if(isdefined(var_02))
+    childthread func_137F9(var_02, var_03);
 
   childthread func_137F9("death", var_03);
   var_03 waittill("returned", var_04, var_05, var_06, var_07);
@@ -144,8 +142,8 @@ func_13808(var_00, var_01, var_02) {
 }
 
 func_137F9(var_00, var_01) {
-  if (var_00 != "death")
-  self endon("death");
+  if(var_00 != "death")
+    self endon("death");
 
   var_01 endon("die");
   self waittill(var_00, var_02, var_03, var_04);

@@ -4,9 +4,9 @@
 ***************************************/
 
 createfx() {
-  if (!level.createfx_enabled)
-  return;
-
+  if(!level.createfx_enabled) {
+    return;
+  }
   _clearstartpointtransients();
   level.func_position_player = ::func_position_player;
   level.func_position_player_get = ::func_position_player_get;
@@ -31,17 +31,17 @@ func_49C3() {
   var_00 = [];
   var_0["trigger_multiple_createart_transient"] = scripts\sp\trigger::func_1272E;
 
-  foreach (var_04, var_02 in var_00) {
-  var_03 = getentarray(var_04, "classname");
-  scripts\engine\utility::array_levelthread(var_03, var_02);
+  foreach(var_04, var_02 in var_00) {
+    var_03 = getentarray(var_04, "classname");
+    scripts\engine\utility::array_levelthread(var_03, var_02);
   }
 }
 
 func_position_player_get(var_00) {
-  if (distancesquared(var_00, level.player.origin) > 4096) {
-  setdvar("createfx_playerpos_x", level.player.origin[0]);
-  setdvar("createfx_playerpos_y", level.player.origin[1]);
-  setdvar("createfx_playerpos_z", level.player.origin[2]);
+  if(distancesquared(var_00, level.player.origin) > 4096) {
+    setdvar("createfx_playerpos_x", level.player.origin[0]);
+    setdvar("createfx_playerpos_y", level.player.origin[1]);
+    setdvar("createfx_playerpos_z", level.player.origin[2]);
   }
 
   return level.player.origin;

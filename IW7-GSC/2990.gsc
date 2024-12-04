@@ -11,13 +11,13 @@ main(var_00, var_01, var_02) {
   precachemodel("veh_mil_air_un_destroyer_engines");
   precachemodel("veh_mil_air_un_destroyer_details");
 
-  if (issubstr(var_02, "cheap")) {
-  precachemodel("veh_mil_air_un_destroyer_periph");
-  precachemodel("ship_exterior_un_cannon_b_rig");
-  precacheturret("cap_turret_cannon_large_un");
-  level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
-  level._effect["capital_un_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_un_turret_small_cheap.vfx");
-  return;
+  if(issubstr(var_02, "cheap")) {
+    precachemodel("veh_mil_air_un_destroyer_periph");
+    precachemodel("ship_exterior_un_cannon_b_rig");
+    precacheturret("cap_turret_cannon_large_un");
+    level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
+    level._effect["capital_un_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_un_turret_small_cheap.vfx");
+    return;
   }
 
   precachemodel("veh_mil_air_un_destroyer");
@@ -43,9 +43,9 @@ init_location() {
   self.func_539B = ["veh_mil_air_un_destroyer_engines", "veh_mil_air_un_destroyer_details"];
   self.func_24C4 = ["tag_origin", "amb_turret_m_2", "amb_missile_l_1", "amb_turret_l_1", "amb_missile_r_4", "fx_engine_l_2", "fx_thruster_v_l_1", "fx_light_main_a_1"];
 
-  if (issubstr(self.classname, "cheap"))
-  return;
-
+  if(issubstr(self.classname, "cheap")) {
+    return;
+  }
   thread func_1EDC();
   self.func_7482 = "destroyer_un_warp";
   self.func_748F = "vfx_ftl_ca_destroyer";
@@ -57,6 +57,6 @@ init_location() {
 func_1EDC() {
   level.func_EC87["ftl_model"] = #animtree;
   level.func_EC8C["ftl_model"] = "vfx_ftl_ca_destroyer";
-  level.func_EC85["ftl_model"]["ftl_in"] = %vfx_ftl_ca_destroyer_in;
-  level.func_EC85["ftl_model"]["ftl_out"] = %vfx_ftl_ca_destroyer_out;
+  level.func_EC85["ftl_model"]["ftl_in"] = % vfx_ftl_ca_destroyer_in;
+  level.func_EC85["ftl_model"]["ftl_out"] = % vfx_ftl_ca_destroyer_out;
 }

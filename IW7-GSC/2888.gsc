@@ -13,8 +13,8 @@ main() {
   scripts\sp\introscreen::func_9631();
   scripts\sp\starts::func_9766();
 
-  if (scripts\sp\utility::func_93A6())
-  scripts\sp\specialist_MAYBE::init();
+  if(scripts\sp\utility::func_93A6())
+    scripts\sp\specialist_MAYBE::init();
 
   scripts\sp\load_code::vehicle_getspeed();
   scripts\sp\load_code::vehicle_finishdamage();
@@ -64,9 +64,9 @@ main() {
   scripts\sp\damagefeedback::init();
   scripts\sp\friendlyfire::main();
 
-  if (getdvarint("ai_iw7", 0) == 1) {
-  scripts\asm\asm::asm_globalinit();
-  scripts\aitypes\bt_util::init();
+  if(getdvarint("ai_iw7", 0) == 1) {
+    scripts\asm\asm::asm_globalinit();
+    scripts\aitypes\bt_util::init();
   }
 
   scripts\sp\fakeactor_node_MAYBE::func_F97C();
@@ -83,8 +83,8 @@ main() {
   func_0B09::func_952F();
   scripts\sp\utility::func_9674();
 
-  if (isdefined(level._meth_83DF))
-  [[level._meth_83DF]]();
+  if(isdefined(level._meth_83DF))
+    [[level._meth_83DF]]();
 
   scripts\sp\load_code::func_B3CD();
   func_0B77::main();
@@ -93,11 +93,11 @@ main() {
   scripts\sp\interaction_manager::func_9A2F();
   thread scripts\sp\geo_mover::func_409C();
 
-  if (scripts\sp\utility::func_93A6()) {
-  if (scripts\sp\specialist_MAYBE::func_2C8F())
-  scripts\sp\specialist_MAYBE::func_F2D2(1);
-  else
-  level.func_10964 thread scripts\sp\specialist_MAYBE::main();
+  if(scripts\sp\utility::func_93A6()) {
+    if(scripts\sp\specialist_MAYBE::func_2C8F())
+      scripts\sp\specialist_MAYBE::func_F2D2(1);
+    else
+      level.func_10964 thread scripts\sp\specialist_MAYBE::main();
   }
 
   scripts\sp\load_code::func_E810();
@@ -106,10 +106,10 @@ main() {
   setomnvar("ui_client_settle_time", var_00);
   var_01 = scripts\sp\utility::func_7F70(level.script);
 
-  if (isdefined(var_01) && var_01 != "")
-  setomnvar("ui_transition_movie", var_01);
+  if(isdefined(var_01) && var_01 != "")
+    setomnvar("ui_transition_movie", var_01);
   else
-  setomnvar("ui_transition_movie", "none");
+    setomnvar("ui_transition_movie", "none");
 
   scripts\sp\analytics::main();
 }

@@ -18,9 +18,9 @@ main() {
   self.behaviortreeasset = "enemy_combatant";
   self.func_1FA9 = "soldier";
 
-  if (isai(self)) {
-  self _meth_82DC(256.0, 0.0);
-  self _meth_82DB(768.0, 1024.0);
+  if(isai(self)) {
+    self _meth_82DC(256.0, 0.0);
+    self _meth_82DB(768.0, 1024.0);
   }
 
   self.weapon = func_0A2F::func_7BEC("rifle");
@@ -28,12 +28,12 @@ main() {
   var_01 = ["character_un_marines", "character_un_marines_female"];
 
   switch (scripts\code\character::get_random_character(2, var_00, var_01)) {
-  case 0:
-  func_08A3::main();
-  break;
-  case 1:
-  func_08B0::main();
-  break;
+    case 0:
+      func_08A3::main();
+      break;
+    case 1:
+      func_08B0::main();
+      break;
   }
 }
 

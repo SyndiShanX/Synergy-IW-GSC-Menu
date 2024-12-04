@@ -12,8 +12,8 @@ func_F87E() {
 func_12D44() {
   self notify("teleportUnset");
 
-  if (self.loadoutarchetype == "archetype_assassin")
-  self setscriptablepartstate("teleporttrail", "neutral", 0);
+  if(self.loadoutarchetype == "archetype_assassin")
+    self setscriptablepartstate("teleporttrail", "neutral", 0);
 
   self motionblurhqdisable();
   scripts\mp\utility\game::removedamagemodifier("teleport", 0);
@@ -41,32 +41,30 @@ func_13A73() {
   self endon("watchForTeleport");
 
   for (;;) {
-  var_00 = spawnstruct();
-  childthread func_13A77(var_00);
-  childthread func_13A75(var_00);
-  childthread func_13A74(var_00);
-  childthread func_13A76(var_00);
-  self waittill("teleportBeginRace");
-  waittillframeend;
+    var_00 = spawnstruct();
+    childthread func_13A77(var_00);
+    childthread func_13A75(var_00);
+    childthread func_13A74(var_00);
+    childthread func_13A76(var_00);
+    self waittill("teleportBeginRace");
+    waittillframeend;
 
-  if (isdefined(var_0.func_6ACF)) {
-  if (isplayer(self))
-  scripts\mp\hud_message::showerrormessage("MP_TELEPORT_FAILED");
+    if(isdefined(var_0.func_6ACF)) {
+      if(isplayer(self))
+        scripts\mp\hud_message::showerrormessage("MP_TELEPORT_FAILED");
 
-  scripts\mp\supers::refundsuper();
-  }
-  else if (isdefined(var_0.func_10DE6) && isdefined(var_0.func_4E59))
-  scripts\mp\supers::refundsuper();
-  else if (isdefined(var_0.func_637B)) {
-  self notify("teleport_success");
-  func_6391();
-  }
-  else if (isdefined(var_0.func_10DE6)) {
-  self notify("teleport_success");
-  func_10DFA(var_0.startpos, var_0.func_6378);
-  }
+      scripts\mp\supers::refundsuper();
+    } else if(isdefined(var_0.func_10DE6) && isdefined(var_0.func_4E59))
+      scripts\mp\supers::refundsuper();
+    else if(isdefined(var_0.func_637B)) {
+      self notify("teleport_success");
+      func_6391();
+    } else if(isdefined(var_0.func_10DE6)) {
+      self notify("teleport_success");
+      func_10DFA(var_0.startpos, var_0.func_6378);
+    }
 
-  self notify("teleportEndRace");
+    self notify("teleportEndRace");
   }
 }
 

@@ -12,10 +12,10 @@ init() {
   var_0.modelplacement = "revocator";
   var_0.modelplacementfailed = "revocator_bad";
   var_0.placedmodel = "revocator";
-  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
-  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
-  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.hintstring = & "COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = & "COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_0.placementheighttolerance = 30.0;
   var_0.placementradius = 24.0;
   var_0.carriedtrapoffset = (0, 0, 25);
@@ -40,19 +40,20 @@ watch_dpad() {
   self notifyonplayercommand("pullout_revocator", "+actionslot 3");
 
   for (;;) {
-  self waittill("pullout_revocator");
+    self waittill("pullout_revocator");
 
-  if (scripts\engine\utility::is_true(self.iscarrying))
-  continue;
-
-  if (scripts\engine\utility::is_true(self.linked_to_coaster))
-  continue;
-
-  if (isdefined(self.allow_carry) && self.allow_carry == 0)
-  continue;
-
-  if (scripts\cp\utility::is_valid_player())
-  break;
+    if(scripts\engine\utility::is_true(self.iscarrying)) {
+      continue;
+    }
+    if(scripts\engine\utility::is_true(self.linked_to_coaster)) {
+      continue;
+    }
+    if(isdefined(self.allow_carry) && self.allow_carry == 0) {
+      continue;
+    }
+    if(scripts\cp\utility::is_valid_player()) {
+      break;
+    }
   }
 
   thread _meth_8329(1);
@@ -66,18 +67,18 @@ _meth_8329(var_00, var_01, var_02) {
   removeperks();
   self.carriedsentry = var_03;
 
-  if (var_00)
-  var_3.firstplacement = 1;
+  if(var_00)
+    var_3.firstplacement = 1;
 
   var_04 = func_F687(var_03, var_00, var_01);
   self.carriedsentry = undefined;
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if (isdefined(var_03))
-  return 1;
+  if(isdefined(var_03))
+    return 1;
   else
-  return 0;
+    return 0;
 }
 
 func_F687(var_00, var_01, var_02) {
@@ -88,61 +89,61 @@ func_F687(var_00, var_01, var_02) {
   self notifyonplayercommand("place_revocator", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_revocator", "+actionslot 3");
 
-  if (!level.console) {
-  self notifyonplayercommand("cancel_revocator", "+actionslot 5");
-  self notifyonplayercommand("cancel_revocator", "+actionslot 6");
-  self notifyonplayercommand("cancel_revocator", "+actionslot 7");
+  if(!level.console) {
+    self notifyonplayercommand("cancel_revocator", "+actionslot 5");
+    self notifyonplayercommand("cancel_revocator", "+actionslot 6");
+    self notifyonplayercommand("cancel_revocator", "+actionslot 7");
   }
 
   for (;;) {
-  var_03 = scripts\engine\utility::waittill_any_return("place_revocator", "cancel_revocator", "force_cancel_placement");
+    var_03 = scripts\engine\utility::waittill_any_return("place_revocator", "cancel_revocator", "force_cancel_placement");
 
-  if (!isdefined(var_00)) {
-  scripts\engine\utility::allow_weapon(1);
-  return 1;
-  }
+    if(!isdefined(var_00)) {
+      scripts\engine\utility::allow_weapon(1);
+      return 1;
+    }
 
-  if (!isdefined(var_03))
-  var_03 = "force_cancel_placement";
+    if(!isdefined(var_03))
+      var_03 = "force_cancel_placement";
 
-  if (var_03 == "cancel_revocator" || var_03 == "force_cancel_placement") {
-  if (!var_01 && var_03 == "cancel_revocator")
-  continue;
+    if(var_03 == "cancel_revocator" || var_03 == "force_cancel_placement") {
+      if(!var_01 && var_03 == "cancel_revocator") {
+        continue;
+      }
+      scripts\engine\utility::allow_weapon(1);
+      var_00 func_E4B6();
 
-  scripts\engine\utility::allow_weapon(1);
-  var_00 func_E4B6();
+      if(var_03 != "force_cancel_placement")
+        thread watch_dpad();
+      else if(var_01)
+        scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
-  if (var_03 != "force_cancel_placement")
-  thread watch_dpad();
-  else if (var_01)
-  scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      return 0;
+    }
 
-  return 0;
-  }
+    if(!var_0.canbeplaced) {
+      continue;
+    }
+    if(var_01)
+      scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
-  if (!var_0.canbeplaced)
-  continue;
-
-  if (var_01)
-  scripts\cp\utility::remove_crafted_item_from_inventory(self);
-
-  var_00 func_E4B9(var_02, self);
-  scripts\engine\utility::allow_weapon(1);
-  return 1;
+    var_00 func_E4B9(var_02, self);
+    scripts\engine\utility::allow_weapon(1);
+    return 1;
   }
 }
 
 removeperks() {
-  if (scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
-  self.restoreperk = "specialty_explosivebullets";
-  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
+  if(scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
+    self.restoreperk = "specialty_explosivebullets";
+    scripts\cp\utility::_unsetperk("specialty_explosivebullets");
   }
 }
 
 restoreperks() {
-  if (isdefined(self.restoreperk)) {
-  scripts\cp\utility::giveperk(self.restoreperk);
-  self.restoreperk = undefined;
+  if(isdefined(self.restoreperk)) {
+    scripts\cp\utility::giveperk(self.restoreperk);
+    self.restoreperk = undefined;
   }
 }
 
@@ -167,10 +168,10 @@ func_4A08(var_00, var_01) {
   var_02 makeunusable();
   var_02 setsentryowner(var_00);
 
-  if (!isdefined(var_01))
-  var_2.func_130D2 = 1;
+  if(!isdefined(var_01))
+    var_2.func_130D2 = 1;
   else
-  var_2.func_130D2 = var_01;
+    var_2.func_130D2 = var_01;
 
   var_02 func_E4B4(var_00);
   return var_02;
@@ -184,22 +185,22 @@ func_E4B4(var_00) {
 func_E4B1(var_00) {
   self waittill("death");
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   func_E4B8();
   playloopsound(self.origin, "trap_revocator_deactivate");
 
-  if (isdefined(self.charge_fx))
-  self.charge_fx delete();
+  if(isdefined(self.charge_fx))
+    self.charge_fx delete();
 
-  if (isdefined(self.zap_model))
-  self.zap_model delete();
+  if(isdefined(self.zap_model))
+    self.zap_model delete();
 
   scripts\cp\utility::removefromtraplist();
 
-  if (isdefined(self))
-  self delete();
+  if(isdefined(self))
+    self delete();
 }
 
 func_E4B9(var_00, var_01) {
@@ -223,8 +224,8 @@ func_E4B9(var_00, var_01) {
 func_E4B6() {
   self.carriedby getrigindexfromarchetyperef();
 
-  if (isdefined(self.owner))
-  self.owner.iscarrying = 0;
+  if(isdefined(self.owner))
+    self.owner.iscarrying = 0;
 
   self.carriedrevocator delete();
   self delete();
@@ -268,22 +269,22 @@ func_E4B2() {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_00);
+    self waittill("trigger", var_00);
 
-  if (!var_00 scripts\cp\utility::is_valid_player())
-  continue;
+    if(!var_00 scripts\cp\utility::is_valid_player()) {
+      continue;
+    }
+    if(scripts\engine\utility::is_true(var_0.iscarrying)) {
+      continue;
+    }
+    self playsound("trap_revocator_pickup");
+    var_00 thread _meth_8329(0, self.lifespan, self.func_130D2);
 
-  if (scripts\engine\utility::is_true(var_0.iscarrying))
-  continue;
+    if(isdefined(self.charge_fx))
+      self.charge_fx delete();
 
-  self playsound("trap_revocator_pickup");
-  var_00 thread _meth_8329(0, self.lifespan, self.func_130D2);
-
-  if (isdefined(self.charge_fx))
-  self.charge_fx delete();
-
-  scripts\cp\utility::removefromtraplist();
-  self delete();
+    scripts\cp\utility::removefromtraplist();
+    self delete();
   }
 }
 
@@ -298,37 +299,38 @@ func_E4BA() {
   var_01 = 1600;
 
   while (self.func_130D2 > 0) {
-  var_02 = scripts\cp\cp_agent_utils::getaliveagents();
-  var_02 = scripts\engine\utility::get_array_of_closest(self.origin, var_02);
+    var_02 = scripts\cp\cp_agent_utils::getaliveagents();
+    var_02 = scripts\engine\utility::get_array_of_closest(self.origin, var_02);
 
-  foreach (var_04 in var_02) {
-  if (!isdefined(var_4.agent_type))
-  continue;
+    foreach(var_04 in var_02) {
+      if(!isdefined(var_4.agent_type)) {
+        continue;
+      }
+      if(var_4.agent_type == "superslasher" || var_4.agent_type == "slasher" || var_4.agent_type == "zombie_sasquatch" || var_4.agent_type == "lumberjack" || scripts\engine\utility::is_true(var_4.is_skeleton)) {
+        continue;
+      }
+      if(!isdefined(var_04) || !isalive(var_04) || !var_4.entered_playspace || scripts\engine\utility::is_true(var_4.marked_for_death) || var_4.agent_type == "zombie_brute" || var_4.agent_type == "zombie_grey" || var_4.agent_type == "zombie_ghost" || var_4.team == "allies") {
+        continue;
+      }
+      if(distancesquared(self.origin, var_4.origin) < var_01) {
+        self setscriptablepartstate("base", "active");
 
-  if (var_4.agent_type == "superslasher" || var_4.agent_type == "slasher" || var_4.agent_type == "zombie_sasquatch" || var_4.agent_type == "lumberjack" || scripts\engine\utility::is_true(var_4.is_skeleton))
-  continue;
+        if(scripts\engine\utility::is_true(var_4.is_suicide_bomber) || scripts\engine\utility::is_true(var_4.is_dancing) || scripts\engine\utility::flag_exist("defense_sequence_active") && scripts\engine\utility::flag("defense_sequence_active"))
+          var_04 getrandomarmkillstreak(var_4.health + 50, self.origin);
+        else
+          var_04 turn_zombie(self.owner);
 
-  if (!isdefined(var_04) || !isalive(var_04) || !var_4.entered_playspace || scripts\engine\utility::is_true(var_4.marked_for_death) || var_4.agent_type == "zombie_brute" || var_4.agent_type == "zombie_grey" || var_4.agent_type == "zombie_ghost" || var_4.team == "allies")
-  continue;
+        self.func_130D2--;
+        wait 1;
+        self setscriptablepartstate("base", "idle");
 
-  if (distancesquared(self.origin, var_4.origin) < var_01) {
-  self setscriptablepartstate("base", "active");
+        if(self.func_130D2 <= 0) {
+          break;
+        }
+      }
+    }
 
-  if (scripts\engine\utility::is_true(var_4.is_suicide_bomber) || scripts\engine\utility::is_true(var_4.is_dancing) || scripts\engine\utility::flag_exist("defense_sequence_active") && scripts\engine\utility::flag("defense_sequence_active"))
-  var_04 getrandomarmkillstreak(var_4.health + 50, self.origin);
-  else
-  var_04 turn_zombie(self.owner);
-
-  self.func_130D2--;
-  wait 1;
-  self setscriptablepartstate("base", "idle");
-
-  if (self.func_130D2 <= 0)
-  break;
-  }
-  }
-
-  wait 0.1;
+    wait 0.1;
   }
 
   self notify("death");
@@ -345,13 +347,13 @@ turn_zombie(var_00) {
   var_1.allowpain = 0;
   var_01 notify("turned");
 
-  if (scripts\engine\utility::is_true(var_1.about_to_dance)) {
-  if (isdefined(var_1.og_goalradius))
-  var_1.goalradius = var_1.og_goalradius;
+  if(scripts\engine\utility::is_true(var_1.about_to_dance)) {
+    if(isdefined(var_1.og_goalradius))
+      var_1.goalradius = var_1.og_goalradius;
 
-  var_1.og_goalradius = undefined;
-  var_1.about_to_dance = 0;
-  var_1.scripted_mode = 0;
+    var_1.og_goalradius = undefined;
+    var_1.about_to_dance = 0;
+    var_1.scripted_mode = 0;
   }
 
   var_1.melee_damage_amt = int(scripts\cp\zombies\zombies_spawning::calculatezombiehealth("generic_zombie") * 0.5);
@@ -363,22 +365,22 @@ turn_zombie(var_00) {
   var_01 thread kill_turned_zombie_after_time(180);
   var_01 thread remove_zombie_from_turned_list_on_death();
 
-  if (isdefined(var_00))
-  var_00 scripts\cp\cp_merits::processmerit("mt_turned_zombies");
+  if(isdefined(var_00))
+    var_00 scripts\cp\cp_merits::processmerit("mt_turned_zombies");
 
   func_B2EB(var_01);
 }
 
 func_B2EB(var_00) {
-  if (!isdefined(level.turned_zombies))
-  level.turned_zombies = [];
+  if(!isdefined(level.turned_zombies))
+    level.turned_zombies = [];
 
   level.turned_zombies[level.turned_zombies.size] = var_00;
 
-  if (level.turned_zombies.size > 6) {
-  var_00 = level.turned_zombies[0];
-  level.turned_zombies = scripts\engine\utility::array_remove(level.turned_zombies, var_00);
-  var_00 getrandomarmkillstreak(var_0.health + 100, var_0.origin);
+  if(level.turned_zombies.size > 6) {
+    var_00 = level.turned_zombies[0];
+    level.turned_zombies = scripts\engine\utility::array_remove(level.turned_zombies, var_00);
+    var_00 getrandomarmkillstreak(var_0.health + 100, var_0.origin);
   }
 }
 
@@ -386,8 +388,8 @@ kill_turned_zombie_after_time(var_00) {
   self endon("death");
 
   while (var_00 > 0) {
-  wait 1;
-  var_0--;
+    wait 1;
+    var_0--;
   }
 
   self getrandomarmkillstreak(self.health + 100, self.origin);

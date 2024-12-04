@@ -5,109 +5,105 @@
 ************************/
 
 main() {
-	func_9732();
-	thread func_10A9E();
-	thread func_13437();
+  func_9732();
+  thread func_10A9E();
+  thread func_13437();
 }
 
 func_9732() {
-	self.var_10E6D = spawnstruct();
-	self.var_10E6D.var_10A9D = [];
-	self.var_10E6D.var_74D5 = [];
-	scripts\sp\_utility::func_65E0("stealth_enabled");
-	scripts\sp\_utility::func_65E0("stealth_override_goal");
-	scripts\sp\_utility::func_65E1("stealth_enabled");
-	scripts\sp\_utility::func_65E0("stealth_in_shadow");
-	lib_0F27::func_868B("stealth_spotted");
-	lib_0F27::func_8682();
+  self.var_10E6D = spawnstruct();
+  self.var_10E6D.var_10A9D = [];
+  self.var_10E6D.var_74D5 = [];
+  scripts\sp\_utility::func_65E0("stealth_enabled");
+  scripts\sp\_utility::func_65E0("stealth_override_goal");
+  scripts\sp\_utility::func_65E1("stealth_enabled");
+  scripts\sp\_utility::func_65E0("stealth_in_shadow");
+  lib_0F27::func_868B("stealth_spotted");
+  lib_0F27::func_8682();
 }
 
 func_10A9E() {
-	self endon("death");
-	self notify("spotted_thread");
-	self endon("spotted_thread");
-	for(;;) {
-		scripts\sp\_utility::func_65E3("stealth_enabled");
-		lib_0F27::func_868E("stealth_spotted");
-		if(!scripts\sp\_utility::func_65DB("stealth_enabled")) {
-			scripts\sp\_utility::func_65E3("stealth_enabled");
-		}
+  self endon("death");
+  self notify("spotted_thread");
+  self endon("spotted_thread");
+  for (;;) {
+    scripts\sp\_utility::func_65E3("stealth_enabled");
+    lib_0F27::func_868E("stealth_spotted");
+    if(!scripts\sp\_utility::func_65DB("stealth_enabled")) {
+      scripts\sp\_utility::func_65E3("stealth_enabled");
+    }
 
-		thread func_10E1B();
-		scripts\sp\_utility::func_65E3("stealth_enabled");
-		lib_0F27::func_868D("stealth_spotted");
-		if(!scripts\sp\_utility::func_65DB("stealth_enabled")) {
-			scripts\sp\_utility::func_65E3("stealth_enabled");
-		}
+    thread func_10E1B();
+    scripts\sp\_utility::func_65E3("stealth_enabled");
+    lib_0F27::func_868D("stealth_spotted");
+    if(!scripts\sp\_utility::func_65DB("stealth_enabled")) {
+      scripts\sp\_utility::func_65E3("stealth_enabled");
+    }
 
-		thread func_10E20();
-	}
+    thread func_10E20();
+  }
 }
 
 func_10E1B() {
-	thread scripts\sp\_utility::func_F2DA(0);
-	self.var_10E6D.var_C3EF = self.objective_state;
-	self.objective_state = 0;
-	self.var_72DE = undefined;
-	self.ignoreme = 1;
-	if(isdefined(self.var_10E6D.var_74D5["hidden"])) {
-		lib_0F18::func_10E8B("hidden");
-	}
+  thread scripts\sp\_utility::func_F2DA(0);
+  self.var_10E6D.var_C3EF = self.objective_state;
+  self.objective_state = 0;
+  self.var_72DE = undefined;
+  self.ignoreme = 1;
+  if(isdefined(self.var_10E6D.var_74D5["hidden"])) {
+    lib_0F18::func_10E8B("hidden");
+  }
 }
 
 func_10E20() {
-	thread scripts\sp\_utility::func_F2DA(1);
-	if(isdefined(self.var_10E6D.var_C3EF)) {
-		self.objective_state = self.var_10E6D.var_C3EF;
-	}
-	else
-	{
-		self.objective_state = 3;
-	}
+  thread scripts\sp\_utility::func_F2DA(1);
+  if(isdefined(self.var_10E6D.var_C3EF)) {
+    self.objective_state = self.var_10E6D.var_C3EF;
+  } else {
+    self.objective_state = 3;
+  }
 
-	self.ignoreme = 0;
-	self _meth_8250(0);
-	scripts\sp\_utility::func_5514();
-	if(isdefined(self.var_10E6D.var_74D5["spotted"])) {
-		lib_0F18::func_10E8B("spotted");
-	}
+  self.ignoreme = 0;
+  self _meth_8250(0);
+  scripts\sp\_utility::func_5514();
+  if(isdefined(self.var_10E6D.var_74D5["spotted"])) {
+    lib_0F18::func_10E8B("spotted");
+  }
 }
 
 makeentitynomeleetarget() {
-	self endon("death");
+  self endon("death");
 }
 
 func_13437() {
-	self endon("death");
-	self endon("pain_death");
-	for(;;) {
-		scripts\sp\_utility::func_65E3("stealth_enabled");
-		if(!isdefined(self.var_10E6D.var_931F)) {
-			self.setturretnode = func_7938();
-		}
+  self endon("death");
+  self endon("pain_death");
+  for (;;) {
+    scripts\sp\_utility::func_65E3("stealth_enabled");
+    if(!isdefined(self.var_10E6D.var_931F)) {
+      self.setturretnode = func_7938();
+    }
 
-		wait(0.05);
-	}
+    wait(0.05);
+  }
 }
 
 func_7938() {
-	var_00 = self.a.pose;
-	if(var_00 == "back") {
-		var_00 = "prone";
-	}
+  var_00 = self.a.pose;
+  if(var_00 == "back") {
+    var_00 = "prone";
+  }
 
-	if(lib_0F27::func_869D()) {
-		var_01 = "spotted";
-	}
-	else
-	{
-		var_01 = "hidden";
-	}
+  if(lib_0F27::func_869D()) {
+    var_01 = "spotted";
+  } else {
+    var_01 = "hidden";
+  }
 
-	var_02 = level.var_10E6D.var_53A0.var_DCCA[var_01][var_00];
-	if(scripts\sp\_utility::func_65DB("stealth_in_shadow")) {
-		var_02 = max(level.var_10E6D.var_53A0.var_DCCA["hidden"]["prone"],var_02 * 0.5);
-	}
+  var_02 = level.var_10E6D.var_53A0.var_DCCA[var_01][var_00];
+  if(scripts\sp\_utility::func_65DB("stealth_in_shadow")) {
+    var_02 = max(level.var_10E6D.var_53A0.var_DCCA["hidden"]["prone"], var_02 * 0.5);
+  }
 
-	return var_02;
+  return var_02;
 }

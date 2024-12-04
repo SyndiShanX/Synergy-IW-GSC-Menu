@@ -75,11 +75,11 @@ player_init() {
 }
 
 set_player_count() {
-  if (!isdefined(level.max_concurrent_player_count))
-  level.max_concurrent_player_count = 0;
+  if(!isdefined(level.max_concurrent_player_count))
+    level.max_concurrent_player_count = 0;
 
-  if (level.players.size >= level.max_concurrent_player_count)
-  level.max_concurrent_player_count = level.players.size + 1;
+  if(level.players.size >= level.max_concurrent_player_count)
+    level.max_concurrent_player_count = level.players.size + 1;
 }
 
 set_split_screen() {
@@ -87,21 +87,21 @@ set_split_screen() {
 }
 
 set_join_in_progress() {
-  if (prematch_over())
-  setmatchdata("players", self.clientid, "joinInProgress", 1);
+  if(prematch_over())
+    setmatchdata("players", self.clientid, "joinInProgress", 1);
 }
 
 prematch_over() {
-  if (scripts\engine\utility::flag_exist("introscreen_over") && scripts\engine\utility::flag("introscreen_over"))
-  return 1;
+  if(scripts\engine\utility::flag_exist("introscreen_over") && scripts\engine\utility::flag("introscreen_over"))
+    return 1;
 
   return 0;
 }
 
 update_challenges_status(var_00, var_01) {
-  if (level.func_13F0B.challenge_results.size > 25)
-  return;
-
+  if(level.func_13F0B.challenge_results.size > 25) {
+    return;
+  }
   var_02 = spawnstruct();
   var_2.challenge_name = var_00;
   var_2.result = var_01;
@@ -121,25 +121,25 @@ inc_bleedout_counts() {
 }
 
 inc_laststand_record(var_00) {
-  if (!isdefined(self.func_13F0B.laststand_record[var_00][level.wave_num]))
-  self.func_13F0B.laststand_record[var_00][level.wave_num] = 0;
+  if(!isdefined(self.func_13F0B.laststand_record[var_00][level.wave_num]))
+    self.func_13F0B.laststand_record[var_00][level.wave_num] = 0;
 
   self.func_13F0B.laststand_record[var_00][level.wave_num]++;
 }
 
 update_spending_type(var_00, var_01) {
   switch (var_01) {
-  case "weapon":
-  self.func_13F0B.single_value_stats["cashSpentOnWeapon"].value = self.func_13F0B.single_value_stats["cashSpentOnWeapon"].value + var_00;
-  break;
-  case "ability":
-  self.func_13F0B.single_value_stats["cashSpentOnAbility"].value = self.func_13F0B.single_value_stats["cashSpentOnAbility"].value + var_00;
-  break;
-  case "trap":
-  self.func_13F0B.single_value_stats["cashSpentOnTrap"].value = self.func_13F0B.single_value_stats["cashSpentOnTrap"].value + var_00;
-  break;
-  default:
-  break;
+    case "weapon":
+      self.func_13F0B.single_value_stats["cashSpentOnWeapon"].value = self.func_13F0B.single_value_stats["cashSpentOnWeapon"].value + var_00;
+      break;
+    case "ability":
+      self.func_13F0B.single_value_stats["cashSpentOnAbility"].value = self.func_13F0B.single_value_stats["cashSpentOnAbility"].value + var_00;
+      break;
+    case "trap":
+      self.func_13F0B.single_value_stats["cashSpentOnTrap"].value = self.func_13F0B.single_value_stats["cashSpentOnTrap"].value + var_00;
+      break;
+    default:
+      break;
   }
 }
 
@@ -148,16 +148,16 @@ endgame(var_00, var_01) {
   write_global_clientmatchdata();
   log_matchdata_at_game_end();
 
-  foreach (var_04, var_03 in level.players) {
-  scripts\cp\cp_persistence::increment_player_career_total_waves(var_03);
-  scripts\cp\cp_persistence::increment_player_career_total_score(var_03);
-  var_03 set_player_data(var_01);
-  var_03 set_player_game_data();
-  var_03 write_clientmatchdata_for_player(var_03, var_04);
+  foreach(var_04, var_03 in level.players) {
+    scripts\cp\cp_persistence::increment_player_career_total_waves(var_03);
+    scripts\cp\cp_persistence::increment_player_career_total_score(var_03);
+    var_03 set_player_data(var_01);
+    var_03 set_player_game_data();
+    var_03 write_clientmatchdata_for_player(var_03, var_04);
   }
 
-  if (isdefined(level.analyticsendgame))
-  [[level.analyticsendgame]]();
+  if(isdefined(level.analyticsendgame))
+    [[level.analyticsendgame]]();
 
   sendmatchdata();
   sendclientmatchdata();
@@ -167,11 +167,11 @@ set_player_data(var_00) {
   var_01 = self getrankedplayerdata("cp", "coopCareerStats", "totalGameplayTime");
   var_02 = self getrankedplayerdata("cp", "coopCareerStats", "gamesPlayed");
 
-  if (!isdefined(var_01))
-  var_01 = 0;
+  if(!isdefined(var_01))
+    var_01 = 0;
 
-  if (!isdefined(var_02))
-  var_02 = 0;
+  if(!isdefined(var_02))
+    var_02 = 0;
 
   var_01 = var_01 + var_00 / 1000;
   var_02 = var_02 + 1;
@@ -183,10 +183,10 @@ set_game_data(var_00, var_01) {
   var_02 = "challengesCompleted";
   var_03 = level.func_13F0B;
 
-  foreach (var_07, var_05 in var_3.single_value_stats)
+  foreach(var_07, var_05 in var_3.single_value_stats)
   var_06 = validate_value(var_5.value, var_5.value_type);
 
-  foreach (var_10, var_09 in var_3.challenge_results) {}
+  foreach(var_10, var_09 in var_3.challenge_results) {}
 
   setmatchdata("commonMatchData", "playerCountEnd", level.players.size);
   setmatchdata("commonMatchData", "utcEndTimeSeconds", getsystemtime());
@@ -203,8 +203,8 @@ set_player_game_data() {
 }
 
 get_player_matchdata(var_00, var_01) {
-  if (isdefined(level.matchdata["player"][self.clientid]) && isdefined(level.matchdata["player"][self.clientid][var_00]))
-  return level.matchdata["player"][self.clientid][var_00];
+  if(isdefined(level.matchdata["player"][self.clientid]) && isdefined(level.matchdata["player"][self.clientid][var_00]))
+    return level.matchdata["player"][self.clientid][var_00];
 
   return var_01;
 }
@@ -215,10 +215,10 @@ set_custom_stats() {
   var_02 = self getrankedplayerdata("cp", "progression", "playerLevel", "rank");
   var_03 = self getrankedplayerdata("cp", "progression", "playerLevel", "prestige");
 
-  if (isdefined(self.wave_num_when_joined))
-  setmatchdata("players", self.clientid, "waveEnd", level.wave_num - self.wave_num_when_joined);
+  if(isdefined(self.wave_num_when_joined))
+    setmatchdata("players", self.clientid, "waveEnd", level.wave_num - self.wave_num_when_joined);
   else
-  setmatchdata("players", self.clientid, "waveEnd", level.wave_num);
+    setmatchdata("players", self.clientid, "waveEnd", level.wave_num);
 
   setmatchdata("players", self.clientid, "doorsOpened", get_player_matchdata("opening_the_doors", 0));
   setmatchdata("players", self.clientid, "moneyEarned", int(get_player_matchdata("currency_earned", 0)));
@@ -242,13 +242,13 @@ set_single_value_stats() {}
 
 validate_value(var_00, var_01) {
   switch (var_01) {
-  case "byte":
-  return validate_byte(var_00);
-  case "short":
-  return validate_short(var_00);
-  case "int":
-  return validate_int(var_00);
-  default:
+    case "byte":
+      return validate_byte(var_00);
+    case "short":
+      return validate_short(var_00);
+    case "int":
+      return validate_int(var_00);
+    default:
   }
 }
 
@@ -294,60 +294,60 @@ init_analytics(var_00) {
   level.clientmatchdata = [];
 
   for (var_14 = var_12; var_14 <= var_13; var_14++) {
-  var_15 = tablelookup(var_00, var_01, var_14, var_04);
+    var_15 = tablelookup(var_00, var_01, var_14, var_04);
 
-  if (var_15 == "")
-  continue;
+    if(var_15 == "") {
+      continue;
+    }
+    var_16 = tablelookup(var_00, var_01, var_14, var_05);
 
-  var_16 = tablelookup(var_00, var_01, var_14, var_05);
+    if(var_16 != "")
+      level.blackbox_data_type[var_15] = var_16;
 
-  if (var_16 != "")
-  level.blackbox_data_type[var_15] = var_16;
+    var_17 = tablelookup(var_00, var_01, var_14, var_06);
 
-  var_17 = tablelookup(var_00, var_01, var_14, var_06);
+    if(var_17 != "")
+      level.matchdata_data_type[var_15] = var_17;
 
-  if (var_17 != "")
-  level.matchdata_data_type[var_15] = var_17;
+    var_18 = tablelookup(var_00, var_01, var_14, var_07);
 
-  var_18 = tablelookup(var_00, var_01, var_14, var_07);
+    if(var_18 != "") {
+      level.matchdata_struct[var_15] = [];
+      level.matchdata[var_15] = [];
+    }
 
-  if (var_18 != "") {
-  level.matchdata_struct[var_15] = [];
-  level.matchdata[var_15] = [];
-  }
+    var_19 = tablelookup(var_00, var_01, var_14, var_08);
 
-  var_19 = tablelookup(var_00, var_01, var_14, var_08);
+    if(var_19 != "")
+      level.clientmatchdata_data_type[var_15] = var_19;
 
-  if (var_19 != "")
-  level.clientmatchdata_data_type[var_15] = var_19;
+    var_20 = tablelookup(var_00, var_01, var_14, var_09);
 
-  var_20 = tablelookup(var_00, var_01, var_14, var_09);
-
-  if (var_20 != "") {
-  level.clientmatchdata_struct[var_15] = [];
-  level.clientmatchdata[var_15] = [];
-  }
+    if(var_20 != "") {
+      level.clientmatchdata_struct[var_15] = [];
+      level.clientmatchdata[var_15] = [];
+    }
   }
 
   level.analytics_event = [];
 
   for (var_14 = var_10; var_14 <= var_11; var_14++) {
-  var_21 = tablelookup(var_00, var_01, var_14, var_02);
+    var_21 = tablelookup(var_00, var_01, var_14, var_02);
 
-  if (var_21 == "")
-  break;
+    if(var_21 == "") {
+      break;
+    }
+    var_22 = tablelookup(var_00, var_01, var_14, var_03);
+    level.analytics_event[var_21] = var_22;
+    var_23 = strtok(var_22, " ");
 
-  var_22 = tablelookup(var_00, var_01, var_14, var_03);
-  level.analytics_event[var_21] = var_22;
-  var_23 = strtok(var_22, " ");
+    foreach(var_25 in var_23) {
+      if(isdefined(level.matchdata_struct[var_25]))
+        level.matchdata_struct[var_25][var_21] = 0;
 
-  foreach (var_25 in var_23) {
-  if (isdefined(level.matchdata_struct[var_25]))
-  level.matchdata_struct[var_25][var_21] = 0;
-
-  if (isdefined(level.clientmatchdata_struct[var_25]) && isdefined(level.clientmatchdata_data_type[var_21]))
-  level.clientmatchdata_struct[var_25][var_21] = 0;
-  }
+      if(isdefined(level.clientmatchdata_struct[var_25]) && isdefined(level.clientmatchdata_data_type[var_21]))
+        level.clientmatchdata_struct[var_25][var_21] = 0;
+    }
   }
 }
 
@@ -359,17 +359,17 @@ func_AF6A(var_00, var_01, var_02, var_03, var_04) {
 }
 
 log_matchdata_at_game_end() {
-  foreach (var_08, var_01 in level.matchdata) {
-  foreach (var_07, var_03 in var_01) {
-  foreach (var_06, var_05 in var_03) {
-  if (var_08 == "match") {
-  setmatchdata("matchData", var_06, int(var_05));
-  continue;
-  }
+  foreach(var_08, var_01 in level.matchdata) {
+    foreach(var_07, var_03 in var_01) {
+      foreach(var_06, var_05 in var_03) {
+        if(var_08 == "match") {
+          setmatchdata("matchData", var_06, int(var_05));
+          continue;
+        }
 
-  setmatchdata("players", int(var_07), var_06, int(var_05));
-  }
-  }
+        setmatchdata("players", int(var_07), var_06, int(var_05));
+      }
+    }
   }
 }
 
@@ -378,47 +378,47 @@ func_AF60(var_00, var_01, var_02) {
   var_04 = "analytics_cp_";
 
   switch (var_2.size) {
-  case 1:
-  bbprint(var_04 + var_00, var_03, var_2[0]);
-  break;
-  case 2:
-  bbprint(var_04 + var_00, var_03, var_2[0], var_2[1]);
-  break;
-  case 3:
-  bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2]);
-  break;
-  case 4:
-  bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3]);
-  break;
-  case 5:
-  bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4]);
-  break;
-  case 6:
-  bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5]);
-  break;
-  case 7:
-  bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6]);
-  break;
-  case 8:
-  bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6], var_2[7]);
-  break;
-  case 9:
-  bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6], var_2[7], var_2[8]);
-  break;
-  case 10:
-  bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6], var_2[7], var_2[8], var_2[9]);
-  break;
+    case 1:
+      bbprint(var_04 + var_00, var_03, var_2[0]);
+      break;
+    case 2:
+      bbprint(var_04 + var_00, var_03, var_2[0], var_2[1]);
+      break;
+    case 3:
+      bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2]);
+      break;
+    case 4:
+      bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3]);
+      break;
+    case 5:
+      bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4]);
+      break;
+    case 6:
+      bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5]);
+      break;
+    case 7:
+      bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6]);
+      break;
+    case 8:
+      bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6], var_2[7]);
+      break;
+    case 9:
+      bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6], var_2[7], var_2[8]);
+      break;
+    case 10:
+      bbprint(var_04 + var_00, var_03, var_2[0], var_2[1], var_2[2], var_2[3], var_2[4], var_2[5], var_2[6], var_2[7], var_2[8], var_2[9]);
+      break;
   }
 }
 
 get_bb_string(var_00) {
   var_01 = "";
 
-  foreach (var_04, var_03 in var_00) {
-  var_01 = var_01 + (var_03 + " " + level.blackbox_data_type[var_03]);
+  foreach(var_04, var_03 in var_00) {
+    var_01 = var_01 + (var_03 + " " + level.blackbox_data_type[var_03]);
 
-  if (var_04 != var_0.size - 1)
-  var_01 = var_01 + " ";
+    if(var_04 != var_0.size - 1)
+      var_01 = var_01 + " ";
   }
 
   return var_01;
@@ -432,37 +432,37 @@ get_data_to_update(var_00) {
 log_matchdata(var_00, var_01, var_02, var_03) {
   var_04 = 0;
 
-  foreach (var_06 in var_01) {
-  if (is_matchdata_struct(var_06)) {
-  var_07 = var_3[var_04];
+  foreach(var_06 in var_01) {
+    if(is_matchdata_struct(var_06)) {
+      var_07 = var_3[var_04];
 
-  if (!isdefined(level.matchdata[var_06][var_07]))
-  level.matchdata[var_06][var_07] = level.matchdata_struct[var_06];
+      if(!isdefined(level.matchdata[var_06][var_07]))
+        level.matchdata[var_06][var_07] = level.matchdata_struct[var_06];
 
-  level.matchdata[var_06][var_07][var_00] = level.matchdata[var_06][var_07][var_00] + var_02;
-  var_4++;
-  }
+      level.matchdata[var_06][var_07][var_00] = level.matchdata[var_06][var_07][var_00] + var_02;
+      var_4++;
+    }
   }
 }
 
 func_AF65(var_00, var_01, var_02, var_03) {
-  if (!isdefined(var_03))
-  return;
-
+  if(!isdefined(var_03)) {
+    return;
+  }
   var_04 = 0;
 
-  if (is_clientmatchdata_data(var_00)) {
-  foreach (var_06 in var_01) {
-  if (is_clientmatchdata_struct(var_06)) {
-  var_07 = var_3[var_04];
+  if(is_clientmatchdata_data(var_00)) {
+    foreach(var_06 in var_01) {
+      if(is_clientmatchdata_struct(var_06)) {
+        var_07 = var_3[var_04];
 
-  if (!isdefined(level.clientmatchdata[var_06][var_07]))
-  level.clientmatchdata[var_06][var_07] = level.clientmatchdata_struct[var_06];
+        if(!isdefined(level.clientmatchdata[var_06][var_07]))
+          level.clientmatchdata[var_06][var_07] = level.clientmatchdata_struct[var_06];
 
-  level.clientmatchdata[var_06][var_07][var_00] = level.clientmatchdata[var_06][var_07][var_00] + var_02;
-  var_4++;
-  }
-  }
+        level.clientmatchdata[var_06][var_07][var_00] = level.clientmatchdata[var_06][var_07][var_00] + var_02;
+        var_4++;
+      }
+    }
   }
 }
 
@@ -484,25 +484,25 @@ write_global_clientmatchdata() {
   setclientmatchdata("scoreboardPlayerCount", level.players.size);
   setclientmatchdata("map", level.script);
 
-  if (isdefined(level.write_global_clientmatchdata_func))
-  [[level.write_global_clientmatchdata_func]]();
+  if(isdefined(level.write_global_clientmatchdata_func))
+    [[level.write_global_clientmatchdata_func]]();
 }
 
 write_clientmatchdata_for_player(var_00, var_01) {
   setclientmatchdata("player", var_01, "username", var_0.name);
   setclientmatchdata("player", var_01, "rank", var_00 scripts\cp\cp_persistence::get_player_rank());
 
-  if (!isdefined(var_0.player_character_index))
-  return;
-
+  if(!isdefined(var_0.player_character_index)) {
+    return;
+  }
   setclientmatchdata("player", var_01, "characterIndex", var_0.player_character_index);
   var_02 = level.clientmatchdata["player"][var_0.clientid];
 
-  if (isdefined(var_02)) {
-  foreach (var_05, var_04 in var_02)
-  setclientmatchdata("player", var_01, var_05, int(var_04));
+  if(isdefined(var_02)) {
+    foreach(var_05, var_04 in var_02)
+    setclientmatchdata("player", var_01, var_05, int(var_04));
   }
 
-  if (isdefined(level.endgame_write_clientmatchdata_for_player_func))
-  [[level.endgame_write_clientmatchdata_for_player_func]](var_00, var_01);
+  if(isdefined(level.endgame_write_clientmatchdata_for_player_func))
+    [[level.endgame_write_clientmatchdata_for_player_func]](var_00, var_01);
 }

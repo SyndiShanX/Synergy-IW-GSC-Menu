@@ -85,8 +85,8 @@ func_5A5D(var_00) {
   thread func_139E8(var_00);
   thread func_3E15(var_00);
 
-  if (var_00 == "specialty_hardline")
-  scripts\mp\killstreaks\killstreaks::func_F866();
+  if(var_00 == "specialty_hardline")
+    scripts\mp\killstreaks\killstreaks::func_F866();
 
   scripts\mp\matchdata::logkillstreakevent(var_00 + "_ks", self.origin);
 }
@@ -94,8 +94,8 @@ func_5A5D(var_00) {
 func_58E3(var_00, var_01) {
   scripts\mp\utility\game::giveperk(var_00);
 
-  if (isdefined(var_01))
-  scripts\mp\matchdata::logkillstreakevent(var_01, self.origin);
+  if(isdefined(var_01))
+    scripts\mp\matchdata::logkillstreakevent(var_01, self.origin);
 }
 
 func_139E8(var_00) {
@@ -107,18 +107,18 @@ func_139E8(var_00) {
 func_3E15(var_00) {
   var_01 = scripts\mp\class::canplayerplacesentry(var_00);
 
-  if (var_01 != "specialty_null") {
-  scripts\mp\utility\game::giveperk(var_01);
-  thread func_139E8(var_01);
+  if(var_01 != "specialty_null") {
+    scripts\mp\utility\game::giveperk(var_01);
+    thread func_139E8(var_01);
   }
 }
 
 func_9EE0(var_00) {
   for (var_01 = 1; var_01 < 4; var_1++) {
-  if (isdefined(self.pers["killstreaks"][var_01].streakname) && self.pers["killstreaks"][var_01].streakname == var_00) {
-  if (self.pers["killstreaks"][var_01].func_269A)
-  return 1;
-  }
+    if(isdefined(self.pers["killstreaks"][var_01].streakname) && self.pers["killstreaks"][var_01].streakname == var_00) {
+      if(self.pers["killstreaks"][var_01].func_269A)
+        return 1;
+    }
   }
 
   return 0;

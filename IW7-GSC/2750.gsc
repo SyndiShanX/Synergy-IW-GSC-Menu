@@ -6,12 +6,12 @@
 callback_hostmigration() {
   level.hostmigrationreturnedplayercount = 0;
 
-  if (level.gameended)
-  return;
-
+  if(level.gameended) {
+    return;
+  }
   level thread hostmigrationconnectwatcher();
 
-  foreach (var_01 in level.characters)
+  foreach(var_01 in level.characters)
   var_1.hostmigrationcontrolsfrozen = 0;
 
   level.hostmigrationtimer = 1;
@@ -20,14 +20,14 @@ callback_hostmigration() {
   level notify("host_migration_begin");
   scripts\mp\gamelogic::func_12F45();
 
-  foreach (var_01 in level.characters) {
-  if (!isdefined(var_01))
-  continue;
+  foreach(var_01 in level.characters) {
+    if(!isdefined(var_01)) {
+      continue;
+    }
+    var_01 thread hostmigrationtimerthink();
 
-  var_01 thread hostmigrationtimerthink();
-
-  if (isplayer(var_01))
-  var_01 setclientomnvar("ui_session_state", var_1.sessionstate);
+    if(isplayer(var_01))
+      var_01 setclientomnvar("ui_session_state", var_1.sessionstate);
   }
 
   level endon("host_migration_begin");
@@ -48,8 +48,8 @@ hostmigrationconnectwatcher() {
   level waittill("connected", var_00);
   var_00 thread hostmigrationtimerthink();
 
-  if (isplayer(var_00))
-  var_00 setclientomnvar("ui_session_state", var_0.sessionstate);
+  if(isplayer(var_00))
+    var_00 setclientomnvar("ui_session_state", var_0.sessionstate);
 }
 
 hostmigrationwait() {
@@ -62,8 +62,8 @@ hostmigrationwait() {
   wait 5;
   level.ingraceperiod = 0;
 
-  if (scripts\mp\utility\game::istrue(level.func_72F2) && !scripts\mp\utility\game::istrue(level.func_72F1))
-  setomnvar("ui_match_start_text", "opponent_forfeiting_in");
+  if(scripts\mp\utility\game::istrue(level.func_72F2) && !scripts\mp\utility\game::istrue(level.func_72F1))
+    setomnvar("ui_match_start_text", "opponent_forfeiting_in");
 }
 
 hostmigrationwaitforplayers() {
@@ -72,26 +72,26 @@ hostmigrationwaitforplayers() {
 }
 
 hostmigrationname(var_00) {
-  if (!isdefined(var_00))
-  return "<removed_ent>";
+  if(!isdefined(var_00))
+    return "<removed_ent>";
 
   var_01 = -1;
   var_02 = "?";
 
-  if (isdefined(var_0.entity_number))
-  var_01 = var_0.entity_number;
+  if(isdefined(var_0.entity_number))
+    var_01 = var_0.entity_number;
 
-  if (isplayer(var_00) && isdefined(var_0.name))
-  var_02 = var_0.name;
+  if(isplayer(var_00) && isdefined(var_0.name))
+    var_02 = var_0.name;
 
-  if (isplayer(var_00))
-  return "player <" + var_02 + ">";
+  if(isplayer(var_00))
+    return "player <" + var_02 + ">";
 
-  if (isagent(var_00) && scripts\mp\utility\game::isgameparticipant(var_00))
-  return "participant agent <" + var_01 + ">";
+  if(isagent(var_00) && scripts\mp\utility\game::isgameparticipant(var_00))
+    return "participant agent <" + var_01 + ">";
 
-  if (isagent(var_00))
-  return "non-participant agent <" + var_01 + ">";
+  if(isagent(var_00))
+    return "non-participant agent <" + var_01 + ">";
 
   return "unknown entity <" + var_01 + ">";
 }
@@ -101,7 +101,7 @@ hostmigrationtimerthink_internal() {
   level endon("host_migration_end");
 
   while (!scripts\mp\utility\game::isreallyalive(self))
-  self waittill("spawned");
+    self waittill("spawned");
 
   self.hostmigrationcontrolsfrozen = 1;
   scripts\mp\utility\game::freezecontrolswrapper(1);
@@ -112,15 +112,15 @@ hostmigrationtimerthink() {
   self endon("disconnect");
   hostmigrationtimerthink_internal();
 
-  if (self.hostmigrationcontrolsfrozen) {
-  scripts\mp\utility\game::freezecontrolswrapper(0);
-  self.hostmigrationcontrolsfrozen = undefined;
+  if(self.hostmigrationcontrolsfrozen) {
+    scripts\mp\utility\game::freezecontrolswrapper(0);
+    self.hostmigrationcontrolsfrozen = undefined;
   }
 }
 
 waittillhostmigrationdone() {
-  if (!isdefined(level.hostmigrationtimer))
-  return 0;
+  if(!isdefined(level.hostmigrationtimer))
+    return 0;
 
   var_00 = gettime();
   level waittill("host_migration_end");
@@ -128,27 +128,27 @@ waittillhostmigrationdone() {
 }
 
 waittillhostmigrationstarts(var_00) {
-  if (isdefined(level.hostmigrationtimer))
-  return;
-
+  if(isdefined(level.hostmigrationtimer)) {
+    return;
+  }
   level endon("host_migration_begin");
   wait(var_00);
 }
 
 waitlongdurationwithhostmigrationpause(var_00) {
-  if (var_00 == 0)
-  return;
-
+  if(var_00 == 0) {
+    return;
+  }
   var_01 = gettime();
   var_02 = gettime() + var_00 * 1000;
 
   while (gettime() < var_02) {
-  waittillhostmigrationstarts((var_02 - gettime()) / 1000);
+    waittillhostmigrationstarts((var_02 - gettime()) / 1000);
 
-  if (isdefined(level.hostmigrationtimer)) {
-  var_03 = waittillhostmigrationdone();
-  var_02 = var_02 + var_03;
-  }
+    if(isdefined(level.hostmigrationtimer)) {
+      var_03 = waittillhostmigrationdone();
+      var_02 = var_02 + var_03;
+    }
   }
 
   waittillhostmigrationdone();
@@ -158,19 +158,19 @@ waitlongdurationwithhostmigrationpause(var_00) {
 waittill_notify_or_timeout_hostmigration_pause(var_00, var_01) {
   self endon(var_00);
 
-  if (var_01 == 0)
-  return;
-
+  if(var_01 == 0) {
+    return;
+  }
   var_02 = gettime();
   var_03 = gettime() + var_01 * 1000;
 
   while (gettime() < var_03) {
-  waittillhostmigrationstarts((var_03 - gettime()) / 1000);
+    waittillhostmigrationstarts((var_03 - gettime()) / 1000);
 
-  if (isdefined(level.hostmigrationtimer)) {
-  var_04 = waittillhostmigrationdone();
-  var_03 = var_03 + var_04;
-  }
+    if(isdefined(level.hostmigrationtimer)) {
+      var_04 = waittillhostmigrationdone();
+      var_03 = var_03 + var_04;
+    }
   }
 
   waittillhostmigrationdone();
@@ -178,26 +178,26 @@ waittill_notify_or_timeout_hostmigration_pause(var_00, var_01) {
 }
 
 waitlongdurationwithgameendtimeupdate(var_00) {
-  if (var_00 == 0)
-  return;
-
+  if(var_00 == 0) {
+    return;
+  }
   var_01 = gettime();
   var_02 = gettime() + var_00 * 1000;
 
   while (gettime() < var_02) {
-  waittillhostmigrationstarts((var_02 - gettime()) / 1000);
+    waittillhostmigrationstarts((var_02 - gettime()) / 1000);
+
+    while (isdefined(level.hostmigrationtimer)) {
+      var_02 = var_02 + 1000;
+      setgameendtime(int(var_02));
+      wait 1;
+    }
+  }
 
   while (isdefined(level.hostmigrationtimer)) {
-  var_02 = var_02 + 1000;
-  setgameendtime(int(var_02));
-  wait 1;
-  }
-  }
-
-  while (isdefined(level.hostmigrationtimer)) {
-  var_02 = var_02 + 1000;
-  setgameendtime(int(var_02));
-  wait 1;
+    var_02 = var_02 + 1000;
+    setgameendtime(int(var_02));
+    wait 1;
   }
 
   return gettime() - var_01;

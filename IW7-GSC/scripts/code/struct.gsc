@@ -5,11 +5,11 @@
 ***********************************/
 
 initstructs() {
-	level.struct = [];
+  level.struct = [];
 }
 
 createstruct() {
-	var_00 = spawnstruct();
-	level.struct[level.struct.size] = var_00;
-	return var_00;
+  var_00 = spawnstruct();
+  level.struct[level.struct.size] = var_00;
+  return var_00;
 }

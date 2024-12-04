@@ -4,37 +4,41 @@
 ***************************************/
 
 codecallback_agentadded() {
-  self [[level.initagentscriptvariables]]();
+  self[[level.initagentscriptvariables]]();
   var_00 = "axis";
 
-  if (level.numagents % 2 == 0)
-  var_00 = "allies";
+  if(level.numagents % 2 == 0)
+    var_00 = "allies";
 
   level.numagents++;
   self sethitlocdamagetable("locdmgtable\mp_lochit_dmgtable");
-  self [[level.setagentteam]](var_00);
+  self[[level.setagentteam]](var_00);
   level.agentarray[level.agentarray.size] = self;
 }
 
 codecallback_agentdamaged(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
-  var_01 = [[level.agentvalidateattacker]](var_01);
-  var_12 = self [[level.agentfunc]]("on_damaged");
+  var_01 = [
+    [level.agentvalidateattacker]
+  ](var_01);
+  var_12 = self[[level.agentfunc]]("on_damaged");
 
-  if (isdefined(var_12))
-  self [[var_12]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+  if(isdefined(var_12))
+    self[[var_12]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
 }
 
 codecallback_agentimpaled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
-  if (isdefined(level.callbackplayerimpaled))
-  [[level.callbackplayerimpaled]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07);
+  if(isdefined(level.callbackplayerimpaled))
+    [[level.callbackplayerimpaled]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07);
 }
 
 codecallback_agentkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
-  var_01 = [[level.agentvalidateattacker]](var_01);
-  var_10 = self [[level.agentfunc]]("on_killed");
+  var_01 = [
+    [level.agentvalidateattacker]
+  ](var_01);
+  var_10 = self[[level.agentfunc]]("on_killed");
 
-  if (isdefined(var_10))
-  self thread [[var_10]](var_00, var_01, var_02, var_04, var_05, var_06, var_07, var_08, var_09);
+  if(isdefined(var_10))
+    self thread[[var_10]](var_00, var_01, var_02, var_04, var_05, var_06, var_07, var_08, var_09);
 }
 
 func_00A7(var_00, var_01, var_02, var_03) {}
@@ -50,23 +54,25 @@ init() {
 }
 
 connectnewagent(var_00, var_01, var_02) {
-  var_03 = [[level.getfreeagent]](var_00);
+  var_03 = [
+    [level.getfreeagent]
+  ](var_00);
 
-  if (isdefined(var_03)) {
-  var_3.connecttime = gettime();
+  if(isdefined(var_03)) {
+    var_3.connecttime = gettime();
 
-  if (isdefined(var_01))
-  var_03 [[level.setagentteam]](var_01);
-  else
-  var_03 [[level.setagentteam]](var_3.team);
+    if(isdefined(var_01))
+      var_03[[level.setagentteam]](var_01);
+    else
+      var_03[[level.setagentteam]](var_3.team);
 
-  if (isdefined(var_02))
-  var_3.class_override = var_02;
+    if(isdefined(var_02))
+      var_3.class_override = var_02;
 
-  if (isdefined(level.agent_funcs[var_00]["onAIConnect"]))
-  var_03 [[var_03 [[level.agentfunc]]("onAIConnect")]]();
+    if(isdefined(level.agent_funcs[var_00]["onAIConnect"]))
+      var_03[[var_03[[level.agentfunc]]("onAIConnect")]]();
 
-  var_03 [[level.addtocharactersarray]]();
+    var_03[[level.addtocharactersarray]]();
   }
 
   return var_03;
@@ -83,12 +89,12 @@ add_agents_to_game() {
   var_01 = getmaxagents();
 
   while (level.agentarray.size < var_01) {
-  var_02 = addagent();
+    var_02 = addagent();
 
-  if (!isdefined(var_02)) {
-  scripts\engine\utility::waitframe();
-  continue;
-  }
+    if(!isdefined(var_02)) {
+      scripts\engine\utility::waitframe();
+      continue;
+    }
   }
 }
 

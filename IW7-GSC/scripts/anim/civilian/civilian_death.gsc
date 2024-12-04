@@ -5,5 +5,5 @@
 ****************************************************/
 
 main() {
-	scripts\anim\death::main();
+  scripts\anim\death::main();
 }

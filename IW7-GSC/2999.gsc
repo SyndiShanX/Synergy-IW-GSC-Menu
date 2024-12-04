@@ -96,19 +96,19 @@ func_F8F8() {
 }
 
 func_F8F7(var_00, var_01, var_02) {
-  if (isdefined(var_00) && var_00 == "allies") {
-  self.model = "ship_exterior_un_cannon_b_rig";
-  self.team = "allies";
+  if(isdefined(var_00) && var_00 == "allies") {
+    self.model = "ship_exterior_un_cannon_b_rig";
+    self.team = "allies";
   } else {
-  self.model = "ship_exterior_un_cannon_b_rig";
-  self.team = "axis";
+    self.model = "ship_exterior_un_cannon_b_rig";
+    self.team = "axis";
   }
 
-  if (!isdefined(var_01) || int(var_01) < 0)
-  var_01 = 1;
+  if(!isdefined(var_01) || int(var_01) < 0)
+    var_01 = 1;
 
-  if (!isdefined(var_02) || int(var_02) < 0)
-  var_02 = 1;
+  if(!isdefined(var_02) || int(var_02) < 0)
+    var_02 = 1;
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_cannon_large_ca";
@@ -144,29 +144,29 @@ func_F8F7(var_00, var_01, var_02) {
   self.func_10241.health = 2500 * int(var_01);
   self.func_10241.func_AF57 = func_0BB6::func_6D4D;
 
-  if (isdefined(var_00) && var_00 == "allies")
-  self.func_10241.func_6D32 = "capitalship_megacannon_fire";
+  if(isdefined(var_00) && var_00 == "allies")
+    self.func_10241.func_6D32 = "capitalship_megacannon_fire";
   else
-  self.func_10241.func_6D32 = "capitalship_megacannon_fire";
+    self.func_10241.func_6D32 = "capitalship_megacannon_fire";
 
   self.func_3AF3 = "large_target";
   self.func_11549 = "JACKAL_76MM_DSM";
 }
 
 func_F8FE(var_00, var_01, var_02, var_03) {
-  if (isdefined(var_00) && var_00 == "allies") {
-  self.model = "ship_exterior_un_turret_b_rig";
-  self.team = "allies";
+  if(isdefined(var_00) && var_00 == "allies") {
+    self.model = "ship_exterior_un_turret_b_rig";
+    self.team = "allies";
   } else {
-  self.model = "sdf_ship_exterior_un_turret_b_rig";
-  self.team = "axis";
+    self.model = "sdf_ship_exterior_un_turret_b_rig";
+    self.team = "axis";
   }
 
-  if (!isdefined(var_01) || int(var_01) < 0)
-  var_01 = 1;
+  if(!isdefined(var_01) || int(var_01) < 0)
+    var_01 = 1;
 
-  if (!isdefined(var_02) || int(var_02) < 0)
-  var_02 = 1;
+  if(!isdefined(var_02) || int(var_02) < 0)
+    var_02 = 1;
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_small_constant";
@@ -203,8 +203,8 @@ func_F8FE(var_00, var_01, var_02, var_03) {
   self.func_10241.func_AF57 = func_0BB6::func_6D4D;
   self.func_10241.func_6CF8 = func_0BB6::func_6D4F;
 
-  if (isdefined(var_00) && var_00 == "allies")
-  self.func_10241.func_6CF8 = func_0BB6::func_6D4D;
+  if(isdefined(var_00) && var_00 == "allies")
+    self.func_10241.func_6CF8 = func_0BB6::func_6D4D;
 
   self.func_10241.func_6D34 = "capship_phalanx_fire_lp";
   self.func_10241.func_6D36 = "capship_phalanx_fire_stop";
@@ -213,12 +213,12 @@ func_F8FE(var_00, var_01, var_02, var_03) {
   self.func_1D52 = 4;
   self.func_3AF3 = "large_target";
 
-  if (isdefined(var_03) && var_3.classname == "script_vehicle_capitalship_missileboat_ca") {
-  self.model = "sdf_ship_exterior_un_turret_b_rig_s0p75";
-  self.func_4D1E.fx.func_1037F = "capital_turret_smolder_sm_mb";
-  self.func_4D1E.fx.death = "capital_turret_death_sm_mb";
-  self.func_3AF3 = "small_target";
-  self.func_10241.health = 1500 * int(var_01);
+  if(isdefined(var_03) && var_3.classname == "script_vehicle_capitalship_missileboat_ca") {
+    self.model = "sdf_ship_exterior_un_turret_b_rig_s0p75";
+    self.func_4D1E.fx.func_1037F = "capital_turret_smolder_sm_mb";
+    self.func_4D1E.fx.death = "capital_turret_death_sm_mb";
+    self.func_3AF3 = "small_target";
+    self.func_10241.health = 1500 * int(var_01);
   }
 
   self.func_11549 = "JACKAL_30MM_GRUNION";
@@ -232,19 +232,19 @@ func_F8FF(var_00, var_01, var_02, var_03) {
 }
 
 func_F8F6(var_00, var_01, var_02) {
-  if (isdefined(var_00) && var_00 == "allies") {
-  self.model = "ship_exterior_ca_cannon_a_rig";
-  self.team = "allies";
+  if(isdefined(var_00) && var_00 == "allies") {
+    self.model = "ship_exterior_ca_cannon_a_rig";
+    self.team = "allies";
   } else {
-  self.model = "ship_exterior_ca_cannon_a_rig";
-  self.team = "axis";
+    self.model = "ship_exterior_ca_cannon_a_rig";
+    self.team = "axis";
   }
 
-  if (!isdefined(var_01) || int(var_01) < 0)
-  var_01 = 1;
+  if(!isdefined(var_01) || int(var_01) < 0)
+    var_01 = 1;
 
-  if (!isdefined(var_02) || int(var_02) < 0)
-  var_02 = 1;
+  if(!isdefined(var_02) || int(var_02) < 0)
+    var_02 = 1;
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_med_flak";
@@ -297,11 +297,11 @@ func_F8FD(var_00, var_01, var_02) {
   self.model = "ship_exterior_un_turret_a_rig";
   self.team = var_00;
 
-  if (!isdefined(var_01) || int(var_01) < 0)
-  var_01 = 1;
+  if(!isdefined(var_01) || int(var_01) < 0)
+    var_01 = 1;
 
-  if (!isdefined(var_02) || int(var_02) < 0)
-  var_02 = 1;
+  if(!isdefined(var_02) || int(var_02) < 0)
+    var_02 = 1;
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_phalanx";
@@ -350,19 +350,19 @@ func_F8FD(var_00, var_01, var_02) {
 }
 
 func_F8FA(var_00, var_01, var_02) {
-  if (isdefined(var_00) && var_00 == "allies") {
-  self.model = "cap_turret_missile_un";
-  self.team = "allies";
+  if(isdefined(var_00) && var_00 == "allies") {
+    self.model = "cap_turret_missile_un";
+    self.team = "allies";
   } else {
-  self.model = "ship_exterior_ca_turret_missile_b";
-  self.team = "axis";
+    self.model = "ship_exterior_ca_turret_missile_b";
+    self.team = "axis";
   }
 
-  if (!isdefined(var_01) || int(var_01) < 0)
-  var_01 = 1;
+  if(!isdefined(var_01) || int(var_01) < 0)
+    var_01 = 1;
 
-  if (!isdefined(var_02) || int(var_02) < 0)
-  var_02 = 1;
+  if(!isdefined(var_02) || int(var_02) < 0)
+    var_02 = 1;
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_missile_barrage";
@@ -406,19 +406,19 @@ func_F8FA(var_00, var_01, var_02) {
 }
 
 func_F8FC(var_00, var_01, var_02) {
-  if (isdefined(var_00) && var_00 == "allies") {
-  self.model = "cap_turret_missile_un";
-  self.team = "allies";
+  if(isdefined(var_00) && var_00 == "allies") {
+    self.model = "cap_turret_missile_un";
+    self.team = "allies";
   } else {
-  self.model = "ship_exterior_ca_turret_missile_b";
-  self.team = "axis";
+    self.model = "ship_exterior_ca_turret_missile_b";
+    self.team = "axis";
   }
 
-  if (!isdefined(var_01) || int(var_01) < 0)
-  var_01 = 1;
+  if(!isdefined(var_01) || int(var_01) < 0)
+    var_01 = 1;
 
-  if (!isdefined(var_02) || int(var_02) < 0)
-  var_02 = 1;
+  if(!isdefined(var_02) || int(var_02) < 0)
+    var_02 = 1;
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_missile_barrage";
@@ -527,25 +527,25 @@ func_F8FB(var_00, var_01, var_02, var_03) {
   self.func_4D1E.fx.func_1037F = "capital_turret_smolder_smt";
   self.func_4D1E.fx.death = "capital_turret_death_smt";
 
-  if (isdefined(var_00) && var_00 == "allies") {
-  self.model = "ship_exterior_ca_turret_missile_b";
-  self.team = "allies";
-  self.func_10241.func_6CF8 = func_0BB6::func_6D0C;
+  if(isdefined(var_00) && var_00 == "allies") {
+    self.model = "ship_exterior_ca_turret_missile_b";
+    self.team = "allies";
+    self.func_10241.func_6CF8 = func_0BB6::func_6D0C;
   } else {
-  self.model = "ship_exterior_ca_turret_missile_b";
-  self.team = "axis";
-  self.func_10241.func_6CF8 = func_0BB6::func_6D0C;
+    self.model = "ship_exterior_ca_turret_missile_b";
+    self.team = "axis";
+    self.func_10241.func_6CF8 = func_0BB6::func_6D0C;
   }
 
   self.func_3AF3 = "small_target";
 
-  if (isdefined(var_03) && var_3.classname == "script_vehicle_capitalship_missileboat_ca") {
-  self.model = "ship_exterior_ca_turret_missile_b_s0p75";
-  self.func_10241.health = 1800;
-  self.func_10241.func_EF5F = "missileboat_missile_launch";
-  self.func_10241.func_EF60 = "missileboat_missile_launch_for_plr";
-  self.func_4D1E.fx.func_1037F = "capital_turret_smolder_smt_mb";
-  self.func_4D1E.fx.death = "capital_turret_death_smt_mb";
+  if(isdefined(var_03) && var_3.classname == "script_vehicle_capitalship_missileboat_ca") {
+    self.model = "ship_exterior_ca_turret_missile_b_s0p75";
+    self.func_10241.health = 1800;
+    self.func_10241.func_EF5F = "missileboat_missile_launch";
+    self.func_10241.func_EF60 = "missileboat_missile_launch_for_plr";
+    self.func_4D1E.fx.func_1037F = "capital_turret_smolder_smt_mb";
+    self.func_4D1E.fx.death = "capital_turret_death_smt_mb";
   }
 
   self.func_11549 = "JACKAL_MMT38_WHIPLASH";
@@ -583,11 +583,11 @@ func_F9DB(var_00, var_01) {
   self.model = "veh_mil_air_ca_missile_boat_turret";
   self.team = "axis";
 
-  if (!isdefined(var_00) || int(var_00) < 0)
-  var_00 = 1;
+  if(!isdefined(var_00) || int(var_00) < 0)
+    var_00 = 1;
 
-  if (!isdefined(var_01) || int(var_01) < 0)
-  var_01 = 1;
+  if(!isdefined(var_01) || int(var_01) < 0)
+    var_01 = 1;
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_small_constant";
@@ -677,25 +677,25 @@ func_B878(var_00, var_01, var_02) {
   var_04 = "JACKAL_MMT38_WHIPLASH";
   var_05 = "small_target";
 
-  if (scripts\sp\utility::func_B324()) {
-  var_00 [[level.func_A056.func_11543]]("missileboat_turret", var_04, var_05, "enemy_jackal");
-  var_00 [[level.func_A056.func_F389]]("tag_lockon", [var_0.func_5978]);
+  if(scripts\sp\utility::func_B324()) {
+    var_00[[level.func_A056.func_11543]]("missileboat_turret", var_04, var_05, "enemy_jackal");
+    var_00[[level.func_A056.func_F389]]("tag_lockon", [var_0.func_5978]);
   }
 }
 
 func_5F1E(var_00, var_01, var_02, var_03, var_04) {}
 
 func_CA98(var_00) {
-  if (isdefined(self.func_CA99))
-  return;
-
+  if(isdefined(self.func_CA99)) {
+    return;
+  }
   self.func_CA99 = 1;
   playfxontag(level._effect["phalanx_burst_fire"], self, var_00);
 
-  if (!isdefined(self.func_B04A) && isdefined(self.func_10241.func_6D32)) {
-  self.func_B04A = spawn("script_origin", self gettagorigin("TAG_FLASH"));
-  self.func_B04A.angles = self gettagangles("TAG_FLASH");
-  self.func_B04A linkto(self);
-  self.func_B04A playloopsound(self.func_10241.func_6D32);
+  if(!isdefined(self.func_B04A) && isdefined(self.func_10241.func_6D32)) {
+    self.func_B04A = spawn("script_origin", self gettagorigin("TAG_FLASH"));
+    self.func_B04A.angles = self gettagangles("TAG_FLASH");
+    self.func_B04A linkto(self);
+    self.func_B04A playloopsound(self.func_10241.func_6D32);
   }
 }

@@ -5,20 +5,20 @@
 ***************************************************/
 
 main() {
-	func_B0CC();
+  func_B0CC();
 }
 
 func_B0CC() {
-	var_00 = [];
-	var_00["traverseAnim"] = func_7814();
-	if(getdvarint("ai_iw7",0) == 0) {
-		scripts\anim\traverse\shared::func_5AC3(var_00);
-		return;
-	}
+  var_00 = [];
+  var_00["traverseAnim"] = func_7814();
+  if(getdvarint("ai_iw7", 0) == 0) {
+    scripts\anim\traverse\shared::func_5AC3(var_00);
+    return;
+  }
 
-	self waittill("killanimscript");
+  self waittill("killanimscript");
 }
 
 func_7814() {
-	return %flood_traverse_stepup_32_v1;
+  return % flood_traverse_stepup_32_v1;
 }

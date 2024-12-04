@@ -5,9 +5,9 @@
 **********************************************/
 
 main() {
-	func_138D0();
+  func_138D0();
 }
 
 func_138D0() {
-	self waittill("killanimscript");
+  self waittill("killanimscript");
 }

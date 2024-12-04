@@ -14,8 +14,8 @@ main() {
   self.voice = "unitednations";
   self give_explosive_touch_on_revived("vestlight");
 
-  if (issentient(self))
-  self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
+  if(issentient(self))
+    self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 
   self glinton(#animtree);
 }

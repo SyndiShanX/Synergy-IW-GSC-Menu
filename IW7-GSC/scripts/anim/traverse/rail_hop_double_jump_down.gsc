@@ -5,9 +5,9 @@
 ***************************************************************/
 
 main() {
-	func_5AC0();
+  func_5AC0();
 }
 
 func_5AC0() {
-	self waittill("killanimscript");
+  self waittill("killanimscript");
 }

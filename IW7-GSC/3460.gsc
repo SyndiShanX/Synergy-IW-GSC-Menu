@@ -33,14 +33,14 @@ init() {
 onuse(var_00) {
   var_01 = scripts\mp\utility\game::getotherteam(self.team);
 
-  if (level.teambased && level.teamairdenied[var_01] || !level.teambased && isdefined(level.airdeniedplayer) && level.airdeniedplayer == self) {
-  scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
-  return 0;
+  if(level.teambased && level.teamairdenied[var_01] || !level.teambased && isdefined(level.airdeniedplayer) && level.airdeniedplayer == self) {
+    scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    return 0;
   } else {
-  thread dostrike(var_0.lifeid, "air_superiority");
-  scripts\mp\matchdata::logkillstreakevent("air_superiority", self.origin);
-  thread scripts\mp\utility\game::teamplayercardsplash("used_air_superiority", self);
-  return 1;
+    thread dostrike(var_0.lifeid, "air_superiority");
+    scripts\mp\matchdata::logkillstreakevent("air_superiority", self.origin);
+    thread scripts\mp\utility\game::teamplayercardsplash("used_air_superiority", self);
+    return 1;
   }
 }
 
@@ -56,9 +56,9 @@ dostrike(var_00, var_01) {
   wait 2;
   scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if (isdefined(self)) {
-  dooneflyby(var_01, var_00, var_3.targetpos, -1 * var_3.func_6F25, var_3.height);
-  self waittill("aa_flyby_complete");
+  if(isdefined(self)) {
+    dooneflyby(var_01, var_00, var_3.targetpos, -1 * var_3.func_6F25, var_3.height);
+    self waittill("aa_flyby_complete");
   }
 
   level.teamairdenied[var_04] = 0;
@@ -81,13 +81,13 @@ func_24D8(var_00, var_01, var_02, var_03, var_04) {
   var_07 = var_6.func_C23A;
 
   for (var_08 = var_5.size - 1; var_08 >= 0 && var_07 > 0; var_8--) {
-  var_09 = var_5[var_08];
+    var_09 = var_5[var_08];
 
-  if (isdefined(var_09) && isalive(var_09)) {
-  fireattarget(var_09);
-  var_7--;
-  wait 1;
-  }
+    if(isdefined(var_09) && isalive(var_09)) {
+      fireattarget(var_09);
+      var_7--;
+      wait 1;
+    }
   }
 }
 
@@ -96,11 +96,13 @@ cleanupgamemodes(var_00, var_01, var_02) {
 }
 
 func_6CC8(var_00, var_01, var_02, var_03, var_04) {
-  if (isdefined(var_03)) {
-  foreach (var_06 in var_03) {
-  if ([[var_02]](var_00, var_01, var_06))
-  var_4.targets[var_4.targets.size] = var_06;
-  }
+  if(isdefined(var_03)) {
+    foreach(var_06 in var_03) {
+      if([
+          [var_02]
+        ](var_00, var_01, var_06))
+        var_4.targets[var_4.targets.size] = var_06;
+    }
   }
 
   return var_04;
@@ -111,21 +113,23 @@ func_6CAA(var_00, var_01) {
   var_2.targets = [];
   var_03 = undefined;
 
-  if (level.teambased)
-  var_03 = scripts\mp\utility\game::func_9FE7;
+  if(level.teambased)
+    var_03 = scripts\mp\utility\game::func_9FE7;
   else
-  var_03 = scripts\mp\utility\game::func_9FD8;
+    var_03 = scripts\mp\utility\game::func_9FD8;
 
   var_04 = undefined;
 
-  if (isdefined(var_01))
-  var_04 = scripts\mp\utility\game::getotherteam(var_01);
+  if(isdefined(var_01))
+    var_04 = scripts\mp\utility\game::getotherteam(var_01);
 
   func_6CC8(var_00, var_04, var_03, level.heli_pilot, var_02);
 
-  if (isdefined(level.lbsniper)) {
-  if ([[var_03]](var_00, var_04, level.lbsniper))
-  var_2.targets[var_2.targets.size] = level.lbsniper;
+  if(isdefined(level.lbsniper)) {
+    if([
+        [var_03]
+      ](var_00, var_04, level.lbsniper))
+      var_2.targets[var_2.targets.size] = level.lbsniper;
   }
 
   func_6CC8(var_00, var_04, var_03, level.planes, var_02);
@@ -135,13 +139,13 @@ func_6CAA(var_00, var_01) {
 }
 
 fireattarget(var_00) {
-  if (!isdefined(var_00))
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
   var_01 = undefined;
 
-  if (isdefined(self.owner))
-  var_01 = self.owner;
+  if(isdefined(self.owner))
+    var_01 = self.owner;
 
   var_02 = 384 * anglestoforward(self.angles);
   var_03 = self gettagorigin("tag_missile_1") + var_02;
@@ -158,23 +162,23 @@ fireattarget(var_00) {
 func_10DC4(var_00, var_01, var_02) {
   wait(var_01);
 
-  if (isdefined(var_00)) {
-  var_03 = undefined;
+  if(isdefined(var_00)) {
+    var_03 = undefined;
 
-  if (var_0.model != "vehicle_av8b_harrier_jet_mp")
-  var_03 = var_00 gettagorigin("tag_missile_target");
+    if(var_0.model != "vehicle_av8b_harrier_jet_mp")
+      var_03 = var_00 gettagorigin("tag_missile_target");
 
-  if (!isdefined(var_03))
-  var_03 = var_00 gettagorigin("tag_body");
+    if(!isdefined(var_03))
+      var_03 = var_00 gettagorigin("tag_body");
 
-  var_04 = var_03 - var_0.origin;
+    var_04 = var_03 - var_0.origin;
 
-  foreach (var_06 in var_02) {
-  if (isvalidmissile(var_06)) {
-  var_06 missile_settargetent(var_00, var_04);
-  var_06 missile_setflightmodedirect();
-  }
-  }
+    foreach(var_06 in var_02) {
+      if(isvalidmissile(var_06)) {
+        var_06 missile_settargetent(var_00, var_04);
+        var_06 missile_setflightmodedirect();
+      }
+    }
   }
 }
 
@@ -183,10 +187,10 @@ func_52CA(var_00, var_01) {
   scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, "aamissile_projectile_mp", level.littlebirds);
   scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, "aamissile_projectile_mp", level.heli_pilot);
 
-  if (isdefined(level.lbsniper)) {
-  var_02 = [];
-  var_2[0] = level.lbsniper;
-  scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, "aamissile_projectile_mp", var_02);
+  if(isdefined(level.lbsniper)) {
+    var_02 = [];
+    var_2[0] = level.lbsniper;
+    scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, "aamissile_projectile_mp", var_02);
   }
 
   scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, "aamissile_projectile_mp", level.remote_uav);

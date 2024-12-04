@@ -31,13 +31,13 @@ func_12827(var_00) {
   var_00 give_player_tickets(1);
   var_02 = scripts\mp\utility\game::_hasperk("specialty_rugged_eqp");
 
-  if (var_02)
-  var_0.hasruggedeqp = 1;
+  if(var_02)
+    var_0.hasruggedeqp = 1;
 
   var_0.func_1E2D = func_1281F();
 
-  if (!isdefined(var_0.func_1E2D))
-  var_0.func_1E2D = 2;
+  if(!isdefined(var_0.func_1E2D))
+    var_0.func_1E2D = 2;
 
   scripts\mp\weapons::ontacticalequipmentplanted(var_00, "power_trophy");
   thread scripts\mp\weapons::monitordisownedequipment(self, var_00);
@@ -74,9 +74,9 @@ trophy_delete(var_00) {
   self.exploding = 1;
   var_01 = self.owner;
 
-  if (isdefined(self.owner)) {
-  var_1.plantedtacticalequip = scripts\engine\utility::array_remove(var_1.plantedtacticalequip, self);
-  var_01 notify("trophy_update", 0);
+  if(isdefined(self.owner)) {
+    var_1.plantedtacticalequip = scripts\engine\utility::array_remove(var_1.plantedtacticalequip, self);
+    var_01 notify("trophy_update", 0);
   }
 
   wait(var_00);
@@ -94,55 +94,55 @@ func_1282B() {
   self endon("death");
   self.owner endon("disconnect");
 
-  if (!isdefined(level.grenades))
-  level.grenades = [];
+  if(!isdefined(level.grenades))
+    level.grenades = [];
 
-  if (!isdefined(level.missiles))
-  level.missiles = [];
+  if(!isdefined(level.missiles))
+    level.missiles = [];
 
-  if (!isdefined(level.mines))
-  level.mines = [];
+  if(!isdefined(level.mines))
+    level.mines = [];
 
   var_00 = func_12804();
 
   for (;;) {
-  var_01 = func_12805();
-  var_02 = [];
-  var_2[0] = level.grenades;
-  var_2[1] = level.missiles;
-  var_2[2] = level.mines;
-  var_03 = scripts\engine\utility::array_combine_multiple(var_02);
+    var_01 = func_12805();
+    var_02 = [];
+    var_2[0] = level.grenades;
+    var_2[1] = level.missiles;
+    var_2[2] = level.mines;
+    var_03 = scripts\engine\utility::array_combine_multiple(var_02);
 
-  foreach (var_05 in var_03) {
-  if (!isdefined(var_05))
-  continue;
+    foreach(var_05 in var_03) {
+      if(!isdefined(var_05)) {
+        continue;
+      }
+      if(scripts\mp\utility\game::istrue(var_5.exploding)) {
+        continue;
+      }
+      if(trophy_checkignorelist(var_05)) {
+        continue;
+      }
+      var_06 = var_5.owner;
 
-  if (scripts\mp\utility\game::istrue(var_5.exploding))
-  continue;
+      if(!isdefined(var_06) && isdefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade")
+        var_06 = getmissileowner(var_05);
 
-  if (trophy_checkignorelist(var_05))
-  continue;
+      if(isdefined(var_06) && !scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_06))) {
+        continue;
+      }
+      if(distancesquared(var_5.origin, self.origin) > trophy_modifiedprotectiondistsqr(var_05, 65536)) {
+        continue;
+      }
+      var_07 = physics_raycast(var_01, var_5.origin, var_00, [self, var_05], 0, "physicsquery_closest");
 
-  var_06 = var_5.owner;
+      if(isdefined(var_07) && var_7.size > 0) {
+        continue;
+      }
+      func_1281E(var_05);
+    }
 
-  if (!isdefined(var_06) && isdefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade")
-  var_06 = getmissileowner(var_05);
-
-  if (isdefined(var_06) && !scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_06)))
-  continue;
-
-  if (distancesquared(var_5.origin, self.origin) > trophy_modifiedprotectiondistsqr(var_05, 65536))
-  continue;
-
-  var_07 = physics_raycast(var_01, var_5.origin, var_00, [self, var_05], 0, "physicsquery_closest");
-
-  if (isdefined(var_07) && var_7.size > 0)
-  continue;
-
-  func_1281E(var_05);
-  }
-
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -159,12 +159,12 @@ func_1281E(var_00) {
   var_01 = var_0.origin;
   var_02 = var_0.angles;
 
-  if (scripts\mp\weapons::isplantedequipment(var_00))
-  var_00 scripts\mp\weapons::deleteexplosive();
-  else if (var_00 scripts\mp\domeshield::isdomeshield())
-  var_00 thread scripts\mp\domeshield::domeshield_delete();
+  if(scripts\mp\weapons::isplantedequipment(var_00))
+    var_00 scripts\mp\weapons::deleteexplosive();
+  else if(var_00 scripts\mp\domeshield::isdomeshield())
+    var_00 thread scripts\mp\domeshield::domeshield_delete();
   else
-  var_00 delete();
+    var_00 delete();
 
   var_03 = trophy_getbesttag(var_01);
   var_04 = trophy_getpartbytag(var_03);
@@ -172,8 +172,8 @@ func_1281E(var_00) {
   self.func_69DA thread trophy_explode(var_01, var_02);
   self.func_1E2D--;
 
-  if (self.func_1E2D <= 0)
-  thread trophy_destroy();
+  if(self.func_1E2D <= 0)
+    thread trophy_destroy();
 }
 
 func_12811(var_00, var_01, var_02, var_03, var_04) {
@@ -206,8 +206,8 @@ trophy_destroyongameend() {
 }
 
 func_12818() {
-  if (self.owner scripts\mp\powers::hasequipment("power_trophy"))
-  self.owner func_12803(self.func_1E2D);
+  if(self.owner scripts\mp\powers::hasequipment("power_trophy"))
+    self.owner func_12803(self.func_1E2D);
 }
 
 trophy_createexplosion(var_00) {
@@ -231,13 +231,12 @@ trophy_explode(var_00, var_01) {
   self.origin = var_00;
   self.angles = var_01;
 
-  if (self.explode1available) {
-  self setscriptablepartstate("explode1", "active", 0);
-  self.explode1available = 0;
-  }
-  else if (self.explode2available) {
-  self setscriptablepartstate("explode2", "active", 0);
-  self.explode1available = 0;
+  if(self.explode1available) {
+    self setscriptablepartstate("explode1", "active", 0);
+    self.explode1available = 0;
+  } else if(self.explode2available) {
+    self setscriptablepartstate("explode2", "active", 0);
+    self.explode1available = 0;
   }
 }
 
@@ -250,91 +249,91 @@ func_12804() {
 }
 
 trophy_modifiedprotectiondistsqr(var_00, var_01) {
-  if (isdefined(var_0.weapon_name) && isdefined(var_0.owner)) {
-  switch (var_0.weapon_name) {
-  case "jackal_cannon_mp":
-  case "shockproj_mp":
-  case "switch_blade_child_mp":
-  case "thorproj_zoomed_mp":
-  case "drone_hive_projectile_mp":
-  if (147456 > var_01)
-  var_01 = 147456;
+  if(isdefined(var_0.weapon_name) && isdefined(var_0.owner)) {
+    switch (var_0.weapon_name) {
+      case "jackal_cannon_mp":
+      case "shockproj_mp":
+      case "switch_blade_child_mp":
+      case "thorproj_zoomed_mp":
+      case "drone_hive_projectile_mp":
+        if(147456 > var_01)
+          var_01 = 147456;
 
-  break;
-  case "iw7_arclassic_mp":
-  case "iw7_chargeshot_mp":
-  case "iw7_lockon_mp":
-  case "wristrocket_proj_mp":
-  if (65536 > var_01)
-  var_01 = 65536;
+        break;
+      case "iw7_arclassic_mp":
+      case "iw7_chargeshot_mp":
+      case "iw7_lockon_mp":
+      case "wristrocket_proj_mp":
+        if(65536 > var_01)
+          var_01 = 65536;
 
-  break;
-  }
+        break;
+    }
   }
 
   return var_01;
 }
 
 trophy_checkignorelist(var_00) {
-  if (isdefined(var_0.weapon_name)) {
-  if (scripts\mp\utility\game::iskillstreakweapon(var_0.weapon_name))
-  return 1;
+  if(isdefined(var_0.weapon_name)) {
+    if(scripts\mp\utility\game::iskillstreakweapon(var_0.weapon_name))
+      return 1;
 
-  if (scripts\mp\weapons::isaxeweapon(var_0.weapon_name))
-  return 1;
+    if(scripts\mp\weapons::isaxeweapon(var_0.weapon_name))
+      return 1;
 
-  switch (var_0.weapon_name) {
-  case "domeshield_mp":
-  if (scripts\mp\weapons::isplantedequipment(var_00))
-  return 1;
+    switch (var_0.weapon_name) {
+      case "domeshield_mp":
+        if(scripts\mp\weapons::isplantedequipment(var_00))
+          return 1;
 
-  break;
-  case "trophy_mp":
-  if (scripts\mp\weapons::isplantedequipment(var_00))
-  return 1;
+        break;
+      case "trophy_mp":
+        if(scripts\mp\weapons::isplantedequipment(var_00))
+          return 1;
 
-  break;
-  case "uplinkball_tracking_mp":
-  case "blackholegun_indicator_mp":
-  case "cluster_grenade_indicator_mp":
-  case "micro_turret_mp":
-  case "iw7_cheytac_mpr_projectile":
-  case "iw7_blackholegun_mp":
-  case "globproj_mp":
-  case "transponder_mp":
-  case "throwingknifeteleport_mp":
-  case "throwingknife_mp":
-  case "wristrocket_mp":
-  case "throwingknifec4_mp":
-  return 1;
-  }
+        break;
+      case "uplinkball_tracking_mp":
+      case "blackholegun_indicator_mp":
+      case "cluster_grenade_indicator_mp":
+      case "micro_turret_mp":
+      case "iw7_cheytac_mpr_projectile":
+      case "iw7_blackholegun_mp":
+      case "globproj_mp":
+      case "transponder_mp":
+      case "throwingknifeteleport_mp":
+      case "throwingknife_mp":
+      case "wristrocket_mp":
+      case "throwingknifec4_mp":
+        return 1;
+    }
   }
 
   return 0;
 }
 
 func_12821(var_00) {
-  if (getdvarint("showArchetypes", 0) > 0)
-  var_00 scripts\mp\powers::func_C179();
+  if(getdvarint("showArchetypes", 0) > 0)
+    var_00 scripts\mp\powers::func_C179();
 }
 
 func_12817(var_00, var_01, var_02) {
-  if (!isdefined(var_0.owner) || !isplayer(var_0.owner))
-  return;
-
+  if(!isdefined(var_0.owner) || !isplayer(var_0.owner)) {
+    return;
+  }
   var_0.owner thread scripts\mp\damagefeedback::updatedamagefeedback("hiticontrophysystem");
 
-  if (isdefined(var_0.weapon_name)) {
-  switch (var_0.weapon_name) {
-  case "jackal_cannon_mp":
-  case "shockproj_mp":
-  case "switch_blade_child_mp":
-  case "thorproj_tracking_mp":
-  case "thorproj_zoomed_mp":
-  case "drone_hive_projectile_mp":
-  var_0.owner notify("destroyed_by_trophy", var_02, var_01, var_0.weapon_name, var_0.origin, var_0.angles);
-  break;
-  }
+  if(isdefined(var_0.weapon_name)) {
+    switch (var_0.weapon_name) {
+      case "jackal_cannon_mp":
+      case "shockproj_mp":
+      case "switch_blade_child_mp":
+      case "thorproj_tracking_mp":
+      case "thorproj_zoomed_mp":
+      case "drone_hive_projectile_mp":
+        var_0.owner notify("destroyed_by_trophy", var_02, var_01, var_0.weapon_name, var_0.origin, var_0.angles);
+        break;
+    }
   }
 }
 
@@ -343,16 +342,16 @@ trophy_getbesttag(var_00) {
   var_02 = undefined;
   var_03 = undefined;
 
-  foreach (var_10, var_05 in var_01) {
-  var_06 = self gettagorigin(var_05);
-  var_07 = self gettagangles(var_05);
-  var_08 = anglestoforward(var_07);
-  var_09 = vectordot(vectornormalize(var_00 - var_06), var_08);
+  foreach(var_10, var_05 in var_01) {
+    var_06 = self gettagorigin(var_05);
+    var_07 = self gettagangles(var_05);
+    var_08 = anglestoforward(var_07);
+    var_09 = vectordot(vectornormalize(var_00 - var_06), var_08);
 
-  if (var_10 == 0 || var_09 > var_02) {
-  var_02 = var_09;
-  var_03 = var_05;
-  }
+    if(var_10 == 0 || var_09 > var_02) {
+      var_02 = var_09;
+      var_03 = var_05;
+    }
   }
 
   return var_03;
@@ -361,48 +360,48 @@ trophy_getbesttag(var_00) {
 trophy_getpartbytag(var_00) {
   var_01 = level.func_12802.func_1141B;
 
-  foreach (var_04, var_03 in var_01) {
-  if (var_03 == var_00)
-  return "protect" + (var_04 + 1);
+  foreach(var_04, var_03 in var_01) {
+    if(var_03 == var_00)
+      return "protect" + (var_04 + 1);
   }
 
   return undefined;
 }
 
 trophy_givepointsfordeath(var_00) {
-  if (scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00))) {
-  var_00 notify("destroyed_equipment");
-  var_00 thread scripts\mp\utility\game::giveunifiedpoints("destroyed_equipment");
+  if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00))) {
+    var_00 notify("destroyed_equipment");
+    var_00 thread scripts\mp\utility\game::giveunifiedpoints("destroyed_equipment");
   }
 }
 
 trophy_givedamagefeedback(var_00) {
   var_01 = "";
 
-  if (scripts\mp\utility\game::istrue(self.hasruggedeqp))
-  var_01 = "hitequip";
+  if(scripts\mp\utility\game::istrue(self.hasruggedeqp))
+    var_01 = "hitequip";
 
-  if (isplayer(var_00))
-  var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_01);
+  if(isplayer(var_00))
+    var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_01);
 }
 
 func_12803(var_00) {
-  if (!isdefined(self.trophies))
-  self.trophies = [];
+  if(!isdefined(self.trophies))
+    self.trophies = [];
 
-  if (self.trophies.size < func_12814()) {
-  if (!isdefined(var_00))
-  var_00 = 2;
+  if(self.trophies.size < func_12814()) {
+    if(!isdefined(var_00))
+      var_00 = 2;
 
-  self.trophies[self.trophies.size] = var_00;
+    self.trophies[self.trophies.size] = var_00;
   }
 }
 
 func_1281F() {
-  if (isdefined(self.trophies) && self.trophies.size > 0) {
-  var_00 = self.trophies[self.trophies.size - 1];
-  self.trophies[self.trophies.size - 1] = undefined;
-  return var_00;
+  if(isdefined(self.trophies) && self.trophies.size > 0) {
+    var_00 = self.trophies[self.trophies.size - 1];
+    self.trophies[self.trophies.size - 1] = undefined;
+    return var_00;
   }
 
   return undefined;
@@ -416,7 +415,7 @@ func_1281A() {
   var_00 = scripts\mp\powers::func_D736("power_trophy");
 
   for (var_01 = 0; var_01 < var_00; var_1++)
-  func_12803();
+    func_12803();
 }
 
 func_12814() {
@@ -424,28 +423,28 @@ func_12814() {
 }
 
 trophy_modifieddamage(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_02))
-  return [var_03, var_04];
+  if(!isdefined(var_02))
+    return [var_03, var_04];
 
-  if (var_03 == 0)
-  return [var_03, var_04];
+  if(var_03 == 0)
+    return [var_03, var_04];
 
   var_05 = undefined;
 
-  if (level.hardcoremode) {
-  switch (var_02) {
-  case "super_trophy_mp":
-  case "player_trophy_system_mp":
-  case "trophy_mp":
-  var_05 = 20;
-  break;
-  }
+  if(level.hardcoremode) {
+    switch (var_02) {
+      case "super_trophy_mp":
+      case "player_trophy_system_mp":
+      case "trophy_mp":
+        var_05 = 20;
+        break;
+    }
   }
 
   var_06 = var_04;
 
-  if (isdefined(var_05))
-  var_06 = var_05 - var_03;
+  if(isdefined(var_05))
+    var_06 = var_05 - var_03;
 
   var_06 = min(var_06, var_04);
   return [var_03, var_04];

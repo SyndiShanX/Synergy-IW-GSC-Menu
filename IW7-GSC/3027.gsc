@@ -4,39 +4,37 @@
  * Script: 3027.gsc
 ************************/
 
-main(param_00,param_01,param_02) {
-	var_03 = spawnstruct();
-	var_03.var_B8F9 = "mp";
-	var_03.dvarfuncs = ::dvarfuncs;
-	var_03.init = ::func_963C;
-	lib_0BCE::main(var_03);
+main(param_00, param_01, param_02) {
+  var_03 = spawnstruct();
+  var_03.var_B8F9 = "mp";
+  var_03.dvarfuncs = ::dvarfuncs;
+  var_03.init = ::func_963C;
+  lib_0BCE::main(var_03);
 }
 
 func_963C() {
-	playfxontag(level.var_A3B9.var_11888,self,"tag_engine_left");
-	playfxontag(level.var_A3B9.var_11888,self,"tag_engine_right");
+  playfxontag(level.var_A3B9.var_11888, self, "tag_engine_left");
+  playfxontag(level.var_A3B9.var_11888, self, "tag_engine_right");
 }
 
 init_location() {}
 
-dvarfuncs(param_00,param_01) {
-	setdvar(param_00,param_01);
+dvarfuncs(param_00, param_01) {
+  setdvar(param_00, param_01);
 }
 
-func_D31A(param_00,param_01,param_02) {
-	self getweaponrankxpmultiplier();
-	if(isdefined(param_02) && param_02) {
-		var_03 = "hover";
-	}
-	else
-	{
-		var_03 = "fly";
-	}
+func_D31A(param_00, param_01, param_02) {
+  self getweaponrankxpmultiplier();
+  if(isdefined(param_02) && param_02) {
+    var_03 = "hover";
+  } else {
+    var_03 = "fly";
+  }
 
-	lib_0BCE::func_A2B2(param_00,param_01,var_03);
+  lib_0BCE::func_A2B2(param_00, param_01, var_03);
 }
 
 func_D05B() {
-	lib_0BCE::func_A2B1();
-	self gold_teeth_pickup();
+  lib_0BCE::func_A2B1();
+  self gold_teeth_pickup();
 }

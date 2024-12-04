@@ -26,9 +26,9 @@ cycletargets() {
   self endon("game_ended");
 
   for (;;) {
-  wait 0.05;
-  findtargets();
-  wait(randomintrange(4, 5));
+    wait 0.05;
+    findtargets();
+    wait(randomintrange(4, 5));
   }
 }
 
@@ -40,48 +40,48 @@ findtargets() {
   var_01 = [];
   var_02 = [];
 
-  if (isdefined(level.littlebirds) && level.littlebirds.size) {
-  foreach (var_04 in level.littlebirds) {
-  if (isdefined(var_4.team) && var_4.team != self.team)
-  var_0[var_0.size] = var_04;
-  }
+  if(isdefined(level.littlebirds) && level.littlebirds.size) {
+    foreach(var_04 in level.littlebirds) {
+      if(isdefined(var_4.team) && var_4.team != self.team)
+        var_0[var_0.size] = var_04;
+    }
   }
 
-  if (isdefined(level.helis) && level.helis.size) {
-  foreach (var_07 in level.helis) {
-  if (var_7.team != self.team)
-  var_1[var_1.size] = var_07;
-  }
+  if(isdefined(level.helis) && level.helis.size) {
+    foreach(var_07 in level.helis) {
+      if(var_7.team != self.team)
+        var_1[var_1.size] = var_07;
+    }
   }
 
   var_09 = scripts\mp\utility\game::getotherteam(self.team);
 
-  if (isdefined(level.activeuavs[var_09])) {
-  foreach (var_11 in level.uavmodels[var_09])
-  var_2[var_2.size] = var_11;
+  if(isdefined(level.activeuavs[var_09])) {
+    foreach(var_11 in level.uavmodels[var_09])
+    var_2[var_2.size] = var_11;
   }
 
   var_13 = 0;
 
-  foreach (var_04 in var_00) {
-  wait 3;
+  foreach(var_04 in var_00) {
+    wait 3;
 
-  if (var_13 % 2)
-  thread fireattarget(var_04, self.team, 1);
-  else
-  thread fireattarget(var_04, self.team, 0);
+    if(var_13 % 2)
+      thread fireattarget(var_04, self.team, 1);
+    else
+      thread fireattarget(var_04, self.team, 0);
 
-  var_13++;
+    var_13++;
   }
 
-  foreach (var_07 in var_01) {
-  wait 3;
-  thread fireattarget(var_07, self.team, 1);
+  foreach(var_07 in var_01) {
+    wait 3;
+    thread fireattarget(var_07, self.team, 1);
   }
 
-  foreach (var_11 in var_02) {
-  wait 0.5;
-  thread fireattarget(var_11, self.team, 0);
+  foreach(var_11 in var_02) {
+    wait 0.5;
+    thread fireattarget(var_11, self.team, 0);
   }
 }
 
@@ -89,10 +89,10 @@ earlyabortwatcher() {
   self endon("stopFindingTargets");
   var_00 = self.team;
 
-  if (scripts\mp\utility\game::bot_is_fireteam_mode())
-  self waittill("killstreak_disowned");
+  if(scripts\mp\utility\game::bot_is_fireteam_mode())
+    self waittill("killstreak_disowned");
   else
-  scripts\engine\utility::waittill_either("killstreak_disowned", "game_ended");
+    scripts\engine\utility::waittill_either("killstreak_disowned", "game_ended");
 
   self notify("owner_gone");
   level.teamairdenied[scripts\mp\utility\game::getotherteam(var_00)] = 0;
@@ -109,14 +109,14 @@ finishaastrike(var_00) {
   thread cycletargets();
 
   for (var_01 = 0; var_01 < 4; var_1++) {
-  wait 6;
+    wait 6;
 
-  if (var_01 == 1 || var_01 == 3) {
-  thread doflyby(1);
-  continue;
-  }
+    if(var_01 == 1 || var_01 == 3) {
+      thread doflyby(1);
+      continue;
+    }
 
-  thread doflyby(0);
+    thread doflyby(0);
   }
 
   wait 3;
@@ -126,9 +126,9 @@ finishaastrike(var_00) {
 }
 
 fireattarget(var_00, var_01, var_02) {
-  if (!isdefined(var_00))
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
   var_03 = (0, 0, 14000);
   var_04 = (0, 0, 1500);
   var_05 = 15000;
@@ -146,15 +146,15 @@ fireattarget(var_00, var_01, var_02) {
   var_13 missile_settargetent(var_00);
   var_13 missile_setflightmodedirect();
 
-  if (var_02)
-  var_14 = spawnplane(self, "script_model", var_10, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_friendly");
+  if(var_02)
+    var_14 = spawnplane(self, "script_model", var_10, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_friendly");
   else
-  var_14 = spawnplane(self, "script_model", var_10);
+    var_14 = spawnplane(self, "script_model", var_10);
 
-  if (self.team == "allies")
-  var_14 setmodel("vehicle_av8b_harrier_jet_mp");
+  if(self.team == "allies")
+    var_14 setmodel("vehicle_av8b_harrier_jet_mp");
   else
-  var_14 setmodel("vehicle_av8b_harrier_jet_opfor_mp");
+    var_14 setmodel("vehicle_av8b_harrier_jet_opfor_mp");
 
   var_15 = distance(var_10, var_11);
   var_14.angles = vectortoangles(var_11 - var_10);
@@ -187,19 +187,19 @@ doflyby(var_00) {
   var_10 = var_08 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
   var_11 = var_09 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
 
-  if (var_00)
-  var_12 = spawnplane(self, "script_model", var_08, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
+  if(var_00)
+    var_12 = spawnplane(self, "script_model", var_08, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
   else
-  var_12 = spawnplane(self, "script_model", var_08);
+    var_12 = spawnplane(self, "script_model", var_08);
 
   var_13 = spawnplane(self, "script_model", var_10);
 
-  if (self.team == "allies") {
-  var_12 setmodel("vehicle_av8b_harrier_jet_mp");
-  var_13 setmodel("vehicle_av8b_harrier_jet_mp");
+  if(self.team == "allies") {
+    var_12 setmodel("vehicle_av8b_harrier_jet_mp");
+    var_13 setmodel("vehicle_av8b_harrier_jet_mp");
   } else {
-  var_12 setmodel("vehicle_av8b_harrier_jet_opfor_mp");
-  var_13 setmodel("vehicle_av8b_harrier_jet_opfor_mp");
+    var_12 setmodel("vehicle_av8b_harrier_jet_opfor_mp");
+    var_13 setmodel("vehicle_av8b_harrier_jet_opfor_mp");
   }
 
   var_12.angles = vectortoangles(var_09 - var_08);

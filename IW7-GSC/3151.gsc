@@ -4,9 +4,9 @@
 ***************************************/
 
 func_2371() {
-  if (scripts\asm\asm::func_232E("jackal"))
-  return;
-
+  if(scripts\asm\asm::func_232E("jackal")) {
+    return;
+  }
   scripts\asm\asm::func_230B("jackal", "Start");
   scripts\asm\asm::func_2373("evade", func_0C4E::func_67C5);
   scripts\asm\asm::func_2373("cannons", func_0C4E::func_1EA6);

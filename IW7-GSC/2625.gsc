@@ -8,13 +8,13 @@ func_EF33(var_00) {
 }
 
 func_028A() {
-  if (isdefined(level.func_EF2E))
-  [[level.func_EF2E]]();
+  if(isdefined(level.func_EF2E))
+    [[level.func_EF2E]]();
 
-  if (scripts\engine\utility::issp()) {
-  if (!scripts\engine\utility::flag_exist("scriptables_ready"))
-  scripts\engine\utility::flag_init("scriptables_ready");
+  if(scripts\engine\utility::issp()) {
+    if(!scripts\engine\utility::flag_exist("scriptables_ready"))
+      scripts\engine\utility::flag_init("scriptables_ready");
 
-  scripts\engine\utility::flag_set("scriptables_ready");
+    scripts\engine\utility::flag_set("scriptables_ready");
   }
 }

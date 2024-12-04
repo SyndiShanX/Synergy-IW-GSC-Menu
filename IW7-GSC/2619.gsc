@@ -4,9 +4,9 @@
 ***************************************/
 
 init_flags() {
-  if (!scripts\engine\utility::add_init_script("init_flags", ::init_flags))
-  return;
-
+  if(!scripts\engine\utility::add_init_script("init_flags", ::init_flags)) {
+    return;
+  }
   level.flag = [];
   level.flags_lock = [];
   level.generic_index = 0;

@@ -31,19 +31,20 @@ watch_dpad() {
   self notifyonplayercommand("pullout_gascan", "+actionslot 3");
 
   for (;;) {
-  self waittill("pullout_gascan");
+    self waittill("pullout_gascan");
 
-  if (scripts\engine\utility::is_true(self.iscarrying))
-  continue;
-
-  if (scripts\engine\utility::is_true(self.linked_to_coaster))
-  continue;
-
-  if (isdefined(self.allow_carry) && self.allow_carry == 0)
-  continue;
-
-  if (scripts\cp\utility::is_valid_player())
-  break;
+    if(scripts\engine\utility::is_true(self.iscarrying)) {
+      continue;
+    }
+    if(scripts\engine\utility::is_true(self.linked_to_coaster)) {
+      continue;
+    }
+    if(isdefined(self.allow_carry) && self.allow_carry == 0) {
+      continue;
+    }
+    if(scripts\cp\utility::is_valid_player()) {
+      break;
+    }
   }
 
   thread setdefaultdroppitch(1);
@@ -61,10 +62,10 @@ setdefaultdroppitch(var_00, var_01) {
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if (isdefined(var_02))
-  return 1;
+  if(isdefined(var_02))
+    return 1;
   else
-  return 0;
+    return 0;
 }
 
 func_F683(var_00, var_01, var_02) {
@@ -75,84 +76,84 @@ func_F683(var_00, var_01, var_02) {
   self notifyonplayercommand("place_gascan", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_gascan", "+actionslot 3");
 
-  if (!level.console) {
-  self notifyonplayercommand("cancel_gascan", "+actionslot 5");
-  self notifyonplayercommand("cancel_gascan", "+actionslot 6");
-  self notifyonplayercommand("cancel_gascan", "+actionslot 7");
+  if(!level.console) {
+    self notifyonplayercommand("cancel_gascan", "+actionslot 5");
+    self notifyonplayercommand("cancel_gascan", "+actionslot 6");
+    self notifyonplayercommand("cancel_gascan", "+actionslot 7");
   }
 
   for (;;) {
-  var_03 = scripts\engine\utility::waittill_any_return("place_gascan", "cancel_gascan", "force_cancel_placement");
+    var_03 = scripts\engine\utility::waittill_any_return("place_gascan", "cancel_gascan", "force_cancel_placement");
 
-  if (!isdefined(var_00)) {
-  scripts\engine\utility::allow_weapon(1);
-  return 1;
-  }
+    if(!isdefined(var_00)) {
+      scripts\engine\utility::allow_weapon(1);
+      return 1;
+    }
 
-  if (!isdefined(var_03))
-  var_03 = "force_cancel_placement";
+    if(!isdefined(var_03))
+      var_03 = "force_cancel_placement";
 
-  if (var_03 == "cancel_gascan" || var_03 == "force_cancel_placement") {
-  if (!var_01 && var_03 == "cancel_gascan")
-  continue;
+    if(var_03 == "cancel_gascan" || var_03 == "force_cancel_placement") {
+      if(!var_01 && var_03 == "cancel_gascan") {
+        continue;
+      }
+      scripts\engine\utility::allow_weapon(1);
+      var_00 func_76C9();
 
-  scripts\engine\utility::allow_weapon(1);
-  var_00 func_76C9();
+      if(var_03 != "force_cancel_placement")
+        thread watch_dpad();
+      else if(var_01)
+        scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
-  if (var_03 != "force_cancel_placement")
-  thread watch_dpad();
-  else if (var_01)
-  scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      return 0;
+    }
 
-  return 0;
-  }
+    if(!var_0.canbeplaced) {
+      continue;
+    }
+    if(var_01)
+      scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
-  if (!var_0.canbeplaced)
-  continue;
-
-  if (var_01)
-  scripts\cp\utility::remove_crafted_item_from_inventory(self);
-
-  var_00 thread func_76C8(var_02, self);
-  self waittill("gas_poured");
-  scripts\engine\utility::allow_weapon(1);
-  return 1;
+    var_00 thread func_76C8(var_02, self);
+    self waittill("gas_poured");
+    scripts\engine\utility::allow_weapon(1);
+    return 1;
   }
 }
 
 removeweapons() {
-  if (self.hasriotshield) {
-  var_00 = scripts\cp\utility::riotshieldname();
-  self.restoreweapon = var_00;
-  self.riotshieldammo = self getammocount(var_00);
-  self giveuponsuppressiontime(var_00);
+  if(self.hasriotshield) {
+    var_00 = scripts\cp\utility::riotshieldname();
+    self.restoreweapon = var_00;
+    self.riotshieldammo = self getammocount(var_00);
+    self giveuponsuppressiontime(var_00);
   }
 }
 
 removeperks() {
-  if (scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
-  self.restoreperk = "specialty_explosivebullets";
-  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
+  if(scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
+    self.restoreperk = "specialty_explosivebullets";
+    scripts\cp\utility::_unsetperk("specialty_explosivebullets");
   }
 }
 
 restoreweapons() {
-  if (isdefined(self.restoreweapon)) {
-  scripts\cp\utility::_giveweapon(self.restoreweapon);
+  if(isdefined(self.restoreweapon)) {
+    scripts\cp\utility::_giveweapon(self.restoreweapon);
 
-  if (self.hasriotshield) {
-  var_00 = scripts\cp\utility::riotshieldname();
-  self setweaponammoclip(var_00, self.riotshieldammo);
-  }
+    if(self.hasriotshield) {
+      var_00 = scripts\cp\utility::riotshieldname();
+      self setweaponammoclip(var_00, self.riotshieldammo);
+    }
   }
 
   self.restoreweapon = undefined;
 }
 
 restoreperks() {
-  if (isdefined(self.restoreperk)) {
-  scripts\cp\utility::giveperk(self.restoreperk);
-  self.restoreperk = undefined;
+  if(isdefined(self.restoreperk)) {
+    scripts\cp\utility::giveperk(self.restoreperk);
+    self.restoreperk = undefined;
   }
 }
 
@@ -190,35 +191,35 @@ func_76C8(var_00, var_01) {
   var_01 endon("disconnect");
   self.func_9F05 = 1;
 
-  if (!isdefined(level.func_38B3))
-  level.func_38B3 = [];
+  if(!isdefined(level.func_38B3))
+    level.func_38B3 = [];
 
   var_02 = 0;
 
   for (;;) {
-  while (var_01 attackbuttonpressed() && var_02 <= 4) {
-  if (!self.canbeplaced) {
-  wait 0.05;
-  continue;
-  }
+    while (var_01 attackbuttonpressed() && var_02 <= 4) {
+      if(!self.canbeplaced) {
+        wait 0.05;
+        continue;
+      }
 
-  if (!isdefined(self.func_8C16))
-  self.func_8C16 = 0;
+      if(!isdefined(self.func_8C16))
+        self.func_8C16 = 0;
 
-  var_01 playsound("trap_kindle_pops_pour");
-  self.func_9F05 = 1;
-  func_1070D(var_01, self);
-  self.func_8C16++;
-  self.func_BE9C = 1;
-  wait 0.35;
-  var_2++;
-  }
+      var_01 playsound("trap_kindle_pops_pour");
+      self.func_9F05 = 1;
+      func_1070D(var_01, self);
+      self.func_8C16++;
+      self.func_BE9C = 1;
+      wait 0.35;
+      var_2++;
+    }
 
-  if (var_02 > 4)
-  break;
-
-  self.func_9F05 = undefined;
-  wait 0.05;
+    if(var_02 > 4) {
+      break;
+    }
+    self.func_9F05 = undefined;
+    wait 0.05;
   }
 
   self.func_9F05 = undefined;
@@ -235,7 +236,7 @@ func_76C8(var_00, var_01) {
   self.carriedgascan delete();
   self delete();
   wait 1;
-  var_01 scripts\cp\utility::setlowermessage("candy_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_SHOOT_TO_IGNITE", 4);
+  var_01 scripts\cp\utility::setlowermessage("candy_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_SHOOT_TO_IGNITE", 4);
   wait 15;
   var_03 delete();
 }
@@ -273,23 +274,23 @@ func_76C2() {
   var_00 = 9216;
 
   for (;;) {
-  self waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
+    self waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
 
-  if (isplayer(var_02) && isdefined(var_10) && var_05 != "MOD_MELEE") {
-  self notify("gas_spot_damaged");
+    if(isplayer(var_02) && isdefined(var_10) && var_05 != "MOD_MELEE") {
+      self notify("gas_spot_damaged");
 
-  foreach (var_12 in level.func_38B3) {
-  if (var_12 == self)
-  continue;
+      foreach(var_12 in level.func_38B3) {
+        if(var_12 == self) {
+          continue;
+        }
+        if(distancesquared(var_12.origin, self.origin) > var_00)
+          continue;
+        else
+          var_12 notify("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
+      }
 
-  if (distancesquared(var_12.origin, self.origin) > var_00)
-  continue;
-  else
-  var_12 notify("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
-  }
-
-  return;
-  }
+      return;
+    }
   }
 }
 
@@ -306,7 +307,7 @@ func_76C0(var_00, var_01) {
   thread func_76C1();
 
   while (gettime() < var_00)
-  wait 0.1;
+    wait 0.1;
 
   playloopsound(self.origin, "trap_kindle_pops_fire_end");
   self stoploopsound();
@@ -320,18 +321,18 @@ func_76C1() {
   self.func_4D27 endon("death");
 
   for (;;) {
-  self.func_4D27 waittill("trigger", var_00);
+    self.func_4D27 waittill("trigger", var_00);
 
-  if (isplayer(var_00) && isalive(var_00) && !scripts\cp\cp_laststand::player_in_laststand(var_00) && !isdefined(var_0.padding_damage)) {
-  var_0.padding_damage = 1;
-  var_00 getrandomarmkillstreak(15, var_0.origin);
-  var_00 thread remove_padding_damage();
-  }
+    if(isplayer(var_00) && isalive(var_00) && !scripts\cp\cp_laststand::player_in_laststand(var_00) && !isdefined(var_0.padding_damage)) {
+      var_0.padding_damage = 1;
+      var_00 getrandomarmkillstreak(15, var_0.origin);
+      var_00 thread remove_padding_damage();
+    }
 
-  if (!scripts\cp\utility::should_be_affected_by_trap(var_00))
-  continue;
-
-  var_00 func_3B25(2, var_0.health + 5, self.func_4D27);
+    if(!scripts\cp\utility::should_be_affected_by_trap(var_00)) {
+      continue;
+    }
+    var_00 func_3B25(2, var_0.health + 5, self.func_4D27);
   }
 }
 
@@ -342,8 +343,8 @@ remove_padding_damage() {
 }
 
 func_3B25(var_00, var_01, var_02) {
-  if (isalive(self) && !scripts\engine\utility::is_true(self.marked_for_death) && !scripts\engine\utility::is_true(self.is_chem_burning))
-  thread scripts\cp\utility::damage_over_time(self, var_02, var_00, var_01, undefined, "iw7_kindlepops_zm", undefined, "chemBurn");
+  if(isalive(self) && !scripts\engine\utility::is_true(self.marked_for_death) && !scripts\engine\utility::is_true(self.is_chem_burning))
+    thread scripts\cp\utility::damage_over_time(self, var_02, var_00, var_01, undefined, "iw7_kindlepops_zm", undefined, "chemBurn");
 }
 
 func_1070D(var_00, var_01) {
@@ -355,16 +356,16 @@ func_1070D(var_00, var_01) {
   var_05 = getgroundposition(var_1.origin, 4);
   var_03 moveto(var_05 + (0, 0, 1), 0.25);
 
-  foreach (var_07 in level.func_38B3) {
-  if (distancesquared(var_7.origin, var_3.origin) < 100) {
-  var_03 delete();
-  break;
-  }
+  foreach(var_07 in level.func_38B3) {
+    if(distancesquared(var_7.origin, var_3.origin) < 100) {
+      var_03 delete();
+      break;
+    }
   }
 
-  if (!isdefined(var_03))
-  return;
-
+  if(!isdefined(var_03)) {
+    return;
+  }
   var_03 setcandamage(1);
   var_3.health = 10000;
   var_3.owner = var_00;
@@ -378,15 +379,15 @@ func_1070D(var_00, var_01) {
 func_76C9() {
   self.carriedby getrigindexfromarchetyperef();
 
-  if (isdefined(self.owner))
-  self.owner.iscarrying = 0;
+  if(isdefined(self.owner))
+    self.owner.iscarrying = 0;
 
   self.carriedgascan delete();
   self delete();
 }
 
 func_76CA(var_00, var_01) {
-  if (isdefined(self.originalowner)) {} else {}
+  if(isdefined(self.originalowner)) {} else {}
 
   self setmodel(level.func_47AF["crafted_gascan"].modelplacement);
   self hide();
@@ -412,32 +413,32 @@ func_12EA0(var_00, var_01) {
   var_0.func_BE9C = 0;
 
   for (;;) {
-  var_0.canbeplaced = func_3831(var_00);
+    var_0.canbeplaced = func_3831(var_00);
 
-  if (var_0.canbeplaced != var_02 || var_0.func_BE9C) {
-  var_0.func_BE9C = 0;
+    if(var_0.canbeplaced != var_02 || var_0.func_BE9C) {
+      var_0.func_BE9C = 0;
 
-  if (var_0.canbeplaced) {
-  var_0.carriedgascan setmodel(level.func_47AF["crafted_gascan"].modelplacement);
+      if(var_0.canbeplaced) {
+        var_0.carriedgascan setmodel(level.func_47AF["crafted_gascan"].modelplacement);
 
-  if (!isdefined(var_0.func_8C16))
-  self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_CANCELABLE");
-  else if (var_0.func_8C16 == 1)
-  self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_80");
-  else if (var_0.func_8C16 == 2)
-  self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_60");
-  else if (var_0.func_8C16 == 3)
-  self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_40");
-  else if (var_0.func_8C16 == 4)
-  self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_20");
-  } else {
-  var_0.carriedgascan setmodel(level.func_47AF["crafted_gascan"].modelplacementfailed);
-  self forceusehinton(&"COOP_CRAFTABLES_CANNOT_PLACE");
-  }
-  }
+        if(!isdefined(var_0.func_8C16))
+          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_CANCELABLE");
+        else if(var_0.func_8C16 == 1)
+          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_80");
+        else if(var_0.func_8C16 == 2)
+          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_60");
+        else if(var_0.func_8C16 == 3)
+          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_40");
+        else if(var_0.func_8C16 == 4)
+          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_20");
+      } else {
+        var_0.carriedgascan setmodel(level.func_47AF["crafted_gascan"].modelplacementfailed);
+        self forceusehinton( & "COOP_CRAFTABLES_CANNOT_PLACE");
+      }
+    }
 
-  var_02 = var_0.canbeplaced;
-  wait 0.05;
+    var_02 = var_0.canbeplaced;
+    wait 0.05;
   }
 }
 
@@ -449,10 +450,10 @@ func_3831(var_00) {
   var_0.name = "crafted_gascan";
   var_0.carriedgascan.name = "crafted_gascan";
 
-  if (isdefined(var_0.func_9F05))
-  var_0.carriedgascan.angles = var_1["angles"] + (35, 0, 0);
+  if(isdefined(var_0.func_9F05))
+    var_0.carriedgascan.angles = var_1["angles"] + (35, 0, 0);
   else
-  var_0.carriedgascan.angles = var_1["angles"];
+    var_0.carriedgascan.angles = var_1["angles"];
 
   return self isonground() && var_1["result"] && abs(var_1["origin"][2] - self.origin[2]) < 30;
 }

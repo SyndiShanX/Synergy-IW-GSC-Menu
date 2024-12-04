@@ -4,11 +4,11 @@
 ***************************************/
 
 init() {
-  if (!isdefined(level.func_5056) || level.func_5056 == 0)
-  return;
-
-  if (!isdefined(game["defcon"]))
-  game["defcon"] = 4;
+  if(!isdefined(level.func_5056) || level.func_5056 == 0) {
+    return;
+  }
+  if(!isdefined(game["defcon"]))
+    game["defcon"] = 4;
 
   setdvar("scr_defcon", game["defcon"]);
   level.func_5059[5] = 0;
@@ -27,8 +27,8 @@ init() {
 
 func_5055(var_00) {
   for (;;) {
-  level waittill("player_got_killstreak_" + var_00, var_01);
-  level notify("defcon_killstreak", var_00, var_01);
+    level waittill("player_got_killstreak_" + var_00, var_01);
+    level notify("defcon_killstreak", var_00, var_01);
   }
 }
 
@@ -46,34 +46,34 @@ func_5054() {
   level thread func_5055(var_00 * 3 - 2);
 
   for (;;) {
-  level waittill("defcon_killstreak", var_01, var_02);
+    level waittill("defcon_killstreak", var_01, var_02);
 
-  if (game["defcon"] <= 1)
-  continue;
+    if(game["defcon"] <= 1) {
+      continue;
+    }
+    if(var_01 % var_00 == var_00 - 2) {
+      foreach(var_04 in level.players) {
+        if(!isalive(var_04)) {
+          continue;
+        }
+        var_04 thread scripts\mp\hud_message::showsplash("two_from_defcon", undefined, var_02);
+      }
 
-  if (var_01 % var_00 == var_00 - 2) {
-  foreach (var_04 in level.players) {
-  if (!isalive(var_04))
-  continue;
+      continue;
+    }
 
-  var_04 thread scripts\mp\hud_message::showsplash("two_from_defcon", undefined, var_02);
-  }
+    if(var_01 % var_00 == var_00 - 1) {
+      foreach(var_04 in level.players) {
+        if(!isalive(var_04)) {
+          continue;
+        }
+        var_04 thread scripts\mp\hud_message::showsplash("one_from_defcon", undefined, var_02);
+      }
 
-  continue;
-  }
+      continue;
+    }
 
-  if (var_01 % var_00 == var_00 - 1) {
-  foreach (var_04 in level.players) {
-  if (!isalive(var_04))
-  continue;
-
-  var_04 thread scripts\mp\hud_message::showsplash("one_from_defcon", undefined, var_02);
-  }
-
-  continue;
-  }
-
-  func_12E87(game["defcon"] - 1, var_02, var_01);
+    func_12E87(game["defcon"] - 1, var_02, var_01);
   }
 }
 
@@ -84,21 +84,21 @@ func_12E87(var_00, var_01, var_02) {
   level.func_C2A7 = level.func_5057[var_00];
   setdvar("scr_defcon", game["defcon"]);
 
-  if (isdefined(var_01))
-  var_01 notify("changed_defcon");
+  if(isdefined(var_01))
+    var_01 notify("changed_defcon");
 
-  if (var_00 == var_03)
-  return;
-
-  if (game["defcon"] == 3 && isdefined(var_01)) {
-  var_01 scripts\mp\killstreaks\killstreaks::givekillstreak("airdrop_mega");
-  var_01 thread scripts\mp\hud_message::showsplash("caused_defcon", var_02);
+  if(var_00 == var_03) {
+    return;
+  }
+  if(game["defcon"] == 3 && isdefined(var_01)) {
+    var_01 scripts\mp\killstreaks\killstreaks::givekillstreak("airdrop_mega");
+    var_01 thread scripts\mp\hud_message::showsplash("caused_defcon", var_02);
   }
 
-  foreach (var_05 in level.players) {
-  if (isalive(var_05)) {
-  if (isdefined(var_01))
-  var_05 thread scripts\mp\hud_message::showsplash("changed_defcon", undefined, var_01);
-  }
+  foreach(var_05 in level.players) {
+    if(isalive(var_05)) {
+      if(isdefined(var_01))
+        var_05 thread scripts\mp\hud_message::showsplash("changed_defcon", undefined, var_01);
+    }
   }
 }

@@ -22,7 +22,7 @@ init() {
   level.func_117B0["thor"].func_1352D = "odin_target_killed";
   level.func_117B0["thor"].func_1352C = "odin_targets_killed";
   level.func_117B0["thor"].func_12B20 = 4;
-  level.func_117B0["thor"].func_12B80 = &"KILLSTREAKS_LOKI_UNAVAILABLE";
+  level.func_117B0["thor"].func_12B80 = & "KILLSTREAKS_LOKI_UNAVAILABLE";
   level.func_117B0["thor"].func_73BE = "compass_objpoint_airstrike_friendly";
   level.func_117B0["thor"].func_6485 = "compass_objpoint_airstrike_busy";
   level.func_117B0["thor"].weapon["missile"] = spawnstruct();
@@ -43,17 +43,17 @@ init() {
 func_13C8E(var_00) {
   var_01 = 1;
 
-  if (scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_01 >= scripts\mp\utility\game::maxvehiclesallowed()) {
-  scripts\mp\hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_VEHICLES");
-  return 0;
+  if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_01 >= scripts\mp\utility\game::maxvehiclesallowed()) {
+    scripts\mp\hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_VEHICLES");
+    return 0;
   }
 
   level.func_C20D++;
 
-  if (level.func_C20D > 1) {
-  scripts\mp\hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_THORS");
-  level.func_C20D--;
-  return 0;
+  if(level.func_C20D > 1) {
+    scripts\mp\hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_THORS");
+    level.func_C20D--;
+    return 0;
   }
 
   thread func_13B73();
@@ -66,21 +66,21 @@ func_13B73() {
   level endon("game_ended");
   scripts\engine\utility::waittill_any("death", "disconnect");
 
-  if (isdefined(level.func_C20D) && level.func_C20D > 0)
-  level.func_C20D--;
+  if(isdefined(level.func_C20D) && level.func_C20D > 0)
+    level.func_C20D--;
 
-  if (isdefined(self))
-  self setclientomnvar("ui_remote_control_sequence", 0);
+  if(isdefined(self))
+    self setclientomnvar("ui_remote_control_sequence", 0);
 }
 
 weaponswitchendedairstrike(var_00, var_01) {
   self notify("thor_weapon_switch_ended");
 
-  if (!scripts\mp\utility\game::istrue(var_01)) {
-  if (isdefined(level.func_C20D) && level.func_C20D > 0)
-  level.func_C20D--;
+  if(!scripts\mp\utility\game::istrue(var_01)) {
+    if(isdefined(level.func_C20D) && level.func_C20D > 0)
+      level.func_C20D--;
 
-  self setclientomnvar("ui_remote_control_sequence", 0);
+    self setclientomnvar("ui_remote_control_sequence", 0);
   }
 }
 
@@ -92,15 +92,15 @@ func_13099(var_00) {
 func_12909(var_00) {
   var_01 = scripts\mp\killstreaks\killstreaks::func_D507(var_00);
 
-  if (!var_01) {
-  level.func_C20D--;
-  return 0;
+  if(!var_01) {
+    level.func_C20D--;
+    return 0;
   }
 
   var_01 = func_10DFC(var_00);
 
-  if (!isdefined(var_01))
-  var_01 = 0;
+  if(!isdefined(var_01))
+    var_01 = 0;
 
   return var_01;
 }
@@ -117,11 +117,11 @@ func_10DFC(var_00) {
   scripts\mp\utility\game::incrementfauxvehiclecount();
   var_01 = func_4A26(var_0.streakname, var_00);
 
-  if (!isdefined(var_01)) {
-  level.func_C20D--;
-  scripts\mp\utility\game::decrementfauxvehiclecount();
-  thread scripts\mp\killstreaks\killstreaks::func_11086();
-  return 0;
+  if(!isdefined(var_01)) {
+    level.func_C20D--;
+    scripts\mp\utility\game::decrementfauxvehiclecount();
+    thread scripts\mp\killstreaks\killstreaks::func_11086();
+    return 0;
   }
 
   return 1;
@@ -131,21 +131,21 @@ func_E731(var_00, var_01, var_02, var_03) {
   self endon("death");
   self.owner endon("disconnect");
 
-  if (isdefined(var_02))
-  self.owner endon(var_02);
+  if(isdefined(var_02))
+    self.owner endon(var_02);
 
-  if (isdefined(var_03))
-  self.owner endon(var_03);
+  if(isdefined(var_03))
+    self.owner endon(var_03);
 
-  if (!isdefined(var_00))
-  var_00 = -360;
+  if(!isdefined(var_00))
+    var_00 = -360;
 
-  if (!isdefined(var_01))
-  var_01 = 60;
+  if(!isdefined(var_01))
+    var_01 = 60;
 
   for (;;) {
-  self rotateyaw(var_00, var_01);
-  wait(var_01);
+    self rotateyaw(var_00, var_01);
+    wait(var_01);
   }
 }
 
@@ -163,13 +163,13 @@ func_4A26(var_00, var_01) {
   var_11 = var_2.modelbase;
   var_12 = scripts\mp\killstreak_loot::getrarityforlootitem(var_1.variantid);
 
-  if (var_12 != "")
-  var_11 = var_11 + "_" + var_12;
+  if(var_12 != "")
+    var_11 = var_11 + "_" + var_12;
 
   var_13 = spawn("script_model", var_09);
 
-  if (!isdefined(var_13))
-  return undefined;
+  if(!isdefined(var_13))
+    return undefined;
 
   var_13 setmodel(var_11);
   var_13.team = self.team;
@@ -206,8 +206,8 @@ func_117AE(var_00, var_01) {
   scripts\mp\shellshock::_earthquake(0.15, 2, var_0.origin, 2000);
   var_02 = level.func_117B0[var_0.streakname];
 
-  if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::setthirdpersondof(0);
+  if(getdvarint("camera_thirdPerson"))
+    scripts\mp\utility\game::setthirdpersondof(0);
 
   var_03 = var_2.weapon["missile"].weaponname;
   var_04 = var_2.weapon["missile"].func_13FCB;
@@ -226,16 +226,16 @@ func_117AE(var_00, var_01) {
   var_0.owner thermalvisionon();
 
   for (var_05 = 0; var_05 < 5; var_5++) {
-  var_0.owner setclientomnvar(var_0.func_B88C[var_05].omnvar, undefined);
-  var_0.owner setclientomnvar(var_0.func_B888[var_05].omnvar, -1);
+    var_0.owner setclientomnvar(var_0.func_B88C[var_05].omnvar, undefined);
+    var_0.owner setclientomnvar(var_0.func_B888[var_05].omnvar, -1);
   }
 
   var_0.owner _meth_82C0("thor_killstreak", 1);
   var_06 = var_2.teamsplash;
   var_07 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.streakinfo.variantid);
 
-  if (var_07 != "")
-  var_06 = var_06 + "_" + var_07;
+  if(var_07 != "")
+    var_06 = var_06 + "_" + var_07;
 
   level thread scripts\mp\utility\game::teamplayercardsplash(var_06, self);
   var_0.owner scripts\engine\utility::allow_weapon_switch(0);
@@ -255,8 +255,8 @@ func_117AE(var_00, var_01) {
   var_0.minimapid = var_00 scripts\mp\killstreaks\airdrop::createobjective(var_08, undefined, 1, 1, 1);
   var_09 = var_2.timeout;
 
-  if (scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_armor_duration"))
-  var_09 = var_09 - 5;
+  if(scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_armor_duration"))
+    var_09 = var_09 - 5;
 
   var_00 thread func_1179D(var_0.owner);
   var_00 thread func_117AC(var_09);
@@ -266,8 +266,8 @@ func_117AE(var_00, var_01) {
   var_00 thread func_117AB();
   var_00 thread func_117A2();
 
-  if (scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_switch_thruster"))
-  var_00 thread thor_watchswitchthrust(var_0.owner);
+  if(scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_switch_thruster"))
+    var_00 thread thor_watchswitchthrust(var_0.owner);
 
   var_00 thread func_117A3();
   var_00 thread func_1179E();
@@ -295,24 +295,24 @@ func_989D(var_00) {
   var_01 = [];
 
   switch (var_00) {
-  case "ID":
-  for (var_02 = 0; var_02 < 5; var_2++) {
-  var_03 = spawnstruct();
-  var_3.omnvar = "ui_thor_missile_" + var_02;
-  var_3.inuse = 0;
-  var_1[var_1.size] = var_03;
-  }
+    case "ID":
+      for (var_02 = 0; var_02 < 5; var_2++) {
+        var_03 = spawnstruct();
+        var_3.omnvar = "ui_thor_missile_" + var_02;
+        var_3.inuse = 0;
+        var_1[var_1.size] = var_03;
+      }
 
-  break;
-  case "Distance":
-  for (var_02 = 0; var_02 < 5; var_2++) {
-  var_03 = spawnstruct();
-  var_3.omnvar = "ui_thor_missile_" + var_02 + "_dist";
-  var_3.inuse = 0;
-  var_1[var_1.size] = var_03;
-  }
+      break;
+    case "Distance":
+      for (var_02 = 0; var_02 < 5; var_2++) {
+        var_03 = spawnstruct();
+        var_3.omnvar = "ui_thor_missile_" + var_02 + "_dist";
+        var_3.inuse = 0;
+        var_1[var_1.size] = var_03;
+      }
 
-  break;
+      break;
   }
 
   return var_01;
@@ -328,15 +328,15 @@ watchhostmigrationfinishedinit(var_00, var_01) {
   self endon("leaving");
 
   for (;;) {
-  level waittill("host_migration_end");
-  var_00 thermalvisionfofoverlayon();
+    level waittill("host_migration_end");
+    var_00 thermalvisionfofoverlayon();
 
-  if (scripts\mp\utility\game::istrue(self.func_117B2)) {
-  var_00 thermalvisionon();
-  continue;
-  }
+    if(scripts\mp\utility\game::istrue(self.func_117B2)) {
+      var_00 thermalvisionon();
+      continue;
+    }
 
-  var_00 thermalvisionoff();
+    var_00 thermalvisionoff();
   }
 }
 
@@ -369,14 +369,14 @@ func_1179A(var_00) {
 }
 
 func_1178F(var_00) {
-  if (isdefined(self))
-  scripts\mp\utility\game::clearusingremote();
+  if(isdefined(self))
+    scripts\mp\utility\game::clearusingremote();
 }
 
 func_1179C(var_00) {
   while (isdefined(self.func_9BE2) && var_00 > 0) {
-  wait 0.05;
-  var_00 = var_00 - 0.05;
+    wait 0.05;
+    var_00 = var_00 - 0.05;
   }
 }
 
@@ -385,14 +385,14 @@ func_1179D(var_00) {
   level endon("game_ended");
 
   for (;;) {
-  var_01 = scripts\engine\utility::waittill_any_return("start_fire", "start_reload", "death", "leaving");
+    var_01 = scripts\engine\utility::waittill_any_return("start_fire", "start_reload", "death", "leaving");
 
-  if (var_01 == "death" || var_01 == "leaving")
-  break;
-
-  var_00 scripts\engine\utility::allow_fire(0);
-  scripts\engine\utility::waittill_any("finished_single_fire", "finished_reload", "death", "leaving");
-  var_00 scripts\engine\utility::allow_fire(1);
+    if(var_01 == "death" || var_01 == "leaving") {
+      break;
+    }
+    var_00 scripts\engine\utility::allow_fire(0);
+    scripts\engine\utility::waittill_any("finished_single_fire", "finished_reload", "death", "leaving");
+    var_00 scripts\engine\utility::allow_fire(1);
   }
 }
 
@@ -401,20 +401,20 @@ func_117A0() {
   self endon("leaving");
   self waittill("death");
 
-  if (isdefined(self.owner)) {
-  self.owner func_11791(self);
-  self.owner setclientomnvar("ui_thor_show", 0);
-  self.owner setclientomnvar("ui_killstreak_countdown", 0);
-  self.owner setclientomnvar("ui_killstreak_health", 0);
-  self.owner setclientomnvar("ui_killstreak_missile_warn", 0);
-  self.owner clearclienttriggeraudiozone(1);
-  self.owner stoprumble("thor_thrust_rumble");
+  if(isdefined(self.owner)) {
+    self.owner func_11791(self);
+    self.owner setclientomnvar("ui_thor_show", 0);
+    self.owner setclientomnvar("ui_killstreak_countdown", 0);
+    self.owner setclientomnvar("ui_killstreak_health", 0);
+    self.owner setclientomnvar("ui_killstreak_missile_warn", 0);
+    self.owner clearclienttriggeraudiozone(1);
+    self.owner stoprumble("thor_thrust_rumble");
 
-  foreach (var_01 in self.func_B88C)
-  self.owner setclientomnvar(var_1.omnvar, undefined);
+    foreach(var_01 in self.func_B88C)
+    self.owner setclientomnvar(var_1.omnvar, undefined);
 
-  foreach (var_04 in self.func_B888)
-  self.owner setclientomnvar(var_4.omnvar, -1);
+    foreach(var_04 in self.func_B888)
+    self.owner setclientomnvar(var_4.omnvar, -1);
   }
 
   func_4074();
@@ -477,20 +477,20 @@ func_11795(var_00) {
   var_01 = level.func_117B0[self.streakname];
   scripts\mp\utility\game::leaderdialog(var_1.votimedout);
 
-  if (isdefined(self.owner)) {
-  self.owner func_11791(self, var_00);
-  self.owner setclientomnvar("ui_thor_show", 0);
-  self.owner setclientomnvar("ui_killstreak_countdown", 0);
-  self.owner setclientomnvar("ui_killstreak_health", 0);
-  self.owner setclientomnvar("ui_killstreak_missile_warn", 0);
-  self.owner clearclienttriggeraudiozone(1);
-  self.owner stoprumble("thor_thrust_rumble");
+  if(isdefined(self.owner)) {
+    self.owner func_11791(self, var_00);
+    self.owner setclientomnvar("ui_thor_show", 0);
+    self.owner setclientomnvar("ui_killstreak_countdown", 0);
+    self.owner setclientomnvar("ui_killstreak_health", 0);
+    self.owner setclientomnvar("ui_killstreak_missile_warn", 0);
+    self.owner clearclienttriggeraudiozone(1);
+    self.owner stoprumble("thor_thrust_rumble");
 
-  foreach (var_03 in self.func_B88C)
-  self.owner setclientomnvar(var_3.omnvar, undefined);
+    foreach(var_03 in self.func_B88C)
+    self.owner setclientomnvar(var_3.omnvar, undefined);
 
-  foreach (var_06 in self.func_B888)
-  self.owner setclientomnvar(var_6.omnvar, -1);
+    foreach(var_06 in self.func_B888)
+    self.owner setclientomnvar(var_6.omnvar, -1);
   }
 
   self notify("gone");
@@ -509,44 +509,44 @@ func_11791(var_00, var_01) {
   var_02 = level.func_117B0[var_0.streakname];
   scripts\mp\utility\game::printgameaction("killstreak ended - thor", self);
 
-  if (isdefined(var_00)) {
-  var_00 notify("end_remote");
-  self notify("thor_ride_ended");
-  scripts\engine\utility::allow_usability(1);
+  if(isdefined(var_00)) {
+    var_00 notify("end_remote");
+    self notify("thor_ride_ended");
+    scripts\engine\utility::allow_usability(1);
 
-  if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::setthirdpersondof(1);
+    if(getdvarint("camera_thirdPerson"))
+      scripts\mp\utility\game::setthirdpersondof(1);
 
-  self thermalvisionfofoverlayoff();
-  self thermalvisionoff();
-  self _meth_85A2("");
-  self unlink();
-  self setplayerangles(self.restoreangles);
+    self thermalvisionfofoverlayoff();
+    self thermalvisionoff();
+    self _meth_85A2("");
+    self unlink();
+    self setplayerangles(self.restoreangles);
 
-  if (scripts\mp\utility\game::istrue(var_01))
-  scripts\mp\utility\game::func_1136C(scripts\engine\utility::getlastweapon(), 1);
-  else
-  thread func_11794();
+    if(scripts\mp\utility\game::istrue(var_01))
+      scripts\mp\utility\game::func_1136C(scripts\engine\utility::getlastweapon(), 1);
+    else
+      thread func_11794();
 
-  self stopolcalsound("odin_negative_action");
-  self stopolcalsound("odin_positive_action");
+    self stopolcalsound("odin_negative_action");
+    self stopolcalsound("odin_positive_action");
 
-  foreach (var_04 in level.func_117B0[var_0.streakname].weapon) {
-  if (isdefined(var_4.func_D5E4))
-  self stopolcalsound(var_4.func_D5E4);
+    foreach(var_04 in level.func_117B0[var_0.streakname].weapon) {
+      if(isdefined(var_4.func_D5E4))
+        self stopolcalsound(var_4.func_D5E4);
 
-  if (isdefined(var_4.func_D5DD))
-  self stopolcalsound(var_4.func_D5DD);
-  }
+      if(isdefined(var_4.func_D5DD))
+        self stopolcalsound(var_4.func_D5DD);
+    }
 
-  thread scripts\mp\killstreaks\killstreaks::func_11086();
+    thread scripts\mp\killstreaks\killstreaks::func_11086();
 
-  if (isdefined(self.func_117AF))
-  self.func_117AF delete();
+    if(isdefined(self.func_117AF))
+      self.func_117AF delete();
 
-  thread scripts\mp\utility\game::_takeweapon(var_0.primaryweapon);
-  thread scripts\mp\utility\game::_takeweapon(var_0.secondaryweapon);
-  scripts\engine\utility::allow_weapon_switch(1);
+    thread scripts\mp\utility\game::_takeweapon(var_0.primaryweapon);
+    thread scripts\mp\utility\game::_takeweapon(var_0.secondaryweapon);
+    scripts\engine\utility::allow_weapon_switch(1);
   }
 }
 
@@ -574,13 +574,13 @@ func_117AA() {
   self _meth_8594();
 
   for (;;) {
-  var_02 = var_00 getvieworigin() - (0, 0, 50);
-  var_03 = var_02 + anglestoforward(var_00 getplayerangles()) * 50000;
-  var_04 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid", "physicscontents_vehicle"];
-  var_05 = physics_createcontents(var_04);
-  var_06 = scripts\engine\trace::ray_trace(var_02, var_03, level.characters, var_05);
-  var_1.origin = var_6["position"] + (0, 0, 50);
-  scripts\engine\utility::waitframe();
+    var_02 = var_00 getvieworigin() - (0, 0, 50);
+    var_03 = var_02 + anglestoforward(var_00 getplayerangles()) * 50000;
+    var_04 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid", "physicscontents_vehicle"];
+    var_05 = physics_createcontents(var_04);
+    var_06 = scripts\engine\trace::ray_trace(var_02, var_03, level.characters, var_05);
+    var_1.origin = var_6["position"] + (0, 0, 50);
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -596,78 +596,78 @@ func_1179F() {
   var_05 = 4;
   var_06 = 5;
 
-  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
-  var_4++;
-  var_5++;
-  var_6++;
+  if(scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
+    var_4++;
+    var_5++;
+    var_6++;
   }
 
   for (;;) {
-  self waittill("damage", var_07, var_08, var_09, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20);
-  var_16 = scripts\mp\utility\game::func_13CA1(var_16, var_20);
+    self waittill("damage", var_07, var_08, var_09, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20);
+    var_16 = scripts\mp\utility\game::func_13CA1(var_16, var_20);
 
-  if (isdefined(var_08)) {
-  if (isdefined(var_8.owner))
-  var_08 = var_8.owner;
+    if(isdefined(var_08)) {
+      if(isdefined(var_8.owner))
+        var_08 = var_8.owner;
 
-  if (isdefined(var_8.team) && var_8.team == self.team && var_08 != self.owner)
-  continue;
-  }
+      if(isdefined(var_8.team) && var_8.team == self.team && var_08 != self.owner)
+        continue;
+    }
 
-  if (scripts\mp\equipment\phase_shift::isentityphaseshifted(var_08))
-  continue;
+    if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_08)) {
+      continue;
+    }
+    if(isdefined(var_11))
+      var_00 func_4CF1(self, var_11);
 
-  if (isdefined(var_11))
-  var_00 func_4CF1(self, var_11);
+    if(isdefined(var_16)) {
+      var_07 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_08, var_16, var_11, var_07, var_1.maxhealth, var_04, var_05, var_06);
 
-  if (isdefined(var_16)) {
-  var_07 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_08, var_16, var_11, var_07, var_1.maxhealth, var_04, var_05, var_06);
+      if(scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
+        if(scripts\mp\killstreaks\utility::isexplosiveantikillstreakweapon(var_16))
+          var_08 scripts\mp\damagefeedback::updatedamagefeedback("hitblastshield");
+      }
+    }
 
-  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
-  if (scripts\mp\killstreaks\utility::isexplosiveantikillstreakweapon(var_16))
-  var_08 scripts\mp\damagefeedback::updatedamagefeedback("hitblastshield");
-  }
-  }
+    var_02 = var_02 - var_07;
+    var_00 setclientomnvar("ui_killstreak_health", var_02 / var_1.maxhealth);
 
-  var_02 = var_02 - var_07;
-  var_00 setclientomnvar("ui_killstreak_health", var_02 / var_1.maxhealth);
+    if(isplayer(var_08)) {
+      var_08 scripts\mp\damagefeedback::updatedamagefeedback("");
+      scripts\mp\killstreaks\killstreaks::killstreakhit(var_08, var_16, self, var_11);
+      scripts\mp\damage::logattackerkillstreak(self, var_07, var_08, var_09, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
 
-  if (isplayer(var_08)) {
-  var_08 scripts\mp\damagefeedback::updatedamagefeedback("");
-  scripts\mp\killstreaks\killstreaks::killstreakhit(var_08, var_16, self, var_11);
-  scripts\mp\damage::logattackerkillstreak(self, var_07, var_08, var_09, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
+      if(var_02 <= 0) {
+        var_08 notify("destroyed_killstreak", var_16);
+        var_21 = "callout_destroyed_thor";
+        var_22 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
-  if (var_02 <= 0) {
-  var_08 notify("destroyed_killstreak", var_16);
-  var_21 = "callout_destroyed_thor";
-  var_22 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+        if(var_22 != "")
+          var_21 = var_21 + "_" + var_22;
 
-  if (var_22 != "")
-  var_21 = var_21 + "_" + var_22;
-
-  scripts\mp\damage::onkillstreakkilled("thor", var_08, var_16, var_11, var_07, "destroyed_thor", "thor_destroyed", var_21);
-  return;
-  }
-  }
+        scripts\mp\damage::onkillstreakkilled("thor", var_08, var_16, var_11, var_07, "destroyed_thor", "thor_destroyed", var_21);
+        return;
+      }
+    }
   }
 }
 
 func_4CF1(var_00, var_01) {
   switch (var_01) {
-  case "MOD_GRENADE_SPLASH":
-  case "MOD_GRENADE":
-  case "MOD_PROJECTILE":
-  case "MOD_EXPLOSIVE_BULLET":
-  case "MOD_PISTOL_BULLET":
-  case "MOD_RIFLE_BULLET":
-  func_3239(var_00);
-  break;
-  case "MOD_PROJECTILE_SPLASH":
-  case "MOD_IMPACT":
-  case "MOD_EXPLOSIVE":
-  func_69E6(var_00);
-  break;
-  default:
+    case "MOD_GRENADE_SPLASH":
+    case "MOD_GRENADE":
+    case "MOD_PROJECTILE":
+    case "MOD_EXPLOSIVE_BULLET":
+    case "MOD_PISTOL_BULLET":
+    case "MOD_RIFLE_BULLET":
+      func_3239(var_00);
+      break;
+    case "MOD_PROJECTILE_SPLASH":
+    case "MOD_IMPACT":
+    case "MOD_EXPLOSIVE":
+      func_69E6(var_00);
+      break;
+    default:
   }
 }
 
@@ -689,8 +689,8 @@ func_1349D(var_00, var_01) {
   var_00 endon("death");
 
   for (var_0.func_10E4C.alpha = var_01; var_01 > 0; var_0.func_10E4C.alpha = var_01) {
-  scripts\engine\utility::waitframe();
-  var_01 = var_01 - 0.1;
+    scripts\engine\utility::waitframe();
+    var_01 = var_01 - 0.1;
   }
 }
 
@@ -717,24 +717,24 @@ func_117AD() {
   var_00 endon("disconnect");
   var_01 = level.func_117B0[self.streakname];
 
-  if (!isai(var_00))
-  var_00 notifyonplayercommand("thor_missile_zoom_on", "+weapnext");
+  if(!isai(var_00))
+    var_00 notifyonplayercommand("thor_missile_zoom_on", "+weapnext");
 
   for (;;) {
-  var_00 waittill("thor_missile_zoom_on");
-  var_00 scripts\engine\utility::allow_weapon_switch(1);
+    var_00 waittill("thor_missile_zoom_on");
+    var_00 scripts\engine\utility::allow_weapon_switch(1);
 
-  if (!isdefined(self.func_117B3)) {
-  var_00 scripts\mp\utility\game::_switchtoweaponimmediate(self.secondaryweapon);
-  self.func_117B3 = 1;
-  var_00 setclientomnvar("ui_thor_show", 2);
-  } else {
-  var_00 scripts\mp\utility\game::_switchtoweaponimmediate(self.primaryweapon);
-  self.func_117B3 = undefined;
-  var_00 setclientomnvar("ui_thor_show", 1);
-  }
+    if(!isdefined(self.func_117B3)) {
+      var_00 scripts\mp\utility\game::_switchtoweaponimmediate(self.secondaryweapon);
+      self.func_117B3 = 1;
+      var_00 setclientomnvar("ui_thor_show", 2);
+    } else {
+      var_00 scripts\mp\utility\game::_switchtoweaponimmediate(self.primaryweapon);
+      self.func_117B3 = undefined;
+      var_00 setclientomnvar("ui_thor_show", 1);
+    }
 
-  var_00 scripts\engine\utility::allow_weapon_switch(0);
+    var_00 scripts\engine\utility::allow_weapon_switch(0);
   }
 }
 
@@ -746,24 +746,24 @@ func_117AB() {
   var_00 endon("disconnect");
   var_01 = level.func_117B0[self.streakname];
 
-  if (!isai(var_00)) {
-  if (var_00 scripts\engine\utility::is_player_gamepad_enabled())
-  var_00 notifyonplayercommand("thor_thermal_toggle", "+usereload");
+  if(!isai(var_00)) {
+    if(var_00 scripts\engine\utility::is_player_gamepad_enabled())
+      var_00 notifyonplayercommand("thor_thermal_toggle", "+usereload");
 
-  var_00 notifyonplayercommand("thor_thermal_toggle", "+activate");
+    var_00 notifyonplayercommand("thor_thermal_toggle", "+activate");
   }
 
   for (;;) {
-  var_00 waittill("thor_thermal_toggle");
+    var_00 waittill("thor_thermal_toggle");
 
-  if (!isdefined(self.func_117B2)) {
-  var_00 thermalvisionon();
-  self.func_117B2 = 1;
-  continue;
-  }
+    if(!isdefined(self.func_117B2)) {
+      var_00 thermalvisionon();
+      self.func_117B2 = 1;
+      continue;
+    }
 
-  var_00 thermalvisionoff();
-  self.func_117B2 = undefined;
+    var_00 thermalvisionoff();
+    self.func_117B2 = undefined;
   }
 }
 
@@ -773,39 +773,39 @@ func_117A2() {
   var_00 = self.owner;
   var_00 endon("disconnect");
 
-  if (!isai(var_00)) {
-  var_00 notifyonplayercommand("thor_fire_thrusters", "+smoke");
-  var_00 notifyonplayercommand("thor_release_thrusters", "-smoke");
+  if(!isai(var_00)) {
+    var_00 notifyonplayercommand("thor_fire_thrusters", "+smoke");
+    var_00 notifyonplayercommand("thor_release_thrusters", "-smoke");
   }
 
   for (;;) {
-  var_01 = var_00 scripts\engine\utility::waittill_any_return("thor_fire_thrusters", "thor_release_thrusters");
+    var_01 = var_00 scripts\engine\utility::waittill_any_return("thor_fire_thrusters", "thor_release_thrusters");
 
-  if (!isdefined(var_01))
-  continue;
+    if(!isdefined(var_01)) {
+      continue;
+    }
+    if(var_01 == "thor_fire_thrusters") {
+      var_0.func_117AF thread func_E731(var_0.thorrigangle, 30, "thor_release_thrusters", "thor_switch_thrusters");
+      thread func_B06B(var_00);
 
-  if (var_01 == "thor_fire_thrusters") {
-  var_0.func_117AF thread func_E731(var_0.thorrigangle, 30, "thor_release_thrusters", "thor_switch_thrusters");
-  thread func_B06B(var_00);
+      if(var_0.thorrigangle == -360)
+        self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_thrust", 1);
+      else
+        self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_rev_thrust", 1);
 
-  if (var_0.thorrigangle == -360)
-  self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_thrust", 1);
-  else
-  self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_rev_thrust", 1);
+      self setscriptablepartstate("thrusters", "boost", 0);
+      continue;
+    }
 
-  self setscriptablepartstate("thrusters", "boost", 0);
-  continue;
-  }
+    var_0.func_117AF thread func_E731(var_0.thorrigangle, 60, "thor_fire_thrusters", "thor_switch_thrusters");
+    var_00 stoprumble("thor_thrust_rumble");
 
-  var_0.func_117AF thread func_E731(var_0.thorrigangle, 60, "thor_fire_thrusters", "thor_switch_thrusters");
-  var_00 stoprumble("thor_thrust_rumble");
+    if(var_0.thorrigangle == -360)
+      self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_idle", 1);
+    else
+      self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_rev_idle", 1);
 
-  if (var_0.thorrigangle == -360)
-  self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_idle", 1);
-  else
-  self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_rev_idle", 1);
-
-  self setscriptablepartstate("thrusters", "idle", 0);
+    self setscriptablepartstate("thrusters", "idle", 0);
   }
 }
 
@@ -815,8 +815,8 @@ func_B06B(var_00) {
   var_00 _meth_8244("thor_thrust_rumble");
 
   for (;;) {
-  scripts\mp\shellshock::_earthquake(0.15, 0.05, self.origin, 1000);
-  scripts\engine\utility::waitframe();
+    scripts\mp\shellshock::_earthquake(0.15, 0.05, self.origin, 1000);
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -828,28 +828,28 @@ func_B9F2(var_00) {
   var_01 = [];
 
   for (;;) {
-  var_02 = var_00 scripts\mp\utility\game::get_players_watching();
+    var_02 = var_00 scripts\mp\utility\game::get_players_watching();
 
-  foreach (var_04 in var_01) {
-  if (!scripts\engine\utility::array_contains(var_02, var_04)) {
-  var_01 = scripts\engine\utility::array_remove(var_01, var_04);
-  self hide();
-  self giveperkequipment(var_00);
-  }
-  }
+    foreach(var_04 in var_01) {
+      if(!scripts\engine\utility::array_contains(var_02, var_04)) {
+        var_01 = scripts\engine\utility::array_remove(var_01, var_04);
+        self hide();
+        self giveperkequipment(var_00);
+      }
+    }
 
-  foreach (var_04 in var_02) {
-  self giveperkequipment(var_04);
+    foreach(var_04 in var_02) {
+      self giveperkequipment(var_04);
 
-  if (!scripts\engine\utility::array_contains(var_01, var_04)) {
-  var_01 = scripts\engine\utility::array_add(var_01, var_04);
-  stopfxontag(level._effect["thor_targeting"], self, "tag_origin");
-  wait 0.05;
-  playfxontag(level._effect["thor_targeting"], self, "tag_origin");
-  }
-  }
+      if(!scripts\engine\utility::array_contains(var_01, var_04)) {
+        var_01 = scripts\engine\utility::array_add(var_01, var_04);
+        stopfxontag(level._effect["thor_targeting"], self, "tag_origin");
+        wait 0.05;
+        playfxontag(level._effect["thor_targeting"], self, "tag_origin");
+      }
+    }
 
-  wait 0.25;
+    wait 0.25;
   }
 }
 
@@ -860,24 +860,24 @@ thor_watchswitchthrust(var_00) {
   var_00 = self.owner;
   var_00 endon("disconnect");
 
-  if (!isai(var_00)) {
-  var_00 notifyonplayercommand("thor_switch_thrusters", "+speed_throw");
-  var_00 notifyonplayercommand("thor_switch_thrusters", "+toggleads_throw");
-  var_00 notifyonplayercommand("thor_switch_thrusters", "+ads_akimbo_accessible");
+  if(!isai(var_00)) {
+    var_00 notifyonplayercommand("thor_switch_thrusters", "+speed_throw");
+    var_00 notifyonplayercommand("thor_switch_thrusters", "+toggleads_throw");
+    var_00 notifyonplayercommand("thor_switch_thrusters", "+ads_akimbo_accessible");
   }
 
   for (;;) {
-  var_01 = var_00 scripts\engine\utility::waittill_any_return("thor_switch_thrusters");
+    var_01 = var_00 scripts\engine\utility::waittill_any_return("thor_switch_thrusters");
 
-  if (var_0.thorrigangle == -360) {
-  self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_rev_idle", 1);
-  var_0.thorrigangle = 360;
-  } else {
-  self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_idle", 1);
-  var_0.thorrigangle = -360;
-  }
+    if(var_0.thorrigangle == -360) {
+      self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_rev_idle", 1);
+      var_0.thorrigangle = 360;
+    } else {
+      self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_idle", 1);
+      var_0.thorrigangle = -360;
+    }
 
-  var_0.func_117AF thread func_E731(var_0.thorrigangle, 60, "thor_fire_thrusters", "thor_switch_thrusters");
+    var_0.func_117AF thread func_E731(var_0.thorrigangle, 60, "thor_fire_thrusters", "thor_switch_thrusters");
   }
 }
 
@@ -887,25 +887,25 @@ thor_watchdebugtogglemovement(var_00) {
   level endon("game_ended");
   var_00 endon("disconnect");
 
-  if (!isai(var_00)) {
-  var_00 notifyonplayercommand("thor_toggle_movement", "+speed_throw");
-  var_00 notifyonplayercommand("thor_toggle_movement", "+toggleads_throw");
-  var_00 notifyonplayercommand("thor_toggle_movement", "+ads_akimbo_accessible");
+  if(!isai(var_00)) {
+    var_00 notifyonplayercommand("thor_toggle_movement", "+speed_throw");
+    var_00 notifyonplayercommand("thor_toggle_movement", "+toggleads_throw");
+    var_00 notifyonplayercommand("thor_toggle_movement", "+ads_akimbo_accessible");
   }
 
   var_01 = 1;
 
   for (;;) {
-  var_02 = var_00 scripts\engine\utility::waittill_any_return("thor_toggle_movement");
+    var_02 = var_00 scripts\engine\utility::waittill_any_return("thor_toggle_movement");
 
-  if (scripts\mp\utility\game::istrue(var_01)) {
-  self unlink();
-  var_01 = 0;
-  continue;
-  }
+    if(scripts\mp\utility\game::istrue(var_01)) {
+      self unlink();
+      var_01 = 0;
+      continue;
+    }
 
-  self linkto(var_0.func_117AF, "tag_origin");
-  var_01 = 1;
+    self linkto(var_0.func_117AF, "tag_origin");
+    var_01 = 1;
   }
 }
 
@@ -919,33 +919,33 @@ func_117A3() {
   var_02 = level.func_117B0[self.streakname].weapon[var_01];
 
   for (;;) {
-  var_00 waittill("missile_fire", var_03, var_04);
+    var_00 waittill("missile_fire", var_03, var_04);
 
-  if (scripts\mp\utility\game::istrue(self.func_9BE2))
-  continue;
+    if(scripts\mp\utility\game::istrue(self.func_9BE2)) {
+      continue;
+    }
+    if(scripts\mp\utility\game::istrue(self.func_9C9F)) {
+      continue;
+    }
+    if(isdefined(level.hostmigrationtimer)) {
+      continue;
+    }
+    if(isdefined(self.func_C239) && self.func_C239 < 1) {
+      continue;
+    }
+    if(isdefined(var_04) && (var_04 != "thorproj_mp" && var_04 != "thorproj_zoomed_mp")) {
+      continue;
+    }
+    self setscriptablepartstate("muzzle", "fire", 0);
+    thread func_5104(0.1);
+    var_3.streakinfo = self.streakinfo;
 
-  if (scripts\mp\utility\game::istrue(self.func_9C9F))
-  continue;
+    if(isdefined(var_04) && var_04 == "thorproj_mp") {
+      var_03 thread func_139D1(var_00, var_01, self);
+      continue;
+    }
 
-  if (isdefined(level.hostmigrationtimer))
-  continue;
-
-  if (isdefined(self.func_C239) && self.func_C239 < 1)
-  continue;
-
-  if (isdefined(var_04) && (var_04 != "thorproj_mp" && var_04 != "thorproj_zoomed_mp"))
-  continue;
-
-  self setscriptablepartstate("muzzle", "fire", 0);
-  thread func_5104(0.1);
-  var_3.streakinfo = self.streakinfo;
-
-  if (isdefined(var_04) && var_04 == "thorproj_mp") {
-  var_03 thread func_139D1(var_00, var_01, self);
-  continue;
-  }
-
-  var_03 thread func_13B42(var_00, self);
+    var_03 thread func_13B42(var_00, self);
   }
 }
 
@@ -968,12 +968,12 @@ func_139D1(var_00, var_01, var_02) {
   var_08 = scripts\mp\killstreaks\utility::func_7E92(var_00);
   var_09 = [];
 
-  foreach (var_11 in var_08) {
-  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(var_11))
-  continue;
-
-  if (var_00 worldpointinreticle_circle(var_11.origin, 65, 55))
-  var_9[var_9.size] = var_11;
+  foreach(var_11 in var_08) {
+    if(!scripts\mp\killstreaks\utility::manualmissilecantracktarget(var_11)) {
+      continue;
+    }
+    if(var_00 worldpointinreticle_circle(var_11.origin, 65, 55))
+      var_9[var_9.size] = var_11;
   }
 
   self waittill("explode", var_13);
@@ -981,35 +981,35 @@ func_139D1(var_00, var_01, var_02) {
   var_15 = "thorproj_tracking_mp";
 
   for (var_16 = 0; var_16 < var_14; var_16++) {
-  if (!isdefined(var_02))
-  break;
+    if(!isdefined(var_02)) {
+      break;
+    }
+    var_17 = randomint(360);
+    var_18 = anglestoright(var_06) * cos(var_17);
+    var_19 = anglestoforward(var_06) * 3;
+    var_20 = anglestoup(var_06) * sin(var_17);
+    var_21 = var_18 + var_19 + var_20;
+    var_22 = scripts\mp\utility\game::_magicbullet(var_15, var_13, var_13 + var_21, var_00);
+    var_22.owner = var_00;
+    var_22.zoffset = var_13[2];
+    var_22.id = func_7FBA(var_04);
+    var_22.func_5716 = func_7FBA(var_05);
+    var_22.outlineid = scripts\mp\utility\game::outlineenableforplayer(var_22, "white", var_22.owner, 0, 0, "killstreak_personal");
+    var_22.streakinfo = var_2.streakinfo;
+    var_22.owner setclientomnvar(var_22.id.omnvar, var_22);
+    var_22.owner setclientomnvar(var_22.func_5716.omnvar, int(var_22.zoffset));
 
-  var_17 = randomint(360);
-  var_18 = anglestoright(var_06) * cos(var_17);
-  var_19 = anglestoforward(var_06) * 3;
-  var_20 = anglestoup(var_06) * sin(var_17);
-  var_21 = var_18 + var_19 + var_20;
-  var_22 = scripts\mp\utility\game::_magicbullet(var_15, var_13, var_13 + var_21, var_00);
-  var_22.owner = var_00;
-  var_22.zoffset = var_13[2];
-  var_22.id = func_7FBA(var_04);
-  var_22.func_5716 = func_7FBA(var_05);
-  var_22.outlineid = scripts\mp\utility\game::outlineenableforplayer(var_22, "white", var_22.owner, 0, 0, "killstreak_personal");
-  var_22.streakinfo = var_2.streakinfo;
-  var_22.owner setclientomnvar(var_22.id.omnvar, var_22);
-  var_22.owner setclientomnvar(var_22.func_5716.omnvar, int(var_22.zoffset));
+    if(scripts\mp\killstreaks\utility::func_A69F(var_2.streakinfo, "passive_seek_cluster"))
+      var_22 thread delayseekopentargetinview(0.3, var_22.owner, var_07, var_09);
+    else
+      var_22 thread func_50E6(0.3, var_03);
 
-  if (scripts\mp\killstreaks\utility::func_A69F(var_2.streakinfo, "passive_seek_cluster"))
-  var_22 thread delayseekopentargetinview(0.3, var_22.owner, var_07, var_09);
-  else
-  var_22 thread func_50E6(0.3, var_03);
-
-  var_22 thread func_139F6(var_22.owner, var_02);
-  var_22 thread func_13A22(var_22.owner, var_02);
-  var_22 thread scripts\mp\killstreaks\utility::watchsupertrophynotify(var_22.owner);
-  var_2.func_C239--;
-  var_00 setclientomnvar("ui_thor_missiles_loaded", var_2.func_C239);
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
+    var_22 thread func_139F6(var_22.owner, var_02);
+    var_22 thread func_13A22(var_22.owner, var_02);
+    var_22 thread scripts\mp\killstreaks\utility::watchsupertrophynotify(var_22.owner);
+    var_2.func_C239--;
+    var_00 setclientomnvar("ui_thor_missiles_loaded", var_2.func_C239);
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
   }
 
   var_02 scriptmodelplayanim("iw7_mp_killstreak_thor_extend_reload", 1);
@@ -1022,25 +1022,25 @@ delayseekopentargetinview(var_00, var_01, var_02, var_03) {
   var_04 = undefined;
   wait(var_00);
 
-  foreach (var_06 in var_03) {
-  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(var_06))
-  continue;
-
-  if (scripts\mp\utility\game::istrue(var_6.thortargetted))
-  continue;
-
-  var_04 = var_06;
-  break;
+  foreach(var_06 in var_03) {
+    if(!scripts\mp\killstreaks\utility::manualmissilecantracktarget(var_06)) {
+      continue;
+    }
+    if(scripts\mp\utility\game::istrue(var_6.thortargetted)) {
+      continue;
+    }
+    var_04 = var_06;
+    break;
   }
 
-  if (isdefined(var_04)) {
-  self missile_settargetent(var_04);
-  self missile_setflightmodedirect();
-  var_4.thortargetted = 1;
-  var_04 thread watchtarget(self);
+  if(isdefined(var_04)) {
+    self missile_settargetent(var_04);
+    self missile_setflightmodedirect();
+    var_4.thortargetted = 1;
+    var_04 thread watchtarget(self);
   } else {
-  self missile_settargetpos(var_02);
-  self missile_setflightmodedirect();
+    self missile_settargetpos(var_02);
+    self missile_setflightmodedirect();
   }
 }
 
@@ -1048,19 +1048,19 @@ watchtarget(var_00) {
   self endon("disconnect");
 
   for (;;) {
-  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(self))
-  break;
-
-  if (!isdefined(var_00))
-  break;
-
-  scripts\engine\utility::waitframe();
+    if(!scripts\mp\killstreaks\utility::manualmissilecantracktarget(self)) {
+      break;
+    }
+    if(!isdefined(var_00)) {
+      break;
+    }
+    scripts\engine\utility::waitframe();
   }
 
   self.thortargetted = undefined;
 
-  if (isdefined(var_00))
-  var_00 missile_cleartarget();
+  if(isdefined(var_00))
+    var_00 missile_cleartarget();
 }
 
 canseetarget(var_00) {
@@ -1069,11 +1069,11 @@ canseetarget(var_00) {
   var_03 = var_00 gettagorigin("j_head");
 
   for (var_04 = 0; var_04 < var_3.size; var_4++) {
-  if (!scripts\engine\trace::ray_trace_passed(self.origin, var_3[var_04], self, var_02))
-  continue;
-
-  var_01 = 1;
-  break;
+    if(!scripts\engine\trace::ray_trace_passed(self.origin, var_3[var_04], self, var_02)) {
+      continue;
+    }
+    var_01 = 1;
+    break;
   }
 
   return var_01;
@@ -1083,8 +1083,8 @@ func_50E6(var_00, var_01) {
   self.owner endon("disconnect");
   wait(var_00);
 
-  if (isdefined(var_01))
-  self missile_settargetent(var_01);
+  if(isdefined(var_01))
+    self missile_settargetent(var_01);
 
   self missile_setflightmodedirect();
 }
@@ -1094,28 +1094,28 @@ func_139F6(var_00, var_01) {
   self endon("death");
 
   for (;;) {
-  if (isdefined(var_1.func_9C9F))
-  break;
-
-  self.zoffset = self.origin[2];
-  var_02 = scripts\engine\trace::ray_trace(self.origin, self.origin + (0, 0, -1000000.0));
-  var_03 = var_2["position"];
-  self.zoffset = self.origin - var_2["position"];
-  self.zoffset = self.zoffset[2];
-  var_00 setclientomnvar(self.func_5716.omnvar, int(max(0.0, self.zoffset)));
-  scripts\engine\utility::waitframe();
+    if(isdefined(var_1.func_9C9F)) {
+      break;
+    }
+    self.zoffset = self.origin[2];
+    var_02 = scripts\engine\trace::ray_trace(self.origin, self.origin + (0, 0, -1000000.0));
+    var_03 = var_2["position"];
+    self.zoffset = self.origin - var_2["position"];
+    self.zoffset = self.zoffset[2];
+    var_00 setclientomnvar(self.func_5716.omnvar, int(max(0.0, self.zoffset)));
+    scripts\engine\utility::waitframe();
   }
 }
 
 func_13A22(var_00, var_01) {
   self waittill("explode", var_02);
 
-  if (isdefined(self.outlineid))
-  scripts\mp\utility\game::outlinedisable(self.outlineid, self);
+  if(isdefined(self.outlineid))
+    scripts\mp\utility\game::outlinedisable(self.outlineid, self);
 
-  if (isdefined(var_00)) {
-  if (isdefined(self.id.omnvar))
-  var_00 setclientomnvar(self.id.omnvar, undefined);
+  if(isdefined(var_00)) {
+    if(isdefined(self.id.omnvar))
+      var_00 setclientomnvar(self.id.omnvar, undefined);
   }
 }
 
@@ -1139,13 +1139,12 @@ func_13B42(var_00, var_01) {
   var_00 setclientomnvar("ui_thor_missiles_loaded", var_1.func_C239);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
 
-  if (var_1.func_C239 > 0)
-  var_01 notify("finished_single_fire");
-  else
-  {
-  var_01 scriptmodelplayanim("iw7_mp_killstreak_thor_extend_reload", 1);
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(2);
-  var_01 notify("start_reload");
+  if(var_1.func_C239 > 0)
+    var_01 notify("finished_single_fire");
+  else {
+    var_01 scriptmodelplayanim("iw7_mp_killstreak_thor_extend_reload", 1);
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(2);
+    var_01 notify("start_reload");
   }
 
   var_1.func_9BE2 = undefined;
@@ -1157,15 +1156,15 @@ func_1179E() {
   var_00 = 0;
 
   for (;;) {
-  self waittill("start_reload");
+    self waittill("start_reload");
 
-  if (var_00 == 20) {
-  func_1179C(3);
-  self notify("death");
-  }
+    if(var_00 == 20) {
+      func_1179C(3);
+      self notify("death");
+    }
 
-  thread func_1179B();
-  var_0++;
+    thread func_1179B();
+    var_0++;
   }
 }
 
@@ -1177,21 +1176,20 @@ func_1179B() {
   level endon("game_ended");
   func_1179C(3);
 
-  if (self.func_C239 < self.func_B47C) {
-  self.func_9C9F = 1;
-  var_00 playlocalsound("thor_missile_reload");
-  thread func_510A(1);
+  if(self.func_C239 < self.func_B47C) {
+    self.func_9C9F = 1;
+    var_00 playlocalsound("thor_missile_reload");
+    thread func_510A(1);
 
-  while (self.func_C239 < self.func_B47C) {
-  self.func_C239++;
-  var_00 setclientomnvar("ui_thor_missiles_loaded", self.func_C239);
-  self.func_B88C[self.func_C239 - 1].inuse = 0;
-  self.func_B888[self.func_C239 - 1].inuse = 0;
-  var_00 setclientomnvar(self.func_B888[self.func_C239 - 1].omnvar, -1);
-  }
-  }
-  else
-  self notify("finished_reload");
+    while (self.func_C239 < self.func_B47C) {
+      self.func_C239++;
+      var_00 setclientomnvar("ui_thor_missiles_loaded", self.func_C239);
+      self.func_B88C[self.func_C239 - 1].inuse = 0;
+      self.func_B888[self.func_C239 - 1].inuse = 0;
+      var_00 setclientomnvar(self.func_B888[self.func_C239 - 1].omnvar, -1);
+    }
+  } else
+    self notify("finished_reload");
 }
 
 func_510A(var_00) {
@@ -1211,10 +1209,10 @@ func_12F01(var_00) {
   var_03 = var_01;
 
   while (var_03 < var_02) {
-  var_03 = gettime();
-  var_04 = (var_03 - var_01) / (var_02 - var_01);
-  var_04 = clamp(var_04, 0.0, 1.0);
-  scripts\engine\utility::waitframe();
+    var_03 = gettime();
+    var_04 = (var_03 - var_01) / (var_02 - var_01);
+    var_04 = clamp(var_04, 0.0, 1.0);
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -1228,16 +1226,16 @@ func_117A6() {
   self endon("death");
   level endon("game_ended");
 
-  foreach (var_01 in level.participants)
+  foreach(var_01 in level.participants)
   func_20D2(var_01);
 }
 
 func_20D2(var_00) {
-  if (level.teambased && var_0.team != self.team)
-  return;
-  else if (!level.teambased)
-  return;
-
+  if(level.teambased && var_0.team != self.team)
+    return;
+  else if(!level.teambased) {
+    return;
+  }
   var_01 = scripts\mp\utility\game::outlineenableforplayer(var_00, "cyan", self.owner, 1, 1, "killstreak");
   thread removeoutline(var_01, var_00);
 }
@@ -1247,16 +1245,16 @@ func_6567(var_00) {
 }
 
 removeoutline(var_00, var_01, var_02) {
-  if (isdefined(var_01))
-  var_01 endon("disconnect");
+  if(isdefined(var_01))
+    var_01 endon("disconnect");
 
   level endon("game_ended");
   var_03 = ["leave", "death"];
 
-  if (isdefined(var_02))
-  scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_03, var_02);
+  if(isdefined(var_02))
+    scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_03, var_02);
   else
-  scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_03);
+    scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_03);
 
   scripts\mp\utility\game::outlinedisable(var_00, var_01);
 }
@@ -1268,9 +1266,9 @@ func_117A8() {
   self.enemieskilledintimewindow = 0;
 
   for (;;) {
-  level waittill("thor_killed_player", var_00);
-  self.enemieskilledintimewindow++;
-  self notify("thor_enemy_killed");
+    level waittill("thor_killed_player", var_00);
+    self.enemieskilledintimewindow++;
+    self notify("thor_enemy_killed");
   }
 }
 
@@ -1282,15 +1280,15 @@ func_11790(var_00) {
   var_02 = 1.0;
 
   for (;;) {
-  self waittill("thor_enemy_killed");
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_02);
+    self waittill("thor_enemy_killed");
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_02);
 
-  if (self.enemieskilledintimewindow > 1)
-  self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352C);
-  else
-  self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352D);
+    if(self.enemieskilledintimewindow > 1)
+      self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352C);
+    else
+      self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352D);
 
-  self.enemieskilledintimewindow = 0;
+    self.enemieskilledintimewindow = 0;
   }
 }
 
@@ -1299,8 +1297,8 @@ func_11796() {
   level endon("game_ended");
 
   for (;;) {
-  level waittill("connected", var_00);
-  var_00 thread func_11797(self);
+    level waittill("connected", var_00);
+    var_00 thread func_11797(self);
   }
 }
 
@@ -1311,17 +1309,17 @@ func_11797(var_00) {
 }
 
 func_4074() {
-  if (isdefined(self.targeting_marker))
-  self.targeting_marker delete();
+  if(isdefined(self.targeting_marker))
+    self.targeting_marker delete();
 
-  if (isdefined(self.func_C7FF))
-  self.func_C7FF delete();
+  if(isdefined(self.func_C7FF))
+    self.func_C7FF delete();
 
-  if (isdefined(self.func_10E4C))
-  self.func_10E4C destroy();
+  if(isdefined(self.func_10E4C))
+    self.func_10E4C destroy();
 
-  if (isdefined(self.minimapid))
-  scripts\mp\objidpoolmanager::returnminimapid(self.minimapid);
+  if(isdefined(self.minimapid))
+    scripts\mp\objidpoolmanager::returnminimapid(self.minimapid);
 
   level.func_C20D--;
 }
@@ -1341,11 +1339,11 @@ func_7FBA(var_00) {
   var_01 = undefined;
 
   for (var_02 = 4; var_02 + 1 > 0; var_2--) {
-  if (!var_0[var_02].inuse) {
-  var_01 = var_0[var_02];
-  var_0[var_02].inuse = 1;
-  break;
-  }
+    if(!var_0[var_02].inuse) {
+      var_01 = var_0[var_02];
+      var_0[var_02].inuse = 1;
+      break;
+    }
   }
 
   return var_01;
@@ -1355,23 +1353,23 @@ getthormapvisionset(var_00) {
   var_01 = "";
 
   switch (var_00) {
-  case "mp_depot":
-  case "mp_hawkwar":
-  case "mp_paris":
-  case "mp_overflow":
-  case "mp_flip":
-  case "mp_geneva":
-  case "mp_dome_dusk":
-  case "mp_rivet":
-  case "mp_skyway":
-  case "mp_quarry":
-  case "mp_breakneck":
-  case "mp_junk":
-  var_01 = "thorbright_mp";
-  break;
-  default:
-  var_01 = "thor_mp";
-  break;
+    case "mp_depot":
+    case "mp_hawkwar":
+    case "mp_paris":
+    case "mp_overflow":
+    case "mp_flip":
+    case "mp_geneva":
+    case "mp_dome_dusk":
+    case "mp_rivet":
+    case "mp_skyway":
+    case "mp_quarry":
+    case "mp_breakneck":
+    case "mp_junk":
+      var_01 = "thorbright_mp";
+      break;
+    default:
+      var_01 = "thor_mp";
+      break;
   }
 
   return var_01;

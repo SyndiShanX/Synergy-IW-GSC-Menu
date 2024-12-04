@@ -4,8 +4,8 @@
 ***************************************************/
 
 func_107B7() {
-  if (!isdefined(level.func_12B67))
-  level.func_12B67 = scripts\sp\vehicle::func_1080C("un_retribution");
+  if(!isdefined(level.func_12B67))
+    level.func_12B67 = scripts\sp\vehicle::func_1080C("un_retribution");
 
   level.func_12B67 scripts\sp\vehicle::playgestureviewmodel();
   level.func_12B67.func_1FBB = "retribution";
@@ -25,8 +25,8 @@ func_A0F0() {
   var_00 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   var_01 = "jackal_callin";
 
-  if (getdvarint("E3", 0))
-  var_01 = "jackal_callin_dps";
+  if(getdvarint("E3", 0))
+    var_01 = "jackal_callin_dps";
 
   wait 0.1;
   scripts\sp\vehicle_build::func_31C6("script_vehicle_jackal_friendly_pearl", "default", "vfx\iw7\core\vehicle\jackal\vfx_jackal_wash_concrete.vfx", 1);
@@ -34,21 +34,21 @@ func_A0F0() {
   var_00 thread func_376C(level.func_D127, var_01);
   var_00 thread func_376E(level.func_EA99, var_01);
 
-  if (!isdefined(level.func_10256)) {
-  level waittill("jackals_landed");
-  level.func_D127 func_0BDC::func_6B4C("none", 0);
-  level.func_D127 func_0BDC::func_104A6(1);
+  if(!isdefined(level.func_10256)) {
+    level waittill("jackals_landed");
+    level.func_D127 func_0BDC::func_6B4C("none", 0);
+    level.func_D127 func_0BDC::func_104A6(1);
 
-  if (getdvarint("E3", 0))
-  scripts\sp\utility::func_15F5("jackals_salter_to_jackal_dps");
-  else
-  scripts\sp\utility::func_15F5("jackals_salter_to_jackal");
+    if(getdvarint("E3", 0))
+      scripts\sp\utility::func_15F5("jackals_salter_to_jackal_dps");
+    else
+      scripts\sp\utility::func_15F5("jackals_salter_to_jackal");
 
-  func_0BDC::func_137CF();
+    func_0BDC::func_137CF();
   }
 
-  if (getdvarint("e3", 0))
-  thread func_1358D();
+  if(getdvarint("e3", 0))
+    thread func_1358D();
 
   level.func_D127 func_0BDC::func_A167();
   func_0BDC::func_A153(1);
@@ -107,29 +107,29 @@ func_8A02() {
 }
 
 func_376C(var_00, var_01) {
-  if (!isdefined(level.func_10256)) {
-  var_00 scripts\engine\utility::delaythread(1, func_0BDC::func_6B4C, "fly", 1);
-  var_0.func_1FBB = "player_jackal";
-  var_00 scripts\sp\anim::func_F64A();
-  var_00 func_0BDC::func_A2DE(1);
-  var_00 scripts\engine\utility::delaythread(4.1, scripts\sp\utility::play_sound_on_tag, "phstreets_jackal_land_plr", "j_canopy");
-  var_00 scripts\engine\utility::delaythread(13.8, scripts\sp\utility::play_sound_on_tag, "phstreets_jackal_land_swt", "j_canopy");
-  level.player thread func_CA93();
-  var_00 scripts\engine\utility::delaythread(11, func_0BDC::func_A1DD, "hover");
-  var_00 scripts\engine\utility::delaythread(8.5, func_0BDC::func_6B4C, "hover", 1);
-  thread scripts\sp\anim::func_1F35(var_00, var_01);
-  var_02 = getanimlength(level.func_EC85["player_jackal"][var_01]);
-  thread func_C12F(var_02);
-  scripts\engine\utility::delaythread(var_02 - 4, ::func_1130D, "jackal_callin_player_clip_e3");
-  var_02 = getanimlength(level.func_EC85["player_jackal"][var_01]);
-  scripts\engine\utility::delaythread(var_02 - 9, scripts\engine\utility::flag_set, "jackals_in_view");
-  wait(var_02);
-  scripts\engine\utility::flag_set("jackals_landed");
+  if(!isdefined(level.func_10256)) {
+    var_00 scripts\engine\utility::delaythread(1, func_0BDC::func_6B4C, "fly", 1);
+    var_0.func_1FBB = "player_jackal";
+    var_00 scripts\sp\anim::func_F64A();
+    var_00 func_0BDC::func_A2DE(1);
+    var_00 scripts\engine\utility::delaythread(4.1, scripts\sp\utility::play_sound_on_tag, "phstreets_jackal_land_plr", "j_canopy");
+    var_00 scripts\engine\utility::delaythread(13.8, scripts\sp\utility::play_sound_on_tag, "phstreets_jackal_land_swt", "j_canopy");
+    level.player thread func_CA93();
+    var_00 scripts\engine\utility::delaythread(11, func_0BDC::func_A1DD, "hover");
+    var_00 scripts\engine\utility::delaythread(8.5, func_0BDC::func_6B4C, "hover", 1);
+    thread scripts\sp\anim::func_1F35(var_00, var_01);
+    var_02 = getanimlength(level.func_EC85["player_jackal"][var_01]);
+    thread func_C12F(var_02);
+    scripts\engine\utility::delaythread(var_02 - 4, ::func_1130D, "jackal_callin_player_clip_e3");
+    var_02 = getanimlength(level.func_EC85["player_jackal"][var_01]);
+    scripts\engine\utility::delaythread(var_02 - 9, scripts\engine\utility::flag_set, "jackals_in_view");
+    wait(var_02);
+    scripts\engine\utility::flag_set("jackals_landed");
   } else {
-  var_0.func_1FBB = "player_jackal";
-  var_00 scripts\sp\anim::func_F64A();
-  var_00 func_0BDC::func_A2DE(1);
-  func_0BDC::func_10CD1(var_00, undefined, "land", "phspace_launch");
+    var_0.func_1FBB = "player_jackal";
+    var_00 scripts\sp\anim::func_F64A();
+    var_00 func_0BDC::func_A2DE(1);
+    func_0BDC::func_10CD1(var_00, undefined, "land", "phspace_launch");
   }
 }
 
@@ -137,20 +137,20 @@ func_376E(var_00, var_01) {
   var_0.func_1FBB = "salter_jackal";
   var_00 scripts\sp\anim::func_F64A();
 
-  if (!isdefined(level.func_10256)) {
-  var_00 scripts\engine\utility::delaythread(10, func_0BDC::func_6B4C, "hover", 1);
-  var_00 func_0BDC::func_19A0();
-  var_02 = getanimlength(level.func_EC85["salter_jackal"][var_01]);
-  thread func_C12F(var_02);
-  scripts\engine\utility::delaythread(var_02 - 4, ::func_1130D, "jackal_callin_salter_clip_e3");
-  scripts\sp\anim::func_1F35(var_00, var_01);
-  var_00 func_0BDC::func_19A0();
-  var_00 func_0BDC::func_6B4C("landed_mode", 1);
-  thread scripts\sp\anim::func_1EEA(var_00, "jackal_callin_dps_idle", "stop_idle");
+  if(!isdefined(level.func_10256)) {
+    var_00 scripts\engine\utility::delaythread(10, func_0BDC::func_6B4C, "hover", 1);
+    var_00 func_0BDC::func_19A0();
+    var_02 = getanimlength(level.func_EC85["salter_jackal"][var_01]);
+    thread func_C12F(var_02);
+    scripts\engine\utility::delaythread(var_02 - 4, ::func_1130D, "jackal_callin_salter_clip_e3");
+    scripts\sp\anim::func_1F35(var_00, var_01);
+    var_00 func_0BDC::func_19A0();
+    var_00 func_0BDC::func_6B4C("landed_mode", 1);
+    thread scripts\sp\anim::func_1EEA(var_00, "jackal_callin_dps_idle", "stop_idle");
   } else {
-  var_00 func_0BDC::func_19A0();
-  var_00 func_0BDC::func_6B4C("landed_mode", 1);
-  thread scripts\sp\anim::func_1EEA(var_00, "jackal_callin_dps_idle", "stop_idle");
+    var_00 func_0BDC::func_19A0();
+    var_00 func_0BDC::func_6B4C("landed_mode", 1);
+    thread scripts\sp\anim::func_1EEA(var_00, "jackal_callin_dps_idle", "stop_idle");
   }
 }
 
@@ -162,11 +162,11 @@ func_C12F(var_00) {
 func_1130D(var_00) {
   var_01 = getent(var_00, "targetname");
 
-  if (!isdefined(var_01))
-  return;
-
-  if (level.player istouching(var_01))
-  level.player _meth_81D0();
+  if(!isdefined(var_01)) {
+    return;
+  }
+  if(level.player istouching(var_01))
+    level.player _meth_81D0();
 
   var_01 solid();
   func_0BDC::func_137CF();
@@ -178,41 +178,40 @@ func_376D(var_00, var_01) {
   var_0.func_1FBB = "retribution";
   var_00 scripts\sp\anim::func_F64A();
 
-  if (!isdefined(level.func_10256))
-  scripts\sp\anim::func_1F35(var_00, var_01);
-  else
-  {
-  thread scripts\sp\anim::func_1F35(var_00, var_01);
-  var_02 = [var_00];
-  scripts\sp\anim::func_1F2A(var_02, var_01, 1);
+  if(!isdefined(level.func_10256))
+    scripts\sp\anim::func_1F35(var_00, var_01);
+  else {
+    thread scripts\sp\anim::func_1F35(var_00, var_01);
+    var_02 = [var_00];
+    scripts\sp\anim::func_1F2A(var_02, var_01, 1);
   }
 }
 
 func_CA93() {
   for (;;) {
-  if (scripts\engine\utility::player_is_in_jackal()) {
-  level.player _meth_82C0("jackal_cockpit", 2);
-  level waittill("jackal_landing");
-  level.player playsound("jackal_landing_plr");
-  level.func_D127 waittill("jackal_touchdown");
-  level.player playsound("jackal_landed");
-  level.player clearclienttriggeraudiozone(2.0);
-  wait 2;
-  } else {
-  level waittill("jackal_enter");
-  wait 1;
-  level.player waittill("jackal_vtol_takeoff_plr");
-  level.player playsound("jackal_vtol_takeoff_plr");
-  wait 2;
-  }
+    if(scripts\engine\utility::player_is_in_jackal()) {
+      level.player _meth_82C0("jackal_cockpit", 2);
+      level waittill("jackal_landing");
+      level.player playsound("jackal_landing_plr");
+      level.func_D127 waittill("jackal_touchdown");
+      level.player playsound("jackal_landed");
+      level.player clearclienttriggeraudiozone(2.0);
+      wait 2;
+    } else {
+      level waittill("jackal_enter");
+      wait 1;
+      level.player waittill("jackal_vtol_takeoff_plr");
+      level.player playsound("jackal_vtol_takeoff_plr");
+      wait 2;
+    }
 
-  wait 0.1;
+    wait 0.1;
   }
 }
 
 func_107C1() {
-  if (!isdefined(level.func_EA99))
-  level.func_EA99 = scripts\sp\vehicle::func_1080C("jackal_salter");
+  if(!isdefined(level.func_EA99))
+    level.func_EA99 = scripts\sp\vehicle::func_1080C("jackal_salter");
 
   level.func_EA99.func_1FBB = "salter_jackal";
   level.func_EA99.unittype = "jackal";

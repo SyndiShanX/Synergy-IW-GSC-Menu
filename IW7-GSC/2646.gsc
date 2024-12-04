@@ -20,26 +20,26 @@ hostmigrationwaitforplayers() {
 }
 
 hostmigrationname(var_00) {
-  if (!isdefined(var_00))
-  return "<removed_ent>";
+  if(!isdefined(var_00))
+    return "<removed_ent>";
 
   var_01 = -1;
   var_02 = "?";
 
-  if (isdefined(var_0.entity_number))
-  var_01 = var_0.entity_number;
+  if(isdefined(var_0.entity_number))
+    var_01 = var_0.entity_number;
 
-  if (isplayer(var_00) && isdefined(var_0.name))
-  var_02 = var_0.name;
+  if(isplayer(var_00) && isdefined(var_0.name))
+    var_02 = var_0.name;
 
-  if (isplayer(var_00))
-  return "player <" + var_02 + ">";
+  if(isplayer(var_00))
+    return "player <" + var_02 + ">";
 
-  if (isagent(var_00) && scripts\cp\utility::isgameparticipant(var_00))
-  return "participant agent <" + var_01 + ">";
+  if(isagent(var_00) && scripts\cp\utility::isgameparticipant(var_00))
+    return "participant agent <" + var_01 + ">";
 
-  if (isagent(var_00))
-  return "non-participant agent <" + var_01 + ">";
+  if(isagent(var_00))
+    return "non-participant agent <" + var_01 + ">";
 
   return "unknown entity <" + var_01 + ">";
 }
@@ -49,7 +49,7 @@ hostmigrationtimerthink_internal() {
   level endon("host_migration_end");
 
   while (!scripts\cp\utility::isreallyalive(self))
-  self waittill("spawned");
+    self waittill("spawned");
 
   self.hostmigrationcontrolsfrozen = 1;
   scripts\cp\utility::freezecontrolswrapper(1);
@@ -60,17 +60,17 @@ hostmigrationtimerthink() {
   self endon("disconnect");
   hostmigrationtimerthink_internal();
 
-  if (self.hostmigrationcontrolsfrozen) {
-  if (scripts\cp\utility::gameflag("prematch_done"))
-  scripts\cp\utility::freezecontrolswrapper(0);
+  if(self.hostmigrationcontrolsfrozen) {
+    if(scripts\cp\utility::gameflag("prematch_done"))
+      scripts\cp\utility::freezecontrolswrapper(0);
 
-  self.hostmigrationcontrolsfrozen = undefined;
+    self.hostmigrationcontrolsfrozen = undefined;
   }
 }
 
 waittillhostmigrationdone() {
-  if (!isdefined(level.hostmigrationtimer))
-  return 0;
+  if(!isdefined(level.hostmigrationtimer))
+    return 0;
 
   var_00 = gettime();
   level waittill("host_migration_end");
@@ -78,27 +78,27 @@ waittillhostmigrationdone() {
 }
 
 waittillhostmigrationstarts(var_00) {
-  if (isdefined(level.hostmigrationtimer))
-  return;
-
+  if(isdefined(level.hostmigrationtimer)) {
+    return;
+  }
   level endon("host_migration_begin");
   wait(var_00);
 }
 
 waitlongdurationwithhostmigrationpause(var_00) {
-  if (var_00 == 0)
-  return;
-
+  if(var_00 == 0) {
+    return;
+  }
   var_01 = gettime();
   var_02 = gettime() + var_00 * 1000;
 
   while (gettime() < var_02) {
-  waittillhostmigrationstarts((var_02 - gettime()) / 1000);
+    waittillhostmigrationstarts((var_02 - gettime()) / 1000);
 
-  if (isdefined(level.hostmigrationtimer)) {
-  var_03 = waittillhostmigrationdone();
-  var_02 = var_02 + var_03;
-  }
+    if(isdefined(level.hostmigrationtimer)) {
+      var_03 = waittillhostmigrationdone();
+      var_02 = var_02 + var_03;
+    }
   }
 
   waittillhostmigrationdone();
@@ -108,19 +108,19 @@ waitlongdurationwithhostmigrationpause(var_00) {
 waittill_notify_or_timeout_hostmigration_pause(var_00, var_01) {
   self endon(var_00);
 
-  if (var_01 == 0)
-  return;
-
+  if(var_01 == 0) {
+    return;
+  }
   var_02 = gettime();
   var_03 = gettime() + var_01 * 1000;
 
   while (gettime() < var_03) {
-  waittillhostmigrationstarts((var_03 - gettime()) / 1000);
+    waittillhostmigrationstarts((var_03 - gettime()) / 1000);
 
-  if (isdefined(level.hostmigrationtimer)) {
-  var_04 = waittillhostmigrationdone();
-  var_03 = var_03 + var_04;
-  }
+    if(isdefined(level.hostmigrationtimer)) {
+      var_04 = waittillhostmigrationdone();
+      var_03 = var_03 + var_04;
+    }
   }
 
   waittillhostmigrationdone();
@@ -128,26 +128,26 @@ waittill_notify_or_timeout_hostmigration_pause(var_00, var_01) {
 }
 
 waitlongdurationwithgameendtimeupdate(var_00) {
-  if (var_00 == 0)
-  return;
-
+  if(var_00 == 0) {
+    return;
+  }
   var_01 = gettime();
   var_02 = gettime() + var_00 * 1000;
 
   while (gettime() < var_02) {
-  waittillhostmigrationstarts((var_02 - gettime()) / 1000);
+    waittillhostmigrationstarts((var_02 - gettime()) / 1000);
+
+    while (isdefined(level.hostmigrationtimer)) {
+      var_02 = var_02 + 1000;
+      setgameendtime(int(var_02));
+      wait 1;
+    }
+  }
 
   while (isdefined(level.hostmigrationtimer)) {
-  var_02 = var_02 + 1000;
-  setgameendtime(int(var_02));
-  wait 1;
-  }
-  }
-
-  while (isdefined(level.hostmigrationtimer)) {
-  var_02 = var_02 + 1000;
-  setgameendtime(int(var_02));
-  wait 1;
+    var_02 = var_02 + 1000;
+    setgameendtime(int(var_02));
+    wait 1;
   }
 
   return gettime() - var_01;
@@ -159,13 +159,13 @@ matchstarttimer(var_00, var_01) {
   level notify("match_start_timer_beginning");
   var_02 = int(var_01);
 
-  if (var_02 >= 2) {
-  setomnvar("ui_match_start_text", var_00);
-  matchstarttimer_internal(var_02);
-  visionsetnaked("", 3.0);
+  if(var_02 >= 2) {
+    setomnvar("ui_match_start_text", var_00);
+    matchstarttimer_internal(var_02);
+    visionsetnaked("", 3.0);
   } else {
-  introvisionset();
-  visionsetnaked("", 1.0);
+    introvisionset();
+    visionsetnaked("", 1.0);
   }
 }
 
@@ -175,21 +175,21 @@ matchstarttimer_internal(var_00) {
   level endon("match_start_timer_beginning");
 
   while (var_00 > 0 && !level.gameended) {
-  setomnvar("ui_match_start_countdown", var_00);
+    setomnvar("ui_match_start_countdown", var_00);
 
-  if (var_00 == 0)
-  visionsetnaked("", 0);
+    if(var_00 == 0)
+      visionsetnaked("", 0);
 
-  var_0--;
-  wait 1.0;
+    var_0--;
+    wait 1.0;
   }
 
   setomnvar("ui_match_start_countdown", 0);
 }
 
 introvisionset() {
-  if (!isdefined(level.introvisionset))
-  level.introvisionset = "mpIntro";
+  if(!isdefined(level.introvisionset))
+    level.introvisionset = "mpIntro";
 
   visionsetnaked(level.introvisionset, 0);
 }

@@ -43,8 +43,8 @@ func_D41C() {
   self.vehicle = var_00;
   var_0.func_1E2D = 100;
 
-  if (level.teambased)
-  var_00 setturretteam(self.team);
+  if(level.teambased)
+    var_00 setturretteam(self.team);
 
   var_00 give_player_session_tokens("sentry");
   var_00 setsentryowner(self);
@@ -71,11 +71,11 @@ watchforplayerdeath(var_00) {
   scripts\engine\utility::waittill_any("death", "disconnect");
   var_00 delete();
 
-  if (isdefined(self)) {
-  self setclientomnvar("ui_shoulder_cannon_ammo", 0);
-  self setclientomnvar("ui_shoulder_cannon", 0);
-  self setclientomnvar("ui_shoulder_cannon_target_ent", -1);
-  self setclientomnvar("ui_shoulder_cannon_hud_reticle", 0);
+  if(isdefined(self)) {
+    self setclientomnvar("ui_shoulder_cannon_ammo", 0);
+    self setclientomnvar("ui_shoulder_cannon", 0);
+    self setclientomnvar("ui_shoulder_cannon_target_ent", -1);
+    self setclientomnvar("ui_shoulder_cannon_hud_reticle", 0);
   }
 }
 
@@ -84,8 +84,8 @@ func_139C8() {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("emp_damage", var_00, var_01);
-  func_1000A(var_01);
+    self waittill("emp_damage", var_00, var_01);
+    func_1000A(var_01);
   }
 }
 
@@ -121,10 +121,10 @@ func_139CA() {
   level waittill("host_migration_begin");
   var_00 = scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if (var_00 > 0)
-  self setclientomnvar("ui_shoulder_cannon_timer_end_milliseconds", self.func_38D5 + var_00);
+  if(var_00 > 0)
+    self setclientomnvar("ui_shoulder_cannon_timer_end_milliseconds", self.func_38D5 + var_00);
   else
-  self setclientomnvar("ui_shoulder_cannon_timer_end_milliseconds", self.func_38D5);
+    self setclientomnvar("ui_shoulder_cannon_timer_end_milliseconds", self.func_38D5);
 }
 
 func_139CB(var_00, var_01) {
@@ -138,9 +138,9 @@ func_139CB(var_00, var_01) {
   scripts\mp\hostmigration::waitlongdurationwithgameendtimeupdate(var_00 - var_02 - 1);
 
   while (var_02 > 0) {
-  self playsoundtoplayer("mp_cranked_countdown", self);
-  scripts\mp\hostmigration::waitlongdurationwithgameendtimeupdate(1.0);
-  var_2--;
+    self playsoundtoplayer("mp_cranked_countdown", self);
+    scripts\mp\hostmigration::waitlongdurationwithgameendtimeupdate(1.0);
+    var_2--;
   }
 
   self setclientomnvar("ui_shoulder_cannon_ammo", 0);
@@ -156,12 +156,12 @@ func_139C9() {
   self endon("disconnect");
 
   for (;;) {
-  if (game["state"] == "postgame" || level.gameended) {
-  self setclientomnvar("ui_shoulder_cannon_timer_end_milliseconds", 0);
-  break;
-  }
+    if(game["state"] == "postgame" || level.gameended) {
+      self setclientomnvar("ui_shoulder_cannon_timer_end_milliseconds", 0);
+      break;
+    }
 
-  wait 0.1;
+    wait 0.1;
   }
 }
 
@@ -172,24 +172,24 @@ balldrone_attacktargets(var_00, var_01) {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("turretstatechange");
+    self waittill("turretstatechange");
 
-  if (var_01 == 1) {
-  if (self getteamarray() && self.func_1E2D > 0 && (isdefined(self.stunned) && !self.stunned)) {
-  self laseron();
-  balldrone_burstfirestop(0.2, var_00);
-  thread balldrone_burstfirestart(var_00);
-  } else {
-  self laseroff();
-  thread func_27D8();
-  var_00 setclientomnvar("ui_shoulder_cannon_target_ent", -1);
-  var_00 setclientomnvar("ui_shoulder_cannon_hud_reticle", 0);
-  }
+    if(var_01 == 1) {
+      if(self getteamarray() && self.func_1E2D > 0 && (isdefined(self.stunned) && !self.stunned)) {
+        self laseron();
+        balldrone_burstfirestop(0.2, var_00);
+        thread balldrone_burstfirestart(var_00);
+      } else {
+        self laseroff();
+        thread func_27D8();
+        var_00 setclientomnvar("ui_shoulder_cannon_target_ent", -1);
+        var_00 setclientomnvar("ui_shoulder_cannon_hud_reticle", 0);
+      }
 
-  continue;
-  }
+      continue;
+    }
 
-  break;
+    break;
   }
 }
 
@@ -206,50 +206,50 @@ balldrone_burstfirestart(var_00) {
   self.owner waittill("begin_firing");
 
   while (self.func_1E2D > 0) {
-  if (self.func_1E2D <= 20)
-  var_06 = self.func_1E2D;
-  else
-  var_06 = randomintrange(10, 20);
+    if(self.func_1E2D <= 20)
+      var_06 = self.func_1E2D;
+    else
+      var_06 = randomintrange(10, 20);
 
-  for (var_07 = 0; var_07 < var_06; var_7++) {
-  if (isdefined(var_1.inactive) && var_1.inactive)
-  break;
+    for (var_07 = 0; var_07 < var_06; var_7++) {
+      if(isdefined(var_1.inactive) && var_1.inactive) {
+        break;
+      }
+      var_08 = self getturrettarget(0);
 
-  var_08 = self getturrettarget(0);
+      if(isdefined(var_08) && canbetargeted(var_08)) {
+        var_00 setclientomnvar("ui_shoulder_cannon_target_ent", var_08 getentitynumber());
+        var_00 setclientomnvar("ui_shoulder_cannon_hud_reticle", 2);
+        self shootturret();
+        var_0.func_38D8 = spawnfxforclient(var_02, var_00 geteye(), var_00);
+        triggerfx(var_0.func_38D8);
+        self.owner playrumbleonentity("shoulder_turret_fire");
+        wait(var_04);
+        self.func_1E2D--;
 
-  if (isdefined(var_08) && canbetargeted(var_08)) {
-  var_00 setclientomnvar("ui_shoulder_cannon_target_ent", var_08 getentitynumber());
-  var_00 setclientomnvar("ui_shoulder_cannon_hud_reticle", 2);
-  self shootturret();
-  var_0.func_38D8 = spawnfxforclient(var_02, var_00 geteye(), var_00);
-  triggerfx(var_0.func_38D8);
-  self.owner playrumbleonentity("shoulder_turret_fire");
-  wait(var_04);
-  self.func_1E2D--;
+        if(self.func_1E2D < 0)
+          self.func_1E2D = 0;
 
-  if (self.func_1E2D < 0)
-  self.func_1E2D = 0;
+        var_00 setclientomnvar("ui_shoulder_cannon_ammo", self.func_1E2D);
+        var_00 setclientomnvar("ui_shoulder_cannon_state", 2);
+        var_00 notify("shoulder_cannon_update", self.func_1E2D * var_05);
 
-  var_00 setclientomnvar("ui_shoulder_cannon_ammo", self.func_1E2D);
-  var_00 setclientomnvar("ui_shoulder_cannon_state", 2);
-  var_00 notify("shoulder_cannon_update", self.func_1E2D * var_05);
+        if(isdefined(var_0.func_38D8))
+          var_0.func_38D8 delete();
+      }
+    }
 
-  if (isdefined(var_0.func_38D8))
-  var_0.func_38D8 delete();
-  }
-  }
-
-  wait(randomfloatrange(0.1, 0.2));
+    wait(randomfloatrange(0.1, 0.2));
   }
 
   var_00 setclientomnvar("ui_shoulder_cannon_hud_reticle", 0);
 
-  if (self.func_1E2D <= 0) {
-  var_00 setclientomnvar("ui_shoulder_cannon_ammo", 0);
-  var_00 setclientomnvar("ui_shoulder_cannon", 0);
-  waittillframeend;
-  var_00 notify("cannon_deleted");
-  self delete();
+  if(self.func_1E2D <= 0) {
+    var_00 setclientomnvar("ui_shoulder_cannon_ammo", 0);
+    var_00 setclientomnvar("ui_shoulder_cannon", 0);
+    waittillframeend;
+    var_00 notify("cannon_deleted");
+    self delete();
   }
 }
 
@@ -258,14 +258,14 @@ balldrone_burstfirestop(var_00, var_01) {
   playfxontag(var_02, self, "tag_flash");
 
   for (var_03 = self getturrettarget(0); var_00 > 0; var_00 = var_00 - 0.2) {
-  var_01 setclientomnvar("ui_shoulder_cannon_target_ent", var_03 getentitynumber());
-  var_01 setclientomnvar("ui_shoulder_cannon_hud_reticle", 1);
-  var_01 playlocalsound("ball_drone_targeting");
+    var_01 setclientomnvar("ui_shoulder_cannon_target_ent", var_03 getentitynumber());
+    var_01 setclientomnvar("ui_shoulder_cannon_hud_reticle", 1);
+    var_01 playlocalsound("ball_drone_targeting");
 
-  if (var_3.loadoutarchetype == "archetype_heavy")
-  break;
-
-  wait 0.2;
+    if(var_3.loadoutarchetype == "archetype_heavy") {
+      break;
+    }
+    wait 0.2;
   }
 
   var_01 setclientomnvar("ui_shoulder_cannon_state", 1);
@@ -275,8 +275,8 @@ balldrone_burstfirestop(var_00, var_01) {
 func_27D8() {
   self notify("stop_shooting");
 
-  if (isdefined(self.idletarget))
-  self setlookatent(self.idletarget);
+  if(isdefined(self.idletarget))
+    self setlookatent(self.idletarget);
 
   self.owner setclientomnvar("ui_shoulder_cannon_state", 0);
 }
@@ -284,31 +284,31 @@ func_27D8() {
 canbetargeted(var_00) {
   var_01 = 1;
 
-  if (isplayer(var_00)) {
-  if (!scripts\mp\utility\game::isreallyalive(var_00) || var_0.sessionstate != "playing")
-  return 0;
+  if(isplayer(var_00)) {
+    if(!scripts\mp\utility\game::isreallyalive(var_00) || var_0.sessionstate != "playing")
+      return 0;
   }
 
-  if (level.teambased && isdefined(var_0.team) && var_0.team == self.team)
-  return 0;
+  if(level.teambased && isdefined(var_0.team) && var_0.team == self.team)
+    return 0;
 
-  if (isdefined(var_0.team) && var_0.team == "spectator")
-  return 0;
+  if(isdefined(var_0.team) && var_0.team == "spectator")
+    return 0;
 
-  if (isplayer(var_00) && var_00 == self.owner)
-  return 0;
+  if(isplayer(var_00) && var_00 == self.owner)
+    return 0;
 
-  if (isplayer(var_00) && isdefined(var_0.spawntime) && (gettime() - var_0.spawntime) / 1000 <= 5)
-  return 0;
+  if(isplayer(var_00) && isdefined(var_0.spawntime) && (gettime() - var_0.spawntime) / 1000 <= 5)
+    return 0;
 
-  if (isplayer(var_00) && var_00 scripts\mp\utility\game::_hasperk("specialty_blindeye"))
-  return 0;
+  if(isplayer(var_00) && var_00 scripts\mp\utility\game::_hasperk("specialty_blindeye"))
+    return 0;
 
-  if (distancesquared(var_0.origin, self.origin) > 810000)
-  return 0;
+  if(distancesquared(var_0.origin, self.origin) > 810000)
+    return 0;
 
-  if (scripts\mp\equipment\phase_shift::isentityphaseshifted(var_00))
-  return 0;
+  if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_00))
+    return 0;
 
   return var_01;
 }
@@ -322,29 +322,29 @@ func_1000B(var_00) {
   var_02 = scripts\mp\powers::func_D735("power_shoulderCannon");
 
   for (;;) {
-  if (var_02 == "+frag")
-  self waittill("power_primary_used");
-  else
-  self waittill("power_secondary_used");
+    if(var_02 == "+frag")
+      self waittill("power_primary_used");
+    else
+      self waittill("power_secondary_used");
 
-  if (var_02 == "+frag" && self fragbuttonpressed() || var_02 == "+smoke" && self secondaryoffhandbuttonpressed()) {
-  while (var_02 == "+frag" && self fragbuttonpressed() || var_02 == "+smoke" && self secondaryoffhandbuttonpressed()) {
-  if (var_01) {
-  var_01 = 0;
-  var_00 thread balldrone_attacktargets(self, var_01);
-  self setclientomnvar("ui_shoulder_cannon_state", 3);
-  self setclientomnvar("ui_shoulder_cannon_hud_reticle", 0);
-  } else {
-  var_01 = 1;
-  var_00 thread balldrone_attacktargets(self, var_01);
-  var_00 notify("turretstatechange");
-  self setclientomnvar("ui_shoulder_cannon_state", 0);
-  }
+    if(var_02 == "+frag" && self fragbuttonpressed() || var_02 == "+smoke" && self secondaryoffhandbuttonpressed()) {
+      while (var_02 == "+frag" && self fragbuttonpressed() || var_02 == "+smoke" && self secondaryoffhandbuttonpressed()) {
+        if(var_01) {
+          var_01 = 0;
+          var_00 thread balldrone_attacktargets(self, var_01);
+          self setclientomnvar("ui_shoulder_cannon_state", 3);
+          self setclientomnvar("ui_shoulder_cannon_hud_reticle", 0);
+        } else {
+          var_01 = 1;
+          var_00 thread balldrone_attacktargets(self, var_01);
+          var_00 notify("turretstatechange");
+          self setclientomnvar("ui_shoulder_cannon_state", 0);
+        }
 
-  break;
-  }
+        break;
+      }
 
-  wait 0.05;
-  }
+      wait 0.05;
+    }
   }
 }

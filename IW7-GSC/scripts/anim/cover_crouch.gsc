@@ -5,12 +5,12 @@
 *****************************************/
 
 main() {
-	self endon("killanimscript");
-	scripts\anim\utility::func_9832("cover_crouch");
-	scripts\anim\cover_wall::func_470E("crouch");
+  self endon("killanimscript");
+  scripts\anim\utility::func_9832("cover_crouch");
+  scripts\anim\cover_wall::func_470E("crouch");
 }
 
 end_script() {
-	self.var_4716 = undefined;
-	scripts\anim\cover_behavior::ismayhem("crouch");
+  self.var_4716 = undefined;
+  scripts\anim\cover_behavior::ismayhem("crouch");
 }

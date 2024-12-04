@@ -4,33 +4,33 @@
 ***************************************/
 
 func_965D() {
-  if (isdefined(level.func_4AEC))
-  return;
-
+  if(isdefined(level.func_4AEC)) {
+    return;
+  }
   level.func_4AEC = 1;
   level.func_4AEE = [];
   var_00 = getcsplinecount();
 
-  if (var_00 == 0)
-  return;
-
+  if(var_00 == 0) {
+    return;
+  }
   var_00 = var_00 + 1;
 
   for (var_01 = 1; var_01 < var_00; var_1++) {
-  var_02 = _getcsplinepointcount(var_01);
+    var_02 = _getcsplinepointcount(var_01);
 
-  for (var_03 = 0; var_03 < var_02; var_3++) {
-  var_04 = _getcsplinepointlabel(var_01, var_03);
+    for (var_03 = 0; var_03 < var_02; var_3++) {
+      var_04 = _getcsplinepointlabel(var_01, var_03);
 
-  if (isdefined(var_04)) {
-  if (!isdefined(level.func_4AEE[var_04]))
-  level.func_4AEE[var_04] = 1;
-  }
-  }
+      if(isdefined(var_04)) {
+        if(!isdefined(level.func_4AEE[var_04]))
+          level.func_4AEE[var_04] = 1;
+      }
+    }
   }
 
-  if (level.func_4AEE.size == 0)
-  return;
+  if(level.func_4AEE.size == 0)
+    return;
 }
 
 func_10A49() {
@@ -40,8 +40,8 @@ func_10A49() {
   self endon("terminate_ai_threads");
   self endon("enter_jackal");
 
-  if (!isdefined(level.func_4AEE))
-  level func_965D();
+  if(!isdefined(level.func_4AEE))
+    level func_965D();
 
   childthread func_10A48();
 }
@@ -55,40 +55,40 @@ func_10A48() {
   self endon("notify_splinelablefunc");
 
   for (;;) {
-  self waittill("splinenode_label", var_00, var_01, var_02, var_03);
-  var_04 = strtok(var_00, " ");
+    self waittill("splinenode_label", var_00, var_01, var_02, var_03);
+    var_04 = strtok(var_00, " ");
 
-  foreach (var_06 in var_04) {
-  switch (var_06) {
-  case "deleteme":
-  self delete();
-  break;
-  case "loop_path":
-  self.func_10A43 = var_01;
-  loop_or_delete();
-  break;
-  case "explode":
-  func_0118();
-  break;
-  case "junction":
-  thread func_A50D(var_03);
-  break;
-  case "continue":
-  thread func_45A8(var_03);
-  break;
-  case "flag":
-  thread func_6E48(var_03);
-  break;
-  case "playerjackal_state":
-  thread func_D3B8(var_03);
-  break;
-  case "notify":
-  func_C133(var_03, var_01, var_02);
-  break;
-  default:
-  break;
-  }
-  }
+    foreach(var_06 in var_04) {
+      switch (var_06) {
+        case "deleteme":
+          self delete();
+          break;
+        case "loop_path":
+          self.func_10A43 = var_01;
+          loop_or_delete();
+          break;
+        case "explode":
+          func_0118();
+          break;
+        case "junction":
+          thread func_A50D(var_03);
+          break;
+        case "continue":
+          thread func_45A8(var_03);
+          break;
+        case "flag":
+          thread func_6E48(var_03);
+          break;
+        case "playerjackal_state":
+          thread func_D3B8(var_03);
+          break;
+        case "notify":
+          func_C133(var_03, var_01, var_02);
+          break;
+        default:
+          break;
+      }
+    }
   }
 }
 
@@ -112,13 +112,13 @@ func_10A44(var_00) {
   var_01 = _getcsplinepointcount(var_00) - 1;
   var_02 = _getcsplinepointlabel(var_00, var_01);
 
-  if (isdefined(var_02) && var_02 != "") {
-  var_03 = _getcsplinepointstring(var_00, var_01);
+  if(isdefined(var_02) && var_02 != "") {
+    var_03 = _getcsplinepointstring(var_00, var_01);
 
-  if (isdefined(var_03) && var_02 != "")
-  self notify("splinenode_label", var_02, var_00, var_01, var_03);
-  else
-  self notify("splinenode_label", var_02, var_00, var_01);
+    if(isdefined(var_03) && var_02 != "")
+      self notify("splinenode_label", var_02, var_00, var_01, var_03);
+    else
+      self notify("splinenode_label", var_02, var_00, var_01);
   }
 }
 
@@ -128,13 +128,13 @@ func_0118() {
 }
 
 func_A50D(var_00) {
-  if (isdefined(self.var_1198) && !self.var_1198.animscriptedactive) {
-  self notify("spline_junction");
-  return;
+  if(isdefined(self.var_1198) && !self.var_1198.animscriptedactive) {
+    self notify("spline_junction");
+    return;
   }
 
-  if (scripts\engine\utility::cointoss())
-  func_A4F9(0);
+  if(scripts\engine\utility::cointoss())
+    func_A4F9(0);
 }
 
 func_A4F9(var_00) {
@@ -144,9 +144,9 @@ func_A4F9(var_00) {
 }
 
 func_45A8(var_00) {
-  if (isdefined(self.var_1198) && !self.var_1198.animscriptedactive) {
-  self notify("spline_junction", "continue");
-  return;
+  if(isdefined(self.var_1198) && !self.var_1198.animscriptedactive) {
+    self notify("spline_junction", "continue");
+    return;
   }
 
   func_A4F9(1);
@@ -156,16 +156,16 @@ func_6E48(var_00) {
   var_01 = strtok(var_00, " ");
 
   switch (tolower(var_1[0])) {
-  case "flag_set":
-  level scripts\engine\utility::flag_set(var_1[1]);
-  return;
-  case "ent_flag_set":
-  scripts\sp\utility::func_65E1(var_1[1]);
-  return;
-  default:
-  scripts\engine\utility::error("Spline with label FLAG is not setup correctly.");
-  scripts\engine\utility::error("Set the splinenode_string as 'flag_set' or 'ent_flag_set' followed by the flag to set.");
-  return;
+    case "flag_set":
+      level scripts\engine\utility::flag_set(var_1[1]);
+      return;
+    case "ent_flag_set":
+      scripts\sp\utility::func_65E1(var_1[1]);
+      return;
+    default:
+      scripts\engine\utility::error("Spline with label FLAG is not setup correctly.");
+      scripts\engine\utility::error("Set the splinenode_string as 'flag_set' or 'ent_flag_set' followed by the flag to set.");
+      return;
   }
 }
 
@@ -181,15 +181,15 @@ func_517E() {
 }
 
 func_10A46(var_00, var_01, var_02) {
-  if (!isdefined(var_01))
-  var_01 = 0.2;
+  if(!isdefined(var_01))
+    var_01 = 0.2;
 
   self _meth_8479(var_00);
 
-  if (isdefined(var_02))
-  self _meth_847B(var_01, var_02);
+  if(isdefined(var_02))
+    self _meth_847B(var_01, var_02);
   else
-  self _meth_847B(var_01);
+    self _meth_847B(var_01);
 
   self.func_10A43 = var_00;
   self waittill("near_goal");

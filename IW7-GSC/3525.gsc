@@ -35,9 +35,9 @@ watchplayerconnect() {
   level endon("stop_teamstreaks");
 
   for (;;) {
-  level waittill("connected", var_00);
-  var_00 thread func_13AFC();
-  var_00 thread func_13B0C();
+    level waittill("connected", var_00);
+    var_00 thread func_13AFC();
+    var_00 thread func_13B0C();
   }
 }
 
@@ -46,20 +46,20 @@ func_13AFC() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("death");
+    self waittill("death");
 
-  if (self.team != "spectator") {
-  if (!level.func_115EC[self.team]) {
-  var_00 = level.func_D410[self.team] - 30;
+    if(self.team != "spectator") {
+      if(!level.func_115EC[self.team]) {
+        var_00 = level.func_D410[self.team] - 30;
 
-  if (var_00 <= 0)
-  level.func_D410[self.team] = 0;
-  else
-  level.func_D410[self.team] = level.func_D410[self.team] - 30;
+        if(var_00 <= 0)
+          level.func_D410[self.team] = 0;
+        else
+          level.func_D410[self.team] = level.func_D410[self.team] - 30;
 
-  func_12F3D(self.team, level.func_D410[self.team]);
-  }
-  }
+        func_12F3D(self.team, level.func_D410[self.team]);
+      }
+    }
   }
 }
 
@@ -68,11 +68,11 @@ func_13B0C() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("spawned_player");
-  wait 1;
+    self waittill("spawned_player");
+    wait 1;
 
-  if (self.team != "spectator")
-  self setclientomnvar("ui_teamstreak_score", level.func_D410[self.team]);
+    if(self.team != "spectator")
+      self setclientomnvar("ui_teamstreak_score", level.func_D410[self.team]);
   }
 }
 
@@ -81,56 +81,56 @@ func_11B02() {
   level endon("stop_teamstreaks");
 
   for (;;) {
-  level waittill("update_player_score", var_00, var_01);
+    level waittill("update_player_score", var_00, var_01);
 
-  if (!isdefined(var_00))
-  continue;
+    if(!isdefined(var_00)) {
+      continue;
+    }
+    if(!level.func_115EC[var_0.team]) {
+      level.func_D410[var_0.team] = level.func_D410[var_0.team] + var_01;
+      func_12F3D(var_0.team, level.func_D410[var_0.team]);
 
-  if (!level.func_115EC[var_0.team]) {
-  level.func_D410[var_0.team] = level.func_D410[var_0.team] + var_01;
-  func_12F3D(var_0.team, level.func_D410[var_0.team]);
+      if(level.func_D410[var_0.team] >= 4500) {
+        var_02 = isreloading(3);
+        var_03 = level.func_115ED[var_02].func_5F36;
+        var_04 = level.func_115ED[var_02].func_6369;
 
-  if (level.func_D410[var_0.team] >= 4500) {
-  var_02 = isreloading(3);
-  var_03 = level.func_115ED[var_02].func_5F36;
-  var_04 = level.func_115ED[var_02].func_6369;
+        foreach(var_06 in level.players) {
+          if(var_6.team != var_0.team) {
+            var_06 scripts\mp\utility\game::leaderdialogonplayer("enemy_jugg");
+            continue;
+          }
 
-  foreach (var_06 in level.players) {
-  if (var_6.team != var_0.team) {
-  var_06 scripts\mp\utility\game::leaderdialogonplayer("enemy_jugg");
-  continue;
-  }
+          var_06 func_10DF9(var_02, var_03, var_04);
+          var_06 scripts\mp\utility\game::leaderdialogonplayer("friendly_jugg");
+        }
 
-  var_06 func_10DF9(var_02, var_03, var_04);
-  var_06 scripts\mp\utility\game::leaderdialogonplayer("friendly_jugg");
-  }
-
-  level.func_115EC[var_0.team] = 1;
-  }
-  }
+        level.func_115EC[var_0.team] = 1;
+      }
+    }
   }
 }
 
 isreloading(var_00) {
   var_01 = undefined;
 
-  foreach (var_04, var_03 in level.func_115ED) {
-  if (var_3.func_118A3 != var_00)
-  continue;
-
-  var_01 = var_04;
-  break;
+  foreach(var_04, var_03 in level.func_115ED) {
+    if(var_3.func_118A3 != var_00) {
+      continue;
+    }
+    var_01 = var_04;
+    break;
   }
 
   return var_01;
 }
 
 func_12F3D(var_00, var_01) {
-  foreach (var_03 in level.players) {
-  if (var_3.team != var_00)
-  continue;
-
-  var_03 setclientomnvar("ui_teamstreak_score", var_01);
+  foreach(var_03 in level.players) {
+    if(var_3.team != var_00) {
+      continue;
+    }
+    var_03 setclientomnvar("ui_teamstreak_score", var_01);
   }
 }
 
@@ -138,17 +138,17 @@ func_10DF9(var_00, var_01, var_02) {
   thread func_13B7D(var_01, var_02);
 
   switch (var_00) {
-  case "ammo_regen":
-  thread func_1E4A(var_02);
-  break;
-  case "super_speed":
-  func_11266(var_02);
-  break;
-  case "jugg_squad":
-  func_A4AE(var_02);
-  break;
-  default:
-  break;
+    case "ammo_regen":
+      thread func_1E4A(var_02);
+      break;
+    case "super_speed":
+      func_11266(var_02);
+      break;
+    case "jugg_squad":
+      func_A4AE(var_02);
+      break;
+    default:
+      break;
   }
 }
 
@@ -163,13 +163,13 @@ func_1E4A(var_00) {
   self endon(var_00);
 
   for (;;) {
-  var_01 = self getcurrentprimaryweapon();
-  var_02 = self getweaponammoclip(var_01);
+    var_01 = self getcurrentprimaryweapon();
+    var_02 = self getweaponammoclip(var_01);
 
-  if (var_02 != weaponclipsize(var_01))
-  self setweaponammoclip(var_01, var_02 + 1);
+    if(var_02 != weaponclipsize(var_01))
+      self setweaponammoclip(var_01, var_02 + 1);
 
-  wait 0.5;
+    wait 0.5;
   }
 }
 

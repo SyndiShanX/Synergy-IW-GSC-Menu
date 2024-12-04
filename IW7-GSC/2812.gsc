@@ -21,16 +21,16 @@ init() {
   setignoremegroup("DogsDontAttack", "Dogs");
 
   switch (scripts\mp\utility\game::getintproperty("perk_scavengerMode", 0)) {
-  case 1:
-  level.func_EBCF = 0;
-  break;
-  case 2:
-  level.func_EBD0 = 0;
-  break;
-  case 3:
-  level.func_EBCF = 0;
-  level.func_EBD0 = 0;
-  break;
+    case 1:
+      level.func_EBCF = 0;
+      break;
+    case 2:
+      level.func_EBD0 = 0;
+      break;
+    case 3:
+      level.func_EBCF = 0;
+      level.func_EBD0 = 0;
+      break;
   }
 
   thread scripts\mp\flashgrenades::main();
@@ -60,8 +60,8 @@ init() {
   scripts\mp\utility\game::func_CC18();
   level.weaponconfigs = [];
 
-  if (!isdefined(level.weapondropfunction))
-  level.weapondropfunction = ::dropweaponfordeath;
+  if(!isdefined(level.weapondropfunction))
+    level.weapondropfunction = ::dropweaponfordeath;
 
   var_00 = 70;
   level.claymoredetectiondot = cos(var_00);
@@ -289,13 +289,13 @@ bombsquadwaiter_missilefire() {
   self endon("disconnect");
 
   for (;;) {
-  var_00 = scripts\mp\utility\game::waittill_missile_fire();
+    var_00 = scripts\mp\utility\game::waittill_missile_fire();
 
-  if (!isdefined(var_00))
-  continue;
-
-  if (var_0.weapon_name == "iw6_mk32_mp")
-  var_00 thread createbombsquadmodel("projectile_semtex_grenade_bombsquad", "tag_weapon", self);
+    if(!isdefined(var_00)) {
+      continue;
+    }
+    if(var_0.weapon_name == "iw6_mk32_mp")
+      var_00 thread createbombsquadmodel("projectile_semtex_grenade_bombsquad", "tag_weapon", self);
   }
 }
 
@@ -304,9 +304,9 @@ createbombsquadmodel(var_00, var_01, var_02) {
   var_03 hide();
   wait 0.05;
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   self.bombsquadmodel = var_03;
   var_03 thread bombsquadvisibilityupdater(var_02);
   var_03 setmodel(var_00);
@@ -314,8 +314,8 @@ createbombsquadmodel(var_00, var_01, var_02) {
   var_03 setcontents(0);
   scripts\engine\utility::waittill_any("death", "trap_death");
 
-  if (isdefined(self.trigger))
-  self.trigger delete();
+  if(isdefined(self.trigger))
+    self.trigger delete();
 
   var_03 delete();
 }
@@ -332,43 +332,42 @@ bombsquadvisibilityupdater(var_00) {
   self endon("death");
   self endon("trap_death");
 
-  if (!isdefined(var_00))
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
   var_01 = var_0.team;
 
   for (;;) {
-  self hide();
+    self hide();
 
-  foreach (var_03 in level.players) {
-  enablevisibilitycullingforclient(var_03);
+    foreach(var_03 in level.players) {
+      enablevisibilitycullingforclient(var_03);
 
-  if (!var_03 scripts\mp\utility\game::_hasperk("specialty_detectexplosive"))
-  continue;
+      if(!var_03 scripts\mp\utility\game::_hasperk("specialty_detectexplosive")) {
+        continue;
+      }
+      if(level.teambased) {
+        if(var_3.team == "spectator" || var_3.team == var_01)
+          continue;
+      } else if(isdefined(var_00) && var_03 == var_00) {
+        continue;
+      }
+      self giveperkequipment(var_03);
+      func_561A(var_03);
+    }
 
-  if (level.teambased) {
-  if (var_3.team == "spectator" || var_3.team == var_01)
-  continue;
-  }
-  else if (isdefined(var_00) && var_03 == var_00)
-  continue;
-
-  self giveperkequipment(var_03);
-  func_561A(var_03);
-  }
-
-  level scripts\engine\utility::waittill_any("joined_team", "player_spawned", "changed_kit", "update_bombsquad");
+    level scripts\engine\utility::waittill_any("joined_team", "player_spawned", "changed_kit", "update_bombsquad");
   }
 }
 
 onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_00);
-  var_0.hits = 0;
-  scripts\mp\gamelogic::sethasdonecombat(var_00, 0);
-  var_00 thread onplayerspawned();
-  var_00 thread bombsquadwaiter_missilefire();
-  var_00 thread watchmissileusage();
+    level waittill("connected", var_00);
+    var_0.hits = 0;
+    scripts\mp\gamelogic::sethasdonecombat(var_00, 0);
+    var_00 thread onplayerspawned();
+    var_00 thread bombsquadwaiter_missilefire();
+    var_00 thread watchmissileusage();
   }
 }
 
@@ -376,86 +375,86 @@ onplayerspawned() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("spawned_player");
-  self.currentweaponatspawn = self.spawnweaponobj;
-  self.empendtime = 0;
-  self.concussionendtime = 0;
-  self.hits = 0;
-  scripts\mp\gamelogic::sethasdonecombat(self, 0);
+    self waittill("spawned_player");
+    self.currentweaponatspawn = self.spawnweaponobj;
+    self.empendtime = 0;
+    self.concussionendtime = 0;
+    self.hits = 0;
+    scripts\mp\gamelogic::sethasdonecombat(self, 0);
 
-  if (!isdefined(self.trackingweapon)) {
-  self.trackingweapon = "";
-  self.trackingweapon = "none";
-  self.trackingweaponshots = 0;
-  self.trackingweaponkills = 0;
-  self.trackingweaponhits = 0;
-  self.trackingweaponheadshots = 0;
-  self.trackingweapondeaths = 0;
-  }
+    if(!isdefined(self.trackingweapon)) {
+      self.trackingweapon = "";
+      self.trackingweapon = "none";
+      self.trackingweaponshots = 0;
+      self.trackingweaponkills = 0;
+      self.trackingweaponhits = 0;
+      self.trackingweaponheadshots = 0;
+      self.trackingweapondeaths = 0;
+    }
 
-  thread watchweaponusage();
-  thread watchweaponchange();
-  thread func_13B4C();
-  thread watchgrenadeusage();
-  thread func_13A1F();
-  thread func_13A93();
-  thread scripts\mp\flashgrenades::func_10DC6();
-  thread func_13AC3();
-  thread func_13B38();
-  thread scripts\mp\class::func_11B04();
-  thread watchdropweapons();
-  self.lasthittime = [];
-  self.droppeddeathweapon = undefined;
-  self.tookweaponfrom = [];
-  thread updatesavedlastweapon();
-  self.currentweaponatspawn = undefined;
-  self.trophyremainingammo = undefined;
-  scripts\mp\gamescore::func_97D2();
-  var_00 = self getcurrentweapon();
-  var_01 = self _meth_8519(var_00);
-  var_02 = getweaponcamoname(var_00);
-  thread runcamoscripts(var_00, var_02);
-  thread runweaponscriptvfx(var_00, var_01);
+    thread watchweaponusage();
+    thread watchweaponchange();
+    thread func_13B4C();
+    thread watchgrenadeusage();
+    thread func_13A1F();
+    thread func_13A93();
+    thread scripts\mp\flashgrenades::func_10DC6();
+    thread func_13AC3();
+    thread func_13B38();
+    thread scripts\mp\class::func_11B04();
+    thread watchdropweapons();
+    self.lasthittime = [];
+    self.droppeddeathweapon = undefined;
+    self.tookweaponfrom = [];
+    thread updatesavedlastweapon();
+    self.currentweaponatspawn = undefined;
+    self.trophyremainingammo = undefined;
+    scripts\mp\gamescore::func_97D2();
+    var_00 = self getcurrentweapon();
+    var_01 = self _meth_8519(var_00);
+    var_02 = getweaponcamoname(var_00);
+    thread runcamoscripts(var_00, var_02);
+    thread runweaponscriptvfx(var_00, var_01);
   }
 }
 
 recordtogglescopestates() {
   self.pers["altScopeStates"] = [];
 
-  if (isdefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && func_7DB8(self.primaryweapon) != "" && self _meth_8519(self.primaryweapon)) {
-  var_00 = getweaponbasename(self.primaryweapon);
-  var_01 = func_7DB8(self.primaryweapon);
-  var_02 = var_00 + "+" + var_01;
-  self.pers["altScopeStates"][var_02] = 1;
+  if(isdefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && func_7DB8(self.primaryweapon) != "" && self _meth_8519(self.primaryweapon)) {
+    var_00 = getweaponbasename(self.primaryweapon);
+    var_01 = func_7DB8(self.primaryweapon);
+    var_02 = var_00 + "+" + var_01;
+    self.pers["altScopeStates"][var_02] = 1;
   }
 
-  if (isdefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && func_7DB8(self.secondaryweapon) != "" && self _meth_8519(self.secondaryweapon)) {
-  var_00 = getweaponbasename(self.secondaryweapon);
-  var_01 = func_7DB8(self.secondaryweapon);
-  var_02 = var_00 + "+" + var_01;
-  self.pers["altScopeStates"][var_02] = 1;
+  if(isdefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && func_7DB8(self.secondaryweapon) != "" && self _meth_8519(self.secondaryweapon)) {
+    var_00 = getweaponbasename(self.secondaryweapon);
+    var_01 = func_7DB8(self.secondaryweapon);
+    var_02 = var_00 + "+" + var_01;
+    self.pers["altScopeStates"][var_02] = 1;
   }
 }
 
 func_DDF6() {
-  if (isdefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && missile_settargetent(self.primaryweapon) != "" && self _meth_8519(self.primaryweapon)) {
-  var_00 = getweaponbasename(self.primaryweapon);
-  var_01 = missile_settargetent(self.primaryweapon);
-  var_02 = var_00 + "+" + var_01;
-  var_03 = func_7DB8(self.primaryweapon);
-  var_04 = var_00 + "+" + var_03;
-  self.pers["altScopeStates"][var_02] = 1;
-  self.pers["altScopeStates"][var_04] = 1;
+  if(isdefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && missile_settargetent(self.primaryweapon) != "" && self _meth_8519(self.primaryweapon)) {
+    var_00 = getweaponbasename(self.primaryweapon);
+    var_01 = missile_settargetent(self.primaryweapon);
+    var_02 = var_00 + "+" + var_01;
+    var_03 = func_7DB8(self.primaryweapon);
+    var_04 = var_00 + "+" + var_03;
+    self.pers["altScopeStates"][var_02] = 1;
+    self.pers["altScopeStates"][var_04] = 1;
   }
 
-  if (isdefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && missile_settargetent(self.secondaryweapon) != "" && self _meth_8519(self.secondaryweapon)) {
-  var_00 = getweaponbasename(self.secondaryweapon);
-  var_01 = missile_settargetent(self.secondaryweapon);
-  var_02 = var_00 + "+" + var_01;
-  var_03 = func_7DB8(self.secondaryweapon);
-  var_04 = var_00 + "+" + var_03;
-  self.pers["altScopeStates"][var_02] = 1;
-  self.pers["altScopeStates"][var_04] = 1;
+  if(isdefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && missile_settargetent(self.secondaryweapon) != "" && self _meth_8519(self.secondaryweapon)) {
+    var_00 = getweaponbasename(self.secondaryweapon);
+    var_01 = missile_settargetent(self.secondaryweapon);
+    var_02 = var_00 + "+" + var_01;
+    var_03 = func_7DB8(self.secondaryweapon);
+    var_04 = var_00 + "+" + var_03;
+    self.pers["altScopeStates"][var_02] = 1;
+    self.pers["altScopeStates"][var_04] = 1;
   }
 }
 
@@ -463,23 +462,23 @@ func_DDF4() {
   self.pers["toggleScopeStates"] = [];
   var_00 = self getweaponslistprimaries();
 
-  foreach (var_02 in var_00) {
-  if (var_02 == self.primaryweapon || var_02 == self.secondaryweapon) {
-  var_03 = getweaponattachments(var_02);
+  foreach(var_02 in var_00) {
+    if(var_02 == self.primaryweapon || var_02 == self.secondaryweapon) {
+      var_03 = getweaponattachments(var_02);
 
-  foreach (var_05 in var_03) {
-  if (issmallmissile(var_05)) {
-  self.pers["toggleScopeStates"][var_02] = self _meth_812E(var_02);
-  break;
-  }
-  }
-  }
+      foreach(var_05 in var_03) {
+        if(issmallmissile(var_05)) {
+          self.pers["toggleScopeStates"][var_02] = self _meth_812E(var_02);
+          break;
+        }
+      }
+    }
   }
 }
 
 updatetogglescopestate(var_00) {
-  if (isdefined(self.pers["toggleScopeStates"]) && isdefined(self.pers["toggleScopeStates"][var_00]))
-  self give_player_cryobomb(var_00, self.pers["toggleScopeStates"][var_00]);
+  if(isdefined(self.pers["toggleScopeStates"]) && isdefined(self.pers["toggleScopeStates"][var_00]))
+    self give_player_cryobomb(var_00, self.pers["toggleScopeStates"][var_00]);
 }
 
 updatesavedaltstate(var_00) {
@@ -489,8 +488,8 @@ updatesavedaltstate(var_00) {
   var_04 = var_03 + "+" + var_01;
   var_05 = var_03 + "+" + var_02;
 
-  if (isdefined(self.pers["altScopeStates"]) && scripts\mp\utility\game::istrue(isdefined(self.pers["altScopeStates"][var_05]) || isdefined(self.pers["altScopeStates"][var_04])))
-  return "alt_" + var_00;
+  if(isdefined(self.pers["altScopeStates"]) && scripts\mp\utility\game::istrue(isdefined(self.pers["altScopeStates"][var_05]) || isdefined(self.pers["altScopeStates"][var_04])))
+    return "alt_" + var_00;
 
   return var_00;
 }
@@ -502,9 +501,9 @@ issmallmissile(var_00) {
 func_7DB8(var_00) {
   var_01 = getweaponattachments(var_00);
 
-  foreach (var_03 in var_01) {
-  if (func_9D3C(var_03))
-  return var_03;
+  foreach(var_03 in var_01) {
+    if(func_9D3C(var_03))
+      return var_03;
   }
 
   return "";
@@ -513,9 +512,9 @@ func_7DB8(var_00) {
 missile_settargetent(var_00) {
   var_01 = getweaponattachments(var_00);
 
-  foreach (var_03 in var_01) {
-  if (func_9FF3(var_03))
-  return var_03;
+  foreach(var_03 in var_01) {
+    if(func_9FF3(var_03))
+      return var_03;
   }
 
   return "";
@@ -525,32 +524,32 @@ func_9D3C(var_00) {
   var_01 = 0;
 
   switch (var_00) {
-  case "shotgunlongshotl":
-  case "longshotlscope":
-  case "longshotscope":
-  case "mod_akimboshotgun":
-  case "ripperscopeb_camo":
-  case "ripperlscope_camo":
-  case "ripperscope_camo":
-  case "m8lchargescope_camo":
-  case "m8lscope_camo":
-  case "m8rscope_camo":
-  case "akimbofmg":
-  case "m8scope_camo":
-  case "ripperrscope_camo":
-  case "shotgunlongshot":
-  case "meleervn":
-  case "arripper":
-  case "arm8":
-  var_01 = 1;
-  break;
-  default:
-  var_02 = scripts\mp\utility\game::attachmentmap_tobase(var_00);
+    case "shotgunlongshotl":
+    case "longshotlscope":
+    case "longshotscope":
+    case "mod_akimboshotgun":
+    case "ripperscopeb_camo":
+    case "ripperlscope_camo":
+    case "ripperscope_camo":
+    case "m8lchargescope_camo":
+    case "m8lscope_camo":
+    case "m8rscope_camo":
+    case "akimbofmg":
+    case "m8scope_camo":
+    case "ripperrscope_camo":
+    case "shotgunlongshot":
+    case "meleervn":
+    case "arripper":
+    case "arm8":
+      var_01 = 1;
+      break;
+    default:
+      var_02 = scripts\mp\utility\game::attachmentmap_tobase(var_00);
 
-  if (var_02 == "hybrid" || var_02 == "acog")
-  var_01 = 1;
+      if(var_02 == "hybrid" || var_02 == "acog")
+        var_01 = 1;
 
-  break;
+      break;
   }
 
   return var_01;
@@ -560,24 +559,24 @@ func_9FF3(var_00) {
   var_01 = 0;
 
   switch (var_00) {
-  case "ripperlscope":
-  case "ripperrscope":
-  case "ripperscope":
-  case "m8lscope":
-  case "m8rscope":
-  case "m8scope":
-  case "akimbofmg":
-  var_01 = 1;
-  break;
-  case "arripper":
-  case "arm8":
-  default:
-  var_02 = scripts\mp\utility\game::attachmentmap_tobase(var_00);
+    case "ripperlscope":
+    case "ripperrscope":
+    case "ripperscope":
+    case "m8lscope":
+    case "m8rscope":
+    case "m8scope":
+    case "akimbofmg":
+      var_01 = 1;
+      break;
+    case "arripper":
+    case "arm8":
+    default:
+      var_02 = scripts\mp\utility\game::attachmentmap_tobase(var_00);
 
-  if (var_02 == "hybrid" || var_02 == "acog")
-  var_01 = 1;
+      if(var_02 == "hybrid" || var_02 == "acog")
+        var_01 = 1;
 
-  break;
+      break;
   }
 
   return var_01;
@@ -592,31 +591,31 @@ func_13AAC() {
 }
 
 func_13CB5(var_00, var_01) {
-  if (isdefined(var_01) && var_01 != "none") {
-  var_01 = scripts\mp\utility\game::getweaponrootname(var_01);
-  var_02 = scripts\mp\utility\game::func_13CB4(var_01);
+  if(isdefined(var_01) && var_01 != "none") {
+    var_01 = scripts\mp\utility\game::getweaponrootname(var_01);
+    var_02 = scripts\mp\utility\game::func_13CB4(var_01);
 
-  if (isdefined(var_02))
-  scripts\mp\utility\game::removeperk(var_02);
+    if(isdefined(var_02))
+      scripts\mp\utility\game::removeperk(var_02);
   }
 
-  if (isdefined(var_00) && var_00 != "none") {
-  var_00 = scripts\mp\utility\game::getweaponrootname(var_00);
-  var_03 = scripts\mp\utility\game::func_13CB4(var_00);
+  if(isdefined(var_00) && var_00 != "none") {
+    var_00 = scripts\mp\utility\game::getweaponrootname(var_00);
+    var_03 = scripts\mp\utility\game::func_13CB4(var_00);
 
-  if (isdefined(var_03))
-  scripts\mp\utility\game::giveperk(var_03);
+    if(isdefined(var_03))
+      scripts\mp\utility\game::giveperk(var_03);
   }
 }
 
 func_12F5D(var_00) {
   var_01 = 1;
 
-  if (isdefined(var_00) && var_00 != "none") {
-  var_02 = weaponclass(var_00);
+  if(isdefined(var_00) && var_00 != "none") {
+    var_02 = weaponclass(var_00);
 
-  if ((var_02 == "sniper" || issubstr(var_00, "iw7_longshot") && !isaltmodeweapon(var_00)) && !scripts\mp\utility\game::_hasperk("passive_scope_radar") || getweaponbasename(var_00) == "iw7_m1c_mp" && scripts\mp\utility\game::weaponhasattachment(var_00, "thermal"))
-  var_01 = 0;
+    if((var_02 == "sniper" || issubstr(var_00, "iw7_longshot") && !isaltmodeweapon(var_00)) && !scripts\mp\utility\game::_hasperk("passive_scope_radar") || getweaponbasename(var_00) == "iw7_m1c_mp" && scripts\mp\utility\game::weaponhasattachment(var_00, "thermal"))
+      var_01 = 0;
   }
 
   self setclientomnvar("ui_ads_minimap", var_01);
@@ -626,34 +625,34 @@ func_13C78(var_00, var_01) {
   var_02 = undefined;
   var_03 = undefined;
 
-  if (isdefined(var_01) && var_01 != "none") {
-  var_03 = getweaponattachments(var_01);
+  if(isdefined(var_01) && var_01 != "none") {
+    var_03 = getweaponattachments(var_01);
 
-  if (isdefined(var_03) && var_3.size > 0) {
-  foreach (var_05 in var_03) {
-  var_06 = scripts\mp\utility\game::attachmentperkmap(var_05);
+    if(isdefined(var_03) && var_3.size > 0) {
+      foreach(var_05 in var_03) {
+        var_06 = scripts\mp\utility\game::attachmentperkmap(var_05);
 
-  if (!isdefined(var_06))
-  continue;
-
-  scripts\mp\utility\game::removeperk(var_06);
+        if(!isdefined(var_06)) {
+          continue;
+        }
+        scripts\mp\utility\game::removeperk(var_06);
+      }
+    }
   }
-  }
-  }
 
-  if (isdefined(var_00) && var_00 != "none") {
-  var_02 = getweaponattachments(var_00);
+  if(isdefined(var_00) && var_00 != "none") {
+    var_02 = getweaponattachments(var_00);
 
-  if (isdefined(var_02) && var_2.size > 0) {
-  foreach (var_09 in var_02) {
-  var_06 = scripts\mp\utility\game::attachmentperkmap(var_09);
+    if(isdefined(var_02) && var_2.size > 0) {
+      foreach(var_09 in var_02) {
+        var_06 = scripts\mp\utility\game::attachmentperkmap(var_09);
 
-  if (!isdefined(var_06))
-  continue;
-
-  scripts\mp\utility\game::giveperk(var_06);
-  }
-  }
+        if(!isdefined(var_06)) {
+          continue;
+        }
+        scripts\mp\utility\game::giveperk(var_06);
+      }
+    }
   }
 }
 
@@ -663,12 +662,12 @@ func_13B2E(var_00, var_01) {
   self endon("faux_spawn");
 
   for (;;) {
-  var_02 = self getcurrentweapon();
+    var_02 = self getcurrentweapon();
 
-  if (var_02 == var_00)
-  childthread func_13BAC(var_00, var_01);
+    if(var_02 == var_00)
+      childthread func_13BAC(var_00, var_01);
 
-  self waittill("weapon_change");
+    self waittill("weapon_change");
   }
 }
 
@@ -676,47 +675,46 @@ func_13BAC(var_00, var_01) {
   self endon("weapon_change");
 
   for (;;) {
-  var_02 = scripts\mp\utility\game::waittill_missile_fire();
+    var_02 = scripts\mp\utility\game::waittill_missile_fire();
 
-  if (!isdefined(var_2.func_9E8F))
-  thread func_13BAB(var_00, var_02, anglestoforward(var_2.angles), 0, var_01);
+    if(!isdefined(var_2.func_9E8F))
+      thread func_13BAB(var_00, var_02, anglestoforward(var_2.angles), 0, var_01);
   }
 }
 
 func_13BAB(var_00, var_01, var_02, var_03, var_04) {
-  if (var_03 >= var_04)
-  return;
-
+  if(var_03 >= var_04) {
+    return;
+  }
   var_05 = var_01 scripts\engine\utility::waittill_any_timeout_no_endon_death(2, "death");
 
-  if (var_05 != "death")
-  return;
-
-  if (!isdefined(var_01))
-  return;
-
+  if(var_05 != "death") {
+    return;
+  }
+  if(!isdefined(var_01)) {
+    return;
+  }
   var_06 = var_1.origin + -8 * var_02;
   var_07 = var_06 + var_02 * 15;
   var_08 = physics_createcontents(["physicscontents_solid", "physicscontents_structural", "physicscontents_player", "physicscontents_vehicleclip"]);
   var_09 = physics_raycast(var_06, var_07, var_08, self, 0, "physicsquery_closest");
 
-  if (var_9.size == 0)
-  return;
-
+  if(var_9.size == 0) {
+    return;
+  }
   var_10 = var_9[0]["entity"];
   var_11 = var_9[0]["normal"];
   var_12 = var_9[0]["position"];
 
-  if (isdefined(var_10) && isplayer(var_10))
-  return;
-  else
-  {
-  var_13 = var_02 - 2 * vectordot(var_02, var_11) * var_11;
-  var_13 = vectornormalize(var_13);
-  var_14 = var_12 + var_13 * 2;
-  var_01 = scripts\mp\utility\game::_magicbullet(var_00, var_14, var_14 + var_13, self);
-  var_1.owner = self;
-  var_1.func_9E8F = 1;
+  if(isdefined(var_10) && isplayer(var_10))
+    return;
+  else {
+    var_13 = var_02 - 2 * vectordot(var_02, var_11) * var_11;
+    var_13 = vectornormalize(var_13);
+    var_14 = var_12 + var_13 * 2;
+    var_01 = scripts\mp\utility\game::_magicbullet(var_00, var_14, var_14 + var_13, self);
+    var_1.owner = self;
+    var_1.func_9E8F = 1;
   }
 
   thread func_13BAB(var_00, var_01, var_13, var_03 + 1, var_04);
@@ -731,11 +729,11 @@ func_13BA9() {
   var_01 = self getcurrentweapon();
 
   for (;;) {
-  var_01 = self getcurrentweapon();
-  func_13C78(var_01, var_00);
-  func_13CB5(var_01, var_00);
-  var_00 = var_01;
-  self waittill("weapon_change");
+    var_01 = self getcurrentweapon();
+    func_13C78(var_01, var_00);
+    func_13CB5(var_01, var_00);
+    var_00 = var_01;
+    self waittill("weapon_change");
   }
 }
 
@@ -749,19 +747,19 @@ watchweaponchange() {
   hitsthismag_init(var_00);
 
   for (;;) {
-  self waittill("weapon_change", var_00);
-  var_00 = scripts\mp\utility\game::func_E0CF(var_00);
+    self waittill("weapon_change", var_00);
+    var_00 = scripts\mp\utility\game::func_E0CF(var_00);
 
-  if (!func_B4E0(var_00))
-  continue;
+    if(!func_B4E0(var_00)) {
+      continue;
+    }
+    if(scripts\mp\utility\game::iskillstreakweapon(var_00)) {
+      continue;
+    }
+    hitsthismag_init(var_00);
 
-  if (scripts\mp\utility\game::iskillstreakweapon(var_00))
-  continue;
-
-  hitsthismag_init(var_00);
-
-  if (scripts\mp\utility\game::iscacprimaryweapon(var_00) || scripts\mp\utility\game::iscacsecondaryweapon(var_00))
-  self.lastdroppableweaponobj = var_00;
+    if(scripts\mp\utility\game::iscacprimaryweapon(var_00) || scripts\mp\utility\game::iscacsecondaryweapon(var_00))
+      self.lastdroppableweaponobj = var_00;
   }
 }
 
@@ -770,13 +768,13 @@ func_12F11(var_00, var_01) {
   self endon("disconnect");
   self endon("faux_spawn");
 
-  if (var_01)
-  wait 0.05;
+  if(var_01)
+    wait 0.05;
 
-  if (var_00 == "iw7_fhr_mp")
-  self setscriptablepartstate("chargeVFX", "chargeVFXOn", 0);
+  if(var_00 == "iw7_fhr_mp")
+    self setscriptablepartstate("chargeVFX", "chargeVFXOn", 0);
   else
-  self setscriptablepartstate("chargeVFX", "chargeVFXOff", 0);
+    self setscriptablepartstate("chargeVFX", "chargeVFXOff", 0);
 }
 
 func_13B4C() {
@@ -784,12 +782,12 @@ func_13B4C() {
   self endon("disconnect");
 
   for (;;) {
-  var_00 = self getcurrentweapon();
+    var_00 = self getcurrentweapon();
 
-  if (func_103B9(var_00))
-  childthread func_103B7();
+    if(func_103B9(var_00))
+      childthread func_103B7();
 
-  self waittill("weapon_change");
+    self waittill("weapon_change");
   }
 }
 
@@ -806,23 +804,22 @@ func_103B7() {
   self.glinton = 0;
 
   for (;;) {
-  if (self playerads() > 0.5 && !scripts\mp\equipment\cloak::func_9FC1()) {
-  if (!self.glinton)
-  func_103B5();
-  }
-  else if (self.glinton)
-  sniperglint_remove();
+    if(self playerads() > 0.5 && !scripts\mp\equipment\cloak::func_9FC1()) {
+      if(!self.glinton)
+        func_103B5();
+    } else if(self.glinton)
+      sniperglint_remove();
 
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
   }
 }
 
 func_103B6() {
   scripts\engine\utility::waittill_any("death", "disconnect", "weapon_change");
 
-  if (isdefined(self.glinton) && self.glinton) {
-  sniperglint_remove();
-  self.glinton = undefined;
+  if(isdefined(self.glinton) && self.glinton) {
+    sniperglint_remove();
+    self.glinton = undefined;
   }
 }
 
@@ -832,9 +829,9 @@ func_103B5() {
 }
 
 sniperglint_remove() {
-  if (isdefined(self)) {
-  self setscriptablepartstate("sniperGlint", "sniperGlintOff", 0);
-  self.glinton = 0;
+  if(isdefined(self)) {
+    self setscriptablepartstate("sniperGlint", "sniperGlintOff", 0);
+    self.glinton = 0;
   }
 }
 
@@ -843,22 +840,22 @@ func_13B4A() {
   self endon("disconnect");
   thread watchsniperboltactionkills_ondeath();
 
-  if (!isdefined(self.pers["recoilReduceKills"]))
-  self.pers["recoilReduceKills"] = 0;
+  if(!isdefined(self.pers["recoilReduceKills"]))
+    self.pers["recoilReduceKills"] = 0;
 
   self setclientomnvar("weap_sniper_display_state", self.pers["recoilReduceKills"]);
 
   for (;;) {
-  self waittill("got_a_kill", var_00, var_01, var_02);
+    self waittill("got_a_kill", var_00, var_01, var_02);
 
-  if (isrecoilreducingweapon(var_01)) {
-  var_03 = self.pers["recoilReduceKills"] + 1;
-  self.pers["recoilReduceKills"] = int(min(var_03, 4));
-  self setclientomnvar("weap_sniper_display_state", self.pers["recoilReduceKills"]);
+    if(isrecoilreducingweapon(var_01)) {
+      var_03 = self.pers["recoilReduceKills"] + 1;
+      self.pers["recoilReduceKills"] = int(min(var_03, 4));
+      self setclientomnvar("weap_sniper_display_state", self.pers["recoilReduceKills"]);
 
-  if (var_03 <= 4)
-  stancerecoilupdate(self getstance());
-  }
+      if(var_03 <= 4)
+        stancerecoilupdate(self getstance());
+    }
   }
 }
 
@@ -871,32 +868,31 @@ watchsniperboltactionkills_ondeath() {
 }
 
 isrecoilreducingweapon(var_00) {
-  if (!isdefined(var_00) || var_00 == "none")
-  return 0;
+  if(!isdefined(var_00) || var_00 == "none")
+    return 0;
 
   var_01 = 0;
 
-  if (issubstr(var_00, "l115a3scope") || issubstr(var_00, "l115a3vzscope") || issubstr(var_00, "usrscope") || issubstr(var_00, "usrvzscope"))
-  var_01 = 1;
+  if(issubstr(var_00, "l115a3scope") || issubstr(var_00, "l115a3vzscope") || issubstr(var_00, "usrscope") || issubstr(var_00, "usrvzscope"))
+    var_01 = 1;
 
   return var_01;
 }
 
 getrecoilreductionvalue() {
-  if (!isdefined(self.pers["recoilReduceKills"]))
-  self.pers["recoilReduceKills"] = 0;
+  if(!isdefined(self.pers["recoilReduceKills"]))
+    self.pers["recoilReduceKills"] = 0;
 
   return self.pers["recoilReduceKills"] * 3;
 }
 
 glprox_trygetweaponname(var_00) {
-  if (var_00 != "none" && getweaponbasename(var_00) == "iw7_glprox_mp") {
-  if (isaltmodeweapon(var_00)) {
-  var_01 = getweaponattachments(var_00);
-  var_00 = var_1[0];
-  }
-  else
-  var_00 = getweaponbasename(var_00);
+  if(var_00 != "none" && getweaponbasename(var_00) == "iw7_glprox_mp") {
+    if(isaltmodeweapon(var_00)) {
+      var_01 = getweaponattachments(var_00);
+      var_00 = var_1[0];
+    } else
+      var_00 = getweaponbasename(var_00);
   }
 
   return var_00;
@@ -906,73 +902,72 @@ glprox_modifieddamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_07 = var_00;
   var_04 = scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_04);
 
-  if (!isplayer(var_02))
-  return var_07;
+  if(!isplayer(var_02))
+    return var_07;
 
-  if (var_04 != "iw7_glprox_mp")
-  return var_07;
+  if(var_04 != "iw7_glprox_mp")
+    return var_07;
 
-  if (!isexplosivedamagemod(var_05))
-  return var_07;
+  if(!isexplosivedamagemod(var_05))
+    return var_07;
 
   var_08 = 2500;
 
-  if (level.hardcoremode)
-  var_08 = 11025;
-  else if (level.tactical)
-  var_08 = 9216;
+  if(level.hardcoremode)
+    var_08 = 11025;
+  else if(level.tactical)
+    var_08 = 9216;
 
   var_09 = 105;
 
-  if (level.hardcoremode)
-  var_09 = 35;
-  else if (level.tactical)
-  var_09 = 105;
+  if(level.hardcoremode)
+    var_09 = 35;
+  else if(level.tactical)
+    var_09 = 105;
 
   var_10 = 55;
 
-  if (level.hardcoremode)
-  var_10 = 25;
-  else if (level.tactical)
-  var_10 = 55;
+  if(level.hardcoremode)
+    var_10 = 25;
+  else if(level.tactical)
+    var_10 = 55;
 
   var_11 = undefined;
   var_12 = undefined;
 
-  if (isdefined(var_06)) {
-  var_11 = distancesquared(var_06, var_02 geteye());
-  var_12 = distancesquared(var_06, var_2.origin);
-  }
-  else if (isdefined(var_03)) {
-  var_11 = distancesquared(var_3.origin, var_02 geteye());
-  var_12 = distancesquared(var_3.origin, var_2.origin);
+  if(isdefined(var_06)) {
+    var_11 = distancesquared(var_06, var_02 geteye());
+    var_12 = distancesquared(var_06, var_2.origin);
+  } else if(isdefined(var_03)) {
+    var_11 = distancesquared(var_3.origin, var_02 geteye());
+    var_12 = distancesquared(var_3.origin, var_2.origin);
   }
 
-  if (isdefined(var_11) && var_11 <= var_08)
-  var_07 = var_09;
-  else if (isdefined(var_12) && var_12 <= var_08)
-  var_07 = var_09;
+  if(isdefined(var_11) && var_11 <= var_08)
+    var_07 = var_09;
+  else if(isdefined(var_12) && var_12 <= var_08)
+    var_07 = var_09;
   else
-  var_07 = var_10;
+    var_07 = var_10;
 
   return var_07;
 }
 
 glprox_modifiedblastshieldconst(var_00, var_01) {
-  if (level.hardcoremode) {
-  if (scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_01) == "iw7_glprox_mp")
-  var_00 = 0.65;
+  if(level.hardcoremode) {
+    if(scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_01) == "iw7_glprox_mp")
+      var_00 = 0.65;
   }
 
   return var_00;
 }
 
 ishackweapon(var_00) {
-  if (var_00 == "radar_mp" || var_00 == "airstrike_mp" || var_00 == "helicopter_mp")
-  return 1;
+  if(var_00 == "radar_mp" || var_00 == "airstrike_mp" || var_00 == "helicopter_mp")
+    return 1;
 
-  if (var_00 == "briefcase_bomb_mp")
-  return 1;
+  if(var_00 == "briefcase_bomb_mp")
+    return 1;
 
   return 0;
 }
@@ -987,101 +982,101 @@ func_9D6D(var_00) {
 }
 
 func_B4E0(var_00) {
-  if (var_00 == "none")
-  return 0;
+  if(var_00 == "none")
+    return 0;
 
-  if (func_9DF7(var_00))
-  return 0;
+  if(func_9DF7(var_00))
+    return 0;
 
-  if (func_9D6D(var_00))
-  return 0;
+  if(func_9D6D(var_00))
+    return 0;
 
-  if (scripts\mp\powers::func_9F0A(var_00))
-  return 0;
+  if(scripts\mp\powers::func_9F0A(var_00))
+    return 0;
 
-  if (issubstr(var_00, "ac130"))
-  return 0;
+  if(issubstr(var_00, "ac130"))
+    return 0;
 
-  if (issubstr(var_00, "uav"))
-  return 0;
+  if(issubstr(var_00, "uav"))
+    return 0;
 
-  if (issubstr(var_00, "killstreak"))
-  return 0;
+  if(issubstr(var_00, "killstreak"))
+    return 0;
 
-  if (scripts\mp\utility\game::issuperweapon(var_00))
-  return 0;
+  if(scripts\mp\utility\game::issuperweapon(var_00))
+    return 0;
 
   var_01 = weaponinventorytype(var_00);
 
-  if (var_01 != "primary")
-  return 0;
+  if(var_01 != "primary")
+    return 0;
 
   return 1;
 }
 
 dropweaponfordeath(var_00, var_01) {
-  if (isdefined(level.blockweapondrops))
-  return;
-
-  if (isdefined(self.droppeddeathweapon))
-  return;
-
-  if (isdefined(var_00) && var_00 == self || var_01 == "MOD_SUICIDE")
-  return;
-
+  if(isdefined(level.blockweapondrops)) {
+    return;
+  }
+  if(isdefined(self.droppeddeathweapon)) {
+    return;
+  }
+  if(isdefined(var_00) && var_00 == self || var_01 == "MOD_SUICIDE") {
+    return;
+  }
   var_02 = self.lastdroppableweaponobj;
 
-  if (!isdefined(var_02))
-  return;
-
-  if (var_02 == "none")
-  return;
-
-  if (!self hasweapon(var_02))
-  return;
-
-  if (scripts\mp\utility\game::isjuggernaut())
-  return;
-
-  if (isdefined(level.gamemodemaydropweapon) && !self [[level.gamemodemaydropweapon]](var_02))
-  return;
-
-  if (isaltmodeweapon(var_02))
-  var_02 = scripts\mp\utility\game::func_E0CF(var_02);
+  if(!isdefined(var_02)) {
+    return;
+  }
+  if(var_02 == "none") {
+    return;
+  }
+  if(!self hasweapon(var_02)) {
+    return;
+  }
+  if(scripts\mp\utility\game::isjuggernaut()) {
+    return;
+  }
+  if(isdefined(level.gamemodemaydropweapon) && !self[[level.gamemodemaydropweapon]](var_02)) {
+    return;
+  }
+  if(isaltmodeweapon(var_02))
+    var_02 = scripts\mp\utility\game::func_E0CF(var_02);
 
   var_03 = 0;
   var_04 = 0;
   var_05 = 0;
 
-  if (var_02 != "iw6_riotshield_mp") {
-  if (!self anyammoforweaponmodes(var_02))
-  return;
+  if(var_02 != "iw6_riotshield_mp") {
+    if(!self anyammoforweaponmodes(var_02)) {
+      return;
+    }
+    var_03 = self getweaponammoclip(var_02, "right");
+    var_04 = self getweaponammoclip(var_02, "left");
 
-  var_03 = self getweaponammoclip(var_02, "right");
-  var_04 = self getweaponammoclip(var_02, "left");
+    if(!var_03 && !var_04) {
+      return;
+    }
+    var_05 = self getweaponammostock(var_02);
+    var_06 = weaponmaxammo(var_02);
 
-  if (!var_03 && !var_04)
-  return;
+    if(var_05 > var_06)
+      var_05 = var_06;
 
-  var_05 = self getweaponammostock(var_02);
-  var_06 = weaponmaxammo(var_02);
+    var_07 = self dropitem(var_02);
 
-  if (var_05 > var_06)
-  var_05 = var_06;
-
-  var_07 = self dropitem(var_02);
-
-  if (!isdefined(var_07))
-  return;
-
-  var_07 itemweaponsetammo(var_03, var_05, var_04);
+    if(!isdefined(var_07)) {
+      return;
+    }
+    var_07 itemweaponsetammo(var_03, var_05, var_04);
   } else {
-  var_07 = self dropitem(var_02);
+    var_07 = self dropitem(var_02);
 
-  if (!isdefined(var_07))
-  return;
-
-  var_07 itemweaponsetammo(1, 1, 0);
+    if(!isdefined(var_07)) {
+      return;
+    }
+    var_07 itemweaponsetammo(1, 1, 0);
   }
 
   self.droppeddeathweapon = 1;
@@ -1094,64 +1089,64 @@ dropweaponfordeath(var_00, var_01) {
 func_1175A(var_00, var_01, var_02, var_03) {
   self.owner endon("disconnect");
 
-  if (!isdefined(self) || !isdefined(self.owner))
-  return;
-
+  if(!isdefined(self) || !isdefined(self.owner)) {
+    return;
+  }
   var_04 = self.origin;
 
   for (;;) {
-  wait 0.25;
+    wait 0.25;
 
-  if (!isdefined(self))
-  return;
+    if(!isdefined(self)) {
+      return;
+    }
+    var_05 = self.origin;
 
-  var_05 = self.origin;
-
-  if (var_04 == var_05)
-  break;
-
-  var_04 = var_05;
+    if(var_04 == var_05) {
+      break;
+    }
+    var_04 = var_05;
   }
 
-  if (!isdefined(self) || !isdefined(self.owner))
-  return;
-
-  if (var_01 <= 0 && var_02 <= 0)
-  return;
-
+  if(!isdefined(self) || !isdefined(self.owner)) {
+    return;
+  }
+  if(var_01 <= 0 && var_02 <= 0) {
+    return;
+  }
   var_06 = self.origin;
   var_07 = self.angles;
   var_08 = 2;
   var_09 = weaponfiretime(var_00) * var_08;
 
   while (isdefined(self) && (var_01 > 0 || var_02 > 0)) {
-  var_10 = (randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(0, 1));
-  var_11 = var_10 * 180;
-  var_12 = var_10 * 1000;
-  self.origin = var_06 + (0, 0, 10);
-  self.angles = var_11;
-  thread scripts\mp\utility\game::drawline(self.origin, self.origin + var_12, 2, (0, 1, 0));
-  thread func_1174C(self.origin, var_12, self.owner, var_00);
-  wait(var_09);
+    var_10 = (randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(0, 1));
+    var_11 = var_10 * 180;
+    var_12 = var_10 * 1000;
+    self.origin = var_06 + (0, 0, 10);
+    self.angles = var_11;
+    thread scripts\mp\utility\game::drawline(self.origin, self.origin + var_12, 2, (0, 1, 0));
+    thread func_1174C(self.origin, var_12, self.owner, var_00);
+    wait(var_09);
 
-  if (!isdefined(self))
-  break;
+    if(!isdefined(self)) {
+      break;
+    }
+    var_01 = var_01 - var_08;
+    var_02 = var_02 - var_08;
 
-  var_01 = var_01 - var_08;
-  var_02 = var_02 - var_08;
+    if(var_01 <= 0)
+      var_01 = 0;
 
-  if (var_01 <= 0)
-  var_01 = 0;
+    if(var_02 <= 0)
+      var_02 = 0;
 
-  if (var_02 <= 0)
-  var_02 = 0;
-
-  self itemweaponsetammo(var_01, var_03, var_02);
+    self itemweaponsetammo(var_01, var_03, var_02);
   }
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   self.origin = var_06;
   self.angles = var_07;
 }
@@ -1165,46 +1160,46 @@ func_1174C(var_00, var_01, var_02, var_03) {
 func_1015B() {
   wait 0.1;
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   var_00 = getitemweaponname();
   var_01 = getweaponbasename(var_00);
   var_02 = _meth_822A(var_01);
 
   switch (var_02) {
-  case 4:
-  playfxontag(scripts\engine\utility::getfx("item_fx_epic"), self, "j_gun");
-  break;
-  case 3:
-  playfxontag(scripts\engine\utility::getfx("item_fx_legendary"), self, "j_gun");
-  break;
-  case 2:
-  playfxontag(scripts\engine\utility::getfx("item_fx_rare"), self, "j_gun");
-  break;
-  case 1:
-  playfxontag(scripts\engine\utility::getfx("item_fx_common"), self, "j_gun");
-  break;
+    case 4:
+      playfxontag(scripts\engine\utility::getfx("item_fx_epic"), self, "j_gun");
+      break;
+    case 3:
+      playfxontag(scripts\engine\utility::getfx("item_fx_legendary"), self, "j_gun");
+      break;
+    case 2:
+      playfxontag(scripts\engine\utility::getfx("item_fx_rare"), self, "j_gun");
+      break;
+    case 1:
+      playfxontag(scripts\engine\utility::getfx("item_fx_common"), self, "j_gun");
+      break;
   }
 }
 
 _meth_822A(var_00) {
-  if (!isdefined(var_00))
-  return 0;
+  if(!isdefined(var_00))
+    return 0;
 
   var_01 = strtok(var_00, "_");
 
-  foreach (var_03 in var_01) {
-  switch (var_03) {
-  case "mpe":
-  return 4;
-  case "mpl":
-  return 3;
-  case "mpr":
-  return 2;
-  case "mp":
-  return 1;
-  }
+  foreach(var_03 in var_01) {
+    switch (var_03) {
+      case "mpe":
+        return 4;
+      case "mpl":
+        return 3;
+      case "mpr":
+        return 2;
+      case "mp":
+        return 1;
+    }
   }
 
   return 0;
@@ -1214,30 +1209,30 @@ detachifattached(var_00, var_01) {
   var_02 = self getattachsize();
 
   for (var_03 = 0; var_03 < var_02; var_3++) {
-  var_04 = self getattachmodelname(var_03);
+    var_04 = self getattachmodelname(var_03);
 
-  if (var_04 != var_00)
-  continue;
+    if(var_04 != var_00) {
+      continue;
+    }
+    var_05 = self getattachtagname(var_03);
+    self detach(var_00, var_05);
 
-  var_05 = self getattachtagname(var_03);
-  self detach(var_00, var_05);
+    if(var_05 != var_01) {
+      var_02 = self getattachsize();
 
-  if (var_05 != var_01) {
-  var_02 = self getattachsize();
+      for (var_03 = 0; var_03 < var_02; var_3++) {
+        var_05 = self getattachtagname(var_03);
 
-  for (var_03 = 0; var_03 < var_02; var_3++) {
-  var_05 = self getattachtagname(var_03);
+        if(var_05 != var_01) {
+          continue;
+        }
+        var_00 = self getattachmodelname(var_03);
+        self detach(var_00, var_05);
+        break;
+      }
+    }
 
-  if (var_05 != var_01)
-  continue;
-
-  var_00 = self getattachmodelname(var_03);
-  self detach(var_00, var_05);
-  break;
-  }
-  }
-
-  return 1;
+    return 1;
   }
 
   return 0;
@@ -1247,9 +1242,9 @@ deletepickupafterawhile() {
   self endon("death");
   wait 60;
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   self delete();
 }
 
@@ -1264,23 +1259,24 @@ watchpickup() {
   var_00 = getitemweaponname();
 
   for (;;) {
-  self waittill("trigger", var_01, var_02);
-  var_03 = fixupplayerweapons(var_01, var_00);
+    self waittill("trigger", var_01, var_02);
+    var_03 = fixupplayerweapons(var_01, var_00);
 
-  if (isdefined(var_02) || var_03)
-  break;
+    if(isdefined(var_02) || var_03) {
+      break;
+    }
   }
 
-  if (isdefined(var_02)) {
-  var_04 = var_02 getitemweaponname();
+  if(isdefined(var_02)) {
+    var_04 = var_02 getitemweaponname();
 
-  if (isdefined(var_1.tookweaponfrom[var_04])) {
-  var_2.owner = var_1.tookweaponfrom[var_04];
-  var_1.tookweaponfrom[var_04] = undefined;
-  }
+    if(isdefined(var_1.tookweaponfrom[var_04])) {
+      var_2.owner = var_1.tookweaponfrom[var_04];
+      var_1.tookweaponfrom[var_04] = undefined;
+    }
 
-  var_2.targetname = "dropped_weapon";
-  var_02 thread watchpickup();
+    var_2.targetname = "dropped_weapon";
+    var_02 thread watchpickup();
   }
 
   var_1.tookweaponfrom[var_00] = self.owner;
@@ -1291,20 +1287,20 @@ fixupplayerweapons(var_00, var_01) {
   var_03 = 1;
   var_04 = 1;
 
-  foreach (var_06 in var_02) {
-  if (var_0.primaryweapon == var_06) {
-  var_03 = 0;
-  continue;
+  foreach(var_06 in var_02) {
+    if(var_0.primaryweapon == var_06) {
+      var_03 = 0;
+      continue;
+    }
+
+    if(var_0.secondaryweapon == var_06)
+      var_04 = 0;
   }
 
-  if (var_0.secondaryweapon == var_06)
-  var_04 = 0;
-  }
-
-  if (var_03)
-  var_0.primaryweapon = var_01;
-  else if (var_04)
-  var_0.secondaryweapon = var_01;
+  if(var_03)
+    var_0.primaryweapon = var_01;
+  else if(var_04)
+    var_0.secondaryweapon = var_01;
 
   return var_03 || var_04;
 }
@@ -1314,8 +1310,8 @@ itemremoveammofromaltmodes() {
   var_01 = weaponaltweaponname(var_00);
 
   for (var_02 = 1; var_01 != "none" && var_01 != var_00; var_2++) {
-  self itemweaponsetammo(0, 0, 0, var_02);
-  var_01 = weaponaltweaponname(var_01);
+    self itemweaponsetammo(0, 0, 0, var_02);
+    var_01 = weaponaltweaponname(var_01);
   }
 }
 
@@ -1332,59 +1328,59 @@ func_89DF(var_00, var_01) {
 func_EBD2(var_00) {
   var_01 = var_00 getweaponslistprimaries();
 
-  foreach (var_03 in var_01) {
-  if (!scripts\mp\utility\game::iscacprimaryweapon(var_03) && !level.func_EBD0)
-  continue;
+  foreach(var_03 in var_01) {
+    if(!scripts\mp\utility\game::iscacprimaryweapon(var_03) && !level.func_EBD0) {
+      continue;
+    }
+    if(isaltmodeweapon(var_03) && weaponclass(var_03) == "grenade") {
+      continue;
+    }
+    if(scripts\mp\utility\game::getweapongroup(var_03) == "weapon_projectile") {
+      continue;
+    }
+    if(var_03 == "venomxgun_mp") {
+      continue;
+    }
+    var_04 = var_00 getweaponammostock(var_03);
+    var_05 = weaponclipsize(var_03);
 
-  if (isaltmodeweapon(var_03) && weaponclass(var_03) == "grenade")
-  continue;
+    if(issubstr(var_03, "akimbo") && scripts\mp\utility\game::getweaponrootname(var_03) != "iw7_fmg")
+      var_05 = var_05 * 2;
 
-  if (scripts\mp\utility\game::getweapongroup(var_03) == "weapon_projectile")
-  continue;
-
-  if (var_03 == "venomxgun_mp")
-  continue;
-
-  var_04 = var_00 getweaponammostock(var_03);
-  var_05 = weaponclipsize(var_03);
-
-  if (issubstr(var_03, "akimbo") && scripts\mp\utility\game::getweaponrootname(var_03) != "iw7_fmg")
-  var_05 = var_05 * 2;
-
-  var_00 setweaponammostock(var_03, var_04 + var_05);
+    var_00 setweaponammostock(var_03, var_04 + var_05);
   }
 }
 
 func_EBD3(var_00) {
-  if (isdefined(var_0.powers)) {
-  foreach (var_02 in var_0.powers) {
-  var_00 notify("scavenged_ammo", var_2.weaponuse);
-  scripts\engine\utility::waitframe();
-  }
+  if(isdefined(var_0.powers)) {
+    foreach(var_02 in var_0.powers) {
+      var_00 notify("scavenged_ammo", var_2.weaponuse);
+      scripts\engine\utility::waitframe();
+    }
   }
 }
 
 dropscavengerfordeath(var_00, var_01) {
-  if (!isdefined(var_00))
-  return;
-
-  if (var_00 == self)
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
+  if(var_00 == self) {
+    return;
+  }
   var_02 = self _meth_80B9("scavenger_bag_mp");
 
-  if (!isdefined(var_02))
-  return;
-
+  if(!isdefined(var_02)) {
+    return;
+  }
   var_02 thread func_89DF(self, var_01);
 
-  if (isdefined(level.bot_funcs["bots_add_scavenger_bag"]))
-  [[level.bot_funcs["bots_add_scavenger_bag"]]](var_02);
+  if(isdefined(level.bot_funcs["bots_add_scavenger_bag"]))
+    [[level.bot_funcs["bots_add_scavenger_bag"]]](var_02);
 }
 
 weaponcanstoreaccuracystats(var_00) {
-  if (scripts\mp\utility\game::iscacmeleeweapon(var_00))
-  return 0;
+  if(scripts\mp\utility\game::iscacmeleeweapon(var_00))
+    return 0;
 
   return scripts\mp\utility\game::iscacprimaryweapon(var_00) || scripts\mp\utility\game::iscacsecondaryweapon(var_00);
 }
@@ -1400,60 +1396,60 @@ watchweaponusage(var_00) {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("weapon_fired", var_01);
-  var_01 = self getcurrentweapon();
-  thread scripts\mp\perks\weaponpassives::updateweaponpassivesonuse(self, var_01);
-  scripts\mp\gamelogic::sethasdonecombat(self, 1);
-  var_02 = gettime();
+    self waittill("weapon_fired", var_01);
+    var_01 = self getcurrentweapon();
+    thread scripts\mp\perks\weaponpassives::updateweaponpassivesonuse(self, var_01);
+    scripts\mp\gamelogic::sethasdonecombat(self, 1);
+    var_02 = gettime();
 
-  if (!isdefined(self.lastshotfiredtime))
-  self.lastshotfiredtime = 0;
+    if(!isdefined(self.lastshotfiredtime))
+      self.lastshotfiredtime = 0;
 
-  var_03 = gettime() - self.lastshotfiredtime;
-  self.lastshotfiredtime = var_02;
+    var_03 = gettime() - self.lastshotfiredtime;
+    self.lastshotfiredtime = var_02;
 
-  if (!issubstr(var_01, "silence") && var_03 > 500 && level.func_768F)
-  thread scripts\mp\killstreaks\uplink::func_B37E();
+    if(!issubstr(var_01, "silence") && var_03 > 500 && level.func_768F)
+      thread scripts\mp\killstreaks\uplink::func_B37E();
 
-  if (isai(self))
-  continue;
+    if(isai(self)) {
+      continue;
+    }
+    if(!weaponcanstoreaccuracystats(var_01)) {
+      continue;
+    }
+    var_04 = var_01;
 
-  if (!weaponcanstoreaccuracystats(var_01))
-  continue;
+    if(scripts\mp\perks\weaponpassives::doesshareammo(var_01))
+      var_04 = scripts\mp\utility\game::func_E0CF(var_01);
 
-  var_04 = var_01;
+    if(isdefined(self.hitsthismag[var_04]))
+      thread hitsthismag_update(var_04);
 
-  if (scripts\mp\perks\weaponpassives::doesshareammo(var_01))
-  var_04 = scripts\mp\utility\game::func_E0CF(var_01);
+    var_05 = scripts\mp\persistence::statgetbuffered("totalShots") + 1;
+    var_06 = scripts\mp\persistence::statgetbuffered("hits");
+    var_07 = clamp(float(var_06) / float(var_05), 0.0, 1.0) * 10000.0;
+    scripts\mp\persistence::func_10E55("totalShots", var_05);
+    scripts\mp\persistence::func_10E55("accuracy", int(var_07));
+    scripts\mp\persistence::func_10E55("misses", int(var_05 - var_06));
 
-  if (isdefined(self.hitsthismag[var_04]))
-  thread hitsthismag_update(var_04);
+    if(isdefined(self.laststandparams) && self.laststandparams.laststandstarttime == gettime()) {
+      self.hits = 0;
+      return;
+    }
 
-  var_05 = scripts\mp\persistence::statgetbuffered("totalShots") + 1;
-  var_06 = scripts\mp\persistence::statgetbuffered("hits");
-  var_07 = clamp(float(var_06) / float(var_05), 0.0, 1.0) * 10000.0;
-  scripts\mp\persistence::func_10E55("totalShots", var_05);
-  scripts\mp\persistence::func_10E55("accuracy", int(var_07));
-  scripts\mp\persistence::func_10E55("misses", int(var_05 - var_06));
-
-  if (isdefined(self.laststandparams) && self.laststandparams.laststandstarttime == gettime()) {
-  self.hits = 0;
-  return;
-  }
-
-  var_08 = 1;
-  setweaponstat(var_01, var_08, "shots");
-  setweaponstat(var_01, self.hits, "hits");
-  self.hits = 0;
+    var_08 = 1;
+    setweaponstat(var_01, var_08, "shots");
+    setweaponstat(var_01, self.hits, "hits");
+    self.hits = 0;
   }
 }
 
 hitsthismag_init(var_00) {
-  if (var_00 == "none")
-  return;
-
-  if ((scripts\mp\utility\game::iscacprimaryweapon(var_00) || scripts\mp\utility\game::iscacsecondaryweapon(var_00)) && !isdefined(self.hitsthismag[var_00]))
-  self.hitsthismag[var_00] = weaponclipsize(var_00);
+  if(var_00 == "none") {
+    return;
+  }
+  if((scripts\mp\utility\game::iscacprimaryweapon(var_00) || scripts\mp\utility\game::iscacsecondaryweapon(var_00)) && !isdefined(self.hitsthismag[var_00]))
+    self.hitsthismag[var_00] = weaponclipsize(var_00);
 }
 
 hitsthismag_update(var_00) {
@@ -1473,77 +1469,77 @@ func_9046(var_00) {
   self notify("updateMagShots_" + var_00);
   waittillframeend;
 
-  if (isdefined(self.hitsthismag[var_00]) && self.hitsthismag[var_00] == 0) {
-  var_01 = scripts\mp\utility\game::getweapongroup(var_00);
-  scripts\mp\missions::processchallenge(var_01);
-  self.hitsthismag[var_00] = weaponclipsize(var_00);
+  if(isdefined(self.hitsthismag[var_00]) && self.hitsthismag[var_00] == 0) {
+    var_01 = scripts\mp\utility\game::getweapongroup(var_00);
+    scripts\mp\missions::processchallenge(var_01);
+    self.hitsthismag[var_00] = weaponclipsize(var_00);
   }
 }
 
 func_3E1E(var_00, var_01) {
   self endon("disconnect");
 
-  if (scripts\mp\utility\game::isstrstart(var_00, "alt_")) {
-  var_02 = scripts\mp\utility\game::getweaponattachmentsbasenames(var_00);
+  if(scripts\mp\utility\game::isstrstart(var_00, "alt_")) {
+    var_02 = scripts\mp\utility\game::getweaponattachmentsbasenames(var_00);
 
-  if (scripts\engine\utility::array_contains(var_02, "shotgun") || scripts\engine\utility::array_contains(var_02, "gl"))
-  self.hits = 1;
-  else
-  var_00 = getsubstr(var_00, 4);
+    if(scripts\engine\utility::array_contains(var_02, "shotgun") || scripts\engine\utility::array_contains(var_02, "gl"))
+      self.hits = 1;
+    else
+      var_00 = getsubstr(var_00, 4);
   }
 
-  if (!weaponcanstoreaccuracystats(var_00))
-  return;
-
-  if (self meleebuttonpressed() && var_00 != "iw7_knife_mp")
-  return;
-
+  if(!weaponcanstoreaccuracystats(var_00)) {
+    return;
+  }
+  if(self meleebuttonpressed() && var_00 != "iw7_knife_mp") {
+    return;
+  }
   switch (weaponclass(var_00)) {
-  case "smg":
-  case "mg":
-  case "rifle":
-  case "sniper":
-  case "pistol":
-  self.hits++;
-  break;
-  case "spread":
-  self.hits = 1;
-  break;
-  default:
-  break;
+    case "smg":
+    case "mg":
+    case "rifle":
+    case "sniper":
+    case "pistol":
+      self.hits++;
+      break;
+    case "spread":
+      self.hits = 1;
+      break;
+    default:
+      break;
   }
 
-  if (isriotshield(var_00) || var_00 == "iw7_knife_mp") {
-  thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_00, self.hits, "hits");
-  self.hits = 0;
+  if(isriotshield(var_00) || var_00 == "iw7_knife_mp") {
+    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_00, self.hits, "hits");
+    self.hits = 0;
   }
 
   waittillframeend;
 
-  if (isdefined(self.hitsthismag[var_00]))
-  thread func_9046(var_00);
+  if(isdefined(self.hitsthismag[var_00]))
+    thread func_9046(var_00);
 
-  if (!isdefined(self.lasthittime[var_00]))
-  self.lasthittime[var_00] = 0;
+  if(!isdefined(self.lasthittime[var_00]))
+    self.lasthittime[var_00] = 0;
 
-  if (self.lasthittime[var_00] == gettime())
-  return;
-
+  if(self.lasthittime[var_00] == gettime()) {
+    return;
+  }
   self.lasthittime[var_00] = gettime();
 
-  if (!isdefined(self.consecutivehitsperweapon) || !isdefined(self.consecutivehitsperweapon[var_00]))
-  self.consecutivehitsperweapon[var_00] = 1;
+  if(!isdefined(self.consecutivehitsperweapon) || !isdefined(self.consecutivehitsperweapon[var_00]))
+    self.consecutivehitsperweapon[var_00] = 1;
   else
-  self.consecutivehitsperweapon[var_00]++;
+    self.consecutivehitsperweapon[var_00]++;
 
   var_03 = scripts\mp\persistence::statgetbuffered("totalShots");
   var_04 = scripts\mp\persistence::statgetbuffered("hits") + 1;
 
-  if (var_04 <= var_03) {
-  scripts\mp\persistence::func_10E55("hits", var_04);
-  scripts\mp\persistence::func_10E55("misses", int(var_03 - var_04));
-  var_05 = clamp(float(var_04) / float(var_03), 0.0, 1.0) * 10000.0;
-  scripts\mp\persistence::func_10E55("accuracy", int(var_05));
+  if(var_04 <= var_03) {
+    scripts\mp\persistence::func_10E55("hits", var_04);
+    scripts\mp\persistence::func_10E55("misses", int(var_03 - var_04));
+    var_05 = clamp(float(var_04) / float(var_03), 0.0, 1.0) * 10000.0;
+    scripts\mp\persistence::func_10E55("accuracy", int(var_05));
   }
 
   thread scripts\mp\missions::func_C5A8(var_00);
@@ -1551,11 +1547,11 @@ func_3E1E(var_00, var_01) {
   self.lastdamagetime = gettime();
   var_06 = scripts\mp\utility\game::getweapongroup(var_00);
 
-  if (var_06 == "weapon_lmg") {
-  if (!isdefined(self.shotslandedlmg))
-  self.shotslandedlmg = 1;
-  else
-  self.shotslandedlmg++;
+  if(var_06 == "weapon_lmg") {
+    if(!isdefined(self.shotslandedlmg))
+      self.shotslandedlmg = 1;
+    else
+      self.shotslandedlmg++;
   }
 }
 
@@ -1564,35 +1560,35 @@ func_24E2(var_00, var_01) {
 }
 
 friendlyfirecheck(var_00, var_01, var_02, var_03) {
-  if (!isdefined(var_00))
-  return 1;
+  if(!isdefined(var_00))
+    return 1;
 
-  if (!level.teambased)
-  return 1;
+  if(!level.teambased)
+    return 1;
 
   var_04 = level.friendlyfire;
 
-  if (isdefined(var_02))
-  var_04 = var_02;
+  if(isdefined(var_02))
+    var_04 = var_02;
 
-  if (var_04 != 0)
-  return 1;
+  if(var_04 != 0)
+    return 1;
 
-  if (var_01 == var_00 || isdefined(var_1.owner) && var_1.owner == var_00)
-  return 1;
+  if(var_01 == var_00 || isdefined(var_1.owner) && var_1.owner == var_00)
+    return 1;
 
   var_05 = undefined;
 
-  if (isdefined(var_1.owner))
-  var_05 = var_1.owner.team;
-  else if (isdefined(var_1.team))
-  var_05 = var_1.team;
+  if(isdefined(var_1.owner))
+    var_05 = var_1.owner.team;
+  else if(isdefined(var_1.team))
+    var_05 = var_1.team;
 
-  if (!isdefined(var_05))
-  return 1;
+  if(!isdefined(var_05))
+    return 1;
 
-  if (var_05 != var_0.team)
-  return 1;
+  if(var_05 != var_0.team)
+    return 1;
 
   return 0;
 }
@@ -1604,32 +1600,32 @@ func_13A1F() {
   self endon("disconnect");
   self endon("faux_spawn");
 
-  if (!isdefined(self.plantedlethalequip))
-  self.plantedlethalequip = [];
+  if(!isdefined(self.plantedlethalequip))
+    self.plantedlethalequip = [];
 
-  if (!isdefined(self.plantedtacticalequip))
-  self.plantedtacticalequip = [];
+  if(!isdefined(self.plantedtacticalequip))
+    self.plantedtacticalequip = [];
 
   deletedisparateplacedequipment();
   var_00 = scripts\mp\utility\game::getintproperty("scr_deleteexplosivesonspawn", 1) && (!scripts\mp\utility\game::_hasperk("specialty_rugged_eqp") || !checkequipforrugged());
 
-  if (var_00)
-  func_51CE();
+  if(var_00)
+    func_51CE();
 
   var_01 = self.plantedtacticalequip.size;
   var_02 = self.plantedlethalequip.size;
   var_03 = var_01 && var_02;
 
-  if (scripts\mp\utility\game::_hasperk("specialty_rugged_eqp") && var_03)
-  thread scripts\mp\perks\perkfunctions::feedbackruggedeqp(var_02, var_01);
+  if(scripts\mp\utility\game::_hasperk("specialty_rugged_eqp") && var_03)
+    thread scripts\mp\perks\perkfunctions::feedbackruggedeqp(var_02, var_01);
 }
 
 checkequipforrugged() {
   var_00 = scripts\engine\utility::array_combine(self.plantedtacticalequip, self.plantedlethalequip);
 
-  foreach (var_02 in var_00) {
-  if (isdefined(var_2.hasruggedeqp))
-  return 1;
+  foreach(var_02 in var_00) {
+    if(isdefined(var_2.hasruggedeqp))
+      return 1;
   }
 
   return 0;
@@ -1643,205 +1639,205 @@ watchgrenadeusage() {
   self endon("faux_spawn");
 
   for (;;)
-  watchgrenadethrows();
+    watchgrenadethrows();
 }
 
 watchgrenadethrows() {
   var_00 = scripts\mp\utility\game::func_1377B();
 
-  if (!isdefined(var_00))
-  return;
-
-  if (!isdefined(var_0.weapon_name))
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
+  if(!isdefined(var_0.weapon_name)) {
+    return;
+  }
   setweaponstat(var_0.weapon_name, 1, "shots");
   scripts\mp\gamelogic::sethasdonecombat(self, 1);
 
-  if (isdefined(level.func_2C46[var_0.weapon_name]))
-  var_00 thread createbombsquadmodel(level.func_2C46[var_0.weapon_name].model, level.func_2C46[var_0.weapon_name].tag, self);
+  if(isdefined(level.func_2C46[var_0.weapon_name]))
+    var_00 thread createbombsquadmodel(level.func_2C46[var_0.weapon_name].model, level.func_2C46[var_0.weapon_name].tag, self);
 
-  if (getweaponbasename(var_0.weapon_name) == "iw7_glprox_mp") {
-  var_01 = glprox_trygetweaponname(var_0.weapon_name);
+  if(getweaponbasename(var_0.weapon_name) == "iw7_glprox_mp") {
+    var_01 = glprox_trygetweaponname(var_0.weapon_name);
 
-  if (var_01 == "stickglprox")
-  semtexused(var_00);
+    if(var_01 == "stickglprox")
+      semtexused(var_00);
 
-  return;
+    return;
   }
 
-  if (isaxeweapon(var_0.weapon_name)) {
-  var_0.func_FF03 = self isinphase();
-  var_00 thread watchgrenadeaxepickup(self);
-  return;
+  if(isaxeweapon(var_0.weapon_name)) {
+    var_0.func_FF03 = self isinphase();
+    var_00 thread watchgrenadeaxepickup(self);
+    return;
   }
 
   switch (var_0.weapon_name) {
-  case "frag_grenade_mp":
-  if (var_0.ticks >= 1)
-  var_0.iscooked = 1;
+    case "frag_grenade_mp":
+      if(var_0.ticks >= 1)
+        var_0.iscooked = 1;
 
-  var_0.originalowner = self;
-  var_00 thread scripts\mp\shellshock::grenade_earthquake();
-  break;
-  case "cluster_grenade_mp":
-  var_0.clusterticks = var_0.ticks;
+      var_0.originalowner = self;
+      var_00 thread scripts\mp\shellshock::grenade_earthquake();
+      break;
+    case "cluster_grenade_mp":
+      var_0.clusterticks = var_0.ticks;
 
-  if (var_0.ticks >= 1)
-  var_0.iscooked = 1;
+      if(var_0.ticks >= 1)
+        var_0.iscooked = 1;
 
-  var_0.originalowner = self;
-  thread clustergrenadeused(var_00);
-  var_00 thread scripts\mp\shellshock::grenade_earthquake();
-  break;
-  case "wristrocket_mp":
-  if (var_0.ticks >= 1)
-  var_0.iscooked = 1;
+      var_0.originalowner = self;
+      thread clustergrenadeused(var_00);
+      var_00 thread scripts\mp\shellshock::grenade_earthquake();
+      break;
+    case "wristrocket_mp":
+      if(var_0.ticks >= 1)
+        var_0.iscooked = 1;
 
-  var_0.originalowner = self;
-  thread scripts\mp\equipment\wrist_rocket::wristrocketused(var_00);
-  var_00 thread scripts\mp\shellshock::grenade_earthquake(0.6);
-  break;
-  case "iw6_aliendlc22_mp":
-  var_00 thread scripts\mp\shellshock::grenade_earthquake();
-  var_0.originalowner = self;
-  break;
-  case "semtex_mp":
-  thread semtexused(var_00);
-  break;
-  case "cryo_mine_mp":
-  thread scripts\mp\equipment\cryo_mine::func_4ADA(var_00);
-  break;
-  case "c4_mp":
-  thread scripts\mp\equipment\c4::c4_used(var_00);
-  break;
-  case "proximity_explosive_mp":
-  thread func_DACD(var_00);
-  break;
-  case "flash_grenade_mp":
-  var_0.func_BFD5 = var_0.ticks;
+      var_0.originalowner = self;
+      thread scripts\mp\equipment\wrist_rocket::wristrocketused(var_00);
+      var_00 thread scripts\mp\shellshock::grenade_earthquake(0.6);
+      break;
+    case "iw6_aliendlc22_mp":
+      var_00 thread scripts\mp\shellshock::grenade_earthquake();
+      var_0.originalowner = self;
+      break;
+    case "semtex_mp":
+      thread semtexused(var_00);
+      break;
+    case "cryo_mine_mp":
+      thread scripts\mp\equipment\cryo_mine::func_4ADA(var_00);
+      break;
+    case "c4_mp":
+      thread scripts\mp\equipment\c4::c4_used(var_00);
+      break;
+    case "proximity_explosive_mp":
+      thread func_DACD(var_00);
+      break;
+    case "flash_grenade_mp":
+      var_0.func_BFD5 = var_0.ticks;
 
-  if (var_0.ticks >= 1)
-  var_0.iscooked = 1;
+      if(var_0.ticks >= 1)
+        var_0.iscooked = 1;
 
-  var_00 thread func_BFD3();
-  break;
-  case "throwingknifedisruptor_mp":
-  thread func_56E6(var_00);
-  break;
-  case "smoke_grenadejugg_mp":
-  case "smoke_grenade_mp":
-  var_00 thread func_1037B();
-  break;
-  case "gas_grenade_mp":
-  var_00 thread watchgasgrenadeexplode();
-  break;
-  case "concussion_grenade_mp":
-  thread scripts\mp\concussion::func_44EE(var_00);
-  break;
-  case "alientrophy_mp":
-  case "trophy_mp":
-  thread scripts\mp\trophy_system::func_12827(var_00);
-  break;
-  case "claymore_mp":
-  thread claymoreused(var_00);
-  break;
-  case "alienbetty_mp":
-  case "bouncingbetty_mp":
-  thread mineused(var_00, ::spawnmine);
-  break;
-  case "motion_sensor_mp":
-  thread mineused(var_00, ::func_108E7);
-  break;
-  case "mobile_radar_mp":
-  thread mineused(var_00, ::func_108E5);
-  break;
-  case "distortionfield_grenade_mp":
-  var_00 thread func_139F5();
-  break;
-  case "throwingknifejugg_mp":
-  case "throwingknifehack_mp":
-  case "throwingknifesiphon_mp":
-  case "throwingknifesmokewall_mp":
-  case "throwingknifeteleport_mp":
-  case "throwingknife_mp":
-  case "throwingknifec4_mp":
-  level thread throwingknifeused(self, var_00, var_0.weapon_name);
-  break;
-  case "sensor_grenade_mp":
-  break;
-  case "sonic_sensor_mp":
-  thread mineused(var_00, ::func_10910);
-  break;
-  case "proto_ricochet_device_mp":
-  thread scripts\mp\protoricochet::func_E4E9(var_00);
-  break;
-  case "proxy_bomb_mp":
-  thread func_DAD5(self, var_00);
-  break;
-  case "disc_marker_mp":
-  thread func_562B(self, var_00);
-  break;
-  case "adrenaline_mist_mp":
-  break;
-  case "case_bomb_mp":
-  thread func_3B0E(self, var_00);
-  break;
-  case "domeshield_mp":
-  thread scripts\mp\domeshield::func_5910(var_00);
-  break;
-  case "blackhole_grenade_mp":
-  thread scripts\mp\blackhole_grenade::blackholegrenadeused(var_00);
-  break;
-  case "portal_grenade_mp":
-  break;
-  case "copycat_grenade_mp":
-  break;
-  case "speed_strip_mp":
-  break;
-  case "shard_ball_mp":
-  if (scripts\mp\powerloot::func_D779(var_0.power, "passive_grenade_to_mine"))
-  thread mineused(var_00, ::func_1090D, scripts\mp\shardball::placementfailed);
-  else
-  thread scripts\mp\shardball::func_FC5B(var_00);
+      var_00 thread func_BFD3();
+      break;
+    case "throwingknifedisruptor_mp":
+      thread func_56E6(var_00);
+      break;
+    case "smoke_grenadejugg_mp":
+    case "smoke_grenade_mp":
+      var_00 thread func_1037B();
+      break;
+    case "gas_grenade_mp":
+      var_00 thread watchgasgrenadeexplode();
+      break;
+    case "concussion_grenade_mp":
+      thread scripts\mp\concussion::func_44EE(var_00);
+      break;
+    case "alientrophy_mp":
+    case "trophy_mp":
+      thread scripts\mp\trophy_system::func_12827(var_00);
+      break;
+    case "claymore_mp":
+      thread claymoreused(var_00);
+      break;
+    case "alienbetty_mp":
+    case "bouncingbetty_mp":
+      thread mineused(var_00, ::spawnmine);
+      break;
+    case "motion_sensor_mp":
+      thread mineused(var_00, ::func_108E7);
+      break;
+    case "mobile_radar_mp":
+      thread mineused(var_00, ::func_108E5);
+      break;
+    case "distortionfield_grenade_mp":
+      var_00 thread func_139F5();
+      break;
+    case "throwingknifejugg_mp":
+    case "throwingknifehack_mp":
+    case "throwingknifesiphon_mp":
+    case "throwingknifesmokewall_mp":
+    case "throwingknifeteleport_mp":
+    case "throwingknife_mp":
+    case "throwingknifec4_mp":
+      level thread throwingknifeused(self, var_00, var_0.weapon_name);
+      break;
+    case "sensor_grenade_mp":
+      break;
+    case "sonic_sensor_mp":
+      thread mineused(var_00, ::func_10910);
+      break;
+    case "proto_ricochet_device_mp":
+      thread scripts\mp\protoricochet::func_E4E9(var_00);
+      break;
+    case "proxy_bomb_mp":
+      thread func_DAD5(self, var_00);
+      break;
+    case "disc_marker_mp":
+      thread func_562B(self, var_00);
+      break;
+    case "adrenaline_mist_mp":
+      break;
+    case "case_bomb_mp":
+      thread func_3B0E(self, var_00);
+      break;
+    case "domeshield_mp":
+      thread scripts\mp\domeshield::func_5910(var_00);
+      break;
+    case "blackhole_grenade_mp":
+      thread scripts\mp\blackhole_grenade::blackholegrenadeused(var_00);
+      break;
+    case "portal_grenade_mp":
+      break;
+    case "copycat_grenade_mp":
+      break;
+    case "speed_strip_mp":
+      break;
+    case "shard_ball_mp":
+      if(scripts\mp\powerloot::func_D779(var_0.power, "passive_grenade_to_mine"))
+        thread mineused(var_00, ::func_1090D, scripts\mp\shardball::placementfailed);
+      else
+        thread scripts\mp\shardball::func_FC5B(var_00);
 
-  break;
-  case "splash_grenade_mp":
-  var_00 thread scripts\mp\shellshock::grenade_earthquake();
-  thread scripts\mp\splashgrenade::splashgrenadeused(var_00);
-  break;
-  case "forcepush_mp":
-  break;
-  case "portal_generator_mp":
-  break;
-  case "transponder_mp":
-  break;
-  case "throwingreaper_mp":
-  break;
-  case "pulse_grenade_mp":
-  thread scripts\mp\equipment\pulse_grenade::func_DAF5(var_00);
-  break;
-  case "ammo_box_mp":
-  break;
-  case "virus_grenade_mp":
-  break;
-  case "fear_grenade_mp":
-  thread mineused(var_00, ::func_10884);
-  break;
-  case "deployable_cover_mp":
-  break;
-  case "power_spider_grenade_mp":
-  thread scripts\mp\equipment\spider_grenade::spidergrenade_used(var_00);
-  break;
-  case "split_grenade_mp":
-  thread scripts\mp\equipment\split_grenade::func_10A54(var_00);
-  break;
-  case "trip_mine_mp":
-  thread scripts\mp\equipment\trip_mine::tripmine_used(var_00);
-  break;
-  case "power_exploding_drone_mp":
-  thread scripts\mp\equipment\exploding_drone::func_69D4(var_00);
-  break;
+      break;
+    case "splash_grenade_mp":
+      var_00 thread scripts\mp\shellshock::grenade_earthquake();
+      thread scripts\mp\splashgrenade::splashgrenadeused(var_00);
+      break;
+    case "forcepush_mp":
+      break;
+    case "portal_generator_mp":
+      break;
+    case "transponder_mp":
+      break;
+    case "throwingreaper_mp":
+      break;
+    case "pulse_grenade_mp":
+      thread scripts\mp\equipment\pulse_grenade::func_DAF5(var_00);
+      break;
+    case "ammo_box_mp":
+      break;
+    case "virus_grenade_mp":
+      break;
+    case "fear_grenade_mp":
+      thread mineused(var_00, ::func_10884);
+      break;
+    case "deployable_cover_mp":
+      break;
+    case "power_spider_grenade_mp":
+      thread scripts\mp\equipment\spider_grenade::spidergrenade_used(var_00);
+      break;
+    case "split_grenade_mp":
+      thread scripts\mp\equipment\split_grenade::func_10A54(var_00);
+      break;
+    case "trip_mine_mp":
+      thread scripts\mp\equipment\trip_mine::tripmine_used(var_00);
+      break;
+    case "power_exploding_drone_mp":
+      thread scripts\mp\equipment\exploding_drone::func_69D4(var_00);
+      break;
   }
 }
 
@@ -1855,8 +1851,8 @@ func_3B0E(var_00, var_01, var_02) {
   var_01 endon("death");
   var_01 waittill("missile_stuck");
 
-  if (!isdefined(var_1.origin))
-  return;
+  if(!isdefined(var_1.origin))
+    return;
 }
 
 func_3B0D(var_00, var_01) {
@@ -1865,9 +1861,9 @@ func_3B0D(var_00, var_01) {
   var_02 = var_00 _meth_8113();
   wait(randomfloatrange(0.5, 0.8));
 
-  if (!isdefined(var_02))
-  return;
-
+  if(!isdefined(var_02)) {
+    return;
+  }
   var_03 = var_2.origin;
   self playsound("frag_grenade_explode");
   earthquake(0.5, 1.5, var_03, 120);
@@ -1876,8 +1872,8 @@ func_3B0D(var_00, var_01) {
   wait 0.1;
   playfx(level._effect["corpse_pop"], var_03 + (0, 0, 12));
 
-  if (isdefined(var_02))
-  var_02 hide();
+  if(isdefined(var_02))
+    var_02 hide();
 }
 
 func_DAD5(var_00, var_01) {
@@ -1885,47 +1881,42 @@ func_DAD5(var_00, var_01) {
   var_01 endon("death");
   var_01 waittill("missile_stuck", var_02);
 
-  if (isdefined(var_02) && (isplayer(var_02) || isagent(var_02)))
-  var_01 detonate(var_00);
+  if(isdefined(var_02) && (isplayer(var_02) || isagent(var_02)))
+    var_01 detonate(var_00);
 }
 
 throwingknifeused(var_00, var_01, var_02) {
   var_01 makeunusable();
 
-  if (var_02 == "throwingknifehack_mp") {}
-  else if (var_02 == "throwingknifec4_mp")
-  var_01 thread recordthrowingknifetraveldist();
+  if(var_02 == "throwingknifehack_mp") {} else if(var_02 == "throwingknifec4_mp")
+    var_01 thread recordthrowingknifetraveldist();
 
   var_03 = undefined;
   var_04 = undefined;
 
-  if (var_02 == "throwingknifesmokewall_mp") {
-  var_01 func_1181E(var_00);
-  return;
-  }
-  else
-  var_01 waittill("missile_stuck", var_03, var_04);
+  if(var_02 == "throwingknifesmokewall_mp") {
+    var_01 func_1181E(var_00);
+    return;
+  } else
+    var_01 waittill("missile_stuck", var_03, var_04);
 
   var_05 = isdefined(var_04) && var_04 == "tag_flicker";
   var_06 = isdefined(var_04) && var_04 == "tag_weapon";
 
-  if (isdefined(var_03) && (isplayer(var_03) || isagent(var_03)) && var_05)
-  var_03 notify("shield_hit", var_01);
+  if(isdefined(var_03) && (isplayer(var_03) || isagent(var_03)) && var_05)
+    var_03 notify("shield_hit", var_01);
 
-  if (isdefined(var_03) && (isplayer(var_03) || isagent(var_03)) && !var_06 && !var_05) {
-  if (!scripts\mp\equipment\phase_shift::areentitiesinphase(var_03, var_01)) {
-  var_01 delete();
-  return;
-  }
-  else if (var_02 == "throwingknifeteleport_mp") {}
-  else if (var_02 == "throwingknifec4_mp")
-  throwingknifec4detonate(var_01, var_03, var_00);
-  else if (var_02 == "throwingknifesiphon_mp") {
-  scripts\mp\equipment\siphon_knife::func_1181D(var_01, var_03, var_00);
-  return;
-  }
-  else if (var_02 == "throwingknifehack_mp")
-  return;
+  if(isdefined(var_03) && (isplayer(var_03) || isagent(var_03)) && !var_06 && !var_05) {
+    if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_03, var_01)) {
+      var_01 delete();
+      return;
+    } else if(var_02 == "throwingknifeteleport_mp") {} else if(var_02 == "throwingknifec4_mp")
+      throwingknifec4detonate(var_01, var_03, var_00);
+    else if(var_02 == "throwingknifesiphon_mp") {
+      scripts\mp\equipment\siphon_knife::func_1181D(var_01, var_03, var_00);
+      return;
+    } else if(var_02 == "throwingknifehack_mp")
+      return;
   }
 
   thread func_11825(var_00, var_01);
@@ -1939,23 +1930,23 @@ throwingknifeused(var_00, var_01, var_02) {
   var_01 thread watchgrenadedeath();
 
   for (;;) {
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
 
-  if (!isdefined(var_07))
-  return;
+    if(!isdefined(var_07)) {
+      return;
+    }
+    var_07 waittill("trigger", var_08);
 
-  var_07 waittill("trigger", var_08);
-
-  if (!isplayer(var_08) || !scripts\mp\utility\game::isreallyalive(var_08))
-  continue;
-
-  if (!var_08 hasweapon(var_02))
-  continue;
-
-  if (throwingknifeused_trygiveknife(var_08, var_1.power)) {
-  var_01 delete();
-  break;
-  }
+    if(!isplayer(var_08) || !scripts\mp\utility\game::isreallyalive(var_08)) {
+      continue;
+    }
+    if(!var_08 hasweapon(var_02)) {
+      continue;
+    }
+    if(throwingknifeused_trygiveknife(var_08, var_1.power)) {
+      var_01 delete();
+      break;
+    }
   }
 }
 
@@ -1966,17 +1957,18 @@ recordthrowingknifetraveldist() {
   var_00 = self.origin;
 
   for (;;) {
-  var_01 = scripts\engine\utility::waittill_any_timeout(0.15, "death", "missile_stuck");
+    var_01 = scripts\engine\utility::waittill_any_timeout(0.15, "death", "missile_stuck");
 
-  if (!isdefined(self))
-  break;
+    if(!isdefined(self)) {
+      break;
+    }
+    var_02 = distance(var_00, self.origin);
+    self.disttravelled = self.disttravelled + var_02;
+    var_00 = self.origin;
 
-  var_02 = distance(var_00, self.origin);
-  self.disttravelled = self.disttravelled + var_02;
-  var_00 = self.origin;
-
-  if (var_01 != "timeout")
-  break;
+    if(var_01 != "timeout") {
+      break;
+    }
   }
 }
 
@@ -1987,8 +1979,8 @@ func_11825(var_00, var_01) {
 }
 
 throwingknifeused_trygiveknife(var_00, var_01) {
-  if (var_00 scripts\mp\powers::func_D734(var_01) == var_00 scripts\mp\powers::func_D736(var_01))
-  return 0;
+  if(var_00 scripts\mp\powers::func_D734(var_01) == var_00 scripts\mp\powers::func_D736(var_01))
+    return 0;
 
   var_00 scripts\mp\powers::func_D74C(var_01);
   var_00 scripts\mp\hud_message::showmiscmessage("throwingknife");
@@ -1998,23 +1990,23 @@ throwingknifeused_trygiveknife(var_00, var_01) {
 throwingknife_detachknivesfromcorpse(var_00) {
   var_01 = var_00 getlinkedchildren();
 
-  foreach (var_03 in var_01) {
-  if (!isdefined(var_03))
-  continue;
+  foreach(var_03 in var_01) {
+    if(!isdefined(var_03)) {
+      continue;
+    }
+    var_04 = var_3.weapon_name;
 
-  var_04 = var_3.weapon_name;
+    if(isdefined(var_04) && func_9FA9(var_04)) {
+      var_03 unlink();
+      var_05 = throwingknife_getdudknifeweapon(var_04);
+      var_03 = var_3.owner scripts\mp\utility\game::_launchgrenade(var_05, var_3.origin, (0, 0, 0), 100, 1, var_03);
 
-  if (isdefined(var_04) && func_9FA9(var_04)) {
-  var_03 unlink();
-  var_05 = throwingknife_getdudknifeweapon(var_04);
-  var_03 = var_3.owner scripts\mp\utility\game::_launchgrenade(var_05, var_3.origin, (0, 0, 0), 100, 1, var_03);
+      if(isdefined(var_3.owner))
+        var_03 setentityowner(var_3.owner);
 
-  if (isdefined(var_3.owner))
-  var_03 setentityowner(var_3.owner);
-
-  thread throwingknife_triggerlinkto(var_03);
-  var_03 _meth_85AE();
-  }
+      thread throwingknife_triggerlinkto(var_03);
+      var_03 _meth_85AE();
+    }
   }
 }
 
@@ -2022,7 +2014,7 @@ throwingknife_triggerlinkto(var_00) {
   var_00 endon("death");
 
   while (!isdefined(var_0.knife_trigger))
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
 
   var_01 = var_0.knife_trigger;
   var_01 endon("death");
@@ -2038,8 +2030,8 @@ throwingknife_triggerlinktointernal(var_00, var_01) {
   var_01 endon("missile_stuck");
 
   for (;;) {
-  var_0.origin = var_1.origin;
-  scripts\engine\utility::waitframe();
+    var_0.origin = var_1.origin;
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -2047,14 +2039,14 @@ throwingknife_getdudknifeweapon(var_00) {
   var_01 = undefined;
 
   switch (var_00) {
-  case "throwingknifec4_mp":
-  var_01 = "throwingknifec4dud_mp";
-  break;
-  case "throwingknifeteleport_mp":
-  var_01 = "throwingknifeteleportdud_mp";
-  break;
-  default:
-  var_01 = "throwingknifec4dud_mp";
+    case "throwingknifec4_mp":
+      var_01 = "throwingknifec4dud_mp";
+      break;
+    case "throwingknifeteleport_mp":
+      var_01 = "throwingknifeteleportdud_mp";
+      break;
+    default:
+      var_01 = "throwingknifec4dud_mp";
   }
 
   return var_01;
@@ -2086,27 +2078,27 @@ func_F235(var_00, var_01, var_02) {
   thread func_F233(var_00, var_01);
 
   while (isdefined(var_01)) {
-  foreach (var_06 in level.characters) {
-  if (!isdefined(var_06))
-  continue;
+    foreach(var_06 in level.characters) {
+      if(!isdefined(var_06)) {
+        continue;
+      }
+      if(!var_00 scripts\mp\utility\game::isenemy(var_06)) {
+        continue;
+      }
+      if(var_06 scripts\mp\utility\game::_hasperk("specialty_incog")) {
+        continue;
+      }
+      if(isdefined(var_3.func_C78B[var_06 getentitynumber()])) {
+        continue;
+      }
+      if(distancesquared(var_1.origin, var_6.origin) > 90000) {
+        continue;
+      }
+      var_3.func_C78B[var_06 getentitynumber()] = var_06;
+      thread func_F234(var_00, var_06, var_03);
+    }
 
-  if (!var_00 scripts\mp\utility\game::isenemy(var_06))
-  continue;
-
-  if (var_06 scripts\mp\utility\game::_hasperk("specialty_incog"))
-  continue;
-
-  if (isdefined(var_3.func_C78B[var_06 getentitynumber()]))
-  continue;
-
-  if (distancesquared(var_1.origin, var_6.origin) > 90000)
-  continue;
-
-  var_3.func_C78B[var_06 getentitynumber()] = var_06;
-  thread func_F234(var_00, var_06, var_03);
-  }
-
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -2120,32 +2112,32 @@ func_10413(var_00, var_01, var_02) {
   thread func_F233(var_00, var_01);
 
   while (isdefined(var_01)) {
-  foreach (var_06 in level.characters) {
-  if (!isdefined(var_06))
-  continue;
+    foreach(var_06 in level.characters) {
+      if(!isdefined(var_06)) {
+        continue;
+      }
+      if(!var_00 scripts\mp\utility\game::isenemy(var_06)) {
+        continue;
+      }
+      if(var_06 scripts\mp\utility\game::_hasperk("specialty_quieter")) {
+        continue;
+      }
+      if(isdefined(var_3.func_C78B[var_06 getentitynumber()])) {
+        continue;
+      }
+      if(distancesquared(var_1.origin, var_6.origin) > 90000) {
+        continue;
+      }
+      var_07 = scripts\engine\utility::add_to_array(level.players, var_01);
 
-  if (!var_00 scripts\mp\utility\game::isenemy(var_06))
-  continue;
+      if(!scripts\engine\trace::ray_trace_passed(var_1.origin, var_6.origin + (0, 0, 32), var_07)) {
+        continue;
+      }
+      var_3.func_C78B[var_06 getentitynumber()] = var_06;
+      thread func_F234(var_00, var_06, var_03);
+    }
 
-  if (var_06 scripts\mp\utility\game::_hasperk("specialty_quieter"))
-  continue;
-
-  if (isdefined(var_3.func_C78B[var_06 getentitynumber()]))
-  continue;
-
-  if (distancesquared(var_1.origin, var_6.origin) > 90000)
-  continue;
-
-  var_07 = scripts\engine\utility::add_to_array(level.players, var_01);
-
-  if (!scripts\engine\trace::ray_trace_passed(var_1.origin, var_6.origin + (0, 0, 32), var_07))
-  continue;
-
-  var_3.func_C78B[var_06 getentitynumber()] = var_06;
-  thread func_F234(var_00, var_06, var_03);
-  }
-
-  wait 2.0;
+    wait 2.0;
   }
 }
 
@@ -2156,10 +2148,10 @@ func_F233(var_00, var_01) {
   scripts\engine\utility::waitframe();
   scripts\mp\utility\game::outlineenableforplayer(var_01, "cyan", var_00, 0, 0, "equipment");
 
-  if (var_1.weapon_name == "sonic_sensor_mp")
-  playfxontag(scripts\engine\utility::getfx("vfx_sonic_sensor_pulse"), var_01, "tag_origin");
+  if(var_1.weapon_name == "sonic_sensor_mp")
+    playfxontag(scripts\engine\utility::getfx("vfx_sonic_sensor_pulse"), var_01, "tag_origin");
   else
-  playfxontagforclients(scripts\engine\utility::getfx("vfx_sensor_grenade_ping"), var_01, "tag_origin", var_00);
+    playfxontagforclients(scripts\engine\utility::getfx("vfx_sensor_grenade_ping"), var_01, "tag_origin", var_00);
 }
 
 func_F234(var_00, var_01, var_02) {
@@ -2170,8 +2162,8 @@ func_F234(var_00, var_01, var_02) {
   var_04 = scripts\mp\utility\game::outlineenableforplayer(var_01, "orange", var_00, 0, 0, "equipment");
   wait 0.5;
 
-  if (isdefined(var_01) && isdefined(var_04))
-  scripts\mp\utility\game::outlinedisable(var_04, var_01);
+  if(isdefined(var_01) && isdefined(var_04))
+    scripts\mp\utility\game::outlinedisable(var_04, var_01);
 
   var_2.func_C78B[var_03] = undefined;
 }
@@ -2179,11 +2171,11 @@ func_F234(var_00, var_01, var_02) {
 watchgrenadedeath() {
   self waittill("death");
 
-  if (isdefined(self.knife_trigger))
-  self.knife_trigger delete();
+  if(isdefined(self.knife_trigger))
+    self.knife_trigger delete();
 
-  if (isdefined(self.useobj_trigger))
-  self.useobj_trigger delete();
+  if(isdefined(self.useobj_trigger))
+    self.useobj_trigger delete();
 }
 
 func_1037B() {
@@ -2192,8 +2184,8 @@ func_1037B() {
   self waittill("explode", var_00);
   thread func_10377(var_00);
 
-  if (isdefined(self.owner))
-  self.owner thread monitorsmokeactive();
+  if(isdefined(self.owner))
+    self.owner thread monitorsmokeactive();
 }
 
 func_10377(var_00) {
@@ -2209,9 +2201,9 @@ smokegrenadegiveblindeye(var_00) {
   var_1.blindeyerecipients = [];
   smokegrenademonitorblindeyerecipients(var_01, var_00);
 
-  foreach (var_03 in var_1.blindeyerecipients) {
-  if (isdefined(var_03) && scripts\mp\utility\game::isreallyalive(var_03))
-  var_03 scripts\mp\utility\game::removeperk("specialty_blindeye");
+  foreach(var_03 in var_1.blindeyerecipients) {
+    if(isdefined(var_03) && scripts\mp\utility\game::isreallyalive(var_03))
+      var_03 scripts\mp\utility\game::removeperk("specialty_blindeye");
   }
 }
 
@@ -2221,40 +2213,40 @@ smokegrenademonitorblindeyerecipients(var_00, var_01) {
   var_03 = [];
 
   while (gettime() < var_02) {
-  var_03 = scripts\mp\utility\game::clearscrambler(var_01, 200);
+    var_03 = scripts\mp\utility\game::clearscrambler(var_01, 200);
 
-  foreach (var_07, var_05 in var_0.blindeyerecipients) {
-  if (!isdefined(var_05)) {
-  var_0.blindeyerecipients[var_07] = undefined;
-  continue;
-  }
+    foreach(var_07, var_05 in var_0.blindeyerecipients) {
+      if(!isdefined(var_05)) {
+        var_0.blindeyerecipients[var_07] = undefined;
+        continue;
+      }
 
-  var_06 = scripts\engine\utility::array_find(var_03, var_05);
+      var_06 = scripts\engine\utility::array_find(var_03, var_05);
 
-  if (!isdefined(var_06) || !scripts\mp\utility\game::isreallyalive(var_05) || scripts\mp\equipment\phase_shift::isentityphaseshifted(var_05)) {
-  var_05 scripts\mp\utility\game::removeperk("specialty_blindeye");
-  var_0.blindeyerecipients[var_07] = undefined;
-  }
+      if(!isdefined(var_06) || !scripts\mp\utility\game::isreallyalive(var_05) || scripts\mp\equipment\phase_shift::isentityphaseshifted(var_05)) {
+        var_05 scripts\mp\utility\game::removeperk("specialty_blindeye");
+        var_0.blindeyerecipients[var_07] = undefined;
+      }
 
-  if (isdefined(var_06))
-  var_3[var_06] = undefined;
-  }
+      if(isdefined(var_06))
+        var_3[var_06] = undefined;
+    }
 
-  foreach (var_09 in var_03) {
-  if (!isdefined(var_09))
-  continue;
+    foreach(var_09 in var_03) {
+      if(!isdefined(var_09)) {
+        continue;
+      }
+      if(isdefined(var_0.blindeyerecipients[var_09 getentitynumber()])) {
+        continue;
+      }
+      if(!scripts\mp\utility\game::isreallyalive(var_09) || scripts\mp\equipment\phase_shift::isentityphaseshifted(var_09) || scripts\mp\utility\game::func_9F72(var_09)) {
+        continue;
+      }
+      var_09 scripts\mp\utility\game::giveperk("specialty_blindeye");
+      var_0.blindeyerecipients[var_09 getentitynumber()] = var_09;
+    }
 
-  if (isdefined(var_0.blindeyerecipients[var_09 getentitynumber()]))
-  continue;
-
-  if (!scripts\mp\utility\game::isreallyalive(var_09) || scripts\mp\equipment\phase_shift::isentityphaseshifted(var_09) || scripts\mp\utility\game::func_9F72(var_09))
-  continue;
-
-  var_09 scripts\mp\utility\game::giveperk("specialty_blindeye");
-  var_0.blindeyerecipients[var_09 getentitynumber()] = var_09;
-  }
-
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -2289,10 +2281,10 @@ ongasgrenadeimpact(var_00, var_01) {
   var_06 linkto(var_02);
 
   for (var_2.killcament = var_06; var_05 > 0.0; var_05 = var_05 - 0.2) {
-  foreach (var_08 in level.characters)
-  var_08 applygaseffect(var_00, var_01, var_02, var_02, 4);
+    foreach(var_08 in level.characters)
+    var_08 applygaseffect(var_00, var_01, var_02, var_02, 4);
 
-  wait 0.2;
+    wait 0.2;
   }
 
   var_04 delete();
@@ -2302,73 +2294,73 @@ ongasgrenadeimpact(var_00, var_01) {
 }
 
 applygaseffect(var_00, var_01, var_02, var_03, var_04) {
-  if (isalive(self) && self istouching(var_02)) {
-  if (var_00 scripts\mp\utility\game::isenemy(self) || self == var_00)
-  var_03 radiusdamage(self.origin, 1, var_04, var_04, var_00, "MOD_RIFLE_BULLET", "gas_grenade_mp");
+  if(isalive(self) && self istouching(var_02)) {
+    if(var_00 scripts\mp\utility\game::isenemy(self) || self == var_00)
+      var_03 radiusdamage(self.origin, 1, var_04, var_04, var_00, "MOD_RIFLE_BULLET", "gas_grenade_mp");
   }
 }
 
 func_AF2B(var_00) {
   var_01 = [];
 
-  if (level.teambased) {
-  if (isdefined(var_00) && var_00 == 1) {
-  foreach (var_03 in level.characters) {
-  if (isdefined(var_03) && isalive(var_03) && var_3.team != self.team)
-  var_1[var_1.size] = var_03;
-  }
-  }
+  if(level.teambased) {
+    if(isdefined(var_00) && var_00 == 1) {
+      foreach(var_03 in level.characters) {
+        if(isdefined(var_03) && isalive(var_03) && var_3.team != self.team)
+          var_1[var_1.size] = var_03;
+      }
+    }
 
-  if (isdefined(level.func_1655)) {
-  foreach (var_06 in level.func_1655) {
-  if (isdefined(var_6.func_18DE) && var_6.team != self.team)
-  var_1[var_1.size] = var_06;
-  }
-  }
+    if(isdefined(level.func_1655)) {
+      foreach(var_06 in level.func_1655) {
+        if(isdefined(var_6.func_18DE) && var_6.team != self.team)
+          var_1[var_1.size] = var_06;
+      }
+    }
 
-  if (isdefined(level.supertrophy) && isdefined(level.supertrophy.trophies)) {
-  foreach (var_09 in level.supertrophy.trophies) {
-  if (isdefined(var_09) && isdefined(var_9.team) && var_9.team != self.team)
-  var_1[var_1.size] = var_09;
-  }
-  }
+    if(isdefined(level.supertrophy) && isdefined(level.supertrophy.trophies)) {
+      foreach(var_09 in level.supertrophy.trophies) {
+        if(isdefined(var_09) && isdefined(var_9.team) && var_9.team != self.team)
+          var_1[var_1.size] = var_09;
+      }
+    }
 
-  if (isdefined(level.microturrets)) {
-  foreach (var_12 in level.microturrets) {
-  if (isdefined(var_12) && isdefined(var_12.team) && var_12.team != self.team)
-  var_1[var_1.size] = var_12;
-  }
-  }
+    if(isdefined(level.microturrets)) {
+      foreach(var_12 in level.microturrets) {
+        if(isdefined(var_12) && isdefined(var_12.team) && var_12.team != self.team)
+          var_1[var_1.size] = var_12;
+      }
+    }
   } else {
-  if (isdefined(var_00) && var_00 == 1) {
-  foreach (var_03 in level.characters) {
-  if (!isdefined(var_03) || !isalive(var_03))
-  continue;
+    if(isdefined(var_00) && var_00 == 1) {
+      foreach(var_03 in level.characters) {
+        if(!isdefined(var_03) || !isalive(var_03)) {
+          continue;
+        }
+        var_1[var_1.size] = var_03;
+      }
+    }
 
-  var_1[var_1.size] = var_03;
-  }
-  }
+    if(isdefined(level.func_1655)) {
+      foreach(var_06 in level.func_1655) {
+        if(isdefined(var_6.func_18DE) && isdefined(var_6.owner) && var_6.owner != self)
+          var_1[var_1.size] = var_06;
+      }
+    }
 
-  if (isdefined(level.func_1655)) {
-  foreach (var_06 in level.func_1655) {
-  if (isdefined(var_6.func_18DE) && isdefined(var_6.owner) && var_6.owner != self)
-  var_1[var_1.size] = var_06;
-  }
-  }
+    if(isdefined(level.supertrophy) && isdefined(level.supertrophy.trophies)) {
+      foreach(var_09 in level.supertrophy.trophies) {
+        if(isdefined(var_09) && isdefined(var_9.owner) && var_9.owner != self)
+          var_1[var_1.size] = var_09;
+      }
+    }
 
-  if (isdefined(level.supertrophy) && isdefined(level.supertrophy.trophies)) {
-  foreach (var_09 in level.supertrophy.trophies) {
-  if (isdefined(var_09) && isdefined(var_9.owner) && var_9.owner != self)
-  var_1[var_1.size] = var_09;
-  }
-  }
-
-  if (isdefined(level.microturrets)) {
-  foreach (var_12 in level.microturrets) {
-  if (isdefined(var_12) && isdefined(var_12.owner) && var_12.owner != self)
-  var_1[var_1.size] = var_12;
-  }
-  }
+    if(isdefined(level.microturrets)) {
+      foreach(var_12 in level.microturrets) {
+        if(isdefined(var_12) && isdefined(var_12.owner) && var_12.owner != self)
+          var_1[var_1.size] = var_12;
+      }
+    }
   }
 
   return var_01;
@@ -2378,50 +2370,50 @@ watchmissileusage() {
   self endon("disconnect");
 
   for (;;) {
-  var_00 = scripts\mp\utility\game::waittill_missile_fire();
+    var_00 = scripts\mp\utility\game::waittill_missile_fire();
 
-  if (!isdefined(var_00))
-  continue;
+    if(!isdefined(var_00)) {
+      continue;
+    }
+    switch (var_0.weapon_name) {
+      case "stinger_mp":
+      case "iw7_lockon_mp":
+        level notify("stinger_fired", self, var_00, self.func_10FAA);
+        break;
+      case "javelin_mp":
+      case "lasedStrike_missile_mp":
+      case "remote_mortar_missile_mp":
+        level notify("stinger_fired", self, var_00, self.func_A445);
+        break;
+      case "iw7_blackholegun_mp":
+        thread scripts\mp\supers\super_blackholegun::missilespawned(var_0.weapon_name, var_00);
+        break;
+      case "iw7_unsalmg_mp":
+      case "iw7_unsalmg_mpl":
+        var_0.weapon_name = "power_smoke_drone_mp";
+        thread scripts\mp\equipment\exploding_drone::func_69D4(var_00, 1);
+        break;
+      case "iw7_tacburst_mpl":
+      case "iw7_tacburst_mp":
+        var_00 thread scripts\mp\emp_debuff_mp::func_13A12();
+        break;
+      default:
+        break;
+    }
 
-  switch (var_0.weapon_name) {
-  case "stinger_mp":
-  case "iw7_lockon_mp":
-  level notify("stinger_fired", self, var_00, self.func_10FAA);
-  break;
-  case "javelin_mp":
-  case "lasedStrike_missile_mp":
-  case "remote_mortar_missile_mp":
-  level notify("stinger_fired", self, var_00, self.func_A445);
-  break;
-  case "iw7_blackholegun_mp":
-  thread scripts\mp\supers\super_blackholegun::missilespawned(var_0.weapon_name, var_00);
-  break;
-  case "iw7_unsalmg_mp":
-  case "iw7_unsalmg_mpl":
-  var_0.weapon_name = "power_smoke_drone_mp";
-  thread scripts\mp\equipment\exploding_drone::func_69D4(var_00, 1);
-  break;
-  case "iw7_tacburst_mpl":
-  case "iw7_tacburst_mp":
-  var_00 thread scripts\mp\emp_debuff_mp::func_13A12();
-  break;
-  default:
-  break;
-  }
+    if(isplayer(self))
+      var_0.adsfire = scripts\mp\utility\game::func_9EE8();
 
-  if (isplayer(self))
-  var_0.adsfire = scripts\mp\utility\game::func_9EE8();
+    if(isexplosivemissile(var_0.weapon_name)) {
+      var_01 = 1.0;
 
-  if (isexplosivemissile(var_0.weapon_name)) {
-  var_01 = 1.0;
+      if(func_9F5C(var_0.weapon_name))
+        var_01 = 0.65;
 
-  if (func_9F5C(var_0.weapon_name))
-  var_01 = 0.65;
+      var_00 thread scripts\mp\shellshock::grenade_earthquake(var_01);
+    }
 
-  var_00 thread scripts\mp\shellshock::grenade_earthquake(var_01);
-  }
-
-  var_0.func_FF03 = self isinphase();
+    var_0.func_FF03 = self isinphase();
   }
 }
 
@@ -2430,11 +2422,11 @@ func_9F5C(var_00) {
   var_01 = 0;
 
   switch (var_00) {
-  case "iw7_glprox_mp":
-  var_01 = 1;
-  break;
-  default:
-  break;
+    case "iw7_glprox_mp":
+      var_01 = 1;
+      break;
+    default:
+      break;
   }
 
   return var_01;
@@ -2444,9 +2436,9 @@ isexplosivemissile(var_00) {
   var_00 = getweaponbasename(var_00);
 
   switch (var_00) {
-  case "iw7_cheytac_mpr_projectile":
-  case "wristrocket_proj_mp":
-  return 0;
+    case "iw7_cheytac_mpr_projectile":
+    case "wristrocket_proj_mp":
+      return 0;
   }
 
   return 1;
@@ -2458,8 +2450,8 @@ func_13B38() {
   self endon("faux_spawn");
 
   for (;;) {
-  self waittill("sentry_placement_finished", var_00);
-  thread scripts\mp\utility\game::setaltsceneobj(var_00, "tag_flash", 65);
+    self waittill("sentry_placement_finished", var_00);
+    thread scripts\mp\utility\game::setaltsceneobj(var_00, "tag_flash", 65);
   }
 }
 
@@ -2470,14 +2462,14 @@ func_42D8(var_00) {
 }
 
 clustergrenadeused(var_00) {
-  if (isalive(self)) {
-  var_01 = anglestoforward(self _meth_857C()) * 940;
-  var_02 = (0, 0, 120);
-  var_03 = var_01 + var_02;
+  if(isalive(self)) {
+    var_01 = anglestoforward(self _meth_857C()) * 940;
+    var_02 = (0, 0, 120);
+    var_03 = var_01 + var_02;
   } else {
-  var_01 = anglestoforward(self _meth_857C()) * 50;
-  var_02 = (0, 0, 10);
-  var_03 = var_01 + var_02;
+    var_01 = anglestoforward(self _meth_857C()) * 50;
+    var_02 = (0, 0, 10);
+    var_03 = var_01 + var_02;
   }
 
   var_00 = scripts\mp\utility\game::_launchgrenade("cluster_grenade_mp", var_0.origin, var_03, 100, 1, var_00);
@@ -2502,16 +2494,16 @@ clustergrenadeexplode(var_00) {
   var_01 setmodel("prop_mp_cluster_grenade_scr");
   func_42DB(var_00, var_01);
 
-  if (isdefined(var_00))
-  var_00 forcehidegrenadehudwarning(1);
+  if(isdefined(var_00))
+    var_00 forcehidegrenadehudwarning(1);
 
   wait 2;
 
-  if (isdefined(var_01))
-  var_01 delete();
+  if(isdefined(var_01))
+    var_01 delete();
 
-  if (isdefined(var_00))
-  var_00 delete();
+  if(isdefined(var_00))
+    var_00 delete();
 }
 
 func_42DB(var_00, var_01) {
@@ -2524,8 +2516,8 @@ func_42DB(var_00, var_01) {
   var_06 = var_05 + (0, 0, -5);
   var_07 = physics_raycast(var_05, var_06, var_02, undefined, 0, "physicsquery_closest");
 
-  if (isdefined(var_07) && var_7.size > 0)
-  var_04 = 1;
+  if(isdefined(var_07) && var_7.size > 0)
+    var_04 = 1;
 
   var_08 = scripts\engine\utility::ter_op(var_04, (0, 0, 32), (0, 0, 2));
   var_09 = var_03 + var_08;
@@ -2533,28 +2525,28 @@ func_42DB(var_00, var_01) {
   var_02 = scripts\engine\trace::create_contents(0, 1, 1, 0, 1, 1, 0);
 
   for (var_11 = 0; var_11 < 4; var_11++) {
-  var_12 = "explode" + (var_11 + 1);
-  var_00 setscriptablepartstate(var_12, "active", 0);
-  var_13 = scripts\engine\utility::ter_op(var_11 < 4, 90 * var_11 + var_10, randomint(360));
-  var_14 = scripts\engine\utility::ter_op(var_04, 110, 90);
-  var_15 = scripts\engine\utility::ter_op(var_04, 12, 45);
-  var_16 = var_14 + randomint(var_15 * 2) - var_15;
-  var_17 = randomint(60) + 30;
-  var_18 = cos(var_13) * sin(var_16);
-  var_19 = sin(var_13) * sin(var_16);
-  var_20 = cos(var_16);
-  var_21 = (var_18, var_19, var_20) * var_17;
-  var_05 = var_09;
-  var_06 = var_09 + var_21;
-  var_07 = physics_raycast(var_05, var_06, var_02, undefined, 0, "physicsquery_closest");
+    var_12 = "explode" + (var_11 + 1);
+    var_00 setscriptablepartstate(var_12, "active", 0);
+    var_13 = scripts\engine\utility::ter_op(var_11 < 4, 90 * var_11 + var_10, randomint(360));
+    var_14 = scripts\engine\utility::ter_op(var_04, 110, 90);
+    var_15 = scripts\engine\utility::ter_op(var_04, 12, 45);
+    var_16 = var_14 + randomint(var_15 * 2) - var_15;
+    var_17 = randomint(60) + 30;
+    var_18 = cos(var_13) * sin(var_16);
+    var_19 = sin(var_13) * sin(var_16);
+    var_20 = cos(var_16);
+    var_21 = (var_18, var_19, var_20) * var_17;
+    var_05 = var_09;
+    var_06 = var_09 + var_21;
+    var_07 = physics_raycast(var_05, var_06, var_02, undefined, 0, "physicsquery_closest");
 
-  if (isdefined(var_07) && var_7.size > 0)
-  var_06 = var_7[0]["position"];
+    if(isdefined(var_07) && var_7.size > 0)
+      var_06 = var_7[0]["position"];
 
-  var_01 dontinterpolate();
-  var_1.origin = var_06;
-  var_01 setscriptablepartstate(var_12, "active", 0);
-  wait 0.175;
+    var_01 dontinterpolate();
+    var_1.origin = var_06;
+    var_01 setscriptablepartstate(var_12, "active", 0);
+    wait 0.175;
   }
 }
 
@@ -2565,22 +2557,21 @@ func_4107() {
 }
 
 func_10D85(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
-  if (!isdefined(var_04))
-  return;
-
-  if (var_06) {
-  var_11 = spawnfx(var_07, self.origin);
-  playloopsound(self.origin, var_08);
-  triggerfx(var_11);
-  wait 2;
-  var_11 delete();
+  if(!isdefined(var_04)) {
+    return;
   }
-  else
-  wait(var_00);
+  if(var_06) {
+    var_11 = spawnfx(var_07, self.origin);
+    playloopsound(self.origin, var_08);
+    triggerfx(var_11);
+    wait 2;
+    var_11 delete();
+  } else
+    wait(var_00);
 
-  if (!isdefined(var_04))
-  return;
-
+  if(!isdefined(var_04)) {
+    return;
+  }
   radiusdamage(self.origin + (0, 0, 50), var_01, var_02, var_03, var_04, "MOD_EXPLOSIVE", var_10);
   playfx(var_05, self.origin + (0, 0, 50));
   playloopsound(self.origin, var_09);
@@ -2596,23 +2587,23 @@ func_BFD3() {
 }
 
 func_BFD2(var_00, var_01, var_02) {
-  if (var_02 >= 5 || func_CBED(var_01, var_02)) {
-  playloopsound(var_00, "emp_grenade_explode_default");
-  var_03 = getempdamageents(var_00, 512, 0, undefined);
+  if(var_02 >= 5 || func_CBED(var_01, var_02)) {
+    playloopsound(var_00, "emp_grenade_explode_default");
+    var_03 = getempdamageents(var_00, 512, 0, undefined);
 
-  foreach (var_05 in var_03) {
-  if (isdefined(var_5.owner) && !friendlyfirecheck(var_01, var_5.owner))
-  continue;
-
-  var_05 notify("emp_damage", self.owner, 8.0);
-  }
+    foreach(var_05 in var_03) {
+      if(isdefined(var_5.owner) && !friendlyfirecheck(var_01, var_5.owner)) {
+        continue;
+      }
+      var_05 notify("emp_damage", self.owner, 8.0);
+    }
   }
 }
 
 func_CBED(var_00, var_01) {
-  if (var_00 scripts\mp\utility\game::_hasperk("specialty_pitcher")) {
-  if (var_01 >= 4)
-  return 1;
+  if(var_00 scripts\mp\utility\game::_hasperk("specialty_pitcher")) {
+    if(var_01 >= 4)
+      return 1;
   }
 
   return 0;
@@ -2624,37 +2615,37 @@ func_5925(var_00, var_01, var_02) {
   wait(randomfloatrange(0.25, 0.5));
 
   for (var_04 = 1; var_04 < var_02; var_4++) {
-  var_05 = func_7FF0(var_00, var_3.vfxradius);
-  playloopsound(var_05, var_3.onexplodesfx);
-  playfx(var_3.onexplodevfx, var_05);
+    var_05 = func_7FF0(var_00, var_3.vfxradius);
+    playloopsound(var_05, var_3.onexplodesfx);
+    playfx(var_3.onexplodevfx, var_05);
 
-  foreach (var_07 in level.players) {
-  if (!scripts\mp\utility\game::isreallyalive(var_07) || var_7.sessionstate != "playing")
-  continue;
+    foreach(var_07 in level.players) {
+      if(!scripts\mp\utility\game::isreallyalive(var_07) || var_7.sessionstate != "playing") {
+        continue;
+      }
+      var_08 = var_07 geteye();
+      var_09 = distancesquared(var_00, var_08);
 
-  var_08 = var_07 geteye();
-  var_09 = distancesquared(var_00, var_08);
+      if(var_09 > var_3.radius_max_sq) {
+        continue;
+      }
+      if(!bullettracepassed(var_00, var_08, 0, var_07)) {
+        continue;
+      }
+      if(var_09 <= var_3.radius_min_sq)
+        var_10 = 1.0;
+      else
+        var_10 = 1.0 - (var_09 - var_3.radius_min_sq) / (var_3.radius_max_sq - var_3.radius_min_sq);
 
-  if (var_09 > var_3.radius_max_sq)
-  continue;
+      var_11 = anglestoforward(var_07 getplayerangles());
+      var_12 = var_00 - var_08;
+      var_12 = vectornormalize(var_12);
+      var_13 = 0.5 * (1.0 + vectordot(var_11, var_12));
+      var_14 = 1;
+      var_07 notify("flashbang", var_00, var_10, var_13, var_01, var_14);
+    }
 
-  if (!bullettracepassed(var_00, var_08, 0, var_07))
-  continue;
-
-  if (var_09 <= var_3.radius_min_sq)
-  var_10 = 1.0;
-  else
-  var_10 = 1.0 - (var_09 - var_3.radius_min_sq) / (var_3.radius_max_sq - var_3.radius_min_sq);
-
-  var_11 = anglestoforward(var_07 getplayerangles());
-  var_12 = var_00 - var_08;
-  var_12 = vectornormalize(var_12);
-  var_13 = 0.5 * (1.0 + vectordot(var_11, var_12));
-  var_14 = 1;
-  var_07 notify("flashbang", var_00, var_10, var_13, var_01, var_14);
-  }
-
-  wait(randomfloatrange(0.25, 0.5));
+    wait(randomfloatrange(0.25, 0.5));
   }
 }
 
@@ -2663,8 +2654,8 @@ func_7FF0(var_00, var_01) {
   var_03 = var_00 + var_02;
   var_04 = bullettrace(var_00, var_03, 0, self, 0, 0, 0, 0, 0);
 
-  if (var_4["fraction"] < 1)
-  var_03 = var_00 + var_4["fraction"] * var_02;
+  if(var_4["fraction"] < 1)
+    var_03 = var_00 + var_4["fraction"] * var_02;
 
   return var_03;
 }
@@ -2680,27 +2671,27 @@ func_56E5(var_00, var_01) {
   playfx(var_2.func_C523, self.origin);
 
   for (var_03 = 0; var_03 < var_01; var_3++) {
-  foreach (var_05 in level.players) {
-  if (!scripts\mp\utility\game::isreallyalive(var_05) || var_5.sessionstate != "playing")
-  continue;
+    foreach(var_05 in level.players) {
+      if(!scripts\mp\utility\game::isreallyalive(var_05) || var_5.sessionstate != "playing") {
+        continue;
+      }
+      if(var_5.team == self.owner.team) {
+        continue;
+      }
+      if(var_05 == self.owner) {
+        continue;
+      }
+      var_06 = var_05 geteye();
 
-  if (var_5.team == self.owner.team)
-  continue;
+      if(!scripts\engine\trace::ray_trace_passed(self.origin, var_06, level.players)) {
+        continue;
+      }
+      thread func_56E4(var_05, var_00, var_02, var_06);
+    }
 
-  if (var_05 == self.owner)
-  continue;
-
-  var_06 = var_05 geteye();
-
-  if (!scripts\engine\trace::ray_trace_passed(self.origin, var_06, level.players))
-  continue;
-
-  thread func_56E4(var_05, var_00, var_02, var_06);
-  }
-
-  wait 0.75;
-  playloopsound(self.origin, var_2.onexplodesfx);
-  playfx(var_2.onexplodevfx, self.origin);
+    wait 0.75;
+    playloopsound(self.origin, var_2.onexplodesfx);
+    playfx(var_2.onexplodevfx, self.origin);
   }
 
   self delete();
@@ -2714,29 +2705,28 @@ func_56E4(var_00, var_01, var_02, var_03) {
   playfx(var_2.func_D828, var_04, rotatevector(var_06, (0, 180, 0)) * (1, 1, -1));
   wait 0.75;
 
-  if (var_00 adsbuttonpressed() && var_00 worldpointinreticle_circle(var_04, 65, 300))
-  var_00 shellshock("disruptor_mp", 2.5, 0, 1);
-  else
-  {
-  var_08 = distancesquared(var_04, var_03);
+  if(var_00 adsbuttonpressed() && var_00 worldpointinreticle_circle(var_04, 65, 300))
+    var_00 shellshock("disruptor_mp", 2.5, 0, 1);
+  else {
+    var_08 = distancesquared(var_04, var_03);
 
-  if (var_08 < var_2.radius_max_sq) {
-  if (var_08 <= var_2.radius_min_sq)
-  var_09 = 1.0;
-  else
-  var_09 = 1.0 - (var_08 - var_2.radius_min_sq) / (var_2.radius_max_sq - var_2.radius_min_sq);
+    if(var_08 < var_2.radius_max_sq) {
+      if(var_08 <= var_2.radius_min_sq)
+        var_09 = 1.0;
+      else
+        var_09 = 1.0 - (var_08 - var_2.radius_min_sq) / (var_2.radius_max_sq - var_2.radius_min_sq);
 
-  var_10 = 0.65 * (1.0 + vectordot(var_05, var_07));
-  var_11 = 1;
-  var_00 notify("flashbang", var_04, var_09, var_10, var_01, var_11);
-  }
+      var_10 = 0.65 * (1.0 + vectordot(var_05, var_07));
+      var_11 = 1;
+      var_00 notify("flashbang", var_04, var_09, var_10, var_01, var_11);
+    }
   }
 }
 
 c4used(var_00) {
-  if (!scripts\mp\utility\game::isreallyalive(self)) {
-  var_00 delete();
-  return;
+  if(!scripts\mp\utility\game::isreallyalive(self)) {
+    var_00 delete();
+    return;
   }
 
   self notify("c4_update", 0);
@@ -2784,8 +2774,8 @@ func_334D(var_00) {
 }
 
 movingplatformdetonate(var_00) {
-  if (!isdefined(var_0.lasttouchedplatform) || !isdefined(var_0.lasttouchedplatform.destroyexplosiveoncollision) || var_0.lasttouchedplatform.destroyexplosiveoncollision)
-  self notify("detonateExplosive");
+  if(!isdefined(var_0.lasttouchedplatform) || !isdefined(var_0.lasttouchedplatform.destroyexplosiveoncollision) || var_0.lasttouchedplatform.destroyexplosiveoncollision)
+    self notify("detonateExplosive");
 }
 
 watchc4stuck() {
@@ -2804,32 +2794,32 @@ c4empdamage() {
   self endon("death");
 
   for (;;) {
-  self waittill("emp_damage", var_00, var_01);
-  equipmentempstunvfx();
-  self.disabled = 1;
-  self notify("disabled");
-  wait(var_01);
-  self.disabled = undefined;
-  self notify("enabled");
+    self waittill("emp_damage", var_00, var_01);
+    equipmentempstunvfx();
+    self.disabled = 1;
+    self notify("disabled");
+    wait(var_01);
+    self.disabled = undefined;
+    self notify("enabled");
   }
 }
 
 func_DACD(var_00) {
-  if (!scripts\mp\utility\game::isreallyalive(self)) {
-  var_00 delete();
-  return;
+  if(!scripts\mp\utility\game::isreallyalive(self)) {
+    var_00 delete();
+    return;
   }
 
   var_00 waittill("missile_stuck", var_01);
 
-  if (!scripts\mp\utility\game::isreallyalive(self)) {
-  var_00 delete();
-  return;
+  if(!scripts\mp\utility\game::isreallyalive(self)) {
+    var_00 delete();
+    return;
   }
 
-  if (!isdefined(var_0.owner.team)) {
-  var_00 delete();
-  return;
+  if(!isdefined(var_0.owner.team)) {
+    var_00 delete();
+    return;
   }
 
   var_02 = anglestoup(var_0.angles);
@@ -2865,9 +2855,9 @@ func_DACC(var_00) {
   var_05 = spawn("trigger_radius", var_02, 0, var_1.detectionradius, var_1.detectionheight);
   var_5.owner = self;
 
-  if (isdefined(var_00)) {
-  var_05 getrankxp();
-  var_05 linkto(self);
+  if(isdefined(var_00)) {
+    var_05 getrankxp();
+    var_05 linkto(self);
   }
 
   self.damagearea = var_05;
@@ -2875,29 +2865,30 @@ func_DACC(var_00) {
   var_06 = undefined;
 
   for (;;) {
-  var_05 waittill("trigger", var_06);
+    var_05 waittill("trigger", var_06);
 
-  if (!isdefined(var_06))
-  continue;
+    if(!isdefined(var_06)) {
+      continue;
+    }
+    if(getdvarint("scr_minesKillOwner") != 1) {
+      if(isdefined(self.owner)) {
+        if(var_06 == self.owner) {
+          continue;
+        }
+        if(isdefined(var_6.owner) && var_6.owner == self.owner)
+          continue;
+      }
 
-  if (getdvarint("scr_minesKillOwner") != 1) {
-  if (isdefined(self.owner)) {
-  if (var_06 == self.owner)
-  continue;
+      if(!friendlyfirecheck(self.owner, var_06, 0))
+        continue;
+    }
 
-  if (isdefined(var_6.owner) && var_6.owner == self.owner)
-  continue;
-  }
-
-  if (!friendlyfirecheck(self.owner, var_06, 0))
-  continue;
-  }
-
-  if (lengthsquared(var_06 getentityvelocity()) < 10)
-  continue;
-
-  if (var_06 damageconetrace(self.origin, self) > 0)
-  break;
+    if(lengthsquared(var_06 getentityvelocity()) < 10) {
+      continue;
+    }
+    if(var_06 damageconetrace(self.origin, self) > 0) {
+      break;
+    }
   }
 
   self stoploopsound("ied_explo_beeps");
@@ -2910,51 +2901,51 @@ func_DACB() {
   self endon("death");
 
   for (;;) {
-  self waittill("emp_damage", var_00, var_01);
-  equipmentempstunvfx();
-  self.disabled = 1;
-  self notify("disabled");
-  func_DACA();
-  wait(var_01);
+    self waittill("emp_damage", var_00, var_01);
+    equipmentempstunvfx();
+    self.disabled = 1;
+    self notify("disabled");
+    func_DACA();
+    wait(var_01);
 
-  if (isdefined(self)) {
-  self.disabled = undefined;
-  self notify("enabled");
-  var_02 = self getlinkedparent();
-  thread func_DACC(var_02);
-  }
+    if(isdefined(self)) {
+      self.disabled = undefined;
+      self notify("enabled");
+      var_02 = self getlinkedparent();
+      thread func_DACC(var_02);
+    }
   }
 }
 
 func_DACA() {
   stopblinkinglight();
 
-  if (isdefined(self.damagearea))
-  self.damagearea delete();
+  if(isdefined(self.damagearea))
+    self.damagearea delete();
 }
 
 func_F692(var_00, var_01) {
   self endon("death");
   wait 0.05;
 
-  if (level.teambased)
-  scripts\mp\entityheadicons::setteamheadicon(var_00, (0, 0, var_01));
-  else if (isdefined(self.owner))
-  scripts\mp\entityheadicons::setplayerheadicon(self.owner, (0, 0, var_01));
+  if(level.teambased)
+    scripts\mp\entityheadicons::setteamheadicon(var_00, (0, 0, var_01));
+  else if(isdefined(self.owner))
+    scripts\mp\entityheadicons::setplayerheadicon(self.owner, (0, 0, var_01));
 }
 
 claymoreused(var_00) {
-  if (!isalive(self)) {
-  var_00 delete();
-  return;
+  if(!isalive(self)) {
+    var_00 delete();
+    return;
   }
 
   var_00 hide();
   var_00 scripts\engine\utility::waittill_any_timeout(0.05, "missile_stuck");
 
-  if (!isdefined(self) || !isalive(self)) {
-  var_00 delete();
-  return;
+  if(!isdefined(self) || !isalive(self)) {
+    var_00 delete();
+    return;
   }
 
   var_01 = 60;
@@ -2964,37 +2955,36 @@ claymoreused(var_00) {
   var_03 = var_03 + 600;
   var_05 = var_00 getlinkedparent();
 
-  if (isdefined(var_05))
-  var_00 unlink();
+  if(isdefined(var_05))
+    var_00 unlink();
 
-  if (var_03 < var_04) {
-  if (var_01 * var_01 < distancesquared(var_0.origin, self.origin)) {
-  var_06 = bullettrace(self.origin, self.origin - (0, 0, var_01), 0, self);
+  if(var_03 < var_04) {
+    if(var_01 * var_01 < distancesquared(var_0.origin, self.origin)) {
+      var_06 = bullettrace(self.origin, self.origin - (0, 0, var_01), 0, self);
 
-  if (var_6["fraction"] == 1) {
-  var_00 delete();
-  self setweaponammostock(var_0.weapon_name, self getweaponammostock(var_0.weapon_name) + 1);
-  return;
-  } else {
-  var_0.origin = var_6["position"];
-  var_05 = var_6["entity"];
-  }
-  } else {}
-  }
-  else if (var_01 * var_01 < distancesquared(var_0.origin, self geteye())) {
-  var_06 = bullettrace(self.origin, self.origin - (0, 0, var_01), 0, self);
+      if(var_6["fraction"] == 1) {
+        var_00 delete();
+        self setweaponammostock(var_0.weapon_name, self getweaponammostock(var_0.weapon_name) + 1);
+        return;
+      } else {
+        var_0.origin = var_6["position"];
+        var_05 = var_6["entity"];
+      }
+    } else {}
+  } else if(var_01 * var_01 < distancesquared(var_0.origin, self geteye())) {
+    var_06 = bullettrace(self.origin, self.origin - (0, 0, var_01), 0, self);
 
-  if (var_6["fraction"] == 1) {
-  var_00 delete();
-  self setweaponammostock(var_0.weapon_name, self getweaponammostock(var_0.weapon_name) + 1);
-  return;
+    if(var_6["fraction"] == 1) {
+      var_00 delete();
+      self setweaponammostock(var_0.weapon_name, self getweaponammostock(var_0.weapon_name) + 1);
+      return;
+    } else {
+      var_0.origin = var_6["position"];
+      var_05 = var_6["entity"];
+    }
   } else {
-  var_0.origin = var_6["position"];
-  var_05 = var_6["entity"];
-  }
-  } else {
-  var_02 = (0, 0, -5);
-  var_0.angles = var_0.angles + (0, 180, 0);
+    var_02 = (0, 0, -5);
+    var_0.angles = var_0.angles + (0, 180, 0);
   }
 
   var_0.angles = var_0.angles * (0, 1, 1);
@@ -3016,64 +3006,65 @@ claymoredetonation(var_00) {
   self endon("death");
   var_01 = spawn("trigger_radius", self.origin + (0, 0, 0 - level.claymoredetonateradius), 0, level.claymoredetonateradius, level.claymoredetonateradius * 2);
 
-  if (isdefined(var_00)) {
-  var_01 getrankxp();
-  var_01 linkto(var_00);
+  if(isdefined(var_00)) {
+    var_01 getrankxp();
+    var_01 linkto(var_00);
   }
 
   thread deleteondeath(var_01);
 
   for (;;) {
-  var_01 waittill("trigger", var_02);
+    var_01 waittill("trigger", var_02);
 
-  if (getdvarint("scr_claymoredebug") != 1) {
-  if (isdefined(self.owner)) {
-  if (var_02 == self.owner)
-  continue;
+    if(getdvarint("scr_claymoredebug") != 1) {
+      if(isdefined(self.owner)) {
+        if(var_02 == self.owner) {
+          continue;
+        }
+        if(isdefined(var_2.owner) && var_2.owner == self.owner)
+          continue;
+      }
 
-  if (isdefined(var_2.owner) && var_2.owner == self.owner)
-  continue;
-  }
+      if(!friendlyfirecheck(self.owner, var_02, 0))
+        continue;
+    }
 
-  if (!friendlyfirecheck(self.owner, var_02, 0))
-  continue;
-  }
+    if(lengthsquared(var_02 getentityvelocity()) < 10) {
+      continue;
+    }
+    var_03 = abs(var_2.origin[2] - self.origin[2]);
 
-  if (lengthsquared(var_02 getentityvelocity()) < 10)
-  continue;
-
-  var_03 = abs(var_2.origin[2] - self.origin[2]);
-
-  if (var_03 > 128)
-  continue;
-
-  if (!var_02 shouldaffectclaymore(self))
-  continue;
-
-  if (var_02 damageconetrace(self.origin, self) > 0)
-  break;
+    if(var_03 > 128) {
+      continue;
+    }
+    if(!var_02 shouldaffectclaymore(self)) {
+      continue;
+    }
+    if(var_02 damageconetrace(self.origin, self) > 0) {
+      break;
+    }
   }
 
   self playsound("claymore_activated");
   explosivetrigger(var_02, level.claymoredetectiongraceperiod, "claymore");
 
-  if (isdefined(self.owner))
-  self.owner thread scripts\mp\utility\game::leaderdialogonplayer("claymore_destroyed", undefined, undefined, self.origin);
+  if(isdefined(self.owner))
+    self.owner thread scripts\mp\utility\game::leaderdialogonplayer("claymore_destroyed", undefined, undefined, self.origin);
 
   self notify("detonateExplosive");
 }
 
 shouldaffectclaymore(var_00) {
-  if (isdefined(var_0.disabled))
-  return 0;
+  if(isdefined(var_0.disabled))
+    return 0;
 
   var_01 = self.origin + (0, 0, 32);
   var_02 = var_01 - var_0.origin;
   var_03 = anglestoforward(var_0.angles);
   var_04 = vectordot(var_02, var_03);
 
-  if (var_04 < level.claymoredetectionmindist)
-  return 0;
+  if(var_04 < level.claymoredetectionmindist)
+    return 0;
 
   var_02 = vectornormalize(var_02);
   var_05 = vectordot(var_02, var_03);
@@ -3084,11 +3075,11 @@ deleteondeath(var_00) {
   self waittill("death");
   wait 0.05;
 
-  if (isdefined(var_00)) {
-  if (isdefined(var_0.trigger))
-  var_0.trigger delete();
+  if(isdefined(var_00)) {
+    if(isdefined(var_0.trigger))
+      var_0.trigger delete();
 
-  var_00 delete();
+    var_00 delete();
   }
 }
 
@@ -3110,35 +3101,35 @@ watchc4altdetonate() {
   var_00 = 0;
 
   for (;;) {
-  if (self usebuttonpressed()) {
-  var_00 = 0;
+    if(self usebuttonpressed()) {
+      var_00 = 0;
 
-  while (self usebuttonpressed()) {
-  var_00 = var_00 + 0.05;
-  wait 0.05;
-  }
+      while (self usebuttonpressed()) {
+        var_00 = var_00 + 0.05;
+        wait 0.05;
+      }
 
-  if (var_00 >= 0.5)
-  continue;
+      if(var_00 >= 0.5) {
+        continue;
+      }
+      var_00 = 0;
 
-  var_00 = 0;
+      while (!self usebuttonpressed() && var_00 < 0.5) {
+        var_00 = var_00 + 0.05;
+        wait 0.05;
+      }
 
-  while (!self usebuttonpressed() && var_00 < 0.5) {
-  var_00 = var_00 + 0.05;
-  wait 0.05;
-  }
+      if(var_00 >= 0.5) {
+        continue;
+      }
+      if(!self.plantedlethalequip.size) {
+        return;
+      }
+      if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(self) && !scripts\mp\utility\game::isusingremote())
+        self notify("alt_detonate");
+    }
 
-  if (var_00 >= 0.5)
-  continue;
-
-  if (!self.plantedlethalequip.size)
-  return;
-
-  if (!scripts\mp\equipment\phase_shift::isentityphaseshifted(self) && !scripts\mp\utility\game::isusingremote())
-  self notify("alt_detonate");
-  }
-
-  wait 0.05;
+    wait 0.05;
   }
 }
 
@@ -3149,8 +3140,8 @@ watchc4detonation(var_00) {
   self endon("disconnect");
 
   for (;;) {
-  self waittillmatch("detonate", "c4_mp");
-  c4detonateallcharges();
+    self waittillmatch("detonate", "c4_mp");
+    c4detonateallcharges();
   }
 }
 
@@ -3161,18 +3152,18 @@ watchc4altdetonation() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("alt_detonate");
-  var_00 = self getcurrentweapon();
+    self waittill("alt_detonate");
+    var_00 = self getcurrentweapon();
 
-  if (var_00 != "c4_mp")
-  c4detonateallcharges();
+    if(var_00 != "c4_mp")
+      c4detonateallcharges();
   }
 }
 
 c4detonateallcharges() {
-  foreach (var_01 in self.plantedlethalequip) {
-  if (isdefined(var_01) && var_1.weapon_name == "c4_mp")
-  var_01 thread waitanddetonate(0.1);
+  foreach(var_01 in self.plantedlethalequip) {
+    if(isdefined(var_01) && var_1.weapon_name == "c4_mp")
+      var_01 thread waitanddetonate(0.1);
   }
 
   self.plantedlethalequip = [];
@@ -3196,82 +3187,81 @@ func_3343() {
   var_00 = undefined;
   var_01 = 1;
 
-  if (self.owner scripts\mp\utility\game::_hasperk("specialty_rugged_eqp"))
-  var_1++;
+  if(self.owner scripts\mp\utility\game::_hasperk("specialty_rugged_eqp"))
+    var_1++;
 
   for (;;) {
-  self waittill("damage", var_02, var_00, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
+    self waittill("damage", var_02, var_00, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
 
-  if (!isplayer(var_00) && !isagent(var_00))
-  continue;
+    if(!isplayer(var_00) && !isagent(var_00)) {
+      continue;
+    }
+    if(!friendlyfirecheck(self.owner, var_00)) {
+      continue;
+    }
+    if(func_66AA(var_10, var_05)) {
+      continue;
+    }
+    var_11 = scripts\engine\utility::ter_op(scripts\mp\utility\game::isfmjdamage(var_10, var_05), 2, 1);
+    var_01 = var_01 - var_11;
 
-  if (!friendlyfirecheck(self.owner, var_00))
-  continue;
-
-  if (func_66AA(var_10, var_05))
-  continue;
-
-  var_11 = scripts\engine\utility::ter_op(scripts\mp\utility\game::isfmjdamage(var_10, var_05), 2, 1);
-  var_01 = var_01 - var_11;
-
-  if (var_01 <= 0)
-  break;
-
-  if (var_01 <= 0)
-  break;
-  else
-  var_00 scripts\mp\damagefeedback::updatedamagefeedback("bouncing_betty");
+    if(var_01 <= 0) {
+      break;
+    }
+    if(var_01 <= 0) {
+      break;
+    } else
+      var_00 scripts\mp\damagefeedback::updatedamagefeedback("bouncing_betty");
   }
 
-  if (level.c4explodethisframe)
-  wait(0.1 + randomfloat(0.4));
+  if(level.c4explodethisframe)
+    wait(0.1 + randomfloat(0.4));
   else
-  wait 0.05;
+    wait 0.05;
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   level.c4explodethisframe = 1;
   thread resetc4explodethisframe();
 
-  if (isdefined(var_05) && (issubstr(var_05, "MOD_GRENADE") || issubstr(var_05, "MOD_EXPLOSIVE")))
-  self.waschained = 1;
+  if(isdefined(var_05) && (issubstr(var_05, "MOD_GRENADE") || issubstr(var_05, "MOD_EXPLOSIVE")))
+    self.waschained = 1;
 
-  if (isdefined(var_09) && var_09 & level.idflags_penetration)
-  self.wasdamagedfrombulletpenetration = 1;
+  if(isdefined(var_09) && var_09 & level.idflags_penetration)
+    self.wasdamagedfrombulletpenetration = 1;
 
-  if (isdefined(var_09) && var_09 & level.idflags_no_team_protection)
-  self.wasdamagedfrombulletricochet = 1;
+  if(isdefined(var_09) && var_09 & level.idflags_no_team_protection)
+    self.wasdamagedfrombulletricochet = 1;
 
   self.wasdamaged = 1;
 
-  if (isdefined(var_00))
-  self.damagedby = var_00;
+  if(isdefined(var_00))
+    self.damagedby = var_00;
 
-  if (isplayer(var_00)) {
-  var_00 scripts\mp\damagefeedback::updatedamagefeedback("c4");
+  if(isplayer(var_00)) {
+    var_00 scripts\mp\damagefeedback::updatedamagefeedback("c4");
 
-  if (var_00 != self.owner && var_0.team != self.owner.team) {
-  if (var_10 != "trophy_mp")
-  var_00 scripts\mp\killstreaks\killstreaks::_meth_83A0();
+    if(var_00 != self.owner && var_0.team != self.owner.team) {
+      if(var_10 != "trophy_mp")
+        var_00 scripts\mp\killstreaks\killstreaks::_meth_83A0();
+    }
   }
-  }
 
-  if (level.teambased) {
-  if (isdefined(var_00) && isdefined(self.owner)) {
-  var_12 = var_0.pers["team"];
-  var_13 = self.owner.pers["team"];
+  if(level.teambased) {
+    if(isdefined(var_00) && isdefined(self.owner)) {
+      var_12 = var_0.pers["team"];
+      var_13 = self.owner.pers["team"];
 
-  if (isdefined(var_12) && isdefined(var_13) && var_12 != var_13)
-  var_00 notify("destroyed_equipment");
-  }
-  }
-  else if (isdefined(self.owner) && isdefined(var_00) && var_00 != self.owner)
-  var_00 notify("destroyed_equipment");
+      if(isdefined(var_12) && isdefined(var_13) && var_12 != var_13)
+        var_00 notify("destroyed_equipment");
+    }
+  } else if(isdefined(self.owner) && isdefined(var_00) && var_00 != self.owner)
+    var_00 notify("destroyed_equipment");
 
-  if (getdvarint("showArchetypes", 0) > 0) {
-  if (self.weapon_name == "c4_mp")
-  self.owner notify("c4_update", 0);
+  if(getdvarint("showArchetypes", 0) > 0) {
+    if(self.weapon_name == "c4_mp")
+      self.owner notify("c4_update", 0);
   }
 
   self notify("detonateExplosive", var_00);
@@ -3284,13 +3274,13 @@ resetc4explodethisframe() {
 
 func_EB82(var_00, var_01) {
   for (var_02 = 0; var_02 < 60; var_2++)
-  wait 0.05;
+    wait 0.05;
 }
 
 waittillenabled() {
-  if (!isdefined(self.disabled))
-  return;
-
+  if(!isdefined(self.disabled)) {
+    return;
+  }
   self waittill("enabled");
 }
 
@@ -3303,8 +3293,8 @@ func_3347(var_00) {
   self waittill("death");
   var_01 notify("end_detection");
 
-  if (isdefined(var_1.func_2C65))
-  var_1.func_2C65 destroy();
+  if(isdefined(var_1.func_2C65))
+    var_1.func_2C65 destroy();
 
   var_01 delete();
 }
@@ -3317,8 +3307,8 @@ claymoredetectiontrigger(var_00) {
   self waittill("death");
   var_01 notify("end_detection");
 
-  if (isdefined(var_1.func_2C65))
-  var_1.func_2C65 destroy();
+  if(isdefined(var_1.func_2C65))
+    var_1.func_2C65 destroy();
 
   var_01 delete();
 }
@@ -3328,20 +3318,20 @@ func_53B0(var_00) {
   level endon("game_ended");
 
   while (!level.gameended) {
-  self waittill("trigger", var_01);
+    self waittill("trigger", var_01);
 
-  if (!var_1.func_53AD)
-  continue;
-
-  if (level.teambased && var_1.team != var_00)
-  continue;
-  else if (!level.teambased && var_01 == self.owner.owner)
-  continue;
-
-  if (isdefined(var_1.func_2C67[self.func_53B1]))
-  continue;
-
-  var_01 thread showheadicon(self);
+    if(!var_1.func_53AD) {
+      continue;
+    }
+    if(level.teambased && var_1.team != var_00)
+      continue;
+    else if(!level.teambased && var_01 == self.owner.owner) {
+      continue;
+    }
+    if(isdefined(var_1.func_2C67[self.func_53B1])) {
+      continue;
+    }
+    var_01 thread showheadicon(self);
   }
 }
 
@@ -3358,8 +3348,8 @@ monitordisownedgrenade(var_00, var_01) {
   var_01 endon("mine_planted");
   var_00 scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
 
-  if (isdefined(var_01))
-  var_01 delete();
+  if(isdefined(var_01))
+    var_01 delete();
 }
 
 isplantedequipment(var_00) {
@@ -3370,11 +3360,11 @@ func_7F9A(var_00) {
   var_01 = 0;
   var_02 = scripts\mp\powers::getcurrentequipment("primary");
 
-  if (isdefined(var_02)) {
-  var_01 = var_01 + scripts\mp\powers::func_D736(var_02);
+  if(isdefined(var_02)) {
+    var_01 = var_01 + scripts\mp\powers::func_D736(var_02);
 
-  if (scripts\mp\utility\game::_hasperk("specialty_rugged_eqp"))
-  var_1++;
+    if(scripts\mp\utility\game::_hasperk("specialty_rugged_eqp"))
+      var_1++;
   }
 
   return var_01;
@@ -3384,11 +3374,11 @@ func_7FA3(var_00) {
   var_01 = 0;
   var_02 = scripts\mp\powers::getcurrentequipment("secondary");
 
-  if (isdefined(var_02)) {
-  var_01 = var_01 + scripts\mp\powers::func_D736(var_02);
+  if(isdefined(var_02)) {
+    var_01 = var_01 + scripts\mp\powers::func_D736(var_02);
 
-  if (scripts\mp\utility\game::_hasperk("specialty_rugged_eqp"))
-  var_1++;
+    if(scripts\mp\utility\game::_hasperk("specialty_rugged_eqp"))
+      var_1++;
   }
 
   return var_01;
@@ -3399,11 +3389,11 @@ onlethalequipmentplanted(var_00, var_01, var_02) {
   var_0.func_51B6 = var_02;
   var_0.planted = 1;
 
-  if (self.plantedlethalequip.size) {
-  self.plantedlethalequip = scripts\engine\utility::array_removeundefined(self.plantedlethalequip);
+  if(self.plantedlethalequip.size) {
+    self.plantedlethalequip = scripts\engine\utility::array_removeundefined(self.plantedlethalequip);
 
-  if (self.plantedlethalequip.size && self.plantedlethalequip.size >= func_7F9A(self))
-  self.plantedlethalequip[0] deleteexplosive();
+    if(self.plantedlethalequip.size && self.plantedlethalequip.size >= func_7F9A(self))
+      self.plantedlethalequip[0] deleteexplosive();
   }
 
   self.plantedlethalequip[self.plantedlethalequip.size] = var_00;
@@ -3417,11 +3407,11 @@ ontacticalequipmentplanted(var_00, var_01, var_02) {
   var_0.func_51B6 = var_02;
   var_0.planted = 1;
 
-  if (self.plantedtacticalequip.size) {
-  self.plantedtacticalequip = scripts\engine\utility::array_removeundefined(self.plantedtacticalequip);
+  if(self.plantedtacticalequip.size) {
+    self.plantedtacticalequip = scripts\engine\utility::array_removeundefined(self.plantedtacticalequip);
 
-  if (self.plantedtacticalequip.size && self.plantedtacticalequip.size >= func_7FA3(self))
-  self.plantedtacticalequip[0] deleteexplosive();
+    if(self.plantedtacticalequip.size && self.plantedtacticalequip.size >= func_7FA3(self))
+      self.plantedtacticalequip[0] deleteexplosive();
   }
 
   self.plantedtacticalequip[self.plantedtacticalequip.size] = var_00;
@@ -3431,70 +3421,70 @@ ontacticalequipmentplanted(var_00, var_01, var_02) {
 }
 
 func_5608() {
-  if (isdefined(self.plantedlethalequip) && self.plantedlethalequip.size > 0) {
-  foreach (var_01 in self.plantedlethalequip) {
-  if (isdefined(var_1.trigger) && isdefined(var_1.owner))
-  var_1.trigger disableplayeruse(var_1.owner);
-  }
+  if(isdefined(self.plantedlethalequip) && self.plantedlethalequip.size > 0) {
+    foreach(var_01 in self.plantedlethalequip) {
+      if(isdefined(var_1.trigger) && isdefined(var_1.owner))
+        var_1.trigger disableplayeruse(var_1.owner);
+    }
   }
 
-  if (isdefined(self.plantedtacticalequip) && self.plantedtacticalequip.size > 0) {
-  foreach (var_01 in self.plantedtacticalequip) {
-  if (isdefined(var_1.trigger) && isdefined(var_1.owner))
-  var_1.trigger disableplayeruse(var_1.owner);
-  }
+  if(isdefined(self.plantedtacticalequip) && self.plantedtacticalequip.size > 0) {
+    foreach(var_01 in self.plantedtacticalequip) {
+      if(isdefined(var_1.trigger) && isdefined(var_1.owner))
+        var_1.trigger disableplayeruse(var_1.owner);
+    }
   }
 }
 
 cleanupequipment(var_00, var_01, var_02, var_03) {
-  if (getdvarint("showArchetypes", 0) > 0) {
-  if (isdefined(self.weapon_name)) {
-  if (self.weapon_name == "c4_mp")
-  self.owner notify("c4_update", 0);
-  else if (self.weapon_name == "bouncingbetty_mp")
-  self.owner notify("bouncing_betty_update", 0);
-  else if (self.weapon_name == "trip_mine_mp")
-  self.owner notify("trip_mine_update", 0);
-  else if (self.weapon_name == "cryo_mine_mp")
-  self.owner notify("cryo_mine_update", 0);
-  else if (self.weapon_name == "fear_grenade_mp")
-  self.owner notify("restart_fear_grenade_cooldown", 0);
-  else if (self.weapon_name == "trophy_mp")
-  self.owner notify("trophy_update", 0);
+  if(getdvarint("showArchetypes", 0) > 0) {
+    if(isdefined(self.weapon_name)) {
+      if(self.weapon_name == "c4_mp")
+        self.owner notify("c4_update", 0);
+      else if(self.weapon_name == "bouncingbetty_mp")
+        self.owner notify("bouncing_betty_update", 0);
+      else if(self.weapon_name == "trip_mine_mp")
+        self.owner notify("trip_mine_update", 0);
+      else if(self.weapon_name == "cryo_mine_mp")
+        self.owner notify("cryo_mine_update", 0);
+      else if(self.weapon_name == "fear_grenade_mp")
+        self.owner notify("restart_fear_grenade_cooldown", 0);
+      else if(self.weapon_name == "trophy_mp")
+        self.owner notify("trophy_update", 0);
+    }
   }
-  }
 
-  if (isdefined(var_00))
-  level.mines[var_00] = undefined;
+  if(isdefined(var_00))
+    level.mines[var_00] = undefined;
 
-  if (isdefined(var_01))
-  var_01 delete();
+  if(isdefined(var_01))
+    var_01 delete();
 
-  if (isdefined(var_02))
-  var_02 delete();
+  if(isdefined(var_02))
+    var_02 delete();
 
-  if (isdefined(var_03))
-  var_03 delete();
+  if(isdefined(var_03))
+    var_03 delete();
 }
 
 deleteexplosive() {
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   scripts\mp\sentientpoolmanager::unregistersentient(self.sentientpool, self.sentientpoolindex);
   var_00 = self getentitynumber();
   level.mines[var_00] = undefined;
 
-  if (isdefined(self.func_51B6)) {
-  self thread [[self.func_51B6]]();
-  self notify("deleted_equipment");
+  if(isdefined(self.func_51B6)) {
+    self thread[[self.func_51B6]]();
+    self notify("deleted_equipment");
   } else {
-  var_01 = self.killcament;
-  var_02 = self.trigger;
-  var_03 = self.sensor;
-  cleanupequipment(var_00, var_01, var_02, var_03);
-  self notify("deleted_equipment");
-  self delete();
+    var_01 = self.killcament;
+    var_02 = self.trigger;
+    var_03 = self.sensor;
+    cleanupequipment(var_00, var_01, var_02, var_03);
+    self notify("deleted_equipment");
+    self delete();
   }
 }
 
@@ -3520,8 +3510,8 @@ cleanupexplosivesondeath() {
 makeexplosiveusable(var_00) {
   self setotherent(self.owner);
 
-  if (!isdefined(var_00))
-  var_00 = 10;
+  if(!isdefined(var_00))
+    var_00 = 10;
 
   var_01 = spawn("script_origin", self.origin + var_00 * anglestoup(self.angles));
   var_01 linkto(self);
@@ -3536,13 +3526,13 @@ makeexplosiveusableinternal() {
   var_00 = self.trigger;
   watchexplosiveusable();
 
-  if (isdefined(self)) {
-  var_00 = self.trigger;
-  self.trigger = undefined;
+  if(isdefined(self)) {
+    var_00 = self.trigger;
+    self.trigger = undefined;
   }
 
-  if (isdefined(var_00))
-  var_00 delete();
+  if(isdefined(var_00))
+    var_00 delete();
 }
 
 makeexplosiveunusable() {
@@ -3550,8 +3540,8 @@ makeexplosiveunusable() {
   var_00 = self.trigger;
   self.trigger = undefined;
 
-  if (isdefined(var_00))
-  var_00 delete();
+  if(isdefined(var_00))
+    var_00 delete();
 }
 
 watchexplosiveusable() {
@@ -3566,36 +3556,36 @@ watchexplosiveusable() {
   var_01 childthread scripts\mp\utility\game::notusableforjoiningplayers(var_00);
 
   switch (self.weapon_name) {
-  case "c4_mp":
-  var_01 sethintstring(&"MP_PICKUP_C4");
-  break;
-  case "cryo_mine_mp":
-  var_01 sethintstring(&"MP_PICKUP_CRYO_MINE");
-  break;
-  case "trip_mine_mp":
-  var_01 sethintstring(&"MP_PICKUP_TRIP_MINE");
-  break;
-  case "trophy_mp":
-  var_01 sethintstring(&"MP_PICKUP_TROPHY");
-  break;
+    case "c4_mp":
+      var_01 sethintstring( & "MP_PICKUP_C4");
+      break;
+    case "cryo_mine_mp":
+      var_01 sethintstring( & "MP_PICKUP_CRYO_MINE");
+      break;
+    case "trip_mine_mp":
+      var_01 sethintstring( & "MP_PICKUP_TRIP_MINE");
+      break;
+    case "trophy_mp":
+      var_01 sethintstring( & "MP_PICKUP_TROPHY");
+      break;
   }
 
   for (;;) {
-  var_01 waittillmatch("trigger", var_00);
+    var_01 waittillmatch("trigger", var_00);
 
-  if (isdefined(self.weapon_name)) {
-  switch (self.weapon_name) {
-  case "trophy_mp":
-  thread scripts\mp\trophy_system::func_12818();
-  }
+    if(isdefined(self.weapon_name)) {
+      switch (self.weapon_name) {
+        case "trophy_mp":
+          thread scripts\mp\trophy_system::func_12818();
+      }
 
-  var_00 thread scripts\mp\equipment\c4::c4_resetaltdetonpickup();
-  }
+      var_00 thread scripts\mp\equipment\c4::c4_resetaltdetonpickup();
+    }
 
-  var_00 playlocalsound("scavenger_pack_pickup");
-  var_00 notify("scavenged_ammo", self.weapon_name);
-  thread deleteexplosive();
-  return;
+    var_00 playlocalsound("scavenger_pack_pickup");
+    var_00 notify("scavenged_ammo", self.weapon_name);
+    thread deleteexplosive();
+    return;
   }
 }
 
@@ -3605,50 +3595,50 @@ makeexplosiveusabletag(var_00, var_01) {
   var_02 = self.owner;
   var_03 = self.weapon_name;
 
-  if (!isdefined(var_01))
-  var_01 = 0;
+  if(!isdefined(var_01))
+    var_01 = 0;
 
-  if (var_01)
-  self grenade_earthquake(1);
+  if(var_01)
+    self grenade_earthquake(1);
   else
-  self setcursorhint("HINT_NOICON");
+    self setcursorhint("HINT_NOICON");
 
   self _meth_84A7(var_00);
 
   switch (var_03) {
-  case "c4_mp":
-  self sethintstring(&"MP_PICKUP_C4");
-  break;
-  case "cryo_mine_mp":
-  self sethintstring(&"MP_PICKUP_CRYO_MINE");
-  break;
-  case "trip_mine_mp":
-  self sethintstring(&"MP_PICKUP_TRIP_MINE");
-  break;
-  case "trophy_mp":
-  self sethintstring(&"MP_PICKUP_TROPHY");
-  break;
+    case "c4_mp":
+      self sethintstring( & "MP_PICKUP_C4");
+      break;
+    case "cryo_mine_mp":
+      self sethintstring( & "MP_PICKUP_CRYO_MINE");
+      break;
+    case "trip_mine_mp":
+      self sethintstring( & "MP_PICKUP_TRIP_MINE");
+      break;
+    case "trophy_mp":
+      self sethintstring( & "MP_PICKUP_TROPHY");
+      break;
   }
 
   scripts\mp\utility\game::setselfusable(var_02);
   childthread scripts\mp\utility\game::notusableforjoiningplayers(var_02);
 
   for (;;) {
-  self waittillmatch("trigger", var_02);
+    self waittillmatch("trigger", var_02);
 
-  if (isdefined(var_03)) {
-  switch (var_03) {
-  case "trophy_mp":
-  thread scripts\mp\trophy_system::func_12818();
-  }
+    if(isdefined(var_03)) {
+      switch (var_03) {
+        case "trophy_mp":
+          thread scripts\mp\trophy_system::func_12818();
+      }
 
-  var_02 thread scripts\mp\equipment\c4::c4_resetaltdetonpickup();
-  }
+      var_02 thread scripts\mp\equipment\c4::c4_resetaltdetonpickup();
+    }
 
-  var_02 playlocalsound("scavenger_pack_pickup");
-  var_02 notify("scavenged_ammo", var_03);
-  thread deleteexplosive();
-  return;
+    var_02 playlocalsound("scavenger_pack_pickup");
+    var_02 notify("scavenged_ammo", var_03);
+    thread deleteexplosive();
+    return;
   }
 }
 
@@ -3663,17 +3653,17 @@ explosivehandlemovers(var_00, var_01) {
   var_2.deathoverridecallback = ::movingplatformdetonate;
   var_2.endonstring = "death";
 
-  if (!isdefined(var_01) || !var_01)
-  var_2.invalidparentoverridecallback = scripts\mp\movers::moving_platform_empty_func;
+  if(!isdefined(var_01) || !var_01)
+    var_2.invalidparentoverridecallback = scripts\mp\movers::moving_platform_empty_func;
 
   thread scripts\mp\movers::handle_moving_platforms(var_02);
 }
 
 explosivetrigger(var_00, var_01, var_02) {
-  if (isplayer(var_00) && var_00 scripts\mp\utility\game::_hasperk("specialty_delaymine")) {
-  var_00 thread scripts\mp\missions::func_127BC();
-  var_00 notify("triggeredExpl", var_02);
-  var_01 = level.delayminetime;
+  if(isplayer(var_00) && var_00 scripts\mp\utility\game::_hasperk("specialty_delaymine")) {
+    var_00 thread scripts\mp\missions::func_127BC();
+    var_00 notify("triggeredExpl", var_02);
+    var_01 = level.delayminetime;
   }
 
   wait(var_01);
@@ -3682,24 +3672,23 @@ explosivetrigger(var_00, var_01, var_02) {
 func_FA95() {
   self.func_2C67 = [];
 
-  if (self.func_53AD && !self.func_2C66.size) {
-  for (var_00 = 0; var_00 < 4; var_0++) {
-  self.func_2C66[var_00] = newclienthudelem(self);
-  self.func_2C66[var_00].x = 0;
-  self.func_2C66[var_00].y = 0;
-  self.func_2C66[var_00].z = 0;
-  self.func_2C66[var_00].alpha = 0;
-  self.func_2C66[var_00].archived = 1;
-  self.func_2C66[var_00] setshader("waypoint_bombsquad", 14, 14);
-  self.func_2C66[var_00] setwaypoint(0, 0);
-  self.func_2C66[var_00].func_53B1 = "";
-  }
-  }
-  else if (!self.func_53AD) {
-  for (var_00 = 0; var_00 < self.func_2C66.size; var_0++)
-  self.func_2C66[var_00] destroy();
+  if(self.func_53AD && !self.func_2C66.size) {
+    for (var_00 = 0; var_00 < 4; var_0++) {
+      self.func_2C66[var_00] = newclienthudelem(self);
+      self.func_2C66[var_00].x = 0;
+      self.func_2C66[var_00].y = 0;
+      self.func_2C66[var_00].z = 0;
+      self.func_2C66[var_00].alpha = 0;
+      self.func_2C66[var_00].archived = 1;
+      self.func_2C66[var_00] setshader("waypoint_bombsquad", 14, 14);
+      self.func_2C66[var_00] setwaypoint(0, 0);
+      self.func_2C66[var_00].func_53B1 = "";
+    }
+  } else if(!self.func_53AD) {
+    for (var_00 = 0; var_00 < self.func_2C66.size; var_0++)
+      self.func_2C66[var_00] destroy();
 
-  self.func_2C66 = [];
+    self.func_2C66 = [];
   }
 }
 
@@ -3708,18 +3697,18 @@ showheadicon(var_00) {
   var_02 = -1;
 
   for (var_03 = 0; var_03 < 4; var_3++) {
-  var_04 = self.func_2C66[var_03].func_53B1;
+    var_04 = self.func_2C66[var_03].func_53B1;
 
-  if (var_04 == var_01)
-  return;
-
-  if (var_04 == "")
-  var_02 = var_03;
+    if(var_04 == var_01) {
+      return;
+    }
+    if(var_04 == "")
+      var_02 = var_03;
   }
 
-  if (var_02 < 0)
-  return;
-
+  if(var_02 < 0) {
+    return;
+  }
   self.func_2C67[var_01] = 1;
   self.func_2C66[var_02].x = var_0.origin[0];
   self.func_2C66[var_02].y = var_0.origin[1];
@@ -3729,11 +3718,11 @@ showheadicon(var_00) {
   self.func_2C66[var_02].func_53B1 = var_0.func_53B1;
 
   while (isalive(self) && isdefined(var_00) && self istouching(var_00))
-  wait 0.05;
+    wait 0.05;
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   self.func_2C66[var_02].func_53B1 = "";
   self.func_2C66[var_02] fadeovertime(0.25);
   self.func_2C66[var_02].alpha = 0;
@@ -3743,98 +3732,98 @@ showheadicon(var_00) {
 getdamageableents(var_00, var_01, var_02, var_03) {
   var_04 = [];
 
-  if (!isdefined(var_02))
-  var_02 = 0;
+  if(!isdefined(var_02))
+    var_02 = 0;
 
-  if (!isdefined(var_03))
-  var_03 = 0;
+  if(!isdefined(var_03))
+    var_03 = 0;
 
   var_05 = var_01 * var_01;
   var_06 = level.players;
 
   for (var_07 = 0; var_07 < var_6.size; var_7++) {
-  if (!isalive(var_6[var_07]) || var_6[var_07].sessionstate != "playing")
-  continue;
+    if(!isalive(var_6[var_07]) || var_6[var_07].sessionstate != "playing") {
+      continue;
+    }
+    var_08 = scripts\mp\utility\game::func_7921(var_6[var_07]);
+    var_09 = distancesquared(var_00, var_08);
 
-  var_08 = scripts\mp\utility\game::func_7921(var_6[var_07]);
-  var_09 = distancesquared(var_00, var_08);
-
-  if (var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_08, var_03, var_6[var_07])))
-  var_4[var_4.size] = scripts\mp\utility\game::func_7920(var_6[var_07], var_08);
+    if(var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_08, var_03, var_6[var_07])))
+      var_4[var_4.size] = scripts\mp\utility\game::func_7920(var_6[var_07], var_08);
   }
 
   var_10 = getentarray("grenade", "classname");
 
   for (var_07 = 0; var_07 < var_10.size; var_7++) {
-  var_11 = scripts\mp\utility\game::func_791E(var_10[var_07]);
-  var_09 = distancesquared(var_00, var_11);
+    var_11 = scripts\mp\utility\game::func_791E(var_10[var_07]);
+    var_09 = distancesquared(var_00, var_11);
 
-  if (var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_10[var_07])))
-  var_4[var_4.size] = scripts\mp\utility\game::func_791D(var_10[var_07], var_11);
+    if(var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_10[var_07])))
+      var_4[var_4.size] = scripts\mp\utility\game::func_791D(var_10[var_07], var_11);
   }
 
   var_12 = getentarray("destructible", "targetname");
 
   for (var_07 = 0; var_07 < var_12.size; var_7++) {
-  var_11 = var_12[var_07].origin;
-  var_09 = distancesquared(var_00, var_11);
+    var_11 = var_12[var_07].origin;
+    var_09 = distancesquared(var_00, var_11);
 
-  if (var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_12[var_07]))) {
-  var_13 = spawnstruct();
-  var_13.isplayer = 0;
-  var_13.func_9D26 = 0;
-  var_13.entity = var_12[var_07];
-  var_13.damagecenter = var_11;
-  var_4[var_4.size] = var_13;
-  }
+    if(var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_12[var_07]))) {
+      var_13 = spawnstruct();
+      var_13.isplayer = 0;
+      var_13.func_9D26 = 0;
+      var_13.entity = var_12[var_07];
+      var_13.damagecenter = var_11;
+      var_4[var_4.size] = var_13;
+    }
   }
 
   var_14 = getentarray("destructable", "targetname");
 
   for (var_07 = 0; var_07 < var_14.size; var_7++) {
-  var_11 = var_14[var_07].origin;
-  var_09 = distancesquared(var_00, var_11);
+    var_11 = var_14[var_07].origin;
+    var_09 = distancesquared(var_00, var_11);
 
-  if (var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_14[var_07]))) {
-  var_13 = spawnstruct();
-  var_13.isplayer = 0;
-  var_13.func_9D26 = 1;
-  var_13.entity = var_14[var_07];
-  var_13.damagecenter = var_11;
-  var_4[var_4.size] = var_13;
-  }
+    if(var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_14[var_07]))) {
+      var_13 = spawnstruct();
+      var_13.isplayer = 0;
+      var_13.func_9D26 = 1;
+      var_13.entity = var_14[var_07];
+      var_13.damagecenter = var_11;
+      var_4[var_4.size] = var_13;
+    }
   }
 
   var_15 = getentarray("misc_turret", "classname");
 
-  foreach (var_17 in var_15) {
-  var_11 = var_17.origin + (0, 0, 32);
-  var_09 = distancesquared(var_00, var_11);
+  foreach(var_17 in var_15) {
+    var_11 = var_17.origin + (0, 0, 32);
+    var_09 = distancesquared(var_00, var_11);
 
-  if (var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_17))) {
-  switch (var_17.model) {
-  case "vehicle_ugv_talon_gun_mp":
-  case "mp_remote_turret":
-  case "mp_scramble_turret":
-  case "mp_sam_turret":
-  case "sentry_minigun_weak":
-  var_4[var_4.size] = scripts\mp\utility\game::func_7922(var_17, var_11);
-  break;
-  }
-  }
+    if(var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_17))) {
+      switch (var_17.model) {
+        case "vehicle_ugv_talon_gun_mp":
+        case "mp_remote_turret":
+        case "mp_scramble_turret":
+        case "mp_sam_turret":
+        case "sentry_minigun_weak":
+          var_4[var_4.size] = scripts\mp\utility\game::func_7922(var_17, var_11);
+          break;
+      }
+    }
   }
 
   var_19 = getentarray("script_model", "classname");
 
-  foreach (var_21 in var_19) {
-  if (var_21.model != "projectile_bouncing_betty_grenade" && var_21.model != "ims_scorpion_body")
-  continue;
+  foreach(var_21 in var_19) {
+    if(var_21.model != "projectile_bouncing_betty_grenade" && var_21.model != "ims_scorpion_body") {
+      continue;
+    }
+    var_11 = var_21.origin + (0, 0, 32);
+    var_09 = distancesquared(var_00, var_11);
 
-  var_11 = var_21.origin + (0, 0, 32);
-  var_09 = distancesquared(var_00, var_11);
-
-  if (var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_21)))
-  var_4[var_4.size] = scripts\mp\utility\game::func_791F(var_21, var_11);
+    if(var_09 < var_05 && (!var_02 || func_13C7E(var_00, var_11, var_03, var_21)))
+      var_4[var_4.size] = scripts\mp\utility\game::func_791F(var_21, var_11);
   }
 
   return var_04;
@@ -3843,95 +3832,95 @@ getdamageableents(var_00, var_01, var_02, var_03) {
 getempdamageents(var_00, var_01, var_02, var_03) {
   var_04 = [];
 
-  if (!isdefined(var_02))
-  var_02 = 0;
+  if(!isdefined(var_02))
+    var_02 = 0;
 
-  if (!isdefined(var_03))
-  var_03 = 0;
+  if(!isdefined(var_03))
+    var_03 = 0;
 
   var_05 = var_01 * var_01;
   level.mines = scripts\engine\utility::array_removeundefined(level.mines);
 
-  foreach (var_07 in level.mines) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.mines) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
   var_09 = getentarray("misc_turret", "classname");
 
-  foreach (var_07 in var_09) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in var_09) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.uplinks) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.uplinks) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.remote_uav) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.remote_uav) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.balldrones) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.balldrones) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.placedims) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.placedims) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.microturrets) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.microturrets) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.func_105EA) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.func_105EA) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.func_69D6) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.func_69D6) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.spidergrenade.activeagents) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.spidergrenade.activeagents) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.spidergrenade.proxies) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.spidergrenade.proxies) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.func_2ABD) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.func_2ABD) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.func_590F) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.func_590F) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.littlebirds) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.littlebirds) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.func_D3CC) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.func_D3CC) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03))
+      var_4[var_4.size] = var_07;
   }
 
-  foreach (var_07 in level.players) {
-  if (func_619A(var_07, var_00, var_05, var_02, var_03) && scripts\mp\utility\game::func_9EF0(var_07))
-  var_4[var_4.size] = var_07;
+  foreach(var_07 in level.players) {
+    if(func_619A(var_07, var_00, var_05, var_02, var_03) && scripts\mp\utility\game::func_9EF0(var_07))
+      var_4[var_4.size] = var_07;
   }
 
   return var_04;
@@ -3947,28 +3936,27 @@ func_13C7E(var_00, var_01, var_02, var_03) {
   var_04 = undefined;
   var_05 = var_01 - var_00;
 
-  if (lengthsquared(var_05) < var_02 * var_02)
-  return 1;
+  if(lengthsquared(var_05) < var_02 * var_02)
+    return 1;
 
   var_06 = vectornormalize(var_05);
   var_04 = var_00 + (var_6[0] * var_02, var_6[1] * var_02, var_6[2] * var_02);
   var_07 = bullettrace(var_04, var_01, 0, var_03);
 
-  if (getdvarint("scr_damage_debug") != 0 || getdvarint("scr_debugMines") != 0) {
-  thread debugprint(var_00, ".dmg");
+  if(getdvarint("scr_damage_debug") != 0 || getdvarint("scr_debugMines") != 0) {
+    thread debugprint(var_00, ".dmg");
 
-  if (isdefined(var_03))
-  thread debugprint(var_01, "." + var_3.classname);
-  else
-  thread debugprint(var_01, ".undefined");
+    if(isdefined(var_03))
+      thread debugprint(var_01, "." + var_3.classname);
+    else
+      thread debugprint(var_01, ".undefined");
 
-  if (var_7["fraction"] == 1)
-  thread debugline(var_04, var_01, (1, 1, 1));
-  else
-  {
-  thread debugline(var_04, var_7["position"], (1, 0.9, 0.8));
-  thread debugline(var_7["position"], var_01, (1, 0.4, 0.3));
-  }
+    if(var_7["fraction"] == 1)
+      thread debugline(var_04, var_01, (1, 1, 1));
+    else {
+      thread debugline(var_04, var_7["position"], (1, 0.9, 0.8));
+      thread debugline(var_7["position"], var_01, (1, 0.4, 0.3));
+    }
   }
 
   return var_7["fraction"] == 1;
@@ -3978,182 +3966,181 @@ func_66B4(var_00) {
   self endon("death");
   self waittill("emp_damage", var_01, var_02, var_03, var_04, var_05);
 
-  if (isdefined(var_04) && var_04 == "emp_grenade_mp") {
-  if (scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_01)))
-  var_01 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
+  if(isdefined(var_04) && var_04 == "emp_grenade_mp") {
+    if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_01)))
+      var_01 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
   }
 
   equipmentempstunvfx();
 
-  if (isdefined(self.owner) && isdefined(var_01) && self.owner != var_01)
-  var_01 scripts\mp\killstreaks\killstreaks::_meth_83A0();
+  if(isdefined(self.owner) && isdefined(var_01) && self.owner != var_01)
+    var_01 scripts\mp\killstreaks\killstreaks::_meth_83A0();
 
-  if (isdefined(var_00) && var_00)
-  deleteexplosive();
+  if(isdefined(var_00) && var_00)
+    deleteexplosive();
   else
-  self notify("detonateExplosive");
+    self notify("detonateExplosive");
 }
 
 damageent(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  if (self.isplayer) {
-  self.func_4D5B = var_05;
-  self.entity thread [[level.callbackplayerdamage]](var_00, var_01, var_02, 0, var_03, var_04, var_05, var_06, "none", 0);
+  if(self.isplayer) {
+    self.func_4D5B = var_05;
+    self.entity thread[[level.callbackplayerdamage]](var_00, var_01, var_02, 0, var_03, var_04, var_05, var_06, "none", 0);
   } else {
-  if (self.func_9D26 && (var_04 == "artillery_mp" || var_04 == "claymore_mp" || var_04 == "stealth_bomb_mp"))
-  return;
-
-  self.entity notify("damage", var_02, var_01, (0, 0, 0), (0, 0, 0), "MOD_EXPLOSIVE", "", "", "", undefined, var_04);
+    if(self.func_9D26 && (var_04 == "artillery_mp" || var_04 == "claymore_mp" || var_04 == "stealth_bomb_mp")) {
+      return;
+    }
+    self.entity notify("damage", var_02, var_01, (0, 0, 0), (0, 0, 0), "MOD_EXPLOSIVE", "", "", "", undefined, var_04);
   }
 }
 
 debugline(var_00, var_01, var_02) {
   for (var_03 = 0; var_03 < 600; var_3++)
-  wait 0.05;
+    wait 0.05;
 }
 
 debugcircle(var_00, var_01, var_02, var_03) {
-  if (!isdefined(var_03))
-  var_03 = 16;
+  if(!isdefined(var_03))
+    var_03 = 16;
 
   var_04 = 360 / var_03;
   var_05 = [];
 
   for (var_06 = 0; var_06 < var_03; var_6++) {
-  var_07 = var_04 * var_06;
-  var_08 = cos(var_07) * var_01;
-  var_09 = sin(var_07) * var_01;
-  var_10 = var_0[0] + var_08;
-  var_11 = var_0[1] + var_09;
-  var_12 = var_0[2];
-  var_5[var_5.size] = (var_10, var_11, var_12);
+    var_07 = var_04 * var_06;
+    var_08 = cos(var_07) * var_01;
+    var_09 = sin(var_07) * var_01;
+    var_10 = var_0[0] + var_08;
+    var_11 = var_0[1] + var_09;
+    var_12 = var_0[2];
+    var_5[var_5.size] = (var_10, var_11, var_12);
   }
 
   for (var_06 = 0; var_06 < var_5.size; var_6++) {
-  var_13 = var_5[var_06];
+    var_13 = var_5[var_06];
 
-  if (var_06 + 1 >= var_5.size)
-  var_14 = var_5[0];
-  else
-  var_14 = var_5[var_06 + 1];
+    if(var_06 + 1 >= var_5.size)
+      var_14 = var_5[0];
+    else
+      var_14 = var_5[var_06 + 1];
 
-  thread debugline(var_13, var_14, var_02);
+    thread debugline(var_13, var_14, var_02);
   }
 }
 
 debugprint(var_00, var_01) {
   for (var_02 = 0; var_02 < 600; var_2++)
-  wait 0.05;
+    wait 0.05;
 }
 
 onweapondamage(var_00, var_01, var_02, var_03, var_04) {
   self endon("death");
   self endon("disconnect");
 
-  if (!scripts\mp\utility\game::isreallyalive(self))
-  return;
-
-  if (isdefined(var_01) && var_01 != "none")
-  var_01 = getweaponbasename(var_01);
+  if(!scripts\mp\utility\game::isreallyalive(self)) {
+    return;
+  }
+  if(isdefined(var_01) && var_01 != "none")
+    var_01 = getweaponbasename(var_01);
 
   switch (var_01) {
-  case "cluster_grenade_mp":
-  if (isdefined(var_00) && scripts\mp\utility\game::istrue(var_0.shellshockondamage))
-  scripts\mp\shellshock::shellshockondamage(var_02, var_03);
+    case "cluster_grenade_mp":
+      if(isdefined(var_00) && scripts\mp\utility\game::istrue(var_0.shellshockondamage))
+        scripts\mp\shellshock::shellshockondamage(var_02, var_03);
 
-  break;
-  case "concussion_grenade_mp":
-  if (var_03 > 0)
-  thread scripts\mp\concussion::onweapondamage(var_00, var_01, var_02, var_03, var_04);
+      break;
+    case "concussion_grenade_mp":
+      if(var_03 > 0)
+        thread scripts\mp\concussion::onweapondamage(var_00, var_01, var_02, var_03, var_04);
 
-  break;
-  case "blackout_grenade_mp":
-  if (var_03 > 0) {
-  if (var_02 != "MOD_IMPACT")
-  scripts\mp\equipment\blackout_grenade::func_10D6F(var_0.owner, var_0.origin);
-  }
+      break;
+    case "blackout_grenade_mp":
+      if(var_03 > 0) {
+        if(var_02 != "MOD_IMPACT")
+          scripts\mp\equipment\blackout_grenade::func_10D6F(var_0.owner, var_0.origin);
+      }
 
-  break;
-  case "venomproj_mp":
-  case "cryo_mine_mp":
-  if (var_03 > 0) {
-  if (var_02 != "MOD_IMPACT") {
-  if (isdefined(var_00)) {
-  if (isdefined(var_0.streakinfo)) {
-  if (scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_increased_frost"))
-  scripts\mp\equipment\cryo_mine::func_4ACF(var_04, 3);
-  else
-  scripts\mp\equipment\cryo_mine::func_4ACF(var_04);
-  }
-  else
-  scripts\mp\equipment\cryo_mine::func_4ACF(var_04);
-  }
-  }
-  }
+      break;
+    case "venomproj_mp":
+    case "cryo_mine_mp":
+      if(var_03 > 0) {
+        if(var_02 != "MOD_IMPACT") {
+          if(isdefined(var_00)) {
+            if(isdefined(var_0.streakinfo)) {
+              if(scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_increased_frost"))
+                scripts\mp\equipment\cryo_mine::func_4ACF(var_04, 3);
+              else
+                scripts\mp\equipment\cryo_mine::func_4ACF(var_04);
+            } else
+              scripts\mp\equipment\cryo_mine::func_4ACF(var_04);
+          }
+        }
+      }
 
-  break;
-  case "weapon_cobra_mk19_mp":
-  break;
-  case "iw7_glprox_mp":
-  break;
-  case "shard_ball_mp":
-  break;
-  case "splash_grenade_mp":
-  break;
-  case "pulse_grenade_mp":
-  scripts\mp\equipment\pulse_grenade::func_DAF4();
-  break;
-  case "minijackal_strike_mp":
-  break;
-  case "groundpound_mp":
-  scripts\mp\equipment\ground_pound::groundpound_victimimpacteffects(var_04, self, var_01, var_00);
-  break;
-  case "gltacburst_big":
-  case "gltacburst":
-  if (var_03 > 0)
-  thread scripts\mp\emp_debuff_mp::onweapondamage(var_00, var_01, var_02, var_03, var_04);
+      break;
+    case "weapon_cobra_mk19_mp":
+      break;
+    case "iw7_glprox_mp":
+      break;
+    case "shard_ball_mp":
+      break;
+    case "splash_grenade_mp":
+      break;
+    case "pulse_grenade_mp":
+      scripts\mp\equipment\pulse_grenade::func_DAF4();
+      break;
+    case "minijackal_strike_mp":
+      break;
+    case "groundpound_mp":
+      scripts\mp\equipment\ground_pound::groundpound_victimimpacteffects(var_04, self, var_01, var_00);
+      break;
+    case "gltacburst_big":
+    case "gltacburst":
+      if(var_03 > 0)
+        thread scripts\mp\emp_debuff_mp::onweapondamage(var_00, var_01, var_02, var_03, var_04);
 
-  break;
-  default:
-  scripts\mp\shellshock::shellshockondamage(var_02, var_03);
-  break;
+      break;
+    default:
+      scripts\mp\shellshock::shellshockondamage(var_02, var_03);
+      break;
   }
 }
 
 isprimaryweapon(var_00) {
-  if (var_00 == "none")
-  return 0;
+  if(var_00 == "none")
+    return 0;
 
-  if (weaponinventorytype(var_00) != "primary")
-  return 0;
+  if(weaponinventorytype(var_00) != "primary")
+    return 0;
 
   switch (weaponclass(var_00)) {
-  case "smg":
-  case "mg":
-  case "rifle":
-  case "sniper":
-  case "rocketlauncher":
-  case "spread":
-  case "pistol":
-  return 1;
-  default:
-  return 0;
+    case "smg":
+    case "mg":
+    case "rifle":
+    case "sniper":
+    case "rocketlauncher":
+    case "spread":
+    case "pistol":
+      return 1;
+    default:
+      return 0;
   }
 }
 
 isbulletweapon(var_00) {
-  if (var_00 == "none" || isriotshield(var_00) || isknifeonly(var_00))
-  return 0;
+  if(var_00 == "none" || isriotshield(var_00) || isknifeonly(var_00))
+    return 0;
 
   switch (weaponclass(var_00)) {
-  case "smg":
-  case "mg":
-  case "rifle":
-  case "sniper":
-  case "spread":
-  case "pistol":
-  return 1;
-  default:
-  return 0;
+    case "smg":
+    case "mg":
+    case "rifle":
+    case "sniper":
+    case "spread":
+    case "pistol":
+      return 1;
+    default:
+      return 0;
   }
 }
 
@@ -4170,15 +4157,15 @@ isaxeweapon(var_00) {
 }
 
 isaltmodeweapon(var_00) {
-  if (var_00 == "none")
-  return 0;
+  if(var_00 == "none")
+    return 0;
 
   return weaponinventorytype(var_00) == "altmode";
 }
 
 func_9E56(var_00) {
-  if (var_00 == "none")
-  return 0;
+  if(var_00 == "none")
+    return 0;
 
   return weaponinventorytype(var_00) == "item";
 }
@@ -4188,25 +4175,25 @@ func_9F5D(var_00) {
 }
 
 isriotshield(var_00) {
-  if (var_00 == "none")
-  return 0;
+  if(var_00 == "none")
+    return 0;
 
   return weapontype(var_00) == "riotshield";
 }
 
 func_9EC0(var_00) {
-  if (var_00 == "none")
-  return 0;
+  if(var_00 == "none")
+    return 0;
 
   return weaponinventorytype(var_00) == "offhand";
 }
 
 func_9F54(var_00) {
-  if (var_00 == "none")
-  return 0;
+  if(var_00 == "none")
+    return 0;
 
-  if (weaponinventorytype(var_00) != "primary")
-  return 0;
+  if(weaponinventorytype(var_00) != "primary")
+    return 0;
 
   return weaponclass(var_00) == "pistol";
 }
@@ -4214,20 +4201,20 @@ func_9F54(var_00) {
 func_9E18(var_00) {
   var_01 = weaponclass(var_00);
 
-  if (var_01 != "grenade")
-  return 0;
+  if(var_01 != "grenade")
+    return 0;
 
   var_02 = weaponinventorytype(var_00);
 
-  if (var_02 != "offhand")
-  return 0;
+  if(var_02 != "offhand")
+    return 0;
 
   return 1;
 }
 
 func_9FA9(var_00) {
-  if (var_00 == "none")
-  return 0;
+  if(var_00 == "none")
+    return 0;
 
   return issubstr(var_00, "throwingknife");
 }
@@ -4238,35 +4225,33 @@ updatesavedlastweapon() {
   self endon("faux_spawn");
   var_00 = self.currentweaponatspawn;
 
-  if (isdefined(self.saved_lastweaponhack))
-  var_00 = self.saved_lastweaponhack;
+  if(isdefined(self.saved_lastweaponhack))
+    var_00 = self.saved_lastweaponhack;
 
   self.saved_lastweapon = var_00;
   self.func_EB6C = var_00;
 
   for (;;) {
-  self waittill("weapon_change", var_01);
-  self.func_EB6C = var_01;
+    self waittill("weapon_change", var_01);
+    self.func_EB6C = var_01;
 
-  if (var_01 == "none")
-  continue;
-  else if (scripts\mp\utility\game::issuperweapon(var_01)) {
-  updatemovespeedscale();
-  continue;
-  }
-  else if (scripts\mp\utility\game::iskillstreakweapon(var_01))
-  continue;
-  else
-  {
-  var_02 = weaponinventorytype(var_01);
+    if(var_01 == "none")
+      continue;
+    else if(scripts\mp\utility\game::issuperweapon(var_01)) {
+      updatemovespeedscale();
+      continue;
+    } else if(scripts\mp\utility\game::iskillstreakweapon(var_01))
+      continue;
+    else {
+      var_02 = weaponinventorytype(var_01);
 
-  if (var_02 != "primary" && var_02 != "altmode")
-  continue;
-  }
+      if(var_02 != "primary" && var_02 != "altmode")
+        continue;
+    }
 
-  updatemovespeedscale();
-  self.saved_lastweapon = var_00;
-  var_00 = var_01;
+    updatemovespeedscale();
+    self.saved_lastweapon = var_00;
+    var_00 = var_01;
   }
 }
 
@@ -4285,24 +4270,23 @@ _meth_8237() {
   var_00 = 2.0;
   self.weaponlist = self getweaponslistprimaries();
 
-  if (self.weaponlist.size) {
-  foreach (var_02 in self.weaponlist) {
-  if (scripts\mp\utility\game::issuperweapon(var_02))
-  var_03 = scripts\mp\supers::func_7FD0(var_02);
-  else if (scripts\mp\utility\game::func_9E0D(var_02))
-  var_03 = func_7ECD(var_02);
-  else
-  var_03 = _meth_8236(var_02);
+  if(self.weaponlist.size) {
+    foreach(var_02 in self.weaponlist) {
+      if(scripts\mp\utility\game::issuperweapon(var_02))
+        var_03 = scripts\mp\supers::func_7FD0(var_02);
+      else if(scripts\mp\utility\game::func_9E0D(var_02))
+        var_03 = func_7ECD(var_02);
+      else
+        var_03 = _meth_8236(var_02);
 
-  if (var_03 == 0)
-  continue;
-
-  if (var_03 < var_00)
-  var_00 = var_03;
-  }
-  }
-  else
-  var_00 = 0.94;
+      if(var_03 == 0) {
+        continue;
+      }
+      if(var_03 < var_00)
+        var_00 = var_03;
+    }
+  } else
+    var_00 = 0.94;
 
   var_00 = clampweaponspeed(var_00);
   return var_00;
@@ -4322,23 +4306,22 @@ clampweaponspeed(var_00) {
 }
 
 updateviewkickscale(var_00) {
-  if (isdefined(var_00))
-  self.func_1339E = var_00;
+  if(isdefined(var_00))
+    self.func_1339E = var_00;
 
-  if (isdefined(self.func_C7E8))
-  var_00 = self.func_C7E8;
-  else if (scripts\mp\utility\game::_hasperk("specialty_distance_kit"))
-  var_00 = 0.05;
-  else if (isdefined(self.overrideviewkickscale)) {
-  if ((weaponclass(self getcurrentweapon()) == "sniper" || issubstr(self getcurrentweapon(), "iw7_udm45_mpl") || issubstr(self getcurrentweapon(), "iw7_longshot_mp")) && isdefined(self.overrideviewkickscalesniper))
-  var_00 = self.overrideviewkickscalesniper;
+  if(isdefined(self.func_C7E8))
+    var_00 = self.func_C7E8;
+  else if(scripts\mp\utility\game::_hasperk("specialty_distance_kit"))
+    var_00 = 0.05;
+  else if(isdefined(self.overrideviewkickscale)) {
+    if((weaponclass(self getcurrentweapon()) == "sniper" || issubstr(self getcurrentweapon(), "iw7_udm45_mpl") || issubstr(self getcurrentweapon(), "iw7_longshot_mp")) && isdefined(self.overrideviewkickscalesniper))
+      var_00 = self.overrideviewkickscalesniper;
+    else
+      var_00 = self.overrideviewkickscale;
+  } else if(isdefined(self.func_1339E))
+    var_00 = self.func_1339E;
   else
-  var_00 = self.overrideviewkickscale;
-  }
-  else if (isdefined(self.func_1339E))
-  var_00 = self.func_1339E;
-  else
-  var_00 = 1.0;
+    var_00 = 1.0;
 
   var_00 = clamp(var_00, 0.0, 1.0);
   self givegesture(var_00);
@@ -4347,46 +4330,46 @@ updateviewkickscale(var_00) {
 updatemovespeedscale() {
   var_00 = undefined;
 
-  if (isdefined(self.playerstreakspeedscale)) {
-  var_00 = 1.0;
-  var_00 = var_00 + self.playerstreakspeedscale;
+  if(isdefined(self.playerstreakspeedscale)) {
+    var_00 = 1.0;
+    var_00 = var_00 + self.playerstreakspeedscale;
   } else {
-  var_00 = getplayerspeedbyweapon(self);
+    var_00 = getplayerspeedbyweapon(self);
 
-  if (isdefined(self.overrideweaponspeed_speedscale))
-  var_00 = self.overrideweaponspeed_speedscale;
+    if(isdefined(self.overrideweaponspeed_speedscale))
+      var_00 = self.overrideweaponspeed_speedscale;
 
-  var_01 = self.chill_data;
+    var_01 = self.chill_data;
 
-  if (isdefined(var_01) && isdefined(var_1.speedmod))
-  var_00 = var_00 + var_1.speedmod;
+    if(isdefined(var_01) && isdefined(var_1.speedmod))
+      var_00 = var_00 + var_1.speedmod;
 
-  if (isdefined(self.weaponpassivespeedmod))
-  var_00 = var_00 + self.weaponpassivespeedmod;
+    if(isdefined(self.weaponpassivespeedmod))
+      var_00 = var_00 + self.weaponpassivespeedmod;
 
-  if (isdefined(self.weaponpassivespeedonkillmod))
-  var_00 = var_00 + self.weaponpassivespeedonkillmod;
+    if(isdefined(self.weaponpassivespeedonkillmod))
+      var_00 = var_00 + self.weaponpassivespeedonkillmod;
 
-  var_00 = var_00 + scripts\mp\perks\weaponpassives::passivecolddamagegetspeedmod(self);
+    var_00 = var_00 + scripts\mp\perks\weaponpassives::passivecolddamagegetspeedmod(self);
 
-  if (isdefined(self.weaponpassivefastrechamberspeedmod))
-  var_00 = var_00 + self.weaponpassivefastrechamberspeedmod;
+    if(isdefined(self.weaponpassivefastrechamberspeedmod))
+      var_00 = var_00 + self.weaponpassivefastrechamberspeedmod;
 
-  if (isdefined(self.speedonkillmod))
-  var_00 = var_00 + self.speedonkillmod;
+    if(isdefined(self.speedonkillmod))
+      var_00 = var_00 + self.speedonkillmod;
   }
 
   self.weaponspeed = var_00;
 
-  if (!isdefined(self.combatspeedscalar))
-  self.combatspeedscalar = 1;
+  if(!isdefined(self.combatspeedscalar))
+    self.combatspeedscalar = 1;
 
   var_00 = var_00 + (self.movespeedscaler - 1.0);
   var_00 = var_00 + (self.combatspeedscalar - 1.0);
   var_00 = clamp(var_00, 0.0, 1.08);
 
-  if (isdefined(self.fastcrouchspeedmod))
-  var_00 = var_00 + self.fastcrouchspeedmod;
+  if(isdefined(self.fastcrouchspeedmod))
+    var_00 = var_00 + self.fastcrouchspeedmod;
 
   self setmovespeedscale(var_00);
 }
@@ -4395,42 +4378,40 @@ getplayerspeedbyweapon(var_00) {
   var_01 = 1.0;
   self.weaponlist = self getweaponslistprimaries();
 
-  if (!self.weaponlist.size)
-  var_01 = 0.94;
-  else
-  {
-  var_02 = self getcurrentweapon();
+  if(!self.weaponlist.size)
+    var_01 = 0.94;
+  else {
+    var_02 = self getcurrentweapon();
 
-  if (scripts\mp\utility\game::issuperweapon(var_02))
-  var_01 = scripts\mp\supers::func_7FD0(var_02);
-  else if (scripts\mp\utility\game::func_9E0D(var_02))
-  var_01 = func_7ECD(var_02);
-  else if (scripts\mp\utility\game::iskillstreakweapon(var_02))
-  var_01 = 0.94;
-  else if (issubstr(var_02, "iw7_mauler_mpl_damage"))
-  var_01 = 0.87;
-  else if (issubstr(var_02, "iw7_udm45_mpl"))
-  var_01 = 0.95;
-  else if (issubstr(var_02, "iw7_rvn") && self _meth_8519(var_02))
-  var_01 = 1.0;
-  else if (issubstr(var_02, "iw7_longshot") && self _meth_8519(var_02))
-  var_01 = 0.98;
-  else
-  {
-  var_03 = weaponinventorytype(var_02);
+    if(scripts\mp\utility\game::issuperweapon(var_02))
+      var_01 = scripts\mp\supers::func_7FD0(var_02);
+    else if(scripts\mp\utility\game::func_9E0D(var_02))
+      var_01 = func_7ECD(var_02);
+    else if(scripts\mp\utility\game::iskillstreakweapon(var_02))
+      var_01 = 0.94;
+    else if(issubstr(var_02, "iw7_mauler_mpl_damage"))
+      var_01 = 0.87;
+    else if(issubstr(var_02, "iw7_udm45_mpl"))
+      var_01 = 0.95;
+    else if(issubstr(var_02, "iw7_rvn") && self _meth_8519(var_02))
+      var_01 = 1.0;
+    else if(issubstr(var_02, "iw7_longshot") && self _meth_8519(var_02))
+      var_01 = 0.98;
+    else {
+      var_03 = weaponinventorytype(var_02);
 
-  if (var_03 != "primary" && var_03 != "altmode") {
-  if (isdefined(self.saved_lastweapon))
-  var_02 = self.saved_lastweapon;
-  else
-  var_02 = undefined;
-  }
+      if(var_03 != "primary" && var_03 != "altmode") {
+        if(isdefined(self.saved_lastweapon))
+          var_02 = self.saved_lastweapon;
+        else
+          var_02 = undefined;
+      }
 
-  if (!isdefined(var_02) || !self hasweapon(var_02))
-  var_01 = _meth_8237();
-  else
-  var_01 = _meth_8236(var_02);
-  }
+      if(!isdefined(var_02) || !self hasweapon(var_02))
+        var_01 = _meth_8237();
+      else
+        var_01 = _meth_8236(var_02);
+    }
   }
 
   var_01 = clampweaponspeed(var_01);
@@ -4438,33 +4419,33 @@ getplayerspeedbyweapon(var_00) {
 }
 
 stancerecoiladjuster() {
-  if (!isplayer(self))
-  return;
-
+  if(!isplayer(self)) {
+    return;
+  }
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
   self notifyonplayercommand("adjustedStance", "+stance");
   self notifyonplayercommand("adjustedStance", "+goStand");
 
-  if (!level.console && !isai(self)) {
-  self notifyonplayercommand("adjustedStance", "+togglecrouch");
-  self notifyonplayercommand("adjustedStance", "toggleprone");
-  self notifyonplayercommand("adjustedStance", "+movedown");
-  self notifyonplayercommand("adjustedStance", "-movedown");
-  self notifyonplayercommand("adjustedStance", "+prone");
-  self notifyonplayercommand("adjustedStance", "-prone");
+  if(!level.console && !isai(self)) {
+    self notifyonplayercommand("adjustedStance", "+togglecrouch");
+    self notifyonplayercommand("adjustedStance", "toggleprone");
+    self notifyonplayercommand("adjustedStance", "+movedown");
+    self notifyonplayercommand("adjustedStance", "-movedown");
+    self notifyonplayercommand("adjustedStance", "+prone");
+    self notifyonplayercommand("adjustedStance", "-prone");
   }
 
   for (;;) {
-  scripts\engine\utility::waittill_any("adjustedStance", "sprint_begin", "weapon_change");
-  wait 0.5;
+    scripts\engine\utility::waittill_any("adjustedStance", "sprint_begin", "weapon_change");
+    wait 0.5;
 
-  if (isdefined(self.onhelisniper) && self.onhelisniper)
-  continue;
-
-  var_00 = self getstance();
-  stancerecoilupdate(var_00);
+    if(isdefined(self.onhelisniper) && self.onhelisniper) {
+      continue;
+    }
+    var_00 = self getstance();
+    stancerecoilupdate(var_00);
   }
 }
 
@@ -4472,82 +4453,80 @@ stancerecoilupdate(var_00) {
   var_01 = self getcurrentprimaryweapon();
   var_02 = 0;
 
-  if (isrecoilreducingweapon(var_01))
-  var_02 = getrecoilreductionvalue();
+  if(isrecoilreducingweapon(var_01))
+    var_02 = getrecoilreductionvalue();
 
-  if (var_00 == "prone") {
-  var_03 = scripts\mp\utility\game::getweapongroup(var_01);
+  if(var_00 == "prone") {
+    var_03 = scripts\mp\utility\game::getweapongroup(var_01);
 
-  if (var_03 == "weapon_lmg") {
-  scripts\mp\utility\game::setrecoilscale(0, 0);
-  return;
-  }
+    if(var_03 == "weapon_lmg") {
+      scripts\mp\utility\game::setrecoilscale(0, 0);
+      return;
+    }
 
-  if (var_03 == "weapon_sniper") {
-  if (issubstr(var_01, "barrelbored")) {
-  scripts\mp\utility\game::setrecoilscale(0, 0 + var_02);
-  return;
-  }
+    if(var_03 == "weapon_sniper") {
+      if(issubstr(var_01, "barrelbored")) {
+        scripts\mp\utility\game::setrecoilscale(0, 0 + var_02);
+        return;
+      }
 
-  scripts\mp\utility\game::setrecoilscale(0, 0 + var_02);
-  return;
-  return;
-  }
+      scripts\mp\utility\game::setrecoilscale(0, 0 + var_02);
+      return;
+      return;
+    }
 
-  scripts\mp\utility\game::setrecoilscale();
-  return;
-  return;
-  }
-  else if (var_00 == "crouch") {
-  var_03 = scripts\mp\utility\game::getweapongroup(var_01);
+    scripts\mp\utility\game::setrecoilscale();
+    return;
+    return;
+  } else if(var_00 == "crouch") {
+    var_03 = scripts\mp\utility\game::getweapongroup(var_01);
 
-  if (var_03 == "weapon_lmg") {
-  scripts\mp\utility\game::setrecoilscale(0, 0);
-  return;
-  }
+    if(var_03 == "weapon_lmg") {
+      scripts\mp\utility\game::setrecoilscale(0, 0);
+      return;
+    }
 
-  if (var_03 == "weapon_sniper") {
-  if (issubstr(var_01, "barrelbored")) {
-  scripts\mp\utility\game::setrecoilscale(0, 0 + var_02);
-  return;
-  }
+    if(var_03 == "weapon_sniper") {
+      if(issubstr(var_01, "barrelbored")) {
+        scripts\mp\utility\game::setrecoilscale(0, 0 + var_02);
+        return;
+      }
 
-  scripts\mp\utility\game::setrecoilscale(0, 0 + var_02);
-  return;
-  return;
-  }
+      scripts\mp\utility\game::setrecoilscale(0, 0 + var_02);
+      return;
+      return;
+    }
 
-  scripts\mp\utility\game::setrecoilscale();
-  return;
-  return;
-  }
-  else if (var_02 > 0)
-  scripts\mp\utility\game::setrecoilscale(0, var_02);
+    scripts\mp\utility\game::setrecoilscale();
+    return;
+    return;
+  } else if(var_02 > 0)
+    scripts\mp\utility\game::setrecoilscale(0, var_02);
   else
-  scripts\mp\utility\game::setrecoilscale();
+    scripts\mp\utility\game::setrecoilscale();
 }
 
 semtexused(var_00) {
-  if (!isdefined(var_00))
-  return;
-
-  if (!isdefined(var_0.weapon_name))
-  return;
-
+  if(!isdefined(var_00)) {
+    return;
+  }
+  if(!isdefined(var_0.weapon_name)) {
+    return;
+  }
   var_0.originalowner = self;
   var_00 waittill("missile_stuck", var_01);
   var_00 thread scripts\mp\shellshock::grenade_earthquake();
 
-  if (isplayer(var_01) || isagent(var_01))
-  grenadestuckto(var_00, var_01);
+  if(isplayer(var_01) || isagent(var_01))
+    grenadestuckto(var_00, var_01);
 
   var_00 explosivehandlemovers(undefined);
 }
 
 turret_monitoruse() {
   for (;;) {
-  self waittill("trigger", var_00);
-  thread turret_playerthread(var_00);
+    self waittill("trigger", var_00);
+    thread turret_playerthread(var_00);
   }
 }
 
@@ -4560,8 +4539,8 @@ turret_playerthread(var_00) {
 }
 
 spawnmine(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_04))
-  var_04 = (0, randomfloat(360), 0);
+  if(!isdefined(var_04))
+    var_04 = (0, randomfloat(360), 0);
 
   var_05 = level.weaponconfigs[var_02];
   var_06 = spawn("script_model", var_00);
@@ -4576,27 +4555,26 @@ spawnmine(var_00, var_01, var_02, var_03, var_04) {
   var_6.killcament setscriptmoverkillcam("explosive");
   var_07 = scripts\mp\utility\game::getequipmenttype(var_02);
 
-  if (!isdefined(var_07))
-  var_07 = "lethal";
+  if(!isdefined(var_07))
+    var_07 = "lethal";
 
-  if (var_07 == "lethal")
-  var_01 onlethalequipmentplanted(var_06, var_03);
-  else if (var_07 == "tactical")
-  var_01 ontacticalequipmentplanted(var_06, var_03);
-  else
-  {}
+  if(var_07 == "lethal")
+    var_01 onlethalequipmentplanted(var_06, var_03);
+  else if(var_07 == "tactical")
+    var_01 ontacticalequipmentplanted(var_06, var_03);
+  else {}
 
-  if (isdefined(var_5.bombsquadmodel))
-  var_06 thread createbombsquadmodel(var_5.bombsquadmodel, "tag_origin", var_01);
+  if(isdefined(var_5.bombsquadmodel))
+    var_06 thread createbombsquadmodel(var_5.bombsquadmodel, "tag_origin", var_01);
 
-  if (isdefined(var_5.mine_beacon))
-  var_06 thread doblinkinglight("tag_fx", var_5.mine_beacon["friendly"], var_5.mine_beacon["enemy"]);
+  if(isdefined(var_5.mine_beacon))
+    var_06 thread doblinkinglight("tag_fx", var_5.mine_beacon["friendly"], var_5.mine_beacon["enemy"]);
 
   var_06 thread func_F692(var_1.pers["team"], var_5.headiconoffset);
   var_08 = undefined;
 
-  if (self != level)
-  var_08 = self getlinkedparent();
+  if(self != level)
+    var_08 = self getlinkedparent();
 
   var_06 explosivehandlemovers(var_08);
   var_06 thread mineproximitytrigger(var_08);
@@ -4612,8 +4590,8 @@ spawnmine(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_108E7(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_04))
-  var_04 = (0, randomfloat(360), 0);
+  if(!isdefined(var_04))
+    var_04 = (0, randomfloat(360), 0);
 
   var_05 = level.weaponconfigs[var_02];
   var_06 = spawn("script_model", var_00);
@@ -4628,8 +4606,8 @@ func_108E7(var_00, var_01, var_02, var_03, var_04) {
   var_06 thread func_F692(var_1.pers["team"], var_5.headiconoffset);
   var_07 = undefined;
 
-  if (self != level)
-  var_07 = self getlinkedparent();
+  if(self != level)
+    var_07 = self getlinkedparent();
 
   var_06 explosivehandlemovers(var_07, 1);
   var_06 thread mineproximitytrigger(var_07);
@@ -4642,8 +4620,8 @@ func_108E7(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_108E5(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  if (!isdefined(var_04))
-  var_04 = (0, randomfloat(360), 0);
+  if(!isdefined(var_04))
+    var_04 = (0, randomfloat(360), 0);
 
   var_07 = level.weaponconfigs[var_02];
   var_08 = spawn("script_model", var_00);
@@ -4654,18 +4632,18 @@ func_108E5(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_8.weapon_name = var_02;
   var_8.config = var_07;
 
-  if (isdefined(var_05))
-  var_8.func_AC75 = var_05;
+  if(isdefined(var_05))
+    var_8.func_AC75 = var_05;
   else
-  var_8.func_AC75 = 45;
+    var_8.func_AC75 = 45;
 
   var_01 ontacticalequipmentplanted(var_08, var_03);
   var_08 thread createbombsquadmodel(var_7.bombsquadmodel, "tag_origin", var_01);
   var_08 thread func_F692(var_1.pers["team"], var_7.headiconoffset);
   var_09 = undefined;
 
-  if (self != level)
-  var_09 = self getlinkedparent();
+  if(self != level)
+    var_09 = self getlinkedparent();
 
   var_08 explosivehandlemovers(var_09, 1);
   var_08 thread mineproximitytrigger(var_09);
@@ -4676,9 +4654,9 @@ func_108E5(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_08 thread func_D501();
   var_08 thread func_139F0();
 
-  if (isdefined(var_06) && var_06) {
-  var_08 makeexplosiveusable();
-  var_08 thread minedamagemonitor();
+  if(isdefined(var_06) && var_06) {
+    var_08 makeexplosiveusable();
+    var_08 thread minedamagemonitor();
   }
 
   return var_08;
@@ -4699,26 +4677,26 @@ func_E845(var_00, var_01) {
   triggerfx(var_04);
   var_05 = 8.0;
 
-  foreach (var_07 in level.players) {
-  var_7.func_9E44 = 0;
-  var_07 thread func_20C2(var_02);
+  foreach(var_07 in level.players) {
+    var_7.func_9E44 = 0;
+    var_07 thread func_20C2(var_02);
   }
 
   while (var_05 > 0.0) {
-  foreach (var_07 in level.players) {
-  if (var_07 istouching(var_02) && !var_7.func_9E44)
-  var_07 thread func_20C2(var_02);
+    foreach(var_07 in level.players) {
+      if(var_07 istouching(var_02) && !var_7.func_9E44)
+        var_07 thread func_20C2(var_02);
+    }
+
+    wait 0.2;
+    var_05 = var_05 - 0.2;
   }
 
-  wait 0.2;
-  var_05 = var_05 - 0.2;
-  }
+  foreach(var_07 in level.players) {
+    var_07 notify("distortion_field_ended");
 
-  foreach (var_07 in level.players) {
-  var_07 notify("distortion_field_ended");
-
-  foreach (var_14 in level.players)
-  var_07 giveperkequipment(var_14);
+    foreach(var_14 in level.players)
+    var_07 giveperkequipment(var_14);
   }
 
   var_04 delete();
@@ -4732,25 +4710,25 @@ func_20C2(var_00) {
   self endon("disconnect");
 
   while (isdefined(var_00) && self istouching(var_00) && !scripts\mp\killstreaks\emp_common::isemped()) {
-  self setblurforplayer(4, 1);
-  self.func_9E44 = 1;
-  thread func_B9CF();
+    self setblurforplayer(4, 1);
+    self.func_9E44 = 1;
+    thread func_B9CF();
 
-  foreach (var_02 in level.players)
-  self hidefromplayer(var_02);
+    foreach(var_02 in level.players)
+    self hidefromplayer(var_02);
 
-  scripts\engine\utility::waittill_any_timeout(1.4, "emp_damage");
+    scripts\engine\utility::waittill_any_timeout(1.4, "emp_damage");
 
-  foreach (var_02 in level.players)
-  self giveperkequipment(var_02);
+    foreach(var_02 in level.players)
+    self giveperkequipment(var_02);
 
-  wait 0.1;
+    wait 0.1;
   }
 
   self setblurforplayer(0, 0.25);
   self.func_9E44 = 0;
 
-  foreach (var_02 in level.players)
+  foreach(var_02 in level.players)
   var_02 giveperkequipment(var_02);
 }
 
@@ -4759,16 +4737,16 @@ func_B9CF() {
   var_00 = 0;
 
   while (!var_00) {
-  var_00 = scripts\mp\killstreaks\emp_common::isemped();
-  scripts\engine\utility::waitframe();
+    var_00 = scripts\mp\killstreaks\emp_common::isemped();
+    scripts\engine\utility::waitframe();
   }
 
   self notify("emp_damage");
 }
 
 func_10910(var_00, var_01, var_02, var_03, var_04) {
-  if (!isdefined(var_04))
-  var_04 = (0, randomfloat(360), 0);
+  if(!isdefined(var_04))
+    var_04 = (0, randomfloat(360), 0);
 
   var_05 = level.weaponconfigs[var_02];
   var_06 = spawn("script_model", var_00);
@@ -4787,8 +4765,8 @@ func_10910(var_00, var_01, var_02, var_03, var_04) {
   var_01 notify("sonic_sensor_used");
   var_07 = undefined;
 
-  if (self != level)
-  var_07 = self getlinkedparent();
+  if(self != level)
+    var_07 = self getlinkedparent();
 
   var_06 explosivehandlemovers(var_07, 1);
   var_06 thread scripts\mp\shellshock::grenade_earthquake();
@@ -4804,11 +4782,11 @@ func_10412() {
   scripts\engine\utility::waittill_any("death", "mine_destroyed");
   self.owner notify("sonic_sensor_update");
 
-  foreach (var_01 in self.owner.plantedtacticalequip) {
-  if (isdefined(var_01) && var_1.weapon_name == "sonic_sensor_mp") {
-  var_01 deleteexplosive();
-  scripts\engine\utility::array_remove(self.owner.plantedtacticalequip, var_01);
-  }
+  foreach(var_01 in self.owner.plantedtacticalequip) {
+    if(isdefined(var_01) && var_1.weapon_name == "sonic_sensor_mp") {
+      var_01 deleteexplosive();
+      scripts\engine\utility::array_remove(self.owner.plantedtacticalequip, var_01);
+    }
   }
 }
 
@@ -4816,66 +4794,66 @@ func_139F0(var_00) {
   self endon("death");
 
   while (self.func_AC75 > 0) {
-  self.func_AC75--;
-  wait 1;
+    self.func_AC75--;
+    wait 1;
   }
 
   self playsound(self.config.onexplodesfx);
   var_01 = self gettagorigin("tag_origin");
   playfx(self.config.onexplodevfx, var_01);
 
-  if (isdefined(self.config.func_127BF)) {
-  self.config.func_127BF.func_DBD8 = undefined;
-  self.config.func_127BF = undefined;
+  if(isdefined(self.config.func_127BF)) {
+    self.config.func_127BF.func_DBD8 = undefined;
+    self.config.func_127BF = undefined;
   }
 
-  if (!isdefined(var_00) || var_00)
-  self getplayermodelname();
+  if(!isdefined(var_00) || var_00)
+    self getplayermodelname();
 
   deleteexplosive();
 }
 
 func_66AA(var_00, var_01) {
-  if (isdefined(var_00)) {
-  switch (var_00) {
-  case "cryo_mine_mp":
-  return 1;
-  }
+  if(isdefined(var_00)) {
+    switch (var_00) {
+      case "cryo_mine_mp":
+        return 1;
+    }
 
-  if (var_01 == "MOD_IMPACT") {
-  switch (var_00) {
-  case "trip_mine_mp":
-  case "splash_grenade_mp":
-  case "c4_mp":
-  return 1;
-  }
-  } else {
-  switch (var_00) {
-  case "gltacburst_big":
-  case "gltacburst":
-  case "blackout_grenade_mp":
-  case "concussion_grenade_mp":
-  return 1;
-  }
-  }
+    if(var_01 == "MOD_IMPACT") {
+      switch (var_00) {
+        case "trip_mine_mp":
+        case "splash_grenade_mp":
+        case "c4_mp":
+          return 1;
+      }
+    } else {
+      switch (var_00) {
+        case "gltacburst_big":
+        case "gltacburst":
+        case "blackout_grenade_mp":
+        case "concussion_grenade_mp":
+          return 1;
+      }
+    }
   }
 
   return 0;
 }
 
 deleteallgrenades() {
-  if (isdefined(level.grenades)) {
-  foreach (var_01 in level.grenades) {
-  if (isdefined(var_01) && !scripts\mp\utility\game::istrue(var_1.exploding) && !isplantedequipment(var_01))
-  var_01 delete();
-  }
+  if(isdefined(level.grenades)) {
+    foreach(var_01 in level.grenades) {
+      if(isdefined(var_01) && !scripts\mp\utility\game::istrue(var_1.exploding) && !isplantedequipment(var_01))
+        var_01 delete();
+    }
   }
 
-  if (isdefined(level.missiles)) {
-  foreach (var_04 in level.missiles) {
-  if (isdefined(var_04) && !scripts\mp\utility\game::istrue(var_4.exploding) && !isplantedequipment(var_04))
-  var_04 delete();
-  }
+  if(isdefined(level.missiles)) {
+    foreach(var_04 in level.missiles) {
+      if(isdefined(var_04) && !scripts\mp\utility\game::istrue(var_4.exploding) && !isplantedequipment(var_04))
+        var_04 delete();
+    }
   }
 }
 
@@ -4896,71 +4874,70 @@ minedamagemonitor() {
   var_03 = scripts\engine\utility::ter_op(var_01, "hitequip", "");
 
   for (;;) {
-  self waittill("damage", var_04, var_00, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
-  var_12 = scripts\mp\utility\game::func_13CA1(var_12, var_16);
+    self waittill("damage", var_04, var_00, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
+    var_12 = scripts\mp\utility\game::func_13CA1(var_12, var_16);
 
-  if (!isplayer(var_00) && !isagent(var_00))
-  continue;
+    if(!isplayer(var_00) && !isagent(var_00)) {
+      continue;
+    }
+    if(isdefined(var_12) && isendstr(var_12, "betty_mp")) {
+      continue;
+    }
+    if(!friendlyfirecheck(self.owner, var_00)) {
+      continue;
+    }
+    if(isballweapon(var_12)) {
+      continue;
+    }
+    if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_00)) {
+      continue;
+    }
+    if(func_66AA(var_12, var_07)) {
+      continue;
+    }
+    var_17 = scripts\engine\utility::ter_op(scripts\mp\utility\game::isfmjdamage(var_12, var_07) || var_04 >= 80, 2, 1);
+    var_02 = var_02 - var_17;
+    scripts\mp\powers::equipmenthit(self.owner, var_00, var_12, var_07);
 
-  if (isdefined(var_12) && isendstr(var_12, "betty_mp"))
-  continue;
-
-  if (!friendlyfirecheck(self.owner, var_00))
-  continue;
-
-  if (isballweapon(var_12))
-  continue;
-
-  if (scripts\mp\equipment\phase_shift::isentityphaseshifted(var_00))
-  continue;
-
-  if (func_66AA(var_12, var_07))
-  continue;
-
-  var_17 = scripts\engine\utility::ter_op(scripts\mp\utility\game::isfmjdamage(var_12, var_07) || var_04 >= 80, 2, 1);
-  var_02 = var_02 - var_17;
-  scripts\mp\powers::equipmenthit(self.owner, var_00, var_12, var_07);
-
-  if (var_02 <= 0)
-  break;
-  else
-  var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_03);
+    if(var_02 <= 0) {
+      break;
+    } else
+      var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_03);
   }
 
   self notify("mine_destroyed");
 
-  if (isdefined(var_07) && (issubstr(var_07, "MOD_GRENADE") || issubstr(var_07, "MOD_EXPLOSIVE")))
-  self.waschained = 1;
+  if(isdefined(var_07) && (issubstr(var_07, "MOD_GRENADE") || issubstr(var_07, "MOD_EXPLOSIVE")))
+    self.waschained = 1;
 
-  if (isdefined(var_11) && var_11 & level.idflags_penetration)
-  self.wasdamagedfrombulletpenetration = 1;
+  if(isdefined(var_11) && var_11 & level.idflags_penetration)
+    self.wasdamagedfrombulletpenetration = 1;
 
-  if (isdefined(var_11) && var_11 & level.idflags_no_team_protection)
-  self.wasdamagedfrombulletricochet = 1;
+  if(isdefined(var_11) && var_11 & level.idflags_no_team_protection)
+    self.wasdamagedfrombulletricochet = 1;
 
   self.wasdamaged = 1;
 
-  if (isdefined(var_00))
-  self.damagedby = var_00;
+  if(isdefined(var_00))
+    self.damagedby = var_00;
 
-  if (isdefined(self.killcament))
-  self.killcament.damagedby = var_00;
+  if(isdefined(self.killcament))
+    self.killcament.damagedby = var_00;
 
-  if (isplayer(var_00)) {
-  var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_03);
+  if(isplayer(var_00)) {
+    var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_03);
 
-  if (var_00 != self.owner && var_0.team != self.owner.team)
-  var_00 scripts\mp\killstreaks\killstreaks::_meth_83A0();
+    if(var_00 != self.owner && var_0.team != self.owner.team)
+      var_00 scripts\mp\killstreaks\killstreaks::_meth_83A0();
   }
 
-  if (level.teambased) {
-  if (isdefined(var_00) && isdefined(var_0.pers["team"]) && isdefined(self.owner) && isdefined(self.owner.pers["team"])) {
-  if (var_0.pers["team"] != self.owner.pers["team"])
-  var_00 notify("destroyed_equipment");
-  }
-  }
-  else if (isdefined(self.owner) && isdefined(var_00) && var_00 != self.owner)
-  var_00 notify("destroyed_equipment");
+  if(level.teambased) {
+    if(isdefined(var_00) && isdefined(var_0.pers["team"]) && isdefined(self.owner) && isdefined(self.owner.pers["team"])) {
+      if(var_0.pers["team"] != self.owner.pers["team"])
+        var_00 notify("destroyed_equipment");
+    }
+  } else if(isdefined(self.owner) && isdefined(var_00) && var_00 != self.owner)
+    var_00 notify("destroyed_equipment");
 
   scripts\mp\missions::minedestroyed(self, var_00, var_07);
   self notify("detonateExplosive", var_00);
@@ -4974,8 +4951,8 @@ mineproximitytrigger(var_00, var_01) {
   var_02 = self.config;
   wait(var_2.armtime);
 
-  if (isdefined(var_2.mine_beacon))
-  thread doblinkinglight("tag_fx", var_2.mine_beacon["friendly"], var_2.mine_beacon["enemy"]);
+  if(isdefined(var_2.mine_beacon))
+    thread doblinkinglight("tag_fx", var_2.mine_beacon["friendly"], var_2.mine_beacon["enemy"]);
 
   var_03 = scripts\engine\utility::ter_op(isdefined(var_2.minedetectionradius), var_2.minedetectionradius, level.minedetectionradius);
   var_04 = scripts\engine\utility::ter_op(isdefined(var_2.minedetectionheight), var_2.minedetectionheight, level.minedetectionheight);
@@ -4983,61 +4960,62 @@ mineproximitytrigger(var_00, var_01) {
   var_5.owner = self;
   thread minedeletetrigger(var_05);
 
-  if (isdefined(var_00)) {
-  var_05 getrankxp();
-  var_05 linkto(var_00);
+  if(isdefined(var_00)) {
+    var_05 getrankxp();
+    var_05 linkto(var_00);
   }
 
   self.damagearea = var_05;
   var_06 = undefined;
 
   for (;;) {
-  var_05 waittill("trigger", var_06);
+    var_05 waittill("trigger", var_06);
 
-  if (!isdefined(var_06))
-  continue;
+    if(!isdefined(var_06)) {
+      continue;
+    }
+    if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_06)) {
+      continue;
+    }
+    if(getdvarint("scr_minesKillOwner") != 1) {
+      if(isdefined(self.owner)) {
+        if(var_06 == self.owner) {
+          continue;
+        }
+        if(isdefined(var_6.owner) && var_6.owner == self.owner)
+          continue;
+      }
 
-  if (!scripts\mp\equipment\phase_shift::areentitiesinphase(self, var_06))
-  continue;
+      if(!friendlyfirecheck(self.owner, var_06, 0))
+        continue;
+    }
 
-  if (getdvarint("scr_minesKillOwner") != 1) {
-  if (isdefined(self.owner)) {
-  if (var_06 == self.owner)
-  continue;
-
-  if (isdefined(var_6.owner) && var_6.owner == self.owner)
-  continue;
-  }
-
-  if (!friendlyfirecheck(self.owner, var_06, 0))
-  continue;
-  }
-
-  if (lengthsquared(var_06 getentityvelocity()) < 10)
-  continue;
-
-  if (self.weapon_name == "mobile_radar_mp" && !func_B8F7(var_06))
-  continue;
-
-  if (isdefined(var_01) && var_01 || var_06 damageconetrace(self.origin, self) > 0)
-  break;
+    if(lengthsquared(var_06 getentityvelocity()) < 10) {
+      continue;
+    }
+    if(self.weapon_name == "mobile_radar_mp" && !func_B8F7(var_06)) {
+      continue;
+    }
+    if(isdefined(var_01) && var_01 || var_06 damageconetrace(self.origin, self) > 0) {
+      break;
+    }
   }
 
   self notify("mine_triggered");
   self.config.func_127BF = var_06;
 
-  if (isdefined(self.config.ontriggeredsfx))
-  self playsound(self.config.ontriggeredsfx);
+  if(isdefined(self.config.ontriggeredsfx))
+    self playsound(self.config.ontriggeredsfx);
 
   explosivetrigger(var_06, level.minedetectiongraceperiod, "mine");
-  self thread [[self.config.ontriggeredfunc]]();
+  self thread[[self.config.ontriggeredfunc]]();
 }
 
 minedeletetrigger(var_00) {
   scripts\engine\utility::waittill_any("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
 
-  if (isdefined(var_00))
-  var_00 delete();
+  if(isdefined(var_00))
+    var_00 delete();
 }
 
 func_BBC4() {
@@ -5045,23 +5023,23 @@ func_BBC4() {
   self endon("death");
 
   for (;;) {
-  self waittill("emp_damage", var_00, var_01);
-  equipmentempstunvfx();
-  stopblinkinglight();
+    self waittill("emp_damage", var_00, var_01);
+    equipmentempstunvfx();
+    stopblinkinglight();
 
-  if (isdefined(self.damagearea))
-  self.damagearea delete();
+    if(isdefined(self.damagearea))
+      self.damagearea delete();
 
-  self.disabled = 1;
-  self notify("disabled");
-  wait(var_01);
+    self.disabled = 1;
+    self notify("disabled");
+    wait(var_01);
 
-  if (isdefined(self)) {
-  self.disabled = undefined;
-  self notify("enabled");
-  var_02 = self getlinkedparent();
-  thread mineproximitytrigger(var_02);
-  }
+    if(isdefined(self)) {
+      self.disabled = undefined;
+      self notify("enabled");
+      var_02 = self getlinkedparent();
+      thread mineproximitytrigger(var_02);
+    }
   }
 }
 
@@ -5078,8 +5056,8 @@ minebounce() {
   self playsound(self.config.onlaunchsfx);
   playfx(level.mine_launch, self.origin);
 
-  if (isdefined(self.trigger))
-  self.trigger delete();
+  if(isdefined(self.trigger))
+    self.trigger delete();
 
   var_00 = self.origin + (0, 0, 64);
   self moveto(var_00, 0.7, 0, 0.65);
@@ -5095,36 +5073,36 @@ mineexplodeonnotify() {
   level endon("game_ended");
   self waittill("detonateExplosive", var_00);
 
-  if (!isdefined(self) || !isdefined(self.owner))
-  return;
-
-  if (!isdefined(var_00))
-  var_00 = self.owner;
+  if(!isdefined(self) || !isdefined(self.owner)) {
+    return;
+  }
+  if(!isdefined(var_00))
+    var_00 = self.owner;
 
   var_01 = self.config;
   var_02 = var_1.vfxtag;
 
-  if (!isdefined(var_02))
-  var_02 = "tag_fx";
+  if(!isdefined(var_02))
+    var_02 = "tag_fx";
 
   var_03 = self gettagorigin(var_02);
 
-  if (!isdefined(var_03))
-  var_03 = self gettagorigin("tag_origin");
+  if(!isdefined(var_03))
+    var_03 = self gettagorigin("tag_origin");
 
   self notify("explode", var_03);
   wait 0.05;
 
-  if (!isdefined(self) || !isdefined(self.owner))
-  return;
-
+  if(!isdefined(self) || !isdefined(self.owner)) {
+    return;
+  }
   self hide();
 
-  if (isdefined(var_1.onexplodefunc))
-  self thread [[var_1.onexplodefunc]]();
+  if(isdefined(var_1.onexplodefunc))
+    self thread[[var_1.onexplodefunc]]();
 
-  if (isdefined(var_1.onexplodesfx))
-  self playsound(var_1.onexplodesfx);
+  if(isdefined(var_1.onexplodesfx))
+    self playsound(var_1.onexplodesfx);
 
   var_04 = scripts\engine\utility::ter_op(isdefined(var_1.onexplodevfx), var_1.onexplodevfx, level.mine_explode);
   playfx(var_04, var_03);
@@ -5132,11 +5110,11 @@ mineexplodeonnotify() {
   var_06 = scripts\engine\utility::ter_op(isdefined(var_1.minedamagemax), var_1.minedamagemax, level.minedamagemax);
   var_07 = scripts\engine\utility::ter_op(isdefined(var_1.minedamageradius), var_1.minedamageradius, level.minedamageradius);
 
-  if (var_06 > 0)
-  self radiusdamage(self.origin, var_07, var_06, var_05, var_00, "MOD_EXPLOSIVE", self.weapon_name);
+  if(var_06 > 0)
+    self radiusdamage(self.origin, var_07, var_06, var_05, var_00, "MOD_EXPLOSIVE", self.weapon_name);
 
-  if (isdefined(self.owner))
-  self.owner thread scripts\mp\utility\game::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
+  if(isdefined(self.owner))
+    self.owner thread scripts\mp\utility\game::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
 
   wait 0.2;
   deleteexplosive();
@@ -5146,8 +5124,8 @@ minesensorbounce() {
   self playsound(self.config.onlaunchsfx);
   playfx(self.config.launchvfx, self.origin);
 
-  if (isdefined(self.trigger))
-  self.trigger delete();
+  if(isdefined(self.trigger))
+    self.trigger delete();
 
   self hidepart("tag_sensor");
   stopblinkinglight();
@@ -5172,76 +5150,76 @@ func_B77D() {
   level endon("game_ended");
   self waittill("detonateExplosive", var_00);
 
-  if (!isdefined(self) || !isdefined(self.owner))
-  return;
-
-  if (!isdefined(var_00))
-  var_00 = self.owner;
+  if(!isdefined(self) || !isdefined(self.owner)) {
+    return;
+  }
+  if(!isdefined(var_00))
+    var_00 = self.owner;
 
   self playsound(self.config.onexplodesfx);
   var_01 = undefined;
 
-  if (isdefined(self.sensor))
-  var_01 = self.sensor gettagorigin("tag_sensor");
+  if(isdefined(self.sensor))
+    var_01 = self.sensor gettagorigin("tag_sensor");
   else
-  var_01 = self gettagorigin("tag_origin");
+    var_01 = self gettagorigin("tag_origin");
 
   playfx(self.config.onexplodevfx, var_01);
   scripts\engine\utility::waitframe();
 
-  if (!isdefined(self) || !isdefined(self.owner))
-  return;
-
-  if (isdefined(self.sensor))
-  self.sensor delete();
+  if(!isdefined(self) || !isdefined(self.owner)) {
+    return;
+  }
+  if(isdefined(self.sensor))
+    self.sensor delete();
   else
-  self hidepart("tag_sensor");
+    self hidepart("tag_sensor");
 
   self.owner thread scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
   var_02 = [];
 
-  foreach (var_04 in level.characters) {
-  if (var_4.team == self.owner.team)
-  continue;
-
-  if (!scripts\mp\utility\game::isreallyalive(var_04))
-  continue;
-
-  if (var_04 scripts\mp\utility\game::_hasperk("specialty_heartbreaker"))
-  continue;
-
-  if (distance2d(self.origin, var_4.origin) < 300)
-  var_2[var_2.size] = var_04;
+  foreach(var_04 in level.characters) {
+    if(var_4.team == self.owner.team) {
+      continue;
+    }
+    if(!scripts\mp\utility\game::isreallyalive(var_04)) {
+      continue;
+    }
+    if(var_04 scripts\mp\utility\game::_hasperk("specialty_heartbreaker")) {
+      continue;
+    }
+    if(distance2d(self.origin, var_4.origin) < 300)
+      var_2[var_2.size] = var_04;
   }
 
-  foreach (var_07 in var_02) {
-  thread func_B37F(var_07, self.owner);
-  level thread func_F236(var_07, self.owner);
+  foreach(var_07 in var_02) {
+    thread func_B37F(var_07, self.owner);
+    level thread func_F236(var_07, self.owner);
   }
 
-  if (var_2.size > 0) {
-  self.owner scripts\mp\missions::processchallenge("ch_motiondetected", var_2.size);
-  self.owner thread scripts\mp\gamelogic::threadedsetweaponstatbyname("motion_sensor", 1, "hits");
+  if(var_2.size > 0) {
+    self.owner scripts\mp\missions::processchallenge("ch_motiondetected", var_2.size);
+    self.owner thread scripts\mp\gamelogic::threadedsetweaponstatbyname("motion_sensor", 1, "hits");
   }
 
-  if (isdefined(self.owner))
-  self.owner thread scripts\mp\utility\game::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
+  if(isdefined(self.owner))
+    self.owner thread scripts\mp\utility\game::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
 
   wait 0.2;
   deleteexplosive();
 }
 
 func_B37F(var_00, var_01) {
-  if (var_00 == var_01)
-  return;
-
+  if(var_00 == var_01) {
+    return;
+  }
   var_00 endon("disconnect");
   var_02 = undefined;
 
-  if (level.teambased)
-  var_02 = scripts\mp\utility\game::outlineenableforteam(var_00, "orange", var_1.team, 0, 0, "equipment");
+  if(level.teambased)
+    var_02 = scripts\mp\utility\game::outlineenableforteam(var_00, "orange", var_1.team, 0, 0, "equipment");
   else
-  var_02 = scripts\mp\utility\game::outlineenableforplayer(var_00, "orange", var_01, 0, 0, "equipment");
+    var_02 = scripts\mp\utility\game::outlineenableforplayer(var_00, "orange", var_01, 0, 0, "equipment");
 
   var_00 thread scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
   scripts\mp\gamescore::func_11ACE(var_01, var_00, "motion_sensor_mp");
@@ -5251,12 +5229,12 @@ func_B37F(var_00, var_01) {
 }
 
 func_F236(var_00, var_01) {
-  if (var_00 == var_01)
-  return;
-
-  if (isai(var_00))
-  return;
-
+  if(var_00 == var_01) {
+    return;
+  }
+  if(isai(var_00)) {
+    return;
+  }
   var_02 = "coup_sunblind";
   var_00 setclientomnvar("ui_hud_shake", 1);
   var_00 visionsetnakedforplayer(var_02, 0.05);
@@ -5269,8 +5247,8 @@ func_B8F5() {
   self playsound(self.config.onlaunchsfx);
   playfx(self.config.launchvfx, self.origin);
 
-  if (isdefined(self.trigger))
-  self.trigger delete();
+  if(isdefined(self.trigger))
+    self.trigger delete();
 
   stopblinkinglight();
   var_00 = self.origin + (0, 0, self.config.launchheight);
@@ -5288,29 +5266,29 @@ func_B8F6() {
   level endon("game_ended");
   self waittill("detonateExplosive", var_00);
 
-  if (!isdefined(self) || !isdefined(self.owner))
-  return;
-
-  if (!isdefined(var_00))
-  var_00 = self.owner;
+  if(!isdefined(self) || !isdefined(self.owner)) {
+    return;
+  }
+  if(!isdefined(var_00))
+    var_00 = self.owner;
 
   self playsound(self.config.onexplodesfx);
   var_01 = self gettagorigin("tag_origin");
   playfx(self.config.onexplodevfx, var_01);
   scripts\engine\utility::waitframe();
 
-  if (!isdefined(self) || !isdefined(self.owner))
-  return;
-
-  if (isdefined(self.config.func_127BF)) {
-  var_02 = self.config.func_127BF;
-  var_2.func_DBD8 = 1;
-  var_02 func_10DC5(self);
+  if(!isdefined(self) || !isdefined(self.owner)) {
+    return;
+  }
+  if(isdefined(self.config.func_127BF)) {
+    var_02 = self.config.func_127BF;
+    var_2.func_DBD8 = 1;
+    var_02 func_10DC5(self);
   }
 
-  if (isdefined(self.owner)) {
-  self.owner thread scripts\mp\utility\game::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
-  self.owner scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
+  if(isdefined(self.owner)) {
+    self.owner thread scripts\mp\utility\game::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
+    self.owner scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
   }
 
   wait 0.2;
@@ -5342,22 +5320,21 @@ func_D501(var_00) {
   var_02 thread func_13A0F(self);
 
   for (;;) {
-  wait 2;
-  playfxontag(self.config.func_C4C5, var_02, "tag_origin");
+    wait 2;
+    playfxontag(self.config.func_C4C5, var_02, "tag_origin");
 
-  if (isdefined(var_00)) {
-  var_00 scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
-  var_00 playsoundonmovingent("ball_drone_3Dping");
-  }
-  else
-  self playsound("ball_drone_3Dping");
+    if(isdefined(var_00)) {
+      var_00 scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
+      var_00 playsoundonmovingent("ball_drone_3Dping");
+    } else
+      self playsound("ball_drone_3Dping");
 
-  foreach (var_04 in level.players) {
-  if (var_4.team != self.owner.team)
-  continue;
-
-  triggerportableradarping(self.origin, var_04);
-  }
+    foreach(var_04 in level.players) {
+      if(var_4.team != self.owner.team) {
+        continue;
+      }
+      triggerportableradarping(self.origin, var_04);
+    }
   }
 }
 
@@ -5371,13 +5348,13 @@ func_13B1A(var_00, var_01) {
   self endon("death");
 
   for (;;) {
-  self waittill("detonateExplosive", var_02);
-  var_0.func_DBD8 = undefined;
-  self.config.func_127BF = undefined;
-  self playsound(self.config.onexplodesfx);
-  var_03 = self gettagorigin("tag_origin");
-  playfx(self.config.onexplodevfx, var_03);
-  self delete();
+    self waittill("detonateExplosive", var_02);
+    var_0.func_DBD8 = undefined;
+    self.config.func_127BF = undefined;
+    self playsound(self.config.onexplodesfx);
+    var_03 = self gettagorigin("tag_origin");
+    playfx(self.config.onexplodevfx, var_03);
+    self delete();
   }
 }
 
@@ -5396,28 +5373,28 @@ func_13B1B(var_00, var_01) {
 func_B8F7(var_00) {
   var_01 = 1;
 
-  if (isdefined(var_0.func_DBD8))
-  var_01 = 0;
+  if(isdefined(var_0.func_DBD8))
+    var_01 = 0;
 
-  if (!isplayer(var_00))
-  var_01 = 0;
+  if(!isplayer(var_00))
+    var_01 = 0;
 
   return var_01;
 }
 
 playspinnerfx() {
-  if (isdefined(self.config.mine_spin)) {
-  self endon("death");
-  var_00 = gettime() + 1000;
+  if(isdefined(self.config.mine_spin)) {
+    self endon("death");
+    var_00 = gettime() + 1000;
 
-  while (gettime() < var_00) {
-  wait 0.05;
-  playfxontag(self.config.mine_spin, self, "tag_fx_spin1");
-  playfxontag(self.config.mine_spin, self, "tag_fx_spin3");
-  wait 0.05;
-  playfxontag(self.config.mine_spin, self, "tag_fx_spin2");
-  playfxontag(self.config.mine_spin, self, "tag_fx_spin4");
-  }
+    while (gettime() < var_00) {
+      wait 0.05;
+      playfxontag(self.config.mine_spin, self, "tag_fx_spin1");
+      playfxontag(self.config.mine_spin, self, "tag_fx_spin3");
+      wait 0.05;
+      playfxontag(self.config.mine_spin, self, "tag_fx_spin2");
+      playfxontag(self.config.mine_spin, self, "tag_fx_spin4");
+    }
   }
 }
 
@@ -5425,45 +5402,45 @@ minedamagedebug(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_6[0] = (1, 0, 0);
   var_6[1] = (0, 1, 0);
 
-  if (var_1[2] < var_05)
-  var_07 = 0;
+  if(var_1[2] < var_05)
+    var_07 = 0;
   else
-  var_07 = 1;
+    var_07 = 1;
 
   var_08 = (var_0[0], var_0[1], var_05);
   var_09 = (var_1[0], var_1[1], var_05);
   thread debugcircle(var_08, level.minedamageradius, var_6[var_07], 32);
   var_10 = distancesquared(var_00, var_01);
 
-  if (var_10 > var_02)
-  var_07 = 0;
+  if(var_10 > var_02)
+    var_07 = 0;
   else
-  var_07 = 1;
+    var_07 = 1;
 
   thread debugline(var_08, var_09, var_6[var_07]);
 }
 
 minedamageheightpassed(var_00, var_01) {
-  if (isplayer(var_01) && isalive(var_01) && var_1.sessionstate == "playing")
-  var_02 = var_01 scripts\mp\utility\game::getstancecenter();
-  else if (var_1.classname == "misc_turret")
-  var_02 = var_1.origin + (0, 0, 32);
+  if(isplayer(var_01) && isalive(var_01) && var_1.sessionstate == "playing")
+    var_02 = var_01 scripts\mp\utility\game::getstancecenter();
+  else if(var_1.classname == "misc_turret")
+    var_02 = var_1.origin + (0, 0, 32);
   else
-  var_02 = var_1.origin;
+    var_02 = var_1.origin;
 
   var_03 = 0;
   var_04 = var_0.origin[2] + var_03 - level.minedamagehalfheight;
 
-  if (var_2[2] < var_04)
-  return 0;
+  if(var_2[2] < var_04)
+    return 0;
 
   return 1;
 }
 
 mineused(var_00, var_01, var_02) {
-  if (!isalive(self)) {
-  var_00 delete();
-  return;
+  if(!isalive(self)) {
+    var_00 delete();
+    return;
   }
 
   scripts\mp\gamelogic::sethasdonecombat(self, 1);
@@ -5474,60 +5451,59 @@ minethrown(var_00, var_01, var_02, var_03, var_04) {
   self.owner = var_00;
   self waittill("missile_stuck", var_05);
 
-  if (var_01 != "trip_mine_mp") {
-  if (isdefined(var_05) && isdefined(var_5.owner)) {
-  if (isdefined(var_04))
-  self.owner [[var_04]](self);
+  if(var_01 != "trip_mine_mp") {
+    if(isdefined(var_05) && isdefined(var_5.owner)) {
+      if(isdefined(var_04))
+        self.owner[[var_04]](self);
 
-  self delete();
-  return;
-  }
+      self delete();
+      return;
+    }
   }
 
   self.owner notify("bouncing_betty_update", 0);
 
-  if (!isdefined(var_00))
-  return;
-
-  if (var_01 != "sonic_sensor_mp")
-  var_06 = bullettrace(self.origin + (0, 0, 4), self.origin - (0, 0, 4), 0, self);
+  if(!isdefined(var_00)) {
+    return;
+  }
+  if(var_01 != "sonic_sensor_mp")
+    var_06 = bullettrace(self.origin + (0, 0, 4), self.origin - (0, 0, 4), 0, self);
   else
-  var_06 = scripts\engine\trace::ray_trace(self.origin, self.origin + anglestoup(self.angles * 2));
+    var_06 = scripts\engine\trace::ray_trace(self.origin, self.origin + anglestoup(self.angles * 2));
 
   var_07 = var_6["position"];
 
-  if (var_6["fraction"] == 1 && var_01 != "sonic_sensor_mp") {
-  var_07 = getgroundposition(self.origin, 12, 0, 32);
-  var_6["normal"] = var_6["normal"] * -1;
+  if(var_6["fraction"] == 1 && var_01 != "sonic_sensor_mp") {
+    var_07 = getgroundposition(self.origin, 12, 0, 32);
+    var_6["normal"] = var_6["normal"] * -1;
   }
 
-  if (var_01 != "sonic_sensor_mp") {
-  var_08 = vectornormalize(var_6["normal"]);
-  var_09 = vectortoangles(var_08);
-  var_09 = var_09 + (90, 0, 0);
-  }
-  else
-  var_09 = self.angles;
+  if(var_01 != "sonic_sensor_mp") {
+    var_08 = vectornormalize(var_6["normal"]);
+    var_09 = vectortoangles(var_08);
+    var_09 = var_09 + (90, 0, 0);
+  } else
+    var_09 = self.angles;
 
-  var_10 = self [[var_03]](var_07, var_00, var_01, var_02, var_09);
+  var_10 = self[[var_03]](var_07, var_00, var_01, var_02, var_09);
   var_10 makeexplosiveusable();
   var_10 thread minedamagemonitor();
   self delete();
 }
 
 func_51CE() {
-  if (isdefined(self.plantedlethalequip)) {
-  foreach (var_01 in self.plantedlethalequip) {
-  if (isdefined(var_01))
-  var_01 deleteexplosive();
-  }
+  if(isdefined(self.plantedlethalequip)) {
+    foreach(var_01 in self.plantedlethalequip) {
+      if(isdefined(var_01))
+        var_01 deleteexplosive();
+    }
   }
 
-  if (isdefined(self.plantedtacticalequip)) {
-  foreach (var_01 in self.plantedtacticalequip) {
-  if (isdefined(var_01))
-  var_01 deleteexplosive();
-  }
+  if(isdefined(self.plantedtacticalequip)) {
+    foreach(var_01 in self.plantedtacticalequip) {
+      if(isdefined(var_01))
+        var_01 deleteexplosive();
+    }
   }
 
   self.plantedlethalequip = [];
@@ -5537,29 +5513,29 @@ func_51CE() {
 deletedisparateplacedequipment() {
   var_00 = scripts\mp\powers::getcurrentequipment("primary");
 
-  foreach (var_02 in self.plantedlethalequip) {
-  if (isdefined(var_02)) {
-  if (!isdefined(var_2.func_D77A) || !isdefined(var_00) || var_2.func_D77A != var_00)
-  var_02 deleteexplosive();
-  }
+  foreach(var_02 in self.plantedlethalequip) {
+    if(isdefined(var_02)) {
+      if(!isdefined(var_2.func_D77A) || !isdefined(var_00) || var_2.func_D77A != var_00)
+        var_02 deleteexplosive();
+    }
   }
 
   var_04 = scripts\mp\powers::getcurrentequipment("secondary");
 
-  foreach (var_02 in self.plantedtacticalequip) {
-  if (isdefined(var_02)) {
-  if (!isdefined(var_2.func_D77A) || !isdefined(var_04) || var_2.func_D77A != var_04)
-  var_02 deleteexplosive();
-  }
+  foreach(var_02 in self.plantedtacticalequip) {
+    if(isdefined(var_02)) {
+      if(!isdefined(var_2.func_D77A) || !isdefined(var_04) || var_2.func_D77A != var_04)
+        var_02 deleteexplosive();
+    }
   }
 }
 
 doblinkinglight(var_00, var_01, var_02) {
-  if (!isdefined(var_01))
-  var_01 = scripts\engine\utility::getfx("weap_blink_friend");
+  if(!isdefined(var_01))
+    var_01 = scripts\engine\utility::getfx("weap_blink_friend");
 
-  if (!isdefined(var_02))
-  var_02 = scripts\engine\utility::getfx("weap_blink_enemy");
+  if(!isdefined(var_02))
+    var_02 = scripts\engine\utility::getfx("weap_blink_enemy");
 
   self.blinkinglightfx["friendly"] = var_01;
   self.blinkinglightfx["enemy"] = var_02;
@@ -5575,22 +5551,22 @@ updateblinkinglight(var_00, var_01, var_02) {
   self endon("emp_damage");
   var_03 = ::checkteam;
 
-  if (!level.teambased)
-  var_03 = ::checkplayer;
+  if(!level.teambased)
+    var_03 = ::checkplayer;
 
   var_04 = randomfloatrange(0.05, 0.25);
   wait(var_04);
   childthread onjointeamblinkinglight(var_00, var_01, var_02, var_03);
 
-  foreach (var_06 in level.players) {
-  if (isdefined(var_06)) {
-  if (self.owner [[var_03]](var_06))
-  playfxontagforclients(var_00, self, var_02, var_06);
-  else
-  playfxontagforclients(var_01, self, var_02, var_06);
+  foreach(var_06 in level.players) {
+    if(isdefined(var_06)) {
+      if(self.owner[[var_03]](var_06))
+        playfxontagforclients(var_00, self, var_02, var_06);
+      else
+        playfxontagforclients(var_01, self, var_02, var_06);
 
-  wait 0.05;
-  }
+      wait 0.05;
+    }
   }
 }
 
@@ -5600,23 +5576,23 @@ onjointeamblinkinglight(var_00, var_01, var_02, var_03) {
   self endon("emp_damage");
 
   for (;;) {
-  level waittill("joined_team", var_04);
+    level waittill("joined_team", var_04);
 
-  if (self.owner [[var_03]](var_04)) {
-  playfxontagforclients(var_00, self, var_02, var_04);
-  continue;
-  }
+    if(self.owner[[var_03]](var_04)) {
+      playfxontagforclients(var_00, self, var_02, var_04);
+      continue;
+    }
 
-  playfxontagforclients(var_01, self, var_02, var_04);
+    playfxontagforclients(var_01, self, var_02, var_04);
   }
 }
 
 stopblinkinglight() {
-  if (isalive(self) && isdefined(self.blinkinglightfx)) {
-  stopfxontag(self.blinkinglightfx["friendly"], self, self.blinkinglighttag);
-  stopfxontag(self.blinkinglightfx["enemy"], self, self.blinkinglighttag);
-  self.blinkinglightfx = undefined;
-  self.blinkinglighttag = undefined;
+  if(isalive(self) && isdefined(self.blinkinglightfx)) {
+    stopfxontag(self.blinkinglightfx["friendly"], self, self.blinkinglighttag);
+    stopfxontag(self.blinkinglightfx["enemy"], self, self.blinkinglighttag);
+    self.blinkinglightfx = undefined;
+    self.blinkinglighttag = undefined;
   }
 }
 
@@ -5631,31 +5607,30 @@ checkplayer(var_00) {
 equipmentdeathvfx(var_00) {
   playfx(scripts\engine\utility::getfx("equipment_sparks"), self.origin);
 
-  if (!isdefined(var_00) || var_00 == 0)
-  self playsound("sentry_explode");
+  if(!isdefined(var_00) || var_00 == 0)
+    self playsound("sentry_explode");
 }
 
 equipmentdeletevfx(var_00, var_01) {
-  if (isdefined(var_00)) {
-  if (isdefined(var_01)) {
-  var_02 = anglestoforward(var_01);
-  var_03 = anglestoup(var_01);
-  playfx(scripts\engine\utility::getfx("equipment_explode"), var_00, var_02, var_03);
-  playfx(scripts\engine\utility::getfx("equipment_smoke"), var_00, var_02, var_03);
-  } else {
-  playfx(scripts\engine\utility::getfx("equipment_explode"), var_00);
-  playfx(scripts\engine\utility::getfx("equipment_smoke"), var_00);
-  }
+  if(isdefined(var_00)) {
+    if(isdefined(var_01)) {
+      var_02 = anglestoforward(var_01);
+      var_03 = anglestoup(var_01);
+      playfx(scripts\engine\utility::getfx("equipment_explode"), var_00, var_02, var_03);
+      playfx(scripts\engine\utility::getfx("equipment_smoke"), var_00, var_02, var_03);
+    } else {
+      playfx(scripts\engine\utility::getfx("equipment_explode"), var_00);
+      playfx(scripts\engine\utility::getfx("equipment_smoke"), var_00);
+    }
 
-  playloopsound(var_00, "mp_killstreak_disappear");
-  }
-  else if (isdefined(self)) {
-  var_04 = self.origin;
-  var_02 = anglestoforward(self.angles);
-  var_03 = anglestoup(self.angles);
-  playfx(scripts\engine\utility::getfx("equipment_explode"), var_04, var_02, var_03);
-  playfx(scripts\engine\utility::getfx("equipment_smoke"), var_04, var_02, var_03);
-  self playsound("mp_killstreak_disappear");
+    playloopsound(var_00, "mp_killstreak_disappear");
+  } else if(isdefined(self)) {
+    var_04 = self.origin;
+    var_02 = anglestoforward(self.angles);
+    var_03 = anglestoup(self.angles);
+    playfx(scripts\engine\utility::getfx("equipment_explode"), var_04, var_02, var_03);
+    playfx(scripts\engine\utility::getfx("equipment_smoke"), var_04, var_02, var_03);
+    self playsound("mp_killstreak_disappear");
   }
 }
 
@@ -5669,83 +5644,83 @@ buildattachmentmaps() {
   level.attachmentmap_uniquetoextra = [];
   level.attachmentextralist = [];
 
-  foreach (var_02 in var_00) {
-  var_03 = tablelookup("mp\attachmenttable.csv", 4, var_02, 5);
+  foreach(var_02 in var_00) {
+    var_03 = tablelookup("mp\attachmenttable.csv", 4, var_02, 5);
 
-  if (var_02 != var_03)
-  level.attachmentmap_uniquetobase[var_02] = var_03;
+    if(var_02 != var_03)
+      level.attachmentmap_uniquetobase[var_02] = var_03;
 
-  var_04 = tablelookup("mp\attachmenttable.csv", 4, var_02, 13);
+    var_04 = tablelookup("mp\attachmenttable.csv", 4, var_02, 13);
 
-  if (var_04 != "") {
-  level.attachmentmap_uniquetoextra[var_02] = var_04;
-  level.attachmentextralist[var_04] = 1;
-  }
+    if(var_04 != "") {
+      level.attachmentmap_uniquetoextra[var_02] = var_04;
+      level.attachmentextralist[var_04] = 1;
+    }
   }
 
   var_06 = [];
   var_07 = 1;
 
   for (var_08 = tablelookupbyrow("mp\attachmentmap.csv", var_07, 0); var_08 != ""; var_08 = tablelookupbyrow("mp\attachmentmap.csv", var_07, 0)) {
-  var_6[var_6.size] = var_08;
-  var_7++;
+    var_6[var_6.size] = var_08;
+    var_7++;
   }
 
   var_09 = [];
   var_10 = 1;
 
   for (var_11 = tablelookupbyrow("mp\attachmentmap.csv", 0, var_10); var_11 != ""; var_11 = tablelookupbyrow("mp\attachmentmap.csv", 0, var_10)) {
-  var_9[var_11] = var_10;
-  var_10++;
+    var_9[var_11] = var_10;
+    var_10++;
   }
 
   level.attachmentmap_basetounique = [];
 
-  foreach (var_08 in var_06) {
-  foreach (var_16, var_14 in var_09) {
-  var_15 = tablelookup("mp\attachmentmap.csv", 0, var_08, var_14);
+  foreach(var_08 in var_06) {
+    foreach(var_16, var_14 in var_09) {
+      var_15 = tablelookup("mp\attachmentmap.csv", 0, var_08, var_14);
 
-  if (var_15 == "")
-  continue;
+      if(var_15 == "") {
+        continue;
+      }
+      if(!isdefined(level.attachmentmap_basetounique[var_08]))
+        level.attachmentmap_basetounique[var_08] = [];
 
-  if (!isdefined(level.attachmentmap_basetounique[var_08]))
-  level.attachmentmap_basetounique[var_08] = [];
-
-  level.attachmentmap_basetounique[var_08][var_16] = var_15;
-  }
+      level.attachmentmap_basetounique[var_08][var_16] = var_15;
+    }
   }
 
   level.attachmentmap_attachtoperk = [];
 
-  foreach (var_19 in var_00) {
-  var_20 = tablelookup("mp\attachmenttable.csv", 4, var_19, 12);
+  foreach(var_19 in var_00) {
+    var_20 = tablelookup("mp\attachmenttable.csv", 4, var_19, 12);
 
-  if (var_20 == "")
-  continue;
-
-  level.attachmentmap_attachtoperk[var_19] = var_20;
+    if(var_20 == "") {
+      continue;
+    }
+    level.attachmentmap_attachtoperk[var_19] = var_20;
   }
 
   level.attachmentmap_conflicts = [];
   var_22 = 1;
 
   for (var_23 = tablelookupbyrow("mp\attachmentcombos.csv", var_22, 0); var_23 != ""; var_23 = tablelookupbyrow("mp\attachmentcombos.csv", var_22, 0)) {
-  var_24 = 1;
+    var_24 = 1;
 
-  for (var_25 = tablelookupbyrow("mp\attachmentcombos.csv", 0, var_24); var_25 != ""; var_25 = tablelookupbyrow("mp\attachmentcombos.csv", 0, var_24)) {
-  if (var_23 != var_25) {
-  var_26 = tablelookupbyrow("mp\attachmentcombos.csv", var_22, var_24);
-  var_27 = scripts\engine\utility::alphabetize([var_23, var_25]);
-  var_28 = var_27[0] + "_" + var_27[1];
+    for (var_25 = tablelookupbyrow("mp\attachmentcombos.csv", 0, var_24); var_25 != ""; var_25 = tablelookupbyrow("mp\attachmentcombos.csv", 0, var_24)) {
+      if(var_23 != var_25) {
+        var_26 = tablelookupbyrow("mp\attachmentcombos.csv", var_22, var_24);
+        var_27 = scripts\engine\utility::alphabetize([var_23, var_25]);
+        var_28 = var_27[0] + "_" + var_27[1];
 
-  if (var_26 == "no" && !isdefined(level.attachmentmap_conflicts[var_28]))
-  level.attachmentmap_conflicts[var_28] = 1;
-  }
+        if(var_26 == "no" && !isdefined(level.attachmentmap_conflicts[var_28]))
+          level.attachmentmap_conflicts[var_28] = 1;
+      }
 
-  var_24++;
-  }
+      var_24++;
+    }
 
-  var_22++;
+    var_22++;
   }
 }
 
@@ -5754,8 +5729,8 @@ getattachmentlistuniquenames() {
   var_01 = 0;
 
   for (var_02 = tablelookup("mp\attachmentTable.csv", 0, var_01, 4); var_02 != ""; var_02 = tablelookup("mp\attachmentTable.csv", 0, var_01, 4)) {
-  var_0[var_02] = var_02;
-  var_1++;
+    var_0[var_02] = var_02;
+    var_1++;
   }
 
   return var_00;
@@ -5765,58 +5740,58 @@ func_3222() {
   level.weaponmapdata = [];
 
   for (var_00 = 1; tablelookup("mp\statstable.csv", 0, var_00, 0) != ""; var_0++) {
-  var_01 = tablelookup("mp\statstable.csv", 0, var_00, 4);
+    var_01 = tablelookup("mp\statstable.csv", 0, var_00, 4);
 
-  if (var_01 != "") {
-  level.weaponmapdata[var_01] = spawnstruct();
-  var_02 = tablelookup("mp\statstable.csv", 0, var_00, 0);
+    if(var_01 != "") {
+      level.weaponmapdata[var_01] = spawnstruct();
+      var_02 = tablelookup("mp\statstable.csv", 0, var_00, 0);
 
-  if (var_02 != "")
-  level.weaponmapdata[var_01].number = var_02;
+      if(var_02 != "")
+        level.weaponmapdata[var_01].number = var_02;
 
-  var_03 = tablelookup("mp\statstable.csv", 0, var_00, 1);
+      var_03 = tablelookup("mp\statstable.csv", 0, var_00, 1);
 
-  if (var_03 != "")
-  level.weaponmapdata[var_01].group = var_03;
+      if(var_03 != "")
+        level.weaponmapdata[var_01].group = var_03;
 
-  var_04 = tablelookup("mp\statstable.csv", 0, var_00, 5);
+      var_04 = tablelookup("mp\statstable.csv", 0, var_00, 5);
 
-  if (var_04 != "")
-  level.weaponmapdata[var_01].func_23B0 = var_04;
+      if(var_04 != "")
+        level.weaponmapdata[var_01].func_23B0 = var_04;
 
-  var_05 = tablelookup("mp\statstable.csv", 0, var_00, 44);
+      var_05 = tablelookup("mp\statstable.csv", 0, var_00, 44);
 
-  if (var_05 != "")
-  level.weaponmapdata[var_01].perk = var_05;
+      if(var_05 != "")
+        level.weaponmapdata[var_01].perk = var_05;
 
-  var_06 = tablelookup("mp\statstable.csv", 0, var_00, 9);
+      var_06 = tablelookup("mp\statstable.csv", 0, var_00, 9);
 
-  if (var_06 != "")
-  level.weaponmapdata[var_01].attachdefaults = strtok(var_06, " ");
+      if(var_06 != "")
+        level.weaponmapdata[var_01].attachdefaults = strtok(var_06, " ");
 
-  level.weaponmapdata[var_01].selectableattachmentlist = [];
-  level.weaponmapdata[var_01].selectableattachmentmap = [];
+      level.weaponmapdata[var_01].selectableattachmentlist = [];
+      level.weaponmapdata[var_01].selectableattachmentmap = [];
 
-  for (var_07 = 0; var_07 < 20; var_7++) {
-  var_08 = tablelookup("mp\statstable.csv", 0, var_00, 10 + var_07);
+      for (var_07 = 0; var_07 < 20; var_7++) {
+        var_08 = tablelookup("mp\statstable.csv", 0, var_00, 10 + var_07);
 
-  if (isdefined(var_08) && var_08 != "") {
-  var_09 = level.weaponmapdata[var_01].selectableattachmentlist.size;
-  level.weaponmapdata[var_01].selectableattachmentlist[var_09] = var_08;
-  level.weaponmapdata[var_01].selectableattachmentmap[var_08] = 1;
-  }
-  }
+        if(isdefined(var_08) && var_08 != "") {
+          var_09 = level.weaponmapdata[var_01].selectableattachmentlist.size;
+          level.weaponmapdata[var_01].selectableattachmentlist[var_09] = var_08;
+          level.weaponmapdata[var_01].selectableattachmentmap[var_08] = 1;
+        }
+      }
 
-  if (level.tactical)
-  var_10 = tablelookup("mp\statstable.csv", 0, var_00, 50);
-  else
-  var_10 = tablelookup("mp\statstable.csv", 0, var_00, 8);
+      if(level.tactical)
+        var_10 = tablelookup("mp\statstable.csv", 0, var_00, 50);
+      else
+        var_10 = tablelookup("mp\statstable.csv", 0, var_00, 8);
 
-  if (var_10 != "") {
-  var_10 = float(var_10);
-  level.weaponmapdata[var_01].speed = var_10;
-  }
-  }
+      if(var_10 != "") {
+        var_10 = float(var_10);
+        level.weaponmapdata[var_01].speed = var_10;
+      }
+    }
   }
 }
 
@@ -5835,61 +5810,61 @@ func_464D(var_00) {
   var_03 = undefined;
   var_04 = 0;
 
-  if (level.teambased)
-  var_03 = scripts\mp\utility\game::getteamarray(var_02);
+  if(level.teambased)
+    var_03 = scripts\mp\utility\game::getteamarray(var_02);
   else
-  var_03 = level.characters;
+    var_03 = level.characters;
 
   var_05 = [];
   var_06 = getempdamageents(var_00, 256, 0, undefined);
 
-  if (var_6.size >= 1) {
-  foreach (var_08 in var_06) {
-  if (isdefined(var_8.owner) && !friendlyfirecheck(self.owner, var_8.owner))
-  continue;
+  if(var_6.size >= 1) {
+    foreach(var_08 in var_06) {
+      if(isdefined(var_8.owner) && !friendlyfirecheck(self.owner, var_8.owner)) {
+        continue;
+      }
+      var_08 notify("emp_damage", self.owner, 5.0);
 
-  var_08 notify("emp_damage", self.owner, 5.0);
+      foreach(var_10 in var_03) {
+        if(var_08 == var_10 || var_08 == self.owner) {
+          var_08 thread func_464E();
+          var_5[var_5.size] = var_08;
+          break;
+        }
+      }
+    }
 
-  foreach (var_10 in var_03) {
-  if (var_08 == var_10 || var_08 == self.owner) {
-  var_08 thread func_464E();
-  var_5[var_5.size] = var_08;
-  break;
-  }
-  }
-  }
+    foreach(var_14 in var_05) {
+      if(var_14 == self.owner) {
+        var_04 = 1;
+        break;
+      }
+    }
 
-  foreach (var_14 in var_05) {
-  if (var_14 == self.owner) {
-  var_04 = 1;
-  break;
-  }
-  }
+    if(!var_04) {
+      var_14 = var_5[var_5.size - 1];
 
-  if (!var_04) {
-  var_14 = var_5[var_5.size - 1];
+      if(isdefined(var_14) && var_14 != var_01) {
+        var_16 = "primary";
+        var_17 = "none";
+        var_18 = getarraykeys(var_1.powers);
 
-  if (isdefined(var_14) && var_14 != var_01) {
-  var_16 = "primary";
-  var_17 = "none";
-  var_18 = getarraykeys(var_1.powers);
+        foreach(var_20 in var_18) {
+          if(var_1.powers[var_20].slot == var_16)
+            var_17 = var_20;
+        }
 
-  foreach (var_20 in var_18) {
-  if (var_1.powers[var_20].slot == var_16)
-  var_17 = var_20;
-  }
+        var_22 = var_14.func_AE7B;
 
-  var_22 = var_14.func_AE7B;
-
-  if (isdefined(var_22) && var_22 != "none") {
-  var_01 notify("corpse_steal");
-  var_01 notify("start_copycat");
-  var_01 scripts\mp\powers::removepower(var_17);
-  var_01 scripts\mp\powers::givepower(var_22, var_16, 1);
-  var_01 thread func_139D7(var_22, var_16);
-  }
-  }
-  }
+        if(isdefined(var_22) && var_22 != "none") {
+          var_01 notify("corpse_steal");
+          var_01 notify("start_copycat");
+          var_01 scripts\mp\powers::removepower(var_17);
+          var_01 scripts\mp\powers::givepower(var_22, var_16, 1);
+          var_01 thread func_139D7(var_22, var_16);
+        }
+      }
+    }
   }
 }
 
@@ -5910,95 +5885,91 @@ func_464E() {
   var_00 = gettime() + 5000.0;
   scripts\mp\powers::power_modifycooldownrate(0.0);
 
-  if (isdefined(self.func_38A1) && self.func_38A1)
-  scripts\mp\powers::func_12C9F();
+  if(isdefined(self.func_38A1) && self.func_38A1)
+    scripts\mp\powers::func_12C9F();
 
   thread scripts\mp\powers::func_D729();
 
   while (gettime() < var_00)
-  wait 0.1;
+    wait 0.1;
 
   scripts\mp\powers::func_D74E();
 
-  if (isdefined(self.func_38A1) && !self.func_38A1)
-  scripts\mp\powers::func_F6B1();
+  if(isdefined(self.func_38A1) && !self.func_38A1)
+    scripts\mp\powers::func_F6B1();
 
   thread scripts\mp\powers::func_D72F();
 }
 
 grenadestuckto(var_00, var_01, var_02) {
-  if (!isdefined(self)) {
-  var_0.stuckenemyentity = var_01;
-  var_1.func_1117F = var_00;
-  }
-  else if (level.teambased && isdefined(var_1.team) && var_1.team == self.team)
-  var_0.isstuck = "friendly";
-  else
-  {
-  var_03 = undefined;
+  if(!isdefined(self)) {
+    var_0.stuckenemyentity = var_01;
+    var_1.func_1117F = var_00;
+  } else if(level.teambased && isdefined(var_1.team) && var_1.team == self.team)
+    var_0.isstuck = "friendly";
+  else {
+    var_03 = undefined;
 
-  if (glprox_trygetweaponname(var_0.weapon_name) == "stickglprox")
-  var_03 = "stickglprox_stuck";
-  else
-  {
-  switch (var_0.weapon_name) {
-  case "semtex_mp":
-  var_03 = "semtex_stuck";
-  break;
-  case "splash_grenade_mp":
-  var_03 = "splash_grenade_stuck";
-  break;
-  case "power_spider_grenade_mp":
-  var_03 = "spider_grenade_stuck";
-  break;
-  case "wristrocket_proj_mp":
-  var_03 = "wrist_rocket_stuck";
-  }
-  }
+    if(glprox_trygetweaponname(var_0.weapon_name) == "stickglprox")
+      var_03 = "stickglprox_stuck";
+    else {
+      switch (var_0.weapon_name) {
+        case "semtex_mp":
+          var_03 = "semtex_stuck";
+          break;
+        case "splash_grenade_mp":
+          var_03 = "splash_grenade_stuck";
+          break;
+        case "power_spider_grenade_mp":
+          var_03 = "spider_grenade_stuck";
+          break;
+        case "wristrocket_proj_mp":
+          var_03 = "wrist_rocket_stuck";
+      }
+    }
 
-  var_0.isstuck = "enemy";
-  var_0.stuckenemyentity = var_01;
+    var_0.isstuck = "enemy";
+    var_0.stuckenemyentity = var_01;
 
-  if (var_0.weapon_name == "split_grenade_mp")
-  var_1.func_1117F = undefined;
-  else
-  {
-  var_1.func_1117F = var_00;
-  self notify("grenade_stuck_enemy");
-  }
+    if(var_0.weapon_name == "split_grenade_mp")
+      var_1.func_1117F = undefined;
+    else {
+      var_1.func_1117F = var_00;
+      self notify("grenade_stuck_enemy");
+    }
 
-  if (!scripts\mp\utility\game::istrue(var_02))
-  func_85DE(var_03, var_01);
+    if(!scripts\mp\utility\game::istrue(var_02))
+      func_85DE(var_03, var_01);
   }
 }
 
 func_85DE(var_00, var_01) {
-  if (isplayer(var_01) && isdefined(var_00))
-  var_01 scripts\mp\hud_message::showsplash(var_00, undefined, self);
+  if(isplayer(var_01) && isdefined(var_00))
+    var_01 scripts\mp\hud_message::showsplash(var_00, undefined, self);
 
   thread scripts\mp\awards::givemidmatchaward("explosive_stick");
 }
 
 func_66A5(var_00, var_01) {
-  if (var_00 scripts\mp\powers::func_D734(var_01) > 0)
-  return 0;
+  if(var_00 scripts\mp\powers::func_D734(var_01) > 0)
+    return 0;
 
   var_02 = undefined;
 
   switch (var_01) {
-  case "power_explodingDrone":
-  var_02 = var_0.func_69D6;
-  break;
-  case "power_c4":
-  var_02 = var_0.plantedlethalequip;
-  break;
-  case "power_transponder":
-  var_02 = var_0.plantedtacticalequip;
-  break;
+    case "power_explodingDrone":
+      var_02 = var_0.func_69D6;
+      break;
+    case "power_c4":
+      var_02 = var_0.plantedlethalequip;
+      break;
+    case "power_transponder":
+      var_02 = var_0.plantedtacticalequip;
+      break;
   }
 
-  if (!isdefined(var_02) || var_2.size == 0)
-  return 0;
+  if(!isdefined(var_02) || var_2.size == 0)
+    return 0;
 
   return 1;
 }
@@ -6083,10 +6054,10 @@ outlineequipmentforowner(var_00, var_01) {
 }
 
 outlinesuperequipment(var_00, var_01) {
-  if (level.teambased)
-  thread outlinesuperequipmentforteam(var_00, var_01);
+  if(level.teambased)
+    thread outlinesuperequipmentforteam(var_00, var_01);
   else
-  thread outlinesuperequipmentforplayer(var_00, var_01);
+    thread outlinesuperequipmentforplayer(var_00, var_01);
 }
 
 outlinesuperequipmentforteam(var_00, var_01) {
@@ -6102,17 +6073,17 @@ outlinesuperequipmentforplayer(var_00, var_01) {
 }
 
 _meth_85BE() {
-  if (!isdefined(self._meth_85BE) || self._meth_85BE == "none")
-  return 0;
+  if(!isdefined(self._meth_85BE) || self._meth_85BE == "none")
+    return 0;
 
   return 1;
 }
 
 func_7EE4() {
-  if (!isdefined(self._meth_85BE))
-  return "none";
+  if(!isdefined(self._meth_85BE))
+    return "none";
   else
-  return self._meth_85BE;
+    return self._meth_85BE;
 }
 
 func_13A93() {
@@ -6123,8 +6094,8 @@ func_13A93() {
   self endon("faux_spawn");
 
   for (;;) {
-  self._meth_85BE = scripts\mp\utility\game::func_7EE5();
-  scripts\engine\utility::waitframe();
+    self._meth_85BE = scripts\mp\utility\game::func_7EE5();
+    scripts\engine\utility::waitframe();
   }
 }
 
@@ -6143,15 +6114,15 @@ impale(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
   var_01 endon("death");
   var_01 endon("disconnect");
 
-  if (!isdefined(var_1.body))
-  return;
-
+  if(!isdefined(var_1.body)) {
+    return;
+  }
   var_09 = var_00 scripts\mp\utility\game::_hasperk("passive_power_melee");
 
-  if (var_09)
-  var_06 = "torso";
+  if(var_09)
+    var_06 = "torso";
   else
-  playfx(scripts\engine\utility::getfx("penetration_railgun_impact"), var_04);
+    playfx(scripts\engine\utility::getfx("penetration_railgun_impact"), var_04);
 
   var_10 = impale_endpoint(var_04, var_05);
   var_11 = trace_impale(var_04, var_10);
@@ -6160,42 +6131,42 @@ impale(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
   var_13 = var_12 / scripts\engine\utility::ter_op(var_09, 600, 1000);
   var_13 = max(var_13, 0.05);
 
-  if (var_11["hittype"] != "hittype_world")
-  var_13 = 0;
+  if(var_11["hittype"] != "hittype_world")
+    var_13 = 0;
 
   var_14 = var_13 > 0.05;
 
-  if (isdefined(var_01))
-  var_1.body startragdoll();
+  if(isdefined(var_01))
+    var_1.body startragdoll();
 
   wait 0.05;
 
-  if (var_14) {
-  var_15 = var_05;
-  var_16 = anglestoup(var_0.angles);
-  var_17 = vectorcross(var_15, var_16);
-  var_18 = scripts\engine\utility::spawn_tag_origin(var_04, _axistoangles(var_15, var_17, var_16));
-  var_18 moveto(var_10, var_13);
-  var_19 = spawnragdollconstraint(var_1.body, var_06, var_07, var_08);
-  var_19.origin = var_18.origin;
-  var_19.angles = var_18.angles;
-  var_19 linkto(var_18);
+  if(var_14) {
+    var_15 = var_05;
+    var_16 = anglestoup(var_0.angles);
+    var_17 = vectorcross(var_15, var_16);
+    var_18 = scripts\engine\utility::spawn_tag_origin(var_04, _axistoangles(var_15, var_17, var_16));
+    var_18 moveto(var_10, var_13);
+    var_19 = spawnragdollconstraint(var_1.body, var_06, var_07, var_08);
+    var_19.origin = var_18.origin;
+    var_19.angles = var_18.angles;
+    var_19 linkto(var_18);
 
-  if (var_13 > scripts\engine\utility::ter_op(var_09, 0.075, 1))
-  thread impale_detachaftertime(var_19, scripts\engine\utility::ter_op(var_09, 0.075, 1));
+    if(var_13 > scripts\engine\utility::ter_op(var_09, 0.075, 1))
+      thread impale_detachaftertime(var_19, scripts\engine\utility::ter_op(var_09, 0.075, 1));
 
-  thread impale_cleanup(var_01, var_18, var_13 + 0.25);
+    thread impale_cleanup(var_01, var_18, var_13 + 0.25);
 
-  if (!var_09)
-  var_18 thread impale_effects(var_10, var_13);
+    if(!var_09)
+      var_18 thread impale_effects(var_10, var_13);
   }
 }
 
 impale_detachaftertime(var_00, var_01) {
   wait(var_01);
 
-  if (isdefined(var_00))
-  var_00 delete();
+  if(isdefined(var_00))
+    var_00 delete();
 }
 
 impale_effects(var_00, var_01) {
@@ -6204,8 +6175,8 @@ impale_effects(var_00, var_01) {
 }
 
 impale_cleanup(var_00, var_01, var_02) {
-  if (isdefined(var_00))
-  var_00 scripts\engine\utility::waittill_any_timeout(var_02, "death", "disconnect");
+  if(isdefined(var_00))
+    var_00 scripts\engine\utility::waittill_any_timeout(var_02, "death", "disconnect");
 
   var_01 delete();
 }
@@ -6219,10 +6190,10 @@ func_9F3C(var_00, var_01) {
 }
 
 func_F7FC() {
-  if (!isdefined(self.isstunned))
-  self.isstunned = 1;
+  if(!isdefined(self.isstunned))
+    self.isstunned = 1;
   else
-  self.isstunned++;
+    self.isstunned++;
 }
 
 func_F800() {
@@ -6234,10 +6205,10 @@ isstunned() {
 }
 
 func_F7EE() {
-  if (!isdefined(self.isblinded))
-  self.isblinded = 1;
+  if(!isdefined(self.isblinded))
+    self.isblinded = 1;
   else
-  self.isblinded++;
+    self.isblinded++;
 }
 
 func_F7FF() {
@@ -6264,8 +6235,8 @@ func_A008(var_00) {
   var_01 = getweaponbasename(var_00);
 
   switch (var_01) {
-  case "iw7_sonic_mp":
-  return 1;
+    case "iw7_sonic_mp":
+      return 1;
   }
 
   return 0;
@@ -6276,9 +6247,9 @@ func_20E4() {
   self endon("disconnect");
   wait 0.1;
 
-  if (isdefined(self) && isplayer(self) && !isbot(self)) {
-  self playlocalsound("sonic_shotgun_debuff");
-  self setsoundsubmix("sonic_shotgun_impact");
+  if(isdefined(self) && isplayer(self) && !isbot(self)) {
+    self playlocalsound("sonic_shotgun_debuff");
+    self setsoundsubmix("sonic_shotgun_impact");
   }
 }
 
@@ -6289,10 +6260,10 @@ func_13AB2() {
   level waittill("prematch_over");
   level.func_ABBF = getdvarfloat("scr_lethalDelay", 0);
 
-  if (level.func_ABBF == 0) {
-  level.func_ABC2 = scripts\mp\utility\game::gettimepassed();
-  level.func_ABC0 = level.func_ABC2;
-  level notify("lethal_delay_end");
+  if(level.func_ABBF == 0) {
+    level.func_ABC2 = scripts\mp\utility\game::gettimepassed();
+    level.func_ABC0 = level.func_ABC2;
+    level notify("lethal_delay_end");
   }
 
   level.func_ABC2 = scripts\mp\utility\game::gettimepassed();
@@ -6300,7 +6271,7 @@ func_13AB2() {
   level notify("lethal_delay_start");
 
   while (scripts\mp\utility\game::gettimepassed() < level.func_ABC0)
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
 
   level notify("lethal_delay_end");
 }
@@ -6311,9 +6282,9 @@ func_13AB5(var_00, var_01, var_02) {
   level endon("round_end");
   level endon("game_ended");
 
-  if (func_ABC1())
-  return;
-
+  if(func_ABC1()) {
+    return;
+  }
   self notify("watchLethalDelayPlayer_" + var_02);
   self endon("watchLethalDelayPlayer_" + var_02);
   self endon("power_removed_" + var_01);
@@ -6325,22 +6296,22 @@ func_13AB5(var_00, var_01, var_02) {
 func_13AB4(var_00, var_01) {
   level endon("lethal_delay_end");
 
-  if (!scripts\mp\utility\game::istrue(scripts\mp\utility\game::gameflag("prematch_done")))
-  level waittill("lethal_delay_start");
+  if(!scripts\mp\utility\game::istrue(scripts\mp\utility\game::gameflag("prematch_done")))
+    level waittill("lethal_delay_start");
 
   var_02 = "+frag";
 
-  if (var_01 != "primary")
-  var_02 = "+smoke";
+  if(var_01 != "primary")
+    var_02 = "+smoke";
 
-  if (!isbot(var_00))
-  var_00 notifyonplayercommand("lethal_attempt_" + var_01, var_02);
+  if(!isbot(var_00))
+    var_00 notifyonplayercommand("lethal_attempt_" + var_01, var_02);
 
   for (;;) {
-  self waittill("lethal_attempt_" + var_01);
-  var_03 = (level.func_ABC0 - scripts\mp\utility\game::gettimepassed()) / 1000;
-  var_03 = int(max(0, ceil(var_03)));
-  var_00 scripts\mp\hud_message::showerrormessage("MP_LETHALS_UNAVAILABLE_FOR_N", var_03);
+    self waittill("lethal_attempt_" + var_01);
+    var_03 = (level.func_ABC0 - scripts\mp\utility\game::gettimepassed()) / 1000;
+    var_03 = int(max(0, ceil(var_03)));
+    var_00 scripts\mp\hud_message::showerrormessage("MP_LETHALS_UNAVAILABLE_FOR_N", var_03);
   }
 }
 
@@ -6352,8 +6323,8 @@ cancellethaldelay() {
 }
 
 func_ABC1(var_00) {
-  if (isdefined(level.func_ABBF) && level.func_ABBF == 0)
-  return 1;
+  if(isdefined(level.func_ABBF) && level.func_ABBF == 0)
+    return 1;
 
   return isdefined(level.func_ABC0) && scripts\mp\utility\game::gettimepassed() > level.func_ABC0;
 }
@@ -6363,12 +6334,12 @@ func_13AA9() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("weapon_switch_invalid", var_00);
-  var_01 = self getcurrentweapon();
-  var_02 = weaponinventorytype(var_01);
+    self waittill("weapon_switch_invalid", var_00);
+    var_01 = self getcurrentweapon();
+    var_02 = weaponinventorytype(var_01);
 
-  if (var_02 == "item" || var_02 == "exclusive")
-  scripts\mp\utility\game::_switchtoweapon(self.lastdroppableweaponobj);
+    if(var_02 == "item" || var_02 == "exclusive")
+      scripts\mp\utility\game::_switchtoweapon(self.lastdroppableweaponobj);
   }
 }
 
@@ -6376,15 +6347,15 @@ func_13C98(var_00) {
   var_01 = scripts\mp\utility\game::getweaponrootname(var_00);
   var_02 = getweaponattachments(var_00);
 
-  foreach (var_04 in var_02) {
-  var_05 = func_248C(var_04);
+  foreach(var_04 in var_02) {
+    var_05 = func_248C(var_04);
 
-  if (var_05 == "rail") {
-  var_06 = scripts\mp\utility\game::attachmentmap_tobase(var_04);
+    if(var_05 == "rail") {
+      var_06 = scripts\mp\utility\game::attachmentmap_tobase(var_04);
 
-  if (func_9F3C(var_01, var_06))
-  return 1;
-  }
+      if(func_9F3C(var_01, var_06))
+        return 1;
+    }
   }
 
   return 0;
@@ -6394,9 +6365,9 @@ watchdropweapons() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("weapon_dropped", var_00, var_01);
+    self waittill("weapon_dropped", var_00, var_01);
 
-  if (isdefined(var_00) && isdefined(var_01)) {}
+    if(isdefined(var_00) && isdefined(var_01)) {}
   }
 }
 
@@ -6404,34 +6375,33 @@ watchgrenadeaxepickup(var_00, var_01) {
   self endon("death");
   level endon("game_ended");
 
-  if (!isdefined(self.weapon_name) && isdefined(var_01))
-  self.weapon_name = var_01;
+  if(!isdefined(self.weapon_name) && isdefined(var_01))
+    self.weapon_name = var_01;
 
   self.inphase = 0;
 
-  if (isdefined(var_00))
-  self.inphase = var_00 isinphase();
+  if(isdefined(var_00))
+    self.inphase = var_00 isinphase();
 
   self waittill("missile_stuck", var_02, var_03);
 
-  if (isdefined(var_02) && (isplayer(var_02) || isagent(var_02))) {
-  var_04 = var_03 == "tag_flicker";
-  var_05 = var_03 == "tag_top_flicker";
-  var_06 = var_02 scripts\mp\utility\game::_hasperk("specialty_rearguard") && var_03 == "tag_origin";
-  var_07 = isdefined(var_03) && (var_04 || var_05 || var_06);
-  var_08 = isdefined(var_03) && var_03 == "tag_weapon";
+  if(isdefined(var_02) && (isplayer(var_02) || isagent(var_02))) {
+    var_04 = var_03 == "tag_flicker";
+    var_05 = var_03 == "tag_top_flicker";
+    var_06 = var_02 scripts\mp\utility\game::_hasperk("specialty_rearguard") && var_03 == "tag_origin";
+    var_07 = isdefined(var_03) && (var_04 || var_05 || var_06);
+    var_08 = isdefined(var_03) && var_03 == "tag_weapon";
 
-  if (var_07) {
-  playfx(scripts\engine\utility::getfx("shield_metal_impact"), self.origin);
+    if(var_07) {
+      playfx(scripts\engine\utility::getfx("shield_metal_impact"), self.origin);
 
-  if (isdefined(self.owner)) {
-  var_09 = self.owner;
-  relaunchaxe(self.weapon_name, var_09, 1);
-  return;
-  }
-  }
-  else if (!scripts\mp\utility\game::istrue(var_07) && isplayer(var_02) && !scripts\mp\utility\game::isreallyalive(var_02) && (level.mapname == "mp_neon" || scripts\mp\utility\game::istrue(level.func_DC24)))
-  return;
+      if(isdefined(self.owner)) {
+        var_09 = self.owner;
+        relaunchaxe(self.weapon_name, var_09, 1);
+        return;
+      }
+    } else if(!scripts\mp\utility\game::istrue(var_07) && isplayer(var_02) && !scripts\mp\utility\game::isreallyalive(var_02) && (level.mapname == "mp_neon" || scripts\mp\utility\game::istrue(level.func_DC24)))
+      return;
   }
 
   var_00 thread func_11825(var_00, self);
@@ -6446,16 +6416,16 @@ axedetachfromcorpse(var_00) {
   level endon("game_ended");
   var_01 = var_00 getlinkedchildren();
 
-  foreach (var_03 in var_01) {
-  if (!isdefined(var_03))
-  continue;
+  foreach(var_03 in var_01) {
+    if(!isdefined(var_03)) {
+      continue;
+    }
+    var_04 = var_3.weapon_name;
+    var_05 = var_3.owner;
+    var_06 = var_3.origin;
 
-  var_04 = var_3.weapon_name;
-  var_05 = var_3.owner;
-  var_06 = var_3.origin;
-
-  if (isdefined(var_04) && isaxeweapon(var_04))
-  var_03 relaunchaxe(var_04, var_05, 1);
+    if(isdefined(var_04) && isaxeweapon(var_04))
+      var_03 relaunchaxe(var_04, var_05, 1);
   }
 }
 
@@ -6467,9 +6437,9 @@ relaunchaxe(var_00, var_01, var_02) {
   var_05 setentityowner(var_01);
   var_05 thread watchgrenadeaxepickup(var_01, self.weapon_name);
 
-  if (scripts\mp\utility\game::istrue(var_02)) {
-  self.inphase = 0;
-  self.func_FF03 = 0;
+  if(scripts\mp\utility\game::istrue(var_02)) {
+    self.inphase = 0;
+    self.func_FF03 = 0;
   }
 }
 
@@ -6490,16 +6460,16 @@ watchaxeautopickup(var_00, var_01) {
   var_02 endon("death");
 
   for (;;) {
-  var_02 waittill("trigger", var_00);
+    var_02 waittill("trigger", var_00);
 
-  if (!isplayer(var_00))
-  continue;
-
-  if (var_00 playercanautopickupaxe(self)) {
-  var_00 playerpickupaxe(var_01, 1);
-  self delete();
-  break;
-  }
+    if(!isplayer(var_00)) {
+      continue;
+    }
+    if(var_00 playercanautopickupaxe(self)) {
+      var_00 playerpickupaxe(var_01, 1);
+      self delete();
+      break;
+    }
   }
 }
 
@@ -6512,7 +6482,7 @@ watchaxeuse(var_00, var_01) {
   var_02 makeusable();
   var_02 setcursorhint("HINT_NOICON");
   var_02 _meth_84A9("show");
-  var_02 sethintstring(&"WEAPON_PICKUP_AXE");
+  var_02 sethintstring( & "WEAPON_PICKUP_AXE");
   var_02 _meth_84A6(360);
   var_02 setusefov(360);
   var_02 _meth_84A4(64);
@@ -6529,62 +6499,62 @@ watchallplayerphasestates(var_00) {
   level endon("game_ended");
 
   for (;;) {
-  foreach (var_02 in level.players) {
-  if (!scripts\mp\utility\game::isreallyalive(var_02))
-  continue;
+    foreach(var_02 in level.players) {
+      if(!scripts\mp\utility\game::isreallyalive(var_02)) {
+        continue;
+      }
+      if(!axeinsamephaseplayerstate(self, var_02)) {
+        var_00 disableplayeruse(var_02);
+        continue;
+      }
 
-  if (!axeinsamephaseplayerstate(self, var_02)) {
-  var_00 disableplayeruse(var_02);
-  continue;
-  }
+      var_00 enableplayeruse(var_02);
+    }
 
-  var_00 enableplayeruse(var_02);
-  }
-
-  scripts\engine\utility::waitframe();
+    scripts\engine\utility::waitframe();
   }
 }
 
 axeinsamephaseplayerstate(var_00, var_01) {
   var_02 = 1;
 
-  if (scripts\mp\utility\game::istrue(var_0.inphase) && !var_01 isinphase())
-  var_02 = 0;
-  else if (!scripts\mp\utility\game::istrue(var_0.inphase) && var_01 isinphase())
-  var_02 = 0;
+  if(scripts\mp\utility\game::istrue(var_0.inphase) && !var_01 isinphase())
+    var_02 = 0;
+  else if(!scripts\mp\utility\game::istrue(var_0.inphase) && var_01 isinphase())
+    var_02 = 0;
 
   return var_02;
 }
 
 playercanautopickupaxe(var_00) {
-  if (isdefined(var_0.owner) && self != var_0.owner)
-  return 0;
+  if(isdefined(var_0.owner) && self != var_0.owner)
+    return 0;
 
   var_01 = self getweaponslistprimaries();
   var_02 = 0;
   var_03 = 0;
 
-  foreach (var_05 in var_01) {
-  if (isaxeweapon(var_05) && self getweaponammoclip(var_05) == 0) {
-  var_02 = 1;
-  break;
+  foreach(var_05 in var_01) {
+    if(isaxeweapon(var_05) && self getweaponammoclip(var_05) == 0) {
+      var_02 = 1;
+      break;
+    }
+
+    if(issubstr(var_05, "iw7_fists_mp")) {
+      var_02 = 1;
+      break;
+    }
+
+    if(!issubstr(var_05, "alt_"))
+      var_3++;
   }
 
-  if (issubstr(var_05, "iw7_fists_mp")) {
-  var_02 = 1;
-  break;
-  }
+  if(var_03 < 2)
+    var_02 = 1;
 
-  if (!issubstr(var_05, "alt_"))
-  var_3++;
-  }
-
-  if (var_03 < 2)
-  var_02 = 1;
-
-  if (scripts\mp\utility\game::istrue(var_02)) {
-  if (!axeinsamephaseplayerstate(var_00, self))
-  var_02 = 0;
+  if(scripts\mp\utility\game::istrue(var_02)) {
+    if(!axeinsamephaseplayerstate(var_00, self))
+      var_02 = 0;
   }
 
   return var_02;
@@ -6595,86 +6565,83 @@ playerpickupaxe(var_00, var_01) {
   var_03 = self getcurrentweapon();
   var_04 = self getweaponslistprimaries();
 
-  if (self hasweapon(var_00)) {
-  var_05 = self getweaponammoclip(var_00);
+  if(self hasweapon(var_00)) {
+    var_05 = self getweaponammoclip(var_00);
 
-  if (!var_01 && var_05 > 0) {
-  self dropitem(var_00);
-  scripts\mp\utility\game::_giveweapon(var_02);
-  }
-  else if (!issubstr(var_03, var_00)) {
-  scripts\mp\utility\game::_takeweapon(var_00);
-  scripts\mp\utility\game::_giveweapon(var_02);
-  }
+    if(!var_01 && var_05 > 0) {
+      self dropitem(var_00);
+      scripts\mp\utility\game::_giveweapon(var_02);
+    } else if(!issubstr(var_03, var_00)) {
+      scripts\mp\utility\game::_takeweapon(var_00);
+      scripts\mp\utility\game::_giveweapon(var_02);
+    }
 
-  var_06 = self getweaponammoclip(var_03) == 0 && isaxeweapon(var_03);
-  var_07 = issubstr(var_03, "iw7_fists_mp");
+    var_06 = self getweaponammoclip(var_03) == 0 && isaxeweapon(var_03);
+    var_07 = issubstr(var_03, "iw7_fists_mp");
 
-  if (!var_01 || var_07 || var_06)
-  scripts\mp\utility\game::_switchtoweapon(var_02);
+    if(!var_01 || var_07 || var_06)
+      scripts\mp\utility\game::_switchtoweapon(var_02);
 
-  self setweaponammoclip(var_02, 1);
-  scripts\mp\hud_message::showmiscmessage("axe");
-  return;
+    self setweaponammoclip(var_02, 1);
+    scripts\mp\hud_message::showmiscmessage("axe");
+    return;
   }
 
   var_08 = undefined;
   var_09 = 0;
 
-  foreach (var_11 in var_04) {
-  if (issubstr(var_11, "alt_"))
-  continue;
+  foreach(var_11 in var_04) {
+    if(issubstr(var_11, "alt_")) {
+      continue;
+    }
+    if(issubstr(var_11, "uplinkball")) {
+      continue;
+    }
+    var_12 = self getweaponammoclip(var_11) == 0 && isaxeweapon(var_11);
 
-  if (issubstr(var_11, "uplinkball"))
-  continue;
+    if(!isdefined(var_08) && (weaponispreferreddrop(var_11) || var_12))
+      var_08 = var_11;
 
-  var_12 = self getweaponammoclip(var_11) == 0 && isaxeweapon(var_11);
-
-  if (!isdefined(var_08) && (weaponispreferreddrop(var_11) || var_12))
-  var_08 = var_11;
-
-  var_9++;
+    var_9++;
   }
 
   var_14 = undefined;
 
-  if (isdefined(var_08))
-  var_14 = var_08;
-  else if (var_09 >= 2)
-  var_14 = var_03;
+  if(isdefined(var_08))
+    var_14 = var_08;
+  else if(var_09 >= 2)
+    var_14 = var_03;
 
   var_15 = !var_01 || isdefined(var_14) && issubstr(var_03, var_14);
 
-  if (isdefined(var_14)) {
-  var_12 = self getweaponammoclip(var_14) == 0 && isaxeweapon(var_14);
-  var_16 = var_14 == "iw7_fists_mp";
-  var_17 = weaponcandrop(var_14) && !var_12;
+  if(isdefined(var_14)) {
+    var_12 = self getweaponammoclip(var_14) == 0 && isaxeweapon(var_14);
+    var_16 = var_14 == "iw7_fists_mp";
+    var_17 = weaponcandrop(var_14) && !var_12;
 
-  if (var_17) {
-  var_18 = self dropitem(var_14);
+    if(var_17) {
+      var_18 = self dropitem(var_14);
 
-  if (isdefined(var_18)) {
-  if (isdefined(self.tookweaponfrom[var_14])) {
-  var_18.owner = self.tookweaponfrom[var_14];
-  self.tookweaponfrom[var_14] = undefined;
-  }
-  else
-  var_18.owner = self;
+      if(isdefined(var_18)) {
+        if(isdefined(self.tookweaponfrom[var_14])) {
+          var_18.owner = self.tookweaponfrom[var_14];
+          self.tookweaponfrom[var_14] = undefined;
+        } else
+          var_18.owner = self;
 
-  var_18.targetname = "dropped_weapon";
-  var_18 thread watchpickup();
-  var_18 thread deletepickupafterawhile();
-  }
-  }
-  else if (!var_17 && !(var_16 && var_09 < 2) && !(var_12 && var_09 < 2))
-  self giveuponsuppressiontime(var_14);
+        var_18.targetname = "dropped_weapon";
+        var_18 thread watchpickup();
+        var_18 thread deletepickupafterawhile();
+      }
+    } else if(!var_17 && !(var_16 && var_09 < 2) && !(var_12 && var_09 < 2))
+      self giveuponsuppressiontime(var_14);
   }
 
   scripts\mp\utility\game::_giveweapon(var_02);
   self setweaponammoclip(var_02, 1);
 
-  if (var_15)
-  scripts\mp\utility\game::_switchtoweapon(var_02);
+  if(var_15)
+    scripts\mp\utility\game::_switchtoweapon(var_02);
 
   scripts\mp\hud_message::showmiscmessage("axe");
   fixupplayerweapons(self, var_02);
@@ -6685,8 +6652,8 @@ callback_finishweaponchange(var_00, var_01, var_02, var_03) {
   updateholidayweaponsounds(var_00, var_01, var_02, var_03);
   updateweaponscriptvfx(var_00, var_01, var_02, var_03);
 
-  if (level.ingraceperiod > 0)
-  thread watchrigchangeforweaponfx(var_00, var_01, var_02, var_03);
+  if(level.ingraceperiod > 0)
+    thread watchrigchangeforweaponfx(var_00, var_01, var_02, var_03);
 
   scripts\mp\missions::monitorweaponpickup(var_00);
 }
@@ -6697,30 +6664,30 @@ watchrigchangeforweaponfx(var_00, var_01, var_02, var_03) {
   self endon("graceperiod_done");
 
   while (level.ingraceperiod > 0) {
-  self waittill("changed_kit");
+    self waittill("changed_kit");
 
-  if (isdefined(var_01) && var_01 != "none")
-  updateweaponscriptvfx(var_00, var_01, var_02, var_03);
+    if(isdefined(var_01) && var_01 != "none")
+      updateweaponscriptvfx(var_00, var_01, var_02, var_03);
   }
 }
 
 updateholidayweaponsounds(var_00, var_01, var_02, var_03) {
   var_04 = getweaponvariantindex(var_00);
 
-  if (scripts\mp\class::isholidayweapon(var_00, var_04))
-  self _meth_8460("special_foley", "bells", 2);
+  if(scripts\mp\class::isholidayweapon(var_00, var_04))
+    self _meth_8460("special_foley", "bells", 2);
   else
-  self _meth_8460("special_foley", "", 0.1);
+    self _meth_8460("special_foley", "", 0.1);
 }
 
 updateweaponscriptvfx(var_00, var_01, var_02, var_03) {
-  if ((var_01 == "none" || var_01 == "alt_none") && isdefined(self.lastdroppableweaponobj)) {
-  if (var_01 == "alt_none")
-  var_03 = 1;
-  else
-  var_03 = 0;
+  if((var_01 == "none" || var_01 == "alt_none") && isdefined(self.lastdroppableweaponobj)) {
+    if(var_01 == "alt_none")
+      var_03 = 1;
+    else
+      var_03 = 0;
 
-  var_01 = self.lastdroppableweaponobj;
+    var_01 = self.lastdroppableweaponobj;
   }
 
   clearweaponscriptvfx(var_01, var_03);
@@ -6728,85 +6695,85 @@ updateweaponscriptvfx(var_00, var_01, var_02, var_03) {
 }
 
 runweaponscriptvfx(var_00, var_01) {
-  if (!isdefined(var_00))
-  return;
-
-  if (isdefined(var_01) && var_01 == 1)
-  var_02 = "alt_" + scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_00);
+  if(!isdefined(var_00)) {
+    return;
+  }
+  if(isdefined(var_01) && var_01 == 1)
+    var_02 = "alt_" + scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_00);
   else
-  var_02 = scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_00);
+    var_02 = scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_00);
 
   switch (var_02) {
-  case "alt_iw7_rvn_mp":
-  self setscriptablepartstate("rvnFXView", "VFX_base", 0);
+    case "alt_iw7_rvn_mp":
+      self setscriptablepartstate("rvnFXView", "VFX_base", 0);
 
-  if (scripts\mp\equipment\phase_shift::isentityphaseshifted(self))
-  self setscriptablepartstate("rvnFXWorld", "activePhase", 0);
-  else
-  self setscriptablepartstate("rvnFXWorld", "active", 0);
+      if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self))
+        self setscriptablepartstate("rvnFXWorld", "activePhase", 0);
+      else
+        self setscriptablepartstate("rvnFXWorld", "active", 0);
 
-  break;
-  case "alt_iw7_rvn_mpl_burst6":
-  case "alt_iw7_rvn_mpl":
-  self setscriptablepartstate("rvnFXView", "VFX_epic", 0);
+      break;
+    case "alt_iw7_rvn_mpl_burst6":
+    case "alt_iw7_rvn_mpl":
+      self setscriptablepartstate("rvnFXView", "VFX_epic", 0);
 
-  if (scripts\mp\equipment\phase_shift::isentityphaseshifted(self))
-  self setscriptablepartstate("rvnFXWorld", "activePhase", 0);
-  else
-  self setscriptablepartstate("rvnFXWorld", "active", 0);
+      if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self))
+        self setscriptablepartstate("rvnFXWorld", "activePhase", 0);
+      else
+        self setscriptablepartstate("rvnFXWorld", "active", 0);
 
-  break;
-  case "alt_iw7_gauss_mpl":
-  case "alt_iw7_gauss_mp_burst3":
-  case "alt_iw7_gauss_mp_burst2":
-  case "alt_iw7_gauss_mp":
-  case "iw7_gauss_mp_burst3":
-  case "iw7_gauss_mp_burst2":
-  case "iw7_gauss_mp":
-  case "iw7_gauss_mpl":
-  self setscriptablepartstate("gaussFXView", "VFX_base", 0);
+      break;
+    case "alt_iw7_gauss_mpl":
+    case "alt_iw7_gauss_mp_burst3":
+    case "alt_iw7_gauss_mp_burst2":
+    case "alt_iw7_gauss_mp":
+    case "iw7_gauss_mp_burst3":
+    case "iw7_gauss_mp_burst2":
+    case "iw7_gauss_mp":
+    case "iw7_gauss_mpl":
+      self setscriptablepartstate("gaussFXView", "VFX_base", 0);
 
-  if (scripts\mp\equipment\phase_shift::isentityphaseshifted(self))
-  self setscriptablepartstate("gaussFXWorld", "activePhase", 0);
-  else
-  self setscriptablepartstate("gaussFXWorld", "active", 0);
+      if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self))
+        self setscriptablepartstate("gaussFXWorld", "activePhase", 0);
+      else
+        self setscriptablepartstate("gaussFXWorld", "active", 0);
 
-  thread chargefxwatcher();
-  break;
+      thread chargefxwatcher();
+      break;
   }
 }
 
 clearweaponscriptvfx(var_00, var_01) {
-  if (!isdefined(var_00))
-  return;
-
-  if (isdefined(var_01) && var_01 == 1)
-  var_02 = "alt_" + scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_00);
+  if(!isdefined(var_00)) {
+    return;
+  }
+  if(isdefined(var_01) && var_01 == 1)
+    var_02 = "alt_" + scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_00);
   else
-  var_02 = scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_00);
+    var_02 = scripts\mp\utility\game::getweaponbasedsmokegrenadecount(var_00);
 
   switch (var_02) {
-  case "alt_iw7_rvn_mp":
-  self setscriptablepartstate("rvnFXView", "neutral", 0);
-  self setscriptablepartstate("rvnFXWorld", "neutral", 0);
-  break;
-  case "alt_iw7_rvn_mpl_burst6":
-  case "alt_iw7_rvn_mpl":
-  self setscriptablepartstate("rvnFXView", "neutral", 0);
-  self setscriptablepartstate("rvnFXWorld", "neutral", 0);
-  break;
-  case "alt_iw7_gauss_mpl":
-  case "alt_iw7_gauss_mp_burst3":
-  case "alt_iw7_gauss_mp_burst2":
-  case "alt_iw7_gauss_mp":
-  case "iw7_gauss_mp_burst3":
-  case "iw7_gauss_mp_burst2":
-  case "iw7_gauss_mp":
-  case "iw7_gauss_mpl":
-  self setscriptablepartstate("gaussFXView", "neutral", 0);
-  self setscriptablepartstate("gaussFXWorld", "neutral", 0);
-  self notify("clear_chargeFXWatcher");
-  break;
+    case "alt_iw7_rvn_mp":
+      self setscriptablepartstate("rvnFXView", "neutral", 0);
+      self setscriptablepartstate("rvnFXWorld", "neutral", 0);
+      break;
+    case "alt_iw7_rvn_mpl_burst6":
+    case "alt_iw7_rvn_mpl":
+      self setscriptablepartstate("rvnFXView", "neutral", 0);
+      self setscriptablepartstate("rvnFXWorld", "neutral", 0);
+      break;
+    case "alt_iw7_gauss_mpl":
+    case "alt_iw7_gauss_mp_burst3":
+    case "alt_iw7_gauss_mp_burst2":
+    case "alt_iw7_gauss_mp":
+    case "iw7_gauss_mp_burst3":
+    case "iw7_gauss_mp_burst2":
+    case "iw7_gauss_mp":
+    case "iw7_gauss_mpl":
+      self setscriptablepartstate("gaussFXView", "neutral", 0);
+      self setscriptablepartstate("gaussFXWorld", "neutral", 0);
+      self notify("clear_chargeFXWatcher");
+      break;
   }
 }
 
@@ -6816,18 +6783,18 @@ chargefxwatcher() {
   thread chargedeathwatcher();
 
   for (;;) {
-  if (!scripts\mp\utility\game::isreallyalive(self))
-  break;
+    if(!scripts\mp\utility\game::isreallyalive(self)) {
+      break;
+    }
+    self waittill("weapon_charge_update_tag_count", var_00);
 
-  self waittill("weapon_charge_update_tag_count", var_00);
+    if(var_00 >= 7) {
+      self setscriptablepartstate("gaussFXWorld", "active", 0);
+      self waittill("weapon_charge_update_tag_count", var_00);
+      self setscriptablepartstate("gaussFXWorld", "neutral", 0);
+    }
 
-  if (var_00 >= 7) {
-  self setscriptablepartstate("gaussFXWorld", "active", 0);
-  self waittill("weapon_charge_update_tag_count", var_00);
-  self setscriptablepartstate("gaussFXWorld", "neutral", 0);
-  }
-
-  wait 0.1;
+    wait 0.1;
   }
 }
 
@@ -6842,41 +6809,41 @@ updatecamoscripts(var_00, var_01, var_02, var_03) {
   var_04 = getweaponcamoname(var_00);
   var_05 = getweaponcamoname(var_01);
 
-  if (!isdefined(var_04))
-  var_04 = "none";
+  if(!isdefined(var_04))
+    var_04 = "none";
 
-  if (!isdefined(var_05))
-  var_05 = "none";
+  if(!isdefined(var_05))
+    var_05 = "none";
 
   clearcamoscripts(var_01, var_05);
   runcamoscripts(var_00, var_04);
 }
 
 runcamoscripts(var_00, var_01) {
-  if (!isdefined(var_01))
-  return;
-
+  if(!isdefined(var_01)) {
+    return;
+  }
   switch (var_01) {
-  case "camo31":
-  thread mw2_camo_31();
-  break;
-  case "camo84":
-  thread blood_camo_84();
-  break;
+    case "camo31":
+      thread mw2_camo_31();
+      break;
+    case "camo84":
+      thread blood_camo_84();
+      break;
   }
 }
 
 clearcamoscripts(var_00, var_01) {
-  if (!isdefined(var_01))
-  return;
-
+  if(!isdefined(var_01)) {
+    return;
+  }
   switch (var_01) {
-  case "camo31":
-  self notify("mw2_camo_31");
-  break;
-  case "camo84":
-  self notify("blood_camo_84");
-  break;
+    case "camo31":
+      self notify("mw2_camo_31");
+      break;
+    case "camo84":
+      self notify("blood_camo_84");
+      break;
   }
 }
 
@@ -6885,19 +6852,19 @@ mw2_camo_31() {
   self endon("death");
   self endon("mw2_camo_31");
 
-  if (!isdefined(self.pers["mw2CamoKillCount"]))
-  self.pers["mw2CamoKillCount"] = 0;
+  if(!isdefined(self.pers["mw2CamoKillCount"]))
+    self.pers["mw2CamoKillCount"] = 0;
 
   self setscriptablepartstate("camo_31", self.pers["mw2CamoKillCount"] + "_kills");
 
   for (;;) {
-  self waittill("kill_event_buffered");
-  self.pers["mw2CamoKillCount"] = self.pers["mw2CamoKillCount"] + 1;
+    self waittill("kill_event_buffered");
+    self.pers["mw2CamoKillCount"] = self.pers["mw2CamoKillCount"] + 1;
 
-  if (self.pers["mw2CamoKillCount"] > 7)
-  self.pers["mw2CamoKillCount"] = 0;
+    if(self.pers["mw2CamoKillCount"] > 7)
+      self.pers["mw2CamoKillCount"] = 0;
 
-  self setscriptablepartstate("camo_31", self.pers["mw2CamoKillCount"] + "_kills");
+    self setscriptablepartstate("camo_31", self.pers["mw2CamoKillCount"] + "_kills");
   }
 }
 
@@ -6906,14 +6873,14 @@ blood_camo_84() {
   self endon("death");
   self endon("blood_camo_84");
 
-  if (isdefined(self.bloodcamokillcount))
-  self setscriptablepartstate("camo_84", self.bloodcamokillcount + "_kills");
+  if(isdefined(self.bloodcamokillcount))
+    self setscriptablepartstate("camo_84", self.bloodcamokillcount + "_kills");
   else
-  self.bloodcamokillcount = 0;
+    self.bloodcamokillcount = 0;
 
   while (self.bloodcamokillcount < 13) {
-  self waittill("kill_event_buffered");
-  self.bloodcamokillcount = self.bloodcamokillcount + 1;
-  self setscriptablepartstate("camo_84", self.bloodcamokillcount + "_kills");
+    self waittill("kill_event_buffered");
+    self.bloodcamokillcount = self.bloodcamokillcount + 1;
+    self setscriptablepartstate("camo_84", self.bloodcamokillcount + "_kills");
   }
 }

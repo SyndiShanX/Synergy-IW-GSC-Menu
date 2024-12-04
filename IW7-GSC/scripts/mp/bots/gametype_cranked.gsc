@@ -5,6 +5,6 @@
 ************************************************/
 
 main() {
-	level.bot_personality_types_desired["active"] = 1;
-	level.bot_personality_types_desired["stationary"] = 0;
+  level.bot_personality_types_desired["active"] = 1;
+  level.bot_personality_types_desired["stationary"] = 0;
 }

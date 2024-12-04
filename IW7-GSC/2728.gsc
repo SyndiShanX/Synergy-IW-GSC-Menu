@@ -25,70 +25,70 @@ func_9807() {
   level.finalkillcam_attackerperks = [];
   level.finalkillcam_killstreakvariantinfo = [];
 
-  if (level.multiteambased) {
-  foreach (var_01 in level.teamnamelist) {
-  level.finalkillcam_delay[var_01] = undefined;
-  level.finalkillcam_victim[var_01] = undefined;
-  level.finalkillcam_attacker[var_01] = undefined;
-  level.finalkillcam_attackernum[var_01] = undefined;
-  level.func_6C64[var_01] = undefined;
-  level.func_6C65[var_01] = undefined;
-  level.func_6C66[var_01] = undefined;
-  level.finalkillcam_killcamentityindex[var_01] = undefined;
-  level.finalkillcam_killcamentitystarttime[var_01] = undefined;
-  level.finalkillcam_killcamentitystickstovictim[var_01] = undefined;
-  level.finalkillcam_sweapon[var_01] = undefined;
-  level.func_6C62[var_01] = undefined;
-  level.finalkillcam_psoffsettime[var_01] = undefined;
-  level.finalkillcam_timerecorded[var_01] = undefined;
-  level.finalkillcam_timegameended[var_01] = undefined;
-  level.finalkillcam_smeansofdeath[var_01] = undefined;
-  level.finalkillcam_attackers[var_01] = undefined;
-  level.finalkillcam_attackerdata[var_01] = undefined;
-  level.finalkillcam_attackerperks[var_01] = undefined;
-  level.finalkillcam_killstreakvariantinfo[var_01] = undefined;
-  }
+  if(level.multiteambased) {
+    foreach(var_01 in level.teamnamelist) {
+      level.finalkillcam_delay[var_01] = undefined;
+      level.finalkillcam_victim[var_01] = undefined;
+      level.finalkillcam_attacker[var_01] = undefined;
+      level.finalkillcam_attackernum[var_01] = undefined;
+      level.func_6C64[var_01] = undefined;
+      level.func_6C65[var_01] = undefined;
+      level.func_6C66[var_01] = undefined;
+      level.finalkillcam_killcamentityindex[var_01] = undefined;
+      level.finalkillcam_killcamentitystarttime[var_01] = undefined;
+      level.finalkillcam_killcamentitystickstovictim[var_01] = undefined;
+      level.finalkillcam_sweapon[var_01] = undefined;
+      level.func_6C62[var_01] = undefined;
+      level.finalkillcam_psoffsettime[var_01] = undefined;
+      level.finalkillcam_timerecorded[var_01] = undefined;
+      level.finalkillcam_timegameended[var_01] = undefined;
+      level.finalkillcam_smeansofdeath[var_01] = undefined;
+      level.finalkillcam_attackers[var_01] = undefined;
+      level.finalkillcam_attackerdata[var_01] = undefined;
+      level.finalkillcam_attackerperks[var_01] = undefined;
+      level.finalkillcam_killstreakvariantinfo[var_01] = undefined;
+    }
   } else {
-  level.finalkillcam_delay["axis"] = undefined;
-  level.finalkillcam_victim["axis"] = undefined;
-  level.finalkillcam_attacker["axis"] = undefined;
-  level.finalkillcam_attackernum["axis"] = undefined;
-  level.func_6C64["axis"] = undefined;
-  level.func_6C65["axis"] = undefined;
-  level.func_6C66["axis"] = undefined;
-  level.finalkillcam_killcamentityindex["axis"] = undefined;
-  level.finalkillcam_killcamentitystarttime["axis"] = undefined;
-  level.finalkillcam_killcamentitystickstovictim["axis"] = undefined;
-  level.finalkillcam_sweapon["axis"] = undefined;
-  level.func_6C62["axis"] = undefined;
-  level.finalkillcam_psoffsettime["axis"] = undefined;
-  level.finalkillcam_timerecorded["axis"] = undefined;
-  level.finalkillcam_timegameended["axis"] = undefined;
-  level.finalkillcam_smeansofdeath["axis"] = undefined;
-  level.finalkillcam_attackers["axis"] = undefined;
-  level.finalkillcam_attackerdata["axis"] = undefined;
-  level.finalkillcam_attackerperks["axis"] = undefined;
-  level.finalkillcam_killstreakvariantinfo["axis"] = undefined;
-  level.finalkillcam_delay["allies"] = undefined;
-  level.finalkillcam_victim["allies"] = undefined;
-  level.finalkillcam_attacker["allies"] = undefined;
-  level.finalkillcam_attackernum["allies"] = undefined;
-  level.func_6C64["allies"] = undefined;
-  level.func_6C65["allies"] = undefined;
-  level.func_6C66["allies"] = undefined;
-  level.finalkillcam_killcamentityindex["allies"] = undefined;
-  level.finalkillcam_killcamentitystarttime["allies"] = undefined;
-  level.finalkillcam_killcamentitystickstovictim["allies"] = undefined;
-  level.finalkillcam_sweapon["allies"] = undefined;
-  level.func_6C62["allies"] = undefined;
-  level.finalkillcam_psoffsettime["allies"] = undefined;
-  level.finalkillcam_timerecorded["allies"] = undefined;
-  level.finalkillcam_timegameended["allies"] = undefined;
-  level.finalkillcam_smeansofdeath["allies"] = undefined;
-  level.finalkillcam_attackers["allies"] = undefined;
-  level.finalkillcam_attackerdata["allies"] = undefined;
-  level.finalkillcam_attackerperks["allies"] = undefined;
-  level.finalkillcam_killstreakvariantinfo["allies"] = undefined;
+    level.finalkillcam_delay["axis"] = undefined;
+    level.finalkillcam_victim["axis"] = undefined;
+    level.finalkillcam_attacker["axis"] = undefined;
+    level.finalkillcam_attackernum["axis"] = undefined;
+    level.func_6C64["axis"] = undefined;
+    level.func_6C65["axis"] = undefined;
+    level.func_6C66["axis"] = undefined;
+    level.finalkillcam_killcamentityindex["axis"] = undefined;
+    level.finalkillcam_killcamentitystarttime["axis"] = undefined;
+    level.finalkillcam_killcamentitystickstovictim["axis"] = undefined;
+    level.finalkillcam_sweapon["axis"] = undefined;
+    level.func_6C62["axis"] = undefined;
+    level.finalkillcam_psoffsettime["axis"] = undefined;
+    level.finalkillcam_timerecorded["axis"] = undefined;
+    level.finalkillcam_timegameended["axis"] = undefined;
+    level.finalkillcam_smeansofdeath["axis"] = undefined;
+    level.finalkillcam_attackers["axis"] = undefined;
+    level.finalkillcam_attackerdata["axis"] = undefined;
+    level.finalkillcam_attackerperks["axis"] = undefined;
+    level.finalkillcam_killstreakvariantinfo["axis"] = undefined;
+    level.finalkillcam_delay["allies"] = undefined;
+    level.finalkillcam_victim["allies"] = undefined;
+    level.finalkillcam_attacker["allies"] = undefined;
+    level.finalkillcam_attackernum["allies"] = undefined;
+    level.func_6C64["allies"] = undefined;
+    level.func_6C65["allies"] = undefined;
+    level.func_6C66["allies"] = undefined;
+    level.finalkillcam_killcamentityindex["allies"] = undefined;
+    level.finalkillcam_killcamentitystarttime["allies"] = undefined;
+    level.finalkillcam_killcamentitystickstovictim["allies"] = undefined;
+    level.finalkillcam_sweapon["allies"] = undefined;
+    level.func_6C62["allies"] = undefined;
+    level.finalkillcam_psoffsettime["allies"] = undefined;
+    level.finalkillcam_timerecorded["allies"] = undefined;
+    level.finalkillcam_timegameended["allies"] = undefined;
+    level.finalkillcam_smeansofdeath["allies"] = undefined;
+    level.finalkillcam_attackers["allies"] = undefined;
+    level.finalkillcam_attackerdata["allies"] = undefined;
+    level.finalkillcam_attackerperks["allies"] = undefined;
+    level.finalkillcam_killstreakvariantinfo["allies"] = undefined;
   }
 
   level.finalkillcam_delay["none"] = undefined;
@@ -116,70 +116,70 @@ func_9807() {
 }
 
 erasefinalkillcam() {
-  if (level.multiteambased) {
-  for (var_00 = 0; var_00 < level.teamnamelist.size; var_0++) {
-  level.finalkillcam_delay[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_victim[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_attacker[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_attackernum[level.teamnamelist[var_00]] = undefined;
-  level.func_6C64[level.teamnamelist[var_00]] = undefined;
-  level.func_6C65[level.teamnamelist[var_00]] = undefined;
-  level.func_6C66[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_killcamentityindex[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_killcamentitystarttime[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_killcamentitystickstovictim[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_sweapon[level.teamnamelist[var_00]] = undefined;
-  level.func_6C62[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_psoffsettime[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_timerecorded[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_timegameended[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_smeansofdeath[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_attackers[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_attackerdata[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_attackerperks[level.teamnamelist[var_00]] = undefined;
-  level.finalkillcam_killstreakvariantinfo[level.teamnamelist[var_00]] = undefined;
-  }
+  if(level.multiteambased) {
+    for (var_00 = 0; var_00 < level.teamnamelist.size; var_0++) {
+      level.finalkillcam_delay[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_victim[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_attacker[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_attackernum[level.teamnamelist[var_00]] = undefined;
+      level.func_6C64[level.teamnamelist[var_00]] = undefined;
+      level.func_6C65[level.teamnamelist[var_00]] = undefined;
+      level.func_6C66[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_killcamentityindex[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_killcamentitystarttime[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_killcamentitystickstovictim[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_sweapon[level.teamnamelist[var_00]] = undefined;
+      level.func_6C62[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_psoffsettime[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_timerecorded[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_timegameended[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_smeansofdeath[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_attackers[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_attackerdata[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_attackerperks[level.teamnamelist[var_00]] = undefined;
+      level.finalkillcam_killstreakvariantinfo[level.teamnamelist[var_00]] = undefined;
+    }
   } else {
-  level.finalkillcam_delay["axis"] = undefined;
-  level.finalkillcam_victim["axis"] = undefined;
-  level.finalkillcam_attacker["axis"] = undefined;
-  level.finalkillcam_attackernum["axis"] = undefined;
-  level.func_6C64["axis"] = undefined;
-  level.func_6C65["axis"] = undefined;
-  level.func_6C66["axis"] = undefined;
-  level.finalkillcam_killcamentityindex["axis"] = undefined;
-  level.finalkillcam_killcamentitystarttime["axis"] = undefined;
-  level.finalkillcam_killcamentitystickstovictim["axis"] = undefined;
-  level.finalkillcam_sweapon["axis"] = undefined;
-  level.func_6C62["axis"] = undefined;
-  level.finalkillcam_psoffsettime["axis"] = undefined;
-  level.finalkillcam_timerecorded["axis"] = undefined;
-  level.finalkillcam_timegameended["axis"] = undefined;
-  level.finalkillcam_smeansofdeath["axis"] = undefined;
-  level.finalkillcam_attackers["axis"] = undefined;
-  level.finalkillcam_attackerdata["axis"] = undefined;
-  level.finalkillcam_attackerperks["axis"] = undefined;
-  level.finalkillcam_killstreakvariantinfo["axis"] = undefined;
-  level.finalkillcam_delay["allies"] = undefined;
-  level.finalkillcam_victim["allies"] = undefined;
-  level.finalkillcam_attacker["allies"] = undefined;
-  level.finalkillcam_attackernum["allies"] = undefined;
-  level.func_6C64["allies"] = undefined;
-  level.func_6C65["allies"] = undefined;
-  level.func_6C66["allies"] = undefined;
-  level.finalkillcam_killcamentityindex["allies"] = undefined;
-  level.finalkillcam_killcamentitystarttime["allies"] = undefined;
-  level.finalkillcam_killcamentitystickstovictim["allies"] = undefined;
-  level.finalkillcam_sweapon["allies"] = undefined;
-  level.func_6C62["allies"] = undefined;
-  level.finalkillcam_psoffsettime["allies"] = undefined;
-  level.finalkillcam_timerecorded["allies"] = undefined;
-  level.finalkillcam_timegameended["allies"] = undefined;
-  level.finalkillcam_smeansofdeath["allies"] = undefined;
-  level.finalkillcam_attackers["allies"] = undefined;
-  level.finalkillcam_attackerdata["allies"] = undefined;
-  level.finalkillcam_attackerperks["allies"] = undefined;
-  level.finalkillcam_killstreakvariantinfo["allies"] = undefined;
+    level.finalkillcam_delay["axis"] = undefined;
+    level.finalkillcam_victim["axis"] = undefined;
+    level.finalkillcam_attacker["axis"] = undefined;
+    level.finalkillcam_attackernum["axis"] = undefined;
+    level.func_6C64["axis"] = undefined;
+    level.func_6C65["axis"] = undefined;
+    level.func_6C66["axis"] = undefined;
+    level.finalkillcam_killcamentityindex["axis"] = undefined;
+    level.finalkillcam_killcamentitystarttime["axis"] = undefined;
+    level.finalkillcam_killcamentitystickstovictim["axis"] = undefined;
+    level.finalkillcam_sweapon["axis"] = undefined;
+    level.func_6C62["axis"] = undefined;
+    level.finalkillcam_psoffsettime["axis"] = undefined;
+    level.finalkillcam_timerecorded["axis"] = undefined;
+    level.finalkillcam_timegameended["axis"] = undefined;
+    level.finalkillcam_smeansofdeath["axis"] = undefined;
+    level.finalkillcam_attackers["axis"] = undefined;
+    level.finalkillcam_attackerdata["axis"] = undefined;
+    level.finalkillcam_attackerperks["axis"] = undefined;
+    level.finalkillcam_killstreakvariantinfo["axis"] = undefined;
+    level.finalkillcam_delay["allies"] = undefined;
+    level.finalkillcam_victim["allies"] = undefined;
+    level.finalkillcam_attacker["allies"] = undefined;
+    level.finalkillcam_attackernum["allies"] = undefined;
+    level.func_6C64["allies"] = undefined;
+    level.func_6C65["allies"] = undefined;
+    level.func_6C66["allies"] = undefined;
+    level.finalkillcam_killcamentityindex["allies"] = undefined;
+    level.finalkillcam_killcamentitystarttime["allies"] = undefined;
+    level.finalkillcam_killcamentitystickstovictim["allies"] = undefined;
+    level.finalkillcam_sweapon["allies"] = undefined;
+    level.func_6C62["allies"] = undefined;
+    level.finalkillcam_psoffsettime["allies"] = undefined;
+    level.finalkillcam_timerecorded["allies"] = undefined;
+    level.finalkillcam_timegameended["allies"] = undefined;
+    level.finalkillcam_smeansofdeath["allies"] = undefined;
+    level.finalkillcam_attackers["allies"] = undefined;
+    level.finalkillcam_attackerdata["allies"] = undefined;
+    level.finalkillcam_attackerperks["allies"] = undefined;
+    level.finalkillcam_killstreakvariantinfo["allies"] = undefined;
   }
 
   level.finalkillcam_delay["none"] = undefined;
@@ -208,9 +208,9 @@ erasefinalkillcam() {
 preloadfinalkillcam() {
   var_00 = level.finalkillcam_attacker[level.finalkillcam_winner];
 
-  if (isdefined(var_00)) {
-  foreach (var_02 in level.players)
-  var_02 gettweakablelastvalue(var_00);
+  if(isdefined(var_00)) {
+    foreach(var_02 in level.players)
+    var_02 gettweakablelastvalue(var_00);
   }
 }
 
@@ -219,8 +219,8 @@ func_5853() {
   level.showingfinalkillcam = 1;
   var_00 = "none";
 
-  if (isdefined(level.finalkillcam_winner))
-  var_00 = level.finalkillcam_winner;
+  if(isdefined(level.finalkillcam_winner))
+    var_00 = level.finalkillcam_winner;
 
   var_01 = level.finalkillcam_delay[var_00];
   var_02 = level.finalkillcam_victim[var_00];
@@ -243,29 +243,29 @@ func_5853() {
   var_19 = level.finalkillcam_attackerperks[var_00];
   var_20 = level.finalkillcam_killstreakvariantinfo[var_00];
 
-  if (!isdefined(var_02) || !isdefined(var_03)) {
-  level.showingfinalkillcam = 0;
-  level notify("final_killcam_done");
-  return;
+  if(!isdefined(var_02) || !isdefined(var_03)) {
+    level.showingfinalkillcam = 0;
+    level notify("final_killcam_done");
+    return;
   }
 
   var_21 = 20;
   var_22 = var_15 - var_14;
 
-  if (var_22 > var_21) {
-  level.showingfinalkillcam = 0;
-  level notify("final_killcam_done");
-  return;
+  if(var_22 > var_21) {
+    level.showingfinalkillcam = 0;
+    level notify("final_killcam_done");
+    return;
   }
 
-  if (isdefined(var_03)) {
-  if (level.teambased)
-  var_23 = var_3.team;
-  else
-  var_23 = var_3.guid;
+  if(isdefined(var_03)) {
+    if(level.teambased)
+      var_23 = var_3.team;
+    else
+      var_23 = var_3.guid;
 
-  if (isdefined(level.finalkillcam_attacker[var_23]) && level.finalkillcam_attacker[var_23] == var_03)
-  scripts\mp\missions::processfinalkillchallenges(var_03, var_02);
+    if(isdefined(level.finalkillcam_attacker[var_23]) && level.finalkillcam_attacker[var_23] == var_03)
+      scripts\mp\missions::processfinalkillchallenges(var_03, var_02);
   }
 
   var_24 = spawnstruct();
@@ -273,82 +273,81 @@ func_5853() {
   var_24.lastspawntime = var_07;
   var_25 = (gettime() - var_2.deathtime) / 1000;
 
-  foreach (var_27 in level.players) {
-  var_27 scripts\mp\utility\game::restorebasevisionset(0);
-  var_27.killcamentitylookat = var_02 getentitynumber();
-  var_27 scripts\mp\damage::updatedeathdetails(var_17, var_18);
+  foreach(var_27 in level.players) {
+    var_27 scripts\mp\utility\game::restorebasevisionset(0);
+    var_27.killcamentitylookat = var_02 getentitynumber();
+    var_27 scripts\mp\damage::updatedeathdetails(var_17, var_18);
 
-  if (!scripts\mp\utility\game::iskillstreakweapon(var_11))
-  var_27 scripts\mp\killcam::func_F770(var_11, var_16, var_05);
+    if(!scripts\mp\utility\game::iskillstreakweapon(var_11))
+      var_27 scripts\mp\killcam::func_F770(var_11, var_16, var_05);
 
-  var_27 thread scripts\mp\killcam::killcam(var_05, var_24, var_04, var_08, var_09, var_02 getentitynumber(), var_10, var_11, var_25 + var_12, var_13, 0, 12, var_03, var_02, var_16, var_19, var_20);
+    var_27 thread scripts\mp\killcam::killcam(var_05, var_24, var_04, var_08, var_09, var_02 getentitynumber(), var_10, var_11, var_25 + var_12, var_13, 0, 12, var_03, var_02, var_16, var_19, var_20);
   }
 
   wait(0.15 + level.func_B4A7);
 
   while (anyplayersinkillcam())
-  wait 0.05;
+    wait 0.05;
 
   level notify("final_killcam_done");
   level.showingfinalkillcam = 0;
 }
 
 recordfinalkillcam(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
-  if (level.teambased && isdefined(var_2.team)) {
-  level.finalkillcam_delay[var_2.team] = var_00;
-  level.finalkillcam_victim[var_2.team] = var_01;
-  level.finalkillcam_attacker[var_2.team] = var_02;
-  level.finalkillcam_attackernum[var_2.team] = var_03;
-  level.func_6C64[var_2.team] = var_04;
-  level.finalkillcam_killcamentityindex[var_2.team] = var_05;
-  level.finalkillcam_killcamentitystarttime[var_2.team] = var_06;
-  level.finalkillcam_killcamentitystickstovictim[var_2.team] = var_07;
-  level.finalkillcam_sweapon[var_2.team] = var_08;
-  level.func_6C62[var_2.team] = var_09;
-  level.finalkillcam_psoffsettime[var_2.team] = var_10;
-  level.finalkillcam_timerecorded[var_2.team] = scripts\mp\utility\game::getsecondspassed();
-  level.finalkillcam_timegameended[var_2.team] = scripts\mp\utility\game::getsecondspassed();
-  level.finalkillcam_smeansofdeath[var_2.team] = var_11;
-  level.finalkillcam_attackers[var_2.team] = var_1.attackers;
-  level.finalkillcam_attackerdata[var_2.team] = var_1.attackerdata;
-  level.finalkillcam_attackerperks[var_2.team] = var_2.pers["loadoutPerks"];
-  level.finalkillcam_killstreakvariantinfo[var_2.team] = var_1.killsteakvariantattackerinfo;
+  if(level.teambased && isdefined(var_2.team)) {
+    level.finalkillcam_delay[var_2.team] = var_00;
+    level.finalkillcam_victim[var_2.team] = var_01;
+    level.finalkillcam_attacker[var_2.team] = var_02;
+    level.finalkillcam_attackernum[var_2.team] = var_03;
+    level.func_6C64[var_2.team] = var_04;
+    level.finalkillcam_killcamentityindex[var_2.team] = var_05;
+    level.finalkillcam_killcamentitystarttime[var_2.team] = var_06;
+    level.finalkillcam_killcamentitystickstovictim[var_2.team] = var_07;
+    level.finalkillcam_sweapon[var_2.team] = var_08;
+    level.func_6C62[var_2.team] = var_09;
+    level.finalkillcam_psoffsettime[var_2.team] = var_10;
+    level.finalkillcam_timerecorded[var_2.team] = scripts\mp\utility\game::getsecondspassed();
+    level.finalkillcam_timegameended[var_2.team] = scripts\mp\utility\game::getsecondspassed();
+    level.finalkillcam_smeansofdeath[var_2.team] = var_11;
+    level.finalkillcam_attackers[var_2.team] = var_1.attackers;
+    level.finalkillcam_attackerdata[var_2.team] = var_1.attackerdata;
+    level.finalkillcam_attackerperks[var_2.team] = var_2.pers["loadoutPerks"];
+    level.finalkillcam_killstreakvariantinfo[var_2.team] = var_1.killsteakvariantattackerinfo;
 
-  if (isdefined(var_04) && isagent(var_04)) {
-  level.func_6C65[var_2.team] = var_4.agent_type;
-  level.func_6C66[var_2.team] = var_4.lastspawntime;
-  } else {
-  level.func_6C65[var_2.team] = undefined;
-  level.func_6C66[var_2.team] = undefined;
-  }
-  }
-  else if (!level.teambased) {
-  level.finalkillcam_delay[var_2.guid] = var_00;
-  level.finalkillcam_victim[var_2.guid] = var_01;
-  level.finalkillcam_attacker[var_2.guid] = var_02;
-  level.finalkillcam_attackernum[var_2.guid] = var_03;
-  level.func_6C64[var_2.guid] = var_04;
-  level.finalkillcam_killcamentityindex[var_2.guid] = var_05;
-  level.finalkillcam_killcamentitystarttime[var_2.guid] = var_06;
-  level.finalkillcam_killcamentitystickstovictim[var_2.guid] = var_07;
-  level.finalkillcam_sweapon[var_2.guid] = var_08;
-  level.func_6C62[var_2.guid] = var_09;
-  level.finalkillcam_psoffsettime[var_2.guid] = var_10;
-  level.finalkillcam_timerecorded[var_2.guid] = scripts\mp\utility\game::getsecondspassed();
-  level.finalkillcam_timegameended[var_2.guid] = scripts\mp\utility\game::getsecondspassed();
-  level.finalkillcam_smeansofdeath[var_2.guid] = var_11;
-  level.finalkillcam_attackers[var_2.guid] = var_1.attackers;
-  level.finalkillcam_attackerdata[var_2.guid] = var_1.attackerdata;
-  level.finalkillcam_attackerperks[var_2.guid] = var_2.pers["loadoutPerks"];
-  level.finalkillcam_killstreakvariantinfo[var_2.guid] = var_1.killsteakvariantattackerinfo;
+    if(isdefined(var_04) && isagent(var_04)) {
+      level.func_6C65[var_2.team] = var_4.agent_type;
+      level.func_6C66[var_2.team] = var_4.lastspawntime;
+    } else {
+      level.func_6C65[var_2.team] = undefined;
+      level.func_6C66[var_2.team] = undefined;
+    }
+  } else if(!level.teambased) {
+    level.finalkillcam_delay[var_2.guid] = var_00;
+    level.finalkillcam_victim[var_2.guid] = var_01;
+    level.finalkillcam_attacker[var_2.guid] = var_02;
+    level.finalkillcam_attackernum[var_2.guid] = var_03;
+    level.func_6C64[var_2.guid] = var_04;
+    level.finalkillcam_killcamentityindex[var_2.guid] = var_05;
+    level.finalkillcam_killcamentitystarttime[var_2.guid] = var_06;
+    level.finalkillcam_killcamentitystickstovictim[var_2.guid] = var_07;
+    level.finalkillcam_sweapon[var_2.guid] = var_08;
+    level.func_6C62[var_2.guid] = var_09;
+    level.finalkillcam_psoffsettime[var_2.guid] = var_10;
+    level.finalkillcam_timerecorded[var_2.guid] = scripts\mp\utility\game::getsecondspassed();
+    level.finalkillcam_timegameended[var_2.guid] = scripts\mp\utility\game::getsecondspassed();
+    level.finalkillcam_smeansofdeath[var_2.guid] = var_11;
+    level.finalkillcam_attackers[var_2.guid] = var_1.attackers;
+    level.finalkillcam_attackerdata[var_2.guid] = var_1.attackerdata;
+    level.finalkillcam_attackerperks[var_2.guid] = var_2.pers["loadoutPerks"];
+    level.finalkillcam_killstreakvariantinfo[var_2.guid] = var_1.killsteakvariantattackerinfo;
 
-  if (isdefined(var_04) && isagent(var_04)) {
-  level.func_6C65[var_2.guid] = var_4.agent_type;
-  level.func_6C66[var_2.guid] = var_4.lastspawntime;
-  } else {
-  level.func_6C65[var_2.guid] = undefined;
-  level.func_6C66[var_2.guid] = undefined;
-  }
+    if(isdefined(var_04) && isagent(var_04)) {
+      level.func_6C65[var_2.guid] = var_4.agent_type;
+      level.func_6C66[var_2.guid] = var_4.lastspawntime;
+    } else {
+      level.func_6C65[var_2.guid] = undefined;
+      level.func_6C66[var_2.guid] = undefined;
+    }
   }
 
   level.finalkillcam_delay["none"] = var_00;
@@ -371,12 +370,12 @@ recordfinalkillcam(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_0
   level.finalkillcam_attackerperks["none"] = var_2.pers["loadoutPerks"];
   level.finalkillcam_killstreakvariantinfo["none"] = var_1.killsteakvariantattackerinfo;
 
-  if (isdefined(var_04) && isagent(var_04)) {
-  level.func_6C65["none"] = var_4.agent_type;
-  level.func_6C66["none"] = var_4.lastspawntime;
+  if(isdefined(var_04) && isagent(var_04)) {
+    level.func_6C65["none"] = var_4.agent_type;
+    level.func_6C66["none"] = var_4.lastspawntime;
   } else {
-  level.func_6C65["none"] = undefined;
-  level.func_6C66["none"] = undefined;
+    level.func_6C65["none"] = undefined;
+    level.func_6C66["none"] = undefined;
   }
 }
 
@@ -399,18 +398,18 @@ func_13717(var_00) {
 func_10266(var_00) {
   self endon("disconnect");
 
-  if (level.showingfinalkillcam)
-  return 0;
+  if(level.showingfinalkillcam)
+    return 0;
 
-  if (!isai(self)) {
-  thread func_13716();
-  thread func_13717(var_00);
-  var_01 = scripts\engine\utility::waittill_any_return("killcam_death_done_waiting", "killcam_death_button_cancel");
+  if(!isai(self)) {
+    thread func_13716();
+    thread func_13717(var_00);
+    var_01 = scripts\engine\utility::waittill_any_return("killcam_death_done_waiting", "killcam_death_button_cancel");
 
-  if (var_01 == "killcam_death_done_waiting")
-  return 0;
-  else
-  return 1;
+    if(var_01 == "killcam_death_done_waiting")
+      return 0;
+    else
+      return 1;
   }
 
   return 0;
@@ -419,23 +418,23 @@ func_10266(var_00) {
 func_5854(var_00, var_01, var_02, var_03, var_04) {
   self endon("killcam_ended");
 
-  if (isdefined(level.func_58D8))
-  return;
-
+  if(isdefined(level.func_58D8)) {
+    return;
+  }
   level.func_58D8 = 1;
   var_05 = var_0.func_37F1;
   var_06 = 0;
   var_07 = var_03 getentitynumber();
 
-  if (!isdefined(var_0.func_24FF))
-  var_0.func_24FF = var_02 getentitynumber();
+  if(!isdefined(var_0.func_24FF))
+    var_0.func_24FF = var_02 getentitynumber();
 
   var_08 = var_05;
 
-  if (var_08 > 1.0) {
-  var_08 = 1.0;
-  var_06 = var_06 + 1.0;
-  wait(var_05 - var_06);
+  if(var_08 > 1.0) {
+    var_08 = 1.0;
+    var_06 = var_06 + 1.0;
+    wait(var_05 - var_06);
   }
 
   soundsettimescalefactor("music_lr", 0);
@@ -502,9 +501,9 @@ func_5854(var_00, var_01, var_02, var_03, var_04) {
 }
 
 anyplayersinkillcam() {
-  foreach (var_01 in level.players) {
-  if (isdefined(var_1.killcam))
-  return 1;
+  foreach(var_01 in level.players) {
+    if(isdefined(var_1.killcam))
+      return 1;
   }
 
   return 0;

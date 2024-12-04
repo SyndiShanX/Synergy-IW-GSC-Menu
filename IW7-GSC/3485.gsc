@@ -40,12 +40,12 @@ init() {
 onuse(var_00, var_01) {
   var_02 = scripts\mp\utility\game::getotherteam(self.team);
 
-  if (isdefined(level.func_C22F)) {
-  self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
-  return 0;
+  if(isdefined(level.func_C22F)) {
+    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    return 0;
   } else {
-  var_03 = scripts\mp\killstreaks\plane::selectairstrikelocation(var_00, "gas_airstrike", ::dostrike);
-  return isdefined(var_03) && var_03;
+    var_03 = scripts\mp\killstreaks\plane::selectairstrikelocation(var_00, "gas_airstrike", ::dostrike);
+    return isdefined(var_03) && var_03;
   }
 }
 
@@ -76,9 +76,9 @@ dropbombs(var_00, var_01, var_02, var_03, var_04) {
   var_07 = var_5.func_5703 / var_5.speed;
 
   while (var_06 > 0) {
-  thread func_5D35(var_03, var_04);
-  var_6--;
-  wait(var_07);
+    thread func_5D35(var_03, var_04);
+    var_6--;
+    wait(var_07);
   }
 }
 
@@ -98,10 +98,10 @@ func_5D35(var_00, var_01) {
   var_07 = var_6.origin;
   var_08 = var_6.angles;
 
-  if (level.splitscreen)
-  playfxontag(level.airstrikessfx, var_06, "tag_origin");
+  if(level.splitscreen)
+    playfxontag(level.airstrikessfx, var_06, "tag_origin");
   else
-  playfxontag(level.airstrikefx, var_06, "tag_origin");
+    playfxontag(level.airstrikefx, var_06, "tag_origin");
 
   wait 1.0;
   var_09 = bullettrace(var_6.origin, var_6.origin + (0, 0, -1000000.0), 0, undefined);
@@ -111,8 +111,8 @@ func_5D35(var_00, var_01) {
   var_05 delete();
   level.func_C22F--;
 
-  if (level.func_C22F == 0)
-  level.func_C22F = undefined;
+  if(level.func_C22F == 0)
+    level.func_C22F = undefined;
 }
 
 spawnbomb(var_00, var_01, var_02) {
@@ -135,10 +135,10 @@ func_C4CD(var_00, var_01, var_02) {
   var_08 linkto(var_04);
 
   for (self.killcament = var_08; var_07 > 0.0; var_07 = var_07 - var_3.func_5FE7) {
-  foreach (var_10 in level.characters)
-  var_10 applygaseffect(var_00, var_01, var_04, self, var_3.func_5FE8);
+    foreach(var_10 in level.characters)
+    var_10 applygaseffect(var_00, var_01, var_04, self, var_3.func_5FE8);
 
-  wait(var_3.func_5FE7);
+    wait(var_3.func_5FE7);
   }
 
   self.killcament delete();
@@ -147,12 +147,12 @@ func_C4CD(var_00, var_01, var_02) {
 }
 
 applygaseffect(var_00, var_01, var_02, var_03, var_04) {
-  if (var_00 scripts\mp\utility\game::isenemy(self) && isalive(self) && self istouching(var_02)) {
-  var_03 radiusdamage(self.origin, 1, var_04, var_04, var_00, "MOD_RIFLE_BULLET", "gas_strike_mp");
+  if(var_00 scripts\mp\utility\game::isenemy(self) && isalive(self) && self istouching(var_02)) {
+    var_03 radiusdamage(self.origin, 1, var_04, var_04, var_00, "MOD_RIFLE_BULLET", "gas_strike_mp");
 
-  if (!scripts\mp\utility\game::isusingremote()) {
-  var_05 = scripts\mp\perks\perkfunctions::applystunresistence(var_00, self, 2.0);
-  self shellshock("default", var_05);
-  }
+    if(!scripts\mp\utility\game::isusingremote()) {
+      var_05 = scripts\mp\perks\perkfunctions::applystunresistence(var_00, self, 2.0);
+      self shellshock("default", var_05);
+    }
   }
 }

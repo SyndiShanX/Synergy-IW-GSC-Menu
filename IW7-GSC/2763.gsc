@@ -6,20 +6,20 @@
 init() {}
 
 func_1768(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if (!isdefined(var_02))
-  var_02 = 0;
+  if(!isdefined(var_02))
+    var_02 = 0;
 
-  if (var_04 == 0)
-  var_04 = undefined;
+  if(var_04 == 0)
+    var_04 = undefined;
 
-  if (!isdefined(self.lightbarstructs) || self.lightbarstructs.size == 0) {
-  var_06 = [];
-  var_6[0] = spawnstruct();
-  self.lightbarstructs = var_06;
+  if(!isdefined(self.lightbarstructs) || self.lightbarstructs.size == 0) {
+    var_06 = [];
+    var_6[0] = spawnstruct();
+    self.lightbarstructs = var_06;
   } else {
-  var_07 = scripts\mp\utility\game::cleanarray(self.lightbarstructs);
-  self.lightbarstructs = var_07;
-  self.lightbarstructs[self.lightbarstructs.size] = spawnstruct();
+    var_07 = scripts\mp\utility\game::cleanarray(self.lightbarstructs);
+    self.lightbarstructs = var_07;
+    self.lightbarstructs[self.lightbarstructs.size] = spawnstruct();
   }
 
   self.lightbarstructs[self.lightbarstructs.size - 1].lbcolor = var_00;
@@ -30,16 +30,16 @@ func_1768(var_00, var_01, var_02, var_03, var_04, var_05) {
   self.lightbarstructs[self.lightbarstructs.size - 1].executing = 0;
   self.lightbarstructs[self.lightbarstructs.size - 1].func_636F = var_05;
 
-  if (isdefined(var_04))
-  self.lightbarstructs[self.lightbarstructs.size - 1].time = var_04 * 1000;
+  if(isdefined(var_04))
+    self.lightbarstructs[self.lightbarstructs.size - 1].time = var_04 * 1000;
   else
-  self.lightbarstructs[self.lightbarstructs.size - 1].time = undefined;
+    self.lightbarstructs[self.lightbarstructs.size - 1].time = undefined;
 
-  if (isdefined(var_03) && var_03)
-  thread endinactiveinstructionondeath(self.lightbarstructs[self.lightbarstructs.size - 1]);
+  if(isdefined(var_03) && var_03)
+    thread endinactiveinstructionondeath(self.lightbarstructs[self.lightbarstructs.size - 1]);
 
-  if (isdefined(var_05))
-  thread endinstructiononnotification(var_05, self.lightbarstructs[self.lightbarstructs.size - 1]);
+  if(isdefined(var_05))
+    thread endinstructiononnotification(var_05, self.lightbarstructs[self.lightbarstructs.size - 1]);
 
   thread managelightbarstack();
 }
@@ -50,60 +50,58 @@ managelightbarstack() {
   self endon("disconnect");
 
   for (;;) {
-  wait 0.05;
+    wait 0.05;
 
-  if (self.lightbarstructs.size > 1) {
-  var_00 = removetimedoutinstructions(self.lightbarstructs);
-  var_01 = scripts\engine\utility::array_sort_with_func(var_00, ::is_higher_priority);
-  }
-  else
-  var_01 = self.lightbarstructs;
+    if(self.lightbarstructs.size > 1) {
+      var_00 = removetimedoutinstructions(self.lightbarstructs);
+      var_01 = scripts\engine\utility::array_sort_with_func(var_00, ::is_higher_priority);
+    } else
+      var_01 = self.lightbarstructs;
 
-  if (var_1.size == 0)
-  return;
+    if(var_1.size == 0) {
+      return;
+    }
+    self.lightbarstructs = var_01;
+    var_02 = var_1[0];
 
-  self.lightbarstructs = var_01;
-  var_02 = var_1[0];
+    if(var_2.executing) {
+      continue;
+    }
+    var_03 = !isdefined(self.lightbarstructs[self.lightbarstructs.size - 1].time);
+    var_04 = 0;
 
-  if (var_2.executing)
-  continue;
+    if(!var_03) {
+      var_05 = gettime() - var_2.timeplacedinstack;
+      var_04 = var_2.time - var_05;
+      var_04 = var_04 / 1000;
 
-  var_03 = !isdefined(self.lightbarstructs[self.lightbarstructs.size - 1].time);
-  var_04 = 0;
+      if(var_04 <= 0) {
+        self.lightbarstructs[0] notify("removed");
+        self.lightbarstructs[0] = undefined;
+        cleanlbarray();
+        managelightbarstack();
+      }
+    }
 
-  if (!var_03) {
-  var_05 = gettime() - var_2.timeplacedinstack;
-  var_04 = var_2.time - var_05;
-  var_04 = var_04 / 1000;
+    if(var_03) {
+      if(var_2.endondeath) {
+        var_02 notify("executing");
+        var_2.executing = 1;
+        thread set_lightbar_perm_endon_death(var_2.lbcolor, var_2.pulsetime);
+      } else
+        thread set_lightbar_perm(var_2.lbcolor, var_2.pulsetime);
 
-  if (var_04 <= 0) {
-  self.lightbarstructs[0] notify("removed");
-  self.lightbarstructs[0] = undefined;
-  cleanlbarray();
-  managelightbarstack();
-  }
-  }
+      continue;
+    }
 
-  if (var_03) {
-  if (var_2.endondeath) {
-  var_02 notify("executing");
-  var_2.executing = 1;
-  thread set_lightbar_perm_endon_death(var_2.lbcolor, var_2.pulsetime);
-  }
-  else
-  thread set_lightbar_perm(var_2.lbcolor, var_2.pulsetime);
+    if(var_2.endondeath) {
+      var_02 notify("executing");
+      var_2.executing = 1;
+      thread set_lightbar_for_time_endon_death(var_2.lbcolor, var_2.pulsetime, var_04);
+      continue;
+    }
 
-  continue;
-  }
-
-  if (var_2.endondeath) {
-  var_02 notify("executing");
-  var_2.executing = 1;
-  thread set_lightbar_for_time_endon_death(var_2.lbcolor, var_2.pulsetime, var_04);
-  continue;
-  }
-
-  thread set_lightbar_for_time(var_2.lbcolor, var_2.pulsetime, var_04);
+    thread set_lightbar_for_time(var_2.lbcolor, var_2.pulsetime, var_04);
   }
 }
 
@@ -115,18 +113,18 @@ cleanlbarray() {
 removetimedoutinstructions(var_00) {
   var_01 = [];
 
-  foreach (var_03 in var_00) {
-  if (!isdefined(var_3.time)) {
-  var_1[var_1.size] = var_03;
-  continue;
-  }
+  foreach(var_03 in var_00) {
+    if(!isdefined(var_3.time)) {
+      var_1[var_1.size] = var_03;
+      continue;
+    }
 
-  var_04 = gettime() - var_3.timeplacedinstack;
-  var_05 = var_3.time - var_04;
-  var_05 = var_05 / 1000;
+    var_04 = gettime() - var_3.timeplacedinstack;
+    var_05 = var_3.time - var_04;
+    var_05 = var_05 / 1000;
 
-  if (var_05 > 0)
-  var_1[var_1.size] = var_03;
+    if(var_05 > 0)
+      var_1[var_1.size] = var_03;
   }
 
   return var_01;
@@ -150,9 +148,9 @@ set_lightbar_for_time(var_00, var_01, var_02) {
   set_lightbar_on();
   wait(var_02);
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   set_lightbar_off();
   self.lightbarstructs = undefined;
   cleanlbarray();
@@ -182,9 +180,9 @@ set_lightbar_for_time_endon_death(var_00, var_01, var_02) {
   thread turn_off_light_bar_on_death();
   wait(var_02);
 
-  if (!isdefined(self))
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
   set_lightbar_off();
   self.lightbarstructs[0] notify("removed");
   self.lightbarstructs[0] = undefined;
@@ -206,12 +204,12 @@ endinactiveinstructionondeath(var_00) {
   var_00 endon("executing");
   self waittill("death");
 
-  if (!isdefined(self))
-  return;
-
-  if (self.lightbarstructs.size == 0)
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
+  if(self.lightbarstructs.size == 0) {
+    return;
+  }
   self.lightbarstructs[0] notify("removed");
   self.lightbarstructs[0] = undefined;
   cleanlbarray();
@@ -220,23 +218,23 @@ endinactiveinstructionondeath(var_00) {
 endinstructiononnotification(var_00, var_01) {
   var_01 endon("removed");
 
-  if (isarray(var_00))
-  var_02 = scripts\engine\utility::waittill_any_in_array_return(var_00);
+  if(isarray(var_00))
+    var_02 = scripts\engine\utility::waittill_any_in_array_return(var_00);
   else
-  self waittill(var_00);
+    self waittill(var_00);
 
-  if (!isdefined(self))
-  return;
-
-  for (var_03 = 0; var_03 < self.lightbarstructs.size; var_3++) {
-  if (var_01 == self.lightbarstructs[var_03]) {
-  if (var_1.executing)
-  set_lightbar_off();
-
-  self.lightbarstructs[var_03] = undefined;
-  cleanlbarray();
-  return;
+  if(!isdefined(self)) {
+    return;
   }
+  for (var_03 = 0; var_03 < self.lightbarstructs.size; var_3++) {
+    if(var_01 == self.lightbarstructs[var_03]) {
+      if(var_1.executing)
+        set_lightbar_off();
+
+      self.lightbarstructs[var_03] = undefined;
+      cleanlbarray();
+      return;
+    }
   }
 }
 
@@ -245,12 +243,12 @@ turn_off_light_bar_on_death() {
   self endon("turn_Off_Light_Bar_On_Death");
   self waittill("death");
 
-  if (!isdefined(self))
-  return;
-
-  if (self.lightbarstructs.size == 0)
-  return;
-
+  if(!isdefined(self)) {
+    return;
+  }
+  if(self.lightbarstructs.size == 0) {
+    return;
+  }
   set_lightbar_off();
   self.lightbarstructs[0] notify("removed");
   self.lightbarstructs[0] = undefined;
