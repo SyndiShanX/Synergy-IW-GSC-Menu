@@ -693,8 +693,8 @@ open_menu(menu) {
 	}
 	
 	self.syn["hud"]["title"][0] = self create_text(self get_title(), self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
-	self.syn["hud"]["title"][1] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
-	self.syn["hud"]["title"][2] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+	self.syn["hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+	self.syn["hud"]["title"][2] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 			
 	self.syn["hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 30, self.syn["utility"].color[5], 1, 1); // Outline
 	self.syn["hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 28, self.syn["utility"].color[1], 1, 2); // Main Background
@@ -783,8 +783,8 @@ create_option() {
 			
 			if(return_toggle(self.structure[index].category)) {
 				self.syn["hud"]["category"][0][index] = self create_text(self.structure[index].text, self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 88), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), self.syn["utility"].color[0], 1, 10);
-				self.syn["hud"]["category"][1][index] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
-				self.syn["hud"]["category"][2][index] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
+				self.syn["hud"]["category"][1][index] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
+				self.syn["hud"]["category"][2][index] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
 			}
 			else {
 				if(return_toggle(self.shader_option[self get_menu()])) {
@@ -1005,8 +1005,8 @@ British maps = Dark Blue
 open_controls_menu() {
 	self.syn["controls-hud"] = [];
 	self.syn["controls-hud"]["title"][0] = self create_text("Controls", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
-	self.syn["controls-hud"]["title"][1] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
-	self.syn["controls-hud"]["title"][2] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+	self.syn["controls-hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+	self.syn["controls-hud"]["title"][2] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 	
 	self.syn["controls-hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 97, self.syn["utility"].color[5], 1, 1); // Outline
 	self.syn["controls-hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 95, self.syn["utility"].color[1], 1, 2); // Main Background
@@ -1056,6 +1056,7 @@ menu_index() {
 			self add_option("Zombie Options", ::new_menu, "Zombie Options");
 			self add_option("Teleport Options", ::new_menu, "Teleport Options");
 			self add_option("Account Options", ::new_menu, "Account Options");
+			self add_option("Menu Options", ::new_menu, "Menu Options");
 			self add_option(self.syn["maps"][level.mapName] + " Options", ::new_menu, self.syn["maps"][level.mapName]);
 			
 			break;
@@ -1090,6 +1091,7 @@ menu_index() {
 			
 			self add_option("Give Weapons", ::new_menu, "Give Weapons");
 			self add_option("Take Current Weapon", ::take_weapon);
+			self add_option("Drop Current Weapon", ::drop_weapon);
 			
 			break;
 		case "Fun Options":
@@ -1099,9 +1101,13 @@ menu_index() {
 			
 			self add_toggle("Exo Movement", ::exo_movement, self.exo_movement);
 			
+			self add_toggle("Max Money in Bank", ::max_bank, self.max_bank);
+			self add_toggle("Freeze Box", ::freeze_box, self.freeze_box);
+			
 			self add_toggle("Fullbright", ::fullbright, self.fullbright);
 			self add_toggle("Third Person", ::third_person, self.third_person);
 			
+			self add_increment("Set XP Scale", ::set_xp_scale, 1, 1, 10, 1);
 			self add_increment("Set Speed", ::set_speed, 190, 190, 1190, 50);
 			self add_increment("Move Menu X", ::modify_x_position, 0, -590, 50, 10);
 			self add_increment("Move Menu Y", ::modify_y_position, 0, -90, 150, 10);
@@ -1175,6 +1181,13 @@ menu_index() {
 			self add_option("Give All Soul Keys", ::unlock_soul_keys);
 			self add_option("Unlock " + self.syn["maps"][level.mapName] + " Talisman", ::unlock_talismans);
 			self add_toggle("Temp Director's Cut", ::temp_directors_cut, self.temp_directors_cut);
+			
+			break;
+		case "Menu Options":
+			self add_menu(menu, menu.size);
+		
+			self add_increment("Move Menu X", ::modify_x_position, 0, -590, 50, 10);
+			self add_increment("Move Menu Y", ::modify_y_position, 0, -90, 150, 10);
 			
 			break;
 		case "Off-Host Options":
@@ -1602,6 +1615,24 @@ exo_movement() {
 	}
 }
 
+max_bank() {
+	self.max_bank = !return_toggle(self.max_bank);
+	if(self.max_bank) {
+		self iPrintln("Max Money in Bank [^2ON^7]");
+		self.old_bank = level.atm_amount_deposited;
+		level.atm_amount_deposited = 2147483647;
+	} else {
+		self iPrintln("Max Money in Bank [^1OFF^7]");
+		level.atm_amount_deposited = self.old_bank;
+	}
+}
+
+set_xp_scale(xpScale) {
+	self iPrintln("XP Multiplier Set to [^3" + xpScale + "x^7]");
+	self.xpScale = xpScale;
+	self.weaponxpscale = xpScale;
+}
+
 set_speed(value) {
 	setdvar("g_speed", value);
 }
@@ -1662,6 +1693,29 @@ forge_mode_loop() {
 			}
 		}
 		wait .05;
+	}
+}
+
+freeze_box() {
+	self.freeze_box = !return_toggle(self.freeze_box);
+	if(self.freeze_box) {
+		self iPrintln("Freeze Box [^2ON^7]");
+		self thread freeze_box_loop();
+	} else {
+		self iPrintln("Freeze Box [^1OFF^7]");
+		level.var_B162  = 1;
+		level.var_13D01 = 4;
+		level notify("stop_freeze_box");
+	}
+}
+
+freeze_box_loop() {
+	self endon("death");
+	self endon("disconnect");
+	self endon("stop_freeze_box");
+	for(;;) {
+		level.var_13D01 = 0;
+		wait 1;
 	}
 }
 
@@ -1940,9 +1994,13 @@ build_custom_weapon(weapon, camo, extra_attachments) {
 	}
 }
 
-take_weapon(weapon_name) {
+take_weapon() {
 	self takeWeapon(self getCurrentWeapon());
 	self switchToWeapon(self getWeaponsListPrimaries()[1]);
+}
+
+drop_weapon() {
+	self dropitem(self getcurrentweapon());
 }
 
 // Zombie Options

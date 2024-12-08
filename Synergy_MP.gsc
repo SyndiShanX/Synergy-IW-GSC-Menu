@@ -517,9 +517,8 @@ open_menu(menu) {
 	
 	self.syn["hud"] = [];
 	self.syn["hud"]["title"][0] = self create_text(self get_title(), self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
-	self.syn["hud"]["title"][1] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
-	self.syn["hud"]["title"][2] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
-			
+	self.syn["hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+	
 	self.syn["hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 30, self.syn["utility"].color[5], 1, 1); // Outline
 	self.syn["hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 28, self.syn["utility"].color[1], 1, 2); // Main Background
 	self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
@@ -607,8 +606,7 @@ create_option() {
 			
 			if(return_toggle(self.structure[index].category)) {
 				self.syn["hud"]["category"][0][index] = self create_text(self.structure[index].text, self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 88), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), self.syn["utility"].color[0], 1, 10);
-				self.syn["hud"]["category"][1][index] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
-				self.syn["hud"]["category"][2][index] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
+				self.syn["hud"]["category"][1][index] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
 			}
 			else {
 				if(return_toggle(self.shader_option[self get_menu()])) {
@@ -829,8 +827,7 @@ British maps = Dark Blue
 open_controls_menu() {
 	self.syn["controls-hud"] = [];
 	self.syn["controls-hud"]["title"][0] = self create_text("Controls", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
-	self.syn["controls-hud"]["title"][1] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
-	self.syn["controls-hud"]["title"][2] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+	self.syn["controls-hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 	
 	self.syn["controls-hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 97, self.syn["utility"].color[5], 1, 1); // Outline
 	self.syn["controls-hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 95, self.syn["utility"].color[1], 1, 2); // Main Background
@@ -878,6 +875,7 @@ menu_index() {
 			self add_option("Give Weapons", ::new_menu, "Give Weapons");
 			self add_option("Give Killstreaks", ::new_menu, "Give Killstreaks");
 			self add_option("Account Options", ::new_menu, "Account Options");
+			self add_option("Menu Options", ::new_menu, "Menu Options");
 			
 			break;
 		case "Basic Options":
@@ -900,17 +898,12 @@ menu_index() {
 			self add_toggle("Forge Mode", ::forge_mode, self.forge_mode);
 			
 			self add_toggle("Disable Exo Movement", ::exo_movement, self.exo_movement);
+			self add_toggle("Remove Out of Bounds Popup", ::out_of_bounds, self.out_of_bounds);
 			
 			self add_toggle("Fullbright", ::fullbright, self.fullbright);
 			self add_toggle("Third Person", ::third_person, self.third_person);
 			
 			self add_increment("Set Speed", ::set_speed, 190, 190, 1190, 50);
-			self add_increment("Move Menu X", ::modify_x_position, 0, -20, 620, 10);
-			if(self.syn["utility"].x_offset > 160) {
-				self add_increment("Move Menu Y", ::modify_y_position, 0, -100, 10, 10);
-			} else {
-				self add_increment("Move Menu Y", ::modify_y_position, 0, -50, 10, 10);
-			}
 			
 			self add_option("Visions", ::new_menu, "Visions");
 			
@@ -937,6 +930,17 @@ menu_index() {
 			self add_increment("Set Level", ::set_rank, 1, 1, 55, 1);
 			
 			self add_option("Complete Active Contracts", ::complete_active_contracts);
+			
+			break;
+		case "Menu Options":
+			self add_menu(menu, menu.size);
+		
+			self add_increment("Move Menu X", ::modify_x_position, 0, -20, 620, 10);
+			if(self.syn["utility"].x_offset > 160) {
+				self add_increment("Move Menu Y", ::modify_y_position, 0, -100, 10, 10);
+			} else {
+				self add_increment("Move Menu Y", ::modify_y_position, 0, -50, 10, 10);
+			}
 			
 			break;
 		case "Off-Host Options":
@@ -1297,6 +1301,23 @@ set_vision(vision) {
 	self visionSetNakedForPlayer("", 0.1);
 	wait .25;
 	self visionSetNakedForPlayer(vision, 0.1);
+}
+
+out_of_bounds() {
+	self.out_of_bounds = !return_toggle(self.out_of_bounds);
+	if(self.out_of_bounds != false) {
+		self iPrintString("Out of Bounds Popup [^1OFF^7]");
+		self.out_of_bounds_barriers = getentarray("OutOfBounds", "targetname");
+		foreach(barrier in self.out_of_bounds_barriers) {
+			barrier.oldorigin = barrier.origin;
+			barrier.origin = (0, 0, 999999);
+		}
+	} else {
+		self iPrintString("Out of Bounds Popup [^2ON^7]");
+		foreach(barrier in self.out_of_bounds_barriers) {
+			barrier.origin = barrier.oldorigin;
+		}
+	}
 }
 
 // Perks
