@@ -32,6 +32,13 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 * You have to play with other Players or Bots, so the best option is to play Combat Training in the Public Match Section
 
+#### Campaign:
+* Download [Synergy_SP.gsc](https://syndishanx.github.io/Synergy-IW-GSC-Menu/Synergy_SP.gsc)
+
+* Place it into `iw7-mod/custom_scripts/sp`
+
+* Currently only works on the First Mission
+
 ## Credits
 
 This menu is based on [M203](https://github.com/Xeirh/M203) by [Xeirh](https://github.com/Xeirh)
