@@ -1234,7 +1234,7 @@ set_vision(vision) {
 // Weapon Options
 
 give_weapon(weapon, category, index) {	
-	if(self getCurrentWeapon() != weapon && self getWeaponsListPrimaries()[1] != weapon && self getWeaponsListPrimaries()[2] != weapon && self getWeaponsListPrimaries()[3] != weapon&& self getWeaponsListPrimaries()[4] != weapon) {
+	if(self getCurrentWeapon() != weapon && self getWeaponsListPrimaries()[1] != weapon && self getWeaponsListPrimaries()[2] != weapon && self getWeaponsListPrimaries()[3] != weapon && self getWeaponsListPrimaries()[4] != weapon) {
 		max_weapon_num = 2;
 		if(self getWeaponsListPrimaries().size >= max_weapon_num) {
 			self takeweapon(self getCurrentWeapon());

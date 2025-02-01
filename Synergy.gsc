@@ -1944,7 +1944,7 @@ give_weapon(weapon, category, index) {
 		}
 	}
 	
-	if(self getCurrentWeapon() != weapon && self getWeaponsListPrimaries()[1] != weapon && self getWeaponsListPrimaries()[2] != weapon && self getWeaponsListPrimaries()[3] != weapon&& self getWeaponsListPrimaries()[4] != weapon) {
+	if(self getCurrentWeapon() != weapon && self getWeaponsListPrimaries()[1] != weapon && self getWeaponsListPrimaries()[2] != weapon && self getWeaponsListPrimaries()[3] != weapon && self getWeaponsListPrimaries()[4] != weapon) {
 		if(self scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
 			max_weapon_num = 4;
 		} else {
