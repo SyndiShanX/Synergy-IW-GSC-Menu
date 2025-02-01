@@ -1373,17 +1373,13 @@ give_weapon(weapon, category, index) {
 		
 		self _giveweapon(weapon);
 		self _switchToWeapon(weapon);
-		wait 1;
-		self setWeaponAmmoClip(self getCurrentWeapon(), 999);
-		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
-		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 	} else {
 		self _switchToWeaponImmediate(weapon);
-		wait 1;
-		self setWeaponAmmoClip(self getCurrentWeapon(), 999);
-		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
-		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 	}
+	wait 1;
+	self setWeaponAmmoClip(self getCurrentWeapon(), 999);
+	self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
+	self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 }
 
 take_weapon(weapon_name) {

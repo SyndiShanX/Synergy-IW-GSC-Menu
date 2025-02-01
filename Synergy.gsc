@@ -1957,26 +1957,17 @@ give_weapon(weapon, category, index) {
 		if(weapon == "iw7_spaceland_wmd" || weapon == "iw7_fists_zm" || weapon == "iw7_entangler_zm" || weapon == "iw7_atomizer_mp" || weapon == "iw7_penetrationrail_mp+penetrationrailscope" || weapon == "iw7_steeldragon_mp" || weapon == "iw7_claw_mp" || weapon == "iw7_blackholegun_mp+blackholegunscope" || weapon == "iw7_cutie_zm") {
 			self giveWeapon(weapon);
 			self switchToWeapon(weapon);
-			wait 1;
-			self setWeaponAmmoClip(self getCurrentWeapon(), 999);
-			self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
-			self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
-			
 		} else {
 			self giveWeapon(return_weapon_name_with_like_attachments(weapon));
 			self switchToWeapon(return_weapon_name_with_like_attachments(weapon));
-			wait 1;
-			self setWeaponAmmoClip(self getCurrentWeapon(), 999);
-			self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
-			self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 		}
 	} else {
 		self switchToWeaponImmediate(return_weapon_name_with_like_attachments(weapon));
-		wait 1;
-		self setWeaponAmmoClip(self getCurrentWeapon(), 999);
-		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
-		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 	}
+	wait 1;
+	self setWeaponAmmoClip(self getCurrentWeapon(), 999);
+	self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
+	self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 }
 
 build_custom_weapon(weapon, camo, extra_attachments) {
