@@ -1018,7 +1018,7 @@ menu_index() {
 		case "Debug Options":
 			self add_menu(menu, menu.size);
 
-			self add_option("Get Current Weapon", ::get_weapon);
+			self add_toggle("Get Current Weapon", ::get_weapon, self.get_weapon);
 			self add_option("Get All Weapons", ::get_all_weapons);
 			
 			self add_toggle("Get Current Postion", ::get_position, self.get_position);
