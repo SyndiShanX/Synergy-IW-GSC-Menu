@@ -770,9 +770,11 @@ on_ended() {
 
 onPlayerConnect() {
 	for(;;) {
-		level waittill("land_animation_over");
+		level waitTill("can_save");
 		executeCommand("sv_cheats 1");
+		
 		player = level.player;
+		
 		player thread onPlayerSpawned();
 	}
 }
