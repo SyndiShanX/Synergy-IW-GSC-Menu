@@ -69,7 +69,7 @@ func_8739(param_00, param_01) {
   }
 
   self.var_E4FB[self.var_E4FB.size] = param_00;
-  if(param_00.classname != "script_model" && scripts\sp\_utility::func_106ED(param_00)) {
+  if(param_00.classname != "script_model" && scripts\sp\utility::func_106ED(param_00)) {
     return;
   }
 
@@ -80,7 +80,7 @@ func_8739(param_00, param_01) {
     param_00 _meth_83B9(var_06, var_07);
     param_00.a.disablelongdeath = 1;
     if(isdefined(var_05.var_2AB6) && !var_05.var_2AB6) {
-      param_00 scripts\sp\_utility::func_86E4();
+      param_00 scripts\sp\utility::func_86E4();
     }
 
     if(func_8755(var_05)) {
@@ -230,8 +230,8 @@ func_ADA7(param_00, param_01, param_02) {
     param_01 = 0;
   }
 
-  scripts\sp\_utility::func_65DD("unloaded");
-  scripts\sp\_utility::func_65DD("loaded");
+  scripts\sp\utility::func_65DD("unloaded");
+  scripts\sp\utility::func_65DD("loaded");
   scripts\engine\utility::array_levelthread(param_00, ::func_7A35, param_01, param_02);
 }
 
@@ -286,7 +286,7 @@ func_8754(param_00, param_01) {
 func_13211(param_00) {
   if(isdefined(param_00.var_380) && isdefined(param_00.var_13212)) {
     if(param_00.var_E4FB.size == param_00.var_13212) {
-      param_00 scripts\sp\_utility::func_65E1("loaded");
+      param_00 scripts\sp\utility::func_65E1("loaded");
       return;
     }
 
@@ -295,7 +295,7 @@ func_13211(param_00) {
 
   if(!param_00.var_E880.size && param_00.var_E4FB.size) {
     if(param_00.var_1307E[0]) {
-      param_00 scripts\sp\_utility::func_65E1("loaded");
+      param_00 scripts\sp\utility::func_65E1("loaded");
       return;
     }
 
@@ -306,15 +306,15 @@ func_13211(param_00) {
 
 func_1321F() {
   var_00 = self.var_E4FB;
-  scripts\sp\_vehicle::func_13253();
-  scripts\sp\_utility::func_65E3("unloaded");
-  var_00 = scripts\sp\_utility::func_22B9(var_00);
-  thread scripts\sp\_vehicle::func_1320F(var_00);
+  scripts\sp\vehicle::func_13253();
+  scripts\sp\utility::func_65E3("unloaded");
+  var_00 = scripts\sp\utility::func_22B9(var_00);
+  thread scripts\sp\vehicle::func_1320F(var_00);
 }
 
 func_E054(param_00) {
   scripts\engine\utility::waittill_any_3("unload", "death");
-  param_00 scripts\sp\_utility::func_1101B();
+  param_00 scripts\sp\utility::func_1101B();
 }
 
 func_8752(param_00, param_01, param_02, param_03) {
@@ -362,7 +362,7 @@ func_8752(param_00, param_01, param_02, param_03) {
   } else if(!param_01.var_1307E[0]) {
     var_07 = param_01 func_131E5(0);
     if(param_02) {
-      param_00 thread scripts\sp\_utility::func_B14F();
+      param_00 thread scripts\sp\utility::func_B14F();
       thread func_E054(param_00);
     }
   } else if(var_0B.var_26A3.size) {
@@ -385,13 +385,13 @@ func_8752(param_00, param_01, param_02, param_03) {
   param_01.var_1307E[var_07.var_1321D] = 1;
   param_00.var_EE2B = 1;
   param_00 notify("stop_going_to_node");
-  param_00 scripts\sp\_utility::func_F3BC();
-  param_00 scripts\sp\_utility::func_5504();
+  param_00 scripts\sp\utility::func_F3BC();
+  param_00 scripts\sp\utility::func_5504();
   param_00.objective_playermask_showto = 16;
   param_00 give_mp_super_weapon(var_08);
   param_00 waittill("goal");
-  param_00 scripts\sp\_utility::func_61DB();
-  param_00 scripts\sp\_utility::func_12BFA();
+  param_00 scripts\sp\utility::func_61DB();
+  param_00 scripts\sp\utility::func_12BFA();
   param_00 notify("boarding_vehicle");
   var_0D = func_1F00(param_01, var_07.var_1321D);
   if(isdefined(var_0D.delay)) {
@@ -455,7 +455,7 @@ func_6623() {
 }
 
 func_5BCE(param_00) {
-  if(scripts\sp\_vehicle::func_9E2C()) {
+  if(scripts\sp\vehicle::func_9E2C()) {
     return;
   }
 
@@ -475,7 +475,7 @@ func_5BCE(param_00) {
     self waittill("reached_wait_speed");
   }
 
-  scripts\sp\_vehicle::func_13253();
+  scripts\sp\vehicle::func_13253();
 }
 
 func_872C(param_00, param_01) {
@@ -637,7 +637,7 @@ func_876A(param_00) {
   param_00 scripts\engine\utility::waittill_any_3("death", "jumpedout");
   self.var_12BD0 = scripts\engine\utility::array_remove(self.var_12BD0, param_00);
   if(!self.var_12BD0.size) {
-    scripts\sp\_utility::func_65E1("unloaded");
+    scripts\sp\utility::func_65E1("unloaded");
     self.var_12BBC = "default";
   }
 }
@@ -764,7 +764,7 @@ botgetpersonality() {
     }
   }
 
-  scripts\sp\_utility::func_228A(var_00);
+  scripts\sp\utility::func_228A(var_00);
   self notify("crashed_while_deploying");
   var_00 = undefined;
 }
@@ -978,7 +978,7 @@ func_8766(param_00, param_01) {
   param_00 notify("newanim");
   if(isdefined(var_03.var_2AB6) && !var_03.var_2AB6) {
     if(!isdefined(param_00.var_5531)) {
-      param_00 scripts\sp\_utility::func_86E2();
+      param_00 scripts\sp\utility::func_86E2();
     }
   }
 
@@ -1011,7 +1011,7 @@ func_8766(param_00, param_01) {
 
   if(isdefined(param_00.var_7B54)) {
     var_0C = param_00.var_7B54;
-  } else if(scripts\sp\_utility::func_65DB("landed") && isdefined(var_04._meth_802E)) {
+  } else if(scripts\sp\utility::func_65DB("landed") && isdefined(var_04._meth_802E)) {
     var_0C = var_04._meth_802E;
   } else if(isdefined(param_01.var_D3E2) && isdefined(var_04.var_D098)) {
     var_0C = var_04.var_D098;
@@ -1029,15 +1029,15 @@ func_8766(param_00, param_01) {
     }
 
     if(isdefined(var_03.botgetscriptgoaltype)) {
-      param_00 thread scripts\sp\_utility::play_sound_on_tag(var_03.botgetscriptgoaltype, "J_Wrist_RI", 1);
+      param_00 thread scripts\sp\utility::play_sound_on_tag(var_03.botgetscriptgoaltype, "J_Wrist_RI", 1);
     }
 
     if(isdefined(param_00.var_D3E2) && isdefined(var_03.var_D099)) {
-      param_00 thread scripts\sp\_utility::play_sound_on_entity(var_03.var_D099);
+      param_00 thread scripts\sp\utility::play_sound_on_entity(var_03.var_D099);
     }
 
     if(isdefined(var_03.botgetnodesonpath)) {
-      param_00 thread scripts\sp\_utility::play_loop_sound_on_tag(var_03.botgetnodesonpath);
+      param_00 thread scripts\sp\utility::play_loop_sound_on_tag(var_03.botgetnodesonpath);
     }
 
     if(isdefined(param_00.var_D3E2) && isdefined(var_03.var_D09B)) {
@@ -1119,7 +1119,7 @@ func_8766(param_00, param_01) {
     }
 
     if(isdefined(param_00.var_D3E2) && isdefined(var_03.var_D09A)) {
-      level.player thread scripts\sp\_utility::play_sound_on_entity(var_03.var_D09A);
+      level.player thread scripts\sp\utility::play_sound_on_entity(var_03.var_D09A);
     }
   } else if(!isai(param_00)) {
     if(param_00.var_5BF2 == 1) {
@@ -1168,9 +1168,9 @@ func_8766(param_00, param_01) {
       param_00.var_1356F.origin = param_00.origin;
       param_00.var_1356F.angles = param_00.angles;
       if(isdefined(param_00.var_1356F.target)) {
-        param_00.var_1356F scripts\sp\_vehicle::func_1080B();
+        param_00.var_1356F scripts\sp\vehicle::func_1080B();
       } else {
-        var_11 = param_00.var_1356F scripts\sp\_utility::func_10808();
+        var_11 = param_00.var_1356F scripts\sp\utility::func_10808();
       }
 
       param_00 delete();
@@ -1200,15 +1200,15 @@ func_8767(param_00, param_01, param_02, param_03, param_04) {
   var_0A.origin = var_07;
   var_0A.angles = var_08;
   var_0B = var_0A gettweakablevalue(var_09);
-  var_0A thread scripts\sp\_utility::func_5184("movedone");
+  var_0A thread scripts\sp\utility::func_5184("movedone");
   var_0C = var_0B;
-  var_0D = scripts\sp\_utility::func_864C(var_0C);
+  var_0D = scripts\sp\utility::func_864C(var_0C);
   var_0E = getstartorigin(var_05, var_06, param_04);
   var_09 = getmovedelta(param_04, 0, 1);
   var_0F = var_0E + var_09;
   var_10 = var_0E[2] - var_0F[2];
   var_11 = var_0D + (0, 0, var_10);
-  param_00 scripts\sp\_utility::func_F2A8(0);
+  param_00 scripts\sp\utility::func_F2A8(0);
   param_00 setcandamage(0);
   param_00 endon("death");
   wait(getanimlength(param_02) - 0.1);
@@ -1220,7 +1220,7 @@ func_8767(param_00, param_01, param_02, param_03, param_04) {
   var_0A dontinterpolate();
   param_00 dontinterpolate();
   param_00 linkto(var_0A, "tag_origin", (0, 0, 0), (0, 0, 0));
-  param_00 scripts\sp\_utility::func_F2A8(1);
+  param_00 scripts\sp\utility::func_F2A8(1);
   param_00 setcandamage(1);
   param_00.var_12BC4 = param_03;
   if(isai(param_00)) {
@@ -1263,7 +1263,7 @@ func_8750(param_00) {
     return 0;
   }
 
-  if(param_00 scripts\sp\_utility::func_8B6C()) {
+  if(param_00 scripts\sp\utility::func_8B6C()) {
     return 0;
   }
 
@@ -1411,7 +1411,7 @@ func_1FC4(param_00, param_01, param_02) {
     var_04 = physicstrace(param_00.origin + (0, 0, 16), param_00.origin - (0, 0, 10000));
     var_05 = distance(param_00.origin + (0, 0, 16), var_04);
     if(abs(var_03[2] + 16) <= abs(var_05)) {
-      param_00 thread scripts\sp\_utility::play_sound_on_entity("generic_death_falling");
+      param_00 thread scripts\sp\utility::play_sound_on_entity("generic_death_falling");
       param_00 _meth_8018("fastrope_fall", param_00.origin, param_00.angles, param_00.var_DC17);
       param_00 waittillmatch("start_ragdoll", "fastrope_fall");
     }
@@ -1564,18 +1564,18 @@ func_874C(param_00, param_01, param_02) {
     ](self, param_00, param_01, var_04);
   }
 
-  scripts\sp\_vehicle_code::func_F5D8(var_04);
+  scripts\sp\vehicle_code::func_F5D8(var_04);
   var_04 setdefaultdroppitch(0);
   wait(0.1);
   param_00 endon("guy_man_turret_stop");
-  level thread scripts\sp\_mgturret::func_B6A7(var_04, scripts\sp\_utility::func_7E72());
+  level thread scripts\sp\mgturret::func_B6A7(var_04, scripts\sp\utility::func_7E72());
   var_04 _meth_8359(1);
   var_05 = "stand";
   if(isdefined(var_03.var_12A80)) {
     var_05 = var_03.var_12A80;
   }
 
-  param_00 scripts\sp\_utility::func_13035(var_04, var_05);
+  param_00 scripts\sp\utility::func_13035(var_04, var_05);
 }
 
 func_8765(param_00) {

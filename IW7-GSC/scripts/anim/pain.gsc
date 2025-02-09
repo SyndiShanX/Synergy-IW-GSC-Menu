@@ -1031,7 +1031,7 @@ func_4669() {
     self endon("death");
     thread func_C874();
     thread func_D899("corner_grenade");
-    thread scripts\sp\_utility::func_F2DA(0);
+    thread scripts\sp\utility::func_F2DA(0);
     self.var_33F = -1000;
     func_C86D("corner_grenade_pain", scripts\anim\utility::func_B027("corner_grenade_death", "pain"), % body, 1, 0.1);
     self waittillmatch("dropgun", "corner_grenade_pain");

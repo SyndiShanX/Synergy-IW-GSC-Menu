@@ -43,7 +43,7 @@ func_C7D3() {
   level.player setclientomnvar("ui_hide_hud", 1);
   scripts\engine\utility::flag_set("start_decompress_player");
   setdvar("skip_outro", "0");
-  var_00 = scripts\sp\_hud_util::func_7B4F();
+  var_00 = scripts\sp\hud_util::func_7B4F();
   var_00.alpha = 1;
   level.player _meth_82C0("europa_suck_out_hit_fade_to_black", 0);
   setmusicstate("");
@@ -90,7 +90,7 @@ func_C7B4() {
   scripts\engine\utility::delaythread(0.6, ::func_6222);
   visionsetnaked("europa_outro", 1);
   var_00 = getdvarint("skip_outro");
-  scripts\sp\_utility::func_28D7();
+  scripts\sp\utility::func_28D7();
   physics_setgravity((0, 0, -386.09));
   thread func_ABE1();
   setsaveddvar("r_mbRadialoverridechromaticAberration", 0);
@@ -111,36 +111,36 @@ func_C7B4() {
   }
 
   level notify("end_europa_mission");
-  scripts\sp\_utility::func_BF95();
+  scripts\sp\utility::func_BF95();
 }
 
 func_ABE1() {
-  scripts\sp\_utility::func_1264E("europa_fatty_tr");
+  scripts\sp\utility::func_1264E("europa_fatty_tr");
   wait(0.05);
-  thread scripts\sp\_utility::func_BF97();
+  thread scripts\sp\utility::func_BF97();
 }
 
 func_EBEA() {
   level.var_C7BD = [];
   setsaveddvar("r_mbenable", "0");
-  var_00 = scripts\sp\_utility::func_22CD("outro_enemies", 1);
+  var_00 = scripts\sp\utility::func_22CD("outro_enemies", 1);
   var_01 = [];
   foreach(var_03 in var_00) {
     if(var_03.var_1FBB == "sdf1") {
-      var_03 scripts\sp\_utility::func_72EC("iw7_m4", "primary");
+      var_03 scripts\sp\utility::func_72EC("iw7_m4", "primary");
       var_03.a.nodeath = 1;
       var_01[var_01.size] = var_03;
       level.var_C7D2 = var_03;
       continue;
     } else if(var_03.var_1FBB == "sdf2") {
-      var_03 scripts\sp\_utility::func_72EC("iw7_m4", "primary");
+      var_03 scripts\sp\utility::func_72EC("iw7_m4", "primary");
       var_01[var_01.size] = var_03;
-      var_03 scripts\sp\_utility::func_F6FE("vignette");
+      var_03 scripts\sp\utility::func_F6FE("vignette");
       var_03 lib_0A1E::func_2318();
       continue;
     } else {
       if(var_03.var_1FBB == "kotch") {
-        var_03 scripts\sp\_utility::func_86E4();
+        var_03 scripts\sp\utility::func_86E4();
         level.var_A70E = var_03;
         level.var_C7BD[level.var_C7BD.size] = var_03;
         continue;
@@ -148,7 +148,7 @@ func_EBEA() {
 
       if(var_03.unittype == "c6" || var_03.var_1FBB == "sdf4") {
         level.var_C7BD[level.var_C7BD.size] = var_03;
-        var_03 scripts\sp\_utility::func_72EC("iw7_m4", "primary");
+        var_03 scripts\sp\utility::func_72EC("iw7_m4", "primary");
         continue;
       }
 
@@ -159,11 +159,11 @@ func_EBEA() {
   }
 
   foreach(var_06 in level.var_EBCA) {
-    var_06 scripts\engine\utility::delaythread(0.5, ::scripts\sp\_utility::func_86E4);
+    var_06 scripts\engine\utility::delaythread(0.5, ::scripts\sp\utility::func_86E4);
   }
 
   var_08 = 0;
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     scripts\sp\specialist_MAYBE::func_F52F(1);
     level.player.helmet = level.var_10964.helmet;
   }
@@ -181,7 +181,7 @@ func_EBEA() {
   thread scripts\sp\maps\europa\europa_util::func_8E46(1);
   level.var_A70E attach("oxygen_bottle_air_boss", "tag_accessory_right");
   thread func_C7C9();
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "lower");
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "lower");
   level.player.var_E505 = scripts\sp\player_rig::get_player_score(1);
   var_01[var_01.size] = level.player.var_E505;
   var_01[var_01.size] = level.var_EBBB;
@@ -205,7 +205,7 @@ func_EBEA() {
   wait(8);
   thread func_912F();
   level.player scripts\engine\utility::delaycall(4.5, ::setclientomnvar, "ui_hide_hud", 0);
-  thread scripts\sp\_hud_util::func_6A99(8);
+  thread scripts\sp\hud_util::func_6A99(8);
   thread func_C7BC();
   setmusicstate("mx_173_cine_europaoutro");
   level.player.var_8632 = spawn("script_origin", level.player.origin);
@@ -225,12 +225,12 @@ func_DB9C() {
 }
 
 func_912F() {
-  thread scripts\sp\_hud::func_8DFD(2, 1);
-  thread scripts\sp\_hud::func_8DFF(-280, 1);
+  thread scripts\sp\hud::func_8DFD(2, 1);
+  thread scripts\sp\hud::func_8DFF(-280, 1);
   level.player waittill("o2_in");
-  thread scripts\sp\_hud::func_8DFD(7, 10);
+  thread scripts\sp\hud::func_8DFD(7, 10);
   level.player waittill("o2_out");
-  thread scripts\sp\_hud::func_8DFD(0, 1);
+  thread scripts\sp\hud::func_8DFD(0, 1);
 }
 
 func_C7D7() {
@@ -245,19 +245,19 @@ func_C7D7() {
 }
 
 func_BF03() {
-  scripts\sp\_art::func_583F(0, 60, 1, 0, 0, 0, 0.5);
+  scripts\sp\art::func_583F(0, 60, 1, 0, 0, 0, 0.5);
   level.player waittill("kotch_intro");
   level waittill("kotch_kneel");
-  scripts\sp\_art::func_583F(0, 0, 0, 53, 88, 1.28, 1);
+  scripts\sp\art::func_583F(0, 0, 0, 53, 88, 1.28, 1);
   level waittill("look_at_friendlies");
-  scripts\sp\_art::func_583D(1.5);
+  scripts\sp\art::func_583D(1.5);
   level waittill("kotch_stands");
   level waittill("kotch_kneel2");
-  scripts\sp\_art::func_583F(0, 0, 0, 53, 88, 1.5, 2);
+  scripts\sp\art::func_583F(0, 0, 0, 53, 88, 1.5, 2);
   level.player waittill("o2_out");
-  scripts\sp\_art::func_583D(0.5);
+  scripts\sp\art::func_583D(0.5);
   level.player waittill("connor");
-  scripts\sp\_art::func_583F(0, 35, 3, 0, 0, 0, 2);
+  scripts\sp\art::func_583F(0, 35, 3, 0, 0, 0, 2);
 }
 
 func_584C() {
@@ -357,7 +357,7 @@ func_F4B0(param_00, param_01, param_02) {
 
   var_0A = var_08 * var_05;
   var_0B = var_09 + 150;
-  scripts\sp\_art::func_583F(var_0A, var_08, var_03, var_09, var_0B, var_04, param_01);
+  scripts\sp\art::func_583F(var_0A, var_08, var_03, var_09, var_0B, var_04, param_01);
 }
 
 func_D20A(param_00) {
@@ -403,9 +403,9 @@ func_C06D() {
 }
 
 func_C7BD(param_00) {
-  level.var_A70E scripts\sp\_utility::func_72EC("iw7_nrg", "primary");
+  level.var_A70E scripts\sp\utility::func_72EC("iw7_nrg", "primary");
   level.var_A70E scripts\anim\shared::placeweaponon("iw7_nrg", "left");
-  var_01 = scripts\sp\_utility::func_10639("kotch_gun", level.var_A70E.origin);
+  var_01 = scripts\sp\utility::func_10639("kotch_gun", level.var_A70E.origin);
   level.var_A70E.var_1FB6 = var_01;
   var_02 = level.var_C7BD;
   var_02[var_02.size] = var_01;
@@ -418,8 +418,8 @@ func_C7BD(param_00) {
 
 func_C7C0(param_00) {
   var_01 = scripts\sp\maps\europa\europa_util::func_5F32(param_00);
-  level.var_C7C1 scripts\sp\_utility::func_86E4();
-  var_02 = scripts\sp\_utility::func_10639("flag");
+  level.var_C7C1 scripts\sp\utility::func_86E4();
+  var_02 = scripts\sp\utility::func_10639("flag");
   var_03 = [level.var_C7C1, var_02];
   var_01 thread scripts\sp\anim::func_1F2C(var_03, "outro");
 }
@@ -446,7 +446,7 @@ func_C7BC() {
   var_00 show();
   var_00 thread func_5E0B();
   wait(22);
-  var_01 = scripts\sp\_vehicle::func_1080C("outro_dropship");
+  var_01 = scripts\sp\vehicle::func_1080C("outro_dropship");
   var_01.var_55A4 = 1;
   var_01 notsolid();
   foreach(var_03 in var_01.mgturret) {
@@ -537,9 +537,9 @@ func_5E0E() {
 func_EBEF() {
   var_00 = 3;
   wait(level.var_C7D5 - var_00);
-  thread scripts\sp\_hud_util::func_6AA3(var_00);
+  thread scripts\sp\hud_util::func_6AA3(var_00);
   waittillframeend;
-  var_01 = scripts\sp\_hud_util::func_7B4F();
+  var_01 = scripts\sp\hud_util::func_7B4F();
   var_01.foreground = 0;
   wait(var_00);
 }
@@ -569,7 +569,7 @@ func_8E0B() {
 
     if(gettime() > var_01) {
       var_01 = gettime() + 6000;
-      thread scripts\sp\_utility::func_10350(var_00[level.var_8E0F]);
+      thread scripts\sp\utility::func_10350(var_00[level.var_8E0F]);
     }
 
     if(gettime() > var_03) {
@@ -638,43 +638,43 @@ func_FB84() {
 }
 
 func_FB33() {
-  scripts\sp\_utility::func_10461("plr_helmet_air_leak_lp", 1, 4, 1);
+  scripts\sp\utility::func_10461("plr_helmet_air_leak_lp", 1, 4, 1);
   level.player waittill("o2_in");
   self stoploopsound();
   level.player waittill("o2_out");
-  scripts\engine\utility::delaythread(11, ::scripts\sp\_utility::func_10461, "plr_helmet_air_leak_lp", 1, 2, 1);
+  scripts\engine\utility::delaythread(11, ::scripts\sp\utility::func_10461, "plr_helmet_air_leak_lp", 1, 2, 1);
   level.player waittill("sfx_beep_fade");
-  scripts\sp\_utility::func_10460(1);
+  scripts\sp\utility::func_10460(1);
 }
 
 func_FB47() {
-  scripts\sp\_utility::func_10461("plr_helmet_o2_level_ok_lp", 1, 4, 1);
+  scripts\sp\utility::func_10461("plr_helmet_o2_level_ok_lp", 1, 4, 1);
   wait(6);
-  level.player thread scripts\sp\_utility::func_10350("europa_cmp_oxygendepleted");
+  level.player thread scripts\sp\utility::func_10350("europa_cmp_oxygendepleted");
   level.player waittill("o2_lvl_2");
   self stoploopsound();
   self playloopsound("plr_helmet_o2_level_low_lp");
-  thread scripts\sp\_utility::func_10350("europa_cmp_oxygendepleted");
+  thread scripts\sp\utility::func_10350("europa_cmp_oxygendepleted");
   level.player waittill("o2_lvl_3");
-  thread scripts\sp\_utility::func_10350("europa_cmp_oxygenlevelcrit");
+  thread scripts\sp\utility::func_10350("europa_cmp_oxygenlevelcrit");
   wait(1);
   self stoploopsound();
   self playloopsound("plr_helmet_o2_level_critical_lp");
   wait(4.1);
-  thread scripts\sp\_utility::func_10350("europa_cmp_oxygenlevelcrit");
+  thread scripts\sp\utility::func_10350("europa_cmp_oxygenlevelcrit");
   wait(8);
-  thread scripts\sp\_utility::func_10350("europa_cmp_oxygenlevelcrit");
+  thread scripts\sp\utility::func_10350("europa_cmp_oxygenlevelcrit");
   level.player waittill("o2_in");
   self stoploopsound();
   level.player waittill("o2_out");
   wait(0.6);
-  scripts\sp\_utility::func_10461("plr_helmet_o2_level_low_lp", 1, 2, 1);
+  scripts\sp\utility::func_10461("plr_helmet_o2_level_low_lp", 1, 2, 1);
   wait(2);
-  thread scripts\sp\_utility::func_10350("europa_cmp_oxygendepleted");
+  thread scripts\sp\utility::func_10350("europa_cmp_oxygendepleted");
   level.player waittill("o2_lvl_4");
-  thread scripts\sp\_utility::func_10350("europa_cmp_oxygenlevelcrit");
+  thread scripts\sp\utility::func_10350("europa_cmp_oxygenlevelcrit");
   self stoploopsound();
   self playloopsound("plr_helmet_o2_level_critical_lp");
   level.player waittill("sfx_beep_fade");
-  scripts\sp\_utility::func_10460(1);
+  scripts\sp\utility::func_10460(1);
 }

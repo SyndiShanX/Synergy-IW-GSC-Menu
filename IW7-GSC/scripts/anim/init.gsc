@@ -119,7 +119,7 @@ main() {
   self.var_101E6 = 1;
   self.var_BE8B = 1;
   self.var_504E = 55;
-  scripts\sp\_utility::func_F6FE("asm");
+  scripts\sp\utility::func_F6FE("asm");
   self.a.var_BFAF = 0;
   if(!isdefined(self.script_forcegrenade)) {
     self.script_forcegrenade = 0;
@@ -257,7 +257,7 @@ func_F7AC() {
     level waittill("loadout complete");
   }
 
-  scripts\sp\_names::func_7B05();
+  scripts\sp\names::func_7B05();
   thread scripts\anim\squadmanager::func_185C();
 }
 
@@ -372,7 +372,7 @@ func_6DE9() {
   anim.defaultexception = ::empty;
   func_97F8();
   setdvarifuninitialized("scr_expDeathMayMoveCheck", "on");
-  scripts\sp\_names::func_F9E6();
+  scripts\sp\names::func_F9E6();
   anim.var_1FB5 = 0;
   scripts\anim\init_move_transitions::func_98A0();
   anim.combatidlepreventoverlappingplayer = 10000;
@@ -411,7 +411,7 @@ func_6DE9() {
     scripts\common\flags::init_flags();
   }
 
-  scripts\sp\_gameskill::func_F848();
+  scripts\sp\gameskill::func_F848();
   level.var_C870 = undefined;
   scripts\anim\setposemovement::func_98BF();
   scripts\anim\face::initlevelface();
@@ -594,7 +594,7 @@ begingrenadetracking() {
 
     switch (var_01) {
       case "frag":
-        thread scripts\sp\_detonategrenades::func_734F(var_00);
+        thread scripts\sp\detonategrenades::func_734F(var_00);
         break;
 
       case "emp":
@@ -610,7 +610,7 @@ begingrenadetracking() {
         break;
 
       default:
-        var_00 thread scripts\sp\_utility::grenade_earthquake();
+        var_00 thread scripts\sp\utility::grenade_earthquake();
         break;
     }
   }
@@ -660,7 +660,7 @@ func_6DEA() {
   }
 
   func_97F8();
-  scripts\sp\_names::func_F9E6();
+  scripts\sp\names::func_F9E6();
   anim.var_1FB5 = 0;
   anim.combatidlepreventoverlappingplayer = 10000;
   anim.combatmemorytimeconst = 6000;
@@ -698,7 +698,7 @@ func_6DEA() {
     scripts\common\flags::init_flags();
   }
 
-  scripts\sp\_gameskill::func_F848();
+  scripts\sp\gameskill::func_F848();
   level.var_C870 = undefined;
   scripts\anim\setposemovement::func_98BF();
   scripts\anim\face::initlevelface();

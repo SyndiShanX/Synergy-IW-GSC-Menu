@@ -64,14 +64,14 @@ func_4F25() {
 }
 
 func_1355(param_00) {
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     scripts\sp\specialist_MAYBE::hide_helmet_impacts();
     if(!level.console) {
       wait(0.05);
     }
   }
 
-  if(scripts\sp\_utility::func_9BB7()) {
+  if(scripts\sp\utility::func_9BB7()) {
     setsaveddvar("ui_nextMission", "0");
     if(isdefined(level.var_BF96)) {
       changelevel("", 0, level.var_BF96);
@@ -90,14 +90,14 @@ func_1355(param_00) {
   setdvar("ui_prev_map", level.script);
   game["previous_map"] = undefined;
   var_01 = func_7F6B(level.script);
-  scripts\sp\_gameskill::func_262C("aa_main_" + level.script);
+  scripts\sp\gameskill::func_262C("aa_main_" + level.script);
   if(!isdefined(var_01)) {
     missionsuccess(level.script);
     return;
   }
 
   if(level.script != "shipcrib_epilogue") {
-    scripts\sp\_utility::func_ABD2();
+    scripts\sp\utility::func_ABD2();
   }
 
   func_F77F(var_01);
@@ -106,7 +106,7 @@ func_1355(param_00) {
   lib_0A2F::func_12E18();
   updategamerprofile();
   if(func_8BBF(var_01)) {
-    scripts\sp\_utility::settimer(func_7D92(var_01));
+    scripts\sp\utility::settimer(func_7D92(var_01));
   }
 
   if(func_7F6A(var_01)) {
@@ -118,7 +118,7 @@ func_1355(param_00) {
     var_03 = func_7F69(var_01);
     if(var_03 >= 4) {
       if(func_3DEA(var_01, 4, 1)) {
-        scripts\sp\_utility::settimer("VETERAN");
+        scripts\sp\utility::settimer("VETERAN");
         lib_0A2F::func_EBB3("veh_mil_air_un_jackal_livery_shell_21");
       }
     }
@@ -142,11 +142,11 @@ func_1355(param_00) {
   }
 
   if(getitemfromcache(var_01) && func_3DEB(var_01)) {
-    scripts\sp\_utility::settimer("ALL_SA");
+    scripts\sp\utility::settimer("ALL_SA");
   }
 
   if(getitemdroporiginandangles(var_01) && func_3DE8(var_01)) {
-    scripts\sp\_utility::settimer("ALL_JA");
+    scripts\sp\utility::settimer("ALL_JA");
   }
 
   level.player scripts\sp\analytics::func_B8CE(level.script);
@@ -431,7 +431,7 @@ func_1356(param_00, param_01, param_02) {
   }
 
   if(param_02) {
-    level thread scripts\sp\_utility::func_BF98();
+    level thread scripts\sp\utility::func_BF98();
   }
 
   if(getdvarint("fastload", 1) != 0) {
@@ -606,7 +606,7 @@ func_1463(param_00, param_01) {
           }
 
           var_13 = scripts\engine\utility::array_remove(var_13, var_20);
-          thread scripts\sp\_utility::func_1264E("weapon_" + var_20 + "_tr");
+          thread scripts\sp\utility::func_1264E("weapon_" + var_20 + "_tr");
           var_1E = scripts\engine\utility::array_add(var_1E, "weapon_" + var_20 + "_tr");
           level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapons"], var_20);
           var_17 = scripts\engine\utility::array_remove(var_17, var_20);
@@ -698,7 +698,7 @@ func_1464() {
     }
   }
 
-  scripts\sp\_utility::func_12651(var_01);
+  scripts\sp\utility::func_12651(var_01);
 }
 
 func_1357() {
@@ -961,9 +961,9 @@ func_7F69(param_00) {
 func_F77F(param_00) {
   var_01 = level.player _meth_8139("missionHighestDifficulty");
   var_02 = level.var_7683 + 1;
-  if(scripts\sp\_utility::func_93AB()) {
+  if(scripts\sp\utility::func_93AB()) {
     var_02 = 6;
-  } else if(scripts\sp\_utility::func_93A6()) {
+  } else if(scripts\sp\utility::func_93A6()) {
     var_02 = 5;
   }
 

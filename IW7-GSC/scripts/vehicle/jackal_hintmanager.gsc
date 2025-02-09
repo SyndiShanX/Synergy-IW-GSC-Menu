@@ -24,15 +24,15 @@ hint_manager_common_hints() {
 
 hint_manager() {
   level.var_D127 endon("player_exit_jackal");
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     return;
   }
 
-  if(!scripts\sp\_gameskill::map_has_jackal_arena()) {
+  if(!scripts\sp\gameskill::map_has_jackal_arena()) {
     return;
   }
 
-  if(!scripts\sp\_gameskill::jackal_arena_is_early_in_the_game() && level.var_7683 == 3) {
+  if(!scripts\sp\gameskill::jackal_arena_is_early_in_the_game() && level.var_7683 == 3) {
     return;
   }
 
@@ -81,7 +81,7 @@ jackal_hint(param_00) {
   self.hinting = 1;
   self.var_C8 = param_00.hint_name;
   param_00.hinting = 1;
-  scripts\sp\_utility::func_56BA(param_00.hint_name);
+  scripts\sp\utility::func_56BA(param_00.hint_name);
   jackal_hint_waittill_termination(param_00);
   param_00.var_7258 = 0;
   param_00.hinting = 0;
@@ -142,7 +142,7 @@ jackal_hint_common_cooldown(param_00) {
 }
 
 do_progression_specific_tutorials() {
-  if(scripts\sp\_gameskill::map_has_jackal_arena() && scripts\sp\_gameskill::get_num_jackal_arenas_completed() == 2) {
+  if(scripts\sp\gameskill::map_has_jackal_arena() && scripts\sp\gameskill::get_num_jackal_arenas_completed() == 2) {
     tutorial_oneoff_roll();
   }
 }
@@ -165,7 +165,7 @@ tutorial_oneoff_roll() {
     if(tutorial_roll_hint_conditions()) {
       if(!scripts\engine\utility::flag("flag_jackal_hintmanaged_hint")) {
         scripts\engine\utility::flag_set("flag_jackal_hintmanaged_hint");
-        scripts\sp\_utility::func_56BA("roll");
+        scripts\sp\utility::func_56BA("roll");
       }
     } else if(scripts\engine\utility::flag("flag_jackal_hintmanaged_hint")) {
       scripts\engine\utility::flag_clear("flag_jackal_hintmanaged_hint");
@@ -232,7 +232,7 @@ tutorial_oneoff_watch_roll() {
 }
 
 hint_roll_conditions(param_00) {
-  if(!scripts\sp\_utility::func_D123()) {
+  if(!scripts\sp\utility::func_D123()) {
     return 0;
   }
 
@@ -253,7 +253,7 @@ hint_roll_conditions(param_00) {
     return 0;
   }
 
-  if(scripts\sp\_utility::func_7B9D() < 0.5) {
+  if(scripts\sp\utility::func_7B9D() < 0.5) {
     return 0;
   }
 
@@ -270,7 +270,7 @@ hint_roll_conditions(param_00) {
 }
 
 hint_roll_terminator(param_00) {
-  if(!scripts\sp\_utility::func_D123()) {
+  if(!scripts\sp\utility::func_D123()) {
     return 0;
   }
 
@@ -282,7 +282,7 @@ hint_roll_terminator(param_00) {
     return 1;
   }
 
-  if(scripts\sp\_utility::func_7B9D() < 0.5) {
+  if(scripts\sp\utility::func_7B9D() < 0.5) {
     return 1;
   }
 
@@ -294,7 +294,7 @@ hint_missile_conditions(param_00) {
     return 0;
   }
 
-  if(!scripts\sp\_utility::func_D123()) {
+  if(!scripts\sp\utility::func_D123()) {
     return 0;
   }
 
@@ -335,7 +335,7 @@ hint_weapdrone_conditions(param_00) {
     return 0;
   }
 
-  if(!scripts\sp\_utility::func_D123()) {
+  if(!scripts\sp\utility::func_D123()) {
     return 0;
   }
 
@@ -348,7 +348,7 @@ hint_weapdrone_conditions(param_00) {
     return 0;
   }
 
-  if(scripts\sp\_utility::func_7B9D() < 0.5) {
+  if(scripts\sp\utility::func_7B9D() < 0.5) {
     return 0;
   }
 

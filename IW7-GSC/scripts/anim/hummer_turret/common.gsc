@@ -49,14 +49,14 @@ func_91E0(param_00, param_01) {
 
 func_8713() {
   self.allowpain = 0;
-  scripts\sp\_utility::setflashbangimmunity(1);
+  scripts\sp\utility::setflashbangimmunity(1);
   self.var_C384 = self.health;
   self.health = 200;
 }
 
 func_8714() {
   self.allowpain = 1;
-  scripts\sp\_utility::setflashbangimmunity(0);
+  scripts\sp\utility::setflashbangimmunity(0);
   self.health = self.var_C384;
 }
 
@@ -218,7 +218,7 @@ func_8716(param_00) {
 
 func_13218(param_00, param_01, param_02, param_03) {
   param_00.var_1307E[self.var_1321D] = 0;
-  scripts\sp\_vehicle_aianim::func_872E();
+  scripts\sp\vehicle_aianim::func_872E();
   func_873F(param_00, param_01, param_02, param_03);
 }
 
@@ -238,7 +238,7 @@ func_873F(param_00, param_01, param_02, param_03) {
     param_03 = self.var_C938;
   }
 
-  var_04 = scripts\sp\_vehicle_aianim::func_1F00(param_00, param_01);
+  var_04 = scripts\sp\vehicle_aianim::func_1F00(param_00, param_01);
   var_05 = param_00 gettagorigin(var_04.var_10220);
   var_06 = param_00 gettagangles(var_04.var_10220);
   param_02 setdefaultdroppitch(0);
@@ -487,7 +487,7 @@ func_5A65(param_00) {
   self endon("dismount");
   self endon("jumping_out");
   if(level.var_3D4B) {
-    thread scripts\sp\_utility::func_4C39("inform_reloading");
+    thread scripts\sp\utility::func_4C39("inform_reloading");
   }
 
   func_57FB(param_00, self.var_12A81, 1);
@@ -596,7 +596,7 @@ func_129F3(param_00) {
 }
 
 func_AB8C(param_00) {
-  var_01 = scripts\sp\_utility::func_48AA(::func_2B6E, 20, 0);
+  var_01 = scripts\sp\utility::func_48AA(::func_2B6E, 20, 0);
   var_01.time = param_00;
 }
 

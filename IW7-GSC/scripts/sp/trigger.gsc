@@ -21,7 +21,7 @@ func_7AA4() {
   var_00["trigger_multiple_compass"] = ::func_12769;
   var_00["trigger_multiple_fx_volume"] = ::func_1276E;
   var_00["trigger_multiple_kleenex"] = ::func_12770;
-  var_00["trigger_multiple_light_sunshadow"] = ::scripts\sp\_lights::func_11203;
+  var_00["trigger_multiple_light_sunshadow"] = ::scripts\sp\lights::func_11203;
   var_00["trigger_multiple_jackal_boundary_autoturn"] = ::func_12759;
   var_00["trigger_multiple_jackal_boundary_warning"] = ::func_1275B;
   var_00["trigger_multiple_jackal_boundary_push"] = ::func_1275A;
@@ -30,7 +30,7 @@ func_7AA4() {
   var_00["trigger_multiple_arbitrary_up"] = ::func_12723;
   var_00["trigger_multiple_spacejump"] = ::func_12794;
   if(!scripts\sp\starts::func_9C4B()) {
-    var_00["trigger_multiple_autosave"] = ::scripts\sp\_autosave::func_12724;
+    var_00["trigger_multiple_autosave"] = ::scripts\sp\autosave::func_12724;
     var_00["trigger_multiple_spawn"] = ::lib_0B77::func_12797;
     var_00["trigger_multiple_spawn_reinforcement"] = ::lib_0B77::func_12798;
   }
@@ -82,16 +82,16 @@ func_7AA5() {
     var_00["camper_spawner"] = ::lib_0B77::camper_trigger_think;
     var_00["flood_spawner"] = ::lib_0B77::func_6F5D;
     var_00["trigger_spawner"] = ::lib_0B77::func_12797;
-    var_00["trigger_autosave"] = ::scripts\sp\_autosave::func_12724;
+    var_00["trigger_autosave"] = ::scripts\sp\autosave::func_12724;
     var_00["trigger_spawngroup"] = ::func_1279A;
     var_00["trigger_vehicle_spline_spawn"] = ::func_127AC;
     var_00["trigger_vehicle_spawn"] = ::lib_0B77::func_12797;
     var_00["random_spawn"] = ::lib_0B77::func_DC9B;
   }
 
-  var_00["autosave_now"] = ::scripts\sp\_autosave::func_2671;
-  var_00["trigger_autosave_tactical"] = ::scripts\sp\_autosave::func_12727;
-  var_00["trigger_autosave_stealth"] = ::scripts\sp\_autosave::func_12726;
+  var_00["autosave_now"] = ::scripts\sp\autosave::func_2671;
+  var_00["trigger_autosave_tactical"] = ::scripts\sp\autosave::func_12727;
+  var_00["trigger_autosave_stealth"] = ::scripts\sp\autosave::func_12726;
   var_00["trigger_unlock"] = ::func_127A8;
   var_00["trigger_lookat"] = ::func_12760;
   var_00["trigger_looking"] = ::func_12762;
@@ -124,9 +124,9 @@ func_7AA5() {
 }
 
 func_9726() {
-  scripts\sp\_colors::init_colors();
-  scripts\sp\_audio::init_audio();
-  scripts\sp\_utility::func_228A(getentarray("trigger_multiple_softlanding", "classname"));
+  scripts\sp\colors::init_colors();
+  scripts\sp\audio::init_audio();
+  scripts\sp\utility::func_228A(getentarray("trigger_multiple_softlanding", "classname"));
   var_00 = func_7AA4();
   var_01 = func_7AA5();
   foreach(var_05, var_03 in var_00) {
@@ -136,11 +136,11 @@ func_9726() {
 
   var_06 = getentarray("trigger_multiple", "classname");
   var_07 = getentarray("trigger_radius", "classname");
-  var_04 = scripts\sp\_utility::func_22A2(var_06, var_07);
+  var_04 = scripts\sp\utility::func_22A2(var_06, var_07);
   var_08 = getentarray("trigger_disk", "classname");
-  var_04 = scripts\sp\_utility::func_22A2(var_04, var_08);
+  var_04 = scripts\sp\utility::func_22A2(var_04, var_08);
   var_09 = getentarray("trigger_once", "classname");
-  var_04 = scripts\sp\_utility::func_22A2(var_04, var_09);
+  var_04 = scripts\sp\utility::func_22A2(var_04, var_09);
   if(!scripts\sp\starts::func_9C4B()) {
     for (var_0A = 0; var_0A < var_04.size; var_0A++) {
       if(var_04[var_0A].spawnimpulsefield & 32) {
@@ -162,11 +162,11 @@ func_9726() {
       }
 
       if(isdefined(var_0F.var_ED0E) || isdefined(var_0F.var_ED0D)) {
-        level thread scripts\sp\_autosave::func_268B(var_0F);
+        level thread scripts\sp\autosave::func_268B(var_0F);
       }
 
       if(isdefined(var_0F.var_EE17)) {
-        level thread scripts\sp\_mgturret::func_B6BE(var_0F);
+        level thread scripts\sp\mgturret::func_B6BE(var_0F);
       }
 
       if(isdefined(var_0F.var_EDF7)) {
@@ -174,7 +174,7 @@ func_9726() {
       }
 
       if(isdefined(var_0F.var_EDF5)) {
-        level thread scripts\sp\_vehicle_code::func_A629(var_0F);
+        level thread scripts\sp\vehicle_code::func_A629(var_0F);
       }
 
       if(isdefined(var_0F.script_emptyspawner)) {
@@ -270,17 +270,17 @@ func_12773(param_00) {
   for (;;) {
     param_00 waittill("trigger");
     if(isdefined(var_03)) {
-      scripts\sp\_utility::func_12651(var_03);
+      scripts\sp\utility::func_12651(var_03);
     }
 
     if(isdefined(var_02)) {
-      scripts\sp\_utility::func_12643(var_02);
+      scripts\sp\utility::func_12643(var_02);
     }
   }
 }
 
 func_1272F(param_00) {
-  var_01 = param_00 scripts\sp\_utility::func_7D1E();
+  var_01 = param_00 scripts\sp\utility::func_7D1E();
   if(!isdefined(level.flag[var_01])) {
     scripts\engine\utility::flag_init(var_01);
   }
@@ -295,26 +295,26 @@ func_1272F(param_00) {
       continue;
     }
 
-    param_00 scripts\sp\_utility::script_delay();
+    param_00 scripts\sp\utility::script_delay();
     scripts\engine\utility::flag_set(var_01, var_02);
   }
 }
 
 func_1273D(param_00) {
-  var_01 = param_00 scripts\sp\_utility::func_7D1E();
+  var_01 = param_00 scripts\sp\utility::func_7D1E();
   if(!isdefined(level.flag[var_01])) {
     scripts\engine\utility::flag_init(var_01);
   }
 
   for (;;) {
     param_00 waittill("trigger");
-    param_00 scripts\sp\_utility::script_delay();
+    param_00 scripts\sp\utility::script_delay();
     scripts\engine\utility::flag_clear(var_01);
   }
 }
 
 func_1273E(param_00) {
-  var_01 = param_00 scripts\sp\_utility::func_7D1E();
+  var_01 = param_00 scripts\sp\utility::func_7D1E();
   if(!isdefined(level.flag[var_01])) {
     scripts\engine\utility::flag_init(var_01);
   }
@@ -359,14 +359,14 @@ func_733E() {
 }
 
 func_1273F(param_00) {
-  var_01 = param_00 scripts\sp\_utility::func_7D1E();
+  var_01 = param_00 scripts\sp\utility::func_7D1E();
   if(!isdefined(level.flag[var_01])) {
     scripts\engine\utility::flag_init(var_01);
   }
 
   for (;;) {
     param_00 waittill("trigger", var_02);
-    param_00 scripts\sp\_utility::script_delay();
+    param_00 scripts\sp\utility::script_delay();
     scripts\engine\utility::flag_set(var_01, var_02);
     if(!isdefined(param_00)) {
       break;
@@ -395,7 +395,7 @@ trigger_friendly_respawn(param_00) {
 }
 
 func_1275E(param_00) {
-  var_01 = param_00 scripts\sp\_utility::func_7D1E();
+  var_01 = param_00 scripts\sp\utility::func_7D1E();
   if(!isdefined(level.flag[var_01])) {
     scripts\engine\utility::flag_init(var_01);
   }
@@ -455,14 +455,14 @@ func_12723(param_00) {
 }
 
 func_12744(param_00) {
-  var_01 = param_00 scripts\sp\_utility::func_7D1E();
+  var_01 = param_00 scripts\sp\utility::func_7D1E();
   if(!isdefined(level.flag[var_01])) {
     scripts\engine\utility::flag_init(var_01);
   }
 
   for (;;) {
     param_00 waittill("trigger", var_02);
-    param_00 scripts\sp\_utility::script_delay();
+    param_00 scripts\sp\utility::script_delay();
     if(isalive(var_02) && isdefined(param_00) && var_02 istouching(param_00)) {
       scripts\engine\utility::flag_set(var_01);
     }
@@ -532,7 +532,7 @@ func_1277E(param_00) {
 
   param_00.var_C6EA = var_02[0].origin;
   param_00 waittill("trigger");
-  param_00 scripts\sp\_utility::script_delay();
+  param_00 scripts\sp\utility::script_delay();
   foreach(var_06 in var_02) {
     var_09 = var_06.fgetarg;
     var_0A = var_06.script_parameters;
@@ -605,7 +605,7 @@ func_1279A(param_00) {
   param_00 waittill("trigger");
   var_02 = scripts\engine\utility::random(level.var_10727[var_01]);
   foreach(var_04 in var_02) {
-    var_04 scripts\sp\_utility::func_10619();
+    var_04 scripts\sp\utility::func_10619();
   }
 }
 
@@ -635,7 +635,7 @@ func_127AC(param_00) {
   param_00 waittill("trigger");
   var_01 = getentarray(param_00.target, "targetname");
   foreach(var_03 in var_01) {
-    var_03 thread scripts\sp\_vehicle_code::func_10809(70);
+    var_03 thread scripts\sp\vehicle_code::func_10809(70);
     wait(0.05);
   }
 }
@@ -696,7 +696,7 @@ func_12761(param_00, param_01) {
   var_06 = isdefined(param_00.var_ED9A) || isdefined(param_00.script_noteworthy);
   var_07 = undefined;
   if(var_06) {
-    var_07 = param_00 scripts\sp\_utility::func_7D1E();
+    var_07 = param_00 scripts\sp\utility::func_7D1E();
     if(!isdefined(level.flag[var_07])) {
       scripts\engine\utility::flag_init(var_07);
     }
@@ -734,7 +734,7 @@ func_12761(param_00, param_01) {
       var_0D = anglestoforward(var_0C);
       var_0E = vectordot(var_0D, var_0B);
       if(var_0E >= var_02) {
-        scripts\engine\utility::array_thread(var_04, ::scripts\sp\_utility::func_F225, "trigger");
+        scripts\engine\utility::array_thread(var_04, ::scripts\sp\utility::func_F225, "trigger");
         if(var_06) {
           scripts\engine\utility::flag_set(var_07, var_09);
         }
@@ -767,7 +767,7 @@ func_1272B(param_00) {
   var_04 = isdefined(param_00.var_ED9A) || isdefined(param_00.script_noteworthy);
   var_05 = undefined;
   if(var_04) {
-    var_05 = param_00 scripts\sp\_utility::func_7D1E();
+    var_05 = param_00 scripts\sp\utility::func_7D1E();
     if(!isdefined(level.flag[var_05])) {
       scripts\engine\utility::flag_init(var_05);
     }
@@ -802,7 +802,7 @@ func_1272B(param_00) {
         scripts\engine\utility::flag_set(var_05);
       }
 
-      scripts\engine\utility::array_thread(var_01, ::scripts\sp\_utility::func_F225, "trigger");
+      scripts\engine\utility::array_thread(var_01, ::scripts\sp\utility::func_F225, "trigger");
       wait(0.5);
     }
   }
@@ -831,7 +831,7 @@ func_127A8(param_00) {
     param_00 waittill("trigger");
     scripts\engine\utility::array_thread(var_02, ::scripts\engine\utility::trigger_on);
     func_135AA(var_02, var_01);
-    scripts\sp\_utility::func_22A4(var_02, "relock");
+    scripts\sp\utility::func_22A4(var_02, "relock");
   }
 }
 
@@ -909,7 +909,7 @@ func_12729(param_00) {
     return;
   }
 
-  var_0A = var_04 scripts\sp\_utility::func_4C39(param_00.var_ED18);
+  var_0A = var_04 scripts\sp\utility::func_4C39(param_00.var_ED18);
   if(!var_0A) {
     level scripts\engine\utility::delaythread(0.25, ::func_12729, param_00);
     return;
@@ -1004,7 +1004,7 @@ func_5169() {
 func_127A5(param_00) {
   param_00 endon("death");
   param_00 waittill("trigger");
-  scripts\sp\_utility::func_11813();
+  scripts\sp\utility::func_11813();
 }
 
 func_1274E(param_00) {
@@ -1020,7 +1020,7 @@ func_1274E(param_00) {
   }
 
   level.var_56D9[var_01] = 1;
-  var_02 scripts\sp\_utility::func_56BA(var_01);
+  var_02 scripts\sp\utility::func_56BA(var_01);
 }
 
 func_12731(param_00) {
@@ -1046,11 +1046,11 @@ func_127A6(param_00) {
 }
 
 func_12752(param_00) {
-  thread func_1278D(param_00, ::scripts\sp\_utility::func_F416, ::scripts\sp\_utility::func_7A31);
+  thread func_1278D(param_00, ::scripts\sp\utility::func_F416, ::scripts\sp\utility::func_7A31);
 }
 
 func_1277C(param_00) {
-  thread func_1278D(param_00, ::scripts\sp\_utility::func_F4B2, ::scripts\sp\_utility::func_7B61);
+  thread func_1278D(param_00, ::scripts\sp\utility::func_F4B2, ::scripts\sp\utility::func_7B61);
 }
 
 func_1278D(param_00, param_01, param_02) {
@@ -1088,11 +1088,11 @@ func_11A40(param_00, param_01) {
 
 func_12787(param_00) {
   param_00 waittill("trigger");
-  scripts\sp\_utility::func_DBEF(param_00.script_noteworthy);
+  scripts\sp\utility::func_DBEF(param_00.script_noteworthy);
 }
 
 func_12741(param_00) {
-  var_01 = param_00 scripts\sp\_utility::func_7D1E();
+  var_01 = param_00 scripts\sp\utility::func_7D1E();
   if(!isdefined(level.flag[var_01])) {
     scripts\engine\utility::flag_init(var_01);
   }
@@ -1103,7 +1103,7 @@ func_12741(param_00) {
       continue;
     }
 
-    param_00 scripts\sp\_utility::script_delay();
+    param_00 scripts\sp\utility::script_delay();
     scripts\engine\utility::flag_set(var_01);
   }
 }
@@ -1112,7 +1112,7 @@ func_12771(param_00) {
   for (;;) {
     param_00 waittill("trigger", var_01);
     if(isdefined(param_00.script_noteworthy)) {
-      var_01 scripts\sp\_art::func_1121E(param_00.script_noteworthy, param_00.script_delay);
+      var_01 scripts\sp\art::func_1121E(param_00.script_noteworthy, param_00.script_delay);
     }
 
     scripts\engine\utility::waitframe();
@@ -1131,7 +1131,7 @@ func_1276A(param_00) {
     var_07 = param_00.var_ED63;
     var_08 = param_00.script_delay;
     if(var_02 != level.var_5832["base"]["goal"]["nearStart"] || var_03 != level.var_5832["base"]["goal"]["nearEnd"] || var_04 != level.var_5832["base"]["goal"]["nearBlur"] || var_05 != level.var_5832["base"]["goal"]["farStart"] || var_06 != level.var_5832["base"]["goal"]["farEnd"] || var_07 != level.var_5832["base"]["goal"]["farBlur"]) {
-      scripts\sp\_art::func_5848(var_02, var_03, var_04, var_05, var_06, var_07, var_08);
+      scripts\sp\art::func_5848(var_02, var_03, var_04, var_05, var_06, var_07, var_08);
       wait(var_08);
       continue;
     }
@@ -1156,7 +1156,7 @@ func_12772(param_00) {
       var_02 = min(10000, var_02);
       var_03 = max(0, var_03);
       var_03 = min(10000, var_03);
-      scripts\sp\_art::func_11716(var_02, var_03, var_04);
+      scripts\sp\art::func_11716(var_02, var_03, var_04);
       continue;
     }
 
@@ -1177,7 +1177,7 @@ func_102ED(param_00) {
     return;
   }
 
-  if(scripts\sp\_utility::func_9F59() || self isjumping() || scripts\sp\_utility::func_9C11() || lib_0E4F::func_9C7B()) {
+  if(scripts\sp\utility::func_9F59() || self isjumping() || scripts\sp\utility::func_9C11() || lib_0E4F::func_9C7B()) {
     return;
   }
 
@@ -1197,9 +1197,9 @@ func_102ED(param_00) {
 
   self endon("cancel_sliding");
   if(getdvarint("use_legacy_slide") > 0) {
-    thread scripts\sp\_utility::func_2A76();
+    thread scripts\sp\utility::func_2A76();
   } else {
-    thread scripts\sp\_utility::func_2A75(undefined, var_01);
+    thread scripts\sp\utility::func_2A75(undefined, var_01);
   }
 
   for (;;) {
@@ -1215,11 +1215,11 @@ func_102ED(param_00) {
   }
 
   if(getdvarint("use_legacy_slide") > 0) {
-    scripts\sp\_utility::func_638A();
+    scripts\sp\utility::func_638A();
     return;
   }
 
-  scripts\sp\_utility::func_6389();
+  scripts\sp\utility::func_6389();
 }
 
 func_1276E(param_00) {
@@ -1256,7 +1256,7 @@ func_1276D(param_00) {
   for (;;) {
     self waittill("trigger");
     if(!param_00.var_75AD) {
-      scripts\engine\utility::array_thread(param_00.fx, ::scripts\sp\_utility::func_E2B0);
+      scripts\engine\utility::array_thread(param_00.fx, ::scripts\sp\utility::func_E2B0);
     }
 
     wait(1);
@@ -1296,7 +1296,7 @@ func_12769(param_00) {
   for (;;) {
     param_00 waittill("trigger");
     if(level.var_B7AE != var_01) {
-      scripts\sp\_compass::setupminimap(var_01);
+      scripts\sp\compass::setupminimap(var_01);
     }
   }
 }
@@ -1342,7 +1342,7 @@ func_1275A(param_00) {
       continue;
     }
 
-    if(level.player scripts\sp\_utility::func_65DB("disable_jackal_map_boundary_push")) {
+    if(level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_push")) {
       continue;
     }
 
@@ -1379,13 +1379,13 @@ func_1275B(param_00) {
       continue;
     }
 
-    if(level.player scripts\sp\_utility::func_65DB("disable_jackal_map_boundary_warning")) {
-      while (isalive(var_04) && isdefined(param_00) && var_04 istouching(param_00) && isdefined(level.var_D127) && level.player scripts\sp\_utility::func_65DB("disable_jackal_map_boundary_warning")) {
+    if(level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_warning")) {
+      while (isalive(var_04) && isdefined(param_00) && var_04 istouching(param_00) && isdefined(level.var_D127) && level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_warning")) {
         wait(0.05);
       }
     }
 
-    if(level.player scripts\sp\_utility::func_65DB("disable_jackal_map_boundary_warning")) {
+    if(level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_warning")) {
       continue;
     }
 
@@ -1469,13 +1469,13 @@ func_12759(param_00) {
       continue;
     }
 
-    if(level.player scripts\sp\_utility::func_65DB("disable_jackal_map_boundary_autoturn")) {
-      while (isalive(var_04) && isdefined(param_00) && var_04 istouching(param_00) && isdefined(level.var_D127) && level.player scripts\sp\_utility::func_65DB("disable_jackal_map_boundary_autoturn")) {
+    if(level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_autoturn")) {
+      while (isalive(var_04) && isdefined(param_00) && var_04 istouching(param_00) && isdefined(level.var_D127) && level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_autoturn")) {
         wait(0.05);
       }
     }
 
-    if(level.player scripts\sp\_utility::func_65DB("disable_jackal_map_boundary_autoturn")) {
+    if(level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_autoturn")) {
       continue;
     }
 
@@ -1566,7 +1566,7 @@ exploder_load(param_00) {
   level endon("killexplodertridgers" + param_00.script_exploder);
   param_00 waittill("trigger");
   if(isdefined(param_00.script_chance) && randomfloat(1) > param_00.script_chance) {
-    if(!param_00 scripts\sp\_utility::script_delay()) {
+    if(!param_00 scripts\sp\utility::script_delay()) {
       wait(4);
     }
 
@@ -1574,7 +1574,7 @@ exploder_load(param_00) {
     return;
   }
 
-  if(!param_00 scripts\sp\_utility::script_delay() && isdefined(param_00.var_ED85)) {
+  if(!param_00 scripts\sp\utility::script_delay() && isdefined(param_00.var_ED85)) {
     wait(param_00.var_ED85);
   }
 
@@ -1588,7 +1588,7 @@ func_12770(param_00) {
   }
 
   param_00 waittill("trigger");
-  scripts\sp\_utility::func_A6F2();
+  scripts\sp\utility::func_A6F2();
 }
 
 func_1279C(param_00) {
@@ -1596,11 +1596,11 @@ func_1279C(param_00) {
   var_01 = "stealth_in_shadow";
   for (;;) {
     param_00 waittill("trigger", var_02);
-    if(!var_02 scripts\sp\_utility::func_65DF(var_01)) {
+    if(!var_02 scripts\sp\utility::func_65DF(var_01)) {
       continue;
     }
 
-    if(var_02 scripts\sp\_utility::func_65DB(var_01)) {
+    if(var_02 scripts\sp\utility::func_65DB(var_01)) {
       continue;
     }
 
@@ -1610,12 +1610,12 @@ func_1279C(param_00) {
 
 func_93A4(param_00, param_01) {
   self endon("death");
-  scripts\sp\_utility::func_65E1(param_01);
+  scripts\sp\utility::func_65E1(param_01);
   while (isdefined(param_00) && self istouching(param_00)) {
     wait(0.05);
   }
 
-  scripts\sp\_utility::func_65DD(param_01);
+  scripts\sp\utility::func_65DD(param_01);
 }
 
 func_1273C(param_00) {
@@ -1669,6 +1669,6 @@ func_1273C(param_00) {
       var_04 playrumbleonentity("damage_heavy");
     }
 
-    param_00 scripts\sp\_utility::script_delay();
+    param_00 scripts\sp\utility::script_delay();
   }
 }

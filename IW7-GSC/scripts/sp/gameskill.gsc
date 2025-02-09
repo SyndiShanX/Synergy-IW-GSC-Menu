@@ -44,22 +44,22 @@ func_F848(param_00) {
     level._meth_83D4 = ::func_61BA;
     level._meth_83D3 = ::func_61BA;
     level.vehicle_canturrettargetpoint = ::func_61BA;
-    scripts\sp\_utility::func_F305();
+    scripts\sp\utility::func_F305();
     foreach(var_02 in level.players) {
-      var_02 scripts\sp\_utility::func_65E0("player_has_red_flashing_overlay");
-      var_02 scripts\sp\_utility::func_65E0("player_is_invulnerable");
-      var_02 scripts\sp\_utility::func_65E0("player_zero_attacker_accuracy");
-      var_02 scripts\sp\_utility::func_65E0("player_no_auto_blur");
-      var_02 scripts\sp\_utility::func_65E0("redflashoverlay_complete");
-      var_02 scripts\sp\_utility::func_65E0("near_death_vision_enabled");
-      var_02 scripts\sp\_utility::func_65E1("near_death_vision_enabled");
+      var_02 scripts\sp\utility::func_65E0("player_has_red_flashing_overlay");
+      var_02 scripts\sp\utility::func_65E0("player_is_invulnerable");
+      var_02 scripts\sp\utility::func_65E0("player_zero_attacker_accuracy");
+      var_02 scripts\sp\utility::func_65E0("player_no_auto_blur");
+      var_02 scripts\sp\utility::func_65E0("redflashoverlay_complete");
+      var_02 scripts\sp\utility::func_65E0("near_death_vision_enabled");
+      var_02 scripts\sp\utility::func_65E1("near_death_vision_enabled");
       var_02.gs = spawnstruct();
       var_02.gs.var_B639 = spawnstruct();
       var_02 func_9723();
       var_02.a = spawnstruct();
       var_02.var_4CF5 = [];
-      var_02 scripts\sp\_player_stats::func_9768();
-      var_02 scripts\sp\_utility::func_65E0("global_hint_in_use");
+      var_02 scripts\sp\player_stats::func_9768();
+      var_02 scripts\sp\utility::func_65E0("global_hint_in_use");
       var_02.pers = [];
       if(!isdefined(var_02.var_28A4)) {
         var_02.var_28A4 = 0;
@@ -323,7 +323,7 @@ func_F848(param_00) {
   level.var_54D0["CapitalshipTurretHealthmod"]["normal"] = 1;
   level.var_54D0["CapitalshipTurretHealthmod"]["hardened"] = 1.3;
   level.var_54D0["CapitalshipTurretHealthmod"]["veteran"] = 1.6;
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     level.var_54D0["player_deathInvulnerableTime"]["hardened"] = 1;
     level.var_54D0["worthyDamageRatio"]["hardened"] = 1;
     level.var_54D0["invulTime_preShield"]["hardened"] = 0;
@@ -396,7 +396,7 @@ func_F725() {
   anim.var_35EC = level.var_54D0["c12_RocketTellHoldTime"][var_01];
   anim.var_35C6 = level.var_54D0["c12_MinigunStruggleDamage"][var_01];
   anim.var_33BB = level.var_54D0["c6_TorsoDamageDismemberLimbChance"][var_01];
-  scripts\sp\_mgturret::func_F6C3();
+  scripts\sp\mgturret::func_F6C3();
 }
 
 func_F761() {
@@ -404,7 +404,7 @@ func_F761() {
     level.var_A48E = spawnstruct();
   }
 
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     var_00 = "veteran";
     level.var_A48E.var_A3FB = level.var_54D0["JackalIncomingMissileSpeedScale"]["hardened"];
   } else {
@@ -459,7 +459,7 @@ func_F762() {
 }
 
 func_F679() {
-  var_00 = scripts\sp\_utility::func_7E72();
+  var_00 = scripts\sp\utility::func_7E72();
   level.player.gs.var_B63A = 1000;
   level.player.gs.var_B63C = 10;
   if(var_00 == "medium") {
@@ -476,7 +476,7 @@ func_F679() {
 
 updategameskill() {
   foreach(var_01 in level.players) {
-    var_01.var_7683 = var_01 scripts\sp\_utility::func_7B93();
+    var_01.var_7683 = var_01 scripts\sp\utility::func_7B93();
   }
 
   level.var_7683 = level.player.var_7683;
@@ -572,7 +572,7 @@ func_20A1(param_00, param_01) {
 }
 
 func_12E0B() {
-  if(scripts\sp\_utility::func_65DB("player_zero_attacker_accuracy")) {
+  if(scripts\sp\utility::func_65DB("player_zero_attacker_accuracy")) {
     return;
   }
 
@@ -792,7 +792,7 @@ func_13847() {
     return var_00;
   }
 
-  if(self.isnodeoccupied scripts\sp\_utility::func_65DB("player_is_invulnerable")) {
+  if(self.isnodeoccupied scripts\sp\utility::func_65DB("player_is_invulnerable")) {
     var_00 = 0.3 + randomfloat(0.4);
   }
 
@@ -909,7 +909,7 @@ func_ECC1() {
   self fadeovertime(var_02);
   self.alpha = 1;
   wait(var_02);
-  scripts\sp\_utility::func_135AF(var_00, 2);
+  scripts\sp\utility::func_135AF(var_00, 2);
   self fadeovertime(var_01);
   self.alpha = 0;
   scripts\engine\utility::waittill_notify_or_timeout("screenfx_force_delete", var_01);
@@ -966,27 +966,27 @@ func_56C6(param_00, param_01, param_02, param_03, param_04) {
       var_06 = int(640);
       var_07 = int(480);
       if(param_00 == "dirt") {
-        var_08 = scripts\sp\_hud_util::func_48B8(param_02, 1);
+        var_08 = scripts\sp\hud_util::func_48B8(param_02, 1);
         var_08 thread func_ECC2(param_00, param_04, 1);
         var_08 func_ECC0();
       } else {
-        var_08 = scripts\sp\_hud_util::func_48B8(param_03, 0);
+        var_08 = scripts\sp\hud_util::func_48B8(param_03, 0);
         var_08 func_ECC2(param_00, param_04);
       }
 
       if(isdefined(param_03)) {
-        var_09 = scripts\sp\_hud_util::func_48B8(param_03, 0);
+        var_09 = scripts\sp\hud_util::func_48B8(param_03, 0);
         var_09 func_ECC2(param_00, param_04);
       }
       break;
 
     case "left":
-      var_08 = scripts\sp\_hud_util::func_48B8(param_02, 0, 1, 1);
+      var_08 = scripts\sp\hud_util::func_48B8(param_02, 0, 1, 1);
       var_08 func_ECC3(param_00, param_04, 1);
       break;
 
     case "right":
-      var_08 = scripts\sp\_hud_util::func_48B8(param_02, 0, 1, 1);
+      var_08 = scripts\sp\hud_util::func_48B8(param_02, 0, 1, 1);
       var_08 func_ECC3(param_00, param_04, 0);
       break;
 
@@ -998,8 +998,8 @@ func_56C6(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_D3A9() {
-  var_00 = ::scripts\sp\_utility::func_7751;
-  var_01 = ::scripts\sp\_utility::func_2BC6;
+  var_00 = ::scripts\sp\utility::func_7751;
+  var_01 = ::scripts\sp\utility::func_2BC6;
   var_02 = [];
   var_02["MOD_GRENADE"] = var_00;
   var_02["MOD_GRENADE_SPLASH"] = var_00;
@@ -1046,7 +1046,7 @@ func_D3A6() {
 
 playerhealthregen() {
   thread func_8CBA();
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     return;
   }
 
@@ -1066,7 +1066,7 @@ playerhealthregen() {
     wait(0.05);
     waittillframeend;
     if(self.health == self.maxhealth) {
-      if(scripts\sp\_utility::func_65DB("player_has_red_flashing_overlay")) {
+      if(scripts\sp\utility::func_65DB("player_has_red_flashing_overlay")) {
         func_D259();
       }
 
@@ -1086,13 +1086,13 @@ playerhealthregen() {
       var_02 = 1;
       if(!var_08) {
         var_05 = gettime();
-        if(scripts\sp\_utility::func_65DB("near_death_vision_enabled")) {
+        if(scripts\sp\utility::func_65DB("near_death_vision_enabled")) {
           thread func_2BDB(3.6, 2);
-          thread scripts\sp\_audio::func_F334();
+          thread scripts\sp\audio::func_F334();
           self getweaponfrommerit();
         }
 
-        scripts\sp\_utility::func_65E1("player_has_red_flashing_overlay");
+        scripts\sp\utility::func_65E1("player_has_red_flashing_overlay");
         var_03 = 1;
       }
     }
@@ -1154,11 +1154,11 @@ playerhealthregen() {
       continue;
     }
 
-    if(scripts\sp\_utility::func_65DB("player_is_invulnerable")) {
+    if(scripts\sp\utility::func_65DB("player_is_invulnerable")) {
       continue;
     }
 
-    scripts\sp\_utility::func_65E1("player_is_invulnerable");
+    scripts\sp\utility::func_65E1("player_is_invulnerable");
     level notify("player_becoming_invulnerable");
     if(var_03) {
       var_04 = self.gs.invultime_onshield;
@@ -1203,7 +1203,7 @@ func_D3B1(param_00) {
   }
 
   func_12E0B();
-  scripts\sp\_utility::func_65DD("player_is_invulnerable");
+  scripts\sp\utility::func_65DD("player_is_invulnerable");
 }
 
 func_4FE9() {
@@ -1256,7 +1256,7 @@ grenadeawareness() {
 }
 
 func_2BDB(param_00, param_01) {
-  if(scripts\sp\_utility::func_65DB("player_no_auto_blur")) {
+  if(scripts\sp\utility::func_65DB("player_no_auto_blur")) {
     return;
   }
 
@@ -1329,7 +1329,7 @@ func_8CBA() {
       break;
     }
 
-    if(scripts\sp\_utility::func_93A6()) {
+    if(scripts\sp\utility::func_93A6()) {
       if(scripts\sp\specialist_MAYBE::func_2C97()) {
         var_02 = 0;
       } else {
@@ -1340,9 +1340,9 @@ func_8CBA() {
         var_07 = var_00.alpha + var_06 * var_04;
         var_02 = clamp(var_07, 0, 1);
       }
-    } else if(level.player scripts\sp\_utility::func_65DB("player_has_red_flashing_overlay")) {
+    } else if(level.player scripts\sp\utility::func_65DB("player_has_red_flashing_overlay")) {
       var_02 = 0;
-      level.player scripts\sp\_utility::func_65E8("player_has_red_flashing_overlay");
+      level.player scripts\sp\utility::func_65E8("player_has_red_flashing_overlay");
     } else {
       var_05 = 1 - self.health / level.player.maxhealth;
       var_08 = var_05 * var_05 * 1.2;
@@ -1367,7 +1367,7 @@ func_8CBA() {
 func_11431(param_00) {
   self endon("death");
   while (isalive(self)) {
-    scripts\sp\_utility::func_65E3("player_has_red_flashing_overlay");
+    scripts\sp\utility::func_65E3("player_has_red_flashing_overlay");
     func_11430(param_00);
   }
 }
@@ -1480,7 +1480,7 @@ func_E34F() {
 }
 
 func_FF8B() {
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     return 0;
   }
 
@@ -1508,7 +1508,7 @@ func_FF8B() {
     return 0;
   }
 
-  if(scripts\sp\_utility::func_65DB("player_retract_shield_active")) {
+  if(scripts\sp\utility::func_65DB("player_retract_shield_active")) {
     return 0;
   }
 
@@ -1521,7 +1521,7 @@ func_FF8B() {
 }
 
 func_FF89() {
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     return 0;
   }
 
@@ -1606,14 +1606,14 @@ func_11430(param_00) {
   self endon("damage");
   self endon("death");
   childthread func_DE16(param_00);
-  if(level.player scripts\sp\_utility::func_7B93() < 2) {
+  if(level.player scripts\sp\utility::func_7B93() < 2) {
     var_01 = func_7D51();
     var_02 = [
       [var_01]
     ]();
     var_03 = gettime() + self.gs.longregentime;
     func_4766(1, var_02);
-    while (gettime() < var_03 && isalive(self) && scripts\sp\_utility::func_65DB("player_has_red_flashing_overlay") && !scripts\sp\_utility::func_65DB("player_retract_shield_active")) {
+    while (gettime() < var_03 && isalive(self) && scripts\sp\utility::func_65DB("player_has_red_flashing_overlay") && !scripts\sp\utility::func_65DB("player_retract_shield_active")) {
       func_4766(0.9, var_02);
     }
 
@@ -1624,7 +1624,7 @@ func_11430(param_00) {
     func_4766(0, var_02);
   }
 
-  scripts\sp\_utility::func_65E3("redflashoverlay_complete");
+  scripts\sp\utility::func_65E3("redflashoverlay_complete");
   self notify("take_cover_done");
   self notify("hit_again");
 }
@@ -1681,7 +1681,7 @@ func_4766(param_00, param_01) {
 }
 
 func_DE16(param_00) {
-  scripts\sp\_utility::func_65DD("redflashoverlay_complete");
+  scripts\sp\utility::func_65DD("redflashoverlay_complete");
   var_01 = gettime() + level.player.gs.longregentime;
   func_DE15(param_00, 1, 1);
   while (gettime() < var_01 && isalive(level.player)) {
@@ -1696,7 +1696,7 @@ func_DE16(param_00) {
   param_00 fadeovertime(0.5);
   param_00.alpha = 0;
   wait(0.5);
-  scripts\sp\_utility::func_65E3("redflashoverlay_complete");
+  scripts\sp\utility::func_65E3("redflashoverlay_complete");
 }
 
 func_DE15(param_00, param_01, param_02) {
@@ -1739,7 +1739,7 @@ func_7D51() {
 }
 
 func_7A59() {
-  if(scripts\sp\_utility::func_D15B("hull")) {
+  if(scripts\sp\utility::func_D15B("hull")) {
     return level.var_A48E.var_D3BA * 1.5;
   }
 
@@ -1747,10 +1747,10 @@ func_7A59() {
 }
 
 func_D259() {
-  scripts\sp\_utility::func_65DD("player_has_red_flashing_overlay");
-  if(scripts\sp\_utility::func_65DB("near_death_vision_enabled")) {
+  scripts\sp\utility::func_65DD("player_has_red_flashing_overlay");
+  if(scripts\sp\utility::func_65DB("near_death_vision_enabled")) {
     self _meth_8222();
-    thread scripts\sp\_audio::func_E2BB();
+    thread scripts\sp\audio::func_E2BB();
   }
 
   self notify("take_cover_done");
@@ -1777,7 +1777,7 @@ func_93F7() {
   self notify("new_cover_on_death_thread");
   self endon("new_cover_on_death_thread");
   self waittill("death");
-  if(!scripts\sp\_utility::func_65DB("player_has_red_flashing_overlay")) {
+  if(!scripts\sp\utility::func_65DB("player_has_red_flashing_overlay")) {
     return;
   }
 
@@ -2062,9 +2062,9 @@ func_14EF() {
   level.player endon("death");
   level.var_CF4B = 0;
   for (;;) {
-    if(level.player scripts\sp\_utility::func_9D27()) {
+    if(level.player scripts\sp\utility::func_9D27()) {
       level.var_CF4B = gettime();
-      while (level.player scripts\sp\_utility::func_9D27()) {
+      while (level.player scripts\sp\utility::func_9D27()) {
         wait(0.05);
       }
 
@@ -2259,7 +2259,7 @@ func_2627(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
 func_14F0(param_00, param_01, param_02) {
   func_14DB("aa_player_damage_dealt", param_00);
-  if(!level.player scripts\sp\_utility::func_9D27()) {
+  if(!level.player scripts\sp\utility::func_9D27()) {
     [
       [level._meth_83D3]
     ](param_01, self.var_DD, param_02);
@@ -2354,7 +2354,7 @@ func_12855(param_00) {
     return;
   }
 
-  if(scripts\sp\_utility::func_65DF("_stealth_enabled") && scripts\sp\_utility::func_65DB("_stealth_enabled")) {
+  if(scripts\sp\utility::func_65DF("_stealth_enabled") && scripts\sp\utility::func_65DB("_stealth_enabled")) {
     return;
   }
 
@@ -2374,27 +2374,27 @@ func_12855(param_00) {
     return;
   }
 
-  scripts\sp\_utility::func_56BE(param_00, 6);
+  scripts\sp\utility::func_56BE(param_00, 6);
 }
 
 func_13C1A() {
   level endon("stop_weapon_help");
   scripts\engine\utility::flag_init("disable_weapon_help");
-  scripts\sp\_utility::func_16EB("alt_m8", & "WEAPON_HELP_M8_AR_DPAD", ::func_13062);
-  scripts\sp\_utility::func_16EB("alt_fmg", & "WEAPON_HELP_FMG_AKIMBO_DPAD", ::func_1305F);
-  scripts\sp\_utility::func_16EB("alt_erad", & "WEAPON_HELP_ERAD_SHOTGUN_DPAD", ::func_1305E);
-  scripts\sp\_utility::func_16EB("alt_ripper", & "WEAPON_HELP_RIPPER_SMG_DPAD", ::func_13069);
+  scripts\sp\utility::func_16EB("alt_m8", & "WEAPON_HELP_M8_AR_DPAD", ::func_13062);
+  scripts\sp\utility::func_16EB("alt_fmg", & "WEAPON_HELP_FMG_AKIMBO_DPAD", ::func_1305F);
+  scripts\sp\utility::func_16EB("alt_erad", & "WEAPON_HELP_ERAD_SHOTGUN_DPAD", ::func_1305E);
+  scripts\sp\utility::func_16EB("alt_ripper", & "WEAPON_HELP_RIPPER_SMG_DPAD", ::func_13069);
   wait(30);
-  var_00 = scripts\sp\_endmission::func_7F6B(level.script);
+  var_00 = scripts\sp\endmission::func_7F6B(level.script);
   if(!isdefined(var_00)) {
     return;
   }
 
-  if(scripts\sp\_endmission::getitemslot(var_00)) {
+  if(scripts\sp\endmission::getitemslot(var_00)) {
     return;
-  } else if(scripts\sp\_endmission::getitemdroporiginandangles(var_00)) {
+  } else if(scripts\sp\endmission::getitemdroporiginandangles(var_00)) {
     return;
-  } else if(scripts\sp\_utility::func_93A6()) {
+  } else if(scripts\sp\utility::func_93A6()) {
     return;
   } else if(level.var_7683 >= 2 && !func_B327()) {
     return;

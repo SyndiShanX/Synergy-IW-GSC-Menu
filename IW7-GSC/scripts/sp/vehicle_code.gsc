@@ -44,18 +44,18 @@ func_A629(param_00) {
 
 func_1063F(param_00) {
   var_01 = [];
-  var_02 = scripts\sp\_utility::func_65DF("no_riders_until_unload");
+  var_02 = scripts\sp\utility::func_65DF("no_riders_until_unload");
   foreach(var_04 in param_00) {
     var_04.var_C1 = 1;
     var_05 = 0;
     var_06 = 0;
     if(isdefined(var_04.var_ED6E)) {
       var_05 = 1;
-      var_07 = scripts\sp\_utility::func_5CC9(var_04);
-      var_07 scripts\sp\_drone_base::func_5C21();
+      var_07 = scripts\sp\utility::func_5CC9(var_04);
+      var_07 scripts\sp\drone_base::func_5C21();
     } else if(isdefined(var_04.var_ED8A) || isdefined(var_04.var_ED1B)) {
       var_05 = 1;
-      var_07 = scripts\sp\_utility::func_2C17(var_04);
+      var_07 = scripts\sp\utility::func_2C17(var_04);
       var_07 scripts\sp\fakeactor::func_6B15();
     } else if(isdefined(var_04.var_9F) && var_04.var_9F == "script_vehicle") {
       var_06 = 1;
@@ -130,7 +130,7 @@ func_19E4(param_00) {
 }
 
 spawn_group() {
-  if(scripts\sp\_utility::func_65DF("no_riders_until_unload") && !scripts\sp\_utility::func_65DB("no_riders_until_unload")) {
+  if(scripts\sp\utility::func_65DF("no_riders_until_unload") && !scripts\sp\utility::func_65DB("no_riders_until_unload")) {
     return [];
   }
 
@@ -143,7 +143,7 @@ spawn_group() {
   var_02 = func_1063F(var_00);
   var_02 = func_1041B(var_02);
   foreach(var_04 in var_02) {
-    thread scripts\sp\_vehicle_aianim::func_8739(var_04);
+    thread scripts\sp\vehicle_aianim::func_8739(var_04);
   }
 
   return var_02;
@@ -180,7 +180,7 @@ func_10805(param_00) {
 
     var_0B = func_1041B(var_0B);
     foreach(var_0E in var_0B) {
-      thread scripts\sp\_vehicle_aianim::func_8739(var_0E);
+      thread scripts\sp\vehicle_aianim::func_8739(var_0E);
     }
 
     return var_0B;
@@ -227,7 +227,7 @@ func_131F6(param_00) {
     return;
   }
 
-  param_00 scripts\sp\_utility::func_F294();
+  param_00 scripts\sp\utility::func_F294();
   if(!isdefined(param_00.var_B91F)) {
     param_00.var_B91F = 0;
   }
@@ -250,9 +250,9 @@ func_131F6(param_00) {
     }
   }
 
-  param_00 scripts\sp\_utility::func_65E0("unloaded");
-  param_00 scripts\sp\_utility::func_65E0("loaded");
-  param_00 scripts\sp\_utility::func_65E0("landed");
+  param_00 scripts\sp\utility::func_65E0("unloaded");
+  param_00 scripts\sp\utility::func_65E0("loaded");
+  param_00 scripts\sp\utility::func_65E0("landed");
   param_00.var_E4FB = [];
   param_00.var_12BD0 = [];
   param_00.var_12BBC = "default";
@@ -277,7 +277,7 @@ func_131F6(param_00) {
 
   param_00.var_4CF5 = [];
   param_00 thread func_740E();
-  param_00 thread scripts\sp\_vehicle_aianim::func_88AE();
+  param_00 thread scripts\sp\vehicle_aianim::func_88AE();
   if(isdefined(param_00.var_EDB8)) {
     param_00 _meth_8363(param_00.var_EDB8, & "");
   }
@@ -374,7 +374,7 @@ func_131FA() {
     if(!var_00) {
       var_00 = 1;
       if(isdefined(var_01) && isdefined(var_02)) {
-        var_01 scripts\sp\_player_stats::func_DEBD(self, var_02, var_03);
+        var_01 scripts\sp\player_stats::func_DEBD(self, var_02, var_03);
         if(isdefined(self.var_4D28)) {
           self.var_4D28 = undefined;
         }
@@ -424,7 +424,7 @@ func_131FA() {
       thread[[level.vehicle.var_116CE.var_4E23[self.var_380]]]();
     }
 
-    scripts\engine\utility::array_levelthread(self.var_E4FB, ::scripts\sp\_vehicle_aianim::func_876B, var_01, self.var_380);
+    scripts\engine\utility::array_levelthread(self.var_E4FB, ::scripts\sp\vehicle_aianim::func_876B, var_01, self.var_380);
     thread func_A5CB(self.classname);
     thread func_A5BF(self.classname);
     thread scripts\sp\vehicle_lights::func_A5F2(self.classname);
@@ -786,7 +786,7 @@ func_A60E(param_00) {
     }
 
     if(isdefined(var_02.var_B14F)) {
-      var_02 scripts\sp\_utility::func_1101B();
+      var_02 scripts\sp\utility::func_1101B();
     }
 
     var_02 _meth_81D0();
@@ -810,7 +810,7 @@ vehicle_caps() {
   self endon("death");
   self endon("enable_spline_path");
   waittillframeend;
-  self.var_E4FB = scripts\sp\_utility::func_DFEB(self.var_E4FB);
+  self.var_E4FB = scripts\sp\utility::func_DFEB(self.var_E4FB);
   if(self.var_E4FB.size) {
     scripts\engine\utility::array_thread(self.var_E4FB, ::func_13225, self, self.var_E4FB);
     scripts\engine\utility::waittill_either("veh_collision", "driver_died");
@@ -834,9 +834,9 @@ func_143F(param_00, param_01) {
   self getplayerkills();
   self settargetyaw(scripts\engine\utility::flat_angle(self.angles)[1]);
   if(isdefined(self.var_12BC2)) {
-    _setvehgoalpos_wrap(scripts\sp\_utility::func_864C(self.origin) + (0, 0, self.var_12BC2), 1);
+    _setvehgoalpos_wrap(scripts\sp\utility::func_864C(self.origin) + (0, 0, self.var_12BC2), 1);
   } else {
-    _setvehgoalpos_wrap(scripts\sp\_utility::func_864C(self.origin), 1);
+    _setvehgoalpos_wrap(scripts\sp\utility::func_864C(self.origin), 1);
   }
 
   self waittill("goal");
@@ -878,7 +878,7 @@ func_10809(param_00) {
     return;
   }
 
-  var_01 = scripts\sp\_utility::func_10808();
+  var_01 = scripts\sp\utility::func_10808();
   if(isdefined(param_00)) {
     var_01 _meth_83F4(param_00);
   }
@@ -944,11 +944,11 @@ func_143C() {
 func_1446(param_00) {
   self notify("unloading");
   var_01 = [];
-  if(scripts\sp\_utility::func_65DF("no_riders_until_unload")) {
-    scripts\sp\_utility::func_65E1("no_riders_until_unload");
+  if(scripts\sp\utility::func_65DF("no_riders_until_unload")) {
+    scripts\sp\utility::func_65E1("no_riders_until_unload");
     var_01 = func_10805(param_00);
     foreach(var_03 in var_01) {
-      scripts\sp\_utility::func_106ED(var_03);
+      scripts\sp\utility::func_106ED(var_03);
     }
 
     waittillframeend;
@@ -964,11 +964,11 @@ func_1446(param_00) {
     }
   }
 
-  var_01 = scripts\sp\_vehicle_aianim::func_1F74("unload");
+  var_01 = scripts\sp\vehicle_aianim::func_1F74("unload");
   var_08 = level.vehicle.var_116CE.var_12BCF[self.classname];
   if(isdefined(var_08)) {
     var_01 = [];
-    var_09 = scripts\sp\_vehicle_aianim::func_7D2F();
+    var_09 = scripts\sp\vehicle_aianim::func_7D2F();
     foreach(var_0B in self.var_E4FB) {
       if(isdefined(var_09[var_0B.var_1321D])) {
         var_01[var_01.size] = var_0B;
@@ -1340,7 +1340,7 @@ func_B03F(param_00, param_01, param_02) {
 }
 
 func_4E05(param_00) {
-  thread scripts\sp\_utility::play_loop_sound_on_tag(param_00, undefined, 0, 1);
+  thread scripts\sp\utility::play_loop_sound_on_tag(param_00, undefined, 0, 1);
   scripts\engine\utility::waittill_any_3("fire_extinguish", "stop_crash_loop_sound");
   if(!isdefined(self)) {
     return;
@@ -1449,7 +1449,7 @@ func_12B8(param_00, param_01) {
 func_1322D(param_00) {
   foreach(var_02 in self.var_E4FB) {
     if(isai(var_02)) {
-      var_02 scripts\sp\_utility::func_F3B5(param_00);
+      var_02 scripts\sp\utility::func_F3B5(param_00);
       continue;
     }
 
@@ -1549,7 +1549,7 @@ func_4CFC() {
 
           level.var_2184 = 1;
           self.var_56DE = 1;
-          var_01 scripts\sp\_utility::func_56BA("invulerable_bullets");
+          var_01 scripts\sp\utility::func_56BA("invulerable_bullets");
           wait(4);
           level.var_2184 = 0;
           if(isdefined(self)) {
@@ -1593,9 +1593,9 @@ func_4CFD() {
           level.var_2184 = 1;
           self.var_56DE = 1;
           if(var_04 == "mod_grenade" || var_04 == "mod_grenade_splash") {
-            var_01 scripts\sp\_utility::func_56BA("invulerable_frags");
+            var_01 scripts\sp\utility::func_56BA("invulerable_frags");
           } else {
-            var_01 scripts\sp\_utility::func_56BA("invulerable_bullets");
+            var_01 scripts\sp\utility::func_56BA("invulerable_bullets");
           }
 
           wait(4);
@@ -1857,10 +1857,10 @@ func_B6B7() {
     var_07.var_9FF0 = 1;
     var_07.var_C841 = self;
     var_07.script_team = self.script_team;
-    var_07 thread scripts\sp\_mgturret::func_32B7();
+    var_07 thread scripts\sp\mgturret::func_32B7();
     var_07 makeunusable();
     func_F5D8(var_07);
-    level thread scripts\sp\_mgturret::func_B6A7(var_07, scripts\sp\_utility::func_7E72());
+    level thread scripts\sp\mgturret::func_B6A7(var_07, scripts\sp\utility::func_7E72());
     if(isdefined(self.var_ED98)) {
       var_07.var_ED98 = self.var_ED98;
     }
@@ -2162,8 +2162,8 @@ func_1322F() {
 func_131EC() {
   self endon("death");
   var_00 = self.var_380;
-  if(!scripts\sp\_utility::func_65DF("unloaded")) {
-    scripts\sp\_utility::func_65E0("unloaded");
+  if(!scripts\sp\utility::func_65DF("unloaded")) {
+    scripts\sp\utility::func_65E0("unloaded");
   }
 }
 
@@ -2274,7 +2274,7 @@ func_740E() {
     }
 
     if(isdefined(var_00)) {
-      var_00 scripts\sp\_player_stats::func_DED8();
+      var_00 scripts\sp\player_stats::func_DED8();
     }
 
     if(func_13234(var_00, var_01) || func_12F0()) {
@@ -2627,7 +2627,7 @@ func_F9C7() {
   level.vehicle = spawnstruct();
   level.vehicle.var_116CE = spawnstruct();
   level.vehicle.var_8DAA = getentarray("helicopter_crash_location", "targetname");
-  level.vehicle.var_8DAA = scripts\engine\utility::array_combine(level.vehicle.var_8DAA, scripts\sp\_utility::_meth_8181("helicopter_crash_location", "targetname"));
+  level.vehicle.var_8DAA = scripts\engine\utility::array_combine(level.vehicle.var_8DAA, scripts\sp\utility::_meth_8181("helicopter_crash_location", "targetname"));
   level.vehicle.var_116CE.team = [];
   level.vehicle.var_116CE.var_4E4E = [];
   level.vehicle.var_116CE.var_4E23 = [];
@@ -2660,7 +2660,7 @@ func_F9C7() {
     level.vehicle.var_116CE.var_4E1C = [];
   }
 
-  scripts\sp\_vehicle_aianim::func_F8AE();
+  scripts\sp\vehicle_aianim::func_F8AE();
 }
 
 func_FB0A(param_00, param_01) {

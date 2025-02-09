@@ -117,10 +117,10 @@ func_5AC3(param_00) {
 
   if(var_06) {
     if(isdefined(param_00["traverseToCoverSound"])) {
-      thread scripts\sp\_utility::play_sound_on_entity(param_00["traverseToCoverSound"]);
+      thread scripts\sp\utility::play_sound_on_entity(param_00["traverseToCoverSound"]);
     }
   } else if(isdefined(param_00["traverseSound"])) {
-    thread scripts\sp\_utility::play_sound_on_entity(param_00["traverseSound"]);
+    thread scripts\sp\utility::play_sound_on_entity(param_00["traverseSound"]);
   }
 
   var_07 = undefined;
@@ -439,7 +439,7 @@ func_D999(param_00) {
     return;
   }
 
-  scripts\sp\_utility::func_51D4(param_00);
+  scripts\sp\utility::func_51D4(param_00);
 }
 
 func_D9BD(param_00) {
@@ -457,7 +457,7 @@ func_D9BD(param_00) {
     self.var_138A6.var_C050[var_04] = var_03.origin - self.origin;
     var_04++;
     var_07 = scripts\engine\utility::getstruct(var_03.target, "targetname");
-    scripts\sp\_utility::func_51D4(var_03);
+    scripts\sp\utility::func_51D4(var_03);
     var_03 = var_07;
     self.var_138A6.var_C050[var_04] = var_03.origin - self.origin;
     var_04++;
@@ -467,7 +467,7 @@ func_D9BD(param_00) {
       var_0A = undefined;
     }
 
-    scripts\sp\_utility::func_51D4(var_03);
+    scripts\sp\utility::func_51D4(var_03);
     var_03 = var_0A;
     if(isdefined(var_03) && isdefined(var_03.var_EF1D)) {
       if(var_03.var_EF1D == "wallrun_mantle") {
@@ -476,12 +476,12 @@ func_D9BD(param_00) {
           self.var_138A6.var_B312 = var_03.angles;
         }
 
-        scripts\sp\_utility::func_51D4(var_03);
+        scripts\sp\utility::func_51D4(var_03);
         break;
       } else if(var_03.var_EF1D == "wallrun_vault") {
         self.var_138A6.var_B313 = var_03.origin - self.origin;
         self.var_138A6.var_331A = 1;
-        scripts\sp\_utility::func_51D4(var_03);
+        scripts\sp\utility::func_51D4(var_03);
         break;
       }
     }
@@ -529,5 +529,5 @@ func_126ED() {
     return;
   }
 
-  scripts\sp\_utility::func_51D4(var_00);
+  scripts\sp\utility::func_51D4(var_00);
 }

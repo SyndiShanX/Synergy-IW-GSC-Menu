@@ -159,7 +159,7 @@ _meth_8467() {
     return;
   }
 
-  if(!scripts\sp\_utility::func_8B6C()) {
+  if(!scripts\sp\utility::func_8B6C()) {
     return;
   }
 
@@ -300,7 +300,7 @@ func_12732() {
     }
   }
 
-  scripts\sp\_utility::func_228A(var_00);
+  scripts\sp\utility::func_228A(var_00);
 }
 
 func_159B(param_00) {
@@ -333,7 +333,7 @@ func_159A(param_00, param_01, param_02, param_03) {
   }
 
   foreach(var_07 in param_01) {
-    level.var_22E0[param_02][var_07] = scripts\sp\_utility::func_22B9(level.var_22E0[param_02][var_07]);
+    level.var_22E0[param_02][var_07] = scripts\sp\utility::func_22B9(level.var_22E0[param_02][var_07]);
     level.var_A95D[param_02][var_07] = level.var_4BE0[param_02][var_07];
     level.var_4BE0[param_02][var_07] = param_03[var_07];
   }
@@ -453,7 +453,7 @@ func_78D6(param_00, param_01) {
 }
 
 func_9F85(param_00, param_01, param_02) {
-  level.var_22DC[param_02][param_00] = scripts\sp\_utility::func_22B9(level.var_22DC[param_02][param_00]);
+  level.var_22DC[param_02][param_00] = scripts\sp\utility::func_22B9(level.var_22DC[param_02][param_00]);
   var_03 = level.var_22DC[param_02][param_00];
   var_03 = scripts\engine\utility::array_combine(var_03, level.var_22E0[param_02][param_01]);
   var_04 = [];
@@ -581,7 +581,7 @@ func_4399(param_00, param_01) {
     return;
   }
 
-  var_03 = scripts\sp\_utility::func_79C8(param_01, var_02);
+  var_03 = scripts\sp\utility::func_79C8(param_01, var_02);
   for (var_04 = 0; var_04 < var_03.size; var_04++) {
     var_05 = var_03[var_04];
     if(var_05 func_C2D2(param_00)) {
@@ -787,7 +787,7 @@ func_BE08() {
     return 1;
   }
 
-  return self.target_getindexoftarget scripts\sp\_utility::script_delay();
+  return self.target_getindexoftarget scripts\sp\utility::script_delay();
 }
 
 func_D966(param_00, param_01, param_02) {
@@ -795,7 +795,7 @@ func_D966(param_00, param_01, param_02) {
   self endon("stop_color_move");
   self endon("death");
   if(isdefined(param_01)) {
-    param_01 scripts\sp\_utility::script_delay();
+    param_01 scripts\sp\utility::script_delay();
   }
 
   if(!func_BE08()) {
@@ -1045,9 +1045,9 @@ func_43AA() {
       return;
     }
 
-    var_04 = scripts\sp\_utility::func_79C8("allies", var_02[var_01]);
+    var_04 = scripts\sp\utility::func_79C8("allies", var_02[var_01]);
     if(!isdefined(level.var_4392)) {
-      var_04 = scripts\sp\_utility::func_E0AF(var_04, var_00);
+      var_04 = scripts\sp\utility::func_E0AF(var_04, var_00);
     }
 
     if(!var_04.size) {
@@ -1061,7 +1061,7 @@ func_43AA() {
       continue;
     }
 
-    var_05 scripts\sp\_utility::func_F3B5(var_01);
+    var_05 scripts\sp\utility::func_F3B5(var_01);
     if(isdefined(level.var_73DF)) {
       var_05[[level.var_73DF]](var_01);
     }
@@ -1211,7 +1211,7 @@ func_10735(param_00, param_01) {
     var_03.origin = level.respawn_threshold;
     var_02 = var_03 _meth_8393();
     var_03.origin = var_04;
-    if(scripts\sp\_utility::func_106ED(var_02)) {
+    if(scripts\sp\utility::func_106ED(var_02)) {
       thread func_AEE0();
       wait(1);
       continue;
@@ -1234,7 +1234,7 @@ func_10735(param_00, param_01) {
   }
 
   if(isdefined(param_01)) {
-    var_02 scripts\sp\_utility::func_F3B5(param_01);
+    var_02 scripts\sp\utility::func_F3B5(param_01);
   }
 
   thread func_AEE0();

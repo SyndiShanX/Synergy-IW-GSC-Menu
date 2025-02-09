@@ -387,7 +387,7 @@ func_1011B(param_00, param_01, param_02, param_03) {
 
 func_FE9C(param_00) {
   self.a.var_A9ED = gettime();
-  scripts\sp\_gameskill::func_F288();
+  scripts\sp\gameskill::func_F288();
   self notify("shooting");
   if(scripts\anim\utility_common::isasniper() && isdefined(self.asm.shootparams) && isdefined(self.asm.shootparams.pos)) {
     self shoot(1, self.asm.shootparams.pos, 1, 0, 1);
@@ -493,7 +493,7 @@ func_CA77() {
   self endon("stop personal effect");
   for (;;) {
     self waittill("spawned", var_00);
-    if(scripts\sp\_utility::func_106ED(var_00)) {
+    if(scripts\sp\utility::func_106ED(var_00)) {
       continue;
     }
 

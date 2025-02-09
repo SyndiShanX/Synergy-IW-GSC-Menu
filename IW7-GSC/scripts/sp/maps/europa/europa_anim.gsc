@@ -149,7 +149,7 @@ func_91DC() {
 }
 
 func_12921(param_00) {
-  playfx(scripts\engine\utility::getfx("vfx_eu_icecave_landing_kickup_sml"), scripts\sp\_utility::func_864C(param_00.origin));
+  playfx(scripts\engine\utility::getfx("vfx_eu_icecave_landing_kickup_sml"), scripts\sp\utility::func_864C(param_00.origin));
 }
 
 func_12924(param_00) {
@@ -214,7 +214,7 @@ func_8E1D(param_00) {
   playfx(level.var_7649["human_gib_head"], param_00 gettagorigin("j_head"), (0, 0, 1));
   playfx(scripts\engine\utility::getfx("deathfx_bloodpool_generic"), param_00 gettagorigin("j_head"), (0, 0, 1));
   param_00.var_C065 = 1;
-  param_00 thread scripts\sp\_utility::func_19D3();
+  param_00 thread scripts\sp\utility::func_19D3();
   param_00 givescorefortrophyblocks();
 }
 
@@ -233,7 +233,7 @@ func_8CA1(param_00) {
 func_C7BF(param_00) {
   level.player viewkick(100, param_00.origin, 0);
   level.player thread func_54D7(0.5, 2, 0.5);
-  level.player thread scripts\sp\_gameskill::func_2BDB(2, 0.5);
+  level.player thread scripts\sp\gameskill::func_2BDB(2, 0.5);
   var_01 = getentarray("europa_lights_outro_2", "targetname");
   foreach(var_03 in var_01) {
     var_03 setlightintensity(0);
@@ -251,36 +251,36 @@ func_C7C5(param_00) {
     param_00.var_902B = 0;
   }
 
-  if(scripts\sp\_utility::func_93A6() && !isdefined(level.player.helmet)) {
+  if(scripts\sp\utility::func_93A6() && !isdefined(level.player.helmet)) {
     level.player.helmet = level.var_10964.helmet;
   }
 
   param_00.var_902B++;
   var_01 = 1;
   if(param_00.var_902B == 1) {
-    level.player thread scripts\sp\_gameskill::func_2BDB(2.5, 0.5);
+    level.player thread scripts\sp\gameskill::func_2BDB(2.5, 0.5);
     level.player _meth_809A(0.25, 2);
     level.player.helmet setmodel("vm_hero_protagonist_helmet_glass_crack_02_clear");
     level.player playsound("scn_europa_outro_plr_helmet_glass_break_01");
-    level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\_utility::play_sound_on_entity, "europa_plr_end_efforts_2");
+    level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_2");
     level.player notify("sfx_beep_fade");
   } else if(param_00.var_902B == 2) {
-    level.player thread scripts\sp\_gameskill::func_2BDB(2.7, 0.5);
+    level.player thread scripts\sp\gameskill::func_2BDB(2.7, 0.5);
     level.player _meth_809A(0.5, 2);
     level.player.helmet setmodel("vm_hero_protagonist_helmet_glass_crack_03_clear");
     level.player playsound("scn_europa_outro_plr_helmet_glass_break_03");
-    level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\_utility::play_sound_on_entity, "europa_plr_end_efforts_3");
+    level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_3");
   } else if(param_00.var_902B == 3) {
-    thread scripts\sp\_hud::func_8DF7(0.05);
+    thread scripts\sp\hud::func_8DF7(0.05);
     level.player _meth_809A(0, 1);
-    level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\_utility::play_sound_on_entity, "europa_plr_end_efforts_4");
+    level.player scripts\engine\utility::delaythread(0.2, ::scripts\sp\utility::play_sound_on_entity, "europa_plr_end_efforts_4");
     wait(0.15);
     level.player playsound("scn_europa_outro_plr_helmet_glass_break_04");
     func_C7CD();
     wait(0.05);
     var_01 = 0;
-    level.player.var_E505 _meth_82B1(level.player.var_E505 scripts\sp\_utility::func_7DC1("outro"), 0);
-    param_00 _meth_82B1(param_00 scripts\sp\_utility::func_7DC1("outro"), 0);
+    level.player.var_E505 _meth_82B1(level.player.var_E505 scripts\sp\utility::func_7DC1("outro"), 0);
+    param_00 _meth_82B1(param_00 scripts\sp\utility::func_7DC1("outro"), 0);
     level.player freezecontrols(1);
     setomnvar("ui_show_compass", 1);
     scripts\engine\utility::flag_set("outro_freeze");
@@ -294,7 +294,7 @@ func_C7C5(param_00) {
 func_C7CD() {
   var_00 = anglestoforward(level.player getplayerangles());
   playfx(scripts\engine\utility::getfx("outro_player_glass_punch"), level.player geteye(), var_00);
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     level.var_10964.helmet delete();
     return;
   }
@@ -315,12 +315,12 @@ func_C7CE(param_00) {
   var_03 = 1;
   var_04 = [level.player.var_E505, param_00];
   foreach(var_06 in var_04) {
-    var_06 thread func_AB76(var_06 scripts\sp\_utility::func_7DC1("outro"), var_01, var_03, var_02);
+    var_06 thread func_AB76(var_06 scripts\sp\utility::func_7DC1("outro"), var_01, var_03, var_02);
   }
 
   wait(0.5);
   foreach(var_06 in var_04) {
-    var_06 thread func_AB76(var_06 scripts\sp\_utility::func_7DC1("outro"), var_01, var_02, var_03);
+    var_06 thread func_AB76(var_06 scripts\sp\utility::func_7DC1("outro"), var_01, var_02, var_03);
   }
 }
 
@@ -463,7 +463,7 @@ func_67AF(param_00) {
 }
 
 func_D015(param_00) {
-  thread scripts\sp\_utility::func_1034F("europa_plr_effortsholdingontod");
+  thread scripts\sp\utility::func_1034F("europa_plr_effortsholdingontod");
 }
 
 func_C7CA(param_00) {
@@ -522,23 +522,23 @@ func_EE25() {
 
 func_12920(param_00) {
   if(isdefined(param_00.var_B14F)) {
-    param_00 scripts\sp\_utility::func_1101B();
+    param_00 scripts\sp\utility::func_1101B();
   }
 
   param_00.var_EF = 1;
   param_00.var_DC1A = 1;
   param_00.var_30 = 1;
-  param_00 scripts\sp\_utility::func_F2DA(0);
+  param_00 scripts\sp\utility::func_F2DA(0);
   param_00 _meth_81D0();
 }
 
 func_C0C7(param_00) {
   if(isdefined(param_00.var_B14F)) {
-    param_00 scripts\sp\_utility::func_1101B();
+    param_00 scripts\sp\utility::func_1101B();
   }
 
   param_00.a.nodeath = 1;
-  param_00 scripts\sp\_utility::func_54C6();
+  param_00 scripts\sp\utility::func_54C6();
 }
 
 func_7348(param_00) {
@@ -559,8 +559,8 @@ func_F1EC(param_00) {
     wait(0.05);
   }
 
-  thread scripts\sp\_art::func_583F(0, 4, 10, 5, 15, 150, 0.5);
-  scripts\engine\utility::delaythread(3.5, ::scripts\sp\_art::func_583D, 1);
+  thread scripts\sp\art::func_583F(0, 4, 10, 5, 15, 150, 0.5);
+  scripts\engine\utility::delaythread(3.5, ::scripts\sp\art::func_583D, 1);
   while (iscinematicplaying()) {
     wait(0.05);
   }

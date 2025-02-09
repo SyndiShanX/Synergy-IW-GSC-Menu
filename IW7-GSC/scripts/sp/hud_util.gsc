@@ -686,7 +686,7 @@ func_48B7(param_00, param_01, param_02) {
 }
 
 func_48B8(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = scripts\sp\_utility::func_7B92();
+  var_05 = scripts\sp\utility::func_7B92();
   var_06 = newclienthudelem(var_05);
   if(!isdefined(param_04)) {
     param_04 = 1;
@@ -714,7 +714,7 @@ func_48B8(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_48B9(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = scripts\sp\_utility::func_7B92();
+  var_05 = scripts\sp\utility::func_7B92();
   var_06 = newclienthudelem(var_05);
   if(!isdefined(param_04)) {
     param_04 = 1;

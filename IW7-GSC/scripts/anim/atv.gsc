@@ -14,7 +14,7 @@ main() {
 func_255B() {
   self.objective_state_nomessage = 0;
   self.a.pose = "crouch";
-  scripts\sp\_utility::func_558D();
+  scripts\sp\utility::func_558D();
   self.allowpain = 0;
   self.var_6EC4 = 1;
   self._meth_8020 = ::func_255A;
@@ -25,7 +25,7 @@ func_255B() {
 func_255A() {
   self.allowpain = 1;
   self.var_6EC4 = 0;
-  scripts\sp\_utility::func_86E2();
+  scripts\sp\utility::func_86E2();
   self.onatv = undefined;
   self.var_4C37["combat"] = undefined;
   self.var_4C37["stop"] = undefined;
@@ -66,7 +66,7 @@ func_255D() {
   self _meth_82B0(scripts\anim\utility::func_1F64(var_00), 0.5);
   for (;;) {
     if(self.var_E500.var_10F83) {
-      var_02 = 0.5 * 1 + scripts\sp\_vehicle_code::func_12E33(self.var_E500);
+      var_02 = 0.5 * 1 + scripts\sp\vehicle_code::func_12E33(self.var_E500);
       var_03 = self getscoreinfocategory(scripts\anim\utility::func_1F64(var_00));
       if(var_00 == "right2left") {
         var_03 = 1 - var_03;
@@ -106,7 +106,7 @@ func_255E() {
       continue;
     }
 
-    var_02 = scripts\sp\_vehicle_code::func_12E33(self.var_E500);
+    var_02 = scripts\sp\vehicle_code::func_12E33(self.var_E500);
     var_03 = 1 - abs(var_02);
     var_04 = max(0, 0 - var_02);
     var_05 = max(0, var_02);

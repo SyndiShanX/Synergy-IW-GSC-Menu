@@ -32,15 +32,15 @@ init_light_generic_iw7(param_00, param_01, param_02, param_03, param_04, param_0
   self.var_10D0C = func_95A8([self.var_EECC, param_06]);
   self.var_ACA5 = func_95A8([self.script_type, "generic"]);
   self.var_50D3 = issubstr(self.var_ACA5, "delaystart");
-  if(!scripts\sp\_utility::func_65DF("light_on")) {
-    scripts\sp\_utility::func_65E0("light_on");
+  if(!scripts\sp\utility::func_65DF("light_on")) {
+    scripts\sp\utility::func_65E0("light_on");
   }
 
   self.var_AD83 = [];
   self.var_12BB6 = [];
   self.var_AD22 = [];
   self.var_127C9 = [];
-  var_08 = scripts\sp\_utility::func_7A8F();
+  var_08 = scripts\sp\utility::func_7A8F();
   foreach(var_0A in var_08) {
     if(func_9C37(var_0A)) {
       self.var_AD22[self.var_AD22.size] = var_0A;
@@ -114,9 +114,9 @@ func_ACA2() {
   }
 
   for (;;) {
-    if(!scripts\sp\_utility::func_65DB("light_on")) {
+    if(!scripts\sp\utility::func_65DB("light_on")) {
       level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
-      scripts\sp\_utility::script_delay();
+      scripts\sp\utility::script_delay();
       if(isdefined(self.var_50D3)) {
         if(isdefined(self.script_delay)) {
           self.var_C3D6 = self.script_delay;
@@ -139,7 +139,7 @@ func_ACA2() {
     }
 
     level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12712, self.var_C14C);
-    scripts\sp\_utility::script_delay();
+    scripts\sp\utility::script_delay();
     if(isdefined(self.var_50D3)) {
       if(isdefined(self.script_delay)) {
         self.var_C3D6 = self.script_delay;
@@ -240,7 +240,7 @@ func_AC88() {
 
   if(isdefined(self.var_C14B) && isdefined(self.var_C14C)) {
     for (;;) {
-      scripts\sp\_utility::script_delay();
+      scripts\sp\utility::script_delay();
       if(isdefined(self.var_50D3)) {
         if(isdefined(self.script_delay)) {
           self.var_C3D6 = self.script_delay;
@@ -304,11 +304,11 @@ func_AC89() {
   }
 
   for (;;) {
-    if(!scripts\sp\_utility::func_65DB("light_on") && isdefined(self.var_12711) || isdefined(self.var_C14B)) {
+    if(!scripts\sp\utility::func_65DB("light_on") && isdefined(self.var_12711) || isdefined(self.var_C14B)) {
       level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
     }
 
-    scripts\sp\_utility::script_delay();
+    scripts\sp\utility::script_delay();
     if(isdefined(self.var_50D3)) {
       if(isdefined(self.script_delay)) {
         self.var_C3D6 = self.script_delay;
@@ -327,7 +327,7 @@ func_AC89() {
       self.script_delay_min = undefined;
     }
 
-    if(self.var_12AE2 && !scripts\sp\_utility::func_65DB("light_on")) {
+    if(self.var_12AE2 && !scripts\sp\utility::func_65DB("light_on")) {
       childthread func_AC8A(1, self.var_DC8B);
       if(self.var_10E46) {
         wait(self.var_C4B5);
@@ -519,11 +519,11 @@ func_AC9D() {
   }
 
   for (;;) {
-    if(!scripts\sp\_utility::func_65DB("light_on") && isdefined(self.var_12711) || isdefined(self.var_C14B)) {
+    if(!scripts\sp\utility::func_65DB("light_on") && isdefined(self.var_12711) || isdefined(self.var_C14B)) {
       level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
     }
 
-    scripts\sp\_utility::script_delay();
+    scripts\sp\utility::script_delay();
     if(isdefined(self.var_50D3)) {
       if(isdefined(self.script_delay)) {
         self.var_C3D6 = self.script_delay;
@@ -542,7 +542,7 @@ func_AC9D() {
       self.script_delay_min = undefined;
     }
 
-    if(self.var_12AE2 && !scripts\sp\_utility::func_65DB("light_on")) {
+    if(self.var_12AE2 && !scripts\sp\utility::func_65DB("light_on")) {
       childthread func_AC9E(1);
       if(self.var_10E46) {
         wait(self.var_C4B5);
@@ -631,10 +631,10 @@ init_light_trig(param_00) {
   self endon("death");
   var_01 = undefined;
   if(isdefined(self.script_noteworthy) && self.script_noteworthy == "stop") {
-    var_01 = "trig_light_stop_" + scripts\sp\_utility::string(param_00 getentitynumber());
+    var_01 = "trig_light_stop_" + scripts\sp\utility::string(param_00 getentitynumber());
     param_00.var_12712 = var_01;
   } else {
-    var_01 = "trig_light_start_" + scripts\sp\_utility::string(param_00 getentitynumber());
+    var_01 = "trig_light_start_" + scripts\sp\utility::string(param_00 getentitynumber());
     param_00.var_12711 = var_01;
   }
 
@@ -643,7 +643,7 @@ init_light_trig(param_00) {
 }
 
 func_ACA4(param_00) {
-  scripts\sp\_utility::func_65E1("light_on");
+  scripts\sp\utility::func_65E1("light_on");
   if(isdefined(param_00) && param_00 && self.var_99E6 > 0) {
     func_F466(randomfloatrange(self.var_99E6 * 0.25, self.var_99E6), self.var_438F);
   } else {
@@ -662,13 +662,13 @@ func_ACA4(param_00) {
   foreach(var_05 in self.var_AD83) {
     var_05 show();
     if(isdefined(var_05.effect)) {
-      var_05.effect scripts\sp\_utility::func_E2B0();
+      var_05.effect scripts\sp\utility::func_E2B0();
     }
   }
 }
 
 func_ACA3(param_00, param_01) {
-  scripts\sp\_utility::func_65DD("light_on");
+  scripts\sp\utility::func_65DD("light_on");
   if(isdefined(param_01) && param_01) {
     func_F466(0, (0, 0, 0));
   } else if(isdefined(param_00) && param_00 && self.var_99E7 > 0) {
@@ -678,7 +678,7 @@ func_ACA3(param_00, param_01) {
   }
 
   if(isdefined(self.script_prefab_exploder)) {
-    scripts\sp\_utility::func_10FEC(self.script_prefab_exploder);
+    scripts\sp\utility::func_10FEC(self.script_prefab_exploder);
   }
 
   foreach(var_03 in self.var_EF3C) {
@@ -696,7 +696,7 @@ func_ACA3(param_00, param_01) {
 }
 
 func_AC9B(param_00) {
-  scripts\sp\_utility::func_65DD("light_on");
+  scripts\sp\utility::func_65DD("light_on");
   var_01 = int(param_00 / 0.1);
   for (var_02 = 1; var_02 <= var_01; var_02++) {
     var_03 = max(0, self.var_99E6 - self.var_99EA * var_02);
@@ -737,7 +737,7 @@ func_1298C(param_00, param_01, param_02) {
     var_04 = param_01;
   }
 
-  scripts\sp\_utility::func_65E1("light_on");
+  scripts\sp\utility::func_65E1("light_on");
   func_F466(var_03, var_04);
   foreach(var_06 in self.var_EF3C) {
     var_06 setscriptablepartstate("onoff", "on");
@@ -747,7 +747,7 @@ func_1298C(param_00, param_01, param_02) {
   foreach(var_09 in self.var_AD83) {
     var_09 show();
     if(isdefined(var_09.effect)) {
-      var_09.effect scripts\sp\_utility::func_E2B0();
+      var_09.effect scripts\sp\utility::func_E2B0();
     }
   }
 }
@@ -776,7 +776,7 @@ func_12968(param_00, param_01, param_02) {
     var_04 = param_01;
   }
 
-  scripts\sp\_utility::func_65DD("light_on");
+  scripts\sp\utility::func_65DD("light_on");
   func_F466(var_03, var_04);
   foreach(var_06 in self.var_EF3C) {
     var_06 setscriptablepartstate("onoff", "off");
@@ -1150,7 +1150,7 @@ func_8924(param_00) {
         var_03.var_13438 = var_01;
         var_03 show();
         if(isdefined(var_03.effect)) {
-          var_03.effect thread scripts\sp\_utility::func_E2B0();
+          var_03.effect thread scripts\sp\utility::func_E2B0();
         }
 
         continue;

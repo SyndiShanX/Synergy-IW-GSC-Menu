@@ -18,7 +18,7 @@ main() {
 func_B23E() {
   scripts\engine\utility::flag_wait("start_is_set");
   var_00 = 0;
-  if(!isdefined(level.var_9AF3) || !scripts\sp\_utility::func_9BB5() || var_00) {
+  if(!isdefined(level.var_9AF3) || !scripts\sp\utility::func_9BB5() || var_00) {
     scripts\engine\utility::delaythread(0.05, ::scripts\engine\utility::flag_set, "introscreen_complete");
     return;
   }
@@ -60,13 +60,13 @@ func_9AF9(param_00, param_01, param_02, param_03) {
   }
 
   if(!isdefined(param_03)) {
-    scripts\sp\_hud_util::func_10CCC();
+    scripts\sp\hud_util::func_10CCC();
   } else {
-    scripts\sp\_hud_util::func_6AA3(param_03);
+    scripts\sp\hud_util::func_6AA3(param_03);
   }
 
   wait(param_01);
-  scripts\sp\_hud_util::func_6A99(param_02);
+  scripts\sp\hud_util::func_6A99(param_02);
   wait(param_02);
   setsaveddvar("com_cinematicEndInWhite", 0);
 }
@@ -140,10 +140,10 @@ func_9AF3(param_00, param_01) {
 
   if(isdefined(param_01)) {
     param_00 = 1;
-    scripts\sp\_hud_util::func_10CCC();
+    scripts\sp\hud_util::func_10CCC();
     level.player freezecontrols(1);
     level.player scripts\engine\utility::delaycall(param_01, ::freezecontrols, 0);
-    scripts\engine\utility::delaythread(param_01, ::scripts\sp\_hud_util::func_6A99, 2);
+    scripts\engine\utility::delaythread(param_01, ::scripts\sp\hud_util::func_6A99, 2);
   }
 
   level.var_3F69 = spawnstruct();
@@ -160,7 +160,7 @@ func_9AF3(param_00, param_01) {
   level.var_3F69.var_BFE0 = param_00;
   if(!param_00) {
     level.player freezecontrols(1);
-    scripts\sp\_hud_util::func_10CCC();
+    scripts\sp\hud_util::func_10CCC();
     thread func_22FD(0);
   }
 
@@ -194,7 +194,7 @@ func_9AF3(param_00, param_01) {
   func_6BAF(0, param_00);
   if(!param_00) {
     func_3F6A(0, "ui_chyron_off");
-    thread scripts\sp\_hud_util::func_6A99(2);
+    thread scripts\sp\hud_util::func_6A99(2);
     level.player freezecontrols(0);
   }
 
@@ -907,7 +907,7 @@ func_7662() {
     level thread func_765F(level.var_7661.var_11760[0], var_01);
     var_01++;
     wait(0.5);
-    level.var_7661.var_11760 = scripts\sp\_utility::array_remove_index(level.var_7661.var_11760, 0);
+    level.var_7661.var_11760 = scripts\sp\utility::array_remove_index(level.var_7661.var_11760, 0);
   }
 
   level.var_7661.var_1175D = 0;
@@ -1058,7 +1058,7 @@ func_1119F(param_00, param_01, param_02, param_03) {
 
 func_A03D(param_00) {
   level.player freezecontrols(1);
-  scripts\sp\_hud_util::func_10CCC();
+  scripts\sp\hud_util::func_10CCC();
   var_01 = newhudelem();
   level.var_3F2B = spawnstruct();
   wait(1);

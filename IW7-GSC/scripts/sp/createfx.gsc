@@ -31,7 +31,7 @@ createfx() {
 
 func_49C3() {
   var_00 = [];
-  var_00["trigger_multiple_createart_transient"] = ::scripts\sp\_trigger::func_1272E;
+  var_00["trigger_multiple_createart_transient"] = ::scripts\sp\trigger::func_1272E;
   foreach(var_04, var_02 in var_00) {
     var_03 = getentarray(var_04, "classname");
     scripts\engine\utility::array_levelthread(var_03, var_02);

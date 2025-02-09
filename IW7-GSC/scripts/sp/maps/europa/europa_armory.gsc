@@ -11,12 +11,12 @@ func_220C() {
   precacheitem("iw7_jackal_support_designator");
   precachestring( & "EUROPA_FAILED_TO_ESCAPE");
   precachestring( & "EUROPA_FSPAR_SHOOT");
-  scripts\sp\_utility::func_16EB("fspar_switch", & "EUROPA_FSPAR_SWITCH");
-  scripts\sp\_utility::func_22C9("tram_enemy_spawner", ::func_D70D);
-  scripts\sp\_utility::func_22C9("tram_enemy_spawner_c6", ::func_D70E);
-  scripts\sp\_utility::func_22CA("lastroom_fleer_bridge", ::func_D710);
-  scripts\sp\_utility::func_22CA("lastroom_fleer", ::func_D710);
-  scripts\sp\_utility::func_9187("bfgtargeting", 10);
+  scripts\sp\utility::func_16EB("fspar_switch", & "EUROPA_FSPAR_SWITCH");
+  scripts\sp\utility::func_22C9("tram_enemy_spawner", ::func_D70D);
+  scripts\sp\utility::func_22C9("tram_enemy_spawner_c6", ::func_D70E);
+  scripts\sp\utility::func_22CA("lastroom_fleer_bridge", ::func_D710);
+  scripts\sp\utility::func_22CA("lastroom_fleer", ::func_D710);
+  scripts\sp\utility::func_9187("bfgtargeting", 10);
   scripts\engine\utility::trigger_off("tram_out_trigger", "script_noteworthy");
   scripts\engine\utility::trigger_off("initial_enemy_trigger", "script_noteworthy");
   scripts\engine\utility::trigger_off("self_destruct_triggers", "script_noteworthy");
@@ -73,7 +73,7 @@ func_220C() {
   scripts\engine\utility::flag_init("self_destruct_timer_active");
   scripts\engine\utility::flag_init("self_destruction_start");
   scripts\engine\utility::flag_init("no_c12_death_save");
-  level.player scripts\sp\_utility::func_65E0("c12_door_visible");
+  level.player scripts\sp\utility::func_65E0("c12_door_visible");
   if(func_9CD5("outro")) {
     func_11B3F();
   }
@@ -149,8 +149,8 @@ func_224A() {
   var_00 = getentarray("extra_corridor_klaxon_light", "script_noteworthy");
   scripts\engine\utility::array_thread(var_00, ::func_A6ED);
   scripts\sp\maps\europa\europa_util::func_107C5();
-  scripts\sp\_utility::func_F5AF("armory_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "raise");
+  scripts\sp\utility::func_F5AF("armory_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
@@ -159,11 +159,11 @@ func_21A4() {
   scripts\engine\utility::flag_wait("player_entering_armory");
   func_9531();
   if(isdefined(level.var_4074) && isdefined(level.var_4074["locker_c6s"])) {
-    scripts\sp\_utility::func_4075("locker_c6s");
+    scripts\sp\utility::func_4075("locker_c6s");
   }
 
-  scripts\sp\_utility::func_28D8("axis");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_54F7);
+  scripts\sp\utility::func_28D8("axis");
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_54F7);
   thread func_21DF();
   scripts\sp\maps\europa\europa_util::func_6244(1);
 }
@@ -184,7 +184,7 @@ func_21CC() {
   func_9531();
   scripts\sp\maps\europa\europa_util::func_6244(1);
   scripts\engine\utility::flag_set("goto_vault_door");
-  scripts\sp\_utility::func_28D8("axis");
+  scripts\sp\utility::func_28D8("axis");
 }
 
 func_7392() {
@@ -214,7 +214,7 @@ func_1353A(param_00, param_01) {
     var_05 = 0;
     var_06 = [];
     foreach(var_08 in var_04) {
-      if(!isalive(var_08) || var_08 scripts\sp\_utility::func_58DA()) {
+      if(!isalive(var_08) || var_08 scripts\sp\utility::func_58DA()) {
         continue;
       }
 
@@ -283,9 +283,9 @@ func_2891() {
   var_00 = getentarray("extra_corridor_klaxon_light", "script_noteworthy");
   scripts\engine\utility::array_thread(var_00, ::func_A6ED);
   scripts\sp\maps\europa\europa_util::func_107C5();
-  scripts\engine\utility::delaythread(0.1, ::scripts\sp\_utility::func_F5AF, "selfdestruct_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\engine\utility::delaythread(0.1, ::scripts\sp\utility::func_F5AF, "selfdestruct_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
   level.var_11B30.var_10DDB = 2000;
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", & "EUROPA_OBJECTIVE_FSPAR");
   thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", & "EUROPA_OBJECTIVE_ESCAPE");
@@ -293,7 +293,7 @@ func_2891() {
 
 func_288C() {
   if(isdefined(level.var_4074) && isdefined(level.var_4074["office_fight"])) {
-    scripts\sp\_utility::func_4074("office_fight");
+    scripts\sp\utility::func_4074("office_fight");
   }
 
   var_00 = getnode("console_node_sipes", "targetname");
@@ -318,31 +318,31 @@ func_288C() {
   scripts\engine\utility::array_thread(level.var_EBCA, ::func_1C38, 1);
   var_03 = getentarray("tram_out_trigger", "script_noteworthy");
   scripts\engine\utility::array_thread(var_03, ::scripts\engine\utility::trigger_on);
-  scripts\sp\_utility::func_2669("post_give_steeldragon");
+  scripts\sp\utility::func_2669("post_give_steeldragon");
   thread func_C856();
   scripts\engine\utility::flag_wait("tram_intro_done");
   wait(2);
-  level.player scripts\sp\_utility::func_D090("ges_radio");
+  level.player scripts\sp\utility::func_D090("ges_radio");
   level.player getnumownedagentsonteambytype(0);
-  scripts\sp\_utility::func_1034D("europa_plr_weremovinoutconfirmi");
+  scripts\sp\utility::func_1034D("europa_plr_weremovinoutconfirmi");
   level.player stopgestureviewmodel("ges_radio", 1);
   level.player getnumownedagentsonteambytype(1);
   wait(0.15);
-  scripts\sp\_utility::func_10350("europa_rpr_initiatingdestruct");
+  scripts\sp\utility::func_10350("europa_rpr_initiatingdestruct");
   wait(1);
   thread alarm_lights_on();
   thread func_A6EF();
   thread func_2874();
-  scripts\sp\_utility::func_10350("europa_rpr_confirmedyouaregofor");
+  scripts\sp\utility::func_10350("europa_rpr_confirmedyouaregofor");
   wait(0.1);
   scripts\engine\utility::flag_set("last_call_before_fight");
-  level.player scripts\sp\_utility::func_D090("ges_radio");
+  level.player scripts\sp\utility::func_D090("ges_radio");
   level.player getnumownedagentsonteambytype(0);
-  scripts\sp\_utility::func_1034D("europa_plr_copywereoscarmiker");
+  scripts\sp\utility::func_1034D("europa_plr_copywereoscarmiker");
   level.player stopgestureviewmodel("ges_radio", 1);
   level.player getnumownedagentsonteambytype(1);
   wait(0.1);
-  scripts\sp\_utility::func_1034D("europa_plr_clocksticking");
+  scripts\sp\utility::func_1034D("europa_plr_clocksticking");
   wait(0.3);
   thread func_C84D("europa_pas_allpersonnel");
   wait(0.1);
@@ -353,7 +353,7 @@ func_288C() {
   thread func_7392();
   wait(2);
   scripts\engine\utility::flag_set("open_room1_doors");
-  scripts\sp\_utility::func_22CD("tram_initial_enemies", 1);
+  scripts\sp\utility::func_22CD("tram_initial_enemies", 1);
   scripts\engine\utility::trigger_on("self_destruct_triggers", "script_noteworthy");
   scripts\engine\utility::delaythread(2, ::armory_battlechatter);
   if(level.var_7683 > 1) {
@@ -466,14 +466,14 @@ func_10215() {
 func_4543() {
   level.player _meth_81DE(55, 2);
   level waittill("dof_change");
-  scripts\sp\_art::func_583F(0, 194, 3, 100, 490, 3.2, 1.2);
+  scripts\sp\art::func_583F(0, 194, 3, 100, 490, 3.2, 1.2);
   level waittill("dof_change");
-  scripts\sp\_art::func_583F(0, 0, 0, 68.1, 76.7, 1, 0.5);
+  scripts\sp\art::func_583F(0, 0, 0, 68.1, 76.7, 1, 0.5);
   level waittill("dof_change");
-  scripts\sp\_art::func_583F(0, 0, 0, 0, 128.1, 2.6, 0.1);
+  scripts\sp\art::func_583F(0, 0, 0, 0, 128.1, 2.6, 0.1);
   wait(1);
   level.player _meth_81DE(65, 0.25);
-  scripts\sp\_art::func_583D(0.05);
+  scripts\sp\art::func_583D(0.05);
 }
 
 func_C856() {
@@ -509,7 +509,7 @@ func_C856() {
 }
 
 func_C850(param_00, param_01) {
-  scripts\sp\_utility::func_74D7(::func_C84D, param_00, param_01);
+  scripts\sp\utility::func_74D7(::func_C84D, param_00, param_01);
 }
 
 func_C84B(param_00, param_01) {
@@ -602,13 +602,13 @@ func_C846() {
 
 func_288F() {
   level.player endon("death");
-  level.player scripts\sp\_utility::func_D090("ges_radio");
+  level.player scripts\sp\utility::func_D090("ges_radio");
   level.player getnumownedagentsonteambytype(0);
-  scripts\sp\_utility::func_1034D("europa_plr_reaperwereatthe");
+  scripts\sp\utility::func_1034D("europa_plr_reaperwereatthe");
   level.player stopgestureviewmodel("ges_radio", 1);
   level.player getnumownedagentsonteambytype(1);
   scripts\engine\utility::flag_set("selfdestruct_ready");
-  scripts\sp\_utility::func_10350("europa_rpr_copythatpackageis");
+  scripts\sp\utility::func_10350("europa_rpr_copythatpackageis");
   if(!scripts\engine\utility::flag("tram_move")) {
     scripts\sp\maps\europa\europa_util::func_134B7("europa_tee_weaponsbehind");
   }
@@ -620,7 +620,7 @@ func_288F() {
 }
 
 armory_battlechatter() {
-  scripts\sp\_utility::func_1034D("europa_plr_gohot");
+  scripts\sp\utility::func_1034D("europa_plr_gohot");
   wait(1);
   thread func_B784();
 }
@@ -799,9 +799,9 @@ func_299B() {
 func_EB80() {
   var_00 = scripts\engine\utility::random(self.var_1B4A);
   if(isplayer(var_00[0])) {
-    scripts\sp\_utility::func_1034D(var_00[1]);
+    scripts\sp\utility::func_1034D(var_00[1]);
   } else {
-    var_00[0] scripts\sp\_utility::func_10346(var_00[1]);
+    var_00[0] scripts\sp\utility::func_10346(var_00[1]);
   }
 
   func_F2DD();
@@ -832,12 +832,12 @@ func_F2DD(param_00, param_01) {
 
 func_3568() {
   scripts\sp\maps\europa\europa_util::func_107C5();
-  scripts\sp\_utility::func_F5AF("c12_fight_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\sp\utility::func_F5AF("c12_fight_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
   level.var_11B30.var_10DDB = 1000;
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
   thread func_B784();
-  scripts\sp\_utility::func_22CD("tram_initial_enemies", 1);
-  thread scripts\sp\_utility::func_1034D("europa_plr_letsgetitout");
+  scripts\sp\utility::func_22CD("tram_initial_enemies", 1);
+  thread scripts\sp\utility::func_1034D("europa_plr_letsgetitout");
   setmusicstate("mx_172_misslefight");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", & "EUROPA_OBJECTIVE_FSPAR");
@@ -880,7 +880,7 @@ func_355D() {
   thread func_353D();
   scripts\engine\utility::flag_wait("c12_spawn");
   setmusicstate("mx_172_misslefight");
-  var_04 = scripts\sp\_utility::func_107EA("c12_spawner", 1);
+  var_04 = scripts\sp\utility::func_107EA("c12_spawner", 1);
   level.var_3508 = var_04;
   var_04.var_1FBB = "c12";
   thread func_3536();
@@ -914,12 +914,12 @@ func_355D() {
   scripts\engine\utility::flag_set("c12_fight_done");
   thread restore_c12_fight_trigs();
   foreach(var_09 in level.var_EBCA) {
-    var_09 scripts\sp\_utility::func_4145();
+    var_09 scripts\sp\utility::func_4145();
   }
 
   func_7392();
   if(!scripts\engine\utility::flag("no_c12_death_save")) {
-    scripts\sp\_utility::func_2669("c12_is_dead");
+    scripts\sp\utility::func_2669("c12_is_dead");
   }
 
   wait(3);
@@ -973,14 +973,14 @@ func_35B4() {
     }
 
     if(var_02 == var_03) {
-      level.player scripts\sp\_utility::func_65E1("c12_door_visible");
+      level.player scripts\sp\utility::func_65E1("c12_door_visible");
       break;
     }
 
     wait(0.05);
   }
 
-  level.player scripts\sp\_utility::func_65E8("player_has_red_flashing_overlay");
+  level.player scripts\sp\utility::func_65E8("player_has_red_flashing_overlay");
   scripts\engine\utility::flag_set("c12_spawn");
   scripts\engine\utility::flag_set("open_room2_doors");
   thread func_A5D9();
@@ -1067,7 +1067,7 @@ func_3621() {
       }
 
       if(gettime() >= var_01 || var_03 >= var_04) {
-        scripts\sp\_utility::func_56BE("fspar_switch", 5);
+        scripts\sp\utility::func_56BE("fspar_switch", 5);
         wait(5);
         var_01 = gettime() + var_00;
         var_03 = 0;
@@ -1257,7 +1257,7 @@ func_6476() {
   while (var_01 > 0 && var_02 > gettime()) {
     var_03 = scripts\engine\utility::random(var_00);
     var_03.var_C1 = 1;
-    var_04 = var_03 scripts\sp\_utility::func_10619();
+    var_04 = var_03 scripts\sp\utility::func_10619();
     if(isdefined(var_04)) {
       var_01--;
     }
@@ -1310,9 +1310,9 @@ func_353D() {
   scripts\engine\utility::flag_wait("open_room2_doors");
   level.player setsoundsubmix("europa_c12_intro");
   wait(1);
-  thread scripts\sp\_utility::func_1034D("europa_plr_ohshit");
+  thread scripts\sp\utility::func_1034D("europa_plr_ohshit");
   wait(1);
-  level.var_EBBB scripts\sp\_utility::func_10346("europa_sip_c12");
+  level.var_EBBB scripts\sp\utility::func_10346("europa_sip_c12");
   while (level.player _meth_819F()) {
     wait(0.05);
   }
@@ -1326,7 +1326,7 @@ func_353D() {
 
   scripts\sp\maps\europa\europa_util::func_134B7("europa_sip_itsnotreadyyet");
   var_00 = ["europa_sip_fanoutwelldraw", "europa_sip_wellhavetosplit"];
-  level.var_EBBB thread scripts\sp\_utility::func_10346(scripts\engine\utility::random(var_00));
+  level.var_EBBB thread scripts\sp\utility::func_10346(scripts\engine\utility::random(var_00));
 }
 
 func_35E1() {
@@ -1350,7 +1350,7 @@ func_35E1() {
       var_03 = level.var_35E1.alias;
       var_04 = level.var_35E1.ent;
       level.var_35E1 = undefined;
-      var_04 scripts\sp\_utility::func_10346(var_03);
+      var_04 scripts\sp\utility::func_10346(var_03);
       continue;
     }
 
@@ -1385,7 +1385,7 @@ func_35F6(param_00) {
   }
 
   param_00.var_A87F = var_01;
-  scripts\sp\_utility::func_10346(var_01);
+  scripts\sp\utility::func_10346(var_01);
 }
 
 func_35A9() {
@@ -1476,7 +1476,7 @@ func_35F0() {
   level.var_3508 waittill("begin_rodeo");
   level notify("stop_c12_reactive_dialogue");
   wait(0.6);
-  scripts\sp\_utility::func_1034D("europa_plr_gotitfireinthehole");
+  scripts\sp\utility::func_1034D("europa_plr_gotitfireinthehole");
 }
 
 func_359A() {
@@ -1485,7 +1485,7 @@ func_359A() {
   thread start_self_destruct_timer(0);
   level notify("stop_c12_reactive_dialogue");
   wait(2);
-  level.var_EBBC scripts\sp\_utility::func_10346("europa_tee_lookouthesgonna");
+  level.var_EBBC scripts\sp\utility::func_10346("europa_tee_lookouthesgonna");
   thread func_363D();
 }
 
@@ -1493,7 +1493,7 @@ func_3536() {
   level.var_3508 waittill("death");
   thread start_self_destruct_timer(0);
   wait(2);
-  level.var_EBBC scripts\sp\_utility::func_10346("europa_tee_goodheatonthatcann");
+  level.var_EBBC scripts\sp\utility::func_10346("europa_tee_goodheatonthatcann");
   thread func_363D();
 }
 
@@ -1530,7 +1530,7 @@ func_3575() {
   var_00 = scripts\engine\utility::array_combine(var_00, getentarray("c12_left_cover_volume", "targetname"));
   foreach(var_02 in level.var_EBCA) {
     var_02.logstring = 0;
-    var_02 scripts\sp\_utility::func_4145();
+    var_02 scripts\sp\utility::func_4145();
     var_03 = sortbydistance(var_00, var_02.origin);
     for (var_04 = 0; var_04 < var_03.size; var_04++) {
       if(var_02 func_7398(var_03[var_04])) {
@@ -1797,7 +1797,7 @@ func_11B45(param_00) {
     }
 
     var_04 = scripts\engine\utility::getstruct(param_00.target, "targetname");
-    param_00 scripts\sp\_utility::script_delay();
+    param_00 scripts\sp\utility::script_delay();
     if(isdefined(param_00.var_EDA0)) {
       if(!scripts\engine\utility::flag(param_00.var_EDA0)) {
         func_11B51();
@@ -2174,7 +2174,7 @@ func_11B3B() {
     var_01 = getaiarray("bad_guys");
     var_02 = 1;
     foreach(var_04 in var_01) {
-      if(var_04 scripts\sp\_utility::func_58DA()) {
+      if(var_04 scripts\sp\utility::func_58DA()) {
         continue;
       }
 
@@ -2204,8 +2204,8 @@ func_11B3A() {
 
 func_21DB() {
   scripts\sp\maps\europa\europa_util::func_107C5();
-  scripts\sp\_utility::func_F5AF("armory_tram_end_startpoint", [level.var_EBBB, level.var_EBBC, level.player]);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "raise");
+  scripts\sp\utility::func_F5AF("armory_tram_end_startpoint", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
   scripts\engine\utility::flag_set("tram_move");
   scripts\engine\utility::delaythread(30.5, ::func_D287);
   thread func_2872(30.5);
@@ -2223,7 +2223,7 @@ func_D70D() {
   }
 
   scripts\engine\utility::flag_wait("c12_spawn");
-  scripts\sp\_utility::func_51E1("frantic");
+  scripts\sp\utility::func_51E1("frantic");
   thread func_6474();
 }
 
@@ -2366,22 +2366,22 @@ func_D287(param_00) {
   magicgrenademanual("frag", level.player.origin, (0, 0, 0), 0);
   wait(0.5);
   foreach(var_02 in level.var_EBCA) {
-    var_02 scripts\sp\_utility::func_1101B();
-    var_02 scripts\sp\_utility::func_54C6();
+    var_02 scripts\sp\utility::func_1101B();
+    var_02 scripts\sp\utility::func_54C6();
   }
 
   if(isalive(level.player)) {
-    if(scripts\sp\_utility::func_93A6()) {
+    if(scripts\sp\utility::func_93A6()) {
       level.player notify("headshot_death");
       level.player _meth_80A1();
     }
 
-    level.player scripts\sp\_utility::func_54C6();
+    level.player scripts\sp\utility::func_54C6();
   }
 }
 
 func_2AC3() {
-  var_00 = scripts\sp\_utility::func_22CD("final_stand", 1);
+  var_00 = scripts\sp\utility::func_22CD("final_stand", 1);
   thread func_138EF();
   thread func_CFA3(var_00);
   thread func_6C29(var_00);
@@ -2401,7 +2401,7 @@ func_2AC3() {
   level.player scripts\engine\utility::delaycall(2, ::playsound, "scn_europa_fspar_button");
   stopfxontag(scripts\engine\utility::getfx("fspar_light_green"), level.var_11B30.var_1021B, "tag_origin");
   var_04 = 3.2;
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     level.player thread scripts\sp\specialist_MAYBE::func_BE53();
     level.player thread scripts\sp\specialist_MAYBE::func_BE51();
   }
@@ -2465,17 +2465,17 @@ func_134D9() {
 }
 
 func_7463(param_00, param_01) {
-  thread scripts\sp\_art::func_583F(0, 1199, 2, 80000, 90000, 0, param_00);
+  thread scripts\sp\art::func_583F(0, 1199, 2, 80000, 90000, 0, param_00);
   level.player _meth_81DE(60, param_00);
   wait(param_00 + param_01);
-  scripts\sp\_art::func_583D(0.05);
+  scripts\sp\art::func_583D(0.05);
   level.player _meth_81DE(65, 0.05);
 }
 
 func_746F(param_00) {
   setslowmotion(1, 0.5, 0.1);
   wait(param_00 + 0.1);
-  scripts\sp\_utility::func_10322();
+  scripts\sp\utility::func_10322();
 }
 
 func_5530() {
@@ -2492,7 +2492,7 @@ func_FED5(param_00) {
 
 func_3D24(param_00) {
   level endon("stop_charge_shake");
-  level thread scripts\sp\_utility::func_C12D("stop_charge_shake", param_00);
+  level thread scripts\sp\utility::func_C12D("stop_charge_shake", param_00);
   var_01 = 1;
   level.player _meth_8244("steady_rumble");
   for (;;) {
@@ -2622,13 +2622,13 @@ func_E5DF() {
 }
 
 func_FFA7() {
-  return scripts\engine\utility::flag("player_asking_for_it") && scripts\sp\_utility::func_13D91(level.player.origin, level.player.angles, self.origin, cos(50));
+  return scripts\engine\utility::flag("player_asking_for_it") && scripts\sp\utility::func_13D91(level.player.origin, level.player.angles, self.origin, cos(50));
 }
 
 func_2AC2() {}
 
 func_6C29(param_00) {
-  scripts\engine\utility::array_thread(param_00, ::scripts\sp\_utility::func_51E1, "casual");
+  scripts\engine\utility::array_thread(param_00, ::scripts\sp\utility::func_51E1, "casual");
   scripts\engine\utility::flag_wait("open_room3_doors");
   wait(2);
   scripts\engine\utility::flag_set("final_stand_moveup");
@@ -2638,7 +2638,7 @@ func_137E6(param_00) {
   param_00 endon("death");
   for (;;) {
     if(scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), param_00.origin, cos(40))) {
-      if(scripts\sp\_detonategrenades::func_385C(level.player geteye(), param_00)) {
+      if(scripts\sp\detonategrenades::func_385C(level.player geteye(), param_00)) {
         return;
       }
     }
@@ -2650,7 +2650,7 @@ func_137E6(param_00) {
 func_D294() {
   level.player endon("death");
   var_00 = getent("tram_interact", "script_noteworthy");
-  var_01 = scripts\sp\_utility::func_10639("player_rig", var_00.origin + (0, 0, 500));
+  var_01 = scripts\sp\utility::func_10639("player_rig", var_00.origin + (0, 0, 500));
   var_01 hide();
   var_00 scripts\sp\anim::func_1EC3(var_01, "fspar_fire");
   var_02 = spawnstruct();
@@ -2724,7 +2724,7 @@ func_3576(param_00) {
       playfx(scripts\engine\utility::getfx("c12_fspar_explosion"), var_02.origin + (0, 0, 20));
     }
 
-    thread scripts\sp\_detonategrenades::func_DBDB(var_02.origin + (0, 0, 50), 0.09, 950, 2000, undefined, undefined, undefined, 1);
+    thread scripts\sp\detonategrenades::func_DBDB(var_02.origin + (0, 0, 50), 0.09, 950, 2000, undefined, undefined, undefined, 1);
     var_02 thread lib_0C46::func_35FD();
     var_02 lib_0A05::func_3555("left", 0);
     var_02 lib_0A05::func_3555("right", 0);
@@ -2788,9 +2788,9 @@ func_21DA() {
     scripts\engine\utility::flag_wait("decompress_blackout");
     setomnvar("ui_countdown_timer", 0);
     stop_far_cars();
-    scripts\sp\_utility::func_28D7();
+    scripts\sp\utility::func_28D7();
     scripts\engine\utility::flag_set("player_decompressed");
-    var_00 = scripts\sp\_hud_util::func_7B4F();
+    var_00 = scripts\sp\hud_util::func_7B4F();
     var_00.alpha = 1;
     wait(0.05);
     clearallcorpses();
@@ -2817,9 +2817,9 @@ func_21DA() {
   scripts\engine\utility::flag_wait("decompress_blackout");
   setomnvar("ui_countdown_timer", 0);
   stop_far_cars();
-  scripts\sp\_utility::func_28D7();
+  scripts\sp\utility::func_28D7();
   scripts\engine\utility::flag_set("player_decompressed");
-  var_00 = scripts\sp\_hud_util::func_7B4F();
+  var_00 = scripts\sp\hud_util::func_7B4F();
   var_00.alpha = 1;
   wait(0.05);
   clearallcorpses();
@@ -2832,9 +2832,9 @@ func_111B4() {
   setsaveddvar("r_mbenable", 1);
   setsaveddvar("r_mbRadialOverridePosition", var_01);
   setsaveddvar("r_mbRadialOverridePositionActive", 1);
-  thread scripts\sp\_utility::func_AB9A("r_mbRadialOverrideRadius", 0.314878, 1);
-  thread scripts\sp\_utility::func_AB9A("r_mbRadialoverridechromaticAberration", 0.25, 2);
-  thread scripts\sp\_utility::func_AB9A("r_mbradialoverridestrength", 0.05, 1);
+  thread scripts\sp\utility::func_AB9A("r_mbRadialOverrideRadius", 0.314878, 1);
+  thread scripts\sp\utility::func_AB9A("r_mbRadialoverridechromaticAberration", 0.25, 2);
+  thread scripts\sp\utility::func_AB9A("r_mbradialoverridestrength", 0.05, 1);
   scripts\engine\utility::flag_wait("player_holding_on");
   setsaveddvar("r_mbRadialOverridePosition", level.var_11B30.var_113F2.origin);
   earthquake(0.3, 1, level.player.origin, 300);
@@ -2882,7 +2882,7 @@ func_224F() {
 func_A9E5() {
   scripts\engine\utility::flag_wait("open_room3_doors");
   thread func_537D("lastroom_rail_explosion");
-  scripts\sp\_utility::func_22CD("lastroom_fleer", 1);
+  scripts\sp\utility::func_22CD("lastroom_fleer", 1);
 }
 
 func_134DA() {
@@ -2891,44 +2891,44 @@ func_134DA() {
   wait(2.5);
   var_00 = ["europa_rpr_scar1weretaking", "europa_plr_reaperthisis11radioch", "europa_sip_nocomms"];
   scripts\sp\maps\europa\europa_util::func_48BD(var_00);
-  level.var_EBBC scripts\sp\_utility::func_10346("europa_tee_thisplaceisgonnabl");
+  level.var_EBBC scripts\sp\utility::func_10346("europa_tee_thisplaceisgonnabl");
   wait(0.5);
-  level.var_EBBB scripts\sp\_utility::func_10346("europa_sip_keeppushing");
+  level.var_EBBB scripts\sp\utility::func_10346("europa_sip_keeppushing");
   scripts\engine\utility::flag_wait("fspar_done_firing");
   wait(0.5);
   level.var_EBBC scripts\engine\utility::delaythread(0.6, ::scripts\sp\maps\europa\europa_util::func_134B7, "europa_tee_holdon");
-  level.var_EBBB scripts\sp\_utility::func_10346("europa_sip_itsdecompressing");
+  level.var_EBBB scripts\sp\utility::func_10346("europa_sip_itsdecompressing");
   wait(0.6);
-  scripts\sp\_utility::func_1034D("europa_plr_holdon");
+  scripts\sp\utility::func_1034D("europa_plr_holdon");
 }
 
 func_A9E4() {
-  level.var_EBBC scripts\sp\_utility::func_10346("europa_sip_wegottagetoffthexn");
+  level.var_EBBC scripts\sp\utility::func_10346("europa_sip_wegottagetoffthexn");
   wait(randomfloatrange(1, 2));
-  scripts\sp\_utility::func_10350("europa_rpr_11uhthiscantberight");
-  scripts\sp\_utility::func_1034D("europa_plr_reapersayagainyouare");
+  scripts\sp\utility::func_10350("europa_rpr_11uhthiscantberight");
+  scripts\sp\utility::func_1034D("europa_plr_reapersayagainyouare");
   wait(1);
-  scripts\sp\_utility::func_1034D("europa_plr_reaperthisis11radioch");
-  level.var_EBBC scripts\sp\_utility::func_10346("europa_tee_nocomms");
+  scripts\sp\utility::func_1034D("europa_plr_reaperthisis11radioch");
+  level.var_EBBC scripts\sp\utility::func_10346("europa_tee_nocomms");
   wait(2);
   scripts\engine\utility::flag_wait("tram_room2_enter");
   func_2873(2, 5, 1000, 2000);
   scripts\engine\utility::flag_wait("open_room3_doors");
-  level.var_EBBC scripts\sp\_utility::func_10346("europa_tee_thisplaceisgonnabl");
+  level.var_EBBC scripts\sp\utility::func_10346("europa_tee_thisplaceisgonnabl");
   wait(3);
   wait(1);
-  level.var_EBBB scripts\sp\_utility::func_10346("europa_sip_keeppushing");
+  level.var_EBBB scripts\sp\utility::func_10346("europa_sip_keeppushing");
 }
 
 func_4F95() {
   wait(1);
-  level.var_EBBB scripts\sp\_utility::func_10346("europa_sip_itsdecompressing");
+  level.var_EBBB scripts\sp\utility::func_10346("europa_sip_itsdecompressing");
   wait(1);
-  scripts\sp\_utility::func_1034D("europa_plr_holdon");
+  scripts\sp\utility::func_1034D("europa_plr_holdon");
 }
 
 func_A9E0() {
-  scripts\sp\_utility::func_22CD("lastroom_fleer_bridge", 1);
+  scripts\sp\utility::func_22CD("lastroom_fleer_bridge", 1);
   func_537D("lastroom_destruction_start");
   func_A9E3();
   var_00 = scripts\engine\utility::getstructarray("lastroom_destruction_end", "targetname");
@@ -2991,16 +2991,16 @@ func_4FAC() {
   var_02 = vectornormalize(var_01.origin - var_00.origin);
   var_03 = spawn("script_origin", var_00.origin);
   var_03.angles = var_00.angles;
-  scripts\sp\_utility::func_16AE(var_03, "decompress");
+  scripts\sp\utility::func_16AE(var_03, "decompress");
   var_04 = 1100;
   var_05 = distance(var_01.origin, var_03.origin);
   var_06 = var_05 / var_04;
   var_03 moveto(var_01.origin, var_06);
   var_07 = [level.player, level.var_EBBB, level.var_EBBC];
   var_07 = scripts\engine\utility::array_combine(var_07, getaiarray("axis"));
-  var_07 = scripts\sp\_utility::func_22B9(var_07);
+  var_07 = scripts\sp\utility::func_22B9(var_07);
   for (;;) {
-    var_07 = scripts\sp\_utility::func_22B9(var_07);
+    var_07 = scripts\sp\utility::func_22B9(var_07);
     foreach(var_09 in var_07) {
       if(isdefined(var_09.var_4FAE)) {
         continue;
@@ -3061,7 +3061,7 @@ func_4F98() {
 }
 
 func_4F8E(param_00) {
-  if(!isalive(param_00) || param_00 scripts\sp\_utility::func_58DA()) {
+  if(!isalive(param_00) || param_00 scripts\sp\utility::func_58DA()) {
     return;
   }
 
@@ -3118,7 +3118,7 @@ func_AB59() {
 
 func_4F9E() {
   scripts\engine\utility::flag_set("start_decompress_player");
-  level.player thread scripts\sp\_utility::func_DC45("lower");
+  level.player thread scripts\sp\utility::func_DC45("lower");
   thread func_4FB1();
   level.player allowstand(1);
   level.player allowcrouch(0);
@@ -3139,7 +3139,7 @@ func_4FB1() {
     foreach(var_02 in var_00) {
       wait(randomfloatrange(1, 3));
       var_02.var_C1 = 1;
-      var_03 = var_02 scripts\sp\_utility::func_10619(1);
+      var_03 = var_02 scripts\sp\utility::func_10619(1);
       if(!isdefined(var_03)) {
         continue;
       }
@@ -3171,7 +3171,7 @@ func_4FA4() {
 
 func_4FAB() {
   scripts\sp\maps\europa\europa_util::func_107C5();
-  scripts\sp\_utility::func_F5AF("armory_tram_end_startpoint", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\sp\utility::func_F5AF("armory_tram_end_startpoint", [level.var_EBBB, level.var_EBBC, level.player]);
   func_95B6("armory_doors");
   level.var_220A = 1;
   scripts\engine\utility::flag_set("open_room2_doors");
@@ -3182,7 +3182,7 @@ func_4FAB() {
 
 func_4FA3() {
   var_00 = scripts\engine\utility::getstructarray("decompress_door_struct", "targetname");
-  thread scripts\sp\_utility::func_1034D("europa_plr_scramblingtofindso");
+  thread scripts\sp\utility::func_1034D("europa_plr_scramblingtofindso");
   var_01 = undefined;
   func_95A3();
   var_02 = 1;
@@ -3431,7 +3431,7 @@ func_4F9F() {
   level.player.var_E505 = scripts\sp\player_rig::get_player_score(1);
   level.player.var_E505 hide();
   level.player.var_E505.angles = level.player.angles;
-  var_02 = level.player.var_E505 scripts\sp\_utility::func_7DC1(var_01);
+  var_02 = level.player.var_E505 scripts\sp\utility::func_7DC1(var_01);
   var_03 = scripts\engine\utility::getstruct("decompress_anim", "targetname");
   var_04 = getstartorigin(var_03.origin, var_03.angles, var_02);
   var_05 = getstartangles(var_03.origin, var_03.angles, var_02);
@@ -3451,11 +3451,11 @@ func_4F9F() {
   var_05 = (0, var_05[1], var_05[2]);
   level.player.var_E505 rotateto(var_05, var_08 * 0.5, var_08 * 0.25);
   wait(var_08 - 0.2);
-  var_0A = scripts\sp\_utility::func_10639("player_rig");
+  var_0A = scripts\sp\utility::func_10639("player_rig");
   var_0A hide();
   level.player.var_E505 notify("stop_decompress_loop");
   scripts\engine\utility::flag_set("player_holding_on");
-  level.var_EBBB scripts\sp\_utility::anim_stopanimscripted();
+  level.var_EBBB scripts\sp\utility::anim_stopanimscripted();
   var_0B = [var_0A, level.var_EBBB];
   level.player.var_E505 delete();
   thread func_4FA0(var_0A);
@@ -3531,7 +3531,7 @@ func_4FA9() {
 func_4FA1() {
   var_00 = level.player.var_E505;
   var_00 endon("stop_decompress_loop");
-  var_01 = var_00 scripts\sp\_utility::func_7DC1("decompress_loop");
+  var_01 = var_00 scripts\sp\utility::func_7DC1("decompress_loop");
   var_02 = "decompress_loop";
   for (;;) {
     var_00 _meth_82E7(var_02, var_01, 1, 0.2, 1);
@@ -3633,7 +3633,7 @@ func_6F55(param_00) {
 
   var_01 = getentarray(param_00.target, "targetname");
   var_02 = param_00.script_count;
-  for (var_03 = []; var_01.size > 0; var_03 = scripts\sp\_utility::array_removedeadvehicles(var_03)) {
+  for (var_03 = []; var_01.size > 0; var_03 = scripts\sp\utility::array_removedeadvehicles(var_03)) {
     if(var_03.size < var_02) {
       foreach(var_05 in var_01) {
         if(!isdefined(var_05)) {
@@ -3641,7 +3641,7 @@ func_6F55(param_00) {
         }
 
         var_05.var_C1 = 1;
-        var_06 = var_05 scripts\sp\_utility::func_10619();
+        var_06 = var_05 scripts\sp\utility::func_10619();
         if(isdefined(var_06)) {
           var_03[var_03.size] = var_06;
         }
@@ -3695,7 +3695,7 @@ func_59F8(param_00) {
     setumbraportalstate(param_00[0].var_EE88, 1);
   }
 
-  var_01 = scripts\sp\_utility::func_7853(param_00);
+  var_01 = scripts\sp\utility::func_7853(param_00);
   playworldsound("scn_europa_fspar_door_open", var_01);
   foreach(var_04, var_03 in param_00) {
     var_03 thread func_59B8(var_04);
@@ -3884,7 +3884,7 @@ func_537C(param_00) {
 
   var_01 = 3000;
   var_02 = 3;
-  param_00 scripts\sp\_utility::script_delay();
+  param_00 scripts\sp\utility::script_delay();
   if(isdefined(param_00.script_fxid)) {
     var_03 = anglestoforward(param_00.angles);
     playfx(scripts\engine\utility::getfx(param_00.script_fxid), param_00.origin, var_03);
@@ -4034,7 +4034,7 @@ func_75D8() {
 func_7572() {
   scripts\engine\utility::flag_wait("open_room3_doors");
   func_16D4("decomp_room");
-  scripts\sp\_utility::func_10FEC("button_room_stage1");
+  scripts\sp\utility::func_10FEC("button_room_stage1");
 }
 
 func_A6EF() {
@@ -4162,7 +4162,7 @@ func_16D4(param_00) {
 
 stop_far_cars() {
   foreach(var_01 in level.var_69B7) {
-    scripts\sp\_utility::func_10FEC(var_01);
+    scripts\sp\utility::func_10FEC(var_01);
   }
 
   level.var_69B7 = undefined;

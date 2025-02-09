@@ -222,7 +222,7 @@ func_EB60() {
   }
 
   logstring("found intel item " + self.var_C1D5);
-  scripts\sp\_endmission::func_12F24();
+  scripts\sp\endmission::func_12F24();
 }
 
 setplayerangles() {
@@ -242,7 +242,7 @@ func_9952(param_00) {
       continue;
     }
 
-    var_06 = var_05 scripts\sp\_hud_util::func_4999("objective", 1.5);
+    var_06 = var_05 scripts\sp\hud_util::func_4999("objective", 1.5);
     var_06.objective_delete = (0.7, 0.7, 0.3);
     var_06.objective_current_nomessage = 1;
     var_06 func_F99F();
@@ -259,7 +259,7 @@ func_9952(param_00) {
     }
 
     if(var_07 == 18) {
-      var_05 scripts\sp\_utility::func_D0A1("EXT_1");
+      var_05 scripts\sp\utility::func_D0A1("EXT_1");
     }
 
     var_06 scripts\engine\utility::delaycall(var_03, ::destroy);

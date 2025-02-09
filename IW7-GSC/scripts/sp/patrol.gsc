@@ -31,7 +31,7 @@ func_C97C(param_00) {
   self.var_EE7E = 1;
   self.var_C3E8 = self.var_BC;
   self.var_BC = "no_cover";
-  scripts\sp\_utility::func_5514();
+  scripts\sp\utility::func_5514();
   if(isdefined(self.var_EE2C)) {
     self.var_C3FA = self.moveplaybackrate;
     self.moveplaybackrate = self.var_EE2C;
@@ -40,14 +40,14 @@ func_C97C(param_00) {
   func_AD3A();
   func_F4C7();
   var_01["ent"][1] = ::func_7CD9;
-  var_01["ent"][0] = ::scripts\sp\_utility::func_7A8F;
+  var_01["ent"][0] = ::scripts\sp\utility::func_7A8F;
   var_01["node"][1] = ::func_7CDB;
   var_01["node"][0] = ::func_7A92;
   var_01["struct"][1] = ::func_7CE0;
-  var_01["struct"][0] = ::scripts\sp\_utility::func_7A97;
-  var_02["ent"] = ::scripts\sp\_utility::func_F3D3;
-  var_02["node"] = ::scripts\sp\_utility::func_F3D9;
-  var_02["struct"] = ::scripts\sp\_utility::func_F3D3;
+  var_01["struct"][0] = ::scripts\sp\utility::func_7A97;
+  var_02["ent"] = ::scripts\sp\utility::func_F3D3;
+  var_02["node"] = ::scripts\sp\utility::func_F3D9;
+  var_02["struct"] = ::scripts\sp\utility::func_F3D3;
   if(isdefined(param_00)) {
     self.target = param_00;
   }
@@ -69,9 +69,9 @@ func_C97C(param_00) {
     }
   } else {
     var_03 = 0;
-    var_04 = scripts\sp\_utility::func_7A8F();
+    var_04 = scripts\sp\utility::func_7A8F();
     var_05 = func_7A92();
-    var_06 = scripts\sp\_utility::func_7A97();
+    var_06 = scripts\sp\utility::func_7A97();
     if(var_06.size) {
       var_07 = scripts\engine\utility::random(var_06);
       var_08 = "ent";
@@ -118,7 +118,7 @@ func_C97C(param_00) {
     }
 
     if(isdefined(var_07.var_ED80)) {
-      scripts\sp\_utility::func_65E1(var_07.var_ED80);
+      scripts\sp\utility::func_65E1(var_07.var_ED80);
     }
 
     if(isdefined(var_07.var_ED9B)) {
@@ -182,7 +182,7 @@ func_C97C(param_00) {
         scripts\engine\utility::flag_wait(var_07.var_EDA0);
       }
 
-      var_07 scripts\sp\_utility::script_delay();
+      var_07 scripts\sp\utility::script_delay();
       if(isdefined(var_0D)) {
         if(isdefined(var_07.var_ED88)) {
           self orientmode("face angle", var_07.angles[1]);
@@ -352,11 +352,11 @@ func_F4C7() {
 
   if(isdefined(self.script_animation)) {
     if(isdefined(level.var_EC85["generic"]["patrol_idle_" + self.script_animation])) {
-      scripts\sp\_utility::func_F3C8("patrol_idle_" + self.script_animation);
+      scripts\sp\utility::func_F3C8("patrol_idle_" + self.script_animation);
     }
   }
 
-  scripts\sp\_utility::func_F3CC(var_00, var_01);
+  scripts\sp\utility::func_F3CC(var_00, var_01);
 }
 
 func_1374A() {
@@ -385,16 +385,16 @@ func_13759() {
 func_13749() {
   self endon("death");
   func_1374A();
-  var_00 = scripts\sp\_utility::func_65DF("_stealth_enabled") && scripts\sp\_utility::func_65DB("_stealth_enabled");
+  var_00 = scripts\sp\utility::func_65DF("_stealth_enabled") && scripts\sp\utility::func_65DB("_stealth_enabled");
   self.var_EE7E = 0;
   if(isdefined(self.var_C3E8)) {
     self.var_BC = self.var_C3E8;
   }
 
   if(!var_00) {
-    scripts\sp\_utility::func_4154();
+    scripts\sp\utility::func_4154();
     self.var_BC = self.var_C3E8;
-    scripts\sp\_utility::func_417A();
+    scripts\sp\utility::func_417A();
     self allowedstances("stand", "crouch", "prone");
     self.disablearrivals = 0;
     self.var_55ED = 0;
@@ -503,7 +503,7 @@ func_AD3A() {
 }
 
 func_CA83() {
-  scripts\sp\_utility::func_106ED(self);
+  scripts\sp\utility::func_106ED(self);
   if(isdefined(self.isnodeoccupied)) {
     return;
   }
@@ -656,7 +656,7 @@ func_CA86(param_00) {
   self endon("end_patrol");
   self.var_C98C endon("death");
   if(isdefined(self.var_C98C.script_noteworthy) && self.var_C98C.script_noteworthy == "cqb_patrol") {
-    scripts\sp\_utility::func_F35F();
+    scripts\sp\utility::func_F35F();
     return;
   }
 
@@ -664,7 +664,7 @@ func_CA86(param_00) {
     param_00 = 200;
   }
 
-  scripts\sp\_utility::func_F35F();
+  scripts\sp\utility::func_F35F();
   for (;;) {
     wait(0.1);
     var_01 = self.var_C986;
@@ -675,7 +675,7 @@ func_CA86(param_00) {
       }
 
       scripts\sp\anim::func_1EC8(self, "gravity", "patrol_dog_start");
-      scripts\sp\_utility::func_417A();
+      scripts\sp\utility::func_417A();
       self.var_EE56 = 1;
       continue;
     }
@@ -683,7 +683,7 @@ func_CA86(param_00) {
     if(self.a.movement != "walk") {
       self notify("stopped_while_patrolling");
       scripts\sp\anim::func_1EC8(self, "gravity", "patrol_dog_stop");
-      scripts\sp\_utility::func_F35F();
+      scripts\sp\utility::func_F35F();
     }
   }
 }

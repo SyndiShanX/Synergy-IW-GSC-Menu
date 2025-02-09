@@ -134,14 +134,14 @@ func_194A(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     param_02 = lib_0EFB::func_7D7A(param_02);
     if(isdefined(param_05)) {
       self thread[[param_01]](param_02, param_05);
-      scripts\engine\utility::delaythread(param_05, ::scripts\sp\_utility::func_77B9, 0.7);
+      scripts\engine\utility::delaythread(param_05, ::scripts\sp\utility::func_77B9, 0.7);
     } else {
       self thread[[param_01]](param_02);
     }
   }
 
   self waittill("gesture_dialog_finished");
-  scripts\sp\_utility::func_77B9(param_04);
+  scripts\sp\utility::func_77B9(param_04);
 }
 
 func_1961(param_00, param_01, param_02, param_03) {
@@ -157,7 +157,7 @@ func_1961(param_00, param_01, param_02, param_03) {
 
 func_1949(param_00) {
   self endon("death");
-  scripts\sp\_utility::func_10347(param_00);
+  scripts\sp\utility::func_10347(param_00);
   self notify("gesture_dialog_finished");
 }
 
@@ -187,6 +187,6 @@ func_195C(param_00, param_01, param_02, param_03, param_04) {
 
 func_10348(param_00, param_01) {
   if(!scripts\engine\utility::flag(param_01)) {
-    scripts\sp\_utility::func_10347(param_00);
+    scripts\sp\utility::func_10347(param_00);
   }
 }

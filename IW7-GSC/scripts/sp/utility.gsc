@@ -175,7 +175,7 @@ func_65E6(param_00, param_01) {
       break;
     }
 
-    scripts\sp\_utility_code::func_65FA(param_00, param_01);
+    scripts\sp\utility_code::func_65FA(param_00, param_01);
   }
 }
 
@@ -331,7 +331,7 @@ func_6E49(param_00, param_01, param_02) {
     param_02 = 0;
   }
 
-  param_01 thread scripts\sp\_utility_code::func_1287(param_00, param_02);
+  param_01 thread scripts\sp\utility_code::func_1287(param_00, param_02);
   return param_01;
 }
 
@@ -342,7 +342,7 @@ func_6E4A(param_00, param_01, param_02) {
   }
 
   for (var_03 = 0; var_03 < param_01.size; var_03++) {
-    param_01[var_03] thread scripts\sp\_utility_code::func_1287(param_00, 0);
+    param_01[var_03] thread scripts\sp\utility_code::func_1287(param_00, 0);
   }
 
   return param_01;
@@ -394,8 +394,8 @@ func_2678() {
 }
 
 func_2679() {
-  scripts\sp\_utility_code::func_2680();
-  thread scripts\sp\_utility_code::func_267F();
+  scripts\sp\utility_code::func_2680();
+  thread scripts\sp\utility_code::func_267F();
 }
 
 func_2669(param_00) {
@@ -412,7 +412,7 @@ func_266B(param_00, param_01, param_02, param_03) {
   }
 
   var_04 = "levelshots\autosave\autosave_" + level.script + level.var_4B18;
-  var_05 = level scripts\sp\_autosave::func_12891(level.var_4B18, "autosave", var_04, param_01, param_02, param_03);
+  var_05 = level scripts\sp\autosave::func_12891(level.var_4B18, "autosave", var_04, param_01, param_02, param_03);
   if(isdefined(var_05) && var_05) {
     level.var_4B18++;
   }
@@ -479,7 +479,7 @@ func_4295(param_00, param_01) {
 }
 
 func_7E33(param_00, param_01, param_02) {
-  return scripts\sp\_utility_code::func_4461(param_00, param_01, param_02, ::func_4295);
+  return scripts\sp\utility_code::func_4461(param_00, param_01, param_02, ::func_4295);
 }
 
 func_79B3(param_00, param_01) {
@@ -970,7 +970,7 @@ play_sound_on_tag(param_00, param_01, param_02, param_03, param_04) {
 
   var_05 = spawn("script_origin", self.origin);
   var_05 endon("death");
-  thread scripts\sp\_utility_code::func_517B(var_05, "sounddone");
+  thread scripts\sp\utility_code::func_517B(var_05, "sounddone");
   if(isdefined(param_01)) {
     var_05 linkto(self, param_01, (0, 0, 0), (0, 0, 0));
   } else {
@@ -981,7 +981,7 @@ play_sound_on_tag(param_00, param_01, param_02, param_03, param_04) {
 
   var_05 playsound(param_00, "sounddone");
   if(isdefined(param_02)) {
-    if(!isdefined(scripts\sp\_utility_code::func_1362A(var_05))) {
+    if(!isdefined(scripts\sp\utility_code::func_1362A(var_05))) {
       var_05 stopsounds();
     }
 
@@ -1008,7 +1008,7 @@ func_CE48(param_00, param_01, param_02, param_03, param_04, param_05) {
     param_01 = "dirt";
   }
 
-  thread scripts\sp\_utility_code::func_517B(var_06, "sounddone");
+  thread scripts\sp\utility_code::func_517B(var_06, "sounddone");
   if(isdefined(param_02)) {
     var_06 linkto(self, param_02, (0, 0, 0), (0, 0, 0));
   } else {
@@ -1019,7 +1019,7 @@ func_CE48(param_00, param_01, param_02, param_03, param_04, param_05) {
 
   var_06 playsurfacesound(param_00, param_01, "sounddone");
   if(isdefined(param_03)) {
-    if(!isdefined(scripts\sp\_utility_code::func_1362A(var_06))) {
+    if(!isdefined(scripts\sp\utility_code::func_1362A(var_06))) {
       var_06 stopsounds();
     }
 
@@ -1316,7 +1316,7 @@ func_13753(param_00, param_01, param_02) {
   var_0A = spawnstruct();
   if(isdefined(param_02)) {
     var_0A endon("thread_timed_out");
-    var_0A thread scripts\sp\_utility_code::func_13758(param_02);
+    var_0A thread scripts\sp\utility_code::func_13758(param_02);
   }
 
   var_0A.var_C1 = param_00.size;
@@ -1324,7 +1324,7 @@ func_13753(param_00, param_01, param_02) {
     var_0A.var_C1 = param_01;
   }
 
-  scripts\engine\utility::array_thread(param_00, ::scripts\sp\_utility_code::func_13757, var_0A);
+  scripts\engine\utility::array_thread(param_00, ::scripts\sp\utility_code::func_13757, var_0A);
   while (var_0A.var_C1 > 0) {
     var_0A waittill("waittill_dead guy died");
   }
@@ -1342,7 +1342,7 @@ func_13754(param_00, param_01, param_02) {
   var_07 = spawnstruct();
   if(isdefined(param_02)) {
     var_07 endon("thread_timed_out");
-    var_07 thread scripts\sp\_utility_code::func_13758(param_02);
+    var_07 thread scripts\sp\utility_code::func_13758(param_02);
   }
 
   var_07.var_C1 = param_00.size;
@@ -1350,7 +1350,7 @@ func_13754(param_00, param_01, param_02) {
     var_07.var_C1 = param_01;
   }
 
-  scripts\engine\utility::array_thread(param_00, ::scripts\sp\_utility_code::func_13756, var_07);
+  scripts\engine\utility::array_thread(param_00, ::scripts\sp\utility_code::func_13756, var_07);
   while (var_07.var_C1 > 0) {
     var_07 waittill("waittill_dead_guy_dead_or_dying");
   }
@@ -1732,7 +1732,7 @@ func_28D7(param_00) {
       continue;
     }
 
-    var_05 scripts\sp\_utility_code::func_1368E();
+    var_05 scripts\sp\utility_code::func_1368E();
     anim.var_29B7 = 0;
   }
 
@@ -1750,7 +1750,7 @@ func_28D7(param_00) {
 }
 
 func_28D8(param_00) {
-  thread scripts\sp\_utility_code::func_28D9(param_00);
+  thread scripts\sp\utility_code::func_28D9(param_00);
 }
 
 func_F2DA(param_00) {
@@ -2190,12 +2190,12 @@ func_11164(param_00) {
 }
 
 func_11167(param_00, param_01) {
-  param_00 scripts\sp\_utility_code::func_11166(param_00.var_2274[param_00.lastindex - 1], param_01);
+  param_00 scripts\sp\utility_code::func_11166(param_00.var_2274[param_00.lastindex - 1], param_01);
 }
 
 func_11165(param_00, param_01) {
   for (var_02 = 0; var_02 < param_01; var_02++) {
-    param_00 scripts\sp\_utility_code::func_11166(param_00.var_2274[var_02], param_00.var_2274[randomint(param_00.lastindex)]);
+    param_00 scripts\sp\utility_code::func_11166(param_00.var_2274[var_02], param_00.var_2274[randomint(param_00.lastindex)]);
   }
 }
 
@@ -2239,7 +2239,7 @@ func_B8D1() {
   if(func_93AB()) {
     level.player _meth_8591(1);
     updategamerprofile();
-    scripts\sp\_endmission::func_41ED();
+    scripts\sp\endmission::func_41ED();
   }
 
   level.var_B8D0 = 1;
@@ -2354,8 +2354,8 @@ func_54F7() {
   }
 
   self.var_C3BE = self.var_EDAD;
-  level.var_22E0[scripts\sp\_colors::func_7CE4()][self.var_EDAD] = scripts\engine\utility::array_remove(level.var_22E0[scripts\sp\_colors::func_7CE4()][self.var_EDAD], self);
-  scripts\sp\_colors::func_AB3A();
+  level.var_22E0[scripts\sp\colors::func_7CE4()][self.var_EDAD] = scripts\engine\utility::array_remove(level.var_22E0[scripts\sp\colors::func_7CE4()][self.var_EDAD], self);
+  scripts\sp\colors::func_AB3A();
   self.var_EDAD = undefined;
   self.var_4BDF = undefined;
 }
@@ -2390,7 +2390,7 @@ func_F3B5(param_00) {
   self.var_ED34 = undefined;
   self.var_ED33 = undefined;
   self.var_C3BE = undefined;
-  var_02 = scripts\sp\_colors::func_7CE4();
+  var_02 = scripts\sp\colors::func_7CE4();
   if(isdefined(self.var_EDAD)) {
     level.var_22E0[var_02][self.var_EDAD] = scripts\engine\utility::array_remove(level.var_22E0[var_02][self.var_EDAD], self);
   }
@@ -2398,7 +2398,7 @@ func_F3B5(param_00) {
   self.var_EDAD = var_01;
   level.var_22E0[var_02][var_01] = func_22B9(level.var_22E0[var_02][var_01]);
   level.var_22E0[var_02][self.var_EDAD] = scripts\engine\utility::array_add(level.var_22E0[var_02][self.var_EDAD], self);
-  thread scripts\sp\_utility_code::func_BF01(var_01);
+  thread scripts\sp\utility_code::func_BF01(var_01);
 }
 
 func_F3B7(param_00) {
@@ -2517,7 +2517,7 @@ func_9326(param_00) {
 }
 
 func_131CC() {
-  scripts\sp\_vehicle_code::func_13219();
+  scripts\sp\vehicle_code::func_13219();
 }
 
 func_13221() {
@@ -2525,15 +2525,15 @@ func_13221() {
 }
 
 func_131FF(param_00) {
-  scripts\sp\_vehicle_code::func_13201(param_00);
+  scripts\sp\vehicle_code::func_13201(param_00);
 }
 
 func_13206(param_00) {
-  scripts\sp\_vehicle_code::func_13207(param_00);
+  scripts\sp\vehicle_code::func_13207(param_00);
 }
 
 func_131D5(param_00, param_01) {
-  scripts\sp\_vehicle::func_1321A(param_00, param_01);
+  scripts\sp\vehicle::func_1321A(param_00, param_01);
 }
 
 func_864C(param_00, param_01) {
@@ -2560,7 +2560,7 @@ maymovetopoint(param_00, param_01) {
 }
 
 melee(param_00, param_01) {
-  return scripts\sp\_vehicle_code::func_12B8(param_00, param_01);
+  return scripts\sp\vehicle_code::func_12B8(param_00, param_01);
 }
 
 func_1749(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
@@ -2680,18 +2680,18 @@ func_DBF4(param_00) {
 }
 
 func_10350(param_00, param_01) {
-  scripts\sp\_utility_code::func_1778(param_00);
+  scripts\sp\utility_code::func_1778(param_00);
   func_DBEF(param_00, param_01);
 }
 
 func_10352(param_00) {
-  scripts\sp\_utility_code::func_1778(param_00);
+  scripts\sp\utility_code::func_1778(param_00);
   func_DBF5();
   func_DBF1(param_00);
 }
 
 func_10353(param_00) {
-  scripts\sp\_utility_code::func_1778(param_00);
+  scripts\sp\utility_code::func_1778(param_00);
   func_DBF2(param_00);
 }
 
@@ -2736,7 +2736,7 @@ func_1369(param_00, param_01, param_02, param_03, param_04) {
     wait(param_01);
   }
 
-  if(!isdefined(scripts\sp\_utility_code::func_1362A(var_05, level.player))) {
+  if(!isdefined(scripts\sp\utility_code::func_1362A(var_05, level.player))) {
     var_05 stopsounds();
   }
 
@@ -2790,27 +2790,27 @@ func_D01F(param_00) {
 }
 
 func_1034D(param_00, param_01) {
-  scripts\sp\_utility_code::func_1773(param_00);
+  scripts\sp\utility_code::func_1773(param_00);
   func_D01B(param_00, param_01);
 }
 
 func_1034F(param_00) {
-  scripts\sp\_utility_code::func_1773(param_00);
+  scripts\sp\utility_code::func_1773(param_00);
   func_D01F(param_00);
 }
 
 func_1034E(param_00, param_01, param_02, param_03, param_04, param_05) {
-  scripts\sp\_utility_code::func_1773(param_00);
+  scripts\sp\utility_code::func_1773(param_00);
   func_D01E(param_00, param_01, param_02, param_03, param_04, param_05);
 }
 
 func_10346(param_00) {
-  scripts\sp\_utility_code::func_175F(param_00);
+  scripts\sp\utility_code::func_175F(param_00);
   func_5480(param_00);
 }
 
 func_10347(param_00) {
-  scripts\sp\_utility_code::func_1760(param_00);
+  scripts\sp\utility_code::func_1760(param_00);
   func_7749(param_00);
 }
 
@@ -2972,11 +2972,11 @@ func_F5C3(param_00, param_01) {
 }
 
 func_E198() {
-  scripts\sp\_colors::func_43AA();
+  scripts\sp\colors::func_43AA();
 }
 
 func_107B3(param_00, param_01) {
-  scripts\sp\_colors::func_43AC(param_00, param_01);
+  scripts\sp\colors::func_43AC(param_00, param_01);
 }
 
 func_F55D(param_00, param_01) {
@@ -3188,11 +3188,11 @@ func_9933(param_00, param_01) {
 }
 
 func_13624(param_00) {
-  scripts\sp\_utility_code::func_13634(param_00, "script_noteworthy");
+  scripts\sp\utility_code::func_13634(param_00, "script_noteworthy");
 }
 
 func_13630(param_00) {
-  scripts\sp\_utility_code::func_13634(param_00, "targetname");
+  scripts\sp\utility_code::func_13634(param_00, "targetname");
 }
 
 func_135D5(param_00, param_01) {
@@ -3220,7 +3220,7 @@ func_135CA(param_00, param_01) {
   var_03 = scripts\engine\utility::array_combine(var_03, getentarray(param_00, "targetname"));
   var_03 = scripts\engine\utility::array_combine(var_03, getentarray(param_01, "targetname"));
   for (var_04 = 0; var_04 < var_03.size; var_04++) {
-    var_02 thread scripts\sp\_utility_code::func_65FB(var_03[var_04]);
+    var_02 thread scripts\sp\utility_code::func_65FB(var_03[var_04]);
   }
 
   var_02 waittill("done");
@@ -3876,12 +3876,12 @@ func_15F1(param_00, param_01, param_02) {
 func_15F2(param_00) {
   if(isdefined(self.var_ED33)) {
     self.activated_color_trigger = 1;
-    scripts\sp\_colors::func_159B("allies");
+    scripts\sp\colors::func_159B("allies");
   }
 
   if(isdefined(self.var_ED34)) {
     self.activated_color_trigger = 1;
-    scripts\sp\_colors::func_159B("axis");
+    scripts\sp\colors::func_159B("axis");
   }
 
   self notify("trigger", param_00);
@@ -3892,7 +3892,7 @@ func_F1DE() {
 }
 
 func_8B6C() {
-  if(scripts\sp\_colors::func_7CE4() == "axis") {
+  if(scripts\sp\colors::func_7CE4() == "axis") {
     return isdefined(self.var_ED34) || isdefined(self.var_EDAD);
   }
 
@@ -4013,8 +4013,8 @@ func_D1FD(param_00) {
 
 func_13763(param_00, param_01, param_02, param_03) {
   var_04 = spawnstruct();
-  thread scripts\sp\_utility_code::func_13764(var_04, param_00, param_01);
-  thread scripts\sp\_utility_code::func_13764(var_04, param_02, param_03);
+  thread scripts\sp\utility_code::func_13764(var_04, param_00, param_01);
+  thread scripts\sp\utility_code::func_13764(var_04, param_02, param_03);
   var_04 waittill("done");
 }
 
@@ -4029,11 +4029,11 @@ func_56BA(param_00, param_01, param_02, param_03) {
       return;
     }
 
-    var_04 thread scripts\sp\_utility_code::func_9021(level.var_12750[param_00], level.var_1274F[param_00], param_01, param_02, param_03);
+    var_04 thread scripts\sp\utility_code::func_9021(level.var_12750[param_00], level.var_1274F[param_00], param_01, param_02, param_03);
     return;
   }
 
-  var_04 thread scripts\sp\_utility_code::func_9021(level.var_12750[param_00]);
+  var_04 thread scripts\sp\utility_code::func_9021(level.var_12750[param_00]);
 }
 
 func_56BE(param_00, param_01, param_02, param_03, param_04) {
@@ -4043,7 +4043,7 @@ func_56BE(param_00, param_01, param_02, param_03, param_04) {
   }
 
   param_01 = scripts\engine\utility::ter_op(isdefined(param_01), param_01, 6);
-  var_05 thread scripts\sp\_utility_code::func_9021(level.var_12750[param_00], level.var_1274F[param_00], param_02, param_03, param_04, param_01);
+  var_05 thread scripts\sp\utility_code::func_9021(level.var_12750[param_00], level.var_1274F[param_00], param_02, param_03, param_04, param_01);
 }
 
 func_56BF(param_00, param_01, param_02, param_03, param_04, param_05) {
@@ -4053,7 +4053,7 @@ func_56BF(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 
   param_01 = scripts\engine\utility::ter_op(isdefined(param_01), param_01, 6);
-  var_06 thread scripts\sp\_utility_code::func_9021(level.var_12750[param_00], level.var_1274F[param_00], param_03, param_04, param_05, param_01, param_02);
+  var_06 thread scripts\sp\utility_code::func_9021(level.var_12750[param_00], level.var_1274F[param_00], param_03, param_04, param_05, param_01, param_02);
 }
 
 func_56BB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
@@ -4061,9 +4061,9 @@ func_56BB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_06 = 0;
   }
 
-  var_0A = scripts\sp\_utility_code::func_900D(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
+  var_0A = scripts\sp\utility_code::func_900D(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
   func_56BA(var_0A, param_07, param_08, param_09);
-  thread scripts\sp\_utility_code::func_900E(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
+  thread scripts\sp\utility_code::func_900E(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
 }
 
 func_56BC(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
@@ -4071,9 +4071,9 @@ func_56BC(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_07 = 0;
   }
 
-  var_0B = scripts\sp\_utility_code::func_900D(param_00, param_02, param_03, param_04, param_05, param_06, param_07);
+  var_0B = scripts\sp\utility_code::func_900D(param_00, param_02, param_03, param_04, param_05, param_06, param_07);
   thread func_56BE(var_0B, param_01, param_08, param_09, param_0A);
-  thread scripts\sp\_utility_code::func_900E(param_00, param_02, param_03, param_04, param_05, param_06, param_07);
+  thread scripts\sp\utility_code::func_900E(param_00, param_02, param_03, param_04, param_05, param_06, param_07);
 }
 
 func_56BD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
@@ -4081,9 +4081,9 @@ func_56BD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_08 = 0;
   }
 
-  var_0C = scripts\sp\_utility_code::func_900D(param_00, param_03, param_04, param_05, param_06, param_07, param_08);
+  var_0C = scripts\sp\utility_code::func_900D(param_00, param_03, param_04, param_05, param_06, param_07, param_08);
   thread func_56BF(var_0C, param_01, param_02, param_09, param_0A, param_0B);
-  thread scripts\sp\_utility_code::func_900E(param_00, param_03, param_04, param_05, param_06, param_07, param_08);
+  thread scripts\sp\utility_code::func_900E(param_00, param_03, param_04, param_05, param_06, param_07, param_08);
 }
 
 func_7ECF(param_00) {
@@ -4160,15 +4160,15 @@ func_10619(param_00, param_01) {
 
 func_74D7(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = spawnstruct();
-  var_06 thread scripts\sp\_utility_code::func_74DB(self, param_00, param_01, param_02, param_03, param_04, param_05);
-  return scripts\sp\_utility_code::func_74DF(var_06);
+  var_06 thread scripts\sp\utility_code::func_74DB(self, param_00, param_01, param_02, param_03, param_04, param_05);
+  return scripts\sp\utility_code::func_74DF(var_06);
 }
 
 func_74DD(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   var_07 = spawnstruct();
-  var_07 thread scripts\sp\_utility_code::func_74DB(self, param_01, param_02, param_03, param_04, param_05, param_06);
+  var_07 thread scripts\sp\utility_code::func_74DB(self, param_01, param_02, param_03, param_04, param_05, param_06);
   if(isdefined(var_07.var_74DA) || var_07 scripts\engine\utility::waittill_any_timeout_1(param_00, "function_stack_func_begun") != "timeout") {
-    return scripts\sp\_utility_code::func_74DF(var_07);
+    return scripts\sp\utility_code::func_74DF(var_07);
   }
 
   var_07 notify("death");
@@ -4433,7 +4433,7 @@ func_16C5(param_00, param_01, param_02) {
     }
   }
 
-  var_05 = scripts\sp\_hud_util::createfontstring("default", 1);
+  var_05 = scripts\sp\hud_util::createfontstring("default", 1);
   var_06 = level.var_545A.size;
   level.var_545A[var_06] = var_05;
   var_05.foreground = 1;
@@ -4523,11 +4523,11 @@ func_9BEE() {
 }
 
 func_266F(param_00) {
-  return scripts\sp\_autosave::func_1190(param_00);
+  return scripts\sp\autosave::func_1190(param_00);
 }
 
 func_2670() {
-  return scripts\sp\_autosave::func_1190(1);
+  return scripts\sp\autosave::func_1190(1);
 }
 
 func_F3C7(param_00) {
@@ -4629,7 +4629,7 @@ func_22D8(param_00, param_01, param_02) {
     var_06 = var_03[var_05];
     var_04[var_06] = spawnstruct();
     var_04[var_06].var_1187 = 1;
-    var_04[var_06] thread scripts\sp\_utility_code::func_22D9(param_00[var_06], param_01, param_02);
+    var_04[var_06] thread scripts\sp\utility_code::func_22D9(param_00[var_06], param_01, param_02);
   }
 
   for (var_05 = 0; var_05 < var_03.size; var_05++) {
@@ -5001,8 +5001,8 @@ func_57D5(param_00) {
   level.var_13711.var_E7E0 = [];
   level.var_13711.var_E80A = [];
   var_01.var_C1 = var_02.size;
-  var_01 scripts\engine\utility::array_levelthread(var_02, ::scripts\sp\_utility_code::func_13774, var_03);
-  var_01 thread scripts\sp\_utility_code::func_5767(var_07);
+  var_01 scripts\engine\utility::array_levelthread(var_02, ::scripts\sp\utility_code::func_13774, var_03);
+  var_01 thread scripts\sp\utility_code::func_5767(var_07);
   var_01 endon("any_funcs_aborted");
   for (;;) {
     if(var_01.var_C1 <= param_00) {
@@ -5013,9 +5013,9 @@ func_57D5(param_00) {
   }
 
   var_01 notify("all_funcs_ended");
-  scripts\engine\utility::array_levelthread(var_04, ::scripts\sp\_utility_code::func_68CE, []);
-  scripts\engine\utility::array_levelthread(var_05, ::scripts\sp\_utility_code::func_68CC);
-  scripts\engine\utility::array_levelthread(var_06, ::scripts\sp\_utility_code::func_68CD);
+  scripts\engine\utility::array_levelthread(var_04, ::scripts\sp\utility_code::func_68CE, []);
+  scripts\engine\utility::array_levelthread(var_05, ::scripts\sp\utility_code::func_68CC);
+  scripts\engine\utility::array_levelthread(var_06, ::scripts\sp\utility_code::func_68CD);
 }
 
 func_578A() {
@@ -5023,7 +5023,7 @@ func_578A() {
   var_01 = level.var_13711.var_E7F9;
   level.var_13711.var_E7F9 = [];
   foreach(var_03 in var_01) {
-    level scripts\sp\_utility_code::func_68CE(var_03, []);
+    level scripts\sp\utility_code::func_68CE(var_03, []);
   }
 
   var_00 notify("all_funcs_ended");
@@ -5110,7 +5110,7 @@ func_B317(param_00, param_01) {
 }
 
 func_BF95(param_00) {
-  scripts\sp\_endmission::func_1355(param_00);
+  scripts\sp\endmission::func_1355(param_00);
 }
 
 func_BF97(param_00, param_01, param_02) {
@@ -5119,26 +5119,26 @@ func_BF97(param_00, param_01, param_02) {
   }
 
   scripts\engine\utility::flag_clear("nextmission_preload_complete");
-  scripts\sp\_endmission::func_1356(param_00, param_01, param_02);
+  scripts\sp\endmission::func_1356(param_00, param_01, param_02);
   scripts\engine\utility::flag_set("nextmission_preload_complete");
 }
 
 func_BF98() {
-  scripts\sp\_endmission::func_1357();
+  scripts\sp\endmission::func_1357();
 }
 
 func_CE6D(param_00) {}
 
 func_7F6E(param_00) {
-  return scripts\sp\_endmission::func_12B0(param_00);
+  return scripts\sp\endmission::func_12B0(param_00);
 }
 
 func_7E2C(param_00) {
-  return scripts\sp\_endmission::func_12AF(param_00);
+  return scripts\sp\endmission::func_12AF(param_00);
 }
 
 func_7F70(param_00) {
-  return scripts\sp\_endmission::func_12B1(param_00);
+  return scripts\sp\endmission::func_12B1(param_00);
 }
 
 func_13705(param_00) {
@@ -5146,15 +5146,15 @@ func_13705(param_00) {
     param_00 = level.script;
   }
 
-  scripts\sp\_endmission::func_1455(param_00);
+  scripts\sp\endmission::func_1455(param_00);
 }
 
 func_13C3C(param_00) {
-  scripts\sp\_endmission::func_1463(param_00);
+  scripts\sp\endmission::func_1463(param_00);
 }
 
 func_13C60() {
-  scripts\sp\_endmission::func_1464();
+  scripts\sp\endmission::func_1464();
 }
 
 func_B263(param_00, param_01, param_02, param_03, param_04) {
@@ -5333,7 +5333,7 @@ func_10321() {
     return;
   }
 
-  scripts\sp\_audio::func_F5A0();
+  scripts\sp\audio::func_F5A0();
   setslowmotion(level.var_1031B.var_1098C, level.var_1031B.var_1098F, level.var_1031B.var_ABA1);
 }
 
@@ -5343,7 +5343,7 @@ func_10322() {
   }
 
   setslowmotion(level.var_1031B.var_1098F, level.var_1031B.var_1098C, level.var_1031B.var_ABA2);
-  scripts\sp\_audio::func_F59F();
+  scripts\sp\audio::func_F59F();
 }
 
 func_16CC(param_00, param_01, param_02, param_03) {
@@ -5367,16 +5367,16 @@ func_BDF2(param_00, param_01, param_02) {
 }
 
 func_BDDF(param_00, param_01, param_02, param_03, param_04) {
-  thread scripts\sp\_utility_code::func_BDE1(param_00, param_01, param_02, param_03, param_04);
+  thread scripts\sp\utility_code::func_BDE1(param_00, param_01, param_02, param_03, param_04);
 }
 
 func_BDE3(param_00, param_01, param_02, param_03, param_04) {
-  thread scripts\sp\_utility_code::func_BDE1(param_00, param_01, param_02, param_03, param_04, 1);
+  thread scripts\sp\utility_code::func_BDE1(param_00, param_01, param_02, param_03, param_04, 1);
 }
 
 func_BDE5(param_00, param_01, param_02, param_03) {
   if(isdefined(param_01) && param_01 > 0) {
-    thread scripts\sp\_utility_code::func_BDE6(param_00, param_01, param_02, param_03);
+    thread scripts\sp\utility_code::func_BDE6(param_00, param_01, param_02, param_03);
     return;
   }
 
@@ -5541,7 +5541,7 @@ func_12687() {
     var_00[var_00.size] = self.issplitscreen;
   }
 
-  scripts\engine\utility::array_levelthread(var_00, ::scripts\sp\_utility_code::func_12688);
+  scripts\engine\utility::array_levelthread(var_00, ::scripts\sp\utility_code::func_12688);
 }
 
 func_C621(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
@@ -5668,7 +5668,7 @@ func_61F1(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 
   self.var_5953 = param_05;
-  thread scripts\sp\_utility_code::func_5F8E(param_00, param_01, param_02, param_03, param_04);
+  thread scripts\sp\utility_code::func_5F8E(param_00, param_01, param_02, param_03, param_04);
 }
 
 func_5523() {
@@ -5842,14 +5842,14 @@ func_D2D1(param_00, param_01) {
     level.player.var_764D = var_02;
   }
 
-  var_03 = ::scripts\sp\_utility_code::func_764E;
-  var_04 = ::scripts\sp\_utility_code::func_764F;
+  var_03 = ::scripts\sp\utility_code::func_764E;
+  var_04 = ::scripts\sp\utility_code::func_764F;
   level.player thread func_D2CE(param_00, param_01, var_03, var_04, "player_speed_set");
 }
 
 func_CF97(param_00, param_01) {
-  var_02 = ::scripts\sp\_utility_code::func_7647;
-  var_03 = ::scripts\sp\_utility_code::func_7648;
+  var_02 = ::scripts\sp\utility_code::func_7647;
+  var_03 = ::scripts\sp\utility_code::func_7648;
   level.player thread func_D2CE(param_00, param_01, var_02, var_03, "player_bob_scale_set");
 }
 
@@ -5863,8 +5863,8 @@ func_2B76(param_00, param_01) {
     var_02.var_BCF5 = 1;
   }
 
-  var_03 = ::scripts\sp\_utility_code::func_BCF0;
-  var_04 = ::scripts\sp\_utility_code::func_BCF3;
+  var_03 = ::scripts\sp\utility_code::func_BCF0;
+  var_04 = ::scripts\sp\utility_code::func_BCF3;
   var_02 thread func_D2CE(param_00, param_01, var_03, var_04, "blend_movespeedscale");
 }
 
@@ -6051,7 +6051,7 @@ func_2A75(param_00, param_01, param_02) {
   var_03 scripts\engine\utility::allow_prone(0);
   var_03 scripts\engine\utility::allow_stances(0);
   var_03 scripts\engine\utility::allow_reload(0);
-  var_03 thread scripts\sp\_utility_code::func_5AAD(var_05, param_01, param_02);
+  var_03 thread scripts\sp\utility_code::func_5AAD(var_05, param_01, param_02);
   var_03 thread play_loop_sound_on_tag("foot_slide_plr_loop");
 }
 
@@ -6131,7 +6131,7 @@ func_2A76(param_00, param_01, param_02) {
   var_03 allowprone(0);
   var_03 allowcrouch(1);
   var_03 allowstand(0);
-  var_03 thread scripts\sp\_utility_code::func_5AAD(var_05, param_01, param_02);
+  var_03 thread scripts\sp\utility_code::func_5AAD(var_05, param_01, param_02);
 }
 
 func_638A() {
@@ -6152,11 +6152,11 @@ func_638A() {
 }
 
 func_10808() {
-  return scripts\sp\_vehicle::func_13237(self);
+  return scripts\sp\vehicle::func_13237(self);
 }
 
 func_7E9C(param_00) {
-  var_01 = scripts\sp\_trigger::func_7AA4();
+  var_01 = scripts\sp\trigger::func_7AA4();
   var_02 = [];
   foreach(var_06, var_04 in var_01) {
     if(!issubstr(var_06, "flag")) {
@@ -6167,7 +6167,7 @@ func_7E9C(param_00) {
     var_02 = scripts\engine\utility::array_combine(var_02, var_05);
   }
 
-  var_07 = scripts\sp\_trigger::func_7AA5();
+  var_07 = scripts\sp\trigger::func_7AA5();
   foreach(var_09, var_04 in var_07) {
     if(!issubstr(var_09, "flag")) {
       continue;
@@ -6186,7 +6186,7 @@ func_7E9C(param_00) {
 }
 
 func_7E99(param_00) {
-  var_01 = scripts\sp\_trigger::func_7AA4();
+  var_01 = scripts\sp\trigger::func_7AA4();
   var_02 = [];
   foreach(var_06, var_04 in var_01) {
     if(!issubstr(var_06, "flag")) {
@@ -6197,7 +6197,7 @@ func_7E99(param_00) {
     var_02 = scripts\engine\utility::array_combine(var_02, var_05);
   }
 
-  var_07 = scripts\sp\_trigger::func_7AA5();
+  var_07 = scripts\sp\trigger::func_7AA5();
   foreach(var_09, var_04 in var_07) {
     if(!issubstr(var_09, "flag")) {
       continue;
@@ -6245,7 +6245,7 @@ func_7C23(param_00) {
 
   var_02 = spawn("script_origin", var_01 geteye());
   var_02.var_99E5 = 1;
-  var_02 thread scripts\sp\_utility_code::func_12E1F(var_01, param_00);
+  var_02 thread scripts\sp\utility_code::func_12E1F(var_01, param_00);
   return var_02;
 }
 
@@ -6379,11 +6379,11 @@ func_8FE1(param_00, param_01, param_02) {
   var_03 = 0.5;
   level endon("clearing_hints");
   if(isdefined(level.var_9019)) {
-    level.var_9019 scripts\sp\_hud_util::destroyelem();
+    level.var_9019 scripts\sp\hud_util::destroyelem();
   }
 
-  level.var_9019 = scripts\sp\_hud_util::createfontstring("default", 1.5);
-  level.var_9019 scripts\sp\_hud_util::setpoint("MIDDLE", undefined, 0, 30 + param_02);
+  level.var_9019 = scripts\sp\hud_util::createfontstring("default", 1.5);
+  level.var_9019 scripts\sp\hud_util::setpoint("MIDDLE", undefined, 0, 30 + param_02);
   level.var_9019.color = (1, 1, 1);
   level.var_9019 settext(param_00);
   level.var_9019.alpha = 0;
@@ -6400,7 +6400,7 @@ func_8FE1(param_00, param_01, param_02) {
   level.var_9019 fadeovertime(var_03);
   level.var_9019.alpha = 0;
   wait(var_03);
-  level.var_9019 scripts\sp\_hud_util::destroyelem();
+  level.var_9019 scripts\sp\hud_util::destroyelem();
 }
 
 func_8FF8() {
@@ -6425,7 +6425,7 @@ func_A5CE(param_00, param_01) {
   foreach(var_03 in level.var_4E3F[param_00]) {
     foreach(var_05 in var_03) {
       if(isalive(var_05)) {
-        var_05 thread scripts\sp\_utility_code::func_A5CF(param_01);
+        var_05 thread scripts\sp\utility_code::func_A5CF(param_01);
         continue;
       }
 
@@ -6456,7 +6456,7 @@ func_7BB6(param_00, param_01, param_02, param_03) {
 
 func_48AA(param_00, param_01, param_02, param_03) {
   var_04 = spawnstruct();
-  var_04 childthread scripts\sp\_utility_code::func_D961(param_00, self, param_01, param_02, param_03);
+  var_04 childthread scripts\sp\utility_code::func_D961(param_00, self, param_01, param_02, param_03);
   return var_04;
 }
 
@@ -6968,7 +6968,7 @@ func_D0F4() {
 func_CFAA() {
   level.player func_65DD("player_zero_attacker_accuracy");
   level.player.precachenightvisioncodeassets = 0;
-  level.player scripts\sp\_gameskill::func_12E0B();
+  level.player scripts\sp\gameskill::func_12E0B();
 }
 
 func_CFB8() {
@@ -6980,7 +6980,7 @@ func_CFB8() {
 func_F520(param_00) {
   var_01 = func_7B92();
   var_01.gs.var_CF81 = param_00;
-  var_01 scripts\sp\_gameskill::func_12E0B();
+  var_01 scripts\sp\gameskill::func_12E0B();
 }
 
 func_2298(param_00) {
@@ -7013,7 +7013,7 @@ func_2299(param_00) {
 }
 
 func_78D5() {
-  var_00 = scripts\sp\_utility_code::func_78D1();
+  var_00 = scripts\sp\utility_code::func_78D1();
   var_01 = var_00["team"];
   foreach(var_03 in var_00["codes"]) {
     var_04 = level.var_22DF[var_01][var_03];
@@ -7026,7 +7026,7 @@ func_78D5() {
 }
 
 func_78D3() {
-  var_00 = scripts\sp\_utility_code::func_78D1();
+  var_00 = scripts\sp\utility_code::func_78D1();
   var_01 = var_00["team"];
   foreach(var_03 in var_00["codes"]) {
     var_04 = level.var_22DD[var_01][var_03];
@@ -7061,7 +7061,7 @@ func_7C9B(param_00) {
 }
 
 grenade_earthquake() {
-  thread scripts\sp\_utility_code::endondeath();
+  thread scripts\sp\utility_code::endondeath();
   self endon("end_explode");
   self waittill("explode", var_00);
   func_7751(var_00);
@@ -7103,7 +7103,7 @@ func_54EF(param_00) {
 dirteffect(param_00, param_01) {
   var_02 = func_ECC4(param_00);
   foreach(var_05, var_04 in var_02) {
-    thread scripts\sp\_gameskill::forcehidegrenadehudwarning(var_05);
+    thread scripts\sp\gameskill::forcehidegrenadehudwarning(var_05);
   }
 }
 
@@ -7114,7 +7114,7 @@ func_2BC6(param_00) {
 
   var_01 = func_ECC4(self.damageattacker.origin);
   foreach(var_04, var_03 in var_01) {
-    thread scripts\sp\_gameskill::func_2BC1(var_04);
+    thread scripts\sp\gameskill::func_2BC1(var_04);
   }
 }
 
@@ -7253,7 +7253,7 @@ func_11905(param_00) {
 }
 
 func_50E4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  childthread scripts\sp\_utility_code::func_50E5(param_01, param_00, param_02, param_03, param_04, param_05, param_06, param_07);
+  childthread scripts\sp\utility_code::func_50E5(param_01, param_00, param_02, param_03, param_04, param_05, param_06, param_07);
 }
 
 func_6E7C(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
@@ -7261,7 +7261,7 @@ func_6E7C(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     param_00 = [param_00, 0];
   }
 
-  thread scripts\sp\_utility_code::func_6E7D(param_01, param_00, param_02, param_03, param_04, param_05, param_06);
+  thread scripts\sp\utility_code::func_6E7D(param_01, param_00, param_02, param_03, param_04, param_05, param_06);
 }
 
 func_13843(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
@@ -7270,7 +7270,7 @@ func_13843(param_00, param_01, param_02, param_03, param_04, param_05, param_06)
     param_00 = [param_00, 0];
   }
 
-  thread scripts\sp\_utility_code::func_13844(param_01, param_00, param_02, param_03, param_04, param_05, param_06);
+  thread scripts\sp\utility_code::func_13844(param_01, param_00, param_02, param_03, param_04, param_05, param_06);
 }
 
 func_61EB(param_00) {
@@ -7296,12 +7296,12 @@ func_E1F2(param_00) {
 
 func_F323(param_00) {
   level.var_4C53 = param_00;
-  thread scripts\sp\_gameskill::func_E26C();
+  thread scripts\sp\gameskill::func_E26C();
 }
 
 func_4140() {
   level.var_4C53 = undefined;
-  thread scripts\sp\_gameskill::func_E26C();
+  thread scripts\sp\gameskill::func_E26C();
 }
 
 func_11147(param_00) {
@@ -7329,7 +7329,7 @@ func_11147(param_00) {
 
 func_F2DC(param_00, param_01) {
   level.var_28CF[param_00] = param_01;
-  scripts\sp\_utility_code::func_12D95();
+  scripts\sp\utility_code::func_12D95();
 }
 
 func_C27B(param_00) {
@@ -7493,7 +7493,7 @@ func_7617(param_00, param_01) {
   var_02 notify("new_volume_command");
   var_02 endon("new_volume_command");
   wait(0.05);
-  scripts\sp\_utility_code::func_7615(var_02, param_01);
+  scripts\sp\utility_code::func_7615(var_02, param_01);
 }
 
 func_7619(param_00) {
@@ -7573,7 +7573,7 @@ func_4075(param_00) {
 
 func_178A(param_00) {
   if(!isdefined(self.var_1274A)) {
-    thread scripts\sp\_utility_code::func_1789();
+    thread scripts\sp\utility_code::func_1789();
   }
 
   self.var_1274A[self.var_1274A.size] = param_00;
@@ -8237,12 +8237,12 @@ func_1119E(param_00, param_01, param_02, param_03) {
   var_05 = 200;
   var_06 = [];
   foreach(var_0A, var_08 in param_00) {
-    var_09 = scripts\sp\_introscreen::func_111A0(var_08, param_01, var_04, var_05 + var_0A * 20, "center", param_02, param_03);
+    var_09 = scripts\sp\introscreen::func_111A0(var_08, param_01, var_04, var_05 + var_0A * 20, "center", param_02, param_03);
     var_06 = scripts\engine\utility::array_combine(var_09, var_06);
   }
 
   wait(param_01);
-  scripts\sp\_introscreen::func_1119F(var_06, var_04, var_05, param_00.size);
+  scripts\sp\introscreen::func_1119F(var_06, var_04, var_05, param_00.size);
 }
 
 func_97A2() {
@@ -8327,11 +8327,11 @@ func_F5AF(param_00, param_01) {
 func_A6F2(param_00) {}
 
 func_61F0(param_00) {
-  scripts\sp\_dynamic_move::func_5F84(param_00);
+  scripts\sp\dynamic_move::func_5F84(param_00);
 }
 
 func_5522() {
-  scripts\sp\_dynamic_move::func_5557();
+  scripts\sp\dynamic_move::func_5557();
 }
 
 func_D08C(param_00, param_01) {
@@ -8771,7 +8771,7 @@ func_D123() {
 }
 
 func_7B9D() {
-  return level.var_D127.var_B154 / scripts\sp\_gameskill::func_7A59();
+  return level.var_D127.var_B154 / scripts\sp\gameskill::func_7A59();
 }
 
 func_A1A8(param_00) {
@@ -9267,37 +9267,37 @@ func_78E4() {
 }
 
 func_9187(param_00, param_01, param_02) {
-  scripts\sp\_outline::func_9188(param_00, param_01, param_02);
+  scripts\sp\outline::func_9188(param_00, param_01, param_02);
 }
 
 func_9189(param_00, param_01, param_02) {
-  scripts\sp\_outline::func_918A(param_00, param_01, param_02);
+  scripts\sp\outline::func_918A(param_00, param_01, param_02);
 }
 
 func_9199(param_00, param_01) {
-  scripts\sp\_outline::func_919A(param_00, param_01);
+  scripts\sp\outline::func_919A(param_00, param_01);
 }
 
 func_9196(param_00, param_01, param_02, param_03) {
-  scripts\sp\_outline::func_9197(param_03, param_00, param_01, param_02, 0);
+  scripts\sp\outline::func_9197(param_03, param_00, param_01, param_02, 0);
 }
 
 func_9198(param_00, param_01, param_02, param_03) {
-  scripts\sp\_outline::func_9197(param_03, param_00, param_01, param_02, 1);
+  scripts\sp\outline::func_9197(param_03, param_00, param_01, param_02, 1);
 }
 
 func_9193(param_00) {
-  scripts\sp\_outline::func_9194(param_00);
+  scripts\sp\outline::func_9194(param_00);
 }
 
 func_918D(param_00, param_01) {
-  scripts\sp\_outline::func_CC8D(param_00, param_01);
+  scripts\sp\outline::func_CC8D(param_00, param_01);
   level notify("hudoutline_anim_complete");
   level notify("hudoutline_anim_complete" + param_00);
 }
 
 func_918E(param_00, param_01) {
-  thread scripts\sp\_outline::func_CC8E(param_00, param_01);
+  thread scripts\sp\outline::func_CC8E(param_00, param_01);
 }
 
 func_91A9(param_00) {
@@ -10200,7 +10200,7 @@ func_CE10(param_00, param_01, param_02) {
   setsaveddvar("bg_cinematicFullScreen", "1");
   setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame(param_00);
-  thread scripts\sp\_gameskill::func_E080();
+  thread scripts\sp\gameskill::func_E080();
   func_E006();
   if(func_93A6()) {
     scripts\sp\specialist_MAYBE::hide_helmet_impacts();
@@ -10230,7 +10230,7 @@ func_CE10(param_00, param_01, param_02) {
     level.player freezecontrols(0);
     level.player _meth_8475();
     level.player _meth_8559(1);
-    level.player thread scripts\sp\_gameskill::func_8CBA();
+    level.player thread scripts\sp\gameskill::func_8CBA();
     setomnvar("ui_hide_hud", 0);
     level.player func_1C3E(1);
     setomnvar("ui_hide_weapon_info", 0);
@@ -10263,7 +10263,7 @@ func_CE10(param_00, param_01, param_02) {
   level.player freezecontrols(0);
   level.player _meth_8475();
   level.player _meth_8559(1);
-  level.player thread scripts\sp\_gameskill::func_8CBA();
+  level.player thread scripts\sp\gameskill::func_8CBA();
   setomnvar("ui_hide_hud", 0);
   level.player func_1C3E(1);
   setomnvar("ui_hide_weapon_info", 0);
@@ -10346,11 +10346,11 @@ func_E006(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   }
 
   if(param_03) {
-    thread scripts\sp\_coverwall::func_DFBD();
+    thread scripts\sp\coverwall::func_DFBD();
   }
 
   if(param_04) {
-    thread scripts\sp\_detonategrenades::func_DFBF();
+    thread scripts\sp\detonategrenades::func_DFBF();
   }
 
   if(param_05) {
@@ -10404,8 +10404,8 @@ dyndof(param_00, param_01) {
     level.dyndof = undefined;
   }
 
-  level.dyndof = scripts\sp\_utility_code::create_dyndof();
-  level thread scripts\sp\_utility_code::dyndof_thread();
+  level.dyndof = scripts\sp\utility_code::create_dyndof();
+  level thread scripts\sp\utility_code::dyndof_thread();
 }
 
 dyndof_farsettings(param_00, param_01, param_02) {
@@ -10424,8 +10424,8 @@ dyndof_farsettings(param_00, param_01, param_02) {
 
 dyndof_disable() {
   level notify("stop_dyndof");
-  scripts\sp\_utility_code::destroy_dyndof();
-  scripts\sp\_art::func_583D(1);
+  scripts\sp\utility_code::destroy_dyndof();
+  scripts\sp\art::func_583D(1);
 }
 
 isactorwallrunning() {

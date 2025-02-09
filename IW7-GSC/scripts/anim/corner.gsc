@@ -622,7 +622,7 @@ func_DC57() {
 }
 
 shootastold() {
-  scripts\sp\_gameskill::func_54C4();
+  scripts\sp\gameskill::func_54C4();
   for (;;) {
     for (;;) {
       if(isdefined(self.var_1006D)) {

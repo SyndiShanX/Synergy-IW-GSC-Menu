@@ -55,7 +55,7 @@ func_9542() {
   if(isdefined(level._stealth)) {
     level.var_68AD["threat"]["self"] = 20000;
     level.var_68AD["threat"]["squad"] = 30000;
-  } else if(scripts\sp\_utility::func_D123()) {
+  } else if(scripts\sp\utility::func_D123()) {
     level.var_68AD["threat"]["self"] = 11000;
     level.var_68AD["threat"]["squad"] = 7000;
   } else {
@@ -158,7 +158,7 @@ func_9542() {
   level.var_68AE["response"]["order"] = 40;
   level.var_68AE["moveEvent"]["coverme"] = 70;
   level.var_68AE["moveEvent"]["ordertoplayer"] = 10;
-  if(scripts\sp\_utility::func_D123()) {
+  if(scripts\sp\utility::func_D123()) {
     anim.var_6BB2 = 9999999;
     anim.var_6BB8 = 2;
     anim.var_6BB7 = 5;
@@ -174,7 +174,7 @@ func_9542() {
 
   anim.var_BCD1 = spawn("script_origin", (0, 0, 0));
   if(!isdefined(level.var_29BD)) {
-    if(scripts\sp\_utility::func_D123()) {
+    if(scripts\sp\utility::func_D123()) {
       level.var_29BD = squared(9999999);
     } else {
       level.var_29BD = squared(3000);
@@ -182,7 +182,7 @@ func_9542() {
   }
 
   if(!isdefined(level.var_29BE)) {
-    if(scripts\sp\_utility::func_D123()) {
+    if(scripts\sp\utility::func_D123()) {
       level.var_29BE = squared(9999999);
     } else {
       level.var_29BE = squared(5000);
@@ -256,7 +256,7 @@ func_9542() {
     level.var_AA29[var_01] = undefined;
   }
 
-  if(scripts\sp\_utility::func_D123()) {
+  if(scripts\sp\utility::func_D123()) {
     anim.var_115EE = 300000;
   } else {
     anim.var_115EE = 120000;
@@ -311,7 +311,7 @@ func_29C1() {
   if(!isdefined(level.var_28CF)) {
     level.var_28CF = [];
     foreach(var_01 in level.var_115E7) {
-      scripts\sp\_utility::func_F2DC(var_01, 0);
+      scripts\sp\utility::func_F2DC(var_01, 0);
     }
   }
 }
@@ -330,25 +330,25 @@ func_95E5() {
   level.var_6EE9["unitednations"] = [];
   var_00 = 41;
   for (var_01 = 0; var_01 < var_00; var_01++) {
-    level.var_6EE9["unitednations"][var_01] = scripts\sp\_utility::string(var_01 + 1);
+    level.var_6EE9["unitednations"][var_01] = scripts\sp\utility::string(var_01 + 1);
   }
 
   level.var_6EE9["unitednationshelmet"] = [];
   var_00 = 41;
   for (var_01 = 0; var_01 < var_00; var_01++) {
-    level.var_6EE9["unitednationshelmet"][var_01] = scripts\sp\_utility::string(var_01 + 1);
+    level.var_6EE9["unitednationshelmet"][var_01] = scripts\sp\utility::string(var_01 + 1);
   }
 
   level.var_6EE9["unitednationsfemale"] = [];
   var_00 = 41;
   for (var_01 = 0; var_01 < var_00; var_01++) {
-    level.var_6EE9["unitednationsfemale"][var_01] = scripts\sp\_utility::string(var_01 + 1);
+    level.var_6EE9["unitednationsfemale"][var_01] = scripts\sp\utility::string(var_01 + 1);
   }
 
   level.var_6EE9["unitednationsjackal"] = [];
   var_00 = 13;
   for (var_01 = 0; var_01 < var_00; var_01++) {
-    level.var_6EE9["unitednationsjackal"][var_01] = scripts\sp\_utility::string(var_01 + 1);
+    level.var_6EE9["unitednationsjackal"][var_01] = scripts\sp\utility::string(var_01 + 1);
   }
 
   anim.var_6EEC = [];
@@ -615,7 +615,7 @@ func_CEE8(param_00) {
     }
 
     if(scripts\engine\utility::player_is_in_jackal()) {
-      var_01 = level.player scripts\sp\_utility::func_7B9D();
+      var_01 = level.player scripts\sp\utility::func_7B9D();
       if(var_01 < 0.3) {
         return;
       }
@@ -1482,7 +1482,7 @@ func_DD50(param_00, param_01, param_02) {
   var_03 = self;
   var_03 endon("death");
   var_03 endon("removed from battleChatter");
-  if(!isdefined(param_01) && !scripts\sp\_utility::func_D123()) {
+  if(!isdefined(param_01) && !scripts\sp\utility::func_D123()) {
     param_01 = "generic";
   }
 
@@ -1686,7 +1686,7 @@ func_C6E1(param_00, param_01) {
   var_02 endon("death");
   var_02 endon("removed from battleChatter");
   var_03 = var_02 func_4996();
-  if(!scripts\sp\_utility::func_D123()) {
+  if(!scripts\sp\utility::func_D123()) {
     var_02 func_128A8(var_03, param_01);
   }
 
@@ -2450,7 +2450,7 @@ finishplayerdamage(param_00, param_01, param_02) {
     }
 
     var_03 = var_04[var_05];
-    if(!scripts\sp\_utility::func_D123()) {
+    if(!scripts\sp\utility::func_D123()) {
       if(cansayname(var_03)) {
         break;
       }
@@ -3083,9 +3083,9 @@ func_1841() {
 }
 
 func_183D(param_00) {
-  if(!scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.player) {
+  if(!scripts\sp\utility::func_D123() && self.triggerportableradarping == level.player) {
     var_01 = "UN_plr_co_dist_" + param_00;
-  } else if(scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.var_D127) {
+  } else if(scripts\sp\utility::func_D123() && self.triggerportableradarping == level.var_D127) {
     var_01 = "JK_plr_co_dist_" + var_01;
   } else {
     var_01 = self.triggerportableradarping.var_46BC + "_" + self.triggerportableradarping.npcid + "_co_dist_" + var_01;
@@ -3382,10 +3382,10 @@ func_181F(param_00, param_01) {
 }
 
 func_181B(param_00, param_01) {
-  if(!scripts\sp\_utility::func_D123()) {}
+  if(!scripts\sp\utility::func_D123()) {}
 
   var_02 = undefined;
-  if(scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.var_D127) {
+  if(scripts\sp\utility::func_D123() && self.triggerportableradarping == level.var_D127) {
     if(param_00 == "movement") {
       if(!isdefined(param_01)) {
         param_01 = "generic";
@@ -3395,9 +3395,9 @@ func_181B(param_00, param_01) {
     } else {
       var_02 = "JK_plr_reaction_" + param_00;
     }
-  } else if(scripts\sp\_utility::func_D123() && param_00 == "movement") {
+  } else if(scripts\sp\utility::func_D123() && param_00 == "movement") {
     var_02 = self.triggerportableradarping.var_46BC + "_" + self.triggerportableradarping.npcid + "_enemy_movement_generic";
-  } else if(!scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.player) {
+  } else if(!scripts\sp\utility::func_D123() && self.triggerportableradarping == level.player) {
     var_02 = "UN_plr_reaction_" + param_00 + "_" + param_01;
   } else if(isdefined(param_01)) {
     var_02 = self.triggerportableradarping.var_46BC + "_" + self.triggerportableradarping.npcid + "_reaction_" + param_00 + "_" + param_01;
@@ -3467,10 +3467,10 @@ func_17CF() {
 func_1808(param_00, param_01) {
   var_02 = undefined;
   if(self.triggerportableradarping == level.player) {
-    if(!scripts\sp\_utility::func_D123()) {
+    if(!scripts\sp\utility::func_D123()) {
       var_02 = "UN_plr_order_" + param_00 + "_" + param_01;
     }
-  } else if(!scripts\sp\_utility::func_D123()) {
+  } else if(!scripts\sp\utility::func_D123()) {
     var_02 = self.triggerportableradarping.var_46BC + "_" + self.triggerportableradarping.npcid + "_order_" + param_00 + "_" + param_01;
   } else {
     var_02 = self.triggerportableradarping.var_46BC + "_" + self.triggerportableradarping.npcid + "_order_" + param_01;

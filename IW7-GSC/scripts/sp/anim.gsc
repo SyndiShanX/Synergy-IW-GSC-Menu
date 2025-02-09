@@ -109,9 +109,9 @@ func_C0DB(param_00) {
     } else {
       var_03 = strtok(var_02, ",");
       if(var_03.size < 2) {
-        thread scripts\sp\_utility::play_sound_on_tag(var_02, undefined, 1);
+        thread scripts\sp\utility::play_sound_on_tag(var_02, undefined, 1);
       } else {
-        thread scripts\sp\_utility::play_sound_on_tag(var_03[0], var_03[1], 1);
+        thread scripts\sp\utility::play_sound_on_tag(var_03[0], var_03[1], 1);
       }
     }
 
@@ -123,7 +123,7 @@ func_C0DB(param_00) {
     if(isdefined(self.var_1EFF)) {
       self thread[[self.var_1EFF]](var_02, "j_head", 1);
     } else if(!issentient(self)) {
-      thread scripts\sp\_utility::play_sound_on_tag(var_02, "j_head", 1, var_02);
+      thread scripts\sp\utility::play_sound_on_tag(var_02, "j_head", 1, var_02);
     } else {
       self getyawtoenemy(var_02, "sounddone", 1);
     }
@@ -133,13 +133,13 @@ func_C0DB(param_00) {
 
   if(var_02 == "sd_") {
     var_02 = getsubstr(var_01, 3);
-    thread scripts\sp\_utility::func_10346(var_02);
+    thread scripts\sp\utility::func_10346(var_02);
     return 1;
   }
 
   if(var_02 == "sr_") {
     var_02 = getsubstr(var_01, 3);
-    level thread scripts\sp\_utility::func_10350(var_02);
+    level thread scripts\sp\utility::func_10350(var_02);
     return 1;
   }
 
@@ -170,7 +170,7 @@ func_C0DB(param_00) {
         scripts\engine\utility::exploder(var_06[1]);
         return 1;
       } else if(var_06[0] == "stop_exploder") {
-        scripts\sp\_utility::func_10FEC(var_06[1]);
+        scripts\sp\utility::func_10FEC(var_06[1]);
         return 1;
       } else {
         playfxontag(level._effect[var_06[0]], self, var_06[1]);
@@ -204,7 +204,7 @@ func_C0DB(param_00) {
   var_04 = getsubstr(var_02, 0, 4);
   if(var_04 == "psr_") {
     var_02 = getsubstr(var_02, 4);
-    scripts\sp\_utility::func_DBEF(var_04);
+    scripts\sp\utility::func_DBEF(var_04);
     return 1;
   }
 
@@ -213,7 +213,7 @@ func_C0DB(param_00) {
     if(isdefined(self.var_1EFF)) {
       self thread[[self.var_1EFF]](var_04, "j_head", 1);
     } else {
-      thread scripts\sp\_pip::func_CBA5(var_04);
+      thread scripts\sp\pip::func_CBA5(var_04);
     }
 
     return 1;
@@ -221,7 +221,7 @@ func_C0DB(param_00) {
 
   if(var_04 == "pvo_") {
     var_02 = getsubstr(var_02, 4);
-    thread scripts\sp\_utility::func_1034D(var_04);
+    thread scripts\sp\utility::func_1034D(var_04);
     return 1;
   }
 
@@ -280,23 +280,23 @@ func_7729(param_00, param_01) {
       break;
 
     case "lookat_plr_head_on":
-      param_00 thread scripts\sp\_utility::func_7799(level.player, 0.15, 0.7);
+      param_00 thread scripts\sp\utility::func_7799(level.player, 0.15, 0.7);
       break;
 
     case "lookat_plr_eyes_on":
-      param_00 thread scripts\sp\_utility::func_7798(level.player, 4, 0.1);
+      param_00 thread scripts\sp\utility::func_7798(level.player, 4, 0.1);
       break;
 
     case "lookat_plr_off":
-      param_00 thread scripts\sp\_utility::func_77B9(0.7);
+      param_00 thread scripts\sp\utility::func_77B9(0.7);
       break;
 
     case "lookat_plr_eyes_off":
-      param_00 thread scripts\sp\_utility::func_7793(0.1);
+      param_00 thread scripts\sp\utility::func_7793(0.1);
       break;
 
     case "lookat_plr_head_off":
-      param_00 thread scripts\sp\_utility::func_779E(0.7);
+      param_00 thread scripts\sp\utility::func_779E(0.7);
       break;
 
     case "bc_vo_start":
@@ -350,15 +350,15 @@ func_7729(param_00, param_01) {
       break;
 
     case "plr_pull_visor_down_activate_lma_normal_and_clear":
-      thread scripts\sp\_audio::func_25C2();
+      thread scripts\sp\audio::func_25C2();
       break;
 
     case "plr_pull_visor_down_activate_lma_fast_and_clear":
-      thread scripts\sp\_audio::func_25C2(1, "fast");
+      thread scripts\sp\audio::func_25C2(1, "fast");
       break;
 
     case "plr_helmet_on_closed_visor_activate_lma_and_clear":
-      thread scripts\sp\_audio::func_25C0();
+      thread scripts\sp\audio::func_25C0();
       break;
 
     case "opsmap_scene_start":
@@ -440,7 +440,7 @@ func_1ED8(param_00, param_01, param_02, param_03) {
       var_05 = param_00["sound_on_tag"];
     }
 
-    param_01 thread scripts\sp\_utility::play_sound_on_tag(param_00["sound"], var_05, var_04);
+    param_01 thread scripts\sp\utility::play_sound_on_tag(param_00["sound"], var_05, var_04);
   }
 
   if(isdefined(param_00["playersound"])) {
@@ -448,7 +448,7 @@ func_1ED8(param_00, param_01, param_02, param_03) {
   }
 
   if(isdefined(param_00["playerdialogue"])) {
-    level.player thread scripts\sp\_utility::func_1034D(param_00["playerdialogue"]);
+    level.player thread scripts\sp\utility::func_1034D(param_00["playerdialogue"]);
   }
 
   if(!param_02.var_54A9) {
@@ -605,7 +605,7 @@ func_11A80(param_00, param_01, param_02, param_03) {
   while (isdefined(self) && !var_07.var_9032) {
     scripts\engine\utility::lock(var_04);
     func_1173F(var_07);
-    scripts\sp\_utility::func_12BDD(var_04);
+    scripts\sp\utility::func_12BDD(var_04);
     if(var_07.var_10E51 == 1 && gettime() - var_07.var_A8EE > 3000) {
       return;
     }
@@ -785,7 +785,7 @@ func_6A85(param_00, param_01, param_02) {
       if(var_06 == "vo_") {
         var_07 = getsubstr(var_05, 3);
         if(!issentient(self)) {
-          thread scripts\sp\_utility::play_sound_on_tag(var_07, "j_head", 1, var_07);
+          thread scripts\sp\utility::play_sound_on_tag(var_07, "j_head", 1, var_07);
         } else {
           self getyawtoenemy(var_07, "face_sounddone", 1);
         }
@@ -795,7 +795,7 @@ func_6A85(param_00, param_01, param_02) {
 
       if(var_06 == "pvo") {
         var_07 = getsubstr(var_05, 4);
-        thread scripts\sp\_utility::func_1034D(var_07);
+        thread scripts\sp\utility::func_1034D(var_07);
       }
     }
   }

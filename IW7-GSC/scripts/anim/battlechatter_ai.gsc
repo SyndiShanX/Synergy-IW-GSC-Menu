@@ -347,9 +347,9 @@ func_94E5() {
   }
 
   if(level.var_7410) {
-    scripts\sp\_utility::func_F3C0(1);
+    scripts\sp\utility::func_F3C0(1);
   } else {
-    scripts\sp\_utility::func_F3C0(0);
+    scripts\sp\utility::func_F3C0(0);
   }
 
   self.var_3D4B = 1;
@@ -728,7 +728,7 @@ func_29A2(param_00) {
       }
     }
   } else if(self == level.player) {
-    if(scripts\sp\_utility::func_CFAC(param_00)) {
+    if(scripts\sp\utility::func_CFAC(param_00)) {
       return 1;
     }
   } else if(self getpersstat(param_00)) {
@@ -763,8 +763,8 @@ func_10AE7() {
             var_00 = "missile";
             var_01 = var_03;
             break;
-          } else if(var_03 scripts\sp\_utility::func_65DF("jackal_firing")) {
-            if(var_03 scripts\sp\_utility::func_65DB("jackal_firing")) {
+          } else if(var_03 scripts\sp\utility::func_65DF("jackal_firing")) {
+            if(var_03 scripts\sp\utility::func_65DB("jackal_firing")) {
               var_00 = "guns";
               var_01 = var_03;
               break;
@@ -774,7 +774,7 @@ func_10AE7() {
           continue;
         }
 
-        if(!level.player scripts\sp\_utility::func_65DB("disable_jackal_flares")) {
+        if(!level.player scripts\sp\utility::func_65DB("disable_jackal_flares")) {
           if(var_03.var_6E9C.var_C1 < var_03.var_6E9C.var_B417 && var_03.var_6E9C.var_A989 < gettime() - 50) {
             var_00 = "flare";
             var_01 = var_03;
@@ -782,8 +782,8 @@ func_10AE7() {
           }
         }
 
-        if(!level.player scripts\sp\_utility::func_65DB("disable_jackal_missiles")) {
-          if(var_03 scripts\sp\_utility::func_65DB("player_jackal_missile")) {
+        if(!level.player scripts\sp\utility::func_65DB("disable_jackal_missiles")) {
+          if(var_03 scripts\sp\utility::func_65DB("player_jackal_missile")) {
             var_00 = "missile";
             var_01 = var_03;
             break;
@@ -883,7 +883,7 @@ func_1A0B(param_00) {
     return;
   }
 
-  if(scripts\sp\_utility::func_D123()) {
+  if(scripts\sp\utility::func_D123()) {
     return;
   }
 
@@ -913,7 +913,7 @@ func_1A0A() {
   }
 
   if(isdefined(var_00.team) && var_00.team == "allies" && isdefined(var_00.unittype) && var_00.unittype == "c12") {
-    var_02 = scripts\sp\_utility::func_78BB(var_00.origin, level.player.var_10AC8.var_B661, 5000);
+    var_02 = scripts\sp\utility::func_78BB(var_00.origin, level.player.var_10AC8.var_B661, 5000);
     var_01 = "ally_c12_kill";
     if(isdefined(var_02)) {
       var_03 = var_02;

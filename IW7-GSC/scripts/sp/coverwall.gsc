@@ -206,7 +206,7 @@ draw_cool_circle_til_notify() {
   for (;;) {
     var_00 = self.origin;
     var_01 = var_00 + anglestoforward(self.angles) * 100;
-    scripts\sp\_debug::func_5B5D(var_00, var_01, (0, 1, 0), 1, 0);
+    scripts\sp\debug::func_5B5D(var_00, var_01, (0, 1, 0), 1, 0);
     wait(0.05);
   }
 }
@@ -371,7 +371,7 @@ func_E0E1(param_00) {
       }
 
       despawncovernode(param_00);
-      self.var_473D = scripts\sp\_utility::func_22B2(self.var_473D, var_04);
+      self.var_473D = scripts\sp\utility::func_22B2(self.var_473D, var_04);
       return;
     }
   }
@@ -409,13 +409,13 @@ func_C049() {
 func_5B54(param_00, param_01, param_02) {
   self endon("death");
   for (;;) {
-    scripts\sp\_debug::func_5B54(param_00, param_01, param_02, 32, 1);
+    scripts\sp\debug::func_5B54(param_00, param_01, param_02, 32, 1);
     wait(0.05);
   }
 }
 
 func_475E(param_00) {
-  self.var_BE07 thread scripts\sp\_utility::func_C12D("expired", param_00);
+  self.var_BE07 thread scripts\sp\utility::func_C12D("expired", param_00);
   var_01 = self.var_BE07 scripts\engine\utility::waittill_any_return("expired", "death");
   var_02 = var_01 == "death";
   var_03 = self.var_BE07.origin;
@@ -502,7 +502,7 @@ func_B9C4() {
         continue;
       }
 
-      thread scripts\sp\_utility::play_sound_on_entity("deployable_cover_det_trig");
+      thread scripts\sp\utility::play_sound_on_entity("deployable_cover_det_trig");
       wait(0.3);
       func_2BCE();
       self.var_4759.var_5AE6 = undefined;

@@ -31,7 +31,7 @@ main() {
   self endon("death");
   self endon("killanimscript");
   scripts\anim\utility::func_9832("flashed");
-  var_00 = scripts\sp\_utility::func_6EC3();
+  var_00 = scripts\sp\utility::func_6EC3();
   if(var_00 <= 0) {
     return;
   }

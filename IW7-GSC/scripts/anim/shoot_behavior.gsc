@@ -9,7 +9,7 @@ func_4F69(param_00) {
   self notify("stop_deciding_how_to_shoot");
   self endon("stop_deciding_how_to_shoot");
   self endon("death");
-  scripts\sp\_gameskill::resetmisstime_code();
+  scripts\sp\gameskill::resetmisstime_code();
   self.var_FECA = param_00;
   self.var_FE9E = undefined;
   self.var_FECF = undefined;

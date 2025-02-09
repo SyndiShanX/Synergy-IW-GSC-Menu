@@ -239,7 +239,7 @@ func_FEFE() {
 
 func_6D97(param_00, param_01, param_02) {
   var_03 = "fireAnim_" + _meth_81EB();
-  scripts\sp\_gameskill::resetmisstime_code();
+  scripts\sp\gameskill::resetmisstime_code();
   while (!func_1A3B()) {
     wait(0.05);
   }
@@ -314,7 +314,7 @@ func_6D99(param_00, param_01, param_02, param_03) {
     }
 
     shootatshootentorpos();
-    if(isplayer(self.isnodeoccupied) && self.isnodeoccupied scripts\sp\_utility::func_65DB("player_is_invulnerable")) {
+    if(isplayer(self.isnodeoccupied) && self.isnodeoccupied scripts\sp\utility::func_65DB("player_is_invulnerable")) {
       if(randomint(3) == 0) {
         self.bulletsinclip--;
       }
@@ -543,7 +543,7 @@ func_453D(param_00) {
 }
 
 func_B4EF(param_00) {
-  if(scripts\sp\_utility::func_D022()) {
+  if(scripts\sp\utility::func_D022()) {
     return 0;
   }
 
@@ -572,7 +572,7 @@ func_BE18() {
 }
 
 _meth_85B5(param_00) {
-  if(scripts\sp\_utility::func_D022()) {
+  if(scripts\sp\utility::func_D022()) {
     return 0;
   }
 
@@ -1186,7 +1186,7 @@ func_B9D9() {
     }
 
     self.var_6ECE = var_04;
-    scripts\sp\_utility::func_6EC6(var_06);
+    scripts\sp\utility::func_6EC6(var_06);
     self notify("doFlashBanged", var_01, var_03);
   }
 }

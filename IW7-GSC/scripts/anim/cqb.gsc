@@ -133,7 +133,7 @@ func_FAA0(param_00) {
   var_01 = scripts\engine\utility::getstructarray(param_00, "targetname");
   foreach(var_03 in var_01) {
     level.var_479A[level.var_479A.size] = var_03.origin;
-    scripts\sp\_utility::func_51D4(var_03);
+    scripts\sp\utility::func_51D4(var_03);
   }
 }
 

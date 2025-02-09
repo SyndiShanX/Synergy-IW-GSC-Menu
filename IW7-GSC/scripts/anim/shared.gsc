@@ -612,7 +612,7 @@ func_D4C2(param_00, param_01, param_02) {
 func_1180E(param_00) {
   self endon("killanimscript");
   placeweaponon(self.secondaryweapon, "right");
-  scripts\sp\_gameskill::func_54C4();
+  scripts\sp\gameskill::func_54C4();
 }
 
 func_E775() {
@@ -649,7 +649,7 @@ func_E775() {
 }
 
 func_E777() {
-  var_00 = scripts\sp\_utility::func_7E72();
+  var_00 = scripts\sp\utility::func_7E72();
   switch (var_00) {
     case "gimp":
     case "easy":
@@ -689,7 +689,7 @@ func_CB29() {
   }
 
   if(var_00 != self.var_394) {
-    scripts\sp\_utility::func_72EC(var_00, "primary");
+    scripts\sp\utility::func_72EC(var_00, "primary");
     self.var_13C4D setmodel(getweaponmodel(self.var_72BA));
     self.var_72BA = var_00;
   }

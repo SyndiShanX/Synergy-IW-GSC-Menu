@@ -272,9 +272,9 @@ func_7E4B() {
       var_00 = scripts\engine\utility::array_remove(var_00, var_02);
       var_03 = var_02.var_C925;
       if(isdefined(var_03["right_leg"]) && !isdefined(var_03["left_leg"])) {
-        var_03 = scripts\sp\_utility::func_22B2(var_03, "right_leg");
+        var_03 = scripts\sp\utility::func_22B2(var_03, "right_leg");
       } else if(isdefined(var_03["left_leg"]) && !isdefined(var_03["right_leg"])) {
-        var_03 = scripts\sp\_utility::func_22B2(var_03, "left_leg");
+        var_03 = scripts\sp\utility::func_22B2(var_03, "left_leg");
       }
 
       var_00 = scripts\engine\utility::array_combine(var_00, var_03);

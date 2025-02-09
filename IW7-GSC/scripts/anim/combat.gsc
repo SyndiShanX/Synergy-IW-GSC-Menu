@@ -549,7 +549,7 @@ func_129B2(param_00) {
     }
 
     func_5AC8("right", 0 - param_00);
-    scripts\sp\_gameskill::func_54C4();
+    scripts\sp\gameskill::func_54C4();
     return 1;
   }
 
@@ -560,7 +560,7 @@ func_129B2(param_00) {
     }
 
     func_5AC8("left", param_00);
-    scripts\sp\_gameskill::func_54C4();
+    scripts\sp\gameskill::func_54C4();
     return 1;
   }
 
@@ -859,7 +859,7 @@ func_1289C(param_00, param_01) {
   }
 
   if(var_02) {
-    scripts\sp\_gameskill::func_54C4();
+    scripts\sp\gameskill::func_54C4();
   }
 
   return var_02;
@@ -897,7 +897,7 @@ transitionto(param_00) {
         var_05 = 0.2;
       }
 
-      scripts\anim\notetracks::donotetracksfortime(var_05, "trans"); self.a.pose = param_00; func_F8BD(); scripts\anim\combat_utility::func_10D9A(); scripts\sp\_gameskill::func_54C4();
+      scripts\anim\notetracks::donotetracksfortime(var_05, "trans"); self.a.pose = param_00; func_F8BD(); scripts\anim\combat_utility::func_10D9A(); scripts\sp\gameskill::func_54C4();
     }
 
     func_A57F() {
@@ -968,7 +968,7 @@ transitionto(param_00) {
       self notify("stop_trying_to_melee");
       self.a.var_6A1A = 0;
       self.var_6CDB = undefined;
-      scripts\sp\_gameskill::func_54C4();
+      scripts\sp\gameskill::func_54C4();
       scripts\anim\combat_utility::func_10D9A();
     }
 
@@ -1020,11 +1020,11 @@ transitionto(param_00) {
     }
 
     func_5D15() {
-      scripts\sp\_mgturret::func_5EEF();
+      scripts\sp\mgturret::func_5EEF();
       scripts\anim\weaponlist::refillclip();
       self.a.needstorechamber = 0;
       self notify("dropped_gun");
-      scripts\sp\_mgturret::func_E2DB();
+      scripts\sp\mgturret::func_E2DB();
     }
 
     func_68C7() {
@@ -1042,7 +1042,7 @@ transitionto(param_00) {
       self aiclearanim(self.var_11317, 0.2);
       self notify("facing_enemy_immediately");
       self notify("switched_to_sidearm");
-      scripts\sp\_gameskill::func_54C4();
+      scripts\sp\gameskill::func_54C4();
     }
 
     donotetrackspostcallbackwithendon(param_00, param_01, param_02) {
@@ -1092,7 +1092,7 @@ transitionto(param_00) {
 
       self aiclearanim(self.var_11317, 0.2);
       self notify("switched_to_lastweapon");
-      scripts\sp\_gameskill::func_54C4();
+      scripts\sp\gameskill::func_54C4();
       return 1;
     }
 

@@ -31,11 +31,11 @@ monitordamage() {
     return;
   }
 
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     return;
   }
 
-  scripts\sp\_utility::func_16B7(::func_4D4C);
+  scripts\sp\utility::func_16B7(::func_4D4C);
 }
 
 func_4D4C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {

@@ -501,7 +501,7 @@ registernotetracks() {
                                   for (var_04 = 0; var_04 < 6; var_04++) {
                                     var_05 = randomint(8);
                                     var_06 = var_02[var_05];
-                                    if(scripts\sp\_utility::hastag(self.model, var_06)) {
+                                    if(scripts\sp\utility::hastag(self.model, var_06)) {
                                       if(!isdefined(self.var_25C8)) {
                                         self.var_25C8 = 0;
                                       }
@@ -525,7 +525,7 @@ registernotetracks() {
                                 }
 
                                 foreach(var_06 in var_03) {
-                                  if(isdefined(var_06) && scripts\sp\_utility::hastag(self.model, var_06)) {
+                                  if(isdefined(var_06) && scripts\sp\utility::hastag(self.model, var_06)) {
                                     if(!isdefined(self.var_25C8)) {
                                       self.var_25C8 = 0;
                                     }
@@ -749,7 +749,7 @@ registernotetracks() {
                               return;
                             }
 
-                            if(scripts\sp\_utility::hastag(getweaponmodel(self.var_394), "tag_rocket")) {
+                            if(scripts\sp\utility::hastag(getweaponmodel(self.var_394), "tag_rocket")) {
                               self giveperk("tag_rocket");
                             }
                           }
@@ -836,7 +836,7 @@ registernotetracks() {
                                 break;
 
                               case "stop anim":
-                                scripts\sp\_utility::anim_stopanimscripted();
+                                scripts\sp\utility::anim_stopanimscripted();
                                 return param_00;
 
                               case "break glass":
@@ -1090,7 +1090,7 @@ registernotetracks() {
 
                                 self.var_6BC7 playsurfacesound(var_06, var_02);
                               } else {
-                                thread scripts\sp\_utility::func_CE48(var_06, var_02, var_03);
+                                thread scripts\sp\utility::func_CE48(var_06, var_02, var_03);
                               }
                             }
 
@@ -1100,7 +1100,7 @@ registernotetracks() {
                               }
 
                               if(self.unittype == "c8" && self.var_164D[self.asmname].var_4BC0 == "melee_charge") {
-                                thread scripts\sp\_utility::play_sound_on_tag("c8_step_charge_lyr", var_03);
+                                thread scripts\sp\utility::play_sound_on_tag("c8_step_charge_lyr", var_03);
                               }
                             }
 
@@ -1236,7 +1236,7 @@ registernotetracks() {
                               return;
                             }
 
-                            if(scripts\sp\_utility::hastag(self.model, "tag_weapon")) {
+                            if(scripts\sp\utility::hastag(self.model, "tag_weapon")) {
                               var_00 = self gettagorigin("tag_weapon");
                             } else {
                               var_00 = self gettagorigin("tag_weapon_right");
@@ -1351,7 +1351,7 @@ registernotetracks() {
                             }
 
                             var_05 = scripts\engine\utility::ter_op(self.team == "axis", "double_jump_boost_enemy", "double_jump_boost_npc");
-                            childthread scripts\sp\_utility::play_sound_on_entity(var_05);
+                            childthread scripts\sp\utility::play_sound_on_entity(var_05);
                             playfxontag(var_04, self, param_02);
                             return [var_04, param_02];
                           }

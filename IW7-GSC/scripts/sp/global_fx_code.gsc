@@ -7,7 +7,7 @@
 global_fx(param_00, param_01, param_02, param_03, param_04) {
   init();
   level.global_fx[param_00] = param_03;
-  var_05 = scripts\sp\_utility::_meth_8181(param_00, "targetname");
+  var_05 = scripts\sp\utility::_meth_8181(param_00, "targetname");
   if(!isdefined(var_05)) {
     return;
   }

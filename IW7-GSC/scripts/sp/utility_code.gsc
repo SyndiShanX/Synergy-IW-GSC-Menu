@@ -66,17 +66,17 @@ func_9938() {}
 func_BF01(param_00) {
   self notify("new_color_being_set");
   self.var_BF06 = 1;
-  scripts\sp\_colors::func_AB3A();
+  scripts\sp\colors::func_AB3A();
   self endon("new_color_being_set");
   self endon("death");
   waittillframeend;
   waittillframeend;
   if(isdefined(self.var_EDAD)) {
-    self.var_4BDF = level.var_4BE0[scripts\sp\_colors::func_7CE4()][self.var_EDAD];
+    self.var_4BDF = level.var_4BE0[scripts\sp\colors::func_7CE4()][self.var_EDAD];
     if(isdefined(self.var_5955)) {
       self.var_5955 = undefined;
     } else {
-      thread scripts\sp\_colors::_meth_8467();
+      thread scripts\sp\colors::_meth_8467();
     }
   }
 
@@ -153,7 +153,7 @@ func_12DC(param_00, param_01) {
 func_12DD(param_00, param_01) {
   var_02 = param_01 + param_00;
   var_03 = level.var_12750[var_02];
-  var_04 = scripts\sp\_utility::func_7B92();
+  var_04 = scripts\sp\utility::func_7B92();
   var_04 sethudtutorialmessage(var_03);
 }
 
@@ -184,19 +184,19 @@ func_9021(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     return;
   }
 
-  scripts\sp\_utility::func_65E8("global_hint_in_use");
+  scripts\sp\utility::func_65E8("global_hint_in_use");
   if(isdefined(self.var_4B7A)) {
     if(self.var_4B7A == param_00) {
       return;
     } else {
       self.var_4B7A = param_00;
-      scripts\sp\_utility::func_65E1("global_hint_in_use");
+      scripts\sp\utility::func_65E1("global_hint_in_use");
       wait(0.05);
     }
   }
 
   self.var_4B7A = param_00;
-  scripts\sp\_utility::func_65E1("global_hint_in_use");
+  scripts\sp\utility::func_65E1("global_hint_in_use");
   level.var_4B80 = 1;
   level.var_8FE4 = param_01;
   level endon("friendlyfire_mission_fail");
@@ -215,7 +215,7 @@ func_9021(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     self clearhudtutorialmessage(1);
   }
 
-  scripts\sp\_utility::func_135AF(var_07, param_06);
+  scripts\sp\utility::func_135AF(var_07, param_06);
   var_08 notify("removing_hint");
   self.var_4B7A = undefined;
   if(var_08.var_6AB8) {
@@ -223,7 +223,7 @@ func_9021(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   }
 
   level.var_4B80 = 0;
-  scripts\sp\_utility::func_65DD("global_hint_in_use");
+  scripts\sp\utility::func_65DD("global_hint_in_use");
 }
 
 func_52AB(param_00) {
@@ -530,16 +530,16 @@ func_5F8E(param_00, param_01, param_02, param_03, param_04) {
   self endon("stop_dynamic_run_speed");
   self endon("start_dynamic_run_speed");
   level endon("_stealth_spotted");
-  if(scripts\sp\_utility::func_65DF("_stealth_custom_anim")) {
-    scripts\sp\_utility::func_65E8("_stealth_custom_anim");
+  if(scripts\sp\utility::func_65DF("_stealth_custom_anim")) {
+    scripts\sp\utility::func_65E8("_stealth_custom_anim");
   }
 
-  if(!scripts\sp\_utility::func_65DF("dynamic_run_speed_stopped")) {
-    scripts\sp\_utility::func_65E0("dynamic_run_speed_stopped");
-    scripts\sp\_utility::func_65E0("dynamic_run_speed_stopping");
+  if(!scripts\sp\utility::func_65DF("dynamic_run_speed_stopped")) {
+    scripts\sp\utility::func_65E0("dynamic_run_speed_stopped");
+    scripts\sp\utility::func_65E0("dynamic_run_speed_stopping");
   } else {
-    scripts\sp\_utility::func_65DD("dynamic_run_speed_stopping");
-    scripts\sp\_utility::func_65DD("dynamic_run_speed_stopped");
+    scripts\sp\utility::func_65DD("dynamic_run_speed_stopping");
+    scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
   }
 
   self.var_E81D = "";
@@ -616,17 +616,17 @@ func_10FE6() {
 
   if(isdefined(level.var_EC85["generic"]["DRS_run"])) {
     if(isarray(level.var_EC85["generic"]["DRS_run"])) {
-      scripts\sp\_utility::func_F3CC("DRS_run");
+      scripts\sp\utility::func_F3CC("DRS_run");
     } else {
-      scripts\sp\_utility::func_F3CB("DRS_run");
+      scripts\sp\utility::func_F3CB("DRS_run");
     }
   } else {
-    scripts\sp\_utility::func_417A();
+    scripts\sp\utility::func_417A();
   }
 
   self notify("stop_loop");
-  scripts\sp\_utility::func_65DD("dynamic_run_speed_stopping");
-  scripts\sp\_utility::func_65DD("dynamic_run_speed_stopped");
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopping");
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
 }
 
 func_10FE7() {
@@ -649,14 +649,14 @@ func_5F8C(param_00) {
       }
 
       if(isarray(level.var_EC85["generic"]["DRS_sprint"])) {
-        scripts\sp\_utility::func_F3CC("DRS_sprint");
+        scripts\sp\utility::func_F3CC("DRS_sprint");
       } else {
-        scripts\sp\_utility::func_F3CB("DRS_sprint");
+        scripts\sp\utility::func_F3CB("DRS_sprint");
       }
 
       self notify("stop_loop");
-      scripts\sp\_utility::anim_stopanimscripted();
-      scripts\sp\_utility::func_65DD("dynamic_run_speed_stopped");
+      scripts\sp\utility::anim_stopanimscripted();
+      scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
       break;
 
     case "run":
@@ -666,17 +666,17 @@ func_5F8C(param_00) {
 
       if(isdefined(level.var_EC85["generic"]["DRS_run"])) {
         if(isarray(level.var_EC85["generic"]["DRS_run"])) {
-          scripts\sp\_utility::func_F3CC("DRS_run");
+          scripts\sp\utility::func_F3CC("DRS_run");
         } else {
-          scripts\sp\_utility::func_F3CB("DRS_run");
+          scripts\sp\utility::func_F3CB("DRS_run");
         }
       } else {
-        scripts\sp\_utility::func_417A();
+        scripts\sp\utility::func_417A();
       }
 
       self notify("stop_loop");
-      scripts\sp\_utility::anim_stopanimscripted();
-      scripts\sp\_utility::func_65DD("dynamic_run_speed_stopped");
+      scripts\sp\utility::anim_stopanimscripted();
+      scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
       break;
 
     case "stop":
@@ -690,17 +690,17 @@ func_5F8C(param_00) {
 
       if(isdefined(level.var_EC85["generic"]["DRS_combat_jog"])) {
         if(isarray(level.var_EC85["generic"]["DRS_combat_jog"])) {
-          scripts\sp\_utility::func_F3CC("DRS_combat_jog");
+          scripts\sp\utility::func_F3CC("DRS_combat_jog");
         } else {
-          scripts\sp\_utility::func_F3CB("DRS_combat_jog");
+          scripts\sp\utility::func_F3CB("DRS_combat_jog");
         }
       } else {
-        scripts\sp\_utility::func_417A();
+        scripts\sp\utility::func_417A();
       }
 
       self notify("stop_loop");
-      scripts\sp\_utility::anim_stopanimscripted();
-      scripts\sp\_utility::func_65DD("dynamic_run_speed_stopped");
+      scripts\sp\utility::anim_stopanimscripted();
+      scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
       break;
 
     case "crouch":
@@ -710,22 +710,22 @@ func_5F8C(param_00) {
 
 func_5F8F() {
   self endon("death");
-  if(scripts\sp\_utility::func_65DB("dynamic_run_speed_stopped")) {
+  if(scripts\sp\utility::func_65DB("dynamic_run_speed_stopped")) {
     return;
   }
 
-  if(scripts\sp\_utility::func_65DB("dynamic_run_speed_stopping")) {
+  if(scripts\sp\utility::func_65DB("dynamic_run_speed_stopping")) {
     return;
   }
 
   self endon("stop_dynamic_run_speed");
-  scripts\sp\_utility::func_65E1("dynamic_run_speed_stopping");
-  scripts\sp\_utility::func_65E1("dynamic_run_speed_stopped");
+  scripts\sp\utility::func_65E1("dynamic_run_speed_stopping");
+  scripts\sp\utility::func_65E1("dynamic_run_speed_stopped");
   self endon("dynamic_run_speed_stopped");
   var_00 = "DRS_run_2_stop";
   scripts\sp\anim::func_1EC8(self, "gravity", var_00);
-  scripts\sp\_utility::func_65DD("dynamic_run_speed_stopping");
-  while (scripts\sp\_utility::func_65DB("dynamic_run_speed_stopped")) {
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopping");
+  while (scripts\sp\utility::func_65DB("dynamic_run_speed_stopped")) {
     var_01 = "DRS_stop_idle";
     thread scripts\sp\anim::func_1ECC(self, var_01);
     if(isdefined(level.var_EC85["generic"]["signal_go"])) {
@@ -733,18 +733,18 @@ func_5F8F() {
     }
 
     wait(randomfloatrange(12, 20));
-    if(scripts\sp\_utility::func_65DF("_stealth_stance_handler")) {
-      scripts\sp\_utility::func_65E8("_stealth_stance_handler");
+    if(scripts\sp\utility::func_65DF("_stealth_stance_handler")) {
+      scripts\sp\utility::func_65E8("_stealth_stance_handler");
     }
 
     self notify("stop_loop");
-    if(!scripts\sp\_utility::func_65DB("dynamic_run_speed_stopped")) {
+    if(!scripts\sp\utility::func_65DB("dynamic_run_speed_stopped")) {
       return;
     }
 
     if(isdefined(level.var_5F8D)) {
       var_02 = scripts\engine\utility::random(level.var_5F8D);
-      level thread scripts\sp\_utility::func_DBF3(var_02);
+      level thread scripts\sp\utility::func_DBF3(var_02);
     }
 
     if(isdefined(level.var_EC85["generic"]["signal_go"])) {
@@ -777,7 +777,7 @@ func_8A0B(param_00, param_01, param_02, param_03) {
   }
 
   if(var_04) {
-    self give_capture_credit(scripts\sp\_utility::func_7ECF(var_05), 1, 0, 1.1);
+    self give_capture_credit(scripts\sp\utility::func_7ECF(var_05), 1, 0, 1.1);
     return;
   }
 
@@ -857,7 +857,7 @@ func_267B(param_00) {
 func_267F() {
   level notify("autosave_tactical_proc");
   level endon("autosave_tactical_proc");
-  level thread scripts\sp\_utility::func_C12D("kill_save", 5);
+  level thread scripts\sp\utility::func_C12D("kill_save", 5);
   level endon("kill_save");
   level endon("autosave_tactical_player_nade");
   if(scripts\engine\utility::flag("autosave_tactical_player_nade")) {
@@ -875,18 +875,18 @@ func_267F() {
   }
 
   waittillframeend;
-  scripts\sp\_utility::func_2669();
+  scripts\sp\utility::func_2669();
 }
 
 func_BDE6(param_00, param_01, param_02, param_03) {
-  scripts\sp\_utility::func_BDEC(param_01);
+  scripts\sp\utility::func_BDEC(param_01);
   level endon("stop_music");
   wait(param_01);
-  thread scripts\sp\_utility::func_BDE5(param_00, undefined, param_02, param_03);
+  thread scripts\sp\utility::func_BDE5(param_00, undefined, param_02, param_03);
 }
 
 func_BDE2(param_00, param_01, param_02, param_03, param_04, param_05) {
-  scripts\sp\_utility::func_BDEC(param_02);
+  scripts\sp\utility::func_BDEC(param_02);
   level endon("stop_music");
   wait(param_02);
   thread func_BDE1(param_00, param_01, undefined, param_03, param_04, param_05);
@@ -898,15 +898,15 @@ func_BDE1(param_00, param_01, param_02, param_03, param_04, param_05) {
     return;
   }
 
-  scripts\sp\_utility::func_BDEC();
+  scripts\sp\utility::func_BDEC();
   level endon("stop_music");
-  scripts\sp\_utility::func_BDF2(param_00, param_03, param_04);
+  scripts\sp\utility::func_BDF2(param_00, param_03, param_04);
   if(isdefined(param_05) && param_05 == 1 && scripts\engine\utility::flag_exist("_stealth_spotted")) {
     level endon("_stealth_spotted");
     thread func_BDE4(param_00, param_01, param_02);
   }
 
-  var_06 = scripts\sp\_utility::func_BDF1(param_00);
+  var_06 = scripts\sp\utility::func_BDF1(param_00);
   if(!isdefined(param_01)) {
     param_01 = 1;
   }
@@ -916,7 +916,7 @@ func_BDE1(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 
   wait(var_06);
-  scripts\sp\_utility::func_BDDF(param_00, param_01, param_02, param_03, param_04);
+  scripts\sp\utility::func_BDDF(param_00, param_01, param_02, param_03, param_04);
 }
 
 func_BDE4(param_00, param_01, param_02) {
@@ -928,7 +928,7 @@ func_BDE4(param_00, param_01, param_02) {
     wait(1);
   }
 
-  thread scripts\sp\_utility::func_BDDF(param_00, param_01, param_02);
+  thread scripts\sp\utility::func_BDDF(param_00, param_01, param_02);
 }
 
 func_5AAD(param_00, param_01, param_02) {
@@ -1042,13 +1042,13 @@ func_78D1() {
     var_00 = "axis";
   }
 
-  var_00 = scripts\sp\_colors::func_7CE4(var_00);
+  var_00 = scripts\sp\colors::func_7CE4(var_00);
   var_01 = [];
   if(var_00 == "allies") {
-    var_02 = scripts\sp\_colors::func_78D9(self.var_ED33, "allies");
+    var_02 = scripts\sp\colors::func_78D9(self.var_ED33, "allies");
     var_01 = var_02["colorCodes"];
   } else {
-    var_02 = scripts\sp\_colors::func_78D9(self.var_ED34, "axis");
+    var_02 = scripts\sp\colors::func_78D9(self.var_ED34, "axis");
     var_01 = var_02["colorCodes"];
   }
 
@@ -1274,11 +1274,11 @@ func_28D9(param_00) {
   anim.var_29B7 = 1;
   wait(1.5);
   if(isdefined(param_00)) {
-    scripts\sp\_utility::func_F2DC(param_00, 1);
+    scripts\sp\utility::func_F2DC(param_00, 1);
     var_01 = getaiarray(param_00);
   } else {
     foreach(param_00 in level.var_115E7) {
-      scripts\sp\_utility::func_F2DC(param_00, 1);
+      scripts\sp\utility::func_F2DC(param_00, 1);
     }
 
     var_01 = getaiarray();
@@ -1289,7 +1289,7 @@ func_28D9(param_00) {
   }
 
   for (var_04 = 0; var_04 < var_01.size; var_04++) {
-    var_01[var_04] scripts\sp\_utility::func_F2DA(1);
+    var_01[var_04] scripts\sp\utility::func_F2DA(1);
   }
 }
 
@@ -1306,7 +1306,7 @@ func_517B(param_00, param_01) {
 }
 
 func_F3A7(param_00, param_01) {
-  thread scripts\sp\_utility::func_F3A5(param_00, param_01, ::scripts\sp\_utility::empty_func, "set_flag_on_spawned");
+  thread scripts\sp\utility::func_F3A5(param_00, param_01, ::scripts\sp\utility::empty_func, "set_flag_on_spawned");
 }
 
 endondeath() {
@@ -1354,7 +1354,7 @@ dyndof_set(param_00) {
   var_04 = var_03 + level.dyndof.nearend - level.dyndof.nearstart * var_02;
   var_04 = clamp(var_04, level.dyndof.nearendmindist, level.dyndof.nearendmaxdist);
   var_06 = var_05 + level.dyndof.farend - level.dyndof.farstart * var_02;
-  scripts\sp\_art::func_583F(var_03, var_04, level.dyndof.nearblur, var_05, var_06, level.dyndof.farblur, level.dyndof.focusspeed);
+  scripts\sp\art::func_583F(var_03, var_04, level.dyndof.nearblur, var_05, var_06, level.dyndof.farblur, level.dyndof.focusspeed);
 }
 
 dyndof_distance() {
@@ -1414,7 +1414,7 @@ dyndof_getplayerorigin() {
         return var_00 gettagorigin("tag_camera");
       }
     } else if(isdefined(var_00.model)) {
-      if(scripts\sp\_utility::hastag(var_00.model, "tag_camera")) {
+      if(scripts\sp\utility::hastag(var_00.model, "tag_camera")) {
         var_00.dyndof_hastag = 1;
       } else {
         var_00.dyndof_hastag = 0;

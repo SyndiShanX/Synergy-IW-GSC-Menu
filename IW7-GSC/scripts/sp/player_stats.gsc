@@ -124,7 +124,7 @@ func_FF05() {
   for (;;) {
     self waittill("weapon_fired");
     var_00 = self getcurrentweapon();
-    if(!isdefined(var_00) || !scripts\sp\_utility::isprimaryweapon(var_00)) {
+    if(!isdefined(var_00) || !scripts\sp\utility::isprimaryweapon(var_00)) {
       continue;
     }
 

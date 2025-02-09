@@ -168,7 +168,7 @@ func_5A07() {
   if(!isdefined(self.var_BEF7) && !self.var_FC) {
     self.var_9E45 = 1;
     if(!scripts\anim\utility::func_9D9B()) {
-      scripts\sp\_utility::func_61E7(1);
+      scripts\sp\utility::func_61E7(1);
     }
   }
 }
@@ -177,7 +177,7 @@ func_5A0B() {
   if(!isdefined(self.var_4797)) {
     self.var_9E45 = 0;
     if(scripts\anim\utility::func_9D9B()) {
-      scripts\sp\_utility::func_5514();
+      scripts\sp\utility::func_5514();
     }
   }
 }

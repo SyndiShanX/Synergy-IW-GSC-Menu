@@ -117,7 +117,7 @@ func_CBAC() {
 
 func_CBA5(param_00) {
   func_6A67();
-  scripts\sp\_utility::func_10347(param_00);
+  scripts\sp\utility::func_10347(param_00);
   func_CBA3();
 }
 

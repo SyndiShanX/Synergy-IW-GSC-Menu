@@ -19,7 +19,7 @@ main() {
 func_103C8() {
   self.objective_state_nomessage = 0;
   self.a.pose = "crouch";
-  scripts\sp\_utility::func_558D();
+  scripts\sp\utility::func_558D();
   self.allowpain = 0;
   self.var_6EC4 = 1;
   self._meth_8020 = ::func_103C7;
@@ -30,7 +30,7 @@ func_103C8() {
 func_103C7() {
   self.allowpain = 1;
   self.var_6EC4 = 0;
-  scripts\sp\_utility::func_86E2();
+  scripts\sp\utility::func_86E2();
   self.var_C59B = undefined;
   self._meth_8020 = undefined;
   self.var_10957 = undefined;
@@ -85,7 +85,7 @@ func_103CA() {
   self _meth_82B0(scripts\anim\utility::func_1F64(var_00), 0.5);
   for (;;) {
     if(self.var_E500.var_10F83) {
-      var_02 = 0.5 * 1 + scripts\sp\_vehicle_code::func_12E33(self.var_E500);
+      var_02 = 0.5 * 1 + scripts\sp\vehicle_code::func_12E33(self.var_E500);
       var_03 = self getscoreinfocategory(scripts\anim\utility::func_1F64(var_00));
       if(var_00 == "right2left") {
         var_03 = 1 - var_03;
@@ -118,7 +118,7 @@ func_103CC() {
   self _meth_82A5(scripts\anim\utility::func_1F64("hide"), % body, 1, 0);
   self setanimknob(scripts\anim\utility::func_1F64("drive"), 1, 0);
   for (;;) {
-    var_00 = scripts\sp\_vehicle_code::func_12E33(self.var_E500);
+    var_00 = scripts\sp\vehicle_code::func_12E33(self.var_E500);
     self _meth_82AC( % sm_lean, abs(var_00), 0.05);
     if(var_00 >= 0) {
       self _meth_82A9(scripts\anim\utility::func_1F64("lean_right"), 1, 0.05);
@@ -143,7 +143,7 @@ func_103CB() {
       continue;
     }
 
-    var_02 = scripts\sp\_vehicle_code::func_12E33(self.var_E500);
+    var_02 = scripts\sp\vehicle_code::func_12E33(self.var_E500);
     var_03 = 1 - abs(var_02);
     var_04 = max(0, 0 - var_02);
     var_05 = max(0, var_02);
@@ -186,7 +186,7 @@ func_103CD() {
       continue;
     }
 
-    var_01 = scripts\sp\_vehicle_code::func_12E33(self.var_E500);
+    var_01 = scripts\sp\vehicle_code::func_12E33(self.var_E500);
     var_02 = 1 - abs(var_01);
     var_03 = max(0, 0 - var_01);
     var_04 = max(0, var_01);

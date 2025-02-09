@@ -14,7 +14,7 @@ func_8715(param_00) {
   self endon("end_mg_behavior");
   self.var_381C = 1;
   self.var_138DC = 0;
-  if(!scripts\sp\_mgturret::func_13030(param_00)) {
+  if(!scripts\sp\mgturret::func_13030(param_00)) {
     self notify("continue_cover_script");
     return;
   }

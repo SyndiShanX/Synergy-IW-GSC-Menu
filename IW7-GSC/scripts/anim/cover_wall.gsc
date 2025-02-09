@@ -148,7 +148,7 @@ func_D66A() {
 
 shootastold() {
   self endon("return_to_cover");
-  scripts\sp\_gameskill::func_54C4();
+  scripts\sp\gameskill::func_54C4();
   for (;;) {
     if(isdefined(self.var_1006D)) {
       break;
@@ -535,7 +535,7 @@ func_130DF() {
     return;
   }
 
-  thread scripts\sp\_mg_penetration::func_8715(var_00);
+  thread scripts\sp\mg_penetration::func_8715(var_00);
   self waittill("continue_cover_script");
 }
 

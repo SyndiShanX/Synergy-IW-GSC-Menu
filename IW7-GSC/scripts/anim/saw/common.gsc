@@ -14,25 +14,25 @@ main(param_00) {
   if(isdefined(param_00.script_delay_min)) {
     var_01 = param_00.script_delay_min;
   } else {
-    var_01 = scripts\sp\_mgturret::func_32B6("delay");
+    var_01 = scripts\sp\mgturret::func_32B6("delay");
   }
 
   if(isdefined(param_00.script_delay_max)) {
     var_02 = param_00.script_delay_max - var_01;
   } else {
-    var_02 = scripts\sp\_mgturret::func_32B6("delay_range");
+    var_02 = scripts\sp\mgturret::func_32B6("delay_range");
   }
 
   if(isdefined(param_00.var_ED26)) {
     var_03 = param_00.var_ED26;
   } else {
-    var_03 = scripts\sp\_mgturret::func_32B6("burst");
+    var_03 = scripts\sp\mgturret::func_32B6("burst");
   }
 
   if(isdefined(param_00.var_ED25)) {
     var_04 = param_00.var_ED25 - var_03;
   } else {
-    var_04 = scripts\sp\_mgturret::func_32B6("burst_range");
+    var_04 = scripts\sp\mgturret::func_32B6("burst_range");
   }
 
   var_05 = gettime();

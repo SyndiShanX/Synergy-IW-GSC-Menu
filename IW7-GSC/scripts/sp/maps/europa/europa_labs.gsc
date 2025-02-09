@@ -55,12 +55,12 @@ func_A79C() {
   scripts\engine\utility::flag_init("straggler_dead");
   scripts\engine\utility::flag_init("base_entrance_snipers_engaged");
   scripts\engine\utility::flag_init("base_entrance_platform_enemies_engaged");
-  scripts\sp\_utility::func_22C9("seeker_enemies_ai", ::func_F11F);
-  level.player scripts\sp\_utility::func_65E0("threw_seeker");
-  scripts\sp\_utility::func_16EB("seeker_hint", & "EUROPA_SEEKER_HINT", ::func_F15C);
+  scripts\sp\utility::func_22C9("seeker_enemies_ai", ::func_F11F);
+  level.player scripts\sp\utility::func_65E0("threw_seeker");
+  scripts\sp\utility::func_16EB("seeker_hint", & "EUROPA_SEEKER_HINT", ::func_F15C);
   precachestring( & "EUROPA_DBL_JUMP1");
-  level.player scripts\sp\_utility::func_65E0("pressed_jump_once");
-  level.player scripts\sp\_utility::func_65E0("pressed_jump_twice");
+  level.player scripts\sp\utility::func_65E0("pressed_jump_once");
+  level.player scripts\sp\utility::func_65E0("pressed_jump_twice");
   var_00 = getent("office_breach_door", "targetname");
   var_01 = scripts\engine\utility::getstruct("office_cutdoor_base_position", "targetname");
   var_00.origin = var_01.origin;
@@ -68,7 +68,7 @@ func_A79C() {
   thread func_94E6();
   scripts\engine\utility::trigger_off("takedown_color_moveup", "targetname");
   scripts\engine\utility::trigger_off("enter_airlock_color_move", "targetname");
-  scripts\sp\_utility::func_22CA("back_office_enemies", ::func_2726);
+  scripts\sp\utility::func_22CA("back_office_enemies", ::func_2726);
 }
 
 func_56B2() {
@@ -92,14 +92,14 @@ func_12B8F() {
   thread scripts\sp\maps\europa\europa_util::func_8E46(1);
   level.player scripts\sp\maps\europa\europa_util::func_8E34(1);
   scripts\sp\maps\europa\europa_util::func_EBC7();
-  scripts\sp\_utility::func_F5AF("drop_landing_start", [level.var_EBBB, level.var_EBBC, level.player]);
-  scripts\sp\_utility::func_15F5("squad_lands");
+  scripts\sp\utility::func_F5AF("drop_landing_start", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\sp\utility::func_15F5("squad_lands");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", & "EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
 }
 
 func_12B8C() {
-  scripts\sp\_utility::func_2669("tunnels");
-  if(scripts\sp\_utility::func_93A6()) {
+  scripts\sp\utility::func_2669("tunnels");
+  if(scripts\sp\utility::func_93A6()) {
     thread specialist_tutorials();
   }
 
@@ -124,15 +124,15 @@ func_115FA() {
   }
 
   wait(0.05);
-  scripts\sp\_utility::func_F3B5("b");
+  scripts\sp\utility::func_F3B5("b");
   wait(7);
   self.var_C9BD = undefined;
 }
 
 func_1351D() {
-  level.player scripts\engine\utility::delaythread(0.15, ::scripts\sp\_utility::func_D091, "ges_point_firm", level.var_10214);
+  level.player scripts\engine\utility::delaythread(0.15, ::scripts\sp\utility::func_D091, "ges_point_firm", level.var_10214);
   var_00 = ["europa_plr_sipestakepoint"];
-  scripts\engine\utility::delaythread(1.3, ::scripts\sp\_utility::func_15F5, "cliffjump_friendlies_clear");
+  scripts\engine\utility::delaythread(1.3, ::scripts\sp\utility::func_15F5, "cliffjump_friendlies_clear");
   scripts\sp\maps\europa\europa_util::func_48BD(var_00);
   scripts\engine\utility::flag_set("cliffjumper_vo_finished");
   wait(1.8);
@@ -169,24 +169,24 @@ func_1146B() {
   thread scripts\sp\maps\europa\europa_util::func_8E46(1);
   level.player scripts\sp\maps\europa\europa_util::func_8E34(1);
   scripts\sp\maps\europa\europa_util::func_EBC7();
-  scripts\sp\_utility::func_F5AF("c6_robot_pods_start", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\sp\utility::func_F5AF("c6_robot_pods_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\engine\utility::flag_set("takedown_approach");
-  scripts\sp\_utility::func_15F5("c6_robot_event_color_move");
+  scripts\sp\utility::func_15F5("c6_robot_event_color_move");
   level thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", & "EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
 }
 
 func_1145E() {
   thread func_1351A();
-  thread scripts\sp\_utility::func_6E7C("takedown_enemy_dead", ::func_A781);
+  thread scripts\sp\utility::func_6E7C("takedown_enemy_dead", ::func_A781);
   scripts\engine\utility::flag_wait("base_arrive");
-  thread scripts\sp\_utility::func_AB9A("player_sprintspeedscale", 1.4, 3);
+  thread scripts\sp\utility::func_AB9A("player_sprintspeedscale", 1.4, 3);
 }
 
 func_CF8F() {
   var_00 = scripts\engine\utility::getclosest(scripts\engine\utility::getstruct("platform_scene", "targetname").origin, level.var_EBCA, 99999);
   if(getdvarint("debug_europa")) {
-    thread scripts\sp\_utility::func_5B4D(var_00, level.player, 1, 0, 0, 20);
+    thread scripts\sp\utility::func_5B4D(var_00, level.player, 1, 0, 0, 20);
   }
 
   var_00 thread scripts\sp\maps\europa\europa_util::func_D2DC(250);
@@ -203,18 +203,18 @@ func_1351A() {
     return;
   }
 
-  var_00 = level.player scripts\sp\_utility::func_D08C("ges_radio");
+  var_00 = level.player scripts\sp\utility::func_D08C("ges_radio");
   if(var_00) {
     level.player scripts\engine\utility::delaycall(0.5, ::playsound, "ges_plr_radio_on");
     level.player getnumownedagentsonteambytype(0);
     wait(0.8);
   }
 
-  level.player scripts\sp\_utility::play_sound_on_entity("europa_plr_reaperweareapp");
+  level.player scripts\sp\utility::play_sound_on_entity("europa_plr_reaperweareapp");
   wait(0.1);
-  level.player scripts\sp\_utility::play_sound_on_entity("europa_rpr_thermalisspotty");
+  level.player scripts\sp\utility::play_sound_on_entity("europa_rpr_thermalisspotty");
   if(!scripts\engine\utility::flag("base_arrive")) {
-    level.player scripts\sp\_utility::play_sound_on_entity("europa_plr_copy");
+    level.player scripts\sp\utility::play_sound_on_entity("europa_plr_copy");
   }
 
   if(var_00) {
@@ -231,14 +231,14 @@ func_11462() {
 }
 
 func_1146A() {
-  scripts\sp\_utility::func_22CA("takedown_enemy", ::func_11466);
+  scripts\sp\utility::func_22CA("takedown_enemy", ::func_11466);
   var_00 = scripts\engine\utility::getstruct("takedown_struct", "targetname");
-  var_00.isnodeoccupied = scripts\sp\_utility::func_107EA("takedown_enemy", 1);
+  var_00.isnodeoccupied = scripts\sp\utility::func_107EA("takedown_enemy", 1);
   var_00.isnodeoccupied thread scripts\sp\maps\europa\europa_intro::func_1081C();
   level.var_EBBC.var_1A29 = var_00.isnodeoccupied scripts\engine\utility::spawn_tag_origin();
   level.var_EBBC.var_1A29 linkto(var_00.isnodeoccupied, "tag_origin", (0, 0, 20), (0, 0, 0));
   scripts\engine\utility::flag_wait("takedown_start");
-  level.var_EBBB scripts\sp\_utility::func_61E7();
+  level.var_EBBB scripts\sp\utility::func_61E7();
   level.var_EBBB.var_C9BD = undefined;
   var_00.var_7395 = level.var_EBBB;
   var_00.var_1684 = [var_00.var_7395, var_00.isnodeoccupied];
@@ -254,11 +254,11 @@ func_1146A() {
     return;
   }
 
-  scripts\sp\_utility::func_15F5("blue_covers_takedown");
+  scripts\sp\utility::func_15F5("blue_covers_takedown");
   level.var_EBBC.var_C9BD = 1;
-  level.var_EBBC scripts\sp\_utility::func_5514();
+  level.var_EBBC scripts\sp\utility::func_5514();
   level.var_EBBC thread func_2BD4();
-  var_04 = getanimlength(scripts\sp\_utility::func_7DC2("tunnel_takedown", "scar1"));
+  var_04 = getanimlength(scripts\sp\utility::func_7DC2("tunnel_takedown", "scar1"));
   var_00.var_7395 thread func_11467(var_00);
   var_00.isnodeoccupied thread func_11465(var_00);
   foreach(var_02 in var_00.var_1684) {
@@ -274,7 +274,7 @@ func_1146A() {
 
   scripts\engine\utility::flag_set("takedown_finished");
   thread func_7394();
-  level.player scripts\sp\_utility::func_D2D1(190, 5);
+  level.player scripts\sp\utility::func_D2D1(190, 5);
 }
 
 func_2BD4() {
@@ -286,7 +286,7 @@ func_11467(param_00) {
   level waittill("interupt_check");
   if(isdefined(param_00.var_9A92)) {
     param_00.var_7395 scripts\sp\maps\europa\europa_util::func_10FC2();
-    param_00.var_7395 scripts\sp\_utility::func_61C7();
+    param_00.var_7395 scripts\sp\utility::func_61C7();
   }
 }
 
@@ -309,9 +309,9 @@ func_7394() {
   level.var_EBBC.dontevershoot = undefined;
   scripts\engine\utility::trigger_on("takedown_color_moveup", "targetname");
   wait(0.05);
-  scripts\sp\_utility::func_15F5("takedown_color_moveup");
+  scripts\sp\utility::func_15F5("takedown_color_moveup");
   level.var_EBBC.var_C9BD = undefined;
-  level.var_EBBB scripts\sp\_utility::func_61C7();
+  level.var_EBBB scripts\sp\utility::func_61C7();
 }
 
 func_11464() {
@@ -329,9 +329,9 @@ func_11464() {
 }
 
 func_1145F(param_00) {
-  thread scripts\sp\_utility::func_6E7C("takedown_enemy_dead", ::scripts\engine\utility::flag_set, "takedown_finished");
+  thread scripts\sp\utility::func_6E7C("takedown_enemy_dead", ::scripts\engine\utility::flag_set, "takedown_finished");
   level.var_EBBB.var_C9BD = undefined;
-  level.var_EBBB scripts\sp\_utility::func_61C7();
+  level.var_EBBB scripts\sp\utility::func_61C7();
   scripts\engine\utility::trigger_on("takedown_color_moveup", "targetname");
   param_00.isnodeoccupied notify("takedown_aborted");
   param_00.isnodeoccupied thread func_4DFD();
@@ -348,7 +348,7 @@ func_1145F(param_00) {
   param_00.isnodeoccupied.var_10265 = undefined;
   param_00.isnodeoccupied thread scripts\sp\maps\europa\europa_util::func_10FC2();
   param_00.isnodeoccupied.target = "takedown_guy_abort_spot";
-  param_00.isnodeoccupied scripts\sp\_utility::func_51E1("casual_gun");
+  param_00.isnodeoccupied scripts\sp\utility::func_51E1("casual_gun");
   param_00.isnodeoccupied.health = 40;
   param_00.isnodeoccupied.objective_playermask_showto = 35;
   param_00.isnodeoccupied thread scripts\sp\maps\europa\europa_util::func_10F49();
@@ -358,15 +358,15 @@ func_1145F(param_00) {
   wait(0.05);
   param_00.isnodeoccupied playsound("stealth_sf0_enemyalerted");
   param_00.isnodeoccupied notify("stop_going_to_node");
-  param_00.isnodeoccupied scripts\sp\_utility::func_F39C(level.player);
-  param_00.isnodeoccupied scripts\sp\_utility::func_4145();
+  param_00.isnodeoccupied scripts\sp\utility::func_F39C(level.player);
+  param_00.isnodeoccupied scripts\sp\utility::func_4145();
   param_00.isnodeoccupied give_mp_super_weapon(param_00.isnodeoccupied.origin);
 }
 
 func_4DFD() {
   scripts\engine\utility::flag_wait("base_arrive");
   if(isalive(self)) {
-    scripts\sp\_utility::func_54C6();
+    scripts\sp\utility::func_54C6();
   }
 }
 
@@ -381,10 +381,10 @@ func_11460() {
 func_11466() {
   self endon("death");
   self endon("takedown_aborted");
-  scripts\sp\_utility::func_65E0("no_interupt");
+  scripts\sp\utility::func_65E0("no_interupt");
   func_19D9();
   self.var_1FBB = "takedown_enemy";
-  scripts\sp\_utility::func_51E1("casual_gun");
+  scripts\sp\utility::func_51E1("casual_gun");
   self.var_ED48 = "takedown_enemy_dead";
   thread lib_0B77::func_1936();
   self.iscinematicplaying = 0;
@@ -406,24 +406,24 @@ func_19D9() {
 
 specialist_tutorials() {
   specialist_nanoshot_tutorial();
-  scripts\sp\_utility::func_127B3("takedown_color_moveup");
+  scripts\sp\utility::func_127B3("takedown_color_moveup");
   specialist_helmet_tutorial();
 }
 
 specialist_nanoshot_tutorial() {
   var_00 = getentarray("specialist_mode_only", "targetname");
   var_01 = scripts\engine\utility::getclosest((29236, -5990, -76), var_00);
-  var_01 scripts\sp\_utility::func_918B("ar_callouts_nanoshot");
-  while (!scripts\sp\_utility::func_D0BD("nanoshot", 1) && !scripts\engine\utility::flag("takedown_start")) {
+  var_01 scripts\sp\utility::func_918B("ar_callouts_nanoshot");
+  while (!scripts\sp\utility::func_D0BD("nanoshot", 1) && !scripts\engine\utility::flag("takedown_start")) {
     wait(0.05);
   }
 
-  var_01 scripts\sp\_utility::func_918C();
+  var_01 scripts\sp\utility::func_918C();
   if(scripts\engine\utility::flag("takedown_start")) {
     return;
   }
 
-  scripts\sp\_utility::func_56BE("nanoshot_tutorial_hint", 9);
+  scripts\sp\utility::func_56BE("nanoshot_tutorial_hint", 9);
 }
 
 specialist_helmet_tutorial() {
@@ -440,17 +440,17 @@ specialist_helmet_tutorial() {
     }
   }
 
-  var_00 scripts\sp\_utility::func_918B("ar_callouts_helmet");
-  while (!scripts\sp\_utility::func_D0BD("helmet", 1) && !scripts\engine\utility::flag("base_arrive")) {
+  var_00 scripts\sp\utility::func_918B("ar_callouts_helmet");
+  while (!scripts\sp\utility::func_D0BD("helmet", 1) && !scripts\engine\utility::flag("base_arrive")) {
     wait(0.05);
   }
 
-  var_00 scripts\sp\_utility::func_918C();
+  var_00 scripts\sp\utility::func_918C();
   if(scripts\engine\utility::flag("base_arrive")) {
     return;
   }
 
-  scripts\sp\_utility::func_56BE("helmet_tutorial_hint", 9);
+  scripts\sp\utility::func_56BE("helmet_tutorial_hint", 9);
 }
 
 scale_accuracy_on_level(param_00) {
@@ -533,7 +533,7 @@ func_A780() {
   scripts\sp\maps\europa\europa_util::func_EBC7();
   thread scripts\sp\maps\europa\europa_util::func_8E46(1);
   level.player scripts\sp\maps\europa\europa_util::func_8E34(1);
-  scripts\sp\_utility::func_F5AF("lab_exterior_start", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\sp\utility::func_F5AF("lab_exterior_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\engine\utility::flag_set_delayed("takedown_vo_complete", 2);
   thread func_A781();
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", & "EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
@@ -546,9 +546,9 @@ func_A77D() {
 
   level.var_A760 = getent("base_door", "targetname");
   level.var_A760 hide();
-  scripts\sp\_utility::func_28D7("axis");
+  scripts\sp\utility::func_28D7("axis");
   scripts\engine\utility::exploder("le_clouds");
-  var_00 = scripts\sp\_vehicle::func_1080C("entrance_dropship");
+  var_00 = scripts\sp\vehicle::func_1080C("entrance_dropship");
   thread func_A77F();
   thread func_28AD();
   scripts\engine\utility::flag_wait("base_arrive");
@@ -562,7 +562,7 @@ func_A77D() {
   }
 
   func_10F40();
-  var_01 = scripts\sp\_utility::func_77DA("base_entrance_snipers");
+  var_01 = scripts\sp\utility::func_77DA("base_entrance_snipers");
   level.var_103BD = var_01;
   foreach(var_03 in var_01) {
     if(level.var_7683 > 1) {
@@ -584,23 +584,23 @@ func_A77D() {
     scripts\engine\utility::flag_wait("base_entrance_snipers_engaged");
     scripts\engine\utility::flag_wait_or_timeout("base_entrance_snipers_dead", 3);
   } else {
-    scripts\sp\_utility::func_13754(var_01);
+    scripts\sp\utility::func_13754(var_01);
   }
 
   foreach(var_03 in level.var_EBCA) {
     var_03.var_C9BD = 1;
-    var_03 scripts\sp\_utility::func_61E7();
+    var_03 scripts\sp\utility::func_61E7();
   }
 
   if(!scripts\engine\utility::flag("base_entrance_platform_enemies_dead")) {
     if(level.var_7683 > 1) {
-      var_07 = scripts\sp\_utility::func_77DA("base_entrance_platform_guys");
+      var_07 = scripts\sp\utility::func_77DA("base_entrance_platform_guys");
       thread wait_platform_guys_fight_started(var_07);
       scripts\engine\utility::flag_wait_or_timeout("base_entrance_platform_enemies_engaged", 3);
       scripts\engine\utility::flag_wait_or_timeout("base_entrance_platform_enemies_dead", 6);
     }
 
-    scripts\sp\_utility::func_15F5("squad_to_base_edge");
+    scripts\sp\utility::func_15F5("squad_to_base_edge");
   }
 
   scripts\engine\utility::flag_wait("base_entrance_platform_enemies_dead");
@@ -610,7 +610,7 @@ func_A77D() {
   setsaveddvar("ai_linkWeightPerUserMin", 9);
   setsaveddvar("ai_linkWeightPerUserMax", 10);
   if(!scripts\engine\utility::flag("player_crossed_chasm")) {
-    scripts\sp\_utility::func_15F5("base_entrnace_moveup");
+    scripts\sp\utility::func_15F5("base_entrnace_moveup");
   }
 
   lib_0F21::func_F5B6(0);
@@ -641,7 +641,7 @@ func_1B31() {
 
   scripts\engine\utility::flag_set("base_entrance_snipers_engaged");
   level.var_1D54 = 1;
-  var_00 = scripts\sp\_utility::array_removedeadvehicles(level.var_103BD);
+  var_00 = scripts\sp\utility::array_removedeadvehicles(level.var_103BD);
   foreach(var_02 in var_00) {
     var_02 snipers_get_tough();
   }
@@ -698,7 +698,7 @@ func_28AD() {
   var_00.var_62E3 = getnode("platform_traverse_end2", "script_noteworthy");
   var_04 = [];
   while (!var_04.size) {
-    var_04 = scripts\sp\_utility::func_77DA("base_entrance_platform_guys");
+    var_04 = scripts\sp\utility::func_77DA("base_entrance_platform_guys");
     wait(0.05);
   }
 
@@ -722,7 +722,7 @@ func_28AD() {
 
 func_CC60() {
   wait(0.05);
-  var_00 = scripts\sp\_utility::func_77DA("base_entrance_platform_guys");
+  var_00 = scripts\sp\utility::func_77DA("base_entrance_platform_guys");
   scripts\engine\utility::array_thread(var_00, ::lib_0F1C::func_6837, 0);
 }
 
@@ -736,8 +736,8 @@ func_DC46() {
 
   scripts\engine\utility::flag_set("raise_platform");
   func_10F42();
-  var_01 = scripts\sp\_utility::func_77DA("base_entrance_platform_guys");
-  var_01 = scripts\sp\_utility::array_removedeadvehicles(var_01);
+  var_01 = scripts\sp\utility::func_77DA("base_entrance_platform_guys");
+  var_01 = scripts\sp\utility::array_removedeadvehicles(var_01);
   foreach(var_03 in var_01) {
     var_03 lib_0F1C::func_6837(1);
     var_03 thread func_872B();
@@ -746,12 +746,12 @@ func_DC46() {
 
 func_872B() {
   self endon("death");
-  scripts\sp\_utility::func_5550();
+  scripts\sp\utility::func_5550();
   thread guy_die_if_helmet_pop();
   wait(randomfloat(2));
   self.var_10E6D.var_B470 = 1;
   self _meth_84F7("attack", level.player, level.player.origin);
-  scripts\sp\_utility::func_50E4(randomfloat(0.8), ::func_2527);
+  scripts\sp\utility::func_50E4(randomfloat(0.8), ::func_2527);
   self.health = 100;
   scale_accuracy_on_level(1.6);
 }
@@ -819,24 +819,24 @@ func_57B8() {
   thread scripts\sp\maps\europa\europa_util::func_134B7("europa_tee_closequarterschec");
   wait(1.5);
   if(level.console || level.player usinggamepad()) {
-    scripts\sp\_utility::func_56BA("scope_both");
+    scripts\sp\utility::func_56BA("scope_both");
   } else {
-    scripts\sp\_utility::func_56BA("scope_kb");
+    scripts\sp\utility::func_56BA("scope_kb");
   }
 
   scripts\engine\utility::flag_set("did_scope_hint");
   if(level.var_7683 < 2) {
-    level.player scripts\sp\_utility::func_65E8("global_hint_in_use");
+    level.player scripts\sp\utility::func_65E8("global_hint_in_use");
     wait(0.5);
-    if(level.player scripts\sp\_utility::func_65DB("switched_weapon_during_tutorial")) {
+    if(level.player scripts\sp\utility::func_65DB("switched_weapon_during_tutorial")) {
       return;
     }
 
-    thread scripts\sp\_utility::func_56BE("scope_test", 5);
+    thread scripts\sp\utility::func_56BE("scope_test", 5);
   }
 
-  level.player scripts\sp\_utility::func_65E8("global_hint_in_use");
-  if(level.player scripts\sp\_utility::func_65DB("switched_weapon_during_tutorial")) {
+  level.player scripts\sp\utility::func_65E8("global_hint_in_use");
+  if(level.player scripts\sp\utility::func_65DB("switched_weapon_during_tutorial")) {
     return;
   }
 
@@ -845,7 +845,7 @@ func_57B8() {
 
 func_137CE() {
   level endon("scope_timeout");
-  level thread scripts\sp\_utility::func_C12D("scope_timeout", 10);
+  level thread scripts\sp\utility::func_C12D("scope_timeout", 10);
   for (;;) {
     var_00 = level.player getcurrentprimaryweapon();
     var_01 = weaponaltweaponname(var_00);
@@ -863,7 +863,7 @@ func_387D(param_00) {
     wait(0.05);
   }
 
-  level.player scripts\sp\_utility::func_65E1("switched_weapon_during_tutorial");
+  level.player scripts\sp\utility::func_65E1("switched_weapon_during_tutorial");
   scripts\engine\utility::flag_set("player_did_alt_scope");
 }
 
@@ -873,31 +873,31 @@ func_A77E() {
 }
 
 func_A781() {
-  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\_utility::func_F415, 1);
-  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\_utility::func_F416, 1);
+  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\utility::func_F415, 1);
+  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\utility::func_F416, 1);
   scripts\engine\utility::flag_wait("raise_platform");
-  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\_utility::func_F415, 0);
-  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\_utility::func_F416, 0);
+  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\utility::func_F415, 0);
+  scripts\engine\utility::array_thread([level.var_EBBB, level.var_EBBC], ::scripts\sp\utility::func_F416, 0);
 }
 
 func_F164() {
-  return level.player scripts\sp\_utility::func_65DB("threw_seeker");
+  return level.player scripts\sp\utility::func_65DB("threw_seeker");
 }
 
 func_134E5(param_00) {
   scripts\engine\utility::flag_wait("base_arrive");
   foreach(var_02 in level.var_EBCA) {
     var_02.var_C9BD = 1;
-    var_02 scripts\sp\_utility::func_5514();
+    var_02 scripts\sp\utility::func_5514();
   }
 
   level.var_EBBB.var_C9BD = 1;
-  level.var_EBBB scripts\sp\_utility::func_5514();
+  level.var_EBBB scripts\sp\utility::func_5514();
   scripts\engine\utility::flag_wait("takedown_vo_complete");
   scripts\sp\maps\europa\europa_util::func_134B7("europa_tee_movementgetdown");
   func_103B1(param_00);
   var_04 = func_137EC(4);
-  if(!scripts\engine\utility::flag("player_crossed_chasm") && !level.player scripts\sp\_utility::func_65DB("player_has_red_flashing_overlay")) {
+  if(!scripts\engine\utility::flag("player_crossed_chasm") && !level.player scripts\sp\utility::func_65DB("player_has_red_flashing_overlay")) {
     if(isdefined(var_04)) {
       scripts\sp\maps\europa\europa_util::func_134B7("europa_plr_got3morecoming");
     } else {
@@ -979,12 +979,12 @@ func_137EC(param_00) {
   }
 
   level endon("timeout");
-  level thread scripts\sp\_utility::func_C12D("timeout", param_00);
-  var_01 = scripts\sp\_utility::func_77DA("base_entrance_platform_guys");
+  level thread scripts\sp\utility::func_C12D("timeout", param_00);
+  var_01 = scripts\sp\utility::func_77DA("base_entrance_platform_guys");
   for (;;) {
     foreach(var_03 in var_01) {
       if(scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), var_03.origin, cos(40))) {
-        if(scripts\sp\_detonategrenades::func_385C(level.player geteye(), var_03)) {
+        if(scripts\sp\detonategrenades::func_385C(level.player geteye(), var_03)) {
           return 1;
         }
       }
@@ -996,7 +996,7 @@ func_137EC(param_00) {
 
 func_7BB2(param_00, param_01) {
   level endon("player_target_timeout");
-  level thread scripts\sp\_utility::func_C12D("player_target_timeout", param_01);
+  level thread scripts\sp\utility::func_C12D("player_target_timeout", param_01);
   for (;;) {
     foreach(var_03 in param_00) {
       if(scripts\sp\maps\europa\europa_util::func_D35D(var_03)) {
@@ -1024,7 +1024,7 @@ func_A770() {
   thread scripts\sp\maps\europa\europa_util::func_8E46(1);
   thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
   thread func_F156();
-  scripts\sp\_utility::func_F5AF("breach_room_start", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\sp\utility::func_F5AF("breach_room_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\engine\utility::flag_set("scars_in_lab");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", & "EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
 }
@@ -1054,24 +1054,24 @@ func_A76D() {
 func_13509() {
   level endon("seeker_room_hot");
   var_00 = getent("seeker_room_vol", "targetname");
-  var_01 = var_00 scripts\sp\_utility::func_77E3("axis");
+  var_01 = var_00 scripts\sp\utility::func_77E3("axis");
   var_02 = scripts\engine\utility::array_randomize(var_01);
-  var_02[1] scripts\sp\_utility::func_10347("europa_sf2_thereslockershe");
+  var_02[1] scripts\sp\utility::func_10347("europa_sf2_thereslockershe");
   wait(0.1);
-  var_02[0] scripts\sp\_utility::func_10347("europa_sf1_complyrightaway");
+  var_02[0] scripts\sp\utility::func_10347("europa_sf1_complyrightaway");
   wait(1.5);
-  var_02[2] scripts\sp\_utility::func_10347("europa_sf3_onlysatowouldle");
-  var_02[1] scripts\sp\_utility::func_10347("europa_sf2_whatdoyouexpect");
+  var_02[2] scripts\sp\utility::func_10347("europa_sf3_onlysatowouldle");
+  var_02[1] scripts\sp\utility::func_10347("europa_sf2_whatdoyouexpect");
   wait(1.7);
-  var_02[1] scripts\sp\_utility::func_10347("europa_sf2_bringanythingof");
+  var_02[1] scripts\sp\utility::func_10347("europa_sf2_bringanythingof");
   wait(0.05);
-  var_02[0] scripts\sp\_utility::func_10347("europa_sf1_confirmilldeliv");
-  var_02[2] scripts\sp\_utility::func_10347("europa_sf3_thatsnotyourtas");
+  var_02[0] scripts\sp\utility::func_10347("europa_sf1_confirmilldeliv");
+  var_02[2] scripts\sp\utility::func_10347("europa_sf3_thatsnotyourtas");
   wait(0.05);
-  var_02[0] scripts\sp\_utility::func_10347("europa_sf1_itsnotyourtaske");
+  var_02[0] scripts\sp\utility::func_10347("europa_sf1_itsnotyourtaske");
   wait(2.5);
-  var_02[1] scripts\sp\_utility::func_10347("europa_sf2_keeplookingweve");
-  var_02[2] scripts\sp\_utility::func_10347("europa_sf3_ithinktheresemp");
+  var_02[1] scripts\sp\utility::func_10347("europa_sf2_keeplookingweve");
+  var_02[2] scripts\sp\utility::func_10347("europa_sf3_ithinktheresemp");
 }
 
 func_A760() {
@@ -1087,7 +1087,7 @@ func_A760() {
   level.var_A760.origin = var_01.origin;
   level.var_A760 show();
   setsuncolorandintensity(0);
-  scripts\sp\_utility::func_2669("entrance");
+  scripts\sp\utility::func_2669("entrance");
 }
 
 func_3825(param_00) {
@@ -1141,13 +1141,13 @@ func_B99F() {
 
 func_9068() {
   var_00 = level.var_EBBB;
-  var_00 thread scripts\sp\_utility::func_7799(level.player, 2, 2);
+  var_00 thread scripts\sp\utility::func_7799(level.player, 2, 2);
   scripts\engine\utility::flag_wait("base_stairs_bottom");
-  var_00 scripts\sp\_utility::func_61E7();
-  var_00 scripts\sp\_utility::func_77B9(1.25);
+  var_00 scripts\sp\utility::func_61E7();
+  var_00 scripts\sp\utility::func_77B9(1.25);
   var_01 = scripts\engine\utility::getstruct("seeker_arrive_hold", "targetname");
   if(scripts\engine\utility::flag("entering_seeker_room")) {
-    var_00 scripts\sp\_utility::func_61C7();
+    var_00 scripts\sp\utility::func_61C7();
     return;
   }
 
@@ -1155,8 +1155,8 @@ func_9068() {
   var_01 scripts\sp\anim::func_1F17(var_00, "hold_up");
   var_01 thread scripts\sp\anim::func_1F35(var_00, "hold_up");
   wait(1);
-  var_00 scripts\sp\_utility::func_61C7();
-  var_00 scripts\sp\_utility::func_5514();
+  var_00 scripts\sp\utility::func_61C7();
+  var_00 scripts\sp\utility::func_5514();
 }
 
 func_6B7F() {
@@ -1198,7 +1198,7 @@ func_134E4() {
 
 func_F158() {
   level endon("seeker_room_hot");
-  level thread scripts\sp\_utility::func_C12D("seeker_pullot", 1);
+  level thread scripts\sp\utility::func_C12D("seeker_pullot", 1);
   scripts\sp\maps\europa\europa_util::func_134B7("europa_sip_eyesonmultipletar");
   scripts\sp\maps\europa\europa_util::func_134B7("europa_plr_timetogetwetse");
   scripts\sp\maps\europa\europa_util::func_134B7("europa_sip_copythat");
@@ -1216,17 +1216,17 @@ func_F156() {
   level.player.dontmelee = 1;
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
   var_04 = getent("seeker_room_vol", "targetname");
-  var_05 = var_04 scripts\sp\_utility::func_77E3("axis");
+  var_05 = var_04 scripts\sp\utility::func_77E3("axis");
   var_06 = scripts\engine\utility::random(var_05).origin;
   thread func_E6DA();
   func_D2FC();
-  if(level.player scripts\sp\_utility::func_65DB("threw_seeker")) {
+  if(level.player scripts\sp\utility::func_65DB("threw_seeker")) {
     level.var_EBBB func_875B();
     wait(0.5);
     level.var_EBBC func_875B();
   } else {}
 
-  scripts\sp\_utility::func_15F5("seekers_thrown");
+  scripts\sp\utility::func_15F5("seekers_thrown");
   scripts\engine\utility::flag_wait("seeker_room_hot");
   var_04 = getent("seeker_axis_badplace", "targetname");
   var_07 = createnavobstaclebyent(var_04, "axis");
@@ -1236,12 +1236,12 @@ func_F156() {
 
   var_08 = "eu_enemy_incoming_" + randomintrange(1, 4);
   playworldsound(var_08, var_06);
-  scripts\sp\_utility::func_28D8("axis");
+  scripts\sp\utility::func_28D8("axis");
   level.var_EBBB.precacheleaderboards = 0;
   level.var_EBBC.precacheleaderboards = 0;
-  scripts\sp\_utility::func_13754(var_05);
+  scripts\sp\utility::func_13754(var_05);
   scripts\engine\utility::flag_set("seeker_enemies_dead");
-  scripts\sp\_utility::func_28D7("axis");
+  scripts\sp\utility::func_28D7("axis");
   destroynavobstacle(var_07);
   level.player.dontmelee = undefined;
   if(getdvarint("debug_europa")) {
@@ -1249,9 +1249,9 @@ func_F156() {
   }
 
   func_2BCC();
-  scripts\sp\_utility::func_10FEC("le_clouds");
+  scripts\sp\utility::func_10FEC("le_clouds");
   wait(2.5);
-  scripts\sp\_utility::func_2669("airlock_go");
+  scripts\sp\utility::func_2669("airlock_go");
 }
 
 func_D2FC() {
@@ -1261,10 +1261,10 @@ func_D2FC() {
     setomnvar("ui_hud_ability_primary", 1);
     level.player giveandfireoffhand("seeker_autohold");
     level.player setweaponammostock("seeker_autohold", 1);
-    level.player thread scripts\sp\_utility::func_56BA("seeker_hint");
+    level.player thread scripts\sp\utility::func_56BA("seeker_hint");
   } else {
     level.player giveweapon("seeker");
-    level.player thread scripts\sp\_utility::func_56BA("seeker_hint");
+    level.player thread scripts\sp\utility::func_56BA("seeker_hint");
   }
 
   if(var_00) {
@@ -1276,7 +1276,7 @@ func_D2FC() {
   func_137F3();
   if(var_00) {
     level.player takeweapon("seeker_autohold");
-    if(level.player scripts\sp\_utility::func_65DB("threw_seeker")) {
+    if(level.player scripts\sp\utility::func_65DB("threw_seeker")) {
       level.player setweaponammostock("seeker", 3);
     } else {
       level.player setweaponammostock("seeker", 4);
@@ -1301,7 +1301,7 @@ func_B992() {
 
     foreach(var_01 in level.var_F10A.var_1633) {
       if(isdefined(var_01.triggerportableradarping) && var_01.triggerportableradarping == level.player) {
-        level.player scripts\sp\_utility::func_65E1("threw_seeker");
+        level.player scripts\sp\utility::func_65E1("threw_seeker");
         var_01 thread func_F168();
         wait(0.05);
         return;
@@ -1325,14 +1325,14 @@ func_F168() {
     }
 
     self.var_3135.var_F15D.var_1FBD notify("stop_loop");
-    self.var_3135.var_F15D scripts\sp\_utility::anim_stopanimscripted();
+    self.var_3135.var_F15D scripts\sp\utility::anim_stopanimscripted();
     self.var_3135.var_F15D notify("seeker_attack");
     self.var_3135.var_F15D scripts\sp\maps\europa\europa_util::func_1108E();
   }
 }
 
 func_F15C() {
-  return level.player scripts\sp\_utility::func_65DB("threw_seeker") || scripts\engine\utility::flag("seeker_enemies_dead");
+  return level.player scripts\sp\utility::func_65DB("threw_seeker") || scripts\engine\utility::flag("seeker_enemies_dead");
 }
 
 func_2BCC() {
@@ -1427,14 +1427,14 @@ func_F131() {
   }
 
   self.var_F10A.health = 3000;
-  self.var_F10A thread scripts\sp\_utility::func_B14F();
+  self.var_F10A thread scripts\sp\utility::func_B14F();
 }
 
 func_E7D3() {
   self endon("seeker_attack");
   var_00 = getspawner("rummage_spawner", "targetname");
   var_00.var_C1 = 1;
-  var_01 = var_00 scripts\sp\_utility::func_10619(1);
+  var_01 = var_00 scripts\sp\utility::func_10619(1);
   var_01.var_1FBB = "generic";
   var_02 = strtok(self.script_parameters, " ");
   var_01.var_1FBD = self;
@@ -1468,7 +1468,7 @@ func_E7D3() {
   var_01 scripts\sp\anim::func_1F35(var_01, var_02[1]);
   var_01 scripts\sp\maps\europa\europa_util::func_1108E();
   scripts\engine\utility::flag_set("seeker_room_hot");
-  if(!level.player scripts\sp\_utility::func_65DB("threw_seeker")) {
+  if(!level.player scripts\sp\utility::func_65DB("threw_seeker")) {
     var_01.var_2894 = var_01.var_2894 * 1.5;
     var_01.health = var_01.health + 110;
   }
@@ -1518,11 +1518,11 @@ func_EF56() {
   if(var_00) {
     var_03 = getspawner("rummage_spawner", "targetname");
     var_03.var_C1++;
-    var_04 = var_03 scripts\sp\_utility::func_10619(1);
-    if(scripts\sp\_utility::func_106ED(var_04)) {
+    var_04 = var_03 scripts\sp\utility::func_10619(1);
+    if(scripts\sp\utility::func_106ED(var_04)) {
       wait(0.05);
-      var_04 = var_03 scripts\sp\_utility::func_10619(1);
-      if(scripts\sp\_utility::func_106ED(var_04)) {
+      var_04 = var_03 scripts\sp\utility::func_10619(1);
+      if(scripts\sp\utility::func_106ED(var_04)) {
         level.var_EF59--;
         return 0;
       }
@@ -1543,7 +1543,7 @@ func_EF56() {
     var_04 func_EF57();
     var_04 scripts\sp\anim::func_1F35(var_04, "scripted_long_death_die", undefined, undefined, "generic");
     var_04.var_DC1A = 1;
-    var_04 scripts\sp\_utility::func_1101B();
+    var_04 scripts\sp\utility::func_1101B();
     var_04.var_30 = 1;
     var_04.a.nodeath = 1;
     var_04 _meth_81D0();
@@ -1572,9 +1572,9 @@ func_AFDF() {
   self.var_C012 = 1;
   self.precacheleaderboards = 1;
   self.ignoreme = 1;
-  thread scripts\sp\_utility::func_B14F();
-  scripts\sp\_utility::func_86E4();
-  scripts\sp\_utility::func_F2DA(0);
+  thread scripts\sp\utility::func_B14F();
+  scripts\sp\utility::func_86E4();
+  scripts\sp\utility::func_F2DA(0);
   self.var_30 = 0;
   self.a.nodeath = 0;
   self hide();
@@ -1622,18 +1622,18 @@ func_F11F() {
   thread func_3D9C();
   thread func_10FC3();
   self.var_4E46 = ::func_EF56;
-  scripts\sp\_utility::func_178D(::scripts\sp\_utility::func_137AA, "stealthlight_attack");
-  scripts\sp\_utility::func_178D(::scripts\engine\utility::flag_wait, "seeker_room_hot");
-  scripts\sp\_utility::func_57D6();
+  scripts\sp\utility::func_178D(::scripts\sp\utility::func_137AA, "stealthlight_attack");
+  scripts\sp\utility::func_178D(::scripts\engine\utility::flag_wait, "seeker_room_hot");
+  scripts\sp\utility::func_57D6();
   if(getdvarint("debug_europa")) {}
 
   scripts\engine\utility::flag_set("seeker_room_hot");
-  scripts\sp\_utility::func_4145();
+  scripts\sp\utility::func_4145();
   self notify("stop_going_to_node");
   self.logstring = 0;
   self.objective_playermask_showto = 800;
   scripts\sp\maps\europa\europa_util::func_1108E();
-  if(!level.player scripts\sp\_utility::func_65DB("threw_seeker")) {
+  if(!level.player scripts\sp\utility::func_65DB("threw_seeker")) {
     self.var_2894 = self.var_2894 * 2;
     self.health = self.health + 110;
   }
@@ -1652,11 +1652,11 @@ _meth_8463() {
   var_00 notsolid();
   scripts\engine\utility::trigger_on("enter_airlock_color_move", "targetname");
   wait(0.05);
-  scripts\sp\_utility::func_15F5("enter_airlock_color_move");
+  scripts\sp\utility::func_15F5("enter_airlock_color_move");
   var_01 = scripts\engine\utility::getstruct("lab_airlock_scene", "targetname");
   foreach(var_03 in level.var_EBCA) {
     var_03.var_C9BD = 1;
-    var_03 scripts\sp\_utility::func_5514();
+    var_03 scripts\sp\utility::func_5514();
   }
 
   var_05 = level.var_EBBC;
@@ -1667,7 +1667,7 @@ _meth_8463() {
   var_07 = getent("lab_entrance_airlock_trig", "targetname");
   var_08 = [level.player, level.var_EBBB];
   func_1378A(var_07, var_08);
-  scripts\sp\_utility::func_2669("in_airlock");
+  scripts\sp\utility::func_2669("in_airlock");
   scripts\engine\utility::array_call(getentarray("airlock_fan", "targetname"), ::delete);
   var_09 = getcorpsearrayinradius();
   foreach(var_0B in var_09) {
@@ -1683,17 +1683,17 @@ _meth_8463() {
   var_0D solid();
   var_0E = [var_05, var_06];
   level.player _meth_82C0("europa_airlock_room", 3);
-  var_06 scripts\engine\utility::delaythread(1, ::scripts\sp\_utility::play_sound_on_entity, "airlock_entry_door_close");
+  var_06 scripts\engine\utility::delaythread(1, ::scripts\sp\utility::play_sound_on_entity, "airlock_entry_door_close");
   var_01 notify("stop_loop");
   scripts\engine\utility::flag_set("airlock_closing");
   var_01 thread scripts\sp\anim::func_1F2C(var_0E, "lab_airlock_close");
   wait(4.9);
-  var_05 scripts\sp\_utility::func_61C7();
+  var_05 scripts\sp\utility::func_61C7();
   level.player playsound("airlock_pressurize_lr");
   setglobalsoundcontext("atmosphere", "", 3);
   foreach(var_03 in level.var_EBCA) {
     var_03.var_C9BD = undefined;
-    var_03 scripts\sp\_utility::func_61E7();
+    var_03 scripts\sp\utility::func_61E7();
   }
 
   var_11 = scripts\engine\utility::getstructarray("airlock_fx", "targetname");
@@ -1769,13 +1769,13 @@ func_1AE2() {
 
 func_1AC0(param_00, param_01) {
   if(isdefined(param_00)) {
-    wait(getanimlength(param_01 scripts\sp\_utility::func_7DC1(param_00)));
+    wait(getanimlength(param_01 scripts\sp\utility::func_7DC1(param_00)));
   } else {
     wait(6);
   }
 
   level.var_1AB3 disconnectpaths();
-  param_01 scripts\sp\_utility::func_61C7();
+  param_01 scripts\sp\utility::func_61C7();
 }
 
 func_94E6() {
@@ -1805,9 +1805,9 @@ func_A746() {
   level.player scripts\sp\maps\europa\europa_util::func_8E34(1);
   scripts\sp\maps\europa\europa_util::func_EBC7();
   scripts\engine\utility::flag_set("player_did_alt_scope");
-  scripts\sp\_utility::func_F5AF("lab_airlock_start", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\sp\utility::func_F5AF("lab_airlock_start", [level.var_EBBB, level.var_EBBC, level.player]);
   wait(0.1);
-  scripts\sp\_utility::func_15F5("enter_airlock_color_move");
+  scripts\sp\utility::func_15F5("enter_airlock_color_move");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
@@ -1815,7 +1815,7 @@ func_A746() {
 func_A744() {
   thread scripts\sp\maps\europa\europa_util::func_10690("lab_airlock");
   if(isdefined(level.var_4074) && isdefined(level.var_4074["lab_exterior"])) {
-    scripts\sp\_utility::func_4074("lab_exterior");
+    scripts\sp\utility::func_4074("lab_exterior");
   }
 
   foreach(var_01 in level.var_EBCA) {
@@ -1828,16 +1828,16 @@ func_A744() {
   scripts\sp\maps\europa\europa_util::func_8E72("base_armory_vista_02");
   var_03 = getentarray("base_reveal_vista", "targetname");
   scripts\engine\utility::array_call(var_03, ::hide);
-  scripts\sp\_utility::func_22CA("locker_enemies", ::func_AF07);
+  scripts\sp\utility::func_22CA("locker_enemies", ::func_AF07);
   thread func_134E3();
   scripts\sp\maps\europa\europa_util::func_13815("lab_entrance_airlock_trig");
   var_04 = scripts\engine\utility::getstructarray("locker_scenes", "script_noteworthy");
-  var_05 = scripts\sp\_utility::func_22CD("locker_enemies", 1);
+  var_05 = scripts\sp\utility::func_22CD("locker_enemies", 1);
   thread func_200E(var_05);
   var_06 = func_F8BF();
   wait(1.5);
   scripts\engine\utility::flag_wait("player_did_alt_scope");
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     scripts\sp\specialist_MAYBE::func_F53C(1);
   }
 
@@ -1858,18 +1858,18 @@ func_A744() {
   var_06.var_4220 delete();
   thread scripts\sp\maps\europa\europa_util::func_10690("lab_walk");
   scripts\engine\utility::flag_wait("antigrav_detonates");
-  thread scripts\sp\_utility::func_6E7C("player_crossing_bridge", ::scripts\engine\utility::flag_set, "straggler_dead");
+  thread scripts\sp\utility::func_6E7C("player_crossing_bridge", ::scripts\engine\utility::flag_set, "straggler_dead");
   foreach(var_01 in level.var_EBCA) {
     var_01.var_C9BD = undefined;
-    var_01 scripts\sp\_utility::func_61E7();
+    var_01 scripts\sp\utility::func_61E7();
   }
 
   thread func_CD69();
   thread func_EBCC();
   level.player _meth_80A1();
-  scripts\sp\_utility::func_13753(var_05);
+  scripts\sp\utility::func_13753(var_05);
   scripts\engine\utility::flag_set("airlock_enemies_dead");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
   scripts\engine\utility::flag_wait("antigrav_clear");
   foreach(var_01 in level.var_EBCA) {
     var_01.objective_state = var_01.var_C380;
@@ -1877,10 +1877,10 @@ func_A744() {
     var_01.objective_state_nomessage = 1;
   }
 
-  scripts\sp\_utility::func_15F5("after_two_kill_color_move");
-  var_0B = scripts\sp\_utility::func_107EA("locker_enemy_guard");
+  scripts\sp\utility::func_15F5("after_two_kill_color_move");
+  var_0B = scripts\sp\utility::func_107EA("locker_enemy_guard");
   if(isdefined(var_0B)) {
-    scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_5564);
+    scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_5564);
     var_0B thread func_110DA();
     var_0B thread func_54C1();
     var_0B.health = 50;
@@ -1888,7 +1888,7 @@ func_A744() {
     var_0B.var_4E46 = ::func_4E31;
     var_0B.ignoreme = 1;
     var_0B.objective_state = 0;
-    var_0B scripts\engine\utility::delaythread(2, ::scripts\sp\_utility::func_F416, 0);
+    var_0B scripts\engine\utility::delaythread(2, ::scripts\sp\utility::func_F416, 0);
     return;
   }
 
@@ -1908,7 +1908,7 @@ func_18EA() {
 
   self.health = 20;
   self endon("death");
-  scripts\engine\utility::delaythread(6.5, ::scripts\sp\_utility::func_54C6);
+  scripts\engine\utility::delaythread(6.5, ::scripts\sp\utility::func_54C6);
 }
 
 func_CD69() {
@@ -1922,7 +1922,7 @@ func_CD69() {
 }
 
 func_4E31() {
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_6224);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_6224);
   if(isdefined(self.var_D417)) {
     var_00 = ["europa_plr_hesdown", "europa_plr_watchyourcorners"];
   } else {
@@ -1945,7 +1945,7 @@ func_54C1() {
 }
 
 func_134E3() {
-  if(!scripts\sp\_utility::func_9BB5()) {
+  if(!scripts\sp\utility::func_9BB5()) {
     wait(0.5);
   }
 
@@ -1958,8 +1958,8 @@ func_134E3() {
 
 func_1F8B() {
   wait(0.1);
-  var_00 = scripts\sp\_utility::func_10639("fhr40", self.origin - (0, 0, 100), self.angles);
-  var_01 = getanimlength(scripts\sp\_utility::func_7DC2("airlock_response", self.var_1FBB));
+  var_00 = scripts\sp\utility::func_10639("fhr40", self.origin - (0, 0, 100), self.angles);
+  var_01 = getanimlength(scripts\sp\utility::func_7DC2("airlock_response", self.var_1FBB));
   var_00 scripts\engine\utility::delaycall(var_01, ::delete);
   scripts\sp\anim::func_1F2C([self, var_00], "airlock_response");
 }
@@ -2025,16 +2025,16 @@ func_2014(param_00) {
 }
 
 func_2019() {
-  if(level.player scripts\sp\_utility::func_65DF("player_gravity_off") && level.player scripts\sp\_utility::func_65DB("player_gravity_off")) {
+  if(level.player scripts\sp\utility::func_65DF("player_gravity_off") && level.player scripts\sp\utility::func_65DB("player_gravity_off")) {
     return;
   }
 
   playworldsound("slomo_whoosh", level.player.origin);
   wait(0.85);
   level.var_1031B.var_1098F = 0.55;
-  scripts\sp\_utility::func_10321();
+  scripts\sp\utility::func_10321();
   wait(0.65);
-  scripts\sp\_utility::func_10322();
+  scripts\sp\utility::func_10322();
 }
 
 func_F8BF() {
@@ -2054,7 +2054,7 @@ func_F8BF() {
 }
 
 func_CF55(param_00) {
-  param_00.var_D267 = scripts\sp\_utility::func_10639("player_rig", param_00.origin);
+  param_00.var_D267 = scripts\sp\utility::func_10639("player_rig", param_00.origin);
   param_00 scripts\sp\anim::func_1EC3(param_00.var_D267, "antigrav_breach");
   param_00.var_D267 hide();
   param_00.var_1FB8 = getanimlength( % europa_airlock_plr_grav_grenade_scene);
@@ -2153,7 +2153,7 @@ func_A76F() {
   for (var_01 = 0; var_01 < var_08.size; var_01++) {
     foreach(var_0E in var_08[var_01]) {
       var_0E setmodel("crr_light_overhead_01_off");
-      var_0E thread scripts\sp\_utility::play_sound_on_entity("lab_light_off");
+      var_0E thread scripts\sp\utility::play_sound_on_entity("lab_light_off");
       if(isdefined(var_0E.target)) {
         var_0A = getent(var_0E.target, "targetname");
         var_0A setlightintensity(0);
@@ -2180,15 +2180,15 @@ func_A765() {
   }
 
   scripts\engine\utility::flag_wait("armory_lights_on");
-  scripts\sp\_utility::func_228A(var_01);
+  scripts\sp\utility::func_228A(var_01);
 }
 
 func_A745() {
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     scripts\sp\specialist_MAYBE::func_F53C(1);
   }
 
-  level.player thread scripts\sp\_utility::func_DC45("raise");
+  level.player thread scripts\sp\utility::func_DC45("raise");
   scripts\engine\utility::array_call(getentarray("airlock_fan", "targetname"), ::delete);
   scripts\sp\maps\europa\europa_util::func_8E72("base_armory_vista_02");
   var_00 = getentarray("base_reveal_vista", "targetname");
@@ -2198,11 +2198,11 @@ func_A745() {
 func_A797() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   scripts\engine\utility::delaythread(0.6, ::scripts\sp\maps\europa\europa_util::func_10690, "lab_airlock");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
   thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
   scripts\sp\maps\europa\europa_util::func_EBC7();
-  scripts\sp\_utility::func_F5AF("lab_walk_start", [level.var_EBBB, level.var_EBBC, level.player]);
-  scripts\sp\_utility::func_15F5("after_two_kill_color_move");
+  scripts\sp\utility::func_F5AF("lab_walk_start", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\sp\utility::func_15F5("after_two_kill_color_move");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
   scripts\engine\utility::flag_set("straggler_dead");
@@ -2213,14 +2213,14 @@ func_A793() {
   scripts\sp\maps\europa\europa_util::func_EF3F(var_00, "part", "healthy", "healthy_blue");
   thread func_13DA2();
   thread func_134E8();
-  scripts\sp\_utility::func_2669("lab_walk");
+  scripts\sp\utility::func_2669("lab_walk");
   scripts\engine\utility::flag_wait("scars_spawned");
   scripts\engine\utility::flag_wait("player_enters_glass_bridge");
   level.var_EBBC thread func_26AA();
   scripts\engine\utility::flag_wait("straggler_dead");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_F415, 1);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F415, 1);
   func_10F41();
-  if(scripts\sp\_utility::func_93A6()) {
+  if(scripts\sp\utility::func_93A6()) {
     thread scripts\sp\specialist_MAYBE::func_2683();
   }
 
@@ -2230,7 +2230,7 @@ func_A793() {
 func_13DA2() {
   var_00 = getent("window_c12", "targetname");
   var_00 func_D6A7();
-  scripts\sp\_utility::func_16AE(var_00, "office_fight");
+  scripts\sp\utility::func_16AE(var_00, "office_fight");
 }
 
 func_10F41() {
@@ -2246,10 +2246,10 @@ func_10F41() {
 }
 
 func_26AA() {
-  scripts\sp\_utility::func_54F7();
+  scripts\sp\utility::func_54F7();
   self.target = "office_long_way";
   lib_0B77::worldpointinreticle_circle();
-  scripts\sp\_utility::func_61C7();
+  scripts\sp\utility::func_61C7();
 }
 
 func_11601() {
@@ -2262,13 +2262,13 @@ func_11601() {
 func_134E8() {
   scripts\engine\utility::flag_wait("straggler_dead");
   scripts\engine\utility::flag_wait("player_enters_glass_bridge");
-  level.player scripts\sp\_utility::func_D090("ges_radio");
-  level.player scripts\sp\_utility::func_D2D1(140, 0.5);
+  level.player scripts\sp\utility::func_D090("ges_radio");
+  level.player scripts\sp\utility::func_D2D1(140, 0.5);
   level.player getnumownedagentsonteambytype(0);
   func_C806();
   level.player stopgestureviewmodel("ges_radio", 1);
   level.player getnumownedagentsonteambytype(1);
-  level.player scripts\sp\_utility::func_D2D1(190, 3);
+  level.player scripts\sp\utility::func_D2D1(190, 3);
   wait(1);
   if(scripts\engine\utility::flag("entering_c12_research_room")) {
     return;
@@ -2281,9 +2281,9 @@ func_134E8() {
 func_30CF() {
   self endon("death");
   if(scripts\engine\utility::cointoss()) {
-    scripts\sp\_utility::func_51E1("frantic");
+    scripts\sp\utility::func_51E1("frantic");
   } else {
-    scripts\sp\_utility::func_51E1("sprint");
+    scripts\sp\utility::func_51E1("sprint");
   }
 
   self.health = 40;
@@ -2311,17 +2311,17 @@ func_E1C7() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   func_10F41();
   thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "raise");
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
   scripts\sp\maps\europa\europa_util::func_EBC7();
-  scripts\sp\_utility::func_F5AF("research_start", [level.var_EBBB, level.var_EBBC, level.player]);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_F415, 1);
+  scripts\sp\utility::func_F5AF("research_start", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F415, 1);
   thread func_13DA2();
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
 
 func_E1C3() {
-  scripts\sp\_utility::func_2669("research");
+  scripts\sp\utility::func_2669("research");
   thread func_13500();
   thread scripts\sp\maps\europa\europa_util::func_10690("office_fight");
   level.var_F10A.var_4C74 = ::func_F167;
@@ -2332,7 +2332,7 @@ func_E1C3() {
   scripts\engine\utility::flag_wait("stealth_spotted");
   level.var_EBBB.var_C062 = undefined;
   level.var_EBBC.var_C062 = undefined;
-  scripts\sp\_utility::func_15F5("spawn_back_office_enemies");
+  scripts\sp\utility::func_15F5("spawn_back_office_enemies");
   scripts\engine\utility::flag_set("office_fight_started");
 }
 
@@ -2395,8 +2395,8 @@ visionsetnakedforplayer() {
   thread func_26E5();
   scripts\engine\utility::flag_wait_any("office_hot", "axis_close");
   func_10F42();
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_F415, 0);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_F416, 0);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F415, 0);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F416, 0);
 }
 
 func_26E5() {
@@ -2406,7 +2406,7 @@ func_26E5() {
     if(isdefined(var_01)) {
       var_01.var_5951 = undefined;
       foreach(var_03 in level.var_EBCA) {
-        var_03 scripts\sp\_utility::func_F39C(var_01);
+        var_03 scripts\sp\utility::func_F39C(var_01);
       }
     }
   }
@@ -2424,7 +2424,7 @@ func_13DA3(param_00) {
   level endon("office_fight_started");
   param_00 scripts\sp\anim::func_1F17(self, "wonder_room_walk");
   param_00 scripts\sp\anim::func_1F35(self, "wonder_room_walk");
-  scripts\sp\_utility::func_61C7();
+  scripts\sp\utility::func_61C7();
 }
 
 func_E1C4() {
@@ -2455,19 +2455,19 @@ func_C806() {
 func_62D7(param_00, param_01) {
   level endon("player_enters_c12_labs");
   if(isalive(param_00)) {
-    param_00 scripts\sp\_utility::play_sound_on_entity("europa_sf1_whyisthatdoorno");
+    param_00 scripts\sp\utility::play_sound_on_entity("europa_sf1_whyisthatdoorno");
   }
 
   if(isalive(param_01[0])) {
-    param_01[0] scripts\sp\_utility::play_sound_on_entity("europa_sf3_sireverythingsfro");
+    param_01[0] scripts\sp\utility::play_sound_on_entity("europa_sf3_sireverythingsfro");
   }
 
   if(isalive(param_00)) {
-    param_00 scripts\sp\_utility::play_sound_on_entity("europa_sf1_whyisthatdoorno");
+    param_00 scripts\sp\utility::play_sound_on_entity("europa_sf1_whyisthatdoorno");
   }
 
   if(isalive(param_01[0])) {
-    param_00 scripts\sp\_utility::play_sound_on_entity("europa_sf1_iwanteverythingo");
+    param_00 scripts\sp\utility::play_sound_on_entity("europa_sf1_iwanteverythingo");
   }
 }
 
@@ -2481,11 +2481,11 @@ func_E40D() {
 }
 
 func_19CD() {
-  scripts\sp\_utility::func_51E1("casual_gun");
+  scripts\sp\utility::func_51E1("casual_gun");
 }
 
 func_19CC() {
-  scripts\sp\_utility::func_51E1("casual");
+  scripts\sp\utility::func_51E1("casual");
 }
 
 func_A794() {
@@ -2494,33 +2494,33 @@ func_A794() {
 
 func_A788() {
   scripts\sp\maps\europa\europa_util::func_107C5();
-  scripts\sp\_utility::func_15F5("wonder_room_patroller_spawn");
+  scripts\sp\utility::func_15F5("wonder_room_patroller_spawn");
   func_10F42();
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "raise");
-  scripts\sp\_utility::func_F5AF("start_lab_office_door", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\sp\utility::func_F5AF("start_lab_office_door", [level.var_EBBB, level.var_EBBC, level.player]);
   thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
   scripts\sp\maps\europa\europa_util::func_EBC7();
   var_00 = [level.var_EBBB, level.var_EBBC];
   scripts\engine\utility::delaythread(1, ::scripts\sp\maps\europa\europa_util::func_10690, "office_fight");
-  scripts\sp\_utility::func_15F5("office_door_color_trig");
-  scripts\sp\_utility::func_15F5("spawn_back_office_enemies");
+  scripts\sp\utility::func_15F5("office_door_color_trig");
+  scripts\sp\utility::func_15F5("spawn_back_office_enemies");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
 
 func_A786() {
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_F415, 0);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_F416, 0);
-  scripts\sp\_utility::func_15F5("office_door_color_trig");
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F415, 0);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F416, 0);
+  scripts\sp\utility::func_15F5("office_door_color_trig");
   thread func_1EDA();
   thread func_3385();
   var_00 = getaiunittypearray("all", "soldier");
-  scripts\engine\utility::array_thread(var_00, ::scripts\sp\_utility::func_F2DA, 1);
+  scripts\engine\utility::array_thread(var_00, ::scripts\sp\utility::func_F2DA, 1);
   thread func_134E6();
   scripts\engine\utility::flag_wait("enter_office_door_area");
-  scripts\sp\_utility::func_2669("soldier_combat");
+  scripts\sp\utility::func_2669("soldier_combat");
   level notify("stop_catching_up");
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_5514);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_5514);
   thread func_4794();
   scripts\engine\utility::flag_wait("entering_office_exit");
   level notify("deploy_c6_lockers");
@@ -2561,8 +2561,8 @@ func_2726() {
 }
 
 func_3385() {
-  scripts\sp\_utility::func_22CA("c6_locker_spawner", ::func_AF01);
-  scripts\sp\_utility::func_22CA("c6_hacker", ::func_3371);
+  scripts\sp\utility::func_22CA("c6_locker_spawner", ::func_AF01);
+  scripts\sp\utility::func_22CA("c6_hacker", ::func_3371);
   var_00 = 1;
   var_01 = scripts\engine\utility::getstructarray("c6_locker", "script_noteworthy");
   level.var_AF02 = [];
@@ -2574,7 +2574,7 @@ func_3385() {
   var_05 = 0;
   var_06 = 1;
   scripts\engine\utility::flag_wait("c6_lockers_go");
-  var_07 = getent("front_office_vol", "targetname") scripts\sp\_utility::func_77E3("axis", "human");
+  var_07 = getent("front_office_vol", "targetname") scripts\sp\utility::func_77E3("axis", "human");
   if(var_07.size < 2) {
     var_05 = 1;
     var_06 = 1;
@@ -2591,7 +2591,7 @@ func_3385() {
 
   var_06 = !var_00;
   if(var_06) {
-    scripts\sp\_utility::func_22CD("c6_hacker", 1);
+    scripts\sp\utility::func_22CD("c6_hacker", 1);
     wait(0.75);
   }
 
@@ -2615,16 +2615,16 @@ func_3385() {
     thread func_3400();
     foreach(var_0D in level.var_EBCA) {
       var_0D.var_C9BD = 1;
-      var_0D scripts\sp\_utility::func_5514();
+      var_0D scripts\sp\utility::func_5514();
     }
 
-    scripts\sp\_utility::func_15F5("c6_fall_back_color");
+    scripts\sp\utility::func_15F5("c6_fall_back_color");
     scripts\engine\utility::trigger_off("color_move_office_hallway", "targetname");
-    scripts\sp\_utility::func_13754(level.var_AF02);
+    scripts\sp\utility::func_13754(level.var_AF02);
     scripts\engine\utility::flag_set("locker_c6s_dead");
     foreach(var_0D in level.var_EBCA) {
       var_0D.var_C9BD = undefined;
-      var_0D scripts\sp\_utility::func_5514();
+      var_0D scripts\sp\utility::func_5514();
     }
 
     return;
@@ -2632,7 +2632,7 @@ func_3385() {
 
   scripts\engine\utility::flag_set("locker_c6s_dead");
   scripts\engine\utility::trigger_off("color_move_office_hallway", "targetname");
-  scripts\sp\_utility::func_15F5("engineer_office_color_move");
+  scripts\sp\utility::func_15F5("engineer_office_color_move");
 }
 
 func_67B7() {
@@ -2647,7 +2647,7 @@ func_3371() {
 
   self.var_1FBB = "generic";
   self.ignoreme = 1;
-  thread scripts\sp\_utility::func_B14F();
+  thread scripts\sp\utility::func_B14F();
   var_00 = scripts\engine\utility::getstruct("hacker", "targetname");
   self.struct = var_00;
   var_00 scripts\sp\anim::func_1F17(self, "c6_hack_enter");
@@ -2664,9 +2664,9 @@ func_3371() {
 
 func_B279() {
   wait(0.05);
-  self _meth_82B1(scripts\sp\_utility::func_7DC1("c6_hack_enter"), 1.7);
+  self _meth_82B1(scripts\sp\utility::func_7DC1("c6_hack_enter"), 1.7);
   wait(2);
-  scripts\sp\_utility::func_1101B();
+  scripts\sp\utility::func_1101B();
   self.var_4E46 = ::func_10FC1;
 }
 
@@ -2688,21 +2688,21 @@ func_3400() {
       var_03 = var_00[var_02];
     }
 
-    var_01 = scripts\sp\_utility::array_removedeadvehicles(var_01);
+    var_01 = scripts\sp\utility::array_removedeadvehicles(var_01);
     var_04 = scripts\engine\utility::getclosest(var_03.origin, var_01);
     var_04.objective_playermask_showto = 45;
     var_04 notify("stop_going_to_node");
     var_04 setgoalentity(var_03);
-    scripts\sp\_utility::func_13753([var_04]);
+    scripts\sp\utility::func_13753([var_04]);
     wait(2);
     var_02++;
-    var_01 = scripts\sp\_utility::array_removedeadvehicles(var_01);
+    var_01 = scripts\sp\utility::array_removedeadvehicles(var_01);
   }
 }
 
 func_48AD() {
-  self.var_215D = scripts\sp\_utility::func_10639("locker_arm", self.origin, self.angles);
-  scripts\sp\_utility::func_16AE(self.var_215D, "locker_c6s");
+  self.var_215D = scripts\sp\utility::func_10639("locker_arm", self.origin, self.angles);
+  scripts\sp\utility::func_16AE(self.var_215D, "locker_c6s");
   thread scripts\sp\anim::func_1EC3(self.var_215D, "locker_deploy");
 }
 
@@ -2710,7 +2710,7 @@ func_3383() {}
 
 func_520B() {
   wait(0.05);
-  self _meth_82B1(scripts\sp\_utility::func_7DC1("locker_deploy"), 1.45);
+  self _meth_82B1(scripts\sp\utility::func_7DC1("locker_deploy"), 1.45);
 }
 
 func_FB53(param_00) {
@@ -2748,20 +2748,20 @@ func_AF01() {
   self.precacheleaderboards = 1;
   self.ignoreme = 1;
   self.objective_state = 0;
-  thread scripts\sp\_utility::func_B14F();
+  thread scripts\sp\utility::func_B14F();
   scripts\asm\asm::asm_setdemeanoranimoverride("combat", "move", % c6_grnd_red_walk_forward_ar);
-  scripts\sp\_utility::func_F2DA(0);
-  scripts\sp\_utility::func_F3AF(0);
-  scripts\sp\_utility::func_16AE(self, "locker_c6s");
+  scripts\sp\utility::func_F2DA(0);
+  scripts\sp\utility::func_F3AF(0);
+  scripts\sp\utility::func_16AE(self, "locker_c6s");
   self waittill("deployed");
   self.precacheleaderboards = 0;
   self.ignoreme = 0;
-  thread scripts\sp\_utility::func_1101B();
+  thread scripts\sp\utility::func_1101B();
 }
 
 func_11600() {
   scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\maps\europa\europa_util::func_10FC2);
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_61C7);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_61C7);
   var_00 = getspawnerarray("back_office_enemies");
   scripts\engine\utility::play_sound_in_space("eu_enemy_incoming_2", var_00[0].origin);
   playworldsound("eu_enemy_incoming_3", var_00[1].origin);
@@ -2788,8 +2788,8 @@ func_5995() {
 
 func_33B1() {
   self endon("death");
-  thread scripts\sp\_utility::func_B14F();
-  scripts\engine\utility::delaythread(2.5, ::scripts\sp\_utility::func_1101B);
+  thread scripts\sp\utility::func_B14F();
+  scripts\engine\utility::delaythread(2.5, ::scripts\sp\utility::func_1101B);
 }
 
 func_4794() {
@@ -2836,11 +2836,11 @@ func_A76C() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
   scripts\sp\maps\europa\europa_util::func_EBC7();
-  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\_utility::func_DC45, "raise");
-  scripts\sp\_utility::func_F5AF("lab_engineer_office_start", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
+  scripts\sp\utility::func_F5AF("lab_engineer_office_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\engine\utility::flag_set("entering_office_exit");
   scripts\engine\utility::delaythread(1, ::scripts\sp\maps\europa\europa_util::func_10690, "office_fight");
-  scripts\sp\_utility::func_15F5("engineer_office_color_move");
+  scripts\sp\utility::func_15F5("engineer_office_color_move");
   thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
@@ -2857,7 +2857,7 @@ func_A78B() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   scripts\sp\maps\europa\europa_util::func_6244(1);
   scripts\sp\maps\europa\europa_util::func_EBC7();
-  scripts\sp\_utility::func_F5AF("lab_office_exit_start", [level.var_EBBB, level.var_EBBC, level.player]);
+  scripts\sp\utility::func_F5AF("lab_office_exit_start", [level.var_EBBB, level.var_EBBC, level.player]);
 }
 
 func_134E7() {
@@ -2886,17 +2886,17 @@ func_A789() {
   thread func_134E7();
   scripts\engine\utility::flag_wait("entering_office_exit");
   level.var_F10A.var_4C74 = undefined;
-  scripts\sp\_utility::func_2669("cutter_room");
+  scripts\sp\utility::func_2669("cutter_room");
   level notify("stop_grenade_think");
   var_00 = scripts\engine\utility::getstruct("scene_cutter_moving_cover", "targetname");
   var_01 = getent("moving_lab_desk", "targetname");
   var_02 = getent("moving_lab_desk_clip_dyn", "targetname");
   var_02 linkto(var_01);
   var_01.var_1FBB = "desk";
-  var_01 scripts\sp\_utility::func_23B7("desk");
+  var_01 scripts\sp\utility::func_23B7("desk");
   getnode("moving_desk_node", "targetname") getrallyvehiclespawndata();
-  var_03 = getent("engineer_office_enemy3", "targetname") scripts\sp\_utility::func_10619(1);
-  var_04 = getent("engineer_office_enemy4", "targetname") scripts\sp\_utility::func_10619(1);
+  var_03 = getent("engineer_office_enemy3", "targetname") scripts\sp\utility::func_10619(1);
+  var_04 = getent("engineer_office_enemy4", "targetname") scripts\sp\utility::func_10619(1);
   var_05 = [var_03, var_04];
   foreach(var_07 in var_05) {
     var_07.var_1FBB = "generic";
@@ -2908,7 +2908,7 @@ func_A789() {
   var_00 scripts\sp\anim::func_1EC3(var_01, "sdf_seeker_pulltable_sc");
   thread func_13508(var_05);
   scripts\engine\utility::flag_wait("enter_cutter_area");
-  scripts\sp\_utility::func_15F5("engineer_office_color_move");
+  scripts\sp\utility::func_15F5("engineer_office_color_move");
   thread func_F02F();
   if(isdefined(var_03)) {
     thread ag_check(var_03);
@@ -2919,7 +2919,7 @@ func_A789() {
     var_00 thread scripts\sp\anim::func_1F35(var_01, "sdf_seeker_pulltable_sc");
   }
 
-  var_05 = scripts\sp\_utility::func_22B9(var_05);
+  var_05 = scripts\sp\utility::func_22B9(var_05);
   scripts\engine\utility::waittill_any_ents(level, "combat_office_exit", var_00, "sdf_seeker_pulltable_sc");
   foreach(var_07 in var_05) {
     if(isdefined(var_07)) {
@@ -2936,16 +2936,16 @@ func_A789() {
   }
 
   if(isalive(var_04)) {
-    var_04 scripts\sp\_utility::func_4145();
-    var_04 scripts\sp\_utility::func_F3DC(var_04.origin);
+    var_04 scripts\sp\utility::func_4145();
+    var_04 scripts\sp\utility::func_F3DC(var_04.origin);
     var_04.objective_playermask_showto = 164;
   }
 
-  scripts\sp\_utility::func_15F5("engineer_office_color_move");
+  scripts\sp\utility::func_15F5("engineer_office_color_move");
   scripts\sp\maps\europa\europa_util::func_1368F("office_exit_area", 0);
-  scripts\sp\_utility::func_15F5("engineer_exit_color_move");
-  scripts\engine\utility::delaythread(0.4, ::scripts\sp\_utility::func_15F5, "engineer_exit_color_move");
-  scripts\sp\_utility::func_28D7("axis");
+  scripts\sp\utility::func_15F5("engineer_exit_color_move");
+  scripts\engine\utility::delaythread(0.4, ::scripts\sp\utility::func_15F5, "engineer_exit_color_move");
+  scripts\sp\utility::func_28D7("axis");
   scripts\engine\utility::flag_set("cutter_bot_battle_finished");
   func_1C08();
   scripts\engine\utility::flag_wait("player_in_cutter_room");
@@ -2961,7 +2961,7 @@ func_A789() {
   wait(1);
   var_0F = getentarray("extra_corridor_klaxon_light", "script_noteworthy");
   scripts\engine\utility::array_thread(var_0F, ::scripts\sp\maps\europa\europa_armory::func_A6ED);
-  scripts\sp\_utility::func_15F5("into_armory_color_move");
+  scripts\sp\utility::func_15F5("into_armory_color_move");
   scripts\engine\utility::flag_wait("player_exit_office_into_armory");
   scripts\sp\maps\europa\europa_util::func_EBC4();
 }
@@ -2980,8 +2980,8 @@ ag_check(param_00) {
 }
 
 func_13508(param_00) {
-  param_00[0] scripts\sp\_utility::func_10347("europa_sf1_theyreclosing");
-  param_00[0] scripts\sp\_utility::func_10347("europa_sf3_getusintherenow");
+  param_00[0] scripts\sp\utility::func_10347("europa_sf1_theyreclosing");
+  param_00[0] scripts\sp\utility::func_10347("europa_sf3_getusintherenow");
 }
 
 func_BEFD() {
@@ -2989,7 +2989,7 @@ func_BEFD() {
   var_01 = scripts\engine\utility::getstruct("cutter_door_entry_scene", "targetname");
   var_02 = getstartorigin(var_01.origin, var_01.angles, % europa_armory_seeker_door_fall);
   var_03 = getstartangles(var_01.origin, var_01.angles, % europa_armory_seeker_door_fall);
-  var_01.var_59B2 = scripts\sp\_utility::func_10639("tag_origin_mover", var_02, var_03);
+  var_01.var_59B2 = scripts\sp\utility::func_10639("tag_origin_mover", var_02, var_03);
   var_01.var_59B2.target_getindexoftarget = var_01 scripts\engine\utility::spawn_script_origin();
   var_01.var_5978 = var_00;
   var_01.var_5978 linkto(var_01.var_59B2, "tag_origin");
@@ -2999,8 +2999,8 @@ func_BEFD() {
   var_01.var_59B2.target_getindexoftarget scripts\engine\utility::delaycall(10, ::delete);
   var_01.var_59B2 scripts\engine\utility::delaycall(10, ::delete);
   var_01 scripts\sp\anim::func_1F2C(var_01.var_1684, "new_armory_enter");
-  level.var_EBBC scripts\sp\_utility::func_61C7();
-  scripts\sp\_utility::func_2669("armory_in");
+  level.var_EBBC scripts\sp\utility::func_61C7();
+  scripts\sp\utility::func_2669("armory_in");
   foreach(var_05 in level.var_EBCA) {
     var_05.closefile = scripts\engine\utility::ter_op(isdefined(var_05.var_C392), var_05.var_C392, 1);
   }
@@ -3026,7 +3026,7 @@ func_1C08() {
 }
 
 func_F02F() {
-  level.var_BCDA = scripts\sp\_vehicle::func_1080C("cutter_script_vehicle");
+  level.var_BCDA = scripts\sp\vehicle::func_1080C("cutter_script_vehicle");
   var_00 = getent("sdf_cutter_device", "targetname");
   var_00.origin = level.var_BCDA.origin;
   var_00 linkto(level.var_BCDA);
@@ -3064,12 +3064,12 @@ func_1CC5() {
   var_02 = getent(var_00.target, "targetname");
   var_02 endon("trigger");
   self waittill("trigger");
-  while (!var_00 scripts\sp\_utility::func_77E3("axis").size) {
+  while (!var_00 scripts\sp\utility::func_77E3("axis").size) {
     wait(1);
   }
 
   for (;;) {
-    var_03 = var_00 scripts\sp\_utility::func_77E3("axis");
+    var_03 = var_00 scripts\sp\utility::func_77E3("axis");
     if(var_03.size <= var_01) {
       break;
     }
@@ -3077,7 +3077,7 @@ func_1CC5() {
     wait(0.25);
   }
 
-  var_02 scripts\sp\_utility::script_delay();
+  var_02 scripts\sp\utility::script_delay();
   var_02 notify("trigger");
 }
 
@@ -3088,7 +3088,7 @@ func_1CC2(param_00) {
   }
 
   foreach(var_02 in param_00) {
-    thread scripts\sp\_utility::draw_circle(var_02.origin, 24, (1, 0, 0), 1, 0, 24);
+    thread scripts\sp\utility::draw_circle(var_02.origin, 24, (1, 0, 0), 1, 0, 24);
   }
 }
 

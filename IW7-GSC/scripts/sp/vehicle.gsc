@@ -14,7 +14,7 @@ func_979A() {
   }
 
   thread func_979B();
-  scripts\sp\_utility::func_D6D9(::func_40D9);
+  scripts\sp\utility::func_D6D9(::func_40D9);
 }
 
 func_40D9() {
@@ -25,15 +25,15 @@ func_40D9() {
 
 func_979B() {
   scripts\engine\utility::create_lock("aircraft_wash_math");
-  scripts\sp\_vehicle_code::func_F9C7();
-  level.vehicle.var_8DAA = scripts\engine\utility::array_combine(level.vehicle.var_8DAA, scripts\sp\_utility::_meth_8181("helicopter_crash_location", "targetname"));
-  scripts\sp\_vehicle_code::func_FA79();
-  var_00 = scripts\sp\_vehicle_code::func_D808();
-  scripts\sp\_vehicle_code::func_FA7A(var_00);
+  scripts\sp\vehicle_code::func_F9C7();
+  level.vehicle.var_8DAA = scripts\engine\utility::array_combine(level.vehicle.var_8DAA, scripts\sp\utility::_meth_8181("helicopter_crash_location", "targetname"));
+  scripts\sp\vehicle_code::func_FA79();
+  var_00 = scripts\sp\vehicle_code::func_D808();
+  scripts\sp\vehicle_code::func_FA7A(var_00);
   level.vehicle.var_8BBA = getentarray("script_vehicle", "code_classname").size > 0;
-  scripts\sp\_utility::func_16EB("invulerable_frags", & "SCRIPT_INVULERABLE_FRAGS", undefined);
-  scripts\sp\_utility::func_16EB("invulerable_bullets", & "SCRIPT_INVULERABLE_BULLETS", undefined);
-  scripts\sp\_utility::func_16EB("c12_bullets", & "SCRIPT_C12_BULLETS");
+  scripts\sp\utility::func_16EB("invulerable_frags", & "SCRIPT_INVULERABLE_FRAGS", undefined);
+  scripts\sp\utility::func_16EB("invulerable_bullets", & "SCRIPT_INVULERABLE_BULLETS", undefined);
+  scripts\sp\utility::func_16EB("c12_bullets", & "SCRIPT_C12_BULLETS");
 }
 
 func_1321A(param_00, param_01, param_02) {
@@ -41,11 +41,11 @@ func_1321A(param_00, param_01, param_02) {
 }
 
 func_13237(param_00) {
-  return scripts\sp\_vehicle_code::func_1444(param_00);
+  return scripts\sp\vehicle_code::func_1444(param_00);
 }
 
 func_A5DF(param_00, param_01) {
-  return scripts\sp\_vehicle_code::func_12FB(param_00, param_01);
+  return scripts\sp\vehicle_code::func_12FB(param_00, param_01);
 }
 
 playgestureviewmodel() {
@@ -57,11 +57,11 @@ _meth_8440() {
 }
 
 func_B6B9() {
-  return scripts\sp\_vehicle_code::func_134C();
+  return scripts\sp\vehicle_code::func_134C();
 }
 
 func_B6BA() {
-  return scripts\sp\_vehicle_code::func_134D();
+  return scripts\sp\vehicle_code::func_134D();
 }
 
 func_9FEF() {
@@ -69,11 +69,11 @@ func_9FEF() {
 }
 
 func_131F7() {
-  return scripts\sp\_vehicle_code::func_143E();
+  return scripts\sp\vehicle_code::func_143E();
 }
 
 func_9BF2() {
-  return scripts\sp\_vehicle_code::func_12F0();
+  return scripts\sp\vehicle_code::func_12F0();
 }
 
 func_131FC() {
@@ -82,7 +82,7 @@ func_131FC() {
 
 func_1080E(param_00) {
   var_01 = [];
-  var_01 = scripts\sp\_vehicle_code::func_10810(param_00);
+  var_01 = scripts\sp\vehicle_code::func_10810(param_00);
   return var_01;
 }
 
@@ -107,15 +107,15 @@ func_1080F(param_00) {
 }
 
 func_1A92(param_00) {
-  thread scripts\sp\_vehicle_code::func_1A93(param_00);
+  thread scripts\sp\vehicle_code::func_1A93(param_00);
 }
 
 func_13259() {
-  scripts\sp\_vehicle_code::func_13D03(1);
+  scripts\sp\vehicle_code::func_13D03(1);
 }
 
 func_13258() {
-  scripts\sp\_vehicle_code::func_13D03(0);
+  scripts\sp\vehicle_code::func_13D03(0);
 }
 
 func_9BC7() {
@@ -127,11 +127,11 @@ func_1320F(param_00, param_01, param_02) {
     param_00 = [param_00];
   }
 
-  scripts\sp\_vehicle_aianim::func_ADA7(param_00, undefined, param_02);
+  scripts\sp\vehicle_aianim::func_ADA7(param_00, undefined, param_02);
 }
 
 func_1080B() {
-  var_00 = scripts\sp\_utility::func_10808();
+  var_00 = scripts\sp\utility::func_10808();
   if(isdefined(self.script_speed)) {
     if(!func_9E2C()) {
       var_00 _meth_83F4(self.script_speed);
@@ -187,7 +187,7 @@ func_131DF(param_00) {
 }
 
 func_13253(param_00) {
-  return scripts\sp\_vehicle_code::func_1446(param_00);
+  return scripts\sp\vehicle_code::func_1446(param_00);
 }
 
 func_13250() {
@@ -220,7 +220,7 @@ func_131DD() {
       continue;
     }
 
-    var_02 = scripts\sp\_utility::func_7E96(var_02.target, "targetname");
+    var_02 = scripts\sp\utility::func_7E96(var_02.target, "targetname");
   }
 
   return var_00;
@@ -253,11 +253,11 @@ func_13220(param_00) {
 }
 
 func_9E2C() {
-  return scripts\sp\_vehicle_code::func_12F8();
+  return scripts\sp\vehicle_code::func_12F8();
 }
 
 func_9D34() {
-  return scripts\sp\_vehicle_code::func_12F6();
+  return scripts\sp\vehicle_code::func_12F6();
 }
 
 func_3182(param_00) {
@@ -271,6 +271,6 @@ func_3182(param_00) {
 }
 
 func_61FB() {
-  scripts\sp\_vehicle_code::func_F9C7();
+  scripts\sp\vehicle_code::func_F9C7();
   level.vehicle.var_10709 = 1;
 }
