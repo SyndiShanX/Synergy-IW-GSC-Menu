@@ -37,8 +37,6 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 * Place it into `iw7-mod/custom_scripts/sp`
 
-* Currently only works on the First Mission
-
 ## Credits
 
 This menu is based on [M203](https://github.com/Xeirh/M203) by [Xeirh](https://github.com/Xeirh)
