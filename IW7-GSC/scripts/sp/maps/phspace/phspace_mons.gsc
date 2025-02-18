@@ -756,8 +756,9 @@ func_1F94() {
     level.func_EA99 func_0BDC::func_19AE("dont_shoot");
     var_0++;
 
-    if(var_00 > var_01)
+    if(var_00 > var_01) {
       break;
+    }
   }
 }
 
@@ -793,8 +794,9 @@ func_126FB(var_00) {
       wait 0.05;
     }
 
-    if(!var_02)
+    if(!var_02) {
       break;
+    }
   }
 
   func_D29E();

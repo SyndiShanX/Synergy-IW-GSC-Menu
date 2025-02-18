@@ -15,7 +15,7 @@ func_C530(var_00) {
     wait 10;
   } else {
     wait 1.05;
-	}
+  }
 
   level.func_72F1 = 0;
   var_01 = 20.0;
@@ -35,7 +35,7 @@ func_C530(var_00) {
     var_03 = var_00;
   else {
     var_03 = "tie";
-	}
+  }
 
   level.func_72B3 = 1;
 
@@ -43,7 +43,7 @@ func_C530(var_00) {
     logstring("forfeit, win: " + var_03 getxuid() + "(" + var_3.name + ")");
   } else {
     logstring("forfeit, win: " + var_03 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
-	}
+  }
 
   thread endgame(var_03, var_02);
 }
@@ -59,7 +59,7 @@ matchforfeittimer_internal(var_00) {
   waittillframeend;
   level endon("match_forfeit_timer_beginning");
 
-  while(var_00 > 0 && !level.gameended && !level.func_72F1 && !level.ingraceperiod) {
+  while (var_00 > 0 && !level.gameended && !level.func_72F1 && !level.ingraceperiod) {
     setomnvar("ui_match_start_countdown", var_00);
     var_0--;
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.0);
@@ -533,13 +533,13 @@ _meth_8487() {
   level endon("game_ended");
 
   if(!isdefined(game["clientActive"])) {
-    while(getactiveclientcount() == 0)
+    while (getactiveclientcount() == 0)
       wait 0.05;
 
     game["clientActive"] = 1;
   }
 
-  while(level.ingraceperiod > 0) {
+  while (level.ingraceperiod > 0) {
     wait 1.0;
     level.ingraceperiod--;
   }
@@ -1159,7 +1159,7 @@ checkscorelimit(var_00) {
 updategametypedvars() {
   level endon("game_ended");
 
-  while(game["state"] == "playing") {
+  while (game["state"] == "playing") {
     if(isdefined(level.starttime)) {
       if(gettimeremaining() < 3000) {
         wait 0.1;
@@ -1190,7 +1190,7 @@ matchstarttimer_internal(var_00) {
   waittillframeend;
   level endon("match_start_timer_beginning");
 
-  while(var_00 > 0 && !level.gameended) {
+  while (var_00 > 0 && !level.gameended) {
     setomnvar("ui_match_start_countdown", var_00);
 
     if(var_00 == 0)
@@ -1345,7 +1345,7 @@ hostidledout() {
 func_E761(var_00, var_01) {
   var_02 = 0;
 
-  while(!var_02) {
+  while (!var_02) {
     var_03 = level.players;
     var_02 = 1;
 
@@ -1373,7 +1373,7 @@ func_E761(var_00, var_01) {
     wait(var_00 / 2);
     var_02 = 0;
 
-    while(!var_02) {
+    while (!var_02) {
       var_03 = level.players;
       var_02 = 1;
 
@@ -1948,7 +1948,7 @@ timelimitthread() {
   level endon("game_ended");
   var_00 = scripts\mp\utility\game::gettimepassed();
 
-  while(game["state"] == "playing") {
+  while (game["state"] == "playing") {
     thread func_3E54(var_00);
     var_00 = scripts\mp\utility\game::gettimepassed();
 
@@ -2044,7 +2044,7 @@ func_118F7() {
   var_00 hide();
   var_01 = scripts\engine\utility::ter_op(scripts\mp\utility\game::isanymlgmatch(), 5, 2);
 
-  while(game["state"] == "playing") {
+  while (game["state"] == "playing") {
     if(!level.func_1191F && scripts\mp\utility\game::gettimelimit()) {
       var_02 = gettimeremaining() / 1000;
       var_03 = int(var_02 + 0.5);
@@ -2095,7 +2095,7 @@ func_7687() {
 
   var_00 = gettime();
 
-  while(game["state"] == "playing") {
+  while (game["state"] == "playing") {
     if(!level.func_1191F)
       game["timePassed"] = game["timePassed"] + (gettime() - var_00);
 
@@ -2172,7 +2172,7 @@ func_10D9F() {
 func_13BE6() {
   level endon("game_ended");
 
-  while(game["state"] == "playing") {
+  while (game["state"] == "playing") {
     var_00 = gettime();
 
     if(var_00 - level.lastwave["allies"] > level.wavedelay["allies"] * 1000) {
@@ -3243,7 +3243,7 @@ updateleaderboardstatscontinuous() {
   var_00 = 0;
 
   for (;;) {
-    while(!isdefined(level.players) || level.players.size == 0)
+    while (!isdefined(level.players) || level.players.size == 0)
       scripts\engine\utility::waitframe();
 
     if(var_00 >= level.players.size)

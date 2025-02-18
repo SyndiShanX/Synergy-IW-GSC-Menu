@@ -558,8 +558,8 @@ dodamagetokillstreak(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 func_FAE4(var_00, var_01) {
   if(isdefined(level.func_C7B3)) {
     foreach(var_03 in level.func_C7B3) {
-			thread func_139B5(var_03, var_00, var_01);
-		}
+      thread func_139B5(var_03, var_00, var_01);
+    }
   }
 }
 

@@ -454,8 +454,9 @@ func_EF25() {
     if(!isdefined(var_01)) {
       continue;
     }
-    if(var_01 == level.player)
+    if(var_01 == level.player) {
       break;
+    }
   }
 
   thread scripts\engine\utility::play_loop_sound_on_entity("ph_hill_streets_car_alarm");
@@ -687,8 +688,9 @@ func_1CC6(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_6.size <= var_04)
+    if(var_6.size <= var_04) {
       break;
+    }
   }
 }
 

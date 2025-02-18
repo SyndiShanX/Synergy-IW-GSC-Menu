@@ -188,8 +188,9 @@ func_8FF1() {
     if(abs(var_2[0]) > 0.3 || abs(var_2[1]) > 0.3 || abs(var_3[0]) > 0.3 || abs(var_3[1]) > 0.3) {
       if(var_01 == -1)
         var_01 = gettime() / 1000;
-      else if(gettime() / 1000 - var_01 > var_00)
+      else if(gettime() / 1000 - var_01 > var_00) {
         break;
+      }
     } else
       var_01 = -1;
 
@@ -207,8 +208,9 @@ func_8FF2() {
     if(level.player issprinting()) {
       if(var_01 == -1)
         var_01 = gettime() / 1000;
-      else if(gettime() / 1000 - var_01 > var_00)
+      else if(gettime() / 1000 - var_01 > var_00) {
         break;
+      }
     } else
       var_01 = -1;
 
@@ -226,8 +228,9 @@ func_8FF3() {
     if(level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_B")) {
       if(var_01 == -1)
         var_01 = gettime() / 1000;
-      else if(gettime() / 1000 - var_01 > var_00)
+      else if(gettime() / 1000 - var_01 > var_00) {
         break;
+      }
     } else
       var_01 = -1;
 
@@ -2069,8 +2072,9 @@ func_728B(var_00, var_01, var_02, var_03) {
         var_04 = 1;
       }
 
-      if(isdefined(var_02) && gettime() - var_07 > var_02 * 1000)
+      if(isdefined(var_02) && gettime() - var_07 > var_02 * 1000) {
         break;
+      }
     }
   } else {
     var_07 = gettime();
@@ -2086,8 +2090,9 @@ func_728B(var_00, var_01, var_02, var_03) {
         break;
       }
 
-      if(gettime() - var_07 > 4000)
+      if(gettime() - var_07 > 4000) {
         break;
+      }
     }
   }
 
