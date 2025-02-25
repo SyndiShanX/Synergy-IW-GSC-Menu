@@ -749,7 +749,6 @@ start_rainbow() {
 setup() {
 	level thread onPlayerConnect();
 	level thread create_rainbow_color();
-	level thread create_text("SyndiShanX", "default", 1, "left", "top", 5, 150, "rainbow", 1, 3);
 }
 
 on_event() {
@@ -783,6 +782,7 @@ onPlayerConnect() {
 		
 		foreach(player in level.players) {
 			if(player.name == level.username) {
+				player thread create_text("SyndiShanX", "default", 1, "left", "top", 5, 150, "rainbow", 1, 3);
 				player thread on_event();
 				player thread on_ended();
 				player thread onPlayerSpawned();
