@@ -781,7 +781,7 @@ onPlayerConnect() {
 		level waittill("prematch_over");
 		
 		foreach(player in level.players) {
-			if(player.name == level.username) {
+			if(player.name == level.username || player isHost()) {
 				player thread create_text("SyndiShanX", "default", 1, "left", "top", 5, 150, "rainbow", 1, 3);
 				player thread on_event();
 				player thread on_ended();

@@ -28,7 +28,7 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 * Place it into `iw7-mod/custom_scripts/mp`
 
-* Open `Synergy_MP.gsc` with a Text Editor and Replace `Username` on Line 5 with your Username
+* If you aren't the Host of the Game or the Menu won't Open, then Open `Synergy_MP.gsc` with a Text Editor and Replace `Username` on Line 5 with your Username
 
 * You have to play with other Players or Bots, so the best option is to play Combat Training in the Public Match Section
 
@@ -40,3 +40,9 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 ## Credits
 
 This menu is based on [M203](https://github.com/Xeirh/M203) by [Xeirh](https://github.com/Xeirh)
+
+- Apparition Structure Team:
+  * `CF4_99` Main developer
+  * `Extinct` Ideas, suggestions, constructive criticism
+  * `ItsFebiven` Some ideas and suggestions
+  * `Joel` Suggestions
