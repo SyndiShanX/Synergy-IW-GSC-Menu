@@ -162,7 +162,7 @@ create_text(text, font, font_scale, align_x, align_y, x, y, color, alpha, z_inde
 		textElement thread start_rainbow();
 	}
 	
-	if(isnumber(text)) {
+	if(isNumber(text)) {
 		textElement setValue(text);
 	} else {
 		textElement set_text(text);
@@ -834,7 +834,6 @@ update_resize() {
 	
 	self.syn["hud"]["background"][0] set_shader(self.syn["hud"]["background"][0].shader, self.syn["hud"]["background"][0].width, return_toggle(self.shader_option[self get_menu()]) ? 42 : (height + 16));
 	self.syn["hud"]["background"][1] set_shader(self.syn["hud"]["background"][1].shader, self.syn["hud"]["background"][1].width, return_toggle(self.shader_option[self get_menu()]) ? 40 : (height + 14));
-	self.syn["hud"]["foreground"][0] set_shader(self.syn["hud"]["foreground"][0].shader, self.syn["hud"]["foreground"][0].width, return_toggle(self.shader_option[self get_menu()]) ? 26 : height);
 	self.syn["hud"]["foreground"][2] set_shader(self.syn["hud"]["foreground"][2].shader, self.syn["hud"]["foreground"][2].width, adjust);
 	
 	if(isDefined(self.syn["hud"]["foreground"][1])) {
@@ -980,45 +979,26 @@ onPlayerSpawned() {
 		level thread create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 1, 3);
 
 		if(!self.menuInit) {
-			open_controls_menu("Controls");
 			self.menuInit = true;
+			
+			self.syn["controls-hud"] = [];
+			self.syn["controls-hud"]["title"][0] = self create_text("Controls", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
+			self.syn["controls-hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+			self.syn["controls-hud"]["title"][2] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+			
+			self.syn["controls-hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 97, self.syn["utility"].color[5], 1, 1); // Outline
+			self.syn["controls-hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 95, self.syn["utility"].color[1], 1, 2); // Main Background
+			
+			self.syn["controls-hud"]["controls"][0] = self create_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 15), self.syn["utility"].color[4], 1, 10);
+			self.syn["controls-hud"]["controls"][1] = self create_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 35), self.syn["utility"].color[4], 1, 10);
+			self.syn["controls-hud"]["controls"][2] = self create_text("Select: ^3[{+activate}] ^7Back: ^3[{+melee}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 55), self.syn["utility"].color[4], 1, 10);
+			self.syn["controls-hud"]["controls"][3] = self create_text("Sliders: ^3[{+smoke}] ^7and ^3[{+frag}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 75), self.syn["utility"].color[4], 1, 10);
+			
+			wait 8;
+			
+			close_controls_menu();
 		}
 	}
-}
-
-/*
-^0 = Black
-^1 = Red
-^2 = Green
-^3 = Gold
-^4 = Blue
-^5 = Aqua
-^6 = Purple
-^7 = White
-^8 is a color that changes depending what level you are on.
-American maps = Dark Green
-Russian maps = Dark Red
-British maps = Dark Blue
-^9 = Gray
-*/
-
-open_controls_menu() {
-	self.syn["controls-hud"] = [];
-	self.syn["controls-hud"]["title"][0] = self create_text("Controls", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
-	self.syn["controls-hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
-	self.syn["controls-hud"]["title"][2] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
-	
-	self.syn["controls-hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 97, self.syn["utility"].color[5], 1, 1); // Outline
-	self.syn["controls-hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 95, self.syn["utility"].color[1], 1, 2); // Main Background
-	
-	self.syn["controls-hud"]["controls"][0] = self create_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 15), self.syn["utility"].color[4], 1, 10);
-	self.syn["controls-hud"]["controls"][1] = self create_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 35), self.syn["utility"].color[4], 1, 10);
-	self.syn["controls-hud"]["controls"][2] = self create_text("Select: ^3[{+activate}] ^7Back: ^3[{+melee}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 55), self.syn["utility"].color[4], 1, 10);
-	self.syn["controls-hud"]["controls"][3] = self create_text("Sliders: ^3[{+smoke}] ^7and ^3[{+frag}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 75), self.syn["utility"].color[4], 1, 10);
-	
-	wait 8;
-	
-	close_controls_menu();
 }
 
 close_controls_menu() {
