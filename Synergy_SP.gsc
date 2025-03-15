@@ -366,7 +366,7 @@ initial_variable() {
 	self.syn["utility"].option_limit = 10;
 	self.syn["utility"].option_spacing = 14;
 	self.syn["utility"].x_offset = 600;
-	self.syn["utility"].y_offset = 100;
+	self.syn["utility"].y_offset = 190;
 	self.syn["utility"].element_list = ["text", "subMenu", "toggle", "category", "slider"];
 	
 	self.syn["visions"][0] = ["None", "AC-130", "AC-130 Enhanced", "AC-130 inverted", "Aftermath", "Aftermath Glow", "Aftermath Post", "Apex", "Black & White", "Lobby", "Afterlife", "Zombies", "Zombies in Spaceland", "Zombies in Spaceland Black & White", "Zombies in Spaceland Ghost Path", "Zombies in Spaceland Basement", "Zombies in Spaceland Triton", "Default", "Default Night", "Night Vision", "Dronehive", "Endgame", "Europa", "Jackal", "Last Stand", "MP Map Select", "Missile Cam", "MP Intro", "MP Outro", "MP Nuke", "MP Nuke Aftermath", "Frontier", "Out of Bounds", "Nuke Flash", "Optic Wave", "RC8", "Thor Bright", "Thor", "Venom Gas"];
