@@ -84,17 +84,21 @@ set_slider(scrolling, index) {
 	
 	if(!isDefined(self.structure[index].array)) {
 		self notify("increment_slider");
-		if(scrolling == -1)
+		if(scrolling == -1) {
 			self.slider[storage] += self.structure[index].increment;
+		}
 		
-		if(scrolling == 1)
+		if(scrolling == 1) {
 			self.slider[storage] -= self.structure[index].increment;
+		}
 		
-		if(self.slider[storage] > self.structure[index].maximum)
+		if(self.slider[storage] > self.structure[index].maximum) {
 			self.slider[storage] = self.structure[index].minimum;
+		}
 		
-		if(self.slider[storage] < self.structure[index].minimum)
+		if(self.slider[storage] < self.structure[index].minimum) {
 			self.slider[storage] = self.structure[index].maximum;
+		}
 		
 		position = abs((self.structure[index].maximum - self.structure[index].minimum)) / ((50 - 8));
 		
@@ -249,10 +253,11 @@ clear_all(array) {
 	keys = getArrayKeys(array);
 	for(a = 0; a < keys.size; a++) {
 		if(isArray(array[keys[a]])) {
-			forEach(value in array[keys[a]])
+			forEach(value in array[keys[a]]) {
 				if( isDefined(value)) {
 					value destroy();
 				}
+			}
 		} else {
 			if(isDefined(array[keys[a]])) {
 				array[keys[a]] destroy();
@@ -394,58 +399,24 @@ initial_variable() {
 	self.syn["weapons"]["classics"][1] =           ["M1", "Hornet", "MacTav-45", "S-Ravage", "OSA", "TF-141"];
 	self.syn["weapons"]["melees"][1] =             ["Axe"];
 	self.syn["weapons"]["specials"][1] =           ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun"];
-	// Weapon Pack-a-Punch Prefixes
-	self.syn["weapons"]["assault_rifles"][2] =     ["m4", "sdfar", "ar57", "fmg", "ake", "rvn", "vr", "gauss", "erad"];
-	self.syn["weapons"]["sub_machine_guns"][2] =   ["fhr", "crb", "ripper", "ump", "crdb", "mp28", "tacburst"];
-	self.syn["weapons"]["light_machine_guns"][2] = ["sdflmg", "mauler", "lmg03", "minilmg", "unsalmg"];
-	self.syn["weapons"]["sniper_rifles"][2] =      ["kbs", "m8", "cheytac", "m1", "ba50cal", "longshot"];
-	self.syn["weapons"]["shotguns"][2] =           ["dev", "sonic", "sdfs", "spas", "mod2187"];
-	self.syn["weapons"]["pistols"][2] =            ["emc", "nrg", "g18", "revolver", "udm", "mag"];
-	self.syn["weapons"]["launchers"][2] =          ["lockon", "gl", "cs"];
-	self.syn["weapons"]["classics"][2] =           ["m1c", "g18c", "umpc", "spasc", "arc", "cheytacc"];
-	self.syn["weapons"]["melees"][2] =             [""];
-	self.syn["weapons"]["specials"][2] =           ["", "", "", "", "", "", ""];
-	// Weapon Additional Default Attachments
-	self.syn["weapons"]["assault_rifles"][3] =     ["", "", "", "+fmgscope_camo", "", "+rvnscope", "+vrscope", "+gaussscope", "+eradscope_camo"];
-	self.syn["weapons"]["sub_machine_guns"][3] =   ["", "", "+ripperrscope_zm", "", "", "", "+tacburstscope"];
-	self.syn["weapons"]["light_machine_guns"][3] = ["", "", "+lmg03scope_camo", "+minilmgscope", ""];
-	self.syn["weapons"]["sniper_rifles"][3] =      ["+kbsscope_zm_camo", "+m8scope_zm_camo", "+cheytacrscope_camo", "+m1scope_camo", "+ba50calscope", ""];
-	self.syn["weapons"]["shotguns"][3] =           ["", "+sonicrscope_camo", "", "", "+mod2187scope"];
-	self.syn["weapons"]["pistols"][3] =            ["", "", "", "", "", ""];
-	self.syn["weapons"]["launchers"][3] =          ["+lockonscope_camo", "+glproxscope_camo", ""];
-	self.syn["weapons"]["classics"][3] =           ["", "", "", "", "+glarclassic", "+cheytacscope_camo"];
-	self.syn["weapons"]["melees"][3] =             [""];
-	self.syn["weapons"]["specials"][3] =           ["", "", "", "", "", "", ""];
 	// Spaceland Weapons
 	self.syn["weapons"]["cp_zmb"][0] =   ["iw7_forgefreeze_zm+forgefreezealtfire", "iw7_dischord_zm", "iw7_facemelter_zm", "iw7_headcutter_zm", "iw7_shredder_zm", "iw7_spaceland_wmd"];
 	self.syn["weapons"]["cp_zmb"][1] =   ["Forge Freeze", "Dischord", "Face Melter", "Head Cutter", "Shredder", "NX 2.0"];
-	self.syn["weapons"]["cp_zmb"][2] =   ["", "", "", "", "", ""];
-	self.syn["weapons"]["cp_zmb"][3] =   ["", "", "", "", "", ""];
 	// Rave in the Redwoods Weapons															
 	self.syn["weapons"]["cp_rave"][0] =  ["iw7_golf_club_mp", "iw7_spiked_bat_mp", "iw7_two_headed_axe_mp", "iw7_machete_mp", "iw7_harpoon1_zm", "iw7_harpoon2_zm", "iw7_harpoon3_zm+akimbo", "iw7_harpoon4_zm"];
 	self.syn["weapons"]["cp_rave"][1] =  ["Golf Club", "Spiked Bat", "2 Headed Axe", "Machete", "Harpoon Gun 1", "Harpoon Gun 2", "Harpoon Gun 3", "Harpoon Gun 4"];
-	self.syn["weapons"]["cp_rave"][2] =  ["", "", "", "", "", "", "", ""];
-	self.syn["weapons"]["cp_rave"][3] =  ["", "", "", "", "", "", "", ""];
 	// Shaolin Shuffle Weapons
 	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm"];					
 	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks"];
-	self.syn["weapons"]["cp_disco"][2] = ["", "", "", "", "", ""];
-	self.syn["weapons"]["cp_disco"][3] = ["", "", "", "", "", ""];
 	// Attack of the Radioactive Thing Weapons
 	self.syn["weapons"]["cp_town"][0] =  ["iw7_cutie_zm"];
 	self.syn["weapons"]["cp_town"][1] =  ["Modular Atomic Disintegrator"];
-	self.syn["weapons"]["cp_town"][2] =  [""];
-	self.syn["weapons"]["cp_town"][3] =  [""];
 	// Beast from Beyond Weapons
 	self.syn["weapons"]["cp_final"][0] = ["iw7_venomx_zm"];					 				
 	self.syn["weapons"]["cp_final"][1] = ["Venom-X"];
-	self.syn["weapons"]["cp_final"][2] = [""];
-	self.syn["weapons"]["cp_final"][3] = [""];
 	// Misc Weapons
 	self.syn["weapons"]["other"][0] =    ["iw7_fists_zm", "iw7_entangler_zm"];	
 	self.syn["weapons"]["other"][1] =    ["Fists", "Entangler"];
-	self.syn["weapons"]["other"][2] =    ["", ""];
-	self.syn["weapons"]["other"][3] =    ["", ""];
 	// Melee Weapons
 	self.syn["melee"]["cp_town"][0] =    ["iw7_knife_zm_cleaver", "iw7_knife_zm_crowbar"];	
 	self.syn["melee"]["cp_town"][1] =    ["Cleaver", "Crowbar"];
@@ -461,34 +432,28 @@ initial_variable() {
 	self.syn["Map Setup Teleports"]["cp_zmb"][0] =       ["Spawn Power", "Journey Power", "Kepler Power", "Polar Peak Power", "Arcade Power", "Journey Teleporter", "Kepler Teleporter", "Polar Peak Teleporter", "Arcade Teleporter"];
 	self.syn["Mystery Wheel Teleports"]["cp_zmb"][0] =   ["Journey 1", "Journey 2", "Journey 3", "Astrocade", "Polar Peak", "Kepler 1", "Kepler 2", "Kepler 3"];
 	self.syn["Main Quest Teleports"]["cp_zmb"][0] =      ["Calculator 1", "Calculator 2", "Calculator 3", "Boom Box 1", "Boom Box 2", "Boom Box 3", "Umbrella 1", "Umbrella 2", "Umbrella 3", "DJ Booth 1", "DJ Booth 2", "DJ Booth 3"];
-	self.syn["Extra Teleports"]["cp_zmb"][0] =           ["N31L's Head", "N31L Auxiliary Battery 1", "N31L Auxiliary Battery 2", "N31L Auxiliary Battery 3", "N31L Auxiliary Battery 4", "N31L Auxiliary Battery 5", "N31L Auxiliary Battery 6", "N31L Floppy Disk 1", "N31L Floppy Disk 2", "N31L Floppy Disk 3", "N31L Floppy Disk 4", "N31L Floppy Disk 5"];
+	self.syn["Extra Teleports"]["cp_zmb"][0] =           ["N31L's Head", "N31L Auxiliary Battery 1", "N31L Auxiliary Battery 2", "N31L Auxiliary Battery 3", "N31L Auxiliary Battery 4", "N31L Auxiliary Battery 5", "N31L Auxiliary Battery 6", "N31L Floppy Disk 1", "N31L Floppy Disk 2", "N31L Floppy Disk 3", "N31L Floppy Disk 4"];
 	// Spaceland Teleport Origins
 	self.syn["Main Teleports"]["cp_zmb"][1] =            [(-10245, 740, -1630), (465, 3680, 0), (650, 970, 0), (-9885, -70, -1795)];
 	self.syn["Map Setup Teleports"]["cp_zmb"][1] =       [(1075, 3720, 0), (4695, 1250, 115), (-1365, -65, 380), (-695, -2795, 560), (2390, -1825, 115), (3640, 1165, 55), (-2150, -35, 225), (-1490, -2650, 360), (2285, -1615, 115)];
 	self.syn["Mystery Wheel Teleports"]["cp_zmb"][1] =   [(1470, 1045, 0), (4065, 2135, 55), (3690, 420, 55), (2575, -865, 240), (955, -2260, 440), (-1950, 1830, 365), (-1900, -530, 380), (-845, -1492, 360)];
 	self.syn["Main Quest Teleports"]["cp_zmb"][1] =      [(540, 1060, 0), (-2520, 805, 365), (2960, -850, 240), (595, 2125, -65), (-1415, -175, 380), (1375, -590, -195), (155, -505, 0), (-1890, -3040, 360), (3640, 2335, 115), (-1000, 1495, 225), (-2710, -2480, 360), (2926, 1305, 0)];
-	self.syn["Extra Teleports"]["cp_zmb"][1] =           [(475, -265, 0), (-1800, -2825, 360), (-535, -3265, 390), (-757, -2415, 560), (-2775, 1565, 365), (-3045, 730, 365), (-1230, 1625, 225), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000)];
+	self.syn["Extra Teleports"]["cp_zmb"][1] =           [(475, -265, 0), (-1800, -2825, 360), (-535, -3265, 390), (-757, -2415, 560), (-2775, 1565, 365), (-3045, 730, 365), (-1230, 1625, 225), (2425, -106, -196), (2495, -295, -196), (1920, -635, -196), (100, -1115, -252)];
 	// Spaceland Teleport Angles
 	self.syn["Main Teleports"]["cp_zmb"][2] =            [90, -90, -90];
 	self.syn["Map Setup Teleports"]["cp_zmb"][2] =       [-90, 0, -90, 90, 180, 0, -45, 20, -90];
 	self.syn["Mystery Wheel Teleports"]["cp_zmb"][2] =   [180, 90, 0, -90, 0, -45, -90, 0];
 	self.syn["Main Quest Teleports"]["cp_zmb"][2] =      [0, 0, 90, 45, 0, 90, 160, 90, -90, 0, -90, 0];
-	self.syn["Extra Teleports"]["cp_zmb"][2] =           [-90, 180, -90, 0, 0, 0, 90, 0, 0, 0, 0, 0];
+	self.syn["Extra Teleports"]["cp_zmb"][2] =           [-90, 180, -90, 0, 0, 0, 90, 50, 60, -100, 135];
 	// Rave in the Redwoods Teleport Names
 	self.syn["Main Teleports"]["cp_rave"][0] =           ["PaP Room", "Spawn", "Cellar", "Kevin's Cabin", "Afterlife Arcade"];
 	self.syn["Mystery Wheel Teleports"]["cp_rave"][0] =  ["Rave Stage", "Dock", "Main Fire", "Mess Hall", "Cellar", "Bear Lodge", "Camp Wolf"];
 	// Rave in the Redwoods Teleport Origins
 	self.syn["Main Teleports"]["cp_rave"][1] =           [(-10245, 750, -1630), (-940, -1620, 225), (-395, -1815, 55), (-6035, 4890, 120), (-9885, -70, -1795)];
-	self.syn["Map Setup Teleports"]["cp_rave"][1] =      [(000, 000, 000), (000, 000, 000)];
 	self.syn["Mystery Wheel Teleports"]["cp_rave"][1] =  [(2205, -1390, -15), (-2900, 2275, -150), (145, 1125, 50), (-3355, -3365, 150), (-560, -1895, 55), (-950, -1150, 390), (-2585, -4575, 255)];
-	self.syn["Main Quest Teleports"]["cp_rave"][1] =     [(000, 000, 000), (000, 000, 000)];
-	self.syn["Extra Teleports"]["cp_rave"][1] =          [(000, 000, 000), (000, 000, 000)];
 	// Rave in the Redwoods Teleport Angles
 	self.syn["Main Teleports"]["cp_rave"][2] =           [90, 165, 130, 100, 0];
-	self.syn["Map Setup Teleports"]["cp_rave"][2] =      [0, 0];
 	self.syn["Mystery Wheel Teleports"]["cp_rave"][2] =  [100, 140, 90, -50, -180, -90, -75];
-	self.syn["Main Quest Teleports"]["cp_rave"][2] =     [0, 0];
-	self.syn["Extra Teleports"]["cp_rave"][2] =          [0, 0];
 	// Shaolin Shuffle Teleport Names
 	self.syn["Main Teleports"]["cp_disco"][0] =          ["PaP Room", "Spawn", "Sewer", "Afterlife Arcade"];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][0] = ["Alleyway", "Rooftop", "Garden", "Disco Roof", "Subway Station 1", "Subway Station 2", "Disco"];
@@ -497,14 +462,10 @@ initial_variable() {
 	self.syn["Main Teleports"]["cp_disco"][1] =          [(-10245, 750, -1630), (580, 3025, 285), (-875, 1820, 180), (-9885, -35, -1795)];
 	self.syn["Map Setup Teleports"]["cp_disco"][1] =     [(-1915, 4620, 750), (1590, 1290, 750), (-810, 765, 925), (-1110, 3435, 1120), (-1075, 2795, 260)];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][1] = [(105, 1300, 750), (15, 665, 935), (-3515, 1165, 975), (-2100, 2795, 1175), (375, 2065, 525), (-2450, 3610, 500), (-1185, 3735, 750)];
-	self.syn["Main Quest Teleports"]["cp_disco"][1] =    [(000, 000, 000), (000, 000, 000)];
-	self.syn["Extra Teleports"]["cp_disco"][1] =         [(000, 000, 000), (000, 000, 000)];
 	// Shaolin Shuffle Teleport Angles
 	self.syn["Main Teleports"]["cp_disco"][2] =          [90, -145, 90, 0];
 	self.syn["Map Setup Teleports"]["cp_disco"][2] =     [-180, -30, 90, 0, 180];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][2] = [-90, 90, -180, 180, -180, 90. -20];
-	self.syn["Main Quest Teleports"]["cp_disco"][2] =    [0, 0];
-	self.syn["Extra Teleports"]["cp_disco"][2] =         [0, 0];
 	// Attack of the Radioactive Thing Teleport Names
 	self.syn["Main Teleports"]["cp_town"][0] =           ["PaP Room", "Spawn", "Studio", "Afterlife Arcade"];
 	self.syn["Map Setup Teleports"]["cp_town"][0] =      ["Power Handle", "Power Station", "Telepad 1", "Telepad 2", "Telepad 3", "Telepad 4"];
@@ -544,23 +505,18 @@ initial_variable() {
 	// Spaceland Zombies
 	self.syn["zombies"]["cp_zmb"][0] =   ["generic_zombie", "zombie_clown", "zombie_cop", "zombie_brute", "zombie_ghost", "the_hoff"];
 	self.syn["zombies"]["cp_zmb"][1] =   ["Normal Zombie", "Clown", "Cop", "Brute", "Ghost", "David Hasselhoff"];
-	self.syn["zombies"]["cp_zmb"][2] =   ["axis", "axis", "axis", "axis", "axis", "allies"];
 	// Rave in the Redwoods Zombies
 	self.syn["zombies"]["cp_rave"][0] =  ["generic_zombie", "lumberjack", "zombie_sasquatch", "slasher", "superslasher"];
 	self.syn["zombies"]["cp_rave"][1] =  ["Normal Zombie", "Lumberjack", "Sasquatch", "Slasher", "Super Slasher"];
-	self.syn["zombies"]["cp_rave"][2] =  ["axis", "axis", "axis", "axis", "axis"];
 	// Shaolin Shuffle Zombies
 	self.syn["zombies"]["cp_disco"][0] = ["generic_zombie", "karatemaster", "skater", "ratking", "pamgrier"];
 	self.syn["zombies"]["cp_disco"][1] = ["Normal Zombie", "Karate Zombie", "Skater", "Rat King", "Pam Grier"];
-	self.syn["zombies"]["cp_disco"][2] = ["axis", "axis", "axis", "axis", "allies"];
 	// Attack of the Radioactive Thing Zombies
 	self.syn["zombies"]["cp_town"][0] =  ["generic_zombie", "crab_mini", "crab_brute", "crab_boss", "elvira"];
 	self.syn["zombies"]["cp_town"][1] =  ["Normal Zombie", "Crog", "Crog Brute", "Crog Boss", "Elvira"];
-	self.syn["zombies"]["cp_town"][2] =  ["axis", "axis", "axis", "axis", "allies"];
 	// Beast from Beyond Zombies
 	self.syn["zombies"]["cp_final"][0] = ["generic_zombie", "alien_goon", "alien_phantom", "alien_rhino", "dlc4_boss"];
 	self.syn["zombies"]["cp_final"][1] = ["Normal Zombie", "Cryptid", "Phantom", "Rhino", "Mephistopheles"];
-	self.syn["zombies"]["cp_final"][2] = ["axis", "axis", "axis", "axis", "axis"];
 	
 	// Common Perks
 	self.syn["perks"][0] = ["perk_machine_revive", "perk_machine_tough", "perk_machine_rat_a_tat", "perk_machine_flash", "perk_machine_run", "perk_machine_boom", "perk_machine_more", "perk_machine_zap", "perk_machine_fwoosh"];
@@ -576,13 +532,12 @@ initial_variable() {
 	self.syn["perks"]["cp_town"][1] = ["Slappy Taffy", "Deadeye Dewdrops", "Change Chews"];
 	self.syn["perks"]["cp_final"][0] = ["perk_machine_smack", "perk_machine_deadeye", "perk_machine_change"];
 	self.syn["perks"]["cp_final"][1] = ["Slappy Taffy", "Deadeye Dewdrops", "Change Chews"];
-	
+	// Map Names
 	self.syn["maps"]["cp_zmb"] = "Zombies in Spaceland";
 	self.syn["maps"]["cp_rave"] = "Rave in the Redwoods";
 	self.syn["maps"]["cp_disco"] = "Shaolin Shuffle";
 	self.syn["maps"]["cp_town"] = "Attack of the Radioactive Thing";
 	self.syn["maps"]["cp_final"] = "The Beast from Beyond";
-
 	
 	self.syn["outline_colors"] = ["White", "Red", "Green", "Aqua", "Orange", "Yellow"];
 	
@@ -903,12 +858,14 @@ create_rainbow_color() {
 		}
 		
 		x += 3;
-		if (x > 255)
+		if (x > 255) {
 			x = 0;
+		}
 		
 		y += 3;
-		if (y > 1545)
+		if (y > 1545) {
 			y = 0;
+		}
 		
 		level.rainbow_color = (r/255, g/255, b/255);
 		wait .05;
@@ -976,7 +933,7 @@ onPlayerSpawned() {
 		
 		level thread create_rainbow_color();
 
-		level thread create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 1, 3);
+		self.syn["watermark"] = self create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 1, 3);
 
 		if(!self.menuInit) {
 			self.menuInit = true;
@@ -1030,14 +987,14 @@ menu_index() {
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86;
 			
 			self add_option("Basic Options", ::new_menu, "Basic Options");
-			self add_option("Weapon Options", ::new_menu, "Weapon Options");
 			self add_option("Fun Options", ::new_menu, "Fun Options");
-			self add_option("Powerup Options", ::new_menu, "Powerup Options");
+			self add_option("Weapon Options", ::new_menu, "Weapon Options");
 			self add_option("Zombie Options", ::new_menu, "Zombie Options");
-			self add_option("Teleport Options", ::new_menu, "Teleport Options");
-			self add_option("Account Options", ::new_menu, "Account Options");
+			self add_option("Powerup Options", ::new_menu, "Powerup Options");
 			self add_option("Menu Options", ::new_menu, "Menu Options");
+			self add_option("Account Options", ::new_menu, "Account Options");
 			self add_option(self.syn["maps"][level.mapName] + " Options", ::new_menu, self.syn["maps"][level.mapName]);
+			self add_option("Teleport Options", ::new_menu, "Teleport Options");
 			
 			break;
 		case "Basic Options":
@@ -1045,6 +1002,7 @@ menu_index() {
 			
 			self add_toggle("God Mode", ::god_mode, self.god_mode);
 			self add_toggle("No Clip", ::no_clip, self.no_clip);
+			self add_toggle("Frag No Clip", ::frag_no_clip, self.frag_no_clip);
 			self add_toggle("UFO", ::ufo_mode, self.ufo_mode);
 			self add_toggle("Infinite Ammo", ::infinite_ammo, self.infinite_ammo);
 			self add_toggle("Self Revive", ::self_revive, self.self_revive);
@@ -1062,35 +1020,33 @@ menu_index() {
 		case "Weapon Options":
 			self add_menu(menu, menu.size);
 			
-			self add_toggle("Double Pack-a-Punch", ::double_pack, self.double_pack);
-			self add_toggle("Mystery Wheel Pack-a-Punch", ::upgraded_box_weapons, self.upgraded_box_weapons);
-			self add_toggle("Mystery Wheel Double Pack-a-Punch", ::double_upgraded_box_weapons, self.double_upgraded_box_weapons);
+			self add_option("Give Weapons", ::new_menu, "Give Weapons");
 			
 			self add_toggle("Give Pack-a-Punched Weapons", ::give_packed_weapon, self.give_packed_weapon);
 			self add_toggle("Give Double Pack-a-Punched Weapons", ::give_double_packed_weapon, self.give_double_packed_weapon);
 			
-			self add_option("Give Weapons", ::new_menu, "Give Weapons");
 			self add_option("Take Current Weapon", ::take_weapon);
 			self add_option("Drop Current Weapon", ::drop_weapon);
+			
+			self add_toggle("Double Pack-a-Punch", ::double_pack, self.double_pack);
+			self add_toggle("Mystery Wheel Pack-a-Punch", ::upgraded_box_weapons, self.upgraded_box_weapons);
+			self add_toggle("Mystery Wheel Double Pack-a-Punch", ::double_upgraded_box_weapons, self.double_upgraded_box_weapons);
+			self add_toggle("Freeze Box", ::freeze_box, self.freeze_box);
 			
 			break;
 		case "Fun Options":
 			self add_menu(menu, menu.size);
 			
 			self add_toggle("Forge Mode", ::forge_mode, self.forge_mode);
-			
 			self add_toggle("Exo Movement", ::exo_movement, self.exo_movement);
-			
 			self add_toggle("Max Money in Bank", ::max_bank, self.max_bank);
-			self add_toggle("Freeze Box", ::freeze_box, self.freeze_box);
 			
 			self add_toggle("Fullbright", ::fullbright, self.fullbright);
 			self add_toggle("Third Person", ::third_person, self.third_person);
 			
-			self add_increment("Set XP Scale", ::set_xp_scale, 1, 1, 10, 1);
 			self add_increment("Set Speed", ::set_speed, 190, 190, 1190, 50);
-			self add_increment("Move Menu X", ::modify_x_position, 0, -590, 50, 10);
-			self add_increment("Move Menu Y", ::modify_y_position, 0, -90, 150, 10);
+			self add_increment("Set Timescale", ::set_timescale, 1, 1, 10, 1);
+			self add_increment("Set Gravity", ::set_gravity, 800, 40, 800, 10);
 			
 			self add_option("Visions", ::new_menu, "Visions");
 			
@@ -1152,6 +1108,7 @@ menu_index() {
 			
 			self add_increment("Set Prestige", ::set_prestige, 0, 0, 20, 1);
 			self add_increment("Set Level", ::set_rank, 1, 1, 999, 1);
+			self add_increment("Set XP Scale", ::set_xp_scale, 1, 1, 10, 1);
 			
 			self add_option("Set Weapons to Max Level", ::set_max_weapons);
 			
@@ -1168,6 +1125,10 @@ menu_index() {
 		
 			self add_increment("Move Menu X", ::modify_x_position, 0, -590, 50, 10);
 			self add_increment("Move Menu Y", ::modify_y_position, 0, -90, 150, 10);
+			
+			self add_toggle("Watermark", ::watermark, self.watermark);
+			self add_toggle("Hide UI", ::hide_ui, self.hide_ui);
+			self add_toggle("Hide Weapon", ::hide_weapon, self.hide_weapon);
 			
 			break;
 		case "Off-Host Options":
@@ -1231,7 +1192,7 @@ menu_index() {
 			map = level.mapName;
 			
 			for(i = 0; i < self.syn["zombies"][map][0].size; i++) {
-				self add_option("Spawn " + self.syn["zombies"][map][1][i], ::spawn_zombie, self.syn["zombies"][map][0][i], self.syn["zombies"][map][2][i]);
+				self add_option("Spawn " + self.syn["zombies"][map][1][i], ::spawn_zombie, self.syn["zombies"][map][0][i]);
 			}
 			
 			break;
@@ -1483,6 +1444,27 @@ modify_y_position(offset) {
 	open_menu("Menu Options");
 }
 
+watermark() {
+	self.watermark = !return_toggle(self.watermark);
+	if(!self.watermark) {
+		iPrintln("Watermark [^2ON^7]");
+		self.syn["watermark"].alpha = 1;
+	} else {
+		iPrintln("Watermark [^1OFF^7]");
+		self.syn["watermark"].alpha = 0;
+	}
+}
+
+hide_ui() {
+	self.hide_ui = !return_toggle(self.hide_ui);
+	setDvar("cg_draw2d", !self.hide_ui);
+}
+
+hide_weapon() {
+	self.hide_weapon = !return_toggle(self.hide_weapon);
+	setDvar("cg_drawgun", !self.hide_weapon);
+}
+
 // Basic Options
 
 god_mode() {
@@ -1505,6 +1487,73 @@ no_clip() {
 	} else {
 		self iPrintln("No Clip [^1OFF^7]");
 	}
+}
+
+frag_no_clip() {
+  self endon("disconnect");
+  self endon("game_ended");
+
+  if(!isDefined(self.frag_no_clip)) {
+    self.frag_no_clip = true;
+		self iPrintln("Frag No Clip [^2ON^7]");
+    while (isDefined(self.frag_no_clip)) {
+      if(self fragButtonPressed()) {
+        if(!isDefined(self.frag_no_clip_loop))
+          self thread frag_no_clip_loop();
+      }
+      wait .05;
+    }
+  } else {
+    self.frag_no_clip = undefined;
+		self iPrintln("Frag No Clip [^1OFF^7]");
+	}
+}
+
+frag_no_clip_loop() {
+  self endon("disconnect");
+  self endon("noclip_end");
+  self disableWeapons();
+  self disableOffHandWeapons();
+  self.frag_no_clip_loop = true;
+
+  clip = spawn("script_origin", self.origin);
+  self playerLinkTo(clip);
+  if(!isDefined(self.godmode) || !self.godmode) {
+    executeCommand("god");
+		wait .01;
+		iPrintln("");
+		self.temp_god_mode = true;
+	}
+  self animMode("noclip");
+
+  while (true) {
+    vec = anglesToForward(self getPlayerAngles());
+    end = (vec[0] * 60, vec[1] * 60, vec[2] * 60);
+    if(self attackButtonPressed()) {
+      clip.origin = clip.origin + end;
+		}
+    if(self adsButtonPressed()) {
+      clip.origin = clip.origin - end;
+		}
+    if(self meleeButtonPressed()) {
+      break;
+		}
+    wait .05;
+  }
+
+  clip delete();
+  self enableWeapons();
+  self enableOffhandWeapons();
+
+  if(self.temp_god_mode) {
+    executeCommand("god");
+		wait .01;
+		iPrintln("");
+		self.temp_god_mode = undefined;
+	}
+  self animmode("noclip", true);
+
+  self.frag_no_clip_loop = undefined;
 }
 
 ufo_mode() {
@@ -1614,7 +1663,15 @@ set_xp_scale(xpScale) {
 }
 
 set_speed(value) {
-	setdvar("g_speed", value);
+	setDvar("g_speed", value);
+}
+
+set_timescale(value) {
+	setDvar("timescale", value);
+}
+
+set_gravity(value) {
+	setDvar("bg_gravity", value);
 }
 
 forge_mode() {
@@ -1703,11 +1760,11 @@ fullbright() {
 	self.fullbright = !return_toggle(self.fullbright);
 	if(self.fullbright) {
 		self iPrintln("Fullbright [^2ON^7]");
-		setdvar("r_fullbright", 1);
+		setDvar("r_fullbright", 1);
 		wait .01;
 	} else {
 		self iPrintln("Fullbright [^1OFF^7]");
-		setdvar("r_fullbright", 0);
+		setDvar("r_fullbright", 0);
 		wait .01;
 	}
 }
@@ -1716,11 +1773,11 @@ third_person() {
 	self.third_person = !return_toggle(self.third_person);
 	if(self.third_person) {
 		self iPrintln("Third Person [^2ON^7]");
-		setdvar("camera_thirdPerson", 1);
+		setDvar("camera_thirdPerson", 1);
 		scripts\cp\utility::setThirdPersonDOF(1);
 	} else {
 		self iPrintln("Third Person [^1OFF^7]");
-		setdvar("camera_thirdPerson", 0);
+		setDvar("camera_thirdPerson", 0);
 		scripts\cp\utility::setThirdPersonDOF(0);
 	}
 }
@@ -1995,11 +2052,13 @@ get_zombies() {
 	return scripts\cp\cp_agent_utils::getAliveAgentsOfTeam("axis");
 }
 
-spawn_zombie(archetype, team) {
+spawn_zombie(archetype) {
+	team = "axis";
 	if(archetype == "zombie_grey") {
 		weapon = "iw7_zapper_grey";
-	} else if(archetype == "the_hoff" || archetype == "elvira") {
+	} else if(archetype == "the_hoff" || archetype == "pamgrier" || archetype == "elvira") {
 		weapon = "iw7_ake_zmr+akepap2";
+		team = "allies";
 	} else {
 		weapon = undefined;
 	}
@@ -2132,8 +2191,9 @@ set_max_weapons() {
 	for(x = 1; x < 62; x++) {
 		weapon = TableLookup("mp/statstable.csv", 0, x, 4);
 
-		if(!isDefined(weapon) || weapon == "")
+		if(!isDefined(weapon) || weapon == "") {
 			continue;
+		}
 
 		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "cpXP", 54300);
 		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "prestige", 3);
