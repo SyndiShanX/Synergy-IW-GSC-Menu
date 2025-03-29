@@ -16,10 +16,6 @@ get_cursor() {
 	return self.cursor[self get_menu()];
 }
 
-get_title() {
-	return self.syn["title"];
-}
-
 set_menu(menu) {
 	if(isDefined(menu)) {
 		self.syn["menu"] = menu;
@@ -450,10 +446,16 @@ initial_variable() {
 	self.syn["Mystery Wheel Teleports"]["cp_rave"][0] =  ["Rave Stage", "Dock", "Main Fire", "Mess Hall", "Cellar", "Bear Lodge", "Camp Wolf"];
 	// Rave in the Redwoods Teleport Origins
 	self.syn["Main Teleports"]["cp_rave"][1] =           [(-10245, 750, -1630), (-940, -1620, 225), (-395, -1815, 55), (-6035, 4890, 120), (-9885, -70, -1795)];
+	self.syn["Map Setup Teleports"]["cp_rave"][1] =      [(000, 000, 000), (000, 000, 000)];
 	self.syn["Mystery Wheel Teleports"]["cp_rave"][1] =  [(2205, -1390, -15), (-2900, 2275, -150), (145, 1125, 50), (-3355, -3365, 150), (-560, -1895, 55), (-950, -1150, 390), (-2585, -4575, 255)];
+	self.syn["Main Quest Teleports"]["cp_rave"][1] =     [(000, 000, 000), (000, 000, 000)];
+	self.syn["Extra Teleports"]["cp_rave"][1] =          [(000, 000, 000), (000, 000, 000)];
 	// Rave in the Redwoods Teleport Angles
 	self.syn["Main Teleports"]["cp_rave"][2] =           [90, 165, 130, 100, 0];
+	self.syn["Map Setup Teleports"]["cp_rave"][2] =      [0, 0];
 	self.syn["Mystery Wheel Teleports"]["cp_rave"][2] =  [100, 140, 90, -50, -180, -90, -75];
+	self.syn["Main Quest Teleports"]["cp_rave"][2] =     [0, 0];
+	self.syn["Extra Teleports"]["cp_rave"][2] =          [0, 0];
 	// Shaolin Shuffle Teleport Names
 	self.syn["Main Teleports"]["cp_disco"][0] =          ["PaP Room", "Spawn", "Sewer", "Afterlife Arcade"];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][0] = ["Alleyway", "Rooftop", "Garden", "Disco Roof", "Subway Station 1", "Subway Station 2", "Disco"];
@@ -462,10 +464,14 @@ initial_variable() {
 	self.syn["Main Teleports"]["cp_disco"][1] =          [(-10245, 750, -1630), (580, 3025, 285), (-875, 1820, 180), (-9885, -35, -1795)];
 	self.syn["Map Setup Teleports"]["cp_disco"][1] =     [(-1915, 4620, 750), (1590, 1290, 750), (-810, 765, 925), (-1110, 3435, 1120), (-1075, 2795, 260)];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][1] = [(105, 1300, 750), (15, 665, 935), (-3515, 1165, 975), (-2100, 2795, 1175), (375, 2065, 525), (-2450, 3610, 500), (-1185, 3735, 750)];
+	self.syn["Main Quest Teleports"]["cp_disco"][1] =    [(000, 000, 000), (000, 000, 000)];
+	self.syn["Extra Teleports"]["cp_disco"][1] =         [(000, 000, 000), (000, 000, 000)];
 	// Shaolin Shuffle Teleport Angles
 	self.syn["Main Teleports"]["cp_disco"][2] =          [90, -145, 90, 0];
 	self.syn["Map Setup Teleports"]["cp_disco"][2] =     [-180, -30, 90, 0, 180];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][2] = [-90, 90, -180, 180, -180, 90. -20];
+	self.syn["Main Quest Teleports"]["cp_disco"][2] =    [0, 0];
+	self.syn["Extra Teleports"]["cp_disco"][2] =         [0, 0];
 	// Attack of the Radioactive Thing Teleport Names
 	self.syn["Main Teleports"]["cp_town"][0] =           ["PaP Room", "Spawn", "Studio", "Afterlife Arcade"];
 	self.syn["Map Setup Teleports"]["cp_town"][0] =      ["Power Handle", "Power Station", "Telepad 1", "Telepad 2", "Telepad 3", "Telepad 4"];
@@ -647,7 +653,7 @@ open_menu(menu) {
 		self.syn["hud"] = [];
 	}
 	
-	self.syn["hud"]["title"][0] = self create_text(self get_title(), self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
+	self.syn["hud"]["title"][0] = self create_text(self.syn["title"], self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
 	self.syn["hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 	self.syn["hud"]["title"][2] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 			
@@ -668,7 +674,7 @@ close_menu() {
 }
 
 create_title(title) {
-	self.syn["hud"]["title"][0] set_text(isDefined(title) ? title : self get_title());
+	self.syn["hud"]["title"][0] set_text(isDefined(title) ? title : self.syn["title"]);
 }
 
 create_option() {
@@ -882,6 +888,7 @@ start_rainbow() {
 
 init() {
 	level thread onPlayerConnect();
+	level thread create_rainbow_color();
 }
 
 on_event() {
@@ -921,19 +928,18 @@ onPlayerConnect() {
 onPlayerSpawned() {
 	self endOn("disconnect");
 	level endOn("game_ended");
+	self thread on_event();
+	self thread on_ended();
+	if(!isDefined(self.menuInit)) {
+		self.menuInit = false;
+	}
 	for(;;) {
 		self waitTill("spawned_player");
-		
-		self thread on_event();
-		self thread on_ended();
 
 		if(self isHost()) {
 			self freezeControls(false);
+			self.syn["watermark"] = self create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 1, 3);
 		}
-		
-		level thread create_rainbow_color();
-
-		self.syn["watermark"] = self create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 1, 3);
 
 		if(!self.menuInit) {
 			self.menuInit = true;
@@ -941,7 +947,6 @@ onPlayerSpawned() {
 			self.syn["controls-hud"] = [];
 			self.syn["controls-hud"]["title"][0] = self create_text("Controls", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
 			self.syn["controls-hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
-			self.syn["controls-hud"]["title"][2] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 			
 			self.syn["controls-hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 97, self.syn["utility"].color[5], 1, 1); // Outline
 			self.syn["controls-hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 95, self.syn["utility"].color[1], 1, 2); // Main Background
@@ -959,19 +964,18 @@ onPlayerSpawned() {
 }
 
 close_controls_menu() {
-	self.syn["controls-hud"] destroy();
-	self.syn["controls-hud"]["title"][0] destroy();
-	self.syn["controls-hud"]["title"][1] destroy();
-	self.syn["controls-hud"]["title"][2] destroy();
-	
-	self.syn["controls-hud"]["background"][0] destroy();
-	self.syn["controls-hud"]["background"][1] destroy();
-	self.syn["controls-hud"]["foreground"][0] destroy();
-	
-	self.syn["controls-hud"]["controls"][0] destroy();
-	self.syn["controls-hud"]["controls"][1] destroy();
-	self.syn["controls-hud"]["controls"][2] destroy();
-	self.syn["controls-hud"]["controls"][3] destroy();
+	if(isDefined(self.syn["controls-hud"]["title"][0])) {
+		self.syn["controls-hud"]["title"][0] destroy();
+		self.syn["controls-hud"]["title"][1] destroy();
+		
+		self.syn["controls-hud"]["background"][0] destroy();
+		self.syn["controls-hud"]["background"][1] destroy();
+		
+		self.syn["controls-hud"]["controls"][0] destroy();
+		self.syn["controls-hud"]["controls"][1] destroy();
+		self.syn["controls-hud"]["controls"][2] destroy();
+		self.syn["controls-hud"]["controls"][3] destroy();
+	}
 }
 
 menu_index() {

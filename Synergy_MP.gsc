@@ -22,10 +22,6 @@ get_cursor() {
 	return self.cursor[self get_menu()];
 }
 
-get_title() {
-	return self.syn["title"];
-}
-
 set_menu(menu) {
 	if(isDefined(menu)) {
 		self.syn["menu"] = menu;
@@ -175,7 +171,7 @@ create_text(text, font, font_scale, align_x, align_y, x, y, color, alpha, z_inde
 		textElement thread start_rainbow();
 	}
 	
-	if(isNumber(text)) {
+	if(isnumber(text)) {
 		textElement setValue(text);
 	} else {
 		textElement set_text(text);
@@ -516,13 +512,13 @@ open_menu(menu) {
 	}
 	
 	self.syn["hud"] = [];
-	self.syn["hud"]["title"][0] = self create_text(self get_title(), self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
+	self.syn["hud"]["title"][0] = self create_text(self.syn["title"], self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
 	self.syn["hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 	
 	self.syn["hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 30, self.syn["utility"].color[5], 1, 1); // Outline
 	self.syn["hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 28, self.syn["utility"].color[1], 1, 2); // Main Background
 	self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
-	self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar Background
+	self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar
 	
 	self set_menu(menu);
 	self create_option();
@@ -536,7 +532,7 @@ close_menu() {
 }
 
 create_title(title) {
-	self.syn["hud"]["title"][0] set_text(isDefined(title) ? title : self get_title());
+	self.syn["hud"]["title"][0] set_text(isDefined(title) ? title : self.syn["title"]);
 }
 
 create_option() {
@@ -778,12 +774,12 @@ onPlayerConnect() {
 		executeCommand("sv_cheats 1");
 		
 		level waittill("prematch_over");
+		if(isBot(player)) {
+			return;
+		}
 		
 		foreach(player in level.players) {
 			if(player.name == level.username || player isHost()) {
-				player thread create_text("SyndiShanX", "default", 1, "left", "top", 5, 150, "rainbow", 1, 3);
-				player thread on_event();
-				player thread on_ended();
 				player thread onPlayerSpawned();
 			}
 		}
@@ -793,8 +789,18 @@ onPlayerConnect() {
 onPlayerSpawned() {
 	self endOn("disconnect");
 	level endOn("game_ended");
+	self thread on_event();
+	self thread on_ended();
+	if(!isDefined(self.menuInit)) {
+		self.menuInit = false;
+	}
 	for(;;) {
 		self waitTill("spawned_player");
+		
+		if(self isHost()) {
+			self freezeControls(false);
+			self.syn["watermark"] = self create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 1, 3);
+		}
 		
 		if(self in_menu()) {
 			self close_menu();
@@ -823,19 +829,18 @@ onPlayerSpawned() {
 }
 
 close_controls_menu() {
-	self.syn["controls-hud"] destroy();
-	self.syn["controls-hud"]["title"][0] destroy();
-	self.syn["controls-hud"]["title"][1] destroy();
-	self.syn["controls-hud"]["title"][2] destroy();
-	
-	self.syn["controls-hud"]["background"][0] destroy();
-	self.syn["controls-hud"]["background"][1] destroy();
-	self.syn["controls-hud"]["foreground"][0] destroy();
-	
-	self.syn["controls-hud"]["controls"][0] destroy();
-	self.syn["controls-hud"]["controls"][1] destroy();
-	self.syn["controls-hud"]["controls"][2] destroy();
-	self.syn["controls-hud"]["controls"][3] destroy();
+	if(isDefined(self.syn["controls-hud"]["title"][0])) {
+		self.syn["controls-hud"]["title"][0] destroy();
+		self.syn["controls-hud"]["title"][1] destroy();
+		
+		self.syn["controls-hud"]["background"][0] destroy();
+		self.syn["controls-hud"]["background"][1] destroy();
+		
+		self.syn["controls-hud"]["controls"][0] destroy();
+		self.syn["controls-hud"]["controls"][1] destroy();
+		self.syn["controls-hud"]["controls"][2] destroy();
+		self.syn["controls-hud"]["controls"][3] destroy();
+	}
 }
 
 menu_index() {
@@ -909,6 +914,9 @@ menu_index() {
 			self add_increment("Set Prestige", ::set_prestige, 0, 0, 30, 1);
 			self add_increment("Set Level", ::set_rank, 1, 1, 55, 1);
 			
+			self add_option("Set Weapons to Max Level", ::set_max_weapons);
+			
+			self add_option("Complete All Challenges", ::complete_challenges);
 			self add_option("Complete Active Contracts", ::complete_active_contracts);
 			
 			break;
@@ -921,6 +929,10 @@ menu_index() {
 			} else {
 				self add_increment("Move Menu Y", ::modify_y_position, 0, -50, 10, 10);
 			}
+			
+			self add_toggle("Watermark", ::watermark, self.watermark);
+			self add_toggle("Hide UI", ::hide_ui, self.hide_ui);
+			self add_toggle("Hide Weapon", ::hide_weapon, self.hide_weapon);
 			
 			break;
 		case "Off-Host Options":
@@ -1113,6 +1125,27 @@ modify_y_position(offset) {
 	open_menu("Menu Options");
 }
 
+watermark() {
+	self.watermark = !return_toggle(self.watermark);
+	if(!self.watermark) {
+		iPrintString("Watermark [^2ON^7]");
+		self.syn["watermark"].alpha = 1;
+	} else {
+		iPrintString("Watermark [^1OFF^7]");
+		self.syn["watermark"].alpha = 0;
+	}
+}
+
+hide_ui() {
+	self.hide_ui = !return_toggle(self.hide_ui);
+	setDvar("cg_draw2d", !self.hide_ui);
+}
+
+hide_weapon() {
+	self.hide_weapon = !return_toggle(self.hide_weapon);
+	setDvar("cg_drawgun", !self.hide_weapon);
+}
+
 // Basic Options
 
 god_mode() {
@@ -1299,8 +1332,6 @@ out_of_bounds() {
 		}
 	}
 }
-
-// Perks
 
 // Killstreaks
 
