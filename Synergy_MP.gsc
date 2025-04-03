@@ -914,9 +914,6 @@ menu_index() {
 			self add_increment("Set Prestige", ::set_prestige, 0, 0, 30, 1);
 			self add_increment("Set Level", ::set_rank, 1, 1, 55, 1);
 			
-			self add_option("Set Weapons to Max Level", ::set_max_weapons);
-			
-			self add_option("Complete All Challenges", ::complete_challenges);
 			self add_option("Complete Active Contracts", ::complete_active_contracts);
 			
 			break;
