@@ -1528,7 +1528,6 @@ frag_no_clip_loop() {
 		iPrintln("");
 		self.temp_god_mode = true;
 	}
-  self animMode("noclip");
 
   while (true) {
     vec = anglesToForward(self getPlayerAngles());
@@ -1555,7 +1554,6 @@ frag_no_clip_loop() {
 		iPrintln("");
 		self.temp_god_mode = undefined;
 	}
-  self animmode("noclip", true);
 
   self.frag_no_clip_loop = undefined;
 }
