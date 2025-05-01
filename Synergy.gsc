@@ -938,7 +938,7 @@ onPlayerSpawned() {
 
 		if(self isHost()) {
 			self freezeControls(false);
-			self.syn["watermark"] = self create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 1, 3);
+			self.syn["watermark"] = self create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 0, 3);
 		}
 
 		if(!self.menuInit) {
@@ -1499,7 +1499,7 @@ frag_no_clip() {
 
   if(!isDefined(self.frag_no_clip)) {
     self.frag_no_clip = true;
-		self iPrintln("Frag No Clip [^2ON^7]");
+		self iPrintln("Frag No Clip [^2ON^7], Press ^3[{+frag}]^7 to Enter and ^3[{+melee}]^7 to Exit");
     while (isDefined(self.frag_no_clip)) {
       if(self fragButtonPressed()) {
         if(!isDefined(self.frag_no_clip_loop))

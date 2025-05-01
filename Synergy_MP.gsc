@@ -799,7 +799,7 @@ onPlayerSpawned() {
 		
 		if(self isHost()) {
 			self freezeControls(false);
-			self.syn["watermark"] = self create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 1, 3);
+			self.syn["watermark"] = self create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 0, 3);
 		}
 		
 		if(self in_menu()) {
@@ -868,6 +868,7 @@ menu_index() {
 			
 			self add_toggle("God Mode", ::god_mode, self.god_mode);
 			self add_toggle("No Clip", ::no_clip, self.no_clip);
+			self add_toggle("Frag No Clip", ::frag_no_clip, self.frag_no_clip);
 			self add_toggle("UFO", ::ufo_mode, self.ufo_mode);
 			self add_toggle("Infinite Ammo", ::infinite_ammo, self.infinite_ammo);
 			
@@ -1165,6 +1166,71 @@ no_clip() {
 	} else {
 		self iPrintString("No Clip [^1OFF^7]");
 	}
+}
+
+frag_no_clip() {
+  self endon("disconnect");
+  self endon("game_ended");
+
+  if(!isDefined(self.frag_no_clip)) {
+    self.frag_no_clip = true;
+		self iPrintString("Frag No Clip [^2ON^7], Press ^3[{+frag}]^7 to Enter and ^3[{+melee}]^7 to Exit");
+    while (isDefined(self.frag_no_clip)) {
+      if(self fragButtonPressed()) {
+        if(!isDefined(self.frag_no_clip_loop))
+          self thread frag_no_clip_loop();
+      }
+      wait .05;
+    }
+  } else {
+    self.frag_no_clip = undefined;
+		self iPrintString("Frag No Clip [^1OFF^7]");
+	}
+}
+
+frag_no_clip_loop() {
+  self endon("disconnect");
+  self endon("noclip_end");
+  self disableWeapons();
+  self disableOffHandWeapons();
+  self.frag_no_clip_loop = true;
+
+  clip = spawn("script_origin", self.origin);
+  self playerLinkTo(clip);
+  if(!isDefined(self.godmode) || !self.godmode) {
+    executeCommand("god");
+		wait .01;
+		iPrintString("");
+		self.temp_god_mode = true;
+	}
+
+  while (true) {
+    vec = anglesToForward(self getPlayerAngles());
+    end = (vec[0] * 60, vec[1] * 60, vec[2] * 60);
+    if(self attackButtonPressed()) {
+      clip.origin = clip.origin + end;
+		}
+    if(self adsButtonPressed()) {
+      clip.origin = clip.origin - end;
+		}
+    if(self meleeButtonPressed()) {
+      break;
+		}
+    wait .05;
+  }
+
+  clip delete();
+  self enableWeapons();
+  self enableOffhandWeapons();
+
+  if(self.temp_god_mode) {
+    executeCommand("god");
+		wait .01;
+		iPrintString("");
+		self.temp_god_mode = undefined;
+	}
+
+  self.frag_no_clip_loop = undefined;
 }
 
 ufo_mode() {
