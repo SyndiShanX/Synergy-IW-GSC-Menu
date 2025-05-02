@@ -14,10 +14,6 @@ get_cursor() {
 	return self.cursor[self get_menu()];
 }
 
-get_title() {
-	return self.syn["title"];
-}
-
 set_menu(menu) {
 	if(isDefined(menu)) {
 		self.syn["menu"] = menu;
@@ -167,7 +163,7 @@ create_text(text, font, font_scale, align_x, align_y, x, y, color, alpha, z_inde
 		textElement thread start_rainbow();
 	}
 	
-	if(isNumber(text)) {
+	if(isnumber(text)) {
 		textElement setValue(text);
 	} else {
 		textElement set_text(text);
@@ -372,38 +368,100 @@ initial_variable() {
 	self.syn["visions"][0] = ["None", "AC-130", "AC-130 Enhanced", "AC-130 inverted", "Aftermath", "Aftermath Glow", "Aftermath Post", "Apex", "Black & White", "Lobby", "Afterlife", "Zombies", "Zombies in Spaceland", "Zombies in Spaceland Black & White", "Zombies in Spaceland Ghost Path", "Zombies in Spaceland Basement", "Zombies in Spaceland Triton", "Default", "Default Night", "Night Vision", "Dronehive", "Endgame", "Europa", "Jackal", "Last Stand", "MP Map Select", "Missile Cam", "MP Intro", "MP Outro", "MP Nuke", "MP Nuke Aftermath", "Frontier", "Out of Bounds", "Nuke Flash", "Optic Wave", "RC8", "Thor Bright", "Thor", "Venom Gas"];
 	self.syn["visions"][1] = ["", "ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb_afterlife", "cp_zmb_alien", "cp_zmb", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpoutro", "mpnuke", "mpnuke_aftermath", "mp_frontier", "mp_out_of_bounds", "nuke_global_flash", "opticwave_mp", "rc8_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
 	
-	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Specialist Weapons"];
+	self.syn["weapons"]["category"] = ["Assault Rifles", "Light Machine Guns", "Sniper Rifles", "Sub Machine Guns", "Shotguns", "Pistols", "Heavies"];
 	
-	self.syn["weapons"]["assault_rifles"][0] =     ["iw7_m4", "iw7_sdfar", "iw7_ar57", "iw7_fmg+akimbofmg+fmgscope_camo", "iw7_aker", "iw7_rvn+meleervn+rvnscope", "iw7_vr+vrscope", "iw7_gauss+gaussscope", "iw7_erad+eradscope_camo"];
-	self.syn["weapons"]["sub_machine_guns"][0] =   ["iw7_fhr", "iw7_crbl+crblscope_camo", "iw7_ripperr+ripperrscope", "iw7_ump45l+ump45lscope_camo", "iw7_tacburst+gltacburst+tacburstscope"];
-	self.syn["weapons"]["light_machine_guns"][0] = ["iw7_sdflmg", "iw7_mauler", "iw7_lmg03+lmg03scope_camo", "iw7_minilmg+minilmgscope", "iw7_unsalmg"];
-	self.syn["weapons"]["sniper_rifles"][0] =      ["iw7_kbs+kbsscope_camo", "iw7_m8+m8scope_camo", "iw7_cheytacr+cheytacrscope_camo", "iw7_m1+m1scope_camo", "iw7_ba50cal+ba50calscope"];
-	self.syn["weapons"]["shotguns"][0] =           ["iw7_devastator", "iw7_sonicr+sonicrscope_camo", "iw7_sdfshotty+sdfshottyscope_camo", "iw7_spasr", "iw7_mod2187+mod2187scope"];
-	self.syn["weapons"]["pistols"][0] =            ["iw7_emc", "iw7_nrg", "iw7_g18r", "iw7_revolver", "iw7_udm45+udm45scope", "iw7_mag"];
-	self.syn["weapons"]["launchers"][0] =          ["iw7_lockon+lockonscope_camo", "iw7_glprox+glproxscope_camo", "iw7_chargeshot+chargeshotscope_camo"];
-	self.syn["weapons"]["classics"][0] =           ["iw7_m1c", "iw7_g18c", "iw7_ump45c", "iw7_spasc", "iw7_arclassic+glarclassic", "iw7_cheytacc+cheytacscope_camo"];
-	self.syn["weapons"]["melees"][0] =             ["iw7_fists", "iw7_knife", "iw7_axer_melee"];
-	self.syn["weapons"]["specials"][0] =           ["iw7_atomizer", "iw7_penetrationrail+penetrationrailscope", "iw7_steeldragon", "iw7_claw", "iw7_blackholegun+blackholegunscope", "defaultweapon", "iw7_gunless"];
+	// Weapon IDs Plus Default Attachments
+	self.syn["weapons"]["assault_rifles"][0] =     ["iw7_ake", "iw7_m4", "iw7_ar57", "iw7_sdfar", "iw7_fmg+akimbofmg_sp+fmgscope"];
+	self.syn["weapons"]["light_machine_guns"][0] = ["iw7_mauler", "iw7_lmg03+lmg03scope", "iw7_sdflmg"];
+	self.syn["weapons"]["sniper_rifles"][0] =      ["iw7_kbs+kbsscope", "iw7_m8+m8scope_sp"];
+	self.syn["weapons"]["sub_machine_guns"][0] =   ["iw7_crb+crbscope", "iw7_ump45+ump45scope", "iw7_fhr", "iw7_erad+eradscope+shotgunerad_sp", "iw7_ripper+ripperrscope_sp"];
+	self.syn["weapons"]["shotguns"][0] =           ["iw7_devastator", "iw7_sdfshotty+sdfshottyscope", "iw7_sonic+sonicscope"];
+	self.syn["weapons"]["pistols"][0] =            ["iw7_nrg", "iw7_emc", "iw7_g18"];
+	self.syn["weapons"]["heavies"][0] =            ["iw7_penetrationrail+penetrationrailscope_sp", "iw7_chargeshot+chargeshotscope", "iw7_lockon+lockonscope", "iw7_steeldragon", "iw7_atomizer+atomizerscope", "defaultweapon"];
+	// Weapon Names
+	self.syn["weapons"]["assault_rifles"][1] =     ["Volk", "NV4", "KBAR-32", "R3K", "Type-2"];
+	self.syn["weapons"]["light_machine_guns"][1] = ["Mauler", "Titan", "R.A.W."];
+	self.syn["weapons"]["sniper_rifles"][1] =      ["KBS Longbow", "EBR-800"];
+	self.syn["weapons"]["sub_machine_guns"][1] =   ["Karma-45", "HVR", "FHR-40", "Erad", "RPR Evo"];
+	self.syn["weapons"]["shotguns"][1] =           ["Reaver", "DCM-8", "Banshee"];
+	self.syn["weapons"]["pistols"][1] =            ["Oni", "EMC", "Kendall 44"];
+	self.syn["weapons"]["heavies"][1] =            ["Ballista EM3", "P-Law", "Spartan SA3", "F-SpAr Torch", "Eraser", "Default Weapon"];
+	
+	self.syn["weapons"]["attachable_weapons"] = ["iw7_sdfar", "iw7_aker", "iw7_fmg", "iw7_m4", "iw7_ar57", "iw7_ripper", "iw7_fhr", "iw7_erad", "iw7_ump45l", "iw7_ump45", "iw7_crbl", "iw7_crb", "iw7_sdflmg", "iw7_mauler", "iw7_lmg03", "iw7_kbs", "iw7_m8", "iw7_devastator", "iw7_sdfshotty", "iw7_sonic", "iw7_g18r", "iw7_g18", "iw7_nrg", "iw7_emc"];
+	
+	self.syn["weapons"]["sights"] = ["acog", "acogake", "acogarnoalt", "acogkbs", "acoglmg", "acoglmgnoalt", "acogm4", "acogm8", "acogsmg", "acogsmgnoalt", "ar57scope", "crblscope", "elo", "eloake", "elofmg", "elokbs", "elolmg", "elom8", "elonrg", "elopstl", "elopstle", "eloshtgn", "elosmg", "eradscope", "fmgscope", "hybrid", "hybridake", "hybridarnoalt", "hybridgmg", "hybridlmg", "hybridsmg", "hybridsmgnoalt", "kbsoscope", "kbsscope", "kbsvzscope", "m8scope_sp", "oscope", "phase_sp", "phaseake_sp", "phasefmg_sp", "phaselmg_sp", "phasenrg_sp", "phasepstl_sp", "phaseshotgun_sp", "phasesmg_sp", "reflex", "reflexake", "reflexfmg", "reflexlmg", "reflexnrg", "reflexpstl", "reflexshotgun", "reflexsmg", "ripperrscope_sp", "sdfshottyscope", "smart", "sonicscope", "thermal", "thermalake", "thermalfmg", "thermalkbs", "thermallmg", "thermalm4", "thermalm8", "thermalsmg", "ump45lscope", "vzscope"];
+	
+	self.syn["weapons"]["attachments"]["iw7_ake"][0] = ["acogake", "reflexake", "phaseake_sp", "thermalake", "hybridake", "eloake", "silencere", "barrelrangee", "gripake", "reflect", "rofar", "xmagse", "epicake"];
+	self.syn["weapons"]["attachments"]["iw7_ake"][1] = ["Scout Hybrid", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Particle Amp", "Foregrip", "Ram Servo", "Slide Rail", "Fusion Mag", "Volk Marksman"];
+	
+	self.syn["weapons"]["attachments"]["iw7_m4"][0] = ["acogm4", "reflex", "phase_sp", "thermalm4", "hybrid", "elo", "fastaim", "silencer", "barrelrange", "gripm4", "rofar", "xmags", "epicm4"];
+	self.syn["weapons"]["attachments"]["iw7_m4"][1] = ["Scout Hybrid", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Quickdraw", "Suppressor", "Rifled Barrel", "Foregrip", "Slide Rail", "Extended Mag", "Tracker Rounds"];
+	
+	self.syn["weapons"]["attachments"]["iw7_ar57"][0] = ["ar57scope", "acog", "reflex", "phase_sp", "thermal", "hybrid", "elo", "silencer", "barrelrange", "gripar57", "rofar", "xmags", "epicar57"];
+	self.syn["weapons"]["attachments"]["iw7_ar57"][1] = ["Default Sight","Scout Hybrid", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Rifled Barrel", "Foregrip", "Slide Rail", "Extended Mag", "High-Impact Rounds"];
+	
+	self.syn["weapons"]["attachments"]["iw7_fmg"][0] = ["fmgscope", "acogarnoalt", "reflexfmg", "phasefmg_sp", "thermalfmg", "hybridarnoalt", "elofmg", "silencerefmg", "barrelrangee", "gripfmg", "reflect", "roffmg", "xmagse", "epicfmg"];
+	self.syn["weapons"]["attachments"]["iw7_fmg"][1] = ["Default Sight", "Scout", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor",  "Particle Amp", "Foregrip", "Ram Servo", "Slide Rail", "Fusion Mag", "Akimbo Shotguns"];
+	
+	self.syn["weapons"]["attachments"]["iw7_sdfar"][0] = ["acog", "reflex", "phase_sp", "thermal", "hybrid", "elo", "silencere", "barrelrangesdfar", "gripsdfar", "reflext", "rofburst", "xmagse", "epicsdfar"];
+	self.syn["weapons"]["attachments"]["iw7_sdfar"][1] = ["Scout Hybrid", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Particle Amp", "Foregrip", "Ram Servo", "Slide Rail", "Fusion Mag", "Full-Auto"];
+	
+	self.syn["weapons"]["attachments"]["iw7_mauler"][0] = ["acoglmgnoalt", "reflexlmg", "phaselmg_sp", "thermallmg", "hybridlmg", "elolmg", "silencer", "barrelrange", "griphide", "roflmg", "xmags", "epicmauler"];
+	self.syn["weapons"]["attachments"]["iw7_mauler"][1] = ["Scout", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Rifled Barrel", "Foregrip (Hidden)", "Slide Rail", "Extended Mag", "Heavy Mauler"];
 
-	self.syn["weapons"]["assault_rifles"][1] =     ["NV4", "R3K", "KBAR-32", "Type-2", "Volk", "R-VN", "X-Con", "G-Rail", "Erad"];
-	self.syn["weapons"]["sub_machine_guns"][1] =   ["FHR-40", "Karma-45", "RPR Evo", "HVR", "Raijin-EMX"];
-	self.syn["weapons"]["light_machine_guns"][1] = ["R.A.W.", "Mauler", "Titan", "Auger", "Atlas"];
-	self.syn["weapons"]["sniper_rifles"][1] =      ["KBS Longbow", "EBR-800", "Widowmaker", "DMR-1", "Trek-50"];
-	self.syn["weapons"]["shotguns"][1] =           ["Reaver", "Banshee", "DCM-8", "Rack-9", "M.2187"];
-	self.syn["weapons"]["pistols"][1] =            ["EMC", "Oni", "Kendall 44", "Hailstorm", "UDM", "Stallion 44"];
-	self.syn["weapons"]["launchers"][1] =          ["Spartan SA3", "Howitzer", "P-Law"];
-	self.syn["weapons"]["classics"][1] =           ["M1", "Hornet", "MacTav-45", "S-Ravage", "OSA", "TF-141"];
-	self.syn["weapons"]["melees"][1] =             ["Fists", "Combat Knife", "Axe"];
-	self.syn["weapons"]["specials"][1] =           ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun", "Default Weapon", "No Gun"];
+	self.syn["weapons"]["attachments"]["iw7_lmg03"][0] = ["acoglmg", "reflexlmg", "phaselmg_sp", "thermallmg", "hybridlmg", "elolmg", "silencere", "barrelrangee", "grip", "reflect", "roflmg", "xmagselmg", "epiclmg03"];
+	self.syn["weapons"]["attachments"]["iw7_lmg03"][1] = ["Scout Hybrid", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Particle Amp", "Foregrip", "Ram Servo", "Slide Rail", "Fusion Mag", "Overcharge"];
 	
+	self.syn["weapons"]["attachments"]["iw7_sdflmg"][0] = ["acoglmg", "reflexlmg", "phaselmg_sp", "thermallmg", "hybridlmg", "elolmg", "silencere", "barrelrangee", "grip", "reflect", "roflmg", "xmagselmg", "epicsdflmg"];
+	self.syn["weapons"]["attachments"]["iw7_sdflmg"][1] = ["Scout Hybrid", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Particle Amp", "Foregrip", "Ram Servo", "Slide Rail", "Fusion Mag", "Compressor"];
+	
+	self.syn["weapons"]["attachments"]["iw7_kbs"][0] = ["kbsscope", "acogkbs", "thermalkbs", "elokbs", "kbsscope+kbsvzscope", "kbsoscope", "silencersniperhide", "gripsnpr", "cpu", "xmags", "epickbs"];
+	self.syn["weapons"]["attachments"]["iw7_kbs"][1] = ["Default Scope", "Scout", "Thermal", "Elo", "Variable Zoom", "Tracking Chip", "Suppressor (Hidden)", "Foregrip", "Ballistic CPU", "Extended Mag", "Stasis"];
+	
+	self.syn["weapons"]["attachments"]["iw7_m8"][0] = ["m8scope_sp", "acogm8", "thermalm8", "elom8", "m8scope_sp+vzscope", "m8scope_sp+oscope", "silencersniperhidee", "gripsnpre", "cpu", "reflect", "xmagse", "epicm8"];
+	self.syn["weapons"]["attachments"]["iw7_m8"][1] = ["Default Scope", "Scout", "Thermal", "Elo", "Variable Zoom", "Tracking Chip", "Suppressor (Hidden)", "Foregrip", "Ballistic CPU", "Ram Servo", "Fusion Mag", "Burst Snipe"];
+
+	self.syn["weapons"]["attachments"]["iw7_crb"][0] = ["crblscope", "acogsmg", "reflexsmg", "phasesmg_sp", "thermalsmg", "hybridsmg", "elosmg", "silencersmg", "barrelrangesmg", "gripcrbl", "rof", "xmags", "epiccrb"];
+	self.syn["weapons"]["attachments"]["iw7_crb"][1] = ["Default Sight", "Scout Hybrid", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Rifled Barrel", "Foregrip", "Slide Rail", "Extended Mag", "High-Cal Burst"];
+	
+	self.syn["weapons"]["attachments"]["iw7_ump45"][0] = ["ump45lscope", "acogsmg", "reflexsmg", "phasesmg_sp", "thermalsmg", "hybridgmg", "elosmg", "silencersmg", "barrelrangesmg", "gripump45l", "rof", "xmags", "epicump45"];
+	self.syn["weapons"]["attachments"]["iw7_ump45"][1] = ["Default Sight", "Scout Hybrid", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Rifled Barrel", "Foregrip", "Slide Rail", "Extended Mag", "Akimbo"];
+
+	self.syn["weapons"]["attachments"]["iw7_fhr"][0] = ["acogsmg", "reflexsmg", "phasesmg_sp", "thermalsmg", "hybridsmg", "elosmg", "silencersmg", "barrelrangesmg", "griphide", "rof", "xmags", "epicfhr"];
+	self.syn["weapons"]["attachments"]["iw7_fhr"][1] = ["Scout Hybrid", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Rifled Barrel", "Foregrip (Hidden)", "Slide Rail", "Extended Mag", "FMJ Rounds"];
+	
+	self.syn["weapons"]["attachments"]["iw7_erad"][0] = ["eradscope", "acogsmgnoalt", "reflexsmg", "phasesmg_sp", "thermalsmg", "hybridsmgnoalt", "elosmg", "silencersmge", "barrelrangesmge", "griperad", "reflect", "rof", "xmagse", "epicerad+epicshotgunerad_sp"];
+	self.syn["weapons"]["attachments"]["iw7_erad"][1] = ["Default Sight", "Scout", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Particle Amp", "Foregrip", "Ram Servo", "Slide Rail", "Fusion Mag", "Splitter"];
+	
+	self.syn["weapons"]["attachments"]["iw7_ripper"][0] = ["ripperrscope_sp", "acogsmgnoalt", "reflexsmg", "phasesmg_sp", "thermalsmg", "hybridsmgnoalt", "elosmg", "silencersmg", "barrelrangesmg", "gripripperr", "rof", "xmags", "epicripper"];
+	self.syn["weapons"]["attachments"]["iw7_ripper"][1] = ["Default Sight", "Scout", "Reflex", "Trojan", "Thermal", "VMC", "Elo", "Suppressor", "Rifled Barrel", "Foregrip", "Slide Rail", "Extended Mag", "Burst-Fire"];
+	
+	self.syn["weapons"]["attachments"]["iw7_devastator"][0] = ["reflexshotgun", "phaseshotgun_sp", "eloshtgn", "smart", "silencershtgn", "barrelrangeshtgn", "gripdevastator", "xmags", "epicdevastator+epicdevastatorads"];
+	self.syn["weapons"]["attachments"]["iw7_devastator"][1] = ["Reflex", "Trojan", "Elo", "Smart Shot", "Suppressor", "Rifled Barrel", "Foregrip", "Extended Mag", "Slug Shot"];
+	
+	self.syn["weapons"]["attachments"]["iw7_sdfshotty"][0] = ["sdfshottyscope", "reflexshotgun", "phaseshotgun_sp", "eloshtgn", "smart", "silencershtgne", "barrelrangeshtgne", "gripsdfshotty", "xmagseshtgn", "epicsdfshotty"];
+	self.syn["weapons"]["attachments"]["iw7_sdfshotty"][1] = ["Default Sight", "Reflex", "Trojan", "Elo", "Smart Shot", "Suppressor", "Particle Amp", "Foregrip", "Fusion Mag", "Advanced DCM-8"];
+	
+	self.syn["weapons"]["attachments"]["iw7_sonic"][0] = ["sonicscope", "reflexshotgun", "phaseshotgun_sp", "eloshtgn", "smart", "silencershtgns", "barrelrangeshtgns_sp", "gripshtgn", "xmagseshtgnpump", "epicsonic"];
+	self.syn["weapons"]["attachments"]["iw7_sonic"][1] = ["Reflex", "Trojan", "Elo", "Smart Shot", "Suppressor", "Speaker Amp", "Foregrip", "Fusion Mag", "C6 Stun"];
+	
+	self.syn["weapons"]["attachments"]["iw7_nrg"][0] = ["reflexnrg", "phasenrg_sp", "elonrg", "silencerpstle", "barrelrangepstle", "akimbonrg", "reflect", "xmagsepstle", "epicnrg"];
+	self.syn["weapons"]["attachments"]["iw7_nrg"][1] = ["Reflex", "Trojan", "Elo", "Suppressor", "Particle Amp", "Akimbo", "Ram Servo", "Fusion Mag", "Energy Boost"];
+	
+	self.syn["weapons"]["attachments"]["iw7_emc"][0] = ["reflexpstl", "phasepstl_sp", "elopstle", "silencerpstle", "barrelrangepstle", "akimboemc", "reflect", "xmagspstl", "epicemc+epicemcads"];
+	self.syn["weapons"]["attachments"]["iw7_emc"][1] = ["Reflex", "Trojan", "Elo", "Suppressor", "Particle Amp", "Akimbo", "Ram Servo", "Fusion Mag", "Spread Shot"];
+	
+	self.syn["weapons"]["attachments"]["iw7_g18"][0] = ["reflexpstl", "phasepstl_sp", "elopstl", "silencerpstl", "barrelrangepstl", "akimbog18", "xmags", "epicg18"];
+	self.syn["weapons"]["attachments"]["iw7_g18"][1] = ["Reflex", "Trojan", "Elo", "Suppressor", "Rifled Barrel", "Akimbo", "Extended Mag", "Full Auto"];
+
 	self.syn["utility"].interaction = true;
 	
-	self.syn["utility"].color[0] = (0.752941176, 0.752941176, 0.752941176);
-	self.syn["utility"].color[1] = (0.074509804, 0.070588235, 0.078431373);
-	self.syn["utility"].color[2] = (0.074509804, 0.070588235, 0.078431373);
-	self.syn["utility"].color[3] = (0.243137255, 0.22745098, 0.247058824);
-	self.syn["utility"].color[4] = (1, 1, 1);
-	self.syn["utility"].color[5] = "rainbow";
+	self.syn["utility"].color[0] = (0.752941176, 0.752941176, 0.752941176); // Selected Slider Thumb and Category Text
+	self.syn["utility"].color[1] = (0.074509804, 0.070588235, 0.078431373); // Title Background and Unselected Slider Background
+	self.syn["utility"].color[2] = (0.074509804, 0.070588235, 0.078431373); // Main Background, Selected Slider Background
+	self.syn["utility"].color[3] = (0.243137255, 0.22745098, 0.247058824); // Cursor, Scrollbar Background, Unselected Slider Thumb, and Unchecked Toggle
+	self.syn["utility"].color[4] = (1, 1, 1); // Text Color
+	self.syn["utility"].color[5] = "rainbow"; // Outline and Separators
 	
 	self.cursor = [];
 	self.previous = [];
@@ -420,7 +478,7 @@ initial_monitor() {
 			if(!self in_menu()) {
 				if(self adsButtonPressed() && self meleeButtonPressed()) {
 					if(return_toggle(self.syn["utility"].interaction)) {
-						level.player playsound("armory_terminal_got_file");
+						level.player playsound("armory_terminal_got_file"); // Open
 					}
 					
 					close_controls_menu();
@@ -433,7 +491,7 @@ initial_monitor() {
 				cursor = self get_cursor();
 				if(self meleeButtonPressed()) {
 					if(return_toggle(self.syn["utility"].interaction)) {
-						level.player playsound("armory_terminal_finish");
+						level.player playsound("armory_terminal_finish"); // Back
 					}
 					
 					if(isDefined(self.previous[(self.previous.size - 1)])) {
@@ -442,12 +500,12 @@ initial_monitor() {
 						self close_menu();
 					}
 					
-					wait .75;
+					wait .75; // Knife Cooldown
 				}
 				else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
 					if(isDefined(self.structure) && self.structure.size >= 2) {
 						if(return_toggle(self.syn["utility"].interaction)) {
-							level.player playsound("plr_helmet_short_boot_up_lr");
+							level.player playsound("plr_helmet_short_boot_up_lr"); // Scroll
 						}
 						
 						scrolling = self attackButtonPressed() ? 1 : -1;
@@ -455,12 +513,12 @@ initial_monitor() {
 						self set_cursor((cursor + scrolling));
 						self update_scrolling(scrolling);
 					}
-					wait .25;
+					wait .15; // Scroll Cooldown
 				}
 				else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || self secondaryOffhandButtonPressed() && !self fragButtonPressed()) {
 					if(return_toggle(self.structure[cursor].slider)) {
 						if(return_toggle(self.syn["utility"].interaction)) {
-							level.player playsound("armory_terminal_tick");
+							level.player playsound("armory_terminal_tick"); // Slider
 						}
 						
 						scrolling = self secondaryOffhandButtonPressed() ? 1 : -1;
@@ -472,7 +530,7 @@ initial_monitor() {
 				else if(self useButtonPressed()) {
 					if(isDefined(self.structure[cursor].function)) {
 						if(return_toggle(self.syn["utility"].interaction)) {
-							level.player playsound("plr_helmet_visor_pull_up_w_air_lr");
+							level.player playsound("plr_helmet_visor_pull_up_w_air_lr"); // Activate
 						}
 						
 						if(return_toggle(self.structure[cursor].slider)) {
@@ -502,14 +560,14 @@ open_menu(menu) {
 		self.syn["hud"] = [];
 	}
 	
-	self.syn["hud"]["title"][0] = self create_text(self get_title(), self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10);
-	self.syn["hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10);
-	self.syn["hud"]["title"][2] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10);
+	self.syn["hud"]["title"][0] = self create_text(self.syn["title"], self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
+	self.syn["hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+	self.syn["hud"]["title"][2] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 			
-	self.syn["hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 30, self.syn["utility"].color[5], 1, 1);
-	self.syn["hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 28, self.syn["utility"].color[1], 1, 2);
-	self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4);
-	self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4);
+	self.syn["hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 30, self.syn["utility"].color[5], 1, 1); // Outline
+	self.syn["hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 28, self.syn["utility"].color[1], 1, 2); // Main Background
+	self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
+	self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar Background
 	
 	self set_menu(menu);
 	self create_option();
@@ -523,7 +581,7 @@ close_menu() {
 }
 
 create_title(title) {
-	self.syn["hud"]["title"][0] set_text(isDefined(title) ? title : self get_title());
+	self.syn["hud"]["title"][0] set_text(isDefined(title) ? title : self.syn["title"]);
 }
 
 create_option() {
@@ -559,7 +617,7 @@ create_option() {
 			}
 			
 			if(isDefined(self.structure[index].toggle)) {
-				self.syn["hud"]["toggle"][1][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 8, 8, color[1], 1, 10);
+				self.syn["hud"]["toggle"][1][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 8, 8, color[1], 1, 10); // Toggle Box
 			}
 			
 			for(x = 0; x < 15; x++) {
@@ -577,15 +635,15 @@ create_option() {
 				} else {
 					if(cursor) {
 						self.syn["hud"]["slider"][0][index] = self create_text(self.slider[self get_menu() + "_" + index], self.syn["utility"].font, (self.syn["utility"].font_scale - 0.1), "left", "CENTER", (self.syn["utility"].x_offset + 155), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), self.syn["utility"].color[4], 1, 10);
-						self.syn["hud"]["arrow"][0][self get_cursor()] = self create_text("<", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 129), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10);
-						self.syn["hud"]["arrow"][1][self get_cursor()] = self create_text(">", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 185), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10);
+						self.syn["hud"]["arrow"][0][self get_cursor()] = self create_text("<", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 129), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10); // Slider Arrow
+						self.syn["hud"]["arrow"][1][self get_cursor()] = self create_text(">", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 185), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10); // Slider Arrow
 					} else {
 						self.syn["hud"]["arrow"][0][index] destroy();
 						self.syn["hud"]["arrow"][1][index] destroy();
 					}
 				
-					self.syn["hud"]["slider"][1][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 135), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 50, 8, cursor ? self.syn["utility"].color[2] : self.syn["utility"].color[1], 1, 8);
-					self.syn["hud"]["slider"][2][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 149), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 8, 8, cursor ? self.syn["utility"].color[0] : self.syn["utility"].color[3], 1, 9);
+					self.syn["hud"]["slider"][1][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 135), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 50, 8, cursor ? self.syn["utility"].color[2] : self.syn["utility"].color[1], 1, 8); // Slider Background
+					self.syn["hud"]["slider"][2][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 149), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 8, 8, cursor ? self.syn["utility"].color[0] : self.syn["utility"].color[3], 1, 9); // Slider Thumb
 				}
 				
 				self set_slider(undefined, index);
@@ -593,8 +651,8 @@ create_option() {
 			
 			if(return_toggle(self.structure[index].category)) {
 				self.syn["hud"]["category"][0][index] = self create_text(self.structure[index].text, self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 88), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), self.syn["utility"].color[0], 1, 10);
-				self.syn["hud"]["category"][1][index] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10);
-				self.syn["hud"]["category"][2][index] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10);
+				self.syn["hud"]["category"][1][index] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
+				self.syn["hud"]["category"][2][index] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
 			}
 			else {
 				if(return_toggle(self.shader_option[self get_menu()])) {
@@ -634,11 +692,11 @@ update_resize() {
 	position = (self.structure.size - 1) / (height - adjust);
 	if(!return_toggle(self.shader_option[self get_menu()])) {
 		if(!isDefined(self.syn["hud"]["foreground"][1])) {
-			self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4);
+			self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
 		}
 		
 		if(!isDefined(self.syn["hud"]["foreground"][2])) {
-			self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4);
+			self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar
 		}
 	}
 	
@@ -736,7 +794,6 @@ start_rainbow() {
 init() {
 	level thread onPlayerConnect();
 	level thread create_rainbow_color();
-	level thread create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 1, 3);
 }
 
 on_event() {
@@ -780,17 +837,21 @@ onPlayerSpawned() {
 	level endOn("game_ended");
 	self thread on_event();
 	self thread on_ended();
+	if(!isDefined(self.menuInit)) {
+		self.menuInit = false;
+	}
+	
+	self.syn["watermark"] = self create_text("SyndiShanX", "default", 1, "left", "top", 5, 10, "rainbow", 0, 3);
 
 	if(!self.menuInit) {
 		self.menuInit = true;
 		
 		self.syn["controls-hud"] = [];
-		self.syn["controls-hud"]["title"][0] = self create_text("Controls", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10);
-		self.syn["controls-hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10);
-		self.syn["controls-hud"]["title"][2] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10);
+		self.syn["controls-hud"]["title"][0] = self create_text("Controls", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
+		self.syn["controls-hud"]["title"][1] = self create_text("______                                      ______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 		
-		self.syn["controls-hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 97, self.syn["utility"].color[5], 1, 1);
-		self.syn["controls-hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 95, self.syn["utility"].color[1], 1, 2);
+		self.syn["controls-hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 97, self.syn["utility"].color[5], 1, 1); // Outline
+		self.syn["controls-hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 95, self.syn["utility"].color[1], 1, 2); // Main Background
 		
 		self.syn["controls-hud"]["controls"][0] = self create_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 15), self.syn["utility"].color[4], 1, 10);
 		self.syn["controls-hud"]["controls"][1] = self create_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 35), self.syn["utility"].color[4], 1, 10);
@@ -804,19 +865,18 @@ onPlayerSpawned() {
 }
 
 close_controls_menu() {
-	self.syn["controls-hud"] destroy();
-	self.syn["controls-hud"]["title"][0] destroy();
-	self.syn["controls-hud"]["title"][1] destroy();
-	self.syn["controls-hud"]["title"][2] destroy();
-	
-	self.syn["controls-hud"]["background"][0] destroy();
-	self.syn["controls-hud"]["background"][1] destroy();
-	self.syn["controls-hud"]["foreground"][0] destroy();
-	
-	self.syn["controls-hud"]["controls"][0] destroy();
-	self.syn["controls-hud"]["controls"][1] destroy();
-	self.syn["controls-hud"]["controls"][2] destroy();
-	self.syn["controls-hud"]["controls"][3] destroy();
+	if(isDefined(self.syn["controls-hud"]["title"][0])) {
+		self.syn["controls-hud"]["title"][0] destroy();
+		self.syn["controls-hud"]["title"][1] destroy();
+		
+		self.syn["controls-hud"]["background"][0] destroy();
+		self.syn["controls-hud"]["background"][1] destroy();
+		
+		self.syn["controls-hud"]["controls"][0] destroy();
+		self.syn["controls-hud"]["controls"][1] destroy();
+		self.syn["controls-hud"]["controls"][2] destroy();
+		self.syn["controls-hud"]["controls"][3] destroy();
+	}
 }
 
 menu_index() {
@@ -832,8 +892,9 @@ menu_index() {
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86;
 			
 			self add_option("Basic Options", ::new_menu, "Basic Options");
-			self add_option("Give Weapons", ::new_menu, "Give Weapons");
+			self add_option("Weapon Options", ::new_menu, "Weapon Options");
 			self add_option("Fun Options", ::new_menu, "Fun Options");
+			self add_option("Menu Options", ::new_menu, "Menu Options");
 			
 			break;
 		case "Basic Options":
@@ -841,23 +902,29 @@ menu_index() {
 			
 			self add_toggle("God Mode", ::god_mode, self.god_mode);
 			self add_toggle("No Clip", ::no_clip, self.no_clip);
+			self add_toggle("Frag No Clip", ::frag_no_clip, self.frag_no_clip);
 			self add_toggle("UFO", ::ufo_mode, self.ufo_mode);
 			self add_toggle("Infinite Ammo", ::infinite_ammo, self.infinite_ammo);
-			
 			
 			break;
 		case "Fun Options":
 			self add_menu(menu, menu.size);
 			
 			self add_toggle("Forge Mode", ::forge_mode, self.forge_mode);
-			
 			self add_toggle("Exo Movement", ::exo_movement, self.exo_movement);
-			
 			self add_toggle("Fullbright", ::fullbright, self.fullbright);
-			
 			self add_increment("Set Speed", ::set_speed, 190, 190, 1190, 50);
-			
+			self add_increment("Set Timescale", ::set_timescale, 1, 1, 10, 1);
+			self add_increment("Set Gravity", ::set_gravity, 800, 40, 800, 10);
 			self add_option("Visions", ::new_menu, "Visions");
+			
+			break;
+		case "Weapon Options":
+			self add_menu(menu, menu.size);
+			
+			self add_option("Give Weapons", ::new_menu, "Give Weapons");
+			self add_option("Give Attachments", ::new_menu, "Give Attachments");
+			self add_option("Take Current Weapon", ::take_weapon);
 			
 			break;
 		case "Menu Options":
@@ -865,6 +932,10 @@ menu_index() {
 		
 			self add_increment("Move Menu X", ::modify_x_position, 0, -590, 50, 10);
 			self add_increment("Move Menu Y", ::modify_y_position, 0, -90, 150, 10);
+			
+			self add_toggle("Watermark", ::watermark, self.watermark);
+			self add_toggle("Hide UI", ::hide_ui, self.hide_ui);
+			self add_toggle("Hide Weapon", ::hide_weapon, self.hide_weapon);
 			
 			break;
 		case "Visions":
@@ -883,13 +954,38 @@ menu_index() {
 			}
 			
 			break;
-		case "Confirmed Weapons":
+		case "Give Attachments":
 			self add_menu(menu, menu.size);
 			
-			category = "confirmed";
-			
-			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
-				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
+			forEach(weapon_id in self.syn["weapons"]["attachable_weapons"]) {
+				weapon = strTok(self getCurrentWeapon(), "+")[0];
+				if (weapon == "alt_iw7_fmg") {
+					weapon = "iw7_fmg";
+				} else if (weapon == "alt_iw7_sdfar") {
+					weapon = "iw7_sdfar";
+				} else if (weapon == "iw7_g18r") {
+					weapon = "iw7_g18";
+				} else if (weapon == "alt_iw7_ripper") {
+					weapon = "iw7_ripper";
+				} else if (weapon == "alt_iw7_ake") {
+					weapon = "iw7_ake";
+				} else if (weapon == "alt_iw7_m8") {
+					weapon = "iw7_m8";
+				} else if (weapon == "alt_iw7_ar57") {
+					weapon = "iw7_ar57";
+				} else if (weapon == "alt_iw7_mauler") {
+					weapon = "iw7_mauler";
+				} else if (weapon == "alt_iw7_sdflmg") {
+					weapon = "iw7_sdflmg";
+				} else if (weapon == "alt_iw7_lmg03") {
+					weapon = "iw7_lmg03";
+				}
+				
+				if(weapon == weapon_id) {
+					for(i = 0; i < self.syn["weapons"]["attachments"][weapon][0].size; i++) {
+						self add_option(self.syn["weapons"]["attachments"][weapon][1][i], ::equip_attachment, weapon, self.syn["weapons"]["attachments"][weapon][0][i]);
+					}
+				}
 			}
 			
 			break;
@@ -897,16 +993,6 @@ menu_index() {
 			self add_menu(menu, menu.size);
 			
 			category = "assault_rifles";
-			
-			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
-				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
-			}
-			
-			break;
-		case "Sub Machine Guns":
-			self add_menu(menu, menu.size);
-			
-			category = "sub_machine_guns";
 			
 			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
 				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
@@ -933,6 +1019,16 @@ menu_index() {
 			}
 			
 			break;
+		case "Sub Machine Guns":
+			self add_menu(menu, menu.size);
+			
+			category = "sub_machine_guns";
+			
+			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
+				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
+			}
+			
+			break;
 		case "Shotguns":
 			self add_menu(menu, menu.size);
 			
@@ -953,40 +1049,10 @@ menu_index() {
 			}
 			
 			break;
-		case "Launchers":
+		case "Heavies":
 			self add_menu(menu, menu.size);
 			
-			category = "launchers";
-			
-			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
-				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
-			}
-			
-			break;
-		case "Classic Weapons":
-			self add_menu(menu, menu.size);
-			
-			category = "classics";
-			
-			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
-				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
-			}
-			
-			break;
-		case "Melee Weapons":
-			self add_menu(menu, menu.size);
-			
-			category = "melees";
-			
-			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
-				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
-			}
-			
-			break;
-		case "Specialist Weapons":
-			self add_menu(menu, menu.size);
-			
-			category = "specials";
+			category = "heavies";
 			
 			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
 				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
@@ -1000,6 +1066,8 @@ menu_index() {
 			break;
 	}
 }
+
+// Common Functions
 
 iPrintString(string) {
 	if(!isDefined(self.syn["string"])) {
@@ -1037,6 +1105,29 @@ modify_y_position(offset) {
 	open_menu("Menu Options");
 }
 
+watermark() {
+	self.watermark = !return_toggle(self.watermark);
+	if(self.watermark) {
+		iPrintString("Watermark [^2ON^7]");
+		self.syn["watermark"].alpha = 1;
+	} else {
+		iPrintString("Watermark [^1OFF^7]");
+		self.syn["watermark"].alpha = 0;
+	}
+}
+
+hide_ui() {
+	self.hide_ui = !return_toggle(self.hide_ui);
+	setDvar("cg_draw2d", !self.hide_ui);
+}
+
+hide_weapon() {
+	self.hide_weapon = !return_toggle(self.hide_weapon);
+	setDvar("cg_drawgun", !self.hide_weapon);
+}
+
+// Basic Options
+
 god_mode() {
 	self.god_mode = !return_toggle(self.god_mode);
 	executeCommand("god");
@@ -1050,13 +1141,78 @@ god_mode() {
 
 no_clip() {
 	self.no_clip = !return_toggle(self.no_clip);
-	executeCommand("noclip");
+	executecommand("noclip");
 	wait .01;
 	if(self.no_clip) {
 		self iPrintString("No Clip [^2ON^7]");
 	} else {
 		self iPrintString("No Clip [^1OFF^7]");
 	}
+}
+
+frag_no_clip() {
+  self endon("disconnect");
+  self endon("game_ended");
+
+  if(!isDefined(self.frag_no_clip)) {
+    self.frag_no_clip = true;
+		self iPrintString("Frag No Clip [^2ON^7], Press ^3[{+frag}]^7 to Enter and ^3[{+melee}]^7 to Exit");
+    while (isDefined(self.frag_no_clip)) {
+      if(self fragButtonPressed()) {
+        if(!isDefined(self.frag_no_clip_loop))
+          self thread frag_no_clip_loop();
+      }
+      wait .05;
+    }
+  } else {
+    self.frag_no_clip = undefined;
+		self iPrintString("Frag No Clip [^1OFF^7]");
+	}
+}
+
+frag_no_clip_loop() {
+  self endon("disconnect");
+  self endon("noclip_end");
+  self disableWeapons();
+  self disableOffHandWeapons();
+  self.frag_no_clip_loop = true;
+
+  clip = spawn("script_origin", self.origin);
+  self playerLinkTo(clip);
+  if(!isDefined(self.godmode) || !self.godmode) {
+    executeCommand("god");
+		wait .01;
+		iPrintString("");
+		self.temp_god_mode = true;
+	}
+
+  while (true) {
+    vec = anglesToForward(self getPlayerAngles());
+    end = (vec[0] * 60, vec[1] * 60, vec[2] * 60);
+    if(self attackButtonPressed()) {
+      clip.origin = clip.origin + end;
+		}
+    if(self adsButtonPressed()) {
+      clip.origin = clip.origin - end;
+		}
+    if(self meleeButtonPressed()) {
+      break;
+		}
+    wait .05;
+  }
+
+  clip delete();
+  self enableWeapons();
+  self enableOffhandWeapons();
+
+  if(self.temp_god_mode) {
+    executeCommand("god");
+		wait .01;
+		iPrintString("");
+		self.temp_god_mode = undefined;
+	}
+
+  self.frag_no_clip_loop = undefined;
 }
 
 ufo_mode() {
@@ -1093,6 +1249,8 @@ infinite_ammo_loop() {
 	}
 }
 
+// Fun Options
+
 exo_movement() {
 	self.exo_movement = !return_toggle(self.exo_movement);
 	if(self.exo_movement) {
@@ -1114,6 +1272,14 @@ exo_movement() {
 
 set_speed(value) {
 	executeCommand("g_speed " + value);
+}
+
+set_timescale(value) {
+	executeCommand("timescale " + value);
+}
+
+set_gravity(value) {
+	executeCommand("bg_gravity " + value);
 }
 
 forge_mode() {
@@ -1194,9 +1360,11 @@ set_vision(vision) {
 	self visionSetNakedForPlayer(vision, 0.1);
 }
 
-give_weapon(weapon, category, index) {	
+// Weapon Options
+
+give_weapon(weapon) {	
 	if(self getCurrentWeapon() != weapon && self getWeaponsListPrimaries()[1] != weapon && self getWeaponsListPrimaries()[2] != weapon && self getWeaponsListPrimaries()[3] != weapon && self getWeaponsListPrimaries()[4] != weapon) {
-		max_weapon_num = 2;
+		max_weapon_num = 100;
 		if(self getWeaponsListPrimaries().size >= max_weapon_num) {
 			self takeweapon(self getCurrentWeapon());
 		}
@@ -1212,7 +1380,63 @@ give_weapon(weapon, category, index) {
 	self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 }
 
-take_weapon(weapon_name) {
+equip_attachment(weapon, attachment) {
+	weapon_attached = self getCurrentWeapon();
+	weapon_attachments = strTok(weapon_attached, "+");
+	already_attached = false;
+	attachment_sight = false;
+	replace_sight = false;
+	sight_index = 0;
+	
+	for(i = 1; i < weapon_attachments.size; i++) {
+		if(weapon_attachments[i] == attachment) {
+			already_attached = true;
+		}
+	}
+	
+	forEach(sight in self.syn["weapons"]["sights"]) {
+		if(attachment == sight) {
+			attachment_sight = true;
+		}
+	}
+	
+	forEach(sight in self.syn["weapons"]["sights"]) {
+		for(i = 1; i < weapon_attachments.size; i++) {
+			if(weapon_attachments[i] == sight) {
+				replace_sight = true;
+				sight_index = i;
+			}
+		}
+	}
+	
+	if(!already_attached) {
+		if(replace_sight) {
+			weapon_attached = weapon;
+			for(i = 1; i < weapon_attachments.size; i++) {
+				if(i == sight_index) {
+					weapon_attached += "+" + attachment;
+				} else {
+					weapon_attached += "+" + weapon_attachments[i];
+				}
+				take_weapon();
+				give_weapon(weapon_attached);
+				iPrintString(weapon_attached);
+			}
+		} else {
+			weapon_attached = weapon;
+			for(i = 1; i < weapon_attachments.size; i++) {
+				weapon_attached += "+" + weapon_attachments[i];
+			}
+			take_weapon();
+			give_weapon(weapon_attached + "+" + attachment);
+			iPrintString(weapon_attached + "+" + attachment);
+		}
+	} else {
+		iPrintString("^1Attachment already Equipped!");
+	}
+}
+
+take_weapon() {
 	self takeweapon(self getCurrentWeapon());
 	self switchToWeapon(self getWeaponsListPrimaries()[1]);
 }
