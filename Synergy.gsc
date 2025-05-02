@@ -606,7 +606,7 @@ initial_monitor() {
 						self set_cursor((cursor + scrolling));
 						self update_scrolling(scrolling);
 					}
-					wait .25; // Scroll Cooldown
+					wait .15; // Scroll Cooldown
 				}
 				else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || self secondaryOffhandButtonPressed() && !self fragButtonPressed()) {
 					if(return_toggle(self.structure[cursor].slider)) {
@@ -1450,7 +1450,7 @@ modify_y_position(offset) {
 
 watermark() {
 	self.watermark = !return_toggle(self.watermark);
-	if(!self.watermark) {
+	if(self.watermark) {
 		iPrintln("Watermark [^2ON^7]");
 		self.syn["watermark"].alpha = 1;
 	} else {

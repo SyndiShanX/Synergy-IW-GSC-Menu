@@ -468,7 +468,7 @@ initial_monitor() {
 						self set_cursor((cursor + scrolling));
 						self update_scrolling(scrolling);
 					}
-					wait .25; // Scroll Cooldown
+					wait .15; // Scroll Cooldown
 				}
 				else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || self secondaryOffhandButtonPressed() && !self fragButtonPressed()) {
 					if(return_toggle(self.structure[cursor].slider)) {
@@ -890,6 +890,8 @@ menu_index() {
 			self add_toggle("Third Person", ::third_person, self.third_person);
 			
 			self add_increment("Set Speed", ::set_speed, 190, 190, 1190, 50);
+			self add_increment("Set Timescale", ::set_timescale, 1, 1, 10, 1);
+			self add_increment("Set Gravity", ::set_gravity, 800, 40, 800, 10);
 			
 			self add_option("Visions", ::new_menu, "Visions");
 			
@@ -1125,7 +1127,7 @@ modify_y_position(offset) {
 
 watermark() {
 	self.watermark = !return_toggle(self.watermark);
-	if(!self.watermark) {
+	if(self.watermark) {
 		iPrintString("Watermark [^2ON^7]");
 		self.syn["watermark"].alpha = 1;
 	} else {
@@ -1288,6 +1290,14 @@ exo_movement() {
 
 set_speed(value) {
 	setdvar("g_speed", value);
+}
+
+set_timescale(value) {
+	setDvar("timescale", value);
+}
+
+set_gravity(value) {
+	setDvar("bg_gravity", value);
 }
 
 forge_mode() {
@@ -1459,13 +1469,6 @@ give_weapon(weapon, category, index) {
 take_weapon(weapon_name) {
 	self _takeweapon(self getCurrentWeapon());
 	self _switchToWeapon(self getWeaponsListPrimaries()[1]);
-}
-
-// Teleport Options
-
-set_position(origin, angles) {
-	self setOrigin(origin);
-	self setPlayerAngles(angles);
 }
 
 // Account Options
