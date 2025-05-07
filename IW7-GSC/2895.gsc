@@ -443,7 +443,7 @@ func_B6AA() {
     var_03 = undefined;
 
     while (!isdefined(var_03)) {
-      var_03 = self _meth_80B5();
+      var_03 = self dospawn();
       wait 1;
     }
 
@@ -1336,7 +1336,7 @@ func_E826(var_00) {
   if(soundexists("weapon_setup"))
     _playworldsound("weapon_setup", self.origin);
 
-  self _meth_8018("setup_done", var_0.origin, var_0.angles, var_02);
+  self animscripted("setup_done", var_0.origin, var_0.angles, var_02);
   func_E2DB();
   self waittillmatch("setup_done", "end");
   var_00 notify("restore_default_drop_pitch");

@@ -1530,7 +1530,7 @@ func_1179(param_00, param_01) {
     if(param_00.var_92DD) {
       param_00.var_92DD = 0;
       var_07 = 0;
-      param_00 _meth_8018(param_01 + var_04, self.origin, self.angles, var_06);
+      param_00 animscripted(param_01 + var_04, self.origin, self.angles, var_06);
     } else {
       param_00 setanimknob(var_06, 1, var_07, var_08);
     }

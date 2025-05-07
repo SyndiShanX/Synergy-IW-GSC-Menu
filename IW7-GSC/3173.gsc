@@ -443,7 +443,7 @@ func_D514(param_00, param_01, param_02, param_03) {
   self.a.var_FC61 = undefined;
   self animmode("zonly_physics", 0);
   self orientmode("face angle", self.angles[1]);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   thread lib_0F3D::func_444B(param_01);
   self _meth_82EA(param_01, var_04, 1, param_02, self.moveplaybackrate);
@@ -467,7 +467,7 @@ func_98C6(param_00, param_01, param_02, param_03) {
     self.var_12DEF = undefined;
     thread lib_0F3D::func_136B4(param_00, param_01, param_03);
     thread lib_0F3D::func_136E7(param_00, param_01, param_03);
-    self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+    self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
     self.var_E879 = 0;
     self.var_E873 = 1;
   }
@@ -475,7 +475,7 @@ func_98C6(param_00, param_01, param_02, param_03) {
 
 func_11088(param_00, param_01, param_02) {
   if(isdefined(self.var_E873)) {
-    self aiclearanim(scripts\asm\asm::asm_lookupanimfromalias(param_01, "run_n_gun"), 0.2);
+    self clearanim(scripts\asm\asm::asm_lookupanimfromalias(param_01, "run_n_gun"), 0.2);
     self.var_E873 = undefined;
   }
 
@@ -596,7 +596,7 @@ func_E877(param_00, param_01, param_02, param_03) {
     if(var_13 > var_0B) {
       var_14 = var_13 - var_0B / var_0B;
       var_14 = clamp(var_14, 0, 1);
-      self aiclearanim(var_04, 0.2);
+      self clearanim(var_04, 0.2);
       self _meth_82AC(var_05, 1 - var_14 * var_0F, 0.2);
       self _meth_82AC(var_06, 1 - var_14 * var_10, 0.2);
       self _meth_82AC(var_07, var_14 * var_0F, 0.2);
@@ -607,8 +607,8 @@ func_E877(param_00, param_01, param_02, param_03) {
       self _meth_82AC(var_05, var_14 * var_0F, 0.2);
       self _meth_82AC(var_06, var_14 * var_10, 0.2);
       if(var_0B < 1) {
-        self aiclearanim(var_07, 0.2);
-        self aiclearanim(var_08, 0.2);
+        self clearanim(var_07, 0.2);
+        self clearanim(var_08, 0.2);
       }
     }
 
@@ -647,7 +647,7 @@ func_D4E6(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   func_98A3(param_00, param_01, param_02, param_03);
   thread func_BCFD(param_00, param_01, param_02, param_03);
 }
@@ -731,7 +731,7 @@ func_BD2C(param_00, param_01, param_02, param_03) {
   var_05 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
   var_06 = var_05.var_47;
   var_07 = var_05.var_7332;
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), 0.2);
+  self clearanim(lib_0A1E::asm_getbodyknob(), 0.2);
   self _meth_82E1(param_01, var_07, 1, 0.2, 1);
   thread func_13874(param_00, param_01);
   var_08 = 0;

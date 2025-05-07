@@ -10,9 +10,9 @@ main() {
   self notify("killanimscript");
   self.closefile = 0;
   if(getdvarint("ai_iw7") == 1) {
-    self aiclearanim(lib_0A1E::asm_getbodyknob(), 0.3);
+    self clearanim(lib_0A1E::asm_getbodyknob(), 0.3);
   } else {
-    self aiclearanim(self.var_E6E6, 0.3);
+    self clearanim(self.var_E6E6, 0.3);
   }
 
   if(scripts\engine\utility::actor_is3d()) {

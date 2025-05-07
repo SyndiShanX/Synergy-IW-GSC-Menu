@@ -56,7 +56,7 @@ func_130F5(param_00, param_01) {
   }
 
   scripts\mp\utility::incrementfauxvehiclecount();
-  var_02 = _meth_8356(param_00, param_01);
+  var_02 = setturretcanaidetach(param_00, param_01);
   if(!isdefined(var_02)) {
     scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
@@ -137,7 +137,7 @@ func_3E5C(param_00, param_01) {
   return var_02;
 }
 
-_meth_8356(param_00, param_01, param_02) {
+setturretcanaidetach(param_00, param_01, param_02) {
   var_03 = scripts\mp\spawnscoring::func_6CB5(self, 90, 20, 192);
   if(!isdefined(var_03)) {
     var_03 = scripts\mp\spawnscoring::func_6CB5(self, 0, 20, 192);

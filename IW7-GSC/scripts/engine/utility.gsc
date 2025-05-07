@@ -3819,7 +3819,7 @@ allow_lean(param_00) {
     }
 
     if(!self.disabledlean) {
-      self _meth_800E(1);
+      self allowlean(1);
       return;
     }
 
@@ -3831,7 +3831,7 @@ allow_lean(param_00) {
   }
 
   self.disabledlean++;
-  self _meth_800E(0);
+  self allowlean(0);
 }
 
 allow_reload(param_00, param_01) {

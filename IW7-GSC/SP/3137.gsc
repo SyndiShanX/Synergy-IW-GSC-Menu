@@ -434,7 +434,7 @@ func_3602(param_00) {
   var_0B = var_04 - var_06;
   var_0C = var_0B[2];
   var_01.var_DCCF["main"]["minigun"][2] = 0 - asin(var_0C / length(var_0B));
-  self aiclearanim(var_0A, 0);
+  self clearanim(var_0A, 0);
   var_0D = lib_0A1E::func_2356("aimset_minigun", "aim_8");
   self give_attacker_kill_rewards(var_0D, 1, 0, 1, 0);
   wait(0.1);
@@ -443,7 +443,7 @@ func_3602(param_00) {
   var_0B = var_04 - var_06;
   var_0C = var_0B[2];
   var_01.var_DCCF["main"]["minigun"][8] = 0 - asin(var_0C / length(var_0B));
-  self aiclearanim(var_0D, 0);
+  self clearanim(var_0D, 0);
   var_0E = anglestoright(self.angles);
   var_0F = lib_0A1E::func_2356("aimset_minigun", "aim_4");
   self give_attacker_kill_rewards(var_0F, 1, 0, 1, 0);
@@ -453,7 +453,7 @@ func_3602(param_00) {
   var_0B = var_04 - var_06;
   var_10 = vectordot(var_0B, var_0E) * -1;
   var_01.var_DCCF["main"]["minigun"][4] = asin(var_10 / length(var_0B));
-  self aiclearanim(var_0F, 0);
+  self clearanim(var_0F, 0);
   var_11 = lib_0A1E::func_2356("aimset_minigun", "aim_6");
   self give_attacker_kill_rewards(var_11, 1, 0, 1, 0);
   wait(0.1);
@@ -462,11 +462,11 @@ func_3602(param_00) {
   var_0B = var_04 - var_06;
   var_10 = vectordot(var_0B, var_0E) * -1;
   var_01.var_DCCF["main"]["minigun"][6] = asin(var_10 / length(var_0B));
-  self aiclearanim(var_11, 0);
+  self clearanim(var_11, 0);
   var_12 = lib_0A1E::func_2356("aimset_minigun", "aim_knob_28");
-  self aiclearanim(var_12, 0);
+  self clearanim(var_12, 0);
   var_13 = lib_0A1E::func_2356("aimset_minigun", "aim_knob_46");
-  self aiclearanim(var_13, 0);
+  self clearanim(var_13, 0);
 }
 
 func_3594(param_00, param_01) {
@@ -550,7 +550,7 @@ func_3632(param_00, param_01, param_02) {
 
 func_3529() {
   var_00 = func_358A();
-  self aiclearanim(var_00, 0.2);
+  self clearanim(var_00, 0.2);
   self.asm.var_11B08.btracking = 0;
 }
 
@@ -772,21 +772,21 @@ func_3631(param_00) {
   self endon("death");
   self endon("terminate_ai_threads");
   var_01 = lib_0A1E::func_2356("aim_body", "hexapod");
-  self aiclearanim(var_01, param_00);
+  self clearanim(var_01, param_00);
   var_01 = lib_0A1E::func_2356("aimset_left", "arm_rail");
-  self aiclearanim(var_01, param_00);
+  self clearanim(var_01, param_00);
   var_01 = lib_0A1E::func_2356("aimset_left", "arm_pitch");
-  self aiclearanim(var_01, param_00);
+  self clearanim(var_01, param_00);
   var_01 = lib_0A1E::func_2356("aimset_right", "arm_rail");
-  self aiclearanim(var_01, param_00);
+  self clearanim(var_01, param_00);
   var_01 = lib_0A1E::func_2356("aimset_right", "arm_pitch");
-  self aiclearanim(var_01, param_00);
+  self clearanim(var_01, param_00);
   var_02 = func_358A();
   var_03 = self _meth_8103(var_02);
   var_04 = 2;
   if(var_03 <= var_04) {
     var_05 = min(param_00, 0.2 * var_03 / var_04);
-    self aiclearanim(var_02, var_05);
+    self clearanim(var_02, var_05);
     return;
   }
 
@@ -802,7 +802,7 @@ func_3631(param_00) {
   }
 
   if(!self.asm.var_11B08.btracking) {
-    self aiclearanim(var_03, var_01);
+    self clearanim(var_03, var_01);
   }
 }
 
@@ -899,13 +899,13 @@ func_360B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(param_00 > 0) {
     var_0A = param_00 / func_3628("main", "minigun", 4);
     var_0A = clamp(var_0A, 0, 1);
-    self aiclearanim(param_05, var_0D);
+    self clearanim(param_05, var_0D);
     self give_attacker_kill_rewards(param_03, 1, var_0D);
     self give_attacker_kill_rewards(param_08, var_0A, var_0D);
   } else if(param_00 < 0) {
     var_0B = param_00 / func_3628("main", "minigun", 6);
     var_0B = clamp(var_0B, 0, 1);
-    self aiclearanim(param_03, var_0D);
+    self clearanim(param_03, var_0D);
     self give_attacker_kill_rewards(param_05, 1, var_0D);
     self give_attacker_kill_rewards(param_08, var_0B, var_0D);
   }
@@ -913,7 +913,7 @@ func_360B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(param_01 > 0) {
     var_09 = param_01 / func_3628("main", "minigun", 2);
     var_09 = clamp(var_09, 0, 1);
-    self aiclearanim(param_06, var_0D);
+    self clearanim(param_06, var_0D);
     self give_attacker_kill_rewards(param_02, 1, var_0D);
     self give_attacker_kill_rewards(param_07, var_09, var_0D);
     return;
@@ -922,7 +922,7 @@ func_360B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(param_01 < 0) {
     var_0C = param_01 / func_3628("main", "minigun", 8);
     var_0C = clamp(var_0C, 0, 1);
-    self aiclearanim(param_02, var_0D);
+    self clearanim(param_02, var_0D);
     self give_attacker_kill_rewards(param_06, 1, var_0D);
     self give_attacker_kill_rewards(param_07, var_0C, var_0D);
   }
@@ -1392,9 +1392,9 @@ func_3509(param_00) {
 func_3612(param_00, param_01, param_02) {
   var_03 = lib_0A1E::func_2356(param_01, "loop");
   var_04 = lib_0A1E::func_2356(param_01, "recoil_knob");
-  self aiclearanim(var_03, 0.2);
-  self aiclearanim(var_04, 0.2);
-  self _meth_837D();
+  self clearanim(var_03, 0.2);
+  self clearanim(var_04, 0.2);
+  self shootstopsound();
   self stoploopsound();
   self playsound("weap_c12_minigun_release");
   var_05 = self.var_164D[param_00].var_4C1A;
@@ -1408,7 +1408,7 @@ func_3612(param_00, param_01, param_02) {
 
 func_3613(param_00, param_01, param_02) {
   var_03 = lib_0A1E::func_2356(param_01, "shoot_knob");
-  self aiclearanim(var_03, 0.2);
+  self clearanim(var_03, 0.2);
   var_04 = self.var_164D[param_00].slot;
   scripts\asm\asm::asm_fireephemeralevent("rocket_shoot_complete", var_04);
   var_05 = self.var_164D[param_00].var_4C1A;

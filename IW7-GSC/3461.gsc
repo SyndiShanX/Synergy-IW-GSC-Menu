@@ -572,7 +572,7 @@ cratesetupforuse(var_00, var_01, var_02, var_03) {
   self makeusable();
 
   if(isdefined(var_03))
-    self _meth_835F(var_03);
+    self setusepriority(var_03);
 
   if(scripts\mp\utility\game::istrue(var_02)) {
     thread watchcratereroll(self.owner);
@@ -649,7 +649,7 @@ fakererollcratesetupforuse(var_00, var_01) {
   var_08 setusefov(var_06);
   var_08 _meth_84A4(var_03);
   var_08 setuserange(var_05);
-  var_08 _meth_835F(var_07);
+  var_08 setusepriority(var_07);
   var_08 thread deleteuseent(self);
   self.fakeuseobj = var_08;
 }

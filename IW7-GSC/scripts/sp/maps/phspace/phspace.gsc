@@ -467,12 +467,12 @@ func_CF3C() {
     var_00 = spawn("script_model", (0, 0, 0));
     var_00 setmodel("vm_hero_protagonist_helmet");
     var_00 _meth_81E2(level.player, "tag_camera", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
-    level.player _meth_836B(2, 10);
+    level.player setviewmodeldepthoffield(2, 10);
 
     while (getdvarint("player_helmet"))
       wait 0.05;
 
-    level.player _meth_836B(0, 0);
+    level.player setviewmodeldepthoffield(0, 0);
     var_00 delete();
   }
 }

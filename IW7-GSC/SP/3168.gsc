@@ -47,7 +47,7 @@ func_CF0E(param_00, param_01, param_02, param_03) {
   }
 
   if(!isdefined(self.var_10265)) {
-    self aiclearanim(lib_0A1E::func_2342(), 0.3);
+    self clearanim(lib_0A1E::func_2342(), 0.3);
   }
 
   playdeathsound(var_04);

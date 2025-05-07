@@ -414,7 +414,7 @@ func_8752(param_00, param_01, param_02, param_03) {
       if(isdefined(var_0D.var_131E6)) {
         var_0E = isdefined(param_00.var_C01A);
         if(!var_0E) {
-          param_01 aiclearanim(var_0D.var_131E6, 0);
+          param_01 clearanim(var_0D.var_131E6, 0);
         }
       }
 
@@ -470,7 +470,7 @@ func_5BCE(param_00) {
   self notify("driver dead");
   self.var_4DEF = 1;
   if(isdefined(self.var_8C2D) && self.var_8C2D) {
-    self _meth_836E(0);
+    self setwaitspeed(0);
     self vehicle_setspeed(0, 10);
     self waittill("reached_wait_speed");
   }
@@ -830,7 +830,7 @@ func_F642(param_00, param_01) {
   self _meth_82EA("vehicle_anim_flag", param_00);
   wait(var_02);
   if(param_01) {
-    self aiclearanim(param_00, 0);
+    self clearanim(param_00, 0);
   }
 }
 
@@ -923,8 +923,8 @@ func_8766(param_00, param_01) {
   }
 
   var_05 = 0;
-  if(isdefined(param_00._meth_8020)) {
-    var_06 = param_00[[param_00._meth_8020]]();
+  if(isdefined(param_00.autoboltmissileeffects)) {
+    var_06 = param_00[[param_00.autoboltmissileeffects]]();
     if(isdefined(var_06) && var_06) {
       var_05 = 1;
     }
@@ -932,8 +932,8 @@ func_8766(param_00, param_01) {
 
   if(isdefined(param_00.var_C584)) {
     param_00.var_C584 = undefined;
-    if(isdefined(param_00._meth_8020)) {
-      param_00[[param_00._meth_8020]]();
+    if(isdefined(param_00.autoboltmissileeffects)) {
+      param_00[[param_00.autoboltmissileeffects]]();
     }
   }
 
@@ -956,8 +956,8 @@ func_8766(param_00, param_01) {
   }
 
   var_0A = 0;
-  if(isdefined(var_03._meth_8032)) {
-    var_0A = var_0A + getanimlength(var_03._meth_8032);
+  if(isdefined(var_03.botgetnearestnode)) {
+    var_0A = var_0A + getanimlength(var_03.botgetnearestnode);
   }
 
   if(isdefined(var_03.delay)) {
@@ -1011,8 +1011,8 @@ func_8766(param_00, param_01) {
 
   if(isdefined(param_00.var_7B54)) {
     var_0C = param_00.var_7B54;
-  } else if(scripts\sp\utility::func_65DB("landed") && isdefined(var_04._meth_802E)) {
-    var_0C = var_04._meth_802E;
+  } else if(scripts\sp\utility::func_65DB("landed") && isdefined(var_04.botgetentrancepoint)) {
+    var_0C = var_04.botgetentrancepoint;
   } else if(isdefined(param_01.var_D3E2) && isdefined(var_04.var_D098)) {
     var_0C = var_04.var_D098;
   } else {
@@ -1090,8 +1090,8 @@ func_8766(param_00, param_01) {
     if(isdefined(var_03.botgetimperfectenemyinfo)) {
       func_1FC2(param_00, var_0B, var_0C);
       var_0F = var_0B;
-      if(isdefined(var_03._meth_8031)) {
-        var_0F = var_03._meth_8031;
+      if(isdefined(var_03.botgetmemoryevents)) {
+        var_0F = var_03.botgetmemoryevents;
       }
 
       func_1FC2(param_00, var_0F, var_03.botgetimperfectenemyinfo);
@@ -1235,7 +1235,7 @@ func_8767(param_00, param_01, param_02, param_03, param_04) {
   var_0A moveto(var_11, var_14);
   var_0A waittill("movedone");
   param_00 unlink();
-  param_00 _meth_8018("dropship_land", param_00.origin, param_00.angles, param_04);
+  param_00 animscripted("dropship_land", param_00.origin, param_00.angles, param_04);
   wait(getanimlength(param_04));
   param_00 notify("hoverunload_done");
   param_00 notify("anim_on_tag_done");
@@ -1249,7 +1249,7 @@ func_873D() {
       self orientmode("face angle", self.angles[1]);
     }
 
-    self aiclearanim(lib_0A1E::asm_getbodyknob(), 0.2);
+    self clearanim(lib_0A1E::asm_getbodyknob(), 0.2);
   }
 
   self give_attacker_kill_rewards(self.var_12BC4, 1);
@@ -1314,7 +1314,7 @@ func_1FC2(param_00, param_01, param_02, param_03, param_04, param_05) {
     level thread func_1FC3(param_00, self);
   }
 
-  param_00 _meth_8018(param_05, var_07, var_08, param_02);
+  param_00 animscripted(param_05, var_07, var_08, param_02);
   if(isai(param_00)) {
     thread donotetracks(param_00, var_06, param_05);
   }
@@ -1412,7 +1412,7 @@ func_1FC4(param_00, param_01, param_02) {
     var_05 = distance(param_00.origin + (0, 0, 16), var_04);
     if(abs(var_03[2] + 16) <= abs(var_05)) {
       param_00 thread scripts\sp\utility::play_sound_on_entity("generic_death_falling");
-      param_00 _meth_8018("fastrope_fall", param_00.origin, param_00.angles, param_00.var_DC17);
+      param_00 animscripted("fastrope_fall", param_00.origin, param_00.angles, param_00.var_DC17);
       param_00 waittillmatch("start_ragdoll", "fastrope_fall");
     }
   }
@@ -1457,7 +1457,7 @@ donotetracks(param_00, param_01, param_02) {
 }
 
 func_1F9D(param_00, param_01, param_02, param_03) {
-  param_00 _meth_8018("movetospot", param_01, param_02, param_03);
+  param_00 animscripted("movetospot", param_01, param_02, param_03);
   param_00 waittillmatch("end", "movetospot");
 }
 
@@ -1569,7 +1569,7 @@ func_874C(param_00, param_01, param_02) {
   wait(0.1);
   param_00 endon("guy_man_turret_stop");
   level thread scripts\sp\mgturret::func_B6A7(var_04, scripts\sp\utility::func_7E72());
-  var_04 _meth_8359(1);
+  var_04 setturretignoregoals(1);
   var_05 = "stand";
   if(isdefined(var_03.var_12A80)) {
     var_05 = var_03.var_12A80;
@@ -1614,7 +1614,7 @@ func_872D(param_00) {
   param_00 notsolid();
   param_00.origin = var_04;
   param_00.angles = var_03;
-  param_00 _meth_8018("deathanim", var_04, var_03, var_02.var_69DF);
+  param_00 animscripted("deathanim", var_04, var_03, var_02.var_69DF);
   var_05 = 0.3;
   if(isdefined(var_02.var_69E1)) {
     var_05 = var_02.var_69E1;

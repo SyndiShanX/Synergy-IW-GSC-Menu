@@ -88,7 +88,7 @@ func_7E5D() {
   return var_00[randomint(var_00.size)];
 }
 
-_meth_8041() {
+botmemoryselectpos() {
   if(self.var_E0 && !isdefined(self.var_55BF)) {
     var_00 = func_7E5D();
     if(isdefined(var_00)) {
@@ -630,8 +630,8 @@ func_4877() {
   }
 
   self notify("end_dying_crawl_back_aim");
-  self aiclearanim( % dying_back_aim_4_wrapper, 0.3);
-  self aiclearanim( % dying_back_aim_6_wrapper, 0.3);
+  self clearanim( % dying_back_aim_4_wrapper, 0.3);
+  self clearanim( % dying_back_aim_6_wrapper, 0.3);
   var_05 = scripts\anim\utility::func_B027("crawl_death", "back_death");
   self.var_4E2A = var_05[randomint(var_05.size)];
   func_A6CE();
@@ -1198,8 +1198,8 @@ func_4669() {
       self _meth_82AC( % add_pain, 1, 0.1, 1);
       self _meth_82AC(var_07, 1, 0, 1);
       wait(0.4);
-      self aiclearanim(var_07, 0.2);
-      self aiclearanim( % add_pain, 0.2);
+      self clearanim(var_07, 0.2);
+      self clearanim( % add_pain, 0.2);
       self.var_58D6 = undefined;
     }
 

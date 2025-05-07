@@ -354,7 +354,7 @@ func_1D7D(param_00, param_01) {
 
   var_05 = level.var_10E6D.enemies[self.team];
   if(param_00) {
-    var_05 = scripts\engine\utility::array_combine(var_05, getcorpsearrayinradius());
+    var_05 = scripts\engine\utility::array_combine(var_05, getcorpsearray());
   }
 
   var_05 = scripts\engine\utility::array_removeundefined(var_05);

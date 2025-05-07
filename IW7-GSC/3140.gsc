@@ -20,7 +20,7 @@ func_35BF(param_00, param_01, param_02, param_03) {
 
   var_07 = lib_0A1E::func_2356(param_01, var_04);
   var_08 = 0.8;
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_07, 1, param_02, var_08);
   scripts\asm\asm::asm_fireephemeralevent("melee_attack", "begin");
   thread _meth_8482(param_01);
@@ -43,7 +43,7 @@ func_3616(param_00, param_01, param_02, param_03) {
 
 func_35C3(param_00, param_01, param_02, param_03) {
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 0.5);
   lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
 }

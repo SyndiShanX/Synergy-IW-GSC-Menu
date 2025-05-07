@@ -38,7 +38,7 @@ main() {
 }
 
 spawner() {
-  self _meth_833A("allies");
+  self setspawnerteam("allies");
 }
 
 precache() {

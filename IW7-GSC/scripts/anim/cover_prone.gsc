@@ -54,7 +54,7 @@ func_92FF() {
     var_00 = scripts\anim\utility::func_1F67("prone_idle");
     self _meth_82E8("idle", var_00);
     self waittillmatch("end", "idle");
-    self aiclearanim(var_00, 0.2);
+    self clearanim(var_00, 0.2);
   }
 }
 
@@ -105,7 +105,7 @@ func_DA7E() {
 
     if(scripts\anim\combat_utility::func_1A3B()) {
       scripts\anim\combat_utility::func_FEDF();
-      self aiclearanim( % add_fire, 0.2);
+      self clearanim( % add_fire, 0.2);
       continue;
     }
 
@@ -173,7 +173,7 @@ prone_transitionto(param_00) {
     return;
   }
 
-  self aiclearanim( % root, 0.3);
+  self clearanim( % root, 0.3);
   scripts\anim\combat_utility::func_631A();
   if(func_10012()) {
     var_01 = scripts\anim\utility::func_1F64(self.a.pose + "_2_" + param_00 + "_firing");
@@ -203,7 +203,7 @@ func_FADE(param_00) {
 }
 
 func_DA87(param_00, param_01) {
-  self aiclearanim( % root, 0.3);
+  self clearanim( % root, 0.3);
   var_02 = undefined;
   if(isdefined(self.var_DA78)) {
     var_02 = self.var_DA78;
@@ -220,5 +220,5 @@ func_DA87(param_00, param_01) {
   scripts\anim\utility::exitpronewrapper(getanimlength(var_02) / 2);
   self _meth_82E4("trans", var_02, % body, 1, 0.2, param_01);
   scripts\anim\shared::donotetracks("trans");
-  self aiclearanim(var_02, 0.1);
+  self clearanim(var_02, 0.1);
 }

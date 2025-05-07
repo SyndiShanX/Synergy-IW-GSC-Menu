@@ -53,9 +53,9 @@ main() {
 
   self animmode(self.var_117F);
   if(getdvarint("ai_iw7") == 1) {
-    self aiclearanim(lib_0A1E::func_2342(), 0.3);
+    self clearanim(lib_0A1E::func_2342(), 0.3);
   } else {
-    self aiclearanim(self.var_E6E6, var_07);
+    self clearanim(self.var_E6E6, var_07);
   }
 
   self orientmode("face angle", var_05[1]);

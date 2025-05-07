@@ -6,7 +6,7 @@
 
 cover() {
   self endon("killanimscript");
-  self aiclearanim( % root, 0.2);
+  self clearanim( % root, 0.2);
   scripts\anim\utility::func_12EB9();
   if(scripts\anim\utility::func_9E40()) {
     var_00 = "idle_combat";

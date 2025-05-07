@@ -172,7 +172,7 @@ func_5AAB(param_00, param_01, param_02, param_03) {
     wait(param_03);
   }
 
-  self _meth_837D();
+  self shootstopsound();
 }
 
 func_FE70(param_00, param_01, param_02, param_03) {
@@ -191,7 +191,7 @@ func_FE70(param_00, param_01, param_02, param_03) {
 }
 
 func_FE71(param_00, param_01, param_02) {
-  self _meth_837D();
+  self shootstopsound();
 }
 
 func_FE61(param_00, param_01, param_02, param_03) {
@@ -234,7 +234,7 @@ func_FE7D(param_00) {
 func_FE82(param_00) {
   self endon("terminate_ai_threads");
   wait(param_00);
-  self _meth_837D();
+  self shootstopsound();
 }
 
 func_FE5C(param_00, param_01, param_02, param_03) {

@@ -781,21 +781,21 @@ updatematchbonusscores(var_00) {
       }
       if(var_02 == "tie") {
         var_06 = var_05 func_3716("tie", var_01);
-        var_05 thread _meth_837D("tie", var_06);
+        var_05 thread shootstopsound("tie", var_06);
         var_5.func_B3DD = var_06;
         continue;
       }
 
       if(isdefined(var_5.pers["team"]) && var_5.pers["team"] == var_02) {
         var_06 = var_05 func_3716("win", var_01);
-        var_05 thread _meth_837D("win", var_06);
+        var_05 thread shootstopsound("win", var_06);
         var_5.func_B3DD = var_06;
         continue;
       }
 
       if(isdefined(var_5.pers["team"]) && var_5.pers["team"] == var_03) {
         var_06 = var_05 func_3716("loss", var_01);
-        var_05 thread _meth_837D("loss", var_06);
+        var_05 thread shootstopsound("loss", var_06);
         var_5.func_B3DD = var_06;
       }
     }
@@ -829,13 +829,13 @@ updatematchbonusscores(var_00) {
 
       if(var_11) {
         var_06 = var_05 func_3716(var_08, var_01);
-        var_05 thread _meth_837D("win", var_06);
+        var_05 thread shootstopsound("win", var_06);
         var_5.func_B3DD = var_06;
         continue;
       }
 
       var_06 = var_05 func_3716(var_09, var_01);
-      var_05 thread _meth_837D("loss", var_06);
+      var_05 thread shootstopsound("loss", var_06);
       var_5.func_B3DD = var_06;
     }
   }
@@ -850,7 +850,7 @@ func_3716(var_00, var_01) {
   return var_06;
 }
 
-_meth_837D(var_00, var_01) {
+shootstopsound(var_00, var_01) {
   self endon("disconnect");
   level waittill("give_match_bonus");
   scripts\mp\rank::giverankxp(var_00, var_01);
@@ -1729,13 +1729,13 @@ callback_startgametype() {
   level.allowperks = scripts\mp\utility\game::botgetworldsize("scr_" + level.gametype + "_allowPerks", "scr_game_allowPerks");
   level.allowsupers = scripts\mp\utility\game::botgetworldsize("scr_" + level.gametype + "_allowSupers", "scr_game_allowSupers");
   level.func_11260 = scripts\mp\utility\game::botgetworldsize("scr_" + level.gametype + "_superFastChargeRate", "scr_game_superFastChargeRate");
-  level.superpointsmod = scripts\mp\utility\game::_meth_803B("scr_" + level.gametype + "_superPointsMod", "scr_game_superPointsMod");
+  level.superpointsmod = scripts\mp\utility\game::botgetworldclosestedge("scr_" + level.gametype + "_superPointsMod", "scr_game_superPointsMod");
 
   if(!level.tactical)
     level.supportdoublejump_MAYBE = scripts\mp\utility\game::botgetworldsize("scr_" + level.gametype + "_doubleJump", "scr_game_doubleJump");
 
   level.supportwallrun_MAYBE = scripts\mp\utility\game::botgetworldsize("scr_" + level.gametype + "_wallRun", "scr_game_wallRun");
-  level.spawnprotectiontimer = scripts\mp\utility\game::_meth_803B("scr_" + level.gametype + "_spawnProtectionTimer", "scr_game_spawnProtectionTimer");
+  level.spawnprotectiontimer = scripts\mp\utility\game::botgetworldclosestedge("scr_" + level.gametype + "_spawnProtectionTimer", "scr_game_spawnProtectionTimer");
   level.scoremod = [];
   level.scoremod["kill"] = getdvarint("scr_" + level.gametype + "_pointsPerKill");
   level.scoremod["death"] = getdvarint("scr_" + level.gametype + "_pointsPerDeath");

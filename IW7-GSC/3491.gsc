@@ -268,7 +268,7 @@ func_C53A(var_00) {
   if(isdefined(self.func_9382))
     func_52CD();
 
-  var_00 thread _meth_835D();
+  var_00 thread setturrettargetvec();
   var_00 setyawspeed(1, 1, 1, 0.1);
   var_00 notify("picked_up_passenger");
   scripts\engine\utility::allow_usability(1);
@@ -723,7 +723,7 @@ func_A576() {
   }
 }
 
-_meth_835D() {
+setturrettargetvec() {
   level endon("game_ended");
   self endon("death");
   self endon("crashing");

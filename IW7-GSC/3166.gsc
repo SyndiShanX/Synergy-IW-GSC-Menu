@@ -79,7 +79,7 @@ func_3F06(param_00, param_01, param_02) {
 func_D559(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   var_05 = 1;
   if((scripts\asm\asm_bb::bb_meleechargerequested(param_00, param_01, param_02, param_03) || scripts\asm\asm_bb::bb_meleerequested(param_00, param_01, param_02, param_03)) && isdefined(self.melee.target) && isplayer(self.melee.target)) {
     var_05 = 2;
@@ -143,7 +143,7 @@ func_D558(param_00, param_01, param_02, param_03) {
     }
 
     lib_0A1E::func_2369(param_00, param_01, var_07.getgrenadedamageradius);
-    self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+    self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
     self _meth_82E7(param_01, var_07.getgrenadedamageradius, 1, param_02, self.animplaybackrate);
     lib_0F3D::func_444B(param_01);
     self _meth_8396(var_09, var_0A);
@@ -155,7 +155,7 @@ func_D558(param_00, param_01, param_02, param_03) {
   self.sendmatchdata = 1;
   childthread scripts\asm\shared_utility::setuseanimgoalweight(var_04, var_05);
   self orientmode("face current");
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), var_05);
+  self clearanim(lib_0A1E::asm_getbodyknob(), var_05);
   self _meth_82E7(var_04, var_08, 1, var_05, 1);
   lib_0A1E::func_2369(param_03, var_04, var_0A);
   lib_0A1E::func_231F(param_03, var_04, scripts\asm\asm::func_2341(param_03, var_04));
@@ -246,7 +246,7 @@ func_CEFC(param_00, param_01, param_02, param_03) {
     self.var_10F8C = self.angles[1] + var_09;
   }
 
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
@@ -318,7 +318,7 @@ func_4497(param_00) {
   self endon("entitydeleted");
   self waittill(param_00 + "_finished");
   var_01 = archetypegetalias(self.asm.archetype, "Knobs", "conceal_add", 0);
-  self aiclearanim(var_01.var_47, 0.2);
+  self clearanim(var_01.var_47, 0.2);
 }
 
 func_ABB7(param_00, param_01, param_02) {
@@ -342,7 +342,7 @@ func_CEC2(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
   var_05 = getanimlength(var_04);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   childthread scripts\asm\shared_utility::setuseanimgoalweight(param_01, param_02);
@@ -379,7 +379,7 @@ func_CEFD(param_00, param_01, param_02, param_03) {
   self.sendmatchdata = 1;
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
   self orientmode("face current");
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
@@ -394,7 +394,7 @@ func_D51A(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   var_05 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
   var_06 = lib_0A1E::asm_getbodyknob();
-  self aiclearanim(var_06, param_02);
+  self clearanim(var_06, param_02);
   self _meth_82EA(param_01, var_05, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_05);
   if(isdefined(self.var_1198.shufflenode)) {
@@ -464,7 +464,7 @@ func_D518(param_00, param_01, param_02, param_03) {
   self.var_4C7E = ::lib_0F3D::func_22EA;
   self.a.var_22E5 = param_01;
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   var_05 = getmovedelta(var_04);

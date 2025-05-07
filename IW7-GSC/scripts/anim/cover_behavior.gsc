@@ -130,7 +130,7 @@ end_script(param_00) {
     self.var_B600 = undefined;
   }
 
-  self aiclearanim( % head, 0.2);
+  self clearanim( % head, 0.2);
   self.facialidx = undefined;
 }
 

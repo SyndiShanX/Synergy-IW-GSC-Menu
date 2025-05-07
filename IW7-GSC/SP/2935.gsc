@@ -369,7 +369,7 @@ func_12799() {
   if(isdefined(self.var_EDB3)) {
     var_00 = self _meth_8393(var_01);
   } else {
-    var_00 = self _meth_80B5(var_01);
+    var_00 = self dospawn(var_01);
   }
 
   if(!scripts\sp\utility::func_106ED(var_01)) {
@@ -2509,7 +2509,7 @@ func_6F51(param_00, param_01, param_02) {
     if(isdefined(self.var_EDB3)) {
       var_07 = self _meth_8393(var_06);
     } else {
-      var_07 = self _meth_80B5(var_06);
+      var_07 = self dospawn(var_06);
     }
 
     if(scripts\sp\utility::func_106ED(var_07)) {
@@ -2984,7 +2984,7 @@ func_6F5C(param_00) {
     if(isdefined(self.var_EDB3)) {
       var_04 = var_03 _meth_8393(var_02);
     } else {
-      var_04 = var_03 _meth_80B5(var_02);
+      var_04 = var_03 dospawn(var_02);
     }
 
     if(scripts\sp\utility::func_106ED(var_04)) {

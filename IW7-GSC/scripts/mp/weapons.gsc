@@ -1401,7 +1401,7 @@ dropscavengerfordeath(param_00, param_01) {
     return;
   }
 
-  var_02 = self _meth_80B9("scavenger_bag_mp");
+  var_02 = self dropscavengerbag("scavenger_bag_mp");
   if(!isdefined(var_02)) {
     return;
   }
@@ -6872,7 +6872,7 @@ watchaxeuse(param_00, param_01) {
   var_02 setusefov(360);
   var_02 _meth_84A4(64);
   var_02 setuserange(64);
-  var_02 _meth_835F(0);
+  var_02 setusepriority(0);
   thread watchallplayerphasestates(var_02);
   var_02 waittill("trigger", param_00);
   param_00 playerpickupaxe(param_01, 0);

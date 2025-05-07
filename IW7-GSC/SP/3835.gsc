@@ -567,7 +567,7 @@ func_11004() {
   thread scripts\sp\interaction::func_9A0F();
   if(isdefined(self.var_C6B7)) {
     if(isdefined(self.var_C6B7.var_4B31)) {
-      self.var_C6B7 aiclearanim(self.var_C6B7.var_4B31, 0.2);
+      self.var_C6B7 clearanim(self.var_C6B7.var_4B31, 0.2);
     }
   }
 

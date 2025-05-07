@@ -160,7 +160,7 @@ func_FE4E(param_00, param_01, param_02, param_03, param_04, param_05) {
   self endon(param_01 + "_finished");
   self endon("painloop_end");
   var_06 = lib_0A1E::asm_getbodyknob();
-  self aiclearanim(var_06, param_02);
+  self clearanim(var_06, param_02);
   if(isdefined(param_04) && param_04) {
     if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
       var_07 = lib_0A1E::func_2356("Knobs", "move");

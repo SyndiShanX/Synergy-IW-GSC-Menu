@@ -191,7 +191,7 @@ func_A4E8(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   var_14 = func_3EA3(param_00, param_01, "takeoff");
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_14, 1, param_02, 1);
   wait(getanimlength(var_14) - 0.1);
   var_15 = distance(var_0A, var_10) + distance(var_0B, var_10);
@@ -202,7 +202,7 @@ func_A4E8(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   func_F154(self.pausemayhem);
   thread scripts\sp\utility::play_sound_on_entity("seeker_jump_start");
   var_19 = func_3EA3(param_00, param_01, "jumploop");
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_19, 1, param_02, 1);
   self.var_A481 = scripts\engine\utility::spawn_tag_origin();
   self.var_A481 linkto(self, "tag_origin", (0, 0, 0), (90, 0, 0));
@@ -221,7 +221,7 @@ func_A4E8(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self _meth_80F1(var_1D, self.angles, 10000);
     if(var_1A > 0.7 && !var_1C) {
       var_19 = func_3EA3(param_00, param_01, "fallloop");
-      self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+      self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
       self _meth_82EA(param_01, var_19, 1, param_02, 1);
       killfxontag(level.var_7649["seeker_thruster"], self, "tag_origin");
       var_1C = 1;
@@ -234,7 +234,7 @@ func_A4E8(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   self _meth_80F1(var_0B, self.angles, 10000);
   func_F154(self.pausemayhem);
   var_1E = func_3EA3(param_00, param_01, "land");
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_1E, 1, param_02, 1);
   thread scripts\sp\utility::play_sound_on_entity("seeker_jump_end");
   wait(getanimlength(var_1E) - 0.05);

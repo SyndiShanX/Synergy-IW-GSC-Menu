@@ -32,7 +32,7 @@ func_49CF(param_00, param_01, param_02, param_03, param_04) {
   level.var_6BBA.var_451D[level.var_6BBA.var_451D.size] = var_05;
 }
 
-_meth_80BA() {
+dropweapon() {
   return level.var_6BBA.var_451D[randomint(level.var_6BBA.var_451D.size)];
 }
 
@@ -283,7 +283,7 @@ func_108CE(param_00, param_01, param_02) {
   var_05 = spawn("script_model", param_01);
   var_05.triggerportableradarping = param_00;
   var_05.projectile = var_04;
-  var_05.config = _meth_80BA();
+  var_05.config = dropweapon();
   var_05 hide();
   var_05 showtoplayer(param_00);
   var_05 setmodel(var_05.config.model);

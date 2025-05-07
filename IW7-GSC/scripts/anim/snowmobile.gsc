@@ -22,7 +22,7 @@ func_103C8() {
   scripts\sp\utility::func_558D();
   self.allowpain = 0;
   self.var_6EC4 = 1;
-  self._meth_8020 = ::func_103C7;
+  self.autoboltmissileeffects = ::func_103C7;
   self.var_10957 = ::func_103CF;
   self.disablebulletwhizbyreaction = 1;
 }
@@ -32,7 +32,7 @@ func_103C7() {
   self.var_6EC4 = 0;
   scripts\sp\utility::func_86E2();
   self.var_C59B = undefined;
-  self._meth_8020 = undefined;
+  self.autoboltmissileeffects = undefined;
   self.var_10957 = undefined;
   self.a.var_1096D = undefined;
   self.disablebulletwhizbyreaction = undefined;
@@ -292,7 +292,7 @@ func_103D8() {
   wait(0.05);
   self notify("end_shoot_while_driving");
   self.var_FE91 = undefined;
-  self aiclearanim( % sm_add_fire, 0.2);
+  self clearanim( % sm_add_fire, 0.2);
 }
 
 func_103C3() {
@@ -401,20 +401,20 @@ func_103D2() {
   self give_attacker_kill_rewards( % sm_aiming, 0, 0.25);
   self _meth_82EA("gun_down", scripts\anim\utility::func_1F64("gun_down"), 1, 0.25);
   scripts\anim\shared::donotetracks("gun_down");
-  self aiclearanim(scripts\anim\utility::func_1F64("gun_down"), 0);
+  self clearanim(scripts\anim\utility::func_1F64("gun_down"), 0);
   self _meth_82E4("reload_anim", scripts\anim\utility::func_1F64("reload"), % body, 1, 0.25);
   scripts\anim\shared::donotetracks("reload_anim");
-  self aiclearanim( % sm_reload, 0.2);
+  self clearanim( % sm_reload, 0.2);
   self _meth_82EA("gun_up", scripts\anim\utility::func_1F64("gun_up"), 1, 0.25);
   self.var_86EC = 1;
   scripts\anim\shared::donotetracks("gun_up", ::func_103DC);
   self.var_10FB2 = undefined;
-  self aiclearanim( % sm_reload, 0.1);
+  self clearanim( % sm_reload, 0.1);
   self give_attacker_kill_rewards( % sm_aiming, 1, 0.1);
   if(isdefined(self.var_86EC)) {
     self.var_86EC = undefined;
     scripts\anim\shared::donotetracks("gun_up", ::func_103DB);
-    self aiclearanim(scripts\anim\utility::func_1F64("gun_up"), 0);
+    self clearanim(scripts\anim\utility::func_1F64("gun_up"), 0);
   }
 }
 

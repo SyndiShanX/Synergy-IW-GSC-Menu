@@ -1424,7 +1424,7 @@ func_3895(var_00) {
     return 0;
 
   if(self.cancontestclaim) {
-    var_01 = _meth_8019(var_0.pers["team"]);
+    var_01 = animscriptedthirdperson(var_0.pers["team"]);
 
     if(var_01 != 0)
       return 0;
@@ -1614,7 +1614,7 @@ migrationcapturereset(var_00) {
   self.migrationcapturereset = undefined;
 }
 
-_meth_8019(var_00) {
+animscriptedthirdperson(var_00) {
   return self.func_C248[scripts\mp\utility\game::getotherteam(var_00)];
 }
 
@@ -2107,25 +2107,25 @@ updatetrigger() {
     self.trigger.origin = self.trigger.origin - (0, 0, 50000);
   else if(self.interactteam == "any") {
     self.trigger.origin = self.curorigin;
-    self.trigger _meth_8349("none");
+    self.trigger setteamfortrigger("none");
   } else if(self.interactteam == "friendly") {
     self.trigger.origin = self.curorigin;
 
     if(self.ownerteam == "allies")
-      self.trigger _meth_8349("allies");
+      self.trigger setteamfortrigger("allies");
     else if(self.ownerteam == "axis")
-      self.trigger _meth_8349("axis");
+      self.trigger setteamfortrigger("axis");
     else
       self.trigger.origin = self.trigger.origin - (0, 0, 50000);
   } else if(self.interactteam == "enemy") {
     self.trigger.origin = self.curorigin;
 
     if(self.ownerteam == "allies")
-      self.trigger _meth_8349("axis");
+      self.trigger setteamfortrigger("axis");
     else if(self.ownerteam == "axis")
-      self.trigger _meth_8349("allies");
+      self.trigger setteamfortrigger("allies");
     else
-      self.trigger _meth_8349("none");
+      self.trigger setteamfortrigger("none");
   }
 }
 

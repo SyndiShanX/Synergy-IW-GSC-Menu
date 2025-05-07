@@ -736,7 +736,7 @@ func_10D8D(var_00, var_01) {
     var_1.func_1349C delete();
 
   var_9.origin = var_12;
-  var_09 _meth_8383();
+  var_09 showallparts();
   var_9.midairdamage.killcament unlink();
   var_9.midairdamage.killcament linkto(var_09, "j_helmet");
   thread updatekillcampos(5, var_09, var_9.midairdamage.killcament);

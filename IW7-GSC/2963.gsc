@@ -234,7 +234,7 @@ func_1320B(var_00, var_01) {
 }
 
 func_13245(var_00, var_01) {
-  self _meth_8344(var_00, var_01);
+  self setswitchnode(var_00, var_01);
   self.func_247E = var_01;
   thread func_1321A();
 }

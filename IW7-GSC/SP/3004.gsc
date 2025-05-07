@@ -150,7 +150,7 @@ func_12B58(param_00) {
     scripts\sp\utility::func_65DD("side_thrusters_out");
     self give_attacker_kill_rewards( % vh_dropship_front_thrusters_in);
     scripts\engine\utility::delaycall(0.05, ::_meth_82B1, % vh_dropship_front_thrusters_in, 0.25);
-    self aiclearanim( % vh_dropship_front_thrusters_out, 0.05);
+    self clearanim( % vh_dropship_front_thrusters_out, 0.05);
     self.var_101B2 = 0;
     return;
   }
@@ -166,7 +166,7 @@ func_12B58(param_00) {
   scripts\engine\utility::delaythread(1.5, ::scripts\sp\utility::func_65E1, "side_thrusters_out");
   self give_attacker_kill_rewards( % vh_dropship_front_thrusters_out);
   scripts\engine\utility::delaycall(0.05, ::_meth_82B1, % vh_dropship_front_thrusters_out, 0.25);
-  self aiclearanim( % vh_dropship_front_thrusters_in, 0.05);
+  self clearanim( % vh_dropship_front_thrusters_in, 0.05);
   self.var_101B2 = 1;
 }
 
@@ -215,10 +215,10 @@ func_5ECA() {
 
 func_5DC2() {
   scripts\sp\utility::func_65DD("dynamicThrusters");
-  self aiclearanim( % vh_dropship_thrusters_up, 0.05);
-  self aiclearanim( % vh_dropship_thrusters_down, 0.05);
-  self aiclearanim( % vh_dropship_front_thrusters_out, 0.05);
-  self aiclearanim( % vh_dropship_front_thrusters_in, 0.05);
+  self clearanim( % vh_dropship_thrusters_up, 0.05);
+  self clearanim( % vh_dropship_thrusters_down, 0.05);
+  self clearanim( % vh_dropship_front_thrusters_out, 0.05);
+  self clearanim( % vh_dropship_front_thrusters_in, 0.05);
 }
 
 func_E752(param_00) {
@@ -275,14 +275,14 @@ func_F8A1() {
   var_00[7].botgetdifficulty = % vh_org_dropship_unload_land_guy6;
   var_00[8].botgetdifficulty = % vh_org_dropship_unload_land_guy7;
   var_00[9].botgetdifficulty = % vh_org_dropship_unload_land_guy8;
-  var_00[2]._meth_802E = % vh_org_dropship_unload_guy1;
-  var_00[3]._meth_802E = % vh_org_dropship_unload_guy2;
-  var_00[4]._meth_802E = % vh_org_dropship_unload_guy3;
-  var_00[5]._meth_802E = % vh_org_dropship_unload_guy4;
-  var_00[6]._meth_802E = % vh_org_dropship_unload_guy5;
-  var_00[7]._meth_802E = % vh_org_dropship_unload_guy6;
-  var_00[8]._meth_802E = % vh_org_dropship_unload_guy7;
-  var_00[9]._meth_802E = % vh_org_dropship_unload_guy8;
+  var_00[2].botgetentrancepoint = % vh_org_dropship_unload_guy1;
+  var_00[3].botgetentrancepoint = % vh_org_dropship_unload_guy2;
+  var_00[4].botgetentrancepoint = % vh_org_dropship_unload_guy3;
+  var_00[5].botgetentrancepoint = % vh_org_dropship_unload_guy4;
+  var_00[6].botgetentrancepoint = % vh_org_dropship_unload_guy5;
+  var_00[7].botgetentrancepoint = % vh_org_dropship_unload_guy6;
+  var_00[8].botgetentrancepoint = % vh_org_dropship_unload_guy7;
+  var_00[9].botgetentrancepoint = % vh_org_dropship_unload_guy8;
   var_00 = func_FB0C(var_00);
   return var_00;
 }
@@ -490,7 +490,7 @@ func_1242(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(isdefined(param_00.var_D89D)) {
-    self aiclearanim(param_00.var_D89D, 0);
+    self clearanim(param_00.var_D89D, 0);
   }
 
   self give_capture_credit(param_01, 1);

@@ -3380,13 +3380,13 @@ allow_lean(var_00) {
       self.disabledlean--;
 
     if(!self.disabledlean)
-      self _meth_800E(1);
+      self allowlean(1);
   } else {
     if(!isdefined(self.disabledlean))
       self.disabledlean = 0;
 
     self.disabledlean++;
-    self _meth_800E(0);
+    self allowlean(0);
   }
 }
 

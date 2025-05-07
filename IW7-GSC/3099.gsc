@@ -353,7 +353,7 @@ func_6D2F() {
     var_02 = 0;
   }
 
-  self _meth_835D(var_06);
+  self setturrettargetvec(var_06);
   self fireweapon(self.func_284C[self.func_284B], var_00, undefined, undefined, var_02);
   self.func_284B = (self.func_284B + 1) % self.func_284C.size;
 }

@@ -17,7 +17,7 @@ func_255B() {
   scripts\sp\utility::func_558D();
   self.allowpain = 0;
   self.var_6EC4 = 1;
-  self._meth_8020 = ::func_255A;
+  self.autoboltmissileeffects = ::func_255A;
   self.var_10957 = ::func_255F;
   self.disablebulletwhizbyreaction = 1;
 }
@@ -29,7 +29,7 @@ func_255A() {
   self.onatv = undefined;
   self.var_4C37["combat"] = undefined;
   self.var_4C37["stop"] = undefined;
-  self._meth_8020 = undefined;
+  self.autoboltmissileeffects = undefined;
   self.var_10957 = undefined;
   self.a.var_1096D = undefined;
   self.disablebulletwhizbyreaction = undefined;
@@ -210,7 +210,7 @@ func_2569() {
   wait(0.05);
   self notify("end_shoot_while_driving");
   self.var_FE91 = undefined;
-  self aiclearanim( % atv_add_fire, 0.2);
+  self clearanim( % atv_add_fire, 0.2);
 }
 
 func_2556() {
@@ -319,20 +319,20 @@ func_2561() {
   self give_attacker_kill_rewards( % atv_aiming, 0, 0.25);
   self _meth_82EA("gun_down", scripts\anim\utility::func_1F64("gun_down"), 1, 0.25);
   scripts\anim\shared::donotetracks("gun_down");
-  self aiclearanim(scripts\anim\utility::func_1F64("gun_down"), 0);
+  self clearanim(scripts\anim\utility::func_1F64("gun_down"), 0);
   self _meth_82E4("reload_anim", scripts\anim\utility::func_1F64("reload"), % body, 1, 0.25);
   scripts\anim\shared::donotetracks("reload_anim");
-  self aiclearanim( % atv_reload, 0.2);
+  self clearanim( % atv_reload, 0.2);
   self _meth_82EA("gun_up", scripts\anim\utility::func_1F64("gun_up"), 1, 0.25);
   self.var_86EC = 1;
   scripts\anim\shared::donotetracks("gun_up", ::func_256E);
   self.var_10FB2 = undefined;
-  self aiclearanim( % atv_reload, 0.1);
+  self clearanim( % atv_reload, 0.1);
   self give_attacker_kill_rewards( % atv_aiming, 1, 0.1);
   if(isdefined(self.var_86EC)) {
     self.var_86EC = undefined;
     scripts\anim\shared::donotetracks("gun_up", ::func_256D);
-    self aiclearanim(scripts\anim\utility::func_1F64("gun_up"), 0);
+    self clearanim(scripts\anim\utility::func_1F64("gun_up"), 0);
   }
 }
 

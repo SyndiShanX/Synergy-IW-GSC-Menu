@@ -28,7 +28,7 @@ func_9BB3() {
 func_E2BB() {
   if(func_9BB3() || isdefined(level.var_1188.var_9392)) {
     level.var_1188.var_9392 = undefined;
-    level.player _meth_807B("deathsdoor");
+    level.player clearpriorityclienttriggeraudiozone("deathsdoor");
     level.player clearsoundsubmix();
     if(isdefined(level.var_4E61)) {
       level.var_4E61 ghostattack(0, 2);

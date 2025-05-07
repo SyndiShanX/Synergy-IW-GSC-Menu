@@ -5,7 +5,7 @@
 ************************************/
 
 func_97CF(param_00) {
-  self aiclearanim( % body, 0.3);
+  self clearanim( % body, 0.3);
   self give_attacker_kill_rewards( % body, 1, 0);
   if(param_00 != "pain" && param_00 != "death") {
     self.a.var_10930 = "none";
@@ -893,7 +893,7 @@ func_DC1F(param_00) {
     if(self.health == 1) {
       self.a.nodeath = 1;
       self giverankxp();
-      self aiclearanim(param_00, 0.1);
+      self clearanim(param_00, 0.1);
       wait(0.05);
       physicsexplosionsphere(var_01, 600, 0, var_03 * 0.1);
       self notify("killanimscript");

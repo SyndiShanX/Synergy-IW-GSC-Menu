@@ -79,7 +79,7 @@ func_1063F(param_00) {
       if(isdefined(var_04.var_EDB3) || var_02) {
         var_07 = var_0A _meth_8393(var_09);
       } else {
-        var_07 = var_0A _meth_80B5(var_09);
+        var_07 = var_0A dospawn(var_09);
       }
 
       if(isdefined(var_04.var_EEB6)) {
@@ -279,7 +279,7 @@ func_131F6(param_00) {
   param_00 thread func_740E();
   param_00 thread scripts\sp\vehicle_aianim::func_88AE();
   if(isdefined(param_00.var_EDB8)) {
-    param_00 _meth_8363(param_00.var_EDB8, & "");
+    param_00 setvehiclelookattext(param_00.var_EDB8, & "");
   }
 
   param_00 thread func_131EC();
@@ -301,7 +301,7 @@ func_131F6(param_00) {
   }
 
   if(isdefined(param_00.script_team)) {
-    param_00 _meth_8364(param_00.script_team);
+    param_00 setvehicleteam(param_00.script_team);
   }
 
   param_00 thread func_5636();
@@ -629,11 +629,11 @@ func_131D7(param_00) {
 
   self glinton(#animtree);
   if(isdefined(level.vehicle.var_116CE.var_5BC3[param_00])) {
-    self aiclearanim(level.vehicle.var_116CE.var_5BC3[param_00], 0);
+    self clearanim(level.vehicle.var_116CE.var_5BC3[param_00], 0);
   }
 
   if(isdefined(level.vehicle.var_116CE.var_5BC6[param_00])) {
-    self aiclearanim(level.vehicle.var_116CE.var_5BC6[param_00], 0);
+    self clearanim(level.vehicle.var_116CE.var_5BC6[param_00], 0);
   }
 }
 
@@ -751,7 +751,7 @@ func_F331(param_00, param_01) {
   }
 
   if(isdefined(self.var_412A)) {
-    self aiclearanim( % root, 0);
+    self clearanim( % root, 0);
   }
 
   if(isdefined(self)) {
@@ -864,7 +864,7 @@ func_13200(param_00, param_01) {
   }
 
   foreach(var_04 in var_02) {
-    self aiclearanim(var_04.setglaregrimematerial, 0);
+    self clearanim(var_04.setglaregrimematerial, 0);
     self give_attacker_kill_rewards(var_04.var_11472, 1, 0.2, 1);
   }
 }
@@ -1976,11 +1976,11 @@ func_1F6E() {
       if(self.var_13D02) {
         var_06 = level.vehicle.var_116CE.var_5BC3[var_00];
         var_08 = 1 - func_7B21(level.vehicle.var_116CE.var_5BC6[var_00]);
-        self aiclearanim(level.vehicle.var_116CE.var_5BC6[var_00], 0);
+        self clearanim(level.vehicle.var_116CE.var_5BC6[var_00], 0);
       } else {
         var_06 = level.vehicle.var_116CE.var_5BC6[var_00];
         var_08 = 1 - func_7B21(level.vehicle.var_116CE.var_5BC3[var_00]);
-        self aiclearanim(level.vehicle.var_116CE.var_5BC3[var_00], 0);
+        self clearanim(level.vehicle.var_116CE.var_5BC3[var_00], 0);
       }
 
       var_02 = 0.01;
@@ -2057,8 +2057,8 @@ func_7B21(param_00) {
 func_112FA() {
   self notify("suspend_drive_anims");
   var_00 = self.model;
-  self aiclearanim(level.vehicle.var_116CE.var_5BC3[var_00], 0);
-  self aiclearanim(level.vehicle.var_116CE.var_5BC6[var_00], 0);
+  self clearanim(level.vehicle.var_116CE.var_5BC3[var_00], 0);
+  self clearanim(level.vehicle.var_116CE.var_5BC6[var_00], 0);
 }
 
 func_92D3() {
@@ -2728,7 +2728,7 @@ func_A5CD(param_00) {
     var_01 scripts\sp\anim::func_1F35(self, param_00);
   } else {
     self glinton(#animtree);
-    self _meth_8018("vehicle_death_anim", var_01.origin, var_01.angles, param_00);
+    self animscripted("vehicle_death_anim", var_01.origin, var_01.angles, param_00);
     self setneargoalnotifydist(30);
     self setvehgoalpos(var_01.origin, 1);
     self setgoalyaw(var_01.angles[1]);
@@ -2750,7 +2750,7 @@ func_5144() {
   var_00 = self getsecondspassed();
   var_01 = self getpointinbounds(1, 0, 0);
   var_02 = distance(var_01, var_00);
-  var_03 = getcorpsearrayinradius();
+  var_03 = getcorpsearray();
   foreach(var_05 in var_03) {
     if(distance(var_05.origin, var_00) < var_02) {
       var_05 delete();

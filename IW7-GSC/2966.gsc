@@ -83,7 +83,7 @@ func_1063F(var_00) {
       if(isdefined(var_4.func_EDB3) || var_02)
         var_07 = var_10 _meth_8393(var_09);
       else
-        var_07 = var_10 _meth_80B5(var_09);
+        var_07 = var_10 dospawn(var_09);
 
       if(isdefined(var_4.func_EEB6)) {
         if(isdefined(var_4.func_EEC9))
@@ -278,7 +278,7 @@ func_131F6(var_00) {
   var_00 thread scripts\sp\vehicle_aianim::func_88AE();
 
   if(isdefined(var_0.func_EDB8))
-    var_00 _meth_8363(var_0.func_EDB8, & "");
+    var_00 setvehiclelookattext(var_0.func_EDB8, & "");
 
   var_00 thread func_131EC();
 
@@ -299,7 +299,7 @@ func_131F6(var_00) {
     level thread[[level.vehicle.func_1066A]](var_00);
 
   if(isdefined(var_0.script_team))
-    var_00 _meth_8364(var_0.script_team);
+    var_00 setvehicleteam(var_0.script_team);
 
   var_00 thread func_5636();
   var_00 thread scripts\sp\vehicle_paths::beginlocationselection();
@@ -611,10 +611,10 @@ func_131D7(var_00) {
   self glinton(#animtree);
 
   if(isdefined(level.vehicle.func_116CE.func_5BC3[var_00]))
-    self aiclearanim(level.vehicle.func_116CE.func_5BC3[var_00], 0);
+    self clearanim(level.vehicle.func_116CE.func_5BC3[var_00], 0);
 
   if(isdefined(level.vehicle.func_116CE.func_5BC6[var_00]))
-    self aiclearanim(level.vehicle.func_116CE.func_5BC6[var_00], 0);
+    self clearanim(level.vehicle.func_116CE.func_5BC6[var_00], 0);
 }
 
 func_13233(var_00, var_01, var_02) {
@@ -719,7 +719,7 @@ func_F331(var_00, var_01) {
     return;
   }
   if(isdefined(self.func_412A))
-    self aiclearanim( % root, 0);
+    self clearanim( % root, 0);
 
   if(isdefined(self))
     self setmodel(var_00);
@@ -824,7 +824,7 @@ func_13200(var_00, var_01) {
     self waittill("continuepath");
 
   foreach(var_04 in var_02) {
-    self aiclearanim(var_4.land, 0);
+    self clearanim(var_4.land, 0);
     self give_attacker_kill_rewards(var_4.func_11472, 1, 0.2, 1);
   }
 }
@@ -1902,11 +1902,11 @@ func_1F6E() {
       if(self.func_13D02) {
         var_06 = level.vehicle.func_116CE.func_5BC3[var_00];
         var_08 = 1 - func_7B21(level.vehicle.func_116CE.func_5BC6[var_00]);
-        self aiclearanim(level.vehicle.func_116CE.func_5BC6[var_00], 0);
+        self clearanim(level.vehicle.func_116CE.func_5BC6[var_00], 0);
       } else {
         var_06 = level.vehicle.func_116CE.func_5BC6[var_00];
         var_08 = 1 - func_7B21(level.vehicle.func_116CE.func_5BC3[var_00]);
-        self aiclearanim(level.vehicle.func_116CE.func_5BC3[var_00], 0);
+        self clearanim(level.vehicle.func_116CE.func_5BC3[var_00], 0);
       }
 
       var_02 = 0.01;
@@ -1976,8 +1976,8 @@ func_7B21(var_00) {
 func_112FA() {
   self notify("suspend_drive_anims");
   var_00 = self.model;
-  self aiclearanim(level.vehicle.func_116CE.func_5BC3[var_00], 0);
-  self aiclearanim(level.vehicle.func_116CE.func_5BC6[var_00], 0);
+  self clearanim(level.vehicle.func_116CE.func_5BC3[var_00], 0);
+  self clearanim(level.vehicle.func_116CE.func_5BC6[var_00], 0);
 }
 
 func_92D3() {
@@ -2601,7 +2601,7 @@ func_A5CD(var_00) {
     var_01 scripts\sp\anim::func_1F35(self, var_00);
   } else {
     self glinton(#animtree);
-    self _meth_8018("vehicle_death_anim", var_1.origin, var_1.angles, var_00);
+    self animscripted("vehicle_death_anim", var_1.origin, var_1.angles, var_00);
     self setneargoalnotifydist(30);
     self setvehgoalpos(var_1.origin, 1);
     self setgoalyaw(var_1.angles[1]);
@@ -2623,7 +2623,7 @@ func_5144() {
   var_00 = self getsecondspassed();
   var_01 = self getpointinbounds(1, 0, 0);
   var_02 = distance(var_01, var_00);
-  var_03 = _getcorpsearrayinradius();
+  var_03 = getcorpsearray();
 
   foreach(var_05 in var_03) {
     if(distance(var_5.origin, var_00) < var_02)

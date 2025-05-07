@@ -38,7 +38,7 @@ func_D4D9(param_00, param_01, param_02, param_03) {
 func_D4CC(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   thread lib_0C64::func_D4CD(param_01);
@@ -58,7 +58,7 @@ func_D4D7(param_00, param_01, param_02, param_03) {
 
   var_05 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
   scripts\asm\asm::asm_fireephemeralevent("melee_attack", "begin");
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   if(isdefined(param_03)) {
     self playsound(param_03);
   }
@@ -104,7 +104,7 @@ func_D4D1(param_00, param_01, param_02, param_03) {
   var_04 scripts\asm\asm::asm_setstate(param_01 + "_victim", var_07);
   self animmode("zonly_physics");
   self orientmode("face angle", self.melee.var_10D6D[1]);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_05, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_05);
   thread lib_0C64::func_D4D6(param_01);
@@ -135,7 +135,7 @@ func_D4D5(param_00, param_01, param_02, param_03) {
   func_B5CB(param_01, 0);
   thread lib_0C64::func_B5D7(param_01);
   var_04 = self[[self.var_7191]](param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   var_05 = getnotetracktimes(var_04, "melee_stop");
@@ -168,7 +168,7 @@ func_D4D5(param_00, param_01, param_02, param_03) {
 func_D4D4(param_00, param_01, param_02, param_03) {
   lib_0F3D::func_444B(param_01);
   var_04 = self[[self.var_7191]](param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   lib_0A1E::func_231F(param_00, param_01, ::lib_0C64::func_B590);

@@ -18,7 +18,7 @@ main() {
 
   self _meth_83AC("voice_bchatter_1_3d");
   var_00 = 0.3;
-  self aiclearanim( % scripted_talking, var_00);
+  self clearanim( % scripted_talking, var_00);
   scripts\sp\anim::func_55C7(0);
   if(self.a.nodeath == 1) {
     return;
@@ -59,7 +59,7 @@ main() {
     func_8E17();
   }
 
-  self aiclearanim( % root, 0.3);
+  self clearanim( % root, 0.3);
   if(!scripts\engine\utility::damagelocationisany("head", "helmet")) {
     if(self.var_EF) {} else {
       playdeathsound();

@@ -754,11 +754,11 @@ unsetafterburner() {
 }
 
 setblastshield() {
-  self _meth_8376("primaryoffhand", "icon_perks_blast_shield");
+  self setweaponhudiconoverride("primaryoffhand", "icon_perks_blast_shield");
 }
 
 unsetblastshield() {
-  self _meth_8376("primaryoffhand", "none");
+  self setweaponhudiconoverride("primaryoffhand", "none");
 }
 
 setfreefall() {}

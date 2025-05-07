@@ -69,8 +69,8 @@ func_BED3() {
   level.neil.upper_body scriptmodelplayanim("IW7_cp_zom_n31l_head_on", 1);
   level.neil setnonstick(1);
   level.neil.upper_body setnonstick(1);
-  level.neil _meth_8364("allies");
-  level.neil _meth_8363("N31L");
+  level.neil setvehicleteam("allies");
+  level.neil setvehiclelookattext("N31L");
   wait(0.5);
   scripts\cp\zombies\zombie_analytics::func_AF7D(level.var_13BD1, level.var_13BD2);
   wait(2);
@@ -953,7 +953,7 @@ setperk() {
   }
 
   wait(1);
-  level thread _meth_833D(25 + level.wave_num * 5);
+  level thread setspeakermapmonotostereo(25 + level.wave_num * 5);
   level thread setspectatedefaults(100);
 }
 
@@ -989,7 +989,7 @@ func_F999(param_00) {
   level.var_BEDC = spawnfx(level._effect["neil_repair_sparks"], level.neil gettagorigin("tag_fx"));
   wait(1);
   triggerfx(level.var_BEDC);
-  level.neil _meth_8364("allies");
+  level.neil setvehicleteam("allies");
   level.neil.var_13084 makeunusable();
   level thread func_BEDE(level.neil);
 }
@@ -1479,10 +1479,10 @@ setspectatedefaults(param_00) {
 
 func_BEC4() {
   wait(0.5);
-  level thread _meth_833D(25);
+  level thread setspeakermapmonotostereo(25);
 }
 
-_meth_833D(param_00) {
+setspeakermapmonotostereo(param_00) {
   foreach(var_02 in level.players) {
     var_02 scripts\cp\zombies\arcade_game_utility::give_player_tickets(var_02, param_00);
     wait(0.05);

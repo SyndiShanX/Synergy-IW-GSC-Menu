@@ -302,7 +302,7 @@ func_16F5(param_00, param_01, param_02, param_03) {
 }
 
 func_A02D(param_00) {
-  param_00 _meth_834A(self);
+  param_00 settenthstimer(self);
 }
 
 givevalidweapon(param_00, param_01) {
@@ -343,7 +343,7 @@ givevalidweapon(param_00, param_01) {
   param_00 switchtoweapon(param_01);
 }
 
-_meth_834A(param_00) {
+settenthstimer(param_00) {
   var_01 = 0;
   var_02 = undefined;
   var_03 = param_00.trigger.cost;

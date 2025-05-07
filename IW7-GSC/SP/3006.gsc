@@ -12,7 +12,7 @@ func_5DFB(param_00) {
     var_02 = self.var_7724;
   }
 
-  self aiclearanim(var_02, 0.05);
+  self clearanim(var_02, 0.05);
   self give_attacker_kill_rewards(var_01);
 }
 

@@ -142,7 +142,7 @@ func_621C(param_00) {
   setsaveddvar("player_swimVerticalAcceleration", level.var_10513);
   setsaveddvar("player_swimSpeed", level.var_1050D);
   setsaveddvar("player_sprintSpeedScale", level.var_10510);
-  self _meth_800E(0);
+  self allowlean(0);
   self _meth_8014(1);
   self setviewkickscale(0.6);
   thread func_8B3A();
@@ -166,7 +166,7 @@ func_5558() {
   setsaveddvar("player_swimSpeed", 80);
   setsaveddvar("player_sprintUnlimited", "1");
   setsaveddvar("player_swimWaterCurrent", (0, 0, 0));
-  self _meth_800E(1);
+  self allowlean(1);
   self _meth_8014(0);
   scripts\engine\utility::allow_doublejump(1);
   if(isdefined(self.var_286F)) {
@@ -281,7 +281,7 @@ func_13E97() {
     if(var_00[0] >= 0) {
       var_03 = var_00[0];
       var_03 = var_03 * var_03;
-      self.var_13E97 aiclearanim( % space_playerbody_idle_b, var_01);
+      self.var_13E97 clearanim( % space_playerbody_idle_b, var_01);
       self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_f, var_03, var_01);
       self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle, 1 - var_03, var_01);
     } else {
@@ -290,7 +290,7 @@ func_13E97() {
       var_04 = func_EBAB();
       var_05 = max(var_02, var_04);
       var_03 = var_04 * var_03;
-      self.var_13E97 aiclearanim( % space_playerbody_idle_f, var_01 * var_05);
+      self.var_13E97 clearanim( % space_playerbody_idle_f, var_01 * var_05);
       self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_b, var_03, var_01 * var_05);
       self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle, 1 - var_03, var_01 * var_05);
     }
@@ -301,7 +301,7 @@ func_13E97() {
       var_04 = func_EBAB();
       var_05 = max(var_02, var_04);
       var_03 = var_04 * var_03;
-      self.var_13E97 aiclearanim( % space_playerbody_idle_r, var_01 * var_05);
+      self.var_13E97 clearanim( % space_playerbody_idle_r, var_01 * var_05);
       self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_l, var_03, var_01 * var_05);
     } else {
       var_03 = abs(var_00[1]);
@@ -309,7 +309,7 @@ func_13E97() {
       var_04 = func_EBAB();
       var_05 = max(var_02, var_04);
       var_03 = var_04 * var_03;
-      self.var_13E97 aiclearanim( % space_playerbody_idle_l, var_01 * var_05);
+      self.var_13E97 clearanim( % space_playerbody_idle_l, var_01 * var_05);
       self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_r, var_03, var_01 * var_05);
     }
 

@@ -129,7 +129,7 @@ func_10D23(param_00, param_01, param_02) {
       }
 
       var_08 notsolid();
-      var_08 _meth_80B3();
+      var_08 dontcastshadows();
       var_08.var_1326A = var_07;
       level.var_1027E[param_00].precachesuit = scripts\engine\utility::array_add(level.var_1027E[param_00].precachesuit, var_08);
       var_08 thread func_E02B(param_00);
@@ -347,7 +347,7 @@ func_48B2(param_00, param_01, param_02) {
   var_08.angles = param_00.angles;
   var_08 _meth_8184();
   var_08 notsolid();
-  var_08 _meth_80B3();
+  var_08 dontcastshadows();
   var_08 lib_0C24::func_10A49();
   var_08 thread lib_0C24::func_517E();
   self.var_3D38 = var_08;
@@ -442,7 +442,7 @@ func_4921(param_00, param_01, param_02) {
   var_05 = spawn("script_model", param_00);
   var_05 setmodel(var_03);
   var_05 notsolid();
-  var_05 _meth_80B3();
+  var_05 dontcastshadows();
   var_05 glinton(#animtree);
   var_05.angles = param_01;
   var_05.script_team = param_02;

@@ -109,6 +109,6 @@ func_3361(param_00, param_01, param_02, param_03) {
   self giverankxp_regularmp("torso_upper", vectornormalize(self.origin - level.player.origin + (0, 0, 10)) * 2200);
   wait(0.1);
   var_05 = lib_0A1E::asm_getbodyknob();
-  self aiclearanim(var_05, 0.05);
+  self clearanim(var_05, 0.05);
   lib_0C60::func_4E36();
 }

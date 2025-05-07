@@ -57,7 +57,7 @@ bombzone_setupobjective(param_00) {
   }
 
   var_01.id = "bomb_zone";
-  var_01.trigger _meth_8360();
+  var_01.trigger setuseprioritymax();
   var_01 scripts\mp\gameobjects::setusetime(level.planttime);
   var_01 scripts\mp\gameobjects::setwaitweaponchangeonuse(0);
   var_01 scripts\mp\gameobjects::setusetext( & "MP_PLANTING_EXPLOSIVE");
@@ -380,7 +380,7 @@ bombzone_onbombplanted(param_00, param_01) {
   }
 
   var_07.id = "defuse_object";
-  var_07.trigger _meth_8360();
+  var_07.trigger setuseprioritymax();
   var_07 scripts\mp\gameobjects::allowuse("friendly");
   if(scripts\mp\utility::inovertime()) {
     param_00 scripts\mp\gameobjects::setownerteam(level.otherteam[param_01.team]);

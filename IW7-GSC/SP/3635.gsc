@@ -43,7 +43,7 @@ func_8CF5() {
   }
 }
 
-_meth_834B(param_00, param_01) {}
+settenthstimerstatic(param_00, param_01) {}
 
 func_8CFB(param_00) {
   self endon("death");

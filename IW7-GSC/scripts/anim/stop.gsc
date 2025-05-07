@@ -52,7 +52,7 @@ main() {
     }
 
     if(self.a.pose != var_01) {
-      self aiclearanim( % root, 0.3);
+      self clearanim( % root, 0.3);
       var_00 = 0;
     }
 
@@ -85,7 +85,7 @@ func_1095B() {
   var_00 = self.var_1095A;
   self animmode("gravity");
   self orientmode("face current");
-  self aiclearanim( % root, 0.2);
+  self clearanim( % root, 0.2);
   for (;;) {
     self _meth_82EA("special_idle", var_00[randomint(var_00.size)], 1, 0.2, self.animplaybackrate);
     self waittillmatch("end", "special_idle");

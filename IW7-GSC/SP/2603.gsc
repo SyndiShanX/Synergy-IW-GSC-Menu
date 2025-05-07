@@ -715,7 +715,7 @@ func_11AFF(param_00, param_01) {
     }
 
     if(var_0A[var_13] != var_0A[var_12] && var_0A[var_13] != var_0A[var_12 - 1]) {
-      self aiclearanim(var_0A[var_13], 0.05);
+      self clearanim(var_0A[var_13], 0.05);
     }
   }
 }

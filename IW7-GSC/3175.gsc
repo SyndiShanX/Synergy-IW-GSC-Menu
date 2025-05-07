@@ -74,7 +74,7 @@ func_CEBF(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_05, 1, param_02, 1);
   lib_0A1E::func_2322(param_00, param_01, ::func_89A1);
   self.var_10E6D.var_C999 = undefined;
@@ -146,7 +146,7 @@ func_D4DE(param_00, param_01, param_02, param_03, param_04) {
   var_05 = scripts\asm\asm::asm_getmoveplaybackrate();
   self _meth_84F1(var_05);
   var_06 = lib_0A1E::asm_getbodyknob();
-  self aiclearanim(var_06, param_02);
+  self clearanim(var_06, param_02);
   if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
     var_07 = lib_0A1E::func_2356("Knobs", "move");
     self _meth_84F2(var_07);
@@ -221,7 +221,7 @@ func_C99F(param_00, param_01, param_02, param_03) {
 
 func_CEBE(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, self.a.var_C984, 1, param_02, 1);
   lib_0A1E::func_231F(param_00, param_01);
 }

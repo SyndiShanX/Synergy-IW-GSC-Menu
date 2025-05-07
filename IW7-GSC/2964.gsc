@@ -393,7 +393,7 @@ func_8752(var_00, var_01, var_02, var_03) {
         var_14 = isdefined(var_0.func_C01A);
 
         if(!var_14)
-          var_01 aiclearanim(var_13.func_131E6, 0);
+          var_01 clearanim(var_13.func_131E6, 0);
       }
 
       var_01 = var_01 func_7DC5();
@@ -447,7 +447,7 @@ func_5BCE(var_00) {
   self.func_4DEF = 1;
 
   if(isdefined(self.func_8C2D) && self.func_8C2D) {
-    self _meth_836E(0);
+    self setwaitspeed(0);
     self vehicle_setspeed(0, 10);
     self waittill("reached_wait_speed");
   }
@@ -792,7 +792,7 @@ func_F642(var_00, var_01) {
   wait(var_02);
 
   if(var_01)
-    self aiclearanim(var_00, 0);
+    self clearanim(var_00, 0);
 }
 
 #using_animtree("generic_human");
@@ -885,8 +885,8 @@ func_8766(var_00, var_01) {
 
   var_05 = 0;
 
-  if(isdefined(var_0._meth_8020)) {
-    var_06 = var_00[[var_0._meth_8020]]();
+  if(isdefined(var_0.autoboltmissileeffects)) {
+    var_06 = var_00[[var_0.autoboltmissileeffects]]();
 
     if(isdefined(var_06) && var_06)
       var_05 = 1;
@@ -895,8 +895,8 @@ func_8766(var_00, var_01) {
   if(isdefined(var_0.func_C584)) {
     var_0.func_C584 = undefined;
 
-    if(isdefined(var_0._meth_8020))
-      var_00[[var_0._meth_8020]]();
+    if(isdefined(var_0.autoboltmissileeffects))
+      var_00[[var_0.autoboltmissileeffects]]();
   }
 
   var_07 = func_7DC5();
@@ -919,8 +919,8 @@ func_8766(var_00, var_01) {
 
   var_10 = 0;
 
-  if(isdefined(var_3._meth_8032))
-    var_10 = var_10 + getanimlength(var_3._meth_8032);
+  if(isdefined(var_3.botgetnearestnode))
+    var_10 = var_10 + getanimlength(var_3.botgetnearestnode);
 
   if(isdefined(var_3.delay))
     var_10 = var_10 + var_3.delay;
@@ -969,8 +969,8 @@ func_8766(var_00, var_01) {
 
   if(isdefined(var_0.func_7B54))
     var_12 = var_0.func_7B54;
-  else if(scripts\sp\utility::func_65DB("landed") && isdefined(var_3._meth_802E))
-    var_12 = var_3._meth_802E;
+  else if(scripts\sp\utility::func_65DB("landed") && isdefined(var_3.botgetentrancepoint))
+    var_12 = var_3.botgetentrancepoint;
   else if(isdefined(var_0.func_D3E2) && isdefined(var_3.func_D098))
     var_12 = var_3.func_D098;
   else
@@ -1041,8 +1041,8 @@ func_8766(var_00, var_01) {
       func_1FC2(var_00, var_11, var_12);
       var_15 = var_11;
 
-      if(isdefined(var_3._meth_8031))
-        var_15 = var_3._meth_8031;
+      if(isdefined(var_3.botgetmemoryevents))
+        var_15 = var_3.botgetmemoryevents;
 
       func_1FC2(var_00, var_15, var_3.botgetimperfectenemyinfo);
     } else {
@@ -1184,7 +1184,7 @@ func_8767(var_00, var_01, var_02, var_03, var_04) {
   var_10 moveto(var_17, var_20);
   var_10 waittill("movedone");
   var_00 unlink();
-  var_00 _meth_8018("dropship_land", var_0.origin, var_0.angles, var_04);
+  var_00 animscripted("dropship_land", var_0.origin, var_0.angles, var_04);
   wait(getanimlength(var_04));
   var_00 notify("hoverunload_done");
   var_00 notify("anim_on_tag_done");
@@ -1197,7 +1197,7 @@ func_873D() {
     else
       self orientmode("face angle", self.angles[1]);
 
-    self aiclearanim(func_0A1E::asm_getbodyknob(), 0.2);
+    self clearanim(func_0A1E::asm_getbodyknob(), 0.2);
   }
 
   self give_attacker_kill_rewards(self.func_12BC4, 1);
@@ -1256,7 +1256,7 @@ func_1FC2(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(isdefined(var_0.func_DC19) && !isdefined(var_0.func_C01B))
     level thread func_1FC3(var_00, self);
 
-  var_00 _meth_8018(var_05, var_07, var_08, var_02);
+  var_00 animscripted(var_05, var_07, var_08, var_02);
 
   if(isai(var_00))
     thread donotetracks(var_00, var_06, var_05);
@@ -1349,7 +1349,7 @@ func_1FC4(var_00, var_01, var_02) {
 
     if(abs(var_3[2] + 16) <= abs(var_05)) {
       var_00 thread scripts\sp\utility::play_sound_on_entity("generic_death_falling");
-      var_00 _meth_8018("fastrope_fall", var_0.origin, var_0.angles, var_0.func_DC17);
+      var_00 animscripted("fastrope_fall", var_0.origin, var_0.angles, var_0.func_DC17);
       var_00 waittillmatch("fastrope_fall", "start_ragdoll");
     }
   }
@@ -1393,7 +1393,7 @@ donotetracks(var_00, var_01, var_02) {
 }
 
 func_1F9D(var_00, var_01, var_02, var_03) {
-  var_00 _meth_8018("movetospot", var_01, var_02, var_03);
+  var_00 animscripted("movetospot", var_01, var_02, var_03);
   var_00 waittillmatch("movetospot", "end");
 }
 
@@ -1500,7 +1500,7 @@ func_874C(var_00, var_01, var_02) {
   wait 0.1;
   var_00 endon("guy_man_turret_stop");
   level thread scripts\sp\mgturret::func_B6A7(var_04, scripts\sp\utility::func_7E72());
-  var_04 _meth_8359(1);
+  var_04 setturretignoregoals(1);
   var_05 = "stand";
 
   if(isdefined(var_3.func_12A80))
@@ -1545,7 +1545,7 @@ func_872D(var_00) {
   var_00 notsolid();
   var_0.origin = var_04;
   var_0.angles = var_03;
-  var_00 _meth_8018("deathanim", var_04, var_03, var_2.func_69DF);
+  var_00 animscripted("deathanim", var_04, var_03, var_2.func_69DF);
   var_05 = 0.3;
 
   if(isdefined(var_2.func_69E1))

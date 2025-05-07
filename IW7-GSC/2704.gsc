@@ -21,7 +21,7 @@ func_10D76(var_00) {
   self getnumberoffrozenticksfromwave(0);
   self getnumownedactiveagents(0);
   self allowdoublejump(0);
-  self _meth_800E(0);
+  self allowlean(0);
   self.func_3253 = spawnstruct();
   self.func_3253.func_4C15 = self getcurrentweapon();
   self.func_3253.func_DF66 = self getweaponammoclip(self.func_3253.func_4C15);
@@ -222,7 +222,7 @@ func_13B61(var_00) {
     var_00 getnumberoffrozenticksfromwave(1);
     var_00 getnumownedactiveagents(1);
     var_00 allowdoublejump(1);
-    var_00 _meth_800E(1);
+    var_00 allowlean(1);
     var_04 = var_0.func_3253.func_4C15;
     var_05 = var_0.func_3253.func_DF66;
     var_06 = var_0.func_3253.func_DF67;

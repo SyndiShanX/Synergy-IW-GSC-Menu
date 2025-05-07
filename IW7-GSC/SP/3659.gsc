@@ -102,8 +102,8 @@ func_1348D(param_00, param_01) {
     scripts\engine\utility::delaythread(0, ::helmethud_off);
   }
 
-  level.player _meth_8024(0.25, 0);
-  level.player.helmet aiclearanim( % vm_gesture_visor_down_visor, 0);
+  level.player blendlinktoplayerviewmotion(0.25, 0);
+  level.player.helmet clearanim( % vm_gesture_visor_down_visor, 0);
   level.player.helmet give_attacker_kill_rewards( % vm_gesture_visor_up_visor);
   if(!param_00) {
     if(self == level.player) {
@@ -125,7 +125,7 @@ func_1348D(param_00, param_01) {
     func_D5DF(1);
   }
 
-  level.player _meth_8024(0.25, 1);
+  level.player blendlinktoplayerviewmotion(0.25, 1);
   level.player.helmet.var_13487 = "up";
   level.player notify("visor_up_end");
   level.player scripts\sp\utility::func_65DD("visor_active");
@@ -174,8 +174,8 @@ func_13485(param_00, param_01, param_02) {
     scripts\engine\utility::delaythread(0, ::helmethud_on);
   }
 
-  level.player _meth_8024(0.25, 0);
-  level.player.helmet aiclearanim( % vm_gesture_visor_up_visor, 0);
+  level.player blendlinktoplayerviewmotion(0.25, 0);
+  level.player.helmet clearanim( % vm_gesture_visor_up_visor, 0);
   level.player.helmet give_attacker_kill_rewards( % vm_gesture_visor_down_visor);
   if(!param_00) {
     var_03 = "ges_visor_down";
@@ -197,7 +197,7 @@ func_13485(param_00, param_01, param_02) {
     func_D5DF(1);
   }
 
-  level.player _meth_8024(0.25, 1);
+  level.player blendlinktoplayerviewmotion(0.25, 1);
   level.player.helmet.var_13487 = "down";
   level.player notify("visor_down_end");
   level.player scripts\sp\utility::func_65DD("visor_active");
@@ -242,11 +242,11 @@ func_8E05(param_00, param_01, param_02) {
   }
 
   func_D5DF(0);
-  level.player _meth_8024(0.25, 0);
+  level.player blendlinktoplayerviewmotion(0.25, 0);
   level.player.helmet give_attacker_kill_rewards(var_03);
   wait(getanimlength(var_03));
-  level.player.helmet aiclearanim(var_03, 0);
-  level.player _meth_8024(0.25, 1);
+  level.player.helmet clearanim(var_03, 0);
+  level.player blendlinktoplayerviewmotion(0.25, 1);
   func_D5DF(1);
   level.player notify("helmet_on_end");
   level.player scripts\sp\utility::func_65DD("helmet_active");
@@ -274,11 +274,11 @@ func_8E02(param_00) {
   func_D5DF(0);
   scripts\engine\utility::delaythread(0.2, ::helmethud_off);
   thread scripts\sp\audio::func_25BE();
-  level.player _meth_8024(0.25, 0);
+  level.player blendlinktoplayerviewmotion(0.25, 0);
   level.player.helmet give_attacker_kill_rewards(var_01);
   wait(getanimlength(var_01));
-  level.player.helmet aiclearanim(var_01, 0);
-  level.player _meth_8024(0.25, 1);
+  level.player.helmet clearanim(var_01, 0);
+  level.player blendlinktoplayerviewmotion(0.25, 1);
   level.player.helmet _meth_83CB(level.player);
   level.player.helmet delete();
   if(self != level && self != level.player && isdefined(self.model)) {

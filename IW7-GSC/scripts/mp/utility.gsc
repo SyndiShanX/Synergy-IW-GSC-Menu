@@ -1198,7 +1198,7 @@ botgetworldsize(param_00, param_01) {
   return getdvarint(param_00, getdvarint(param_01));
 }
 
-_meth_803B(param_00, param_01) {
+botgetworldclosestedge(param_00, param_01) {
   return getdvarfloat(param_00, getdvarfloat(param_01));
 }
 
@@ -5801,7 +5801,7 @@ getuniqueid() {
   return self.pers["guid"];
 }
 
-_meth_80BF() {
+setkillstreakpoints() {
   var_00 = scripts\engine\utility::array_removeundefined(level.players);
   for (;;) {
     if(!var_00.size) {
@@ -7125,7 +7125,7 @@ bufferednotify_internal(param_00, param_01, param_02, param_03, param_04, param_
   }
 }
 
-aiclearanim() {
+clearanim() {
   if(level.rankedmatch) {
     return "mp";
   }
@@ -7142,7 +7142,7 @@ clearalltextafterhudelem() {
 }
 
 func_F7F1() {
-  level.var_10E59 = aiclearanim();
+  level.var_10E59 = clearanim();
   level.loadoutsgroup = clearalltextafterhudelem();
 }
 

@@ -1360,7 +1360,7 @@ func_11803() {
   thread func_F131();
   self orientmode("face point", scripts\engine\utility::random(getaiarray("axis")).origin);
   wait(0.25);
-  self aiclearanim( % body, 0.2);
+  self clearanim( % body, 0.2);
   self _meth_82EA("exposed_throw_seeker", % hm_grnd_org_exposed_seeker_throw01, 1, 0.2, lib_0C6A::func_6B9A());
   var_00 = "exposed_throw_seeker";
   thread lib_0A1E::func_231F("soldier", var_00);
@@ -1669,7 +1669,7 @@ _meth_8463() {
   func_1378A(var_07, var_08);
   scripts\sp\utility::func_2669("in_airlock");
   scripts\engine\utility::array_call(getentarray("airlock_fan", "targetname"), ::delete);
-  var_09 = getcorpsearrayinradius();
+  var_09 = getcorpsearray();
   foreach(var_0B in var_09) {
     if(isdefined(var_0B.origin)) {
       if(distance2dsquared(var_0B.origin, var_01.origin) < squared(100)) {

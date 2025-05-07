@@ -3260,7 +3260,7 @@ func_9591() {
       return;
     }
 
-    self _meth_8018("corpse_anim", self.origin, self.angles, func_7DC1(self.script_animation), "deathplant", undefined, 0);
+    self animscripted("corpse_anim", self.origin, self.angles, func_7DC1(self.script_animation), "deathplant", undefined, 0);
 
     if(self.script_noteworthy != "corpse_noragdoll") {
       var_03 = getanimlength(func_7DC1(self.script_animation));
@@ -4026,7 +4026,7 @@ func_10619(var_00, var_01) {
   else if(isdefined(self.func_EDB3) || isdefined(var_00))
     var_02 = self _meth_8393(var_03);
   else
-    var_02 = self _meth_80B5(var_03);
+    var_02 = self dospawn(var_03);
 
   if(isdefined(var_01) && var_01 && isalive(var_02))
     var_02 func_B14F();

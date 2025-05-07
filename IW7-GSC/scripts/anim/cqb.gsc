@@ -7,7 +7,7 @@
 func_BCB1() {
   scripts\anim\run::func_10B77();
   if(self.a.pose != "stand") {
-    self aiclearanim( % root, 0.2);
+    self clearanim( % root, 0.2);
     if(self.a.pose == "prone") {
       scripts\anim\utility::exitpronewrapper(1);
     }
@@ -21,7 +21,7 @@ func_BCB1() {
     return;
   }
 
-  self aiclearanim( % stair_transitions, 0.2);
+  self clearanim( % stair_transitions, 0.2);
   if(scripts\anim\run::func_10B78()) {
     return;
   }
@@ -213,5 +213,5 @@ func_478E(param_00) {
 
 func_4789() {
   self.facialidx = undefined;
-  self aiclearanim( % head, 0.2);
+  self clearanim( % head, 0.2);
 }

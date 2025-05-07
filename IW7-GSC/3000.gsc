@@ -517,7 +517,7 @@ func_397D() {
 }
 
 func_397E() {
-  self _meth_8383();
+  self showallparts();
 }
 
 func_39C5() {
@@ -563,22 +563,22 @@ func_39BB() {
 }
 
 func_3980() {
-  self _meth_80B3();
+  self dontcastshadows();
 
   if(isdefined(self.func_EF3C)) {
     foreach(var_01 in self.func_EF3C)
-    var_01 _meth_80B3();
+    var_01 dontcastshadows();
   }
 
   if(isdefined(self.func_539C)) {
     foreach(var_04 in self.func_539C)
-    var_04 _meth_80B3();
+    var_04 dontcastshadows();
   }
 
   foreach(var_07 in self.func_8B4F) {
     foreach(var_09 in var_07) {
       if(isdefined(var_09) && !_isstruct(var_09))
-        var_09 _meth_80B3();
+        var_09 dontcastshadows();
     }
   }
 }

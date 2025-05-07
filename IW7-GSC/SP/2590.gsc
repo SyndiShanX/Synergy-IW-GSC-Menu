@@ -433,7 +433,7 @@ func_2309(param_00) {
 func_2318() {
   if(self.var_6A8B != "filler") {
     var_00 = func_2356("Knobs", "head");
-    self aiclearanim(var_00, 0.2);
+    self clearanim(var_00, 0.2);
     self.facialidx = undefined;
   }
 }
@@ -650,7 +650,7 @@ func_2319(param_00) {
   }
 
   var_02 = func_2356("Knobs", var_01);
-  self aiclearanim(var_02, 0.3, 1);
+  self clearanim(var_02, 0.3, 1);
 }
 
 func_2355() {
@@ -680,7 +680,7 @@ func_236E() {
 
 func_231A() {
   var_00 = func_2356("Knobs", "visor");
-  self aiclearanim(var_00, 0);
+  self clearanim(var_00, 0);
 }
 
 asm_getaimlimitset(param_00, param_01, param_02) {
@@ -817,7 +817,7 @@ asm_getbodyknob() {
 func_235F(param_00, param_01, param_02, param_03, param_04) {
   self endon(param_01 + "_finished");
   var_05 = asm_getbodyknob();
-  self aiclearanim(var_05, param_02);
+  self clearanim(var_05, param_02);
   if(isdefined(param_04) && param_04) {
     if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
       var_06 = func_2356("Knobs", "move");
@@ -837,7 +837,7 @@ func_235F(param_00, param_01, param_02, param_03, param_04) {
     }
 
     if(isdefined(var_07) && var_07 != var_0B) {
-      self aiclearanim(var_07, param_02);
+      self clearanim(var_07, param_02);
     }
 
     if(self _meth_8103(var_0B) > 0) {
@@ -872,7 +872,7 @@ func_235F(param_00, param_01, param_02, param_03, param_04) {
 func_2368(param_00, param_01, param_02, param_03, param_04) {
   self endon(param_01 + "_finished");
   var_05 = asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(asm_getbodyknob(), param_02);
+  self clearanim(asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_05, 1, param_02, 1);
   func_2369(param_00, param_01, var_05);
   var_06 = func_2322(param_00, param_01, param_03, param_04);
@@ -888,7 +888,7 @@ func_2368(param_00, param_01, param_02, param_03, param_04) {
 func_2366(param_00, param_01, param_02) {
   self endon(param_01 + "_finished");
   var_03 = asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(asm_getbodyknob(), param_02);
+  self clearanim(asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_03, 1, param_02, 1);
   func_2369(param_00, param_01, var_03);
   var_04 = func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
@@ -897,7 +897,7 @@ func_2366(param_00, param_01, param_02) {
 func_2364(param_00, param_01, param_02) {
   self endon(param_01 + "_finished");
   var_03 = asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(asm_getbodyknob(), param_02);
+  self clearanim(asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_03, 1, param_02, 1);
   func_2369(param_00, param_01, var_03);
   var_04 = func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
@@ -1199,9 +1199,9 @@ func_2386() {
 func_2307(param_00, param_01) {
   if(getdvarint("ai_iw7", 0) == 0) {
     if(!isdefined(param_01)) {
-      self _meth_8015(param_00);
+      self animcustom(param_00);
     } else {
-      self _meth_8015(param_00, param_01);
+      self animcustom(param_00, param_01);
     }
 
     return;
@@ -1209,7 +1209,7 @@ func_2307(param_00, param_01) {
 
   scripts\asm\asm_bb::bb_setanimscripted();
   self.asm.var_1FAC = param_01;
-  self _meth_8015(param_00, ::func_2308);
+  self animcustom(param_00, ::func_2308);
   var_02 = self.asmname;
   var_03 = self.var_164D[var_02].var_4BC0;
   var_04 = level.asm[var_02].states[var_03];

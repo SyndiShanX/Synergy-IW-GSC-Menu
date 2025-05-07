@@ -591,7 +591,7 @@ func_F2DF(param_00) {
   var_01["fire"] = % steel_dragon_fire;
   var_01["powerdown"] = % steel_dragon_powerdown;
   var_02 = "bfganim";
-  level.var_11B30.var_2AA2 aiclearanim( % root, 0.2);
+  level.var_11B30.var_2AA2 clearanim( % root, 0.2);
   if(param_00 == "idle") {
     level.var_11B30.var_2AA2 thread func_2AA4(var_01[param_00]);
   }

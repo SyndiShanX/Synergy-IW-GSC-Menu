@@ -392,7 +392,7 @@ getuniqueid() {
   if(isdefined(self.pers["guid"]))
     return self.pers["guid"];
 
-  var_00 = self _meth_812C();
+  var_00 = self getguid();
 
   if(var_00 == "0000000000000000") {
     if(isdefined(level.guidgen))

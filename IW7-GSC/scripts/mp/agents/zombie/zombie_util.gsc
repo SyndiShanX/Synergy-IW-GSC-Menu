@@ -50,7 +50,7 @@ func_13141(param_00) {
   }
 }
 
-_meth_8024(param_00) {
+blendlinktoplayerviewmotion(param_00) {
   var_01 = param_00.origin;
   if(isdefined(param_00.var_864C)) {
     var_01 = param_00.var_864C;
@@ -796,7 +796,7 @@ func_7FAA(param_00) {
     func_3717();
   }
 
-  var_01 = _meth_8024(param_00);
+  var_01 = blendlinktoplayerviewmotion(param_00);
   self.var_B5E0.var_656D = var_01;
   var_02 = func_7FB1(param_00, var_01);
   if(isdefined(var_02)) {

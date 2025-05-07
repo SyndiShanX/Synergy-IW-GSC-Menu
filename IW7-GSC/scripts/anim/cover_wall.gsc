@@ -173,7 +173,7 @@ shootastold() {
     }
 
     func_FEE1();
-    self aiclearanim( % add_fire, 0.2);
+    self clearanim( % add_fire, 0.2);
   }
 }
 
@@ -372,7 +372,7 @@ func_D65B() {
     var_01 = 0.1;
   }
 
-  self aiclearanim(var_02, var_01 + 0.05);
+  self clearanim(var_02, var_01 + 0.05);
   self.a.var_4727 = var_00;
   self.a.var_D892 = var_00;
   func_F8A6(var_01);
@@ -442,7 +442,7 @@ _meth_8405() {
   scripts\anim\combat_utility::func_6309();
   var_00 = func_D65C();
   self _meth_82E3("go_to_hide", scripts\anim\utility::func_1F64(self.a.var_4727 + "_2_hide"), % body, 1, 0.2, var_00);
-  self aiclearanim( % exposed_modern, 0.2);
+  self clearanim( % exposed_modern, 0.2);
   scripts\anim\shared::donotetracks("go_to_hide");
   self.a.var_4727 = "hide";
   if(self.var_4757 == "stand") {
@@ -651,7 +651,7 @@ func_7DFA() {
     }
   }
 
-  return scripts\anim\combat_utility::_meth_80B5(var_00);
+  return scripts\anim\combat_utility::dospawn(var_00);
 }
 
 _meth_811F(param_00) {
@@ -678,5 +678,5 @@ func_470A(param_00, param_01) {
 
 func_4701() {
   self.facialidx = undefined;
-  self aiclearanim( % head, 0.2);
+  self clearanim( % head, 0.2);
 }

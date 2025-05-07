@@ -10,7 +10,7 @@ _meth_80A1() {
   return var_00;
 }
 
-_meth_807A() {
+clearpotentialthreat() {
   var_00 = [];
   var_00["chokePlayer_save"] = % vm_grnd_red_melee_choke_rescued;
   var_00["chokePlayer_kill"] = % vm_grnd_red_melee_choke_death;
@@ -83,7 +83,7 @@ func_D3F9() {
   var_01.angles = var_00;
   level.player.melee.partner = self;
   level.player.melee.var_E505 = var_01;
-  var_02 = _meth_807A();
+  var_02 = clearpotentialthreat();
   level.player playrumbleonentity("heavy_2s");
   var_03 = "meleeAnim";
   var_01 _meth_82E4(var_03, var_02["chokePlayer"], var_01.var_E6E5, 1, 0.2, 1);
@@ -305,7 +305,7 @@ func_B5FA() {
 
 func_B61F(param_00, param_01, param_02, param_03) {
   var_04 = getanimentrycount();
-  var_05 = _meth_807A();
+  var_05 = clearpotentialthreat();
   var_06 = "meleeSave";
   var_07 = "chokePlayer_save";
   var_08 = var_05[var_07];
@@ -332,7 +332,7 @@ func_B61F(param_00, param_01, param_02, param_03) {
   var_0A linktoblendtotag(var_0A.var_B650, "tag_origin", 1, 0);
   var_0A lib_0A1E::func_2307(::func_EB7C, ::saviorcleanup);
   var_0D = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_0D, 1, param_02, 1);
   thread scripts\sp\anim::func_10CBF(self, param_01);
   var_0E = lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
@@ -352,7 +352,7 @@ func_B062() {
 
 func_B61C(param_00, param_01, param_02, param_03) {
   level.player endon("meleegrab_interupt");
-  var_04 = _meth_807A();
+  var_04 = clearpotentialthreat();
   var_05 = undefined;
   var_06 = randomfloatrange(0, 1);
   if(var_06 <= 0.33) {
@@ -376,7 +376,7 @@ func_B61C(param_00, param_01, param_02, param_03) {
   var_0C _meth_82E4(var_0A, var_0B, var_0C.var_E6E5, 1, 0.2, 1);
   var_0C thread scripts\sp\anim::func_10CBF(var_0C, var_0A);
   var_0C thread scripts\anim\shared::donotetracks(var_0A, ::func_B617);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   if(isdefined(var_05)) {
     thread func_3675(param_01, var_05, param_02);
   }
@@ -424,7 +424,7 @@ saviorcleanup() {
 
 func_B61A(param_00, param_01, param_02, param_03) {
   level.player thread lib_0F3D::func_46B5();
-  var_04 = _meth_807A();
+  var_04 = clearpotentialthreat();
   var_05 = "meleeKillPlayer";
   var_06 = "chokePlayer_kill";
   var_07 = var_04[var_06];
@@ -559,7 +559,7 @@ func_B614() {
 
 func_B613() {
   if(isdefined(self.meleegrabweapon)) {
-    self _meth_80BA(self.meleegrabweapon, "right", 0);
+    self dropweapon(self.meleegrabweapon, "right", 0);
   }
 
   func_B5FA();
@@ -636,7 +636,7 @@ func_D3EC() {
   var_01.angles = var_00;
   level.player.melee.partner = self;
   level.player.melee.var_E505 = var_01;
-  var_02 = _meth_807A();
+  var_02 = clearpotentialthreat();
   var_03 = "meleeAnim";
   var_01 _meth_82E4(var_03, var_02["crawlMeleeGrab"], var_01.var_E6E5, 1, 0.2, 1);
   var_01 thread func_4884(self);
@@ -650,7 +650,7 @@ func_D3EB(param_00) {
   level.player endon("stop_crawlmelee_loop");
   level.player endon("crawlmeleegrab_interrupt");
   param_00 thread scripts\engine\utility::play_loop_sound_on_entity("c6_grapple_crawl_struggle_lp");
-  var_01 = _meth_807A();
+  var_01 = clearpotentialthreat();
   var_02 = var_01["crawlMeleeGrab_loop"];
   level.player forceplaygestureviewmodel("ges_crawlmelee_grabbed");
   var_03 = "crawMeleeGrabLoop";
@@ -814,14 +814,14 @@ func_488A(param_00, param_01, param_02, param_03) {
   scripts\engine\utility::stop_loop_sound_on_entity("c6_grapple_crawl_struggle_lp");
   self playsound("c6_grapple_crawl_win_collapse");
   level.player thread func_488B();
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   lib_0A1E::func_2364(param_00, param_01, param_02);
   level.player scripts\engine\utility::delaycall(1.5, ::playsound, "c6_grapple_crawl_win_foley");
 }
 
 func_488B() {
   var_00 = level.player.melee.var_E505;
-  var_01 = _meth_807A();
+  var_01 = clearpotentialthreat();
   var_02 = "crawlMeleeCounter";
   thread lib_0F3D::func_50E8(1);
   level.player _meth_80A6();
@@ -851,7 +851,7 @@ func_4888(param_00, param_01, param_02, param_03) {
   self.var_E0 = 1;
   level.player notify("stop_crawlmelee_loop");
   scripts\engine\utility::stop_loop_sound_on_entity("c6_grapple_crawl_struggle_lp");
-  var_04 = _meth_807A();
+  var_04 = clearpotentialthreat();
   var_05 = "crawlMeleeKill";
   level.player.melee.var_E505 _meth_82E4(var_05, var_04["crawlMeleeGrab_lose"], level.player.melee.var_E505.var_E6E5, 1, 0.2, 1);
   level.player.melee.var_E505 thread scripts\sp\anim::func_10CBF(level.player.melee.var_E505, var_05);
@@ -859,7 +859,7 @@ func_4888(param_00, param_01, param_02, param_03) {
   level.player scripts\engine\utility::delaycall(0.1, ::playsound, "c6_grapple_crawl_lose_pound_01");
   level.player scripts\engine\utility::delaycall(0.7, ::playsound, "c6_grapple_crawl_lose_pound_02");
   level.player scripts\engine\utility::delaycall(1.5, ::playsound, "c6_grapple_crawl_lose_pound_03");
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   lib_0A1E::func_2364(param_00, param_01, param_02);
 }
 
