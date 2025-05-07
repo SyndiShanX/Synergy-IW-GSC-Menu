@@ -769,7 +769,7 @@ alt_acid_rain_activate(var_00, var_01) {
     return;
   }
   for (var_02 = 0; var_02 < 3; var_2++) {
-    var_03 = _meth_80B9(var_00, var_01);
+    var_03 = dropscavengerbag(var_00, var_01);
     var_04 = var_00 + var_03;
     magicbullet("iw7_acid_rain_projectile_zm", var_00, var_04, self);
     scripts\engine\utility::waitframe();
@@ -777,7 +777,7 @@ alt_acid_rain_activate(var_00, var_01) {
   }
 }
 
-_meth_80B9(var_00, var_01) {
+dropscavengerbag(var_00, var_01) {
   var_02 = anglestoup(var_01);
   var_03 = anglestoright(var_01);
   var_04 = anglestoforward(var_01);

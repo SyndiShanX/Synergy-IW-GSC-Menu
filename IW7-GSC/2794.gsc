@@ -157,7 +157,7 @@ func_13B34(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_16 = var_01 scripts\mp\powerloot::func_7FC2("power_shardBall", var_15);
 
   for (var_17 = 0; var_17 < var_16; var_17++) {
-    var_18 = _meth_80B9(var_07, var_00);
+    var_18 = dropscavengerbag(var_07, var_00);
     var_19 = undefined;
 
     if(isdefined(var_14) && var_14.size > 0) {
@@ -171,7 +171,7 @@ func_13B34(var_00, var_01, var_02, var_03, var_04, var_05) {
   }
 }
 
-_meth_80B9(var_00, var_01) {
+dropscavengerbag(var_00, var_01) {
   var_02 = anglestoup(var_01);
   var_03 = anglestoright(var_01);
   var_04 = anglestoforward(var_01);

@@ -460,7 +460,7 @@ func_A335(var_00) {
     return;
   }
   self.func_8E5D = scripts\engine\utility::array_remove(self.func_8E5D, var_00);
-  self _meth_8383();
+  self showallparts();
 
   foreach(var_02 in self.func_8E5D)
   self _meth_8189(var_02);
@@ -468,7 +468,7 @@ func_A335(var_00) {
 
 func_A334() {
   self.func_8E5D = [];
-  self _meth_8383();
+  self showallparts();
 }
 
 func_A208(var_00) {
@@ -1066,26 +1066,26 @@ func_A2DE(var_00, var_01, var_02, var_03) {
   self _meth_848F(var_00);
 
   if(var_00 && !var_02) {
-    self aiclearanim( % jackal_thrust_p, var_01);
-    self aiclearanim( % jackal_motion_idle_p, var_01);
-    self aiclearanim( % root, var_01);
-    self aiclearanim( % jackal_assault_lhand_fb_range_p, var_01);
-    self aiclearanim( % jackal_assault_lhand_lr_range_p, var_01);
-    self aiclearanim( % jackal_assault_rhand_fb_range_p, var_01);
-    self aiclearanim( % jackal_assault_rhand_lr_range_p, var_01);
-    self aiclearanim( % jackal_strike_lhand_fb_range_p, var_01);
-    self aiclearanim( % jackal_strike_lhand_lr_range_p, var_01);
-    self aiclearanim( % jackal_strike_rhand_fb_range_p, var_01);
-    self aiclearanim( % jackal_strike_rhand_lr_range_p, var_01);
+    self clearanim( % jackal_thrust_p, var_01);
+    self clearanim( % jackal_motion_idle_p, var_01);
+    self clearanim( % root, var_01);
+    self clearanim( % jackal_assault_lhand_fb_range_p, var_01);
+    self clearanim( % jackal_assault_lhand_lr_range_p, var_01);
+    self clearanim( % jackal_assault_rhand_fb_range_p, var_01);
+    self clearanim( % jackal_assault_rhand_lr_range_p, var_01);
+    self clearanim( % jackal_strike_lhand_fb_range_p, var_01);
+    self clearanim( % jackal_strike_lhand_lr_range_p, var_01);
+    self clearanim( % jackal_strike_rhand_fb_range_p, var_01);
+    self clearanim( % jackal_strike_rhand_lr_range_p, var_01);
   }
 
   if(var_00 && !var_03) {
-    self aiclearanim( % jackal_weapon_switch_p, var_01);
-    self aiclearanim( % jackal_weapon_drop_p, var_01);
-    self aiclearanim( % jackal_vehicle_weap_primary_fire_l_p, var_01);
-    self aiclearanim( % jackal_vehicle_weap_primary_fire_r_p, var_01);
-    self aiclearanim( % jackal_vehicle_weap_secondary_fire_l_p, var_01);
-    self aiclearanim( % jackal_vehicle_weap_secondary_fire_r_p, var_01);
+    self clearanim( % jackal_weapon_switch_p, var_01);
+    self clearanim( % jackal_weapon_drop_p, var_01);
+    self clearanim( % jackal_vehicle_weap_primary_fire_l_p, var_01);
+    self clearanim( % jackal_vehicle_weap_primary_fire_r_p, var_01);
+    self clearanim( % jackal_vehicle_weap_secondary_fire_l_p, var_01);
+    self clearanim( % jackal_vehicle_weap_secondary_fire_r_p, var_01);
   }
 }
 
@@ -3021,7 +3021,7 @@ func_10CD3(var_00, var_01) {
   level.func_D127 = var_00;
   var_00 func_0BDB::func_BBE0();
   wait 0.1;
-  var_00 _meth_8383();
+  var_00 showallparts();
   var_00 func_0BDB::func_E073(1);
 }
 

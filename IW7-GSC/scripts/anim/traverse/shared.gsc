@@ -16,7 +16,7 @@ func_18D1(param_00, param_01) {
   var_03 = var_02.var_126D4 - var_02.origin[2];
   thread func_11661(var_03 - param_01);
   var_04 = 0.15;
-  self aiclearanim( % body, var_04);
+  self clearanim( % body, var_04);
   self _meth_82E4("traverse", param_00, % root, 1, var_04, 1);
   var_05 = 0.2;
   var_06 = 0.2;
@@ -158,7 +158,7 @@ func_5AC3(param_00) {
     self.a.movement = "stop";
   } else {
     self.a.movement = "run";
-    self aiclearanim(var_04, 0.2);
+    self clearanim(var_04, 0.2);
   }
 
   self.var_126DD = undefined;
@@ -317,7 +317,7 @@ func_586D(param_00, param_01, param_02) {
   self.var_126DB = level.var_58C7[param_00];
   self.var_126EB = var_03;
   self.var_126E4 = self _meth_8145();
-  self aiclearanim( % body, 0.2);
+  self clearanim( % body, 0.2);
   self _meth_82EA("dog_traverse", self.var_126DB, 1, 0.2, 1);
   self.var_BCA6 = "land";
   scripts\anim\notetracks::donotetracksintercept("dog_traverse", ::func_5864);
@@ -350,7 +350,7 @@ func_5867(param_00, param_01, param_02, param_03) {
   }
 
   self.var_BCA6 = "land";
-  self aiclearanim( % body, 0.2);
+  self clearanim( % body, 0.2);
   self _meth_82EA("traverseAnim", self.var_126DB, 1, 0.2, 1);
   if(!param_03) {
     scripts\anim\shared::donotetracks("traverseAnim");
@@ -387,7 +387,7 @@ func_5868(param_00, param_01, param_02, param_03) {
   }
 
   self.var_BCA6 = "land";
-  self aiclearanim( % body, 0.2);
+  self clearanim( % body, 0.2);
   self _meth_82EA("traverseAnim", self.var_126DB, 1, 0.2, 1);
   if(!param_03) {
     scripts\anim\shared::donotetracks("traverseAnim");
@@ -415,7 +415,7 @@ func_5869(param_00, param_01) {
   var_03 = var_02.var_126D4 - var_02.origin[2];
   thread func_11661(var_03 - param_01);
   self.var_BCA6 = "land";
-  self aiclearanim( % body, 0.2);
+  self clearanim( % body, 0.2);
   self _meth_82E4("dog_traverse", level.var_58C7[param_00], 1, 0.2, 1);
   scripts\anim\shared::donotetracks("dog_traverse");
   self.var_BCA6 = undefined;

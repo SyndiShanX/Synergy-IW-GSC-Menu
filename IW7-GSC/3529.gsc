@@ -312,7 +312,7 @@ func_F774(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   self setusefov(var_03);
   self _meth_84A4(var_04);
   self setuserange(var_05);
-  self _meth_835F(var_06);
+  self setusepriority(var_06);
   level thread func_20D8(self);
 
   foreach(var_08 in level.players) {

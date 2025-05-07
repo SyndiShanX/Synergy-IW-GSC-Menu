@@ -50,7 +50,7 @@ main(param_00) {
 
   param_00.var_5855 = 0;
   thread func_6D63(param_00);
-  self _meth_8355(self.primaryturretanim);
+  self setturretanim(self.primaryturretanim);
   self _meth_82AB(self.primaryturretanim, 1, 0.2, 1);
   self _meth_82AA(self.var_17E3);
   self _meth_82AA(self.var_17E2);

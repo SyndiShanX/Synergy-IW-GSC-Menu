@@ -162,7 +162,7 @@ func_CEC8(param_00, param_01, param_02, param_03) {
   var_08 = lib_0A1E::asm_getbodyknob();
   scripts\anim\battlechatter_ai::func_67CF(self.objective_team);
   lib_0A1E::func_2369(param_00, param_01, var_07);
-  self aiclearanim(var_08, param_02);
+  self clearanim(var_08, param_02);
   self _meth_82EA(param_01, var_07, 1, param_02, func_6B9A());
   thread lib_0A1E::func_231F(param_00, param_01);
   var_09 = "seeker_grenade_folded";
@@ -378,7 +378,7 @@ func_58BA(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   var_08 = lib_0A1E::asm_getbodyknob();
   scripts\anim\battlechatter_ai::func_67CF(self.objective_team);
   lib_0A1E::func_2369(param_00, param_01, param_02);
-  self aiclearanim(var_08, param_04);
+  self clearanim(var_08, param_04);
   self _meth_82EA(param_01, param_02, 1, param_04, func_6B9A());
   thread lib_0A1E::func_231F(param_00, param_01);
   var_09 = scripts\anim\utility_common::getgrenademodel();

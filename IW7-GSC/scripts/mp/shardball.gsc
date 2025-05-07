@@ -157,7 +157,7 @@ func_13B34(param_00, param_01, param_02, param_03, param_04, param_05) {
 
   var_10 = param_01 scripts\mp\powerloot::func_7FC2("power_shardBall", var_0F);
   for (var_11 = 0; var_11 < var_10; var_11++) {
-    var_12 = _meth_80B9(var_07, param_00);
+    var_12 = dropscavengerbag(var_07, param_00);
     var_13 = undefined;
     if(isdefined(var_0E) && var_0E.size > 0) {
       var_14 = scripts\engine\utility::random(var_0E);
@@ -170,7 +170,7 @@ func_13B34(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 }
 
-_meth_80B9(param_00, param_01) {
+dropscavengerbag(param_00, param_01) {
   var_02 = anglestoup(param_01);
   var_03 = anglestoright(param_01);
   var_04 = anglestoforward(param_01);

@@ -20,7 +20,7 @@ main() {
     thread func_1524();
   }
 
-  self aiclearanim( % body, 0.2);
+  self clearanim( % body, 0.2);
   self _meth_82EA("coverArrival", var_01, 1, 0.2, self.var_BD22);
   scripts\anim\face::playfacialanim(var_01, "run");
   scripts\anim\shared::donotetracks("coverArrival", ::func_89EA);
@@ -31,7 +31,7 @@ main() {
 
   self.a.movement = "stop";
   self.a.var_22F5 = self.var_20F2;
-  self aiclearanim( % root, 0.3);
+  self clearanim( % root, 0.3);
   self.var_A93C = undefined;
 }
 
@@ -70,7 +70,7 @@ func_1524() {
     }
 
     if(func_9FA5()) {
-      self aiclearanim( % root, 0.3);
+      self clearanim( % root, 0.3);
       self notify("abort_approach");
       self.var_A93C = gettime();
       return;

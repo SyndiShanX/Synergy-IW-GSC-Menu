@@ -3157,7 +3157,7 @@ choose_random_weapon_from_list(param_00) {
     var_02 = self getcurrentweapon();
     var_03 = scripts\cp\utility::getrawbaseweaponname(var_01);
     if(can_upgrade_via_pap2fnfcard(var_01, 1)) {
-      thread _meth_834A(self, param_00, var_03, var_01);
+      thread settenthstimer(self, param_00, var_03, var_01);
       self.isusingsupercard = 0;
       return 1;
     } else {
@@ -3167,7 +3167,7 @@ choose_random_weapon_from_list(param_00) {
   }
 }
 
-_meth_834A(param_00, param_01, param_02, param_03) {
+settenthstimer(param_00, param_01, param_02, param_03) {
   var_04 = 0;
   var_05 = undefined;
   var_06 = undefined;

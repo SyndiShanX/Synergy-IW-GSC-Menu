@@ -1057,7 +1057,7 @@ loadout_updateplayerarchetype(param_00) {
   self allowslide(var_06 & var_02);
   self allowwallrun(var_06 & var_03);
   self allowdodge(var_06 & var_04);
-  self _meth_800E(0);
+  self allowlean(0);
   self setsuit(var_05);
   self energy_setmax(0, var_09);
   self goal_radius(0, var_09);
@@ -2028,15 +2028,15 @@ listhasattachment(param_00, param_01) {
 
 getrandomarmkillstreak(param_00, param_01) {
   var_02 = scripts\mp\utility::getweaponattachmentarrayfromstats(param_00);
-  return _meth_80B2(var_02, param_01);
+  return dontcastdistantshadows(var_02, param_01);
 }
 
-_meth_80B3(param_00, param_01, param_02) {
+dontcastshadows(param_00, param_01, param_02) {
   var_03 = scripts\mp\utility::getweaponbarsize(param_00, param_01);
-  return _meth_80B2(var_03, param_02);
+  return dontcastdistantshadows(var_03, param_02);
 }
 
-_meth_80B2(param_00, param_01) {
+dontcastdistantshadows(param_00, param_01) {
   if(param_00.size > 0) {
     param_00 = scripts\engine\utility::array_randomize(param_00);
     if(param_01 > param_00.size) {

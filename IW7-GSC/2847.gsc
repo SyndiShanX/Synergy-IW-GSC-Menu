@@ -920,7 +920,7 @@ buddyplayerid() {
   self endon("buddydoor_pull_complete");
   var_00 = scripts\sp\utility::func_7DC1(self.func_130FF func_5997("pull"));
   var_01 = func_0A1E::func_2356("Knobs", "body");
-  self aiclearanim(var_01, 0);
+  self clearanim(var_01, 0);
   self animmode("noclip");
   self give_attacker_kill_rewards(var_00, 1, 0.2, self.func_130FF.func_C633);
   level waittill("ever");

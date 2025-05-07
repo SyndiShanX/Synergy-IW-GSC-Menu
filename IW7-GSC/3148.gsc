@@ -64,11 +64,11 @@ func_CEE9(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
   self.var_1198.var_28D1 = 1;
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
-  self aiclearanim(var_04, param_02);
+  self clearanim(var_04, param_02);
   self.var_1198.var_28D0 = undefined;
   self.var_1198.var_28D1 = undefined;
 }
@@ -186,8 +186,8 @@ func_1964(param_00) {
   self _meth_82AC( % lookat_head_base_partial, 0, 0.05);
   self _meth_82AC( % head_gesture_look_partial, 0, 0.05);
   self _meth_82AC( % lookat_head_adds, 0, 0.05);
-  self aiclearanim( % lookat_left_right, 0.05);
-  self aiclearanim( % lookat_up_down, 0.05);
+  self clearanim( % lookat_left_right, 0.05);
+  self clearanim( % lookat_up_down, 0.05);
   self.var_9BFC = undefined;
 }
 
@@ -201,13 +201,13 @@ func_194F(param_00) {
     var_01 = 0.25;
   }
 
-  self aiclearanim( % eyes_look_leftright, var_01);
-  self aiclearanim( % eyes_look_updown, var_01);
-  self aiclearanim( % eyes_lookat_base_partial, var_01);
-  self aiclearanim( % facial_gesture_look_partial, var_01);
-  self aiclearanim( % eyes_blink_base_partial, var_01);
-  self aiclearanim( % facial_gesture_blink_partial, var_01);
-  self aiclearanim( % eyes_blink, var_01);
+  self clearanim( % eyes_look_leftright, var_01);
+  self clearanim( % eyes_look_updown, var_01);
+  self clearanim( % eyes_lookat_base_partial, var_01);
+  self clearanim( % facial_gesture_look_partial, var_01);
+  self clearanim( % eyes_blink_base_partial, var_01);
+  self clearanim( % facial_gesture_blink_partial, var_01);
+  self clearanim( % eyes_blink, var_01);
   self.var_9BDC = undefined;
 }
 
@@ -339,7 +339,7 @@ func_1967(param_00) {
   self _meth_82AC(self.var_11A0E, 0, 0.05);
   self _meth_82AC(self.var_11A12, 0, 0.05);
   self _meth_82AC(self.var_11A0F, 0, 0.05);
-  self aiclearanim( % torso_tracking_anims, param_00);
+  self clearanim( % torso_tracking_anims, param_00);
   self.var_9CE9 = undefined;
 }
 
@@ -910,7 +910,7 @@ func_1948(param_00) {
   func_1963();
   for (;;) {
     wait(randomfloatrange(param_00 * 0.5, param_00));
-    self aiclearanim( % facial_gesture_blink_1, 0);
+    self clearanim( % facial_gesture_blink_1, 0);
     wait(0.05);
     self _meth_82AC( % facial_gesture_blink_1, 1, 0);
     scripts\engine\utility::waitframe();
@@ -926,7 +926,7 @@ func_1963() {
   }
 
   self _meth_82AC( % eyes_blink, 1, 0);
-  self aiclearanim( % facial_gesture_blink_1, 0);
+  self clearanim( % facial_gesture_blink_1, 0);
   wait(0.05);
   self _meth_82AC( % facial_gesture_blink_1, 1, 0);
 }
@@ -1037,7 +1037,7 @@ func_195D(param_00) {
 
   var_19 = getanimlength( % prototype_gesture_point_center) * 0.85;
   wait(var_19);
-  self aiclearanim(self.var_77AD, 0.25);
+  self clearanim(self.var_77AD, 0.25);
   self _meth_82AC(self.var_778D, 1, 0.25);
   self.var_1198.var_D636 = 0;
 }
@@ -1222,8 +1222,8 @@ func_1960(param_00) {
   if(self.var_9C5F) {
     thread func_2B7A(self.var_101F8, var_07, 0.5);
   } else {
-    self aiclearanim(self.var_101F8, 0.5);
-    self aiclearanim(var_07, 0.5);
+    self clearanim(self.var_101F8, 0.5);
+    self clearanim(var_07, 0.5);
   }
 
   self.var_9C5F = 0;
@@ -1246,8 +1246,8 @@ func_2B7A(param_00, param_01, param_02) {
   self _meth_82AC(param_00, 1, var_03);
   self _meth_82AC(param_01, 1, var_03);
   wait(var_03);
-  self aiclearanim(param_00, var_03);
-  self aiclearanim(param_01, var_03);
+  self clearanim(param_00, var_03);
+  self clearanim(param_01, var_03);
 }
 
 func_6F41(param_00, param_01, param_02, param_03, param_04) {
@@ -1375,7 +1375,7 @@ func_194C(param_00, param_01, param_02) {
 
   var_22 = getanimlength(var_04);
   wait(var_22);
-  self aiclearanim(var_0B, 0.25);
+  self clearanim(var_0B, 0.25);
   self _meth_82AC(var_0A, 1, 0.25);
 }
 
@@ -1406,8 +1406,8 @@ func_192F(param_00, param_01) {
     return;
   }
 
-  self aiclearanim(var_02, 0.2);
-  self aiclearanim(param_00, 0.2);
+  self clearanim(var_02, 0.2);
+  self clearanim(param_00, 0.2);
 }
 
 func_12FB2() {
@@ -1533,10 +1533,10 @@ func_1965(param_00) {
   self _meth_82AC( % lookat_head_base_partial, 1, var_01 * 0.15);
   self _meth_82AC( % head_gesture_look_partial, 1, var_01 * 0.15);
   wait(var_01 * 0.15);
-  self aiclearanim( % lookat_left_right, var_01 * 0.85);
-  self aiclearanim( % lookat_up_down, var_01 * 0.85);
-  self aiclearanim( % lookat_head_base_partial, var_01 * 0.85);
-  self aiclearanim( % head_gesture_look_partial, var_01 * 0.85);
+  self clearanim( % lookat_left_right, var_01 * 0.85);
+  self clearanim( % lookat_up_down, var_01 * 0.85);
+  self clearanim( % lookat_head_base_partial, var_01 * 0.85);
+  self clearanim( % head_gesture_look_partial, var_01 * 0.85);
   self.var_9BFC = undefined;
 }
 
@@ -1686,21 +1686,21 @@ func_2B8B() {
     var_00 notify(var_00.var_6317);
   }
 
-  var_00 aiclearanim(var_00.var_7540, 0.2);
+  var_00 clearanim(var_00.var_7540, 0.2);
   if(isdefined(var_00.var_E512)) {
-    var_00 aiclearanim(var_00.var_E512, 0.2);
+    var_00 clearanim(var_00.var_E512, 0.2);
   }
 
   if(isdefined(var_00.var_AB35)) {
-    var_00 aiclearanim(var_00.var_AB35, 0.2);
+    var_00 clearanim(var_00.var_AB35, 0.2);
   }
 
   if(isdefined(var_00.var_AB54)) {
-    var_00 aiclearanim(var_00.var_AB54, 0.2);
+    var_00 clearanim(var_00.var_AB54, 0.2);
   }
 
   if(isdefined(var_00.var_E52E)) {
-    var_00 aiclearanim(var_00.var_E52E, 0.2);
+    var_00 clearanim(var_00.var_E52E, 0.2);
   }
 
   var_00 _meth_8250(0);

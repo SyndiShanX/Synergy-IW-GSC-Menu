@@ -70,7 +70,7 @@ func_1276F(var_00) {
     var_00 waittill("trigger", var_02);
 
     if(isplayer(var_02)) {
-      var_02 _meth_836F(1, var_01);
+      var_02 setwatersheeting(1, var_01);
       wait(var_01 * 0.2);
     }
   }

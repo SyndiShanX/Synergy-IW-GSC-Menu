@@ -1460,7 +1460,7 @@ func_D2A6(var_00, var_01) {
     var_3.func_4074 = scripts\engine\utility::array_add(var_3.func_4074, var_3.func_B025);
   }
 
-  var_03 _meth_8364("allies");
+  var_03 setvehicleteam("allies");
   var_03 notsolid();
   var_03 thread func_0BDC::func_D29D();
   return var_03;

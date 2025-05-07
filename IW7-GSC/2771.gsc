@@ -337,7 +337,7 @@ runonce_checkpostshiprigprogress() {
       thread giverankxpafterwait(var_02, var_03);
       scripts\mp\matchdata::func_AF99(var_02, var_03);
       func_110AE(var_02);
-      _meth_8358(level.func_3C2C[var_02]["score"][var_03]);
+      setturretfov(level.func_3C2C[var_02]["score"][var_03]);
       thread showchallengesplash(var_02);
     }
   }
@@ -3262,7 +3262,7 @@ func_D991(var_00, var_01, var_02) {
     thread giverankxpafterwait(var_00, var_03);
     scripts\mp\matchdata::func_AF99(var_00, var_03);
     func_110AE(var_00);
-    _meth_8358(level.func_3C2C[var_00]["score"][var_03]);
+    setturretfov(level.func_3C2C[var_00]["score"][var_03]);
     var_3++;
     func_3C06(var_00, var_03);
     self.func_3C2A[var_00] = var_03;
@@ -3338,7 +3338,7 @@ giverankxpafterwait(var_00, var_01) {
   scripts\mp\rank::giverankxp(var_02, var_04, var_03);
 }
 
-_meth_8358(var_00) {
+setturretfov(var_00) {
   var_01 = self getrankedplayerdata("mp", "challengeScore");
   self setrankedplayerdata("mp", "challengeScore", var_01 + var_00);
 }

@@ -162,7 +162,7 @@ func_10D9A() {
 
 func_631A() {
   func_6309();
-  self aiclearanim( % add_fire, 0.1);
+  self clearanim( % add_fire, 0.1);
   self notify("stop tracking");
 }
 
@@ -216,13 +216,13 @@ func_1A3E(param_00) {
     var_02++;
   }
 
-  self aiclearanim( % add_idle, 0.1);
+  self clearanim( % add_idle, 0.1);
 }
 
 func_6309() {
   self notify("end_aim_idle_thread");
   self.a.var_1A3E = undefined;
-  self aiclearanim( % add_idle, 0.1);
+  self clearanim( % add_idle, 0.1);
 }
 
 func_FEFE() {
@@ -271,7 +271,7 @@ func_6D98() {
   for (;;) {
     waittillframeend;
     if(!isdefined(var_00)) {
-      self _meth_837D();
+      self shootstopsound();
       return;
     }
 
@@ -341,7 +341,7 @@ func_6D99(param_00, param_01, param_02, param_03) {
     }
   }
 
-  self _meth_837D();
+  self shootstopsound();
   if(param_02) {
     self notify("fireAnimEnd");
   }
@@ -718,7 +718,7 @@ func_58BA(param_00, param_01, param_02, param_03) {
   self notify("weapon_switch_done");
   self give_attacker_kill_rewards( % exposed_modern, 1, 0.2);
   self give_attacker_kill_rewards( % exposed_aiming, 1);
-  self aiclearanim(param_00, 0.2);
+  self clearanim(param_00, 0.2);
 }
 
 func_13A98(param_00, param_01) {
@@ -1065,7 +1065,7 @@ canspawntestclient() {
   return angleclamp180(var_01);
 }
 
-_meth_8065(param_00) {
+castshadows(param_00) {
   if(!isdefined(param_00)) {
     return 0;
   }
@@ -1199,7 +1199,7 @@ func_DCAD() {
   return randomfloatrange(1, 1.2);
 }
 
-_meth_80B5(param_00) {
+dospawn(param_00) {
   if(param_00.size == 0) {
     return undefined;
   }

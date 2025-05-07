@@ -179,7 +179,7 @@ func_13A1C(param_00) {
       continue;
     }
 
-    var_01 _meth_8363(param_00);
+    var_01 setvehiclelookattext(param_00);
     var_01 playlocalsound("scavenger_pack_pickup");
     if(var_01 scripts\mp\utility::_hasperk("specialty_superpack")) {
       var_01 scripts\mp\missions::func_D991("ch_trait_super_pack");
@@ -189,7 +189,7 @@ func_13A1C(param_00) {
   }
 }
 
-_meth_8363(param_00) {
+setvehiclelookattext(param_00) {
   if(param_00.type == "battery") {
     thread scripts\mp\rank::scoreeventpopup("battery_pack");
     scripts\mp\equipment\battery::func_E83B(param_00.triggerportableradarping);

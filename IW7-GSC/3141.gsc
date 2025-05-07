@@ -172,7 +172,7 @@ func_CEC3(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
 }
@@ -342,7 +342,7 @@ func_CEAD(param_00, param_01, param_02, param_03) {
     var_07 = var_0A - var_0B;
   }
 
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_05, 1, param_02, 1);
   var_0C = var_06[1] - var_08;
   if(isdefined(self.asm.var_11068)) {
@@ -581,7 +581,7 @@ func_CEBB(param_00, param_01, param_02, param_03) {
   thread lib_0F3D::func_136B4(param_00, param_01, param_03);
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
   var_05 = func_7DD5();
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   childthread func_CEBC();
   lib_0A1E::func_231F(param_00, param_01);
@@ -608,7 +608,7 @@ func_CEBC() {
 func_CEB6(param_00, param_01, param_02, param_03) {
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
   var_05 = -1 * self.setocclusionpreset;
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   var_06 = vectortoyaw(var_05);
   var_07 = lib_0C08::func_7E30();
@@ -649,7 +649,7 @@ func_CEAC(param_00, param_01, param_02, param_03) {
   var_0A = var_05 - self.origin;
   var_0B = -1 * var_0A;
   var_0C = vectortoyaw(var_0B);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_07, 1, param_02, 1);
   if(!var_04) {
     self _meth_8396(var_08, self.angles[1]);

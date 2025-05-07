@@ -11,7 +11,7 @@ init() {
   level._effect["dash_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_dash_trail");
 }
 
-_meth_835F() {}
+setusepriority() {}
 
 func_E0E9() {
   self notify("removeDash");

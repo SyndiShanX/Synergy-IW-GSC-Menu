@@ -77,7 +77,7 @@ tryuseremoteuav(var_00, var_01) {
   self setrankedplayerdata("reconDroneState", "staticAlpha", 0);
   self setrankedplayerdata("reconDroneState", "incomingMissile", 0);
   scripts\mp\utility\game::incrementfauxvehiclecount();
-  var_03 = _meth_8355(var_00, var_01);
+  var_03 = setturretanim(var_00, var_01);
 
   if(var_03) {
     scripts\mp\matchdata::logkillstreakevent(var_01, self.origin);
@@ -89,7 +89,7 @@ tryuseremoteuav(var_00, var_01) {
   return var_03;
 }
 
-_meth_8355(var_00, var_01) {
+setturretanim(var_00, var_01) {
   var_02 = func_4994(var_01, self);
   scripts\mp\utility\game::_takeweapon("killstreak_uav_mp");
   scripts\mp\utility\game::_giveweapon("killstreak_remote_uav_mp");

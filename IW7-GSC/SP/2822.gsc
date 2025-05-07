@@ -438,7 +438,7 @@ func_1EAE(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  param_00 _meth_8015(::scripts\anim\animmode::main);
+  param_00 animcustom(::scripts\anim\animmode::main);
 }
 
 func_1EE7(param_00, param_01, param_02, param_03, param_04, param_05) {
@@ -575,7 +575,7 @@ func_1EE8(param_00, param_01, param_02, param_03) {
           ]();
         }
 
-        var_06 _meth_8018(var_09, var_13, var_14, level.var_EC85[var_1F][param_01][var_0B], undefined, var_21, var_20);
+        var_06 animscripted(var_09, var_13, var_14, level.var_EC85[var_1F][param_01][var_0B], undefined, var_21, var_20);
         var_22 = getanimlength(level.var_EC85[var_1F][param_01][var_0B]);
         if(var_22 < var_0E) {
           var_0E = var_22;
@@ -755,7 +755,7 @@ func_1F31(param_00, param_01, param_02, param_03, param_04) {
           var_07 lib_0A1E::func_230A();
         }
 
-        var_07 _meth_8018(var_12, var_0A, var_0B, level.var_EC85[var_1C][param_01], undefined, var_20, var_1D);
+        var_07 animscripted(var_12, var_0A, var_0B, level.var_EC85[var_1C][param_01], undefined, var_20, var_1D);
       }
 
       var_21 = getanimlength(level.var_EC85[var_1C][param_01]);
@@ -829,7 +829,7 @@ func_1F31(param_00, param_01, param_02, param_03, param_04) {
         var_1E = level.var_EC85[var_1C]["root"];
         var_07 give_attacker_kill_rewards(var_1E, 1, 0.2);
         var_1F = level.var_EC85[var_1C][param_01];
-        var_07 aiclearanim(var_1F, 0.2);
+        var_07 clearanim(var_1F, 0.2);
       }
     }
 
@@ -927,8 +927,8 @@ func_CC70(param_00, param_01) {
   param_00 _meth_82AC( % addtive_head_anims, 1, 0.2);
   param_00 _meth_82AC(param_01, 1, 0.2);
   wait(getanimlength(param_01));
-  param_00 aiclearanim( % addtive_head_anims, 0.2);
-  param_00 aiclearanim(param_01, 0.2);
+  param_00 clearanim( % addtive_head_anims, 0.2);
+  param_00 clearanim(param_01, 0.2);
 }
 
 func_1F0E(param_00, param_01, param_02, param_03, param_04) {
@@ -1868,7 +1868,7 @@ func_55C7(param_00) {
 
   if(!isdefined(param_00) || param_00) {
     scripts\sp\utility::func_F6FE("vignette");
-    self aiclearanim(self.var_8C7E, 0.2);
+    self clearanim(self.var_8C7E, 0.2);
     self.facialidx = undefined;
     return;
   }
@@ -1941,7 +1941,7 @@ func_1EBF(param_00, param_01) {
   self give_attacker_kill_rewards(var_05, 5, 0.267);
   func_F5BE(param_00, var_04, var_05);
   var_02 = 0.3;
-  self aiclearanim(var_05, 0.2);
+  self clearanim(var_05, 0.2);
   scripts\sp\utility::func_41AD("filler");
 }
 
@@ -1957,7 +1957,7 @@ func_11497(param_00) {
   func_55C7();
   wait(param_00);
   var_02 = 0.3;
-  self aiclearanim(self.var_EF82, 0.2);
+  self clearanim(self.var_EF82, 0.2);
   func_55C7(0);
 }
 
@@ -2003,7 +2003,7 @@ func_41AC(param_00, param_01, param_02) {
   param_00 waittillmatch("end", param_01);
   param_00 notify("scripted_face_done");
   var_03 = 0.3;
-  param_00 aiclearanim(self.var_EF82, 0.2);
+  param_00 clearanim(self.var_EF82, 0.2);
   func_55C7(0);
 }
 

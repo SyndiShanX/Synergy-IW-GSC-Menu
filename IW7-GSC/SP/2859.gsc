@@ -1002,7 +1002,7 @@ func_6D53(param_00) {
       }
 
       self _meth_82AB(param_00, 1, 0.2, 1);
-      scripts\engine\utility::delaycall(0.15, ::aiclearanim, param_00, 0);
+      scripts\engine\utility::delaycall(0.15, ::clearanim, param_00, 0);
     }
 
     var_05--;
@@ -1732,7 +1732,7 @@ play_looping_breath_sound(param_00, param_01) {
     return;
   }
 
-  self aiclearanim(self.var_1EA4["body"], 0.2);
+  self clearanim(self.var_1EA4["body"], 0.2);
   self givescorefortrophyblocks();
   self _meth_82E4("fakeactor_anim", param_00, self.var_1EA4["body"], 1, 0.2, param_01);
 }
@@ -1743,7 +1743,7 @@ func_CE00(param_00, param_01, param_02, param_03, param_04, param_05) {
     return;
   }
 
-  self aiclearanim(self.var_1EA4["body"], 0.2);
+  self clearanim(self.var_1EA4["body"], 0.2);
   self givescorefortrophyblocks();
   var_06 = "normal";
   if(isdefined(param_01)) {
@@ -1761,7 +1761,7 @@ func_CE00(param_00, param_01, param_02, param_03, param_04, param_05) {
     param_05 = 0.2;
   }
 
-  self _meth_8018("fakeactor_anim", var_07, var_08, param_00, var_06);
+  self animscripted("fakeactor_anim", var_07, var_08, param_00, var_06);
   if(isdefined(param_02)) {
     thread scripts\anim\shared::donotetracks(param_03, param_02);
   }

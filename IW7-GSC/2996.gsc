@@ -220,7 +220,7 @@ func_E058() {
   var_04 = spawn("script_origin", var_03);
   var_04 linkto(self);
   self.cannon _meth_8535(0);
-  self aiclearanim( % veh_mil_air_ca_mons_main_cannon_open, 0);
+  self clearanim( % veh_mil_air_ca_mons_main_cannon_open, 0);
   self give_attacker_kill_rewards( % veh_mil_air_ca_mons_main_cannon_close);
   wait(getanimlength( % veh_mil_air_ca_mons_main_cannon_close));
   self giveperk("tag_main_cannon_hood");

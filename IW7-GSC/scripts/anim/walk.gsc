@@ -48,7 +48,7 @@ func_BD2B() {
 
 func_5AEC(param_00) {
   self endon("movemode");
-  self aiclearanim( % combatrun, 0.6);
+  self clearanim( % combatrun, 0.6);
   self _meth_82A5( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
   if(isarray(self.var_13872)) {
     if(isdefined(self.var_13871)) {

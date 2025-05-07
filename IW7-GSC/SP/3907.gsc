@@ -60,7 +60,7 @@ reload(param_00, param_01, param_02, param_03) {
     self orientmode("face enemy");
   }
 
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   lib_0A1E::func_231F(param_00, param_01);
@@ -82,7 +82,7 @@ func_D56A(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   scripts\sp\gameskill::func_54C4();
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   if(scripts\engine\utility::actor_is3d() && isdefined(self.isnodeoccupied)) {
     self orientmode("face enemy");
   } else {

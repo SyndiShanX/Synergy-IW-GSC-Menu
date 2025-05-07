@@ -96,7 +96,7 @@ func_3559(param_00) {
 func_D4EE(param_00, param_01, param_02, param_03) {
   self.asm.var_2AD2 = 1;
   var_04 = self[[self.var_7191]](param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_231F(param_00, param_01);
 }
@@ -125,7 +125,7 @@ func_3EE4(param_00, param_01, param_02) {
 func_D542(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   self.asm.var_2AD2 = 1;
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, lib_0A1E::asm_getallanimsforstate(param_00, param_01), 1, param_02);
   lib_0A1E::func_231F(param_00, param_01);
 }
@@ -137,7 +137,7 @@ func_CF37(param_00, param_01, param_02, param_03) {
   var_05 = lib_0A1E::func_2356(param_01, "recover");
   var_06 = max(0, self.empstartcallback - getanimlength(var_04) - getanimlength(var_05));
   if(var_06 > 0) {
-    self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+    self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
     self _meth_82AB(lib_0A1E::func_2356(param_01, "stun"), 1, param_02);
     wait(var_06);
   }
@@ -149,7 +149,7 @@ func_CF1C(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   self.asm.var_2AD2 = 1;
   if(!scripts\asm\asm_bb::bb_isselfdestruct() && !isdefined(self.var_30E9) || !self.var_30E9) {
-    self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+    self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
     self _meth_82AB(lib_0A1E::func_2356(param_01, "stun"), 1, param_02);
     wait(level.var_3546);
   }
@@ -227,7 +227,7 @@ func_35D7(param_00, param_01, param_02, param_03) {
   }
 
   playfxontag(level.var_7649["c12_implode_buildup"], self, "j_spinelowerbottom");
-  self aiclearanim(lib_0A1E::func_2342(), param_02);
+  self clearanim(lib_0A1E::func_2342(), param_02);
   self _meth_82EA(param_01, var_05, 1, param_02);
   self endon("terminate_death_thread");
   lib_0A1E::func_231F(param_00, param_01);

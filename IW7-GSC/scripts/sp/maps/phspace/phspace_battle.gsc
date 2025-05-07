@@ -40,7 +40,7 @@ func_104B7(var_00) {
   var_03 = scripts\sp\vehicle::func_1080C(var_00);
   func_0BDC::func_10CD1(var_03);
   level.func_D299 glinton(#animtree);
-  level.func_D299 _meth_8018("", var_2.origin, var_2.angles, level.func_EC85["sled_jackal"]["space_launch_boost"]);
+  level.func_D299 animscripted("", var_2.origin, var_2.angles, level.func_EC85["sled_jackal"]["space_launch_boost"]);
   wait 0.05;
   level.func_D299 _meth_82B0(level.func_EC85["sled_jackal"]["space_launch_boost"], 0.654132);
   wait 0.05;
@@ -2198,8 +2198,8 @@ func_5878() {
 func_A24C(var_00) {
   level.func_EA99 func_0BDC::func_19A2();
   level.func_1CB9 func_0BDC::func_19A2();
-  level.func_EA99 _meth_8018("space_launch_done", var_0.origin, var_0.angles, level.func_EC85["salter_jackal"]["space_launch"]);
-  level.func_1CB9 _meth_8018("space_launch_done", var_0.origin, var_0.angles, level.func_EC85["jackal_ally1"]["space_launch"]);
+  level.func_EA99 animscripted("space_launch_done", var_0.origin, var_0.angles, level.func_EC85["salter_jackal"]["space_launch"]);
+  level.func_1CB9 animscripted("space_launch_done", var_0.origin, var_0.angles, level.func_EC85["jackal_ally1"]["space_launch"]);
   wait 0.05;
   level.func_EA99 _meth_82B0(level.func_EC85["salter_jackal"]["space_launch"], 0.803228);
   level.func_1CB9 _meth_82B0(level.func_EC85["jackal_ally1"]["space_launch"], 0.803228);

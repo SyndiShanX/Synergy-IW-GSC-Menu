@@ -1507,8 +1507,8 @@ func_2A46(param_00) {
     }
 
     if(param_00 == "flying") {
-      level.player _meth_8014(1);
-      level.player _meth_800E(0);
+      level.player allowswim(1);
+      level.player allowlean(0);
       level.player scripts\engine\utility::allow_crouch(0);
       level.player _meth_818A();
       level.var_880A thread func_E0E3();
@@ -2458,8 +2458,8 @@ func_2A47(param_00) {
 
     level.player scripts\engine\utility::delaythread(3, ::func_B2B5);
     level.player giveperkoffhand();
-    level.player _meth_8014(0);
-    level.player _meth_800E(1);
+    level.player allowswim(0);
+    level.player allowlean(1);
     level.player thermalvisionoff();
     level.player scripts\engine\utility::allow_sprint(1);
     level.player scripts\engine\utility::allow_melee(0);

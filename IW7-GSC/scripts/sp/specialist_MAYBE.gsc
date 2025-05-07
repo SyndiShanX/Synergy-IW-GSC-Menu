@@ -1190,10 +1190,10 @@ func_8E05() {
     level.var_10964.helmet notsolid();
   }
 
-  level.player _meth_8024(0.25, 0);
+  level.player blendlinktoplayerviewmotion(0.25, 0);
   level.var_10964.helmet show();
   level.var_10964.helmet glinton(#animtree);
-  level.var_10964.helmet aiclearanim( % vm_gesture_visor_up_visor, 0);
+  level.var_10964.helmet clearanim( % vm_gesture_visor_up_visor, 0);
   level.var_10964.helmet give_attacker_kill_rewards( % vm_gesture_visor_down_visor);
   thread lib_0E4B::func_8DE2();
   level.player playsound("plr_helmet_visor_on");
@@ -1205,7 +1205,7 @@ func_8E05() {
   wait(getanimlength( % vm_gesture_visor_down_visor));
   func_F3FF(1);
   level.var_10964.var_8E1B = 0;
-  level.player _meth_8024(0.25, 1);
+  level.player blendlinktoplayerviewmotion(0.25, 1);
 }
 
 specialist_helmet_on_immediate() {
@@ -1213,7 +1213,7 @@ specialist_helmet_on_immediate() {
   level.var_10964.helmet setmodel("vm_hero_protagonist_helmet");
   level.var_10964.helmet _meth_81E2(level.player, "tag_playerhelmet", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
   level.var_10964.helmet notsolid();
-  level.player _meth_8024(0.25, 0);
+  level.player blendlinktoplayerviewmotion(0.25, 0);
   func_F3FF(1);
 }
 

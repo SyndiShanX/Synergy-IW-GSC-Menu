@@ -431,7 +431,7 @@ func_A32A() {
 
   func_0BDC::func_A144();
   self setmodel(level.vehicle.func_116CE.func_13265[self.classname].func_D375);
-  self _meth_80B3();
+  self dontcastshadows();
   _setsaveddvar("r_playerShadowProxy0Params", "0 0 0 0");
   _setsaveddvar("r_playerShadowProxy1Params", "0 0 0 0");
 }
@@ -443,7 +443,7 @@ func_A0F9() {
 
 func_A330() {
   self setmodel(level.vehicle.func_116CE.func_13265[self.classname].func_13DCB);
-  self _meth_8065();
+  self castshadows();
   _setsaveddvar("r_playerShadowProxy0Params", "0 0 0 4");
   _setsaveddvar("r_playerShadowProxy1Params", "0 0 -8 4");
   func_0BDC::func_A0AF();
@@ -1696,7 +1696,7 @@ func_BBD9() {
 }
 
 func_BBDA() {
-  self aiclearanim( % root, 0.0);
+  self clearanim( % root, 0.0);
   scripts\engine\utility::delaythread(0.1, func_0BDC::func_A334);
   func_F919(1);
   level.player _meth_818A();
@@ -1739,7 +1739,7 @@ spawn_jackal_mip_buffer(var_00) {
   var_02 = level.player.origin + anglestoforward(level.player.angles) * var_01;
   level.func_A056.mip_buffer_model = spawn("script_model", var_02);
   level.func_A056.mip_buffer_model setmodel(var_00);
-  level.func_A056.mip_buffer_model _meth_80B3();
+  level.func_A056.mip_buffer_model dontcastshadows();
   level.func_A056.mip_buffer_model notsolid();
   level.func_A056.mip_buffer_model thread jackal_mip_buffer_offscreen(var_01);
 }

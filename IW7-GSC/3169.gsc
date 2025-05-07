@@ -7,7 +7,7 @@
 func_D490(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self animmode("zonly_physics");
   if(isdefined(self.objective_position) && distancesquared(self.objective_position.origin, self.origin) > 36) {
     self orientmode("face angle", vectortoyaw(self.objective_position.origin - self.origin));

@@ -1367,7 +1367,7 @@ dropscavengerfordeath(var_00, var_01) {
   if(var_00 == self) {
     return;
   }
-  var_02 = self _meth_80B9("scavenger_bag_mp");
+  var_02 = self dropscavengerbag("scavenger_bag_mp");
 
   if(!isdefined(var_02)) {
     return;
@@ -6487,7 +6487,7 @@ watchaxeuse(var_00, var_01) {
   var_02 setusefov(360);
   var_02 _meth_84A4(64);
   var_02 setuserange(64);
-  var_02 _meth_835F(0);
+  var_02 setusepriority(0);
   thread watchallplayerphasestates(var_02);
   var_02 waittill("trigger", var_00);
   var_00 playerpickupaxe(var_01, 0);

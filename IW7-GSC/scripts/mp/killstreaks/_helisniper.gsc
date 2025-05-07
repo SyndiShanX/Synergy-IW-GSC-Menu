@@ -274,7 +274,7 @@ func_C53A(param_00) {
     func_52CD();
   }
 
-  param_00 thread _meth_835D();
+  param_00 thread setturrettargetvec();
   param_00 givelastonteamwarning(1, 1, 1, 0.1);
   param_00 notify("picked_up_passenger");
   scripts\engine\utility::allow_usability(1);
@@ -728,7 +728,7 @@ func_A576() {
   }
 }
 
-_meth_835D() {
+setturrettargetvec() {
   level endon("game_ended");
   self endon("death");
   self endon("crashing");

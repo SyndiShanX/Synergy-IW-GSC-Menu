@@ -600,7 +600,7 @@ cratesetupforuse(param_00, param_01, param_02, param_03) {
   self _meth_84A7("none");
   self makeusable();
   if(isdefined(param_03)) {
-    self _meth_835F(param_03);
+    self setusepriority(param_03);
   }
 
   if(scripts\mp\utility::istrue(param_02)) {
@@ -684,7 +684,7 @@ fakererollcratesetupforuse(param_00, param_01) {
   var_08 setusefov(var_06);
   var_08 _meth_84A4(var_03);
   var_08 setuserange(var_05);
-  var_08 _meth_835F(var_07);
+  var_08 setusepriority(var_07);
   var_08 thread deleteuseent(self);
   self.fakeuseobj = var_08;
 }

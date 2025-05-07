@@ -166,15 +166,15 @@ func_3EA4(param_00, param_01, param_02) {
     var_04 = scripts\asm\shared_utility::getnodeforwardyaw(var_03);
     var_05 = angleclamp(var_04 - var_03.angles[1]);
     var_06 = angleclamp(self.angles[1] - var_03.angles[1]);
-    var_07 = _meth_812C(var_05);
-    var_08 = _meth_812C(var_06);
+    var_07 = getguid(var_05);
+    var_08 = getguid(var_06);
     var_09 = var_08 + "_to_" + var_07;
     var_0A = scripts\asm\asm::asm_lookupanimfromalias(param_01, var_09);
     return var_0A;
   }
 }
 
-_meth_812C(param_00) {
+getguid(param_00) {
   var_01 = 8;
   if(param_00 > 45 && param_00 <= 135) {
     var_01 = 4;
@@ -337,7 +337,7 @@ func_CEAA(param_00, param_01, param_02, param_03) {
   }
 
   lib_0A1E::func_2369(param_00, param_01, var_05.getgrenadedamageradius);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   var_12 = 1;
   if(isdefined(var_10)) {
     var_13 = length(var_05.stricmp);

@@ -1469,7 +1469,7 @@ func_3895(param_00) {
   }
 
   if(self.cancontestclaim) {
-    var_01 = _meth_8019(param_00.pers["team"]);
+    var_01 = animscriptedthirdperson(param_00.pers["team"]);
     if(var_01 != 0) {
       return 0;
     }
@@ -1675,7 +1675,7 @@ migrationcapturereset(param_00) {
   self.migrationcapturereset = undefined;
 }
 
-_meth_8019(param_00) {
+animscriptedthirdperson(param_00) {
   return self.numtouching[scripts\mp\utility::getotherteam(param_00)];
 }
 

@@ -58,7 +58,7 @@ func_A2B2(param_00, param_01, param_02) {
   self.ignoreme = 1;
   self remotecontrolvehicle(param_00);
   param_00 makeentitysentient(self.team, 0);
-  param_00 _meth_8364(self.team);
+  param_00 setvehicleteam(self.team);
   if(isdefined(param_01)) {
     self.var_E473 = self getorigin();
     self setorigin(param_01);

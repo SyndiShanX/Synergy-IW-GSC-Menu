@@ -239,7 +239,7 @@ func_5EF5(param_00, param_01) {
   }
 
   var_04 = var_02 + var_03;
-  self _meth_80BA(var_04, param_01, 0);
+  self dropweapon(var_04, param_01, 0);
   self endon("end_weapon_drop_" + param_01);
   wait(0.05);
   if(!isdefined(self)) {
@@ -299,10 +299,10 @@ _meth_8064() {
       return 0;
     }
 
-    return scripts\anim\combat_utility::_meth_8065(self.var_FECF);
+    return scripts\anim\combat_utility::castshadows(self.var_FECF);
   }
 
-  return scripts\anim\combat_utility::_meth_8065(self.var_FE9E getshootatpos());
+  return scripts\anim\combat_utility::castshadows(self.var_FE9E getshootatpos());
 }
 
 _meth_811C() {

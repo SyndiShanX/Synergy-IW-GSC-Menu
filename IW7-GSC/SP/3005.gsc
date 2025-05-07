@@ -168,7 +168,7 @@ func_5DB7(param_00) {
       break;
   }
 
-  self aiclearanim(var_01, 0.05);
+  self clearanim(var_01, 0.05);
   self give_attacker_kill_rewards(var_02);
 }
 
@@ -459,7 +459,7 @@ func_CD70(param_00, param_01, param_02) {
     self.var_1FEB thread scripts\sp\anim::func_1F35(self, param_01);
   } else {
     var_03 = getanimlength(param_01);
-    self _meth_8018("single anim", self.origin, self.angles, param_01);
+    self animscripted("single anim", self.origin, self.angles, param_01);
   }
 
   if(!isdefined(param_02)) {

@@ -221,7 +221,7 @@ func_7E3C(param_00, param_01) {
     }
   }
 
-  return scripts\anim\combat_utility::_meth_80B5(var_04);
+  return scripts\anim\combat_utility::dospawn(var_04);
 }
 
 func_7E03() {
@@ -315,7 +315,7 @@ func_3C5D() {
     self waittillmatch("end", "changeStepOutPos");
   }
 
-  self aiclearanim(var_02, 0.1);
+  self clearanim(var_02, 0.1);
   self.a.var_4667 = var_00;
   self.var_3C60 = 0;
   self.var_4740 = gettime();
@@ -375,10 +375,10 @@ func_3C50(param_00, param_01, param_02) {
 
 func_1105C(param_00) {
   self.var_4662 = 0;
-  self aiclearanim( % add_fire, param_00);
+  self clearanim( % add_fire, param_00);
   scripts\anim\track::func_F641(0, param_00);
   self.facialidx = undefined;
-  self aiclearanim( % head, 0.2);
+  self clearanim( % head, 0.2);
 }
 
 func_F637(param_00, param_01, param_02) {
@@ -522,8 +522,8 @@ func_10F89() {
   }
 
   func_3C50(undefined, 1, 0.2);
-  self aiclearanim( % cover, 0.1);
-  self aiclearanim( % corner, 0.1);
+  self clearanim( % cover, 0.1);
+  self clearanim( % corner, 0.1);
   self.var_3C60 = 0;
   self.var_4740 = gettime();
   self.closefile = 1;
@@ -661,7 +661,7 @@ shootastold() {
       }
 
       func_FEE0(1);
-      self aiclearanim( % add_fire, 0.2);
+      self clearanim( % add_fire, 0.2);
     }
 
     if(canreturntocover(self.a.var_4667 != "lean")) {
@@ -758,9 +758,9 @@ func_E47A() {
 
   var_04 = func_10F8A();
   if(scripts\engine\utility::actor_is3d()) {
-    self aiclearanim( % exposed_modern, 0.2);
+    self clearanim( % exposed_modern, 0.2);
   } else {
-    self aiclearanim( % body, 0.1);
+    self clearanim( % body, 0.1);
   }
 
   self _meth_82EA("hide", var_02, 1, 0.1, var_04);
@@ -780,7 +780,7 @@ func_E47A() {
   }
 
   self.sendmatchdata = 0;
-  self aiclearanim(var_02, 0.2);
+  self clearanim(var_02, 0.2);
 }
 
 func_2B99() {
@@ -938,7 +938,7 @@ func_4668() {
   self notify("abort_reload");
   scripts\anim\weaponlist::refillclip();
   self give_capture_credit(scripts\anim\utility::func_1F64("alert_idle"), 1, 0.2);
-  self aiclearanim(var_00, 0.2);
+  self clearanim(var_00, 0.2);
   return 1;
 }
 
@@ -1235,5 +1235,5 @@ func_465D(param_00) {
 
 func_465B() {
   self.facialidx = undefined;
-  self aiclearanim( % head, 0.2);
+  self clearanim( % head, 0.2);
 }

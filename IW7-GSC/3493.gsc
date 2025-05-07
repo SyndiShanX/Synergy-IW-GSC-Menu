@@ -52,7 +52,7 @@ func_128EA(var_00) {
   if(isdefined(self.func_9382))
     var_01 = self.func_9382;
 
-  var_02 = _meth_836E("ims", var_00);
+  var_02 = setwaitspeed("ims", var_00);
 
   if(!isdefined(var_02)) {
     var_02 = 0;
@@ -73,7 +73,7 @@ func_128EA(var_00) {
   return var_02;
 }
 
-_meth_836E(var_00, var_01) {
+setwaitspeed(var_00, var_01) {
   var_02 = createimsforplayer(var_00, self);
   var_1.func_9380 = var_02;
   removeperks();

@@ -63,7 +63,7 @@ func_CF03(param_00, param_01, param_02, param_03) {
 func_4756(param_00, param_01, param_02) {
   self.asm.var_58EC = 0;
   var_03 = lib_0A1E::func_2356(param_01, "aim_knob");
-  self aiclearanim(var_03, 0.2);
+  self clearanim(var_03, 0.2);
   self _meth_82D0();
   var_04 = self _meth_8164();
   if(isdefined(var_04) && var_04 == self.asm.turret) {
@@ -80,7 +80,7 @@ func_4756(param_00, param_01, param_02) {
 func_4725(param_00, param_01, param_02) {
   self.asm.var_58EC = 0;
   var_03 = lib_0A1E::func_2356(param_01, "aim_knob");
-  self aiclearanim(var_03, 0.2);
+  self clearanim(var_03, 0.2);
   self _meth_82D0();
 }
 
@@ -200,7 +200,7 @@ func_CEAF(param_00, param_01, param_02, param_03) {
   }
 
   self endon(param_01 + "_finished");
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   var_07 = lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));

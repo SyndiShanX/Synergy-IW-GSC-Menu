@@ -477,7 +477,7 @@ func_D20D() {
     level.player getnumberoffrozenticksfromwave(0);
     level.player getnumownedactiveagents(0);
     level.player getnumownedagentsonteambytype(0);
-    level.player _meth_836F(1, 2);
+    level.player setwatersheeting(1, 2);
     level.player thread func_D20C();
 
     while (level.player istouching(self)) {
@@ -1296,7 +1296,7 @@ func_1510(var_00) {
 func_150B() {
   self.disabled = 1;
   self notify("aatis_turret_disabled");
-  self aiclearanim( % ph_aatis_gun_fire, 0.05);
+  self clearanim( % ph_aatis_gun_fire, 0.05);
   self cleartargetentity();
 }
 
@@ -1392,7 +1392,7 @@ func_150C(var_00) {
   self endon("death");
   self endon("aatis_turret_disabled");
   self.func_DD7B = undefined;
-  self aiclearanim( % ph_aatis_gun_fire, 0.05);
+  self clearanim( % ph_aatis_gun_fire, 0.05);
   wait 0.05;
   self shootturret();
   self give_attacker_kill_rewards( % ph_aatis_gun_fire);

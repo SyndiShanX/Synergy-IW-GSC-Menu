@@ -18,14 +18,14 @@ func_91E0(param_00, param_01) {
   }
 
   self.var_9DA6 = 0;
-  self _meth_8355(self.primaryturretanim);
+  self setturretanim(self.primaryturretanim);
   self _meth_82AB(self.primaryturretanim, 1, 0.2, 1);
   if(isdefined(self.var_394)) {
     scripts\anim\shared::placeweaponon(self.var_394, "none");
   }
 
   self.var_C584 = 1;
-  self._meth_8020 = ::func_129D3;
+  self.autoboltmissileeffects = ::func_129D3;
   self notify("guy_man_turret_stop");
   param_00 notify("stop_burst_fire_unmanned");
   param_00.var_12A94 = "start";
@@ -34,7 +34,7 @@ func_91E0(param_00, param_01) {
   param_00 give_player_session_tokens("sentry");
   param_00 setsentryowner(self);
   param_00 setdefaultdroppitch(0);
-  param_00 _meth_8356(0);
+  param_00 setturretcanaidetach(0);
   func_8713();
   level thread func_8903(self, param_00);
   level thread func_8902(self, param_00);
@@ -108,7 +108,7 @@ func_129D3() {
     self.var_12A92 = undefined;
     self.var_12A7F = undefined;
     self.var_C584 = undefined;
-    self._meth_8020 = undefined;
+    self.autoboltmissileeffects = undefined;
     self _meth_83AF();
     if(isdefined(self.var_394)) {
       scripts\anim\shared::placeweaponon(self.var_394, "right");
@@ -129,9 +129,9 @@ func_129D2(param_00, param_01) {
   param_01 cleartargetentity();
   param_01 setdefaultdroppitch(param_01.var_4FEA);
   if(isdefined(param_00)) {
-    param_00 aiclearanim(param_00.var_17E6, 0);
-    param_00 aiclearanim(param_00.var_17E0, 0);
-    param_00 aiclearanim(param_00.var_12A93, 0);
+    param_00 clearanim(param_00.var_17E6, 0);
+    param_00 clearanim(param_00.var_17E0, 0);
+    param_00 clearanim(param_00.var_12A93, 0);
   }
 
   param_01.var_6D6F = undefined;
@@ -210,7 +210,7 @@ func_8716(param_00) {
           wait(0.05);
         }
 
-        self aiclearanim(self.var_17E0, var_02);
+        self clearanim(self.var_17E0, var_02);
       }
     }
   }
@@ -243,7 +243,7 @@ func_873F(param_00, param_01, param_02, param_03) {
   var_06 = param_00 gettagangles(var_04.var_10220);
   param_02 setdefaultdroppitch(0);
   param_02 thread func_129C2(param_02.var_C937);
-  self _meth_8018("passenger2turret", var_05, var_06, param_03);
+  self animscripted("passenger2turret", var_05, var_06, param_03);
   wait(getanimlength(param_03));
   self givescorefortrophyblocks();
   param_02 func_129BC();
@@ -252,13 +252,13 @@ func_873F(param_00, param_01, param_02, param_03) {
 
 func_129C2(param_00) {
   if(isdefined(self.var_92F3)) {
-    self aiclearanim(self.var_92F3, 0);
+    self clearanim(self.var_92F3, 0);
     self.var_92F3 = undefined;
   }
 
   self _meth_82E7("minigun_turret", param_00, 1, 0, 1);
   self waittillmatch("end", "minigun_turret");
-  self aiclearanim(param_00, 0);
+  self clearanim(param_00, 0);
 }
 
 func_129C3(param_00) {
@@ -519,7 +519,7 @@ func_57FB(param_00, param_01, param_02) {
     }
   }
 
-  self aiclearanim(self.var_12A93, 0.2);
+  self clearanim(self.var_12A93, 0.2);
   self _meth_82AC(self.primaryturretanim, 1);
   self _meth_82AC(self.var_17E6, 1);
   if(isdefined(param_02) && param_02) {

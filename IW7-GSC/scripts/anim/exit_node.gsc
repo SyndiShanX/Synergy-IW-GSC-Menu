@@ -310,7 +310,7 @@ func_5926(param_00, param_01) {
   self orientmode("face motion");
   self animmode("none", 0);
   func_6CD5("coverexit");
-  self aiclearanim( % root, 0.2);
+  self clearanim( % root, 0.2);
   self orientmode("face default");
   self animmode("normal", 0);
 }
@@ -371,7 +371,7 @@ custommovetransition() {
     var_01 = 0.2;
   }
 
-  self aiclearanim( % root, var_01);
+  self clearanim( % root, var_01);
   self orientmode("face default");
   self animmode("none", 0);
 }

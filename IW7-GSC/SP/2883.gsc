@@ -832,7 +832,7 @@ func_CD4F(param_00, param_01) {
 }
 
 func_4179() {
-  self aiclearanim( % body, 0.2);
+  self clearanim( % body, 0.2);
 }
 
 func_9C3D(param_00, param_01) {
@@ -902,7 +902,7 @@ func_9A13() {
     self _meth_82E1(var_01, var_07, 1, var_02);
     var_0D = getanimlength(var_07);
     wait(var_0D);
-    self aiclearanim(var_07, var_03);
+    self clearanim(var_07, var_03);
     level notify("interaction_done");
     self notify("interaction_done");
   }
@@ -1114,7 +1114,7 @@ func_9A11() {
               self.var_F274 = 1;
               scripts\sp\utility::func_65DD("scene_end");
               self.var_1F25 = self.var_1F25 + 1;
-              self aiclearanim(var_1A, 0.15);
+              self clearanim(var_1A, 0.15);
               self.var_9C84 = 0;
               break;
             }
@@ -1162,8 +1162,8 @@ func_9A11() {
           if(isarray(self.var_B004["diff"])) {
             if(self.var_1F25 < self.var_B004["diff"].size) {
               scripts\sp\utility::func_65DD("scene_end");
-              self aiclearanim(self.var_B004["follow"], 0.1);
-              self aiclearanim(self.var_B004["ring"], 0.1);
+              self clearanim(self.var_B004["follow"], 0.1);
+              self clearanim(self.var_B004["ring"], 0.1);
               self.var_1F25 = self.var_1F25 + 1;
               self.var_9C84 = 0;
             }
@@ -1207,8 +1207,8 @@ func_9A11() {
           if(isarray(self.var_B004["diff"])) {
             if(self.var_1F25 < self.var_B004["diff"].size) {
               scripts\sp\utility::func_65DD("scene_end");
-              self aiclearanim(self.var_B004["follow"], 0.1);
-              self aiclearanim(self.var_B004["ring"], 0.1);
+              self clearanim(self.var_B004["follow"], 0.1);
+              self clearanim(self.var_B004["ring"], 0.1);
               self.var_1F25 = self.var_1F25 + 1;
               self.var_9C84 = 0;
             }
@@ -1271,17 +1271,17 @@ func_9A11() {
         if(var_10 >= 90 && !var_25 && !scripts\sp\utility::func_65DB("playing_interaction")) {
           var_25 = 1;
           func_10C47(self.var_B004["reacquire_right"]);
-          self aiclearanim( % body, 0.25);
+          self clearanim( % body, 0.25);
           self _meth_82EA(var_01, self.var_B004["reacquire_right"], 1, 0.25);
           wait(clamp(getanimlength(self.var_B004["reacquire_right"]) - 0.25, 0, 100));
-          self aiclearanim(self.var_B004["reacquire_right"], 0.25);
+          self clearanim(self.var_B004["reacquire_right"], 0.25);
         } else if(var_10 < -90 && !var_25 && !scripts\sp\utility::func_65DB("playing_interaction")) {
           var_25 = 1;
           func_10C47(self.var_B004["reacquire_left"]);
-          self aiclearanim( % body, 0.25);
+          self clearanim( % body, 0.25);
           self _meth_82EA(var_01, self.var_B004["reacquire_left"], 1, 0.25);
           wait(clamp(getanimlength(self.var_B004["reacquire_left"]) - 0.25, 0, 100));
-          self aiclearanim(self.var_B004["reacquire_left"], 0.25);
+          self clearanim(self.var_B004["reacquire_left"], 0.25);
         } else {
           func_F5CD(self.var_B004["follow"], var_1B);
         }
@@ -1578,7 +1578,7 @@ func_9A35() {
         var_1C = self.var_F273 + self.var_F275 + getanimlength(var_13);
         var_1D = clamp(var_1B, 0, var_1C);
         wait(var_1D);
-        self aiclearanim(var_13, 0.1);
+        self clearanim(var_13, 0.1);
         self.var_9C84 = 0;
       } else {
         self.var_9C84 = 0;
@@ -1916,8 +1916,8 @@ func_9842() {
   level thread scripts\sp\interaction_manager::func_9A0E(self);
   self _meth_82AC(self.var_B004["interaction_blend_parent"], 1, 0.2);
   var_01 = func_7A4C();
-  self aiclearanim(var_01, 0.2);
-  self aiclearanim( % head, 0.2);
+  self clearanim(var_01, 0.2);
+  self clearanim( % head, 0.2);
   func_10C47(self.var_B004["fwd_anim"]);
   self _meth_82E8("single anim", self.var_B004["fwd_anim"], 0.005, 0.05);
   self _meth_82AC(self.var_B004["right_anim"], 0.005, 0.05);
@@ -1928,11 +1928,11 @@ func_9842() {
 
 func_62AB(param_00) {
   self.var_DD3C = undefined;
-  self aiclearanim(self.var_B004["fwd_anim"], param_00);
-  self aiclearanim(self.var_B004["right_anim"], param_00);
-  self aiclearanim(self.var_B004["left_anim"], param_00);
-  self aiclearanim(self.var_B004["back_right_anim"], param_00);
-  self aiclearanim(self.var_B004["back_left_anim"], param_00);
+  self clearanim(self.var_B004["fwd_anim"], param_00);
+  self clearanim(self.var_B004["right_anim"], param_00);
+  self clearanim(self.var_B004["left_anim"], param_00);
+  self clearanim(self.var_B004["back_right_anim"], param_00);
+  self clearanim(self.var_B004["back_left_anim"], param_00);
   level notify("interaction_done");
   self notify("interaction_done");
   self.var_9C84 = 0;
@@ -2036,7 +2036,7 @@ func_101F9() {
       thread func_1403(var_0B);
     }
 
-    self aiclearanim(var_03, 0.2);
+    self clearanim(var_03, 0.2);
     if(isdefined(self.var_C6B9)) {
       func_13CA(self.var_C6B9, var_0A);
     }
@@ -2045,7 +2045,7 @@ func_101F9() {
     self give_left_powers("single anim", var_0A, 1, 0.2, 1);
     thread lib_0C4C::func_19BD();
     wait(getanimlength(var_0A));
-    self aiclearanim(var_0A, 0.2);
+    self clearanim(var_0A, 0.2);
     if(isdefined(self.var_C6B7)) {
       thread func_1402();
     }
@@ -2074,7 +2074,7 @@ func_1403(param_00) {
   self endon("stop_reaction");
   self endon("reaction_end");
   self.var_C6B7 glinton(#animtree);
-  self.var_C6B7 aiclearanim(self.var_C6B7.var_4B31, 0.2);
+  self.var_C6B7 clearanim(self.var_C6B7.var_4B31, 0.2);
   self.var_C6B7 setanimknob(param_00, 1, 0.2, 1);
   self.var_C6B7.var_4B31 = param_00;
 }
@@ -2093,7 +2093,7 @@ func_1402() {
   self endon("stop_reaction");
   self endon("reaction_end");
   self.var_C6B7 glinton(#animtree);
-  self.var_C6B7 aiclearanim(self.var_C6B7.var_4B31, 0.2);
+  self.var_C6B7 clearanim(self.var_C6B7.var_4B31, 0.2);
 }
 
 func_CC8B(param_00, param_01) {
@@ -2123,7 +2123,7 @@ func_1368() {
           wait(lookupsoundlength(var_03) / 1000);
           self notify("single dialogue");
           if(isdefined(self.var_EF82)) {
-            self aiclearanim(self.var_EF82, 0.2);
+            self clearanim(self.var_EF82, 0.2);
           }
         }
       }
@@ -2137,7 +2137,7 @@ func_1368() {
       wait(lookupsoundlength(var_03) / 1000);
       self notify("single dialogue");
       if(isdefined(self.var_EF82)) {
-        self aiclearanim(self.var_EF82, 0.2);
+        self clearanim(self.var_EF82, 0.2);
       }
     }
   }
@@ -2406,7 +2406,7 @@ func_DC7D() {
     }
 
     self.var_DC80 = 0;
-    self aiclearanim(var_09, 0.3);
+    self clearanim(var_09, 0.3);
     self.var_9C83 = undefined;
     func_10C47(var_04);
     self give_left_powers("single anim", var_04, 1, 0.2, 1);
@@ -2510,7 +2510,7 @@ func_DC7E() {
     }
 
     self.var_DC80 = 0;
-    self aiclearanim(var_09, 0.3);
+    self clearanim(var_09, 0.3);
     self.var_9C83 = undefined;
     func_10C47(var_03);
     self give_left_powers("single anim", var_03, 1, 0.2, 1);
@@ -2845,7 +2845,7 @@ func_43DB() {
   self _meth_82AC( % cover, 0, 0.25, 1);
   self _meth_82E3("vo", var_08, % body, 1, 0.25, 1);
   wait(getanimlength(var_08));
-  self aiclearanim( % scripted, 0.25);
+  self clearanim( % scripted, 0.25);
   self _meth_82AC( % cover, 1, 0.25, 1);
   self.var_9C84 = 0;
   wait(0.25);

@@ -20,7 +20,7 @@ func_D55D(param_00, param_01, param_02, param_03) {
   thread func_11661(var_06 - param_03);
   param_02 = 0.15;
   var_07 = lib_0A1E::asm_getbodyknob();
-  self aiclearanim(var_07, param_02);
+  self clearanim(var_07, param_02);
   self _meth_82E7(param_01, var_04, 1, param_02, 1);
   var_08 = 0.2;
   var_09 = 0.2;
@@ -81,7 +81,7 @@ func_D566(param_00, param_01, param_02, param_03) {
     self _meth_83B9(self.target_getindexoftarget.origin);
   } else {
     self.a.movement = "run";
-    self aiclearanim(var_04, 0.2);
+    self clearanim(var_04, 0.2);
   }
 
   self.var_126DD = undefined;
@@ -97,7 +97,7 @@ func_D55C(param_00, param_01, param_02, param_03) {
   self animmode("noclip");
   var_05 = self getspectatepoint();
   self orientmode("face angle", var_05.angles[1]);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_231F(param_00, param_01);
   func_11701(param_00, param_01);
@@ -269,7 +269,7 @@ func_D55E(param_00, param_01, param_02, param_03) {
   var_0C = 1.63;
   self linkto(var_0B);
   var_0D = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), 0.2);
+  self clearanim(lib_0A1E::asm_getbodyknob(), 0.2);
   lib_0A1E::func_2369(param_00, param_01, var_0D);
   self _meth_82EA(param_01, var_0D, 1, param_02, 1);
   thread func_126D1(param_00, param_01);
@@ -303,7 +303,7 @@ func_D565(param_00, param_01, param_02, param_03) {
   var_09 = getmovedelta(var_07);
   var_0A = length(var_09) / var_08;
   var_0B = var_06 / var_0A;
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_07, 1, param_02, 1);
   wait(var_0B);
   func_11701(param_00, param_01);
@@ -750,7 +750,7 @@ func_D5CF(param_00, param_01, param_02, param_03) {
   var_08 = self.var_138C1 - var_07;
   var_09 = (0, var_08, 0);
   self _meth_80F1(self.origin, var_09);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   var_0A = lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
@@ -1179,7 +1179,7 @@ func_D55B(param_00, param_01, param_02, param_03) {
   self.a.var_22E5 = param_01;
   self.var_36A = 1;
   self _meth_8396(var_11, var_12, var_0B);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   lib_0A1E::func_231F(param_00, param_01, scripts\asm\asm::func_2341(param_00, param_01));
@@ -1386,7 +1386,7 @@ func_FAF7() {
 func_126CE(param_00, param_01, param_02, param_03) {
   self endon(param_01 + "_finished");
   var_04 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self animmode("noclip", 0);
   var_05 = self getspectatepoint();
   self orientmode("face angle", var_05.angles[1]);

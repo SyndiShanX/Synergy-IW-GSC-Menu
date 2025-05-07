@@ -39,7 +39,7 @@ func_5AD2() {
   var_05.angles = var_00.angles;
   self orientmode("face angle", var_00.angles[1]);
   var_06 = 1.63;
-  self aiclearanim( % body, 0.2);
+  self clearanim( % body, 0.2);
   self _meth_82E7("traverseAnim", % traverse_doublejump, 1, 0.2, 1);
   childthread func_11629(var_05);
   thread scripts\anim\shared::donotetracks("traverseAnim", ::scripts\anim\traverse\shared::func_89F8);

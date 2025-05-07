@@ -15,7 +15,7 @@ func_95F3() {
   scripts\engine\utility::add_func_ref_MAYBE("setanimtime", ::_meth_82B0);
   scripts\engine\utility::add_func_ref_MAYBE("getanimtime", ::getscoreinfocategory);
   scripts\engine\utility::add_func_ref_MAYBE("getanimlength", ::getanimlength);
-  scripts\engine\utility::add_func_ref_MAYBE("clearanim", ::aiclearanim);
+  scripts\engine\utility::add_func_ref_MAYBE("clearanim", ::clearanim);
   scripts\engine\utility::add_func_ref_MAYBE("kill", ::_meth_81D0);
   scripts\engine\utility::add_func_ref_MAYBE("magicgrenade", ::magicgrenade);
   scripts\engine\utility::add_func_ref_MAYBE("connectPaths", ::connectpaths);

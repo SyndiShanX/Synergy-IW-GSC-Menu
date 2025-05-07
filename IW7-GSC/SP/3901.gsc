@@ -155,7 +155,7 @@ func_D4E2(param_00, param_01, param_02, param_03) {
 func_2360(param_00, param_01, param_02, param_03, param_04) {
   self endon(param_01 + "_finished");
   var_05 = lib_0A1E::asm_getbodyknob();
-  self aiclearanim(var_05, param_02);
+  self clearanim(var_05, param_02);
   if(isdefined(param_04) && param_04) {
     if(scripts\asm\asm::asm_hasalias("Knobs", "move")) {
       var_06 = lib_0A1E::func_2356("Knobs", "move");
@@ -610,14 +610,14 @@ func_C057(param_00) {
 
 func_CEC0(param_00, param_01, param_02) {
   var_03 = lib_0A1E::func_2356(param_01, "add_fire");
-  self aiclearanim(var_03, 0.2);
-  self _meth_837D();
+  self clearanim(var_03, 0.2);
+  self shootstopsound();
 }
 
 func_CEC1(param_00, param_01, param_02) {
   var_03 = lib_0A1E::func_2356(param_01, "add_idle");
-  self aiclearanim(var_03, 0.2);
-  self _meth_837D();
+  self clearanim(var_03, 0.2);
+  self shootstopsound();
 }
 
 func_FE7E(param_00, param_01, param_02, param_03) {

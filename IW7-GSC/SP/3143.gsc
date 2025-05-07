@@ -15,12 +15,12 @@ func_351B() {
   }
 
   if(var_00 == "right") {
-    self aiclearanim(lib_0A1E::func_2356("aimset_right", "arm_pitch"), 0.2);
-    self aiclearanim(lib_0A1E::func_2356("aimset_right", "arm_rail"), 0.2);
+    self clearanim(lib_0A1E::func_2356("aimset_right", "arm_pitch"), 0.2);
+    self clearanim(lib_0A1E::func_2356("aimset_right", "arm_rail"), 0.2);
   } else {
-    self aiclearanim(lib_0A1E::func_2356("aimset_left", "arm_pitch"), 0.2);
-    self aiclearanim(lib_0A1E::func_2356("aimset_left", "arm_rail"), 0.2);
-    self aiclearanim(lib_0A1E::func_2356("aimset_minigun", "aim_knob"), 0.2);
+    self clearanim(lib_0A1E::func_2356("aimset_left", "arm_pitch"), 0.2);
+    self clearanim(lib_0A1E::func_2356("aimset_left", "arm_rail"), 0.2);
+    self clearanim(lib_0A1E::func_2356("aimset_minigun", "aim_knob"), 0.2);
   }
 
   var_01 = 0.4;
@@ -93,14 +93,14 @@ func_351B() {
     var_09 = lib_0A1E::func_2356(var_06, "hit");
     self _meth_82E7("RodeoHit", var_09, 1, 0.2, 1);
     lib_0A1E::func_231F("rodeo", "RodeoHit", ::func_35EE);
-    self aiclearanim(var_09, 0.2);
+    self clearanim(var_09, 0.2);
     if(var_00 == "left") {
       thread func_35F2(var_02);
       thread func_D404(var_02);
       var_0A = lib_0A1E::func_2356(var_06, "struggle");
       self _meth_82EA("RodeoStruggle", var_0A, 1, 0.2, 1);
       self waittill("struggle_succeeded");
-      self aiclearanim(var_0A, 0.2);
+      self clearanim(var_0A, 0.2);
       thread lib_0F3D::func_50E8(0.2);
     }
 
@@ -141,9 +141,9 @@ func_361A(param_00) {
   var_01 = "aimset_" + param_00;
   var_02 = 0.2;
   var_03 = lib_0A1E::func_2356(var_01, "arm_rail");
-  self aiclearanim(var_03, var_02);
+  self clearanim(var_03, var_02);
   var_03 = lib_0A1E::func_2356(var_01, "arm_pitch");
-  self aiclearanim(var_03, var_02);
+  self clearanim(var_03, var_02);
 }
 
 func_35F1(param_00, param_01, param_02) {
@@ -561,7 +561,7 @@ func_D3F4(param_00, param_01, param_02) {
 
   level.player playsound("double_jump_boost_plr");
   level.player playrumbleonentity("doublejumpboost_start");
-  param_00 _meth_8018(var_03, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_04);
+  param_00 animscripted(var_03, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_04);
   param_00 scripts\anim\shared::donotetracks(var_03, ::func_D403);
 }
 
@@ -573,7 +573,7 @@ func_D3FA(param_00, param_01) {
     var_03 = % titan_c12_rodeo_gun_player_mount;
   }
 
-  param_00 _meth_8018(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_03);
+  param_00 animscripted(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_03);
   param_00 scripts\anim\shared::donotetracks(var_02, ::func_D403);
 }
 
@@ -585,7 +585,7 @@ func_D3F0(param_00, param_01) {
     var_03 = % titan_c12_rodeo_gun_player_hit;
   }
 
-  param_00 _meth_8018(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_03);
+  param_00 animscripted(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_03);
   param_00 scripts\anim\shared::donotetracks(var_02, ::func_D403);
 }
 
@@ -593,7 +593,7 @@ func_D3F2(param_00, param_01) {
   func_E5FE(" --- PlayerRig_HitQuickMiss");
   var_02 = "rodeoQuickMiss";
   if(param_01 == "right") {
-    param_00 _meth_8018(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), % titan_c12_rodeo_player_miss_quick);
+    param_00 animscripted(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), % titan_c12_rodeo_player_miss_quick);
   } else {
     param_00 _meth_82E7(var_02, % titan_c12_rodeo_gun_player_miss_quick);
   }
@@ -605,7 +605,7 @@ func_D3F3(param_00, param_01) {
   func_E5FE(" --- PlayerRig_Idle");
   var_02 = "rodeoIdle";
   if(param_01 == "right") {
-    param_00 _meth_8018(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), % titan_c12_rodeo_player_idle);
+    param_00 animscripted(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), % titan_c12_rodeo_player_idle);
   } else {
     param_00 _meth_82E7(var_02, % titan_c12_rodeo_gun_player_idle);
   }
@@ -616,7 +616,7 @@ func_D3F3(param_00, param_01) {
 func_D404(param_00) {
   func_E5FE(" --- PlayerRig_Struggle");
   var_01 = "rodeoStruggle";
-  param_00 _meth_8018(var_01, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), param_00.var_11169);
+  param_00 animscripted(var_01, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), param_00.var_11169);
   param_00 scripts\anim\shared::donotetracks(var_01, ::func_D403);
 }
 
@@ -629,7 +629,7 @@ func_D3ED(param_00, param_01) {
   }
 
   thread func_D3EF(param_00, param_01, var_03);
-  param_00 _meth_8018(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_03);
+  param_00 animscripted(var_02, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_03);
   param_00 scripts\anim\shared::donotetracks(var_02, ::func_D403);
 }
 
@@ -642,7 +642,7 @@ func_D3F6(param_00, param_01, param_02) {
   }
 
   thread func_D3F7(param_00, param_01, param_02);
-  param_00 _meth_8018(var_03, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_04);
+  param_00 animscripted(var_03, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_04);
   param_00 scripts\anim\shared::donotetracks(var_03, ::func_D403);
 }
 

@@ -61,10 +61,10 @@ watch_dpad() {
     }
   }
 
-  thread _meth_8342(1);
+  thread setsuppressiontime(1);
 }
 
-_meth_8342(var_00, var_01) {
+setsuppressiontime(var_00, var_01) {
   self endon("disconnect");
   scripts\cp\utility::clearlowermessage("msg_power_hint");
   var_02 = func_4A2A(self);
@@ -239,7 +239,7 @@ func_126A1() {
     if(scripts\engine\utility::is_true(var_0.iscarrying)) {
       continue;
     }
-    var_00 thread _meth_8342(0, self.lifespan);
+    var_00 thread setsuppressiontime(0, self.lifespan);
 
     if(isdefined(self.charge_fx))
       self.charge_fx delete();

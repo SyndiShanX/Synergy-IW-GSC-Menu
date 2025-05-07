@@ -25,7 +25,7 @@ func_9BB3() {
 func_E2BB() {
   if(func_9BB3() || isdefined(level.func_1188.func_9392)) {
     level.func_1188.func_9392 = undefined;
-    level.player _meth_807B("deathsdoor");
+    level.player clearpriorityclienttriggeraudiozone("deathsdoor");
     level.player clearsoundsubmix();
 
     if(isdefined(level.func_4E61)) {

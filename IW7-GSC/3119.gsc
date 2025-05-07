@@ -232,7 +232,7 @@ func_CEB9(param_00, param_01, param_02, param_03) {
 
   self orientmode("face angle", var_04);
   var_05 = self[[self.var_7191]](param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_05, 1, param_02, 1);
   thread lib_0A1E::func_231F(param_00, param_01);
   if(animhasnotetrack(var_05, "grenade_left")) {
@@ -257,7 +257,7 @@ func_CEB9(param_00, param_01, param_02, param_03) {
 
 func_CEB8(param_00, param_01, param_02, param_03) {
   var_04 = self[[self.var_7191]](param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82EA(param_01, var_04, 1, param_02, 1);
 }
 

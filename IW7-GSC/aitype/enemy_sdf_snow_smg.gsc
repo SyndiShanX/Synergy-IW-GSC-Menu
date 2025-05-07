@@ -28,7 +28,7 @@ main() {
 }
 
 spawner() {
-  self _meth_833A("axis");
+  self setspawnerteam("axis");
 }
 
 precache() {

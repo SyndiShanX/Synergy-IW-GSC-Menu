@@ -68,7 +68,7 @@ func_468A() {
     self.var_10E6D.var_4686 = gettime() + 1000;
   }
 
-  var_00 = getcorpsearrayinradius();
+  var_00 = getcorpsearray();
   var_01 = undefined;
   var_02 = undefined;
   foreach(var_04 in var_00) {

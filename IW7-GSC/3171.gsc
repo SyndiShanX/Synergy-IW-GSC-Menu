@@ -80,7 +80,7 @@ func_5F73(param_00) {
 
 func_FA8D(param_00, param_01) {
   var_02 = lib_0A1E::func_2356(param_00, "clear_knob");
-  self aiclearanim(var_02, param_01);
+  self clearanim(var_02, param_01);
   if(isdefined(self.a.var_29D4)) {
     return;
   }
@@ -256,7 +256,7 @@ func_CF2A(param_00, param_01, param_02, param_03) {
   }
 
   var_05 = lib_0A1E::asm_getallanimsforstate(param_00, param_01);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_05, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_05);
   for (var_06 = 0; var_06 < var_04; var_06++) {
@@ -377,7 +377,7 @@ func_D541(param_00, param_01, param_02, param_03) {
 
   var_07 = getmovedelta(var_06);
   var_08 = randomintrange(1, 3);
-  self aiclearanim(lib_0A1E::asm_getbodyknob(), param_02);
+  self clearanim(lib_0A1E::asm_getbodyknob(), param_02);
   self _meth_82E7(param_01, var_04, 1, param_02, 1);
   lib_0A1E::func_2369(param_00, param_01, var_04);
   while (var_08 > 0) {

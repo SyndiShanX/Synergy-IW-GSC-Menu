@@ -22,7 +22,7 @@ func_10D76(param_00) {
   self allowcrouch(0);
   self allowprone(0);
   self allowdoublejump(0);
-  self _meth_800E(0);
+  self allowlean(0);
   self.var_3253 = spawnstruct();
   self.var_3253.var_4C15 = self getcurrentweapon();
   self.var_3253.var_DF66 = self getweaponammoclip(self.var_3253.var_4C15);
@@ -223,7 +223,7 @@ func_13B61(param_00) {
     param_00 allowcrouch(1);
     param_00 allowprone(1);
     param_00 allowdoublejump(1);
-    param_00 _meth_800E(1);
+    param_00 allowlean(1);
     var_04 = param_00.var_3253.var_4C15;
     var_05 = param_00.var_3253.var_DF66;
     var_06 = param_00.var_3253.var_DF67;

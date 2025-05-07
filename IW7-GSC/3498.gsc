@@ -138,14 +138,14 @@ updatestreakcount() {
     return;
   }
   var_00 = self.streakpoints;
-  self _meth_80BF(int(min(self.streakpoints, 16384)));
+  self setkillstreakpoints(int(min(self.streakpoints, 16384)));
 
   if(self.streakpoints >= self.func_BFB0)
     func_F866();
 }
 
 func_E274() {
-  self _meth_80BF(0);
+  self setkillstreakpoints(0);
   self setclientomnvar("ui_score_streak_cost", 0);
   self setclientomnvar("ui_score_streak_two_cost", 0);
   self setclientomnvar("ui_score_streak_three_cost", 0);
@@ -190,7 +190,7 @@ func_F866() {
       self.func_5FBD = 1;
       self.func_BFB0 = 0;
       self getrandompoint(0);
-      self _meth_80BF(0);
+      self setkillstreakpoints(0);
       self setclientomnvar("ui_score_streak_cost", 0);
       self setclientomnvar("ui_score_streak_two_cost", 0);
       self setclientomnvar("ui_score_streak_three_cost", 0);

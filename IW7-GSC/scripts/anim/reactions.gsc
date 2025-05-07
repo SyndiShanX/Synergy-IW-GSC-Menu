@@ -51,7 +51,7 @@ func_325D() {
     }
 
     self.var_13D13 = var_00;
-    self _meth_8015(::func_325E);
+    self animcustom(::func_325E);
   }
 }
 
@@ -74,7 +74,7 @@ func_BF20() {
     func_10F51();
   } else {
     var_00 = func_7FE1();
-    self aiclearanim( % root, 0.2);
+    self clearanim( % root, 0.2);
     self _meth_82E7("reactanim", var_00, 1, 0.2, 1);
     scripts\anim\shared::donotetracks("reactanim");
   }

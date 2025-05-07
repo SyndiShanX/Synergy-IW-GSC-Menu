@@ -239,7 +239,7 @@ func_1320B(param_00, param_01) {
 }
 
 func_13245(param_00, param_01) {
-  self _meth_8344(param_00, param_01);
+  self setswitchnode(param_00, param_01);
   self.var_247E = param_01;
   thread func_1321A();
 }

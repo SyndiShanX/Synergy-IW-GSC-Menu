@@ -1745,7 +1745,7 @@ func_10FB6() {
   foreach(var_01 in level.var_13563.var_E546) {
     var_01 stopsounds();
     var_01 givescorefortrophyblocks();
-    var_01 aiclearanim( % root, 0);
+    var_01 clearanim( % root, 0);
   }
 
   foreach(var_04 in level.var_13563.var_E546[1].var_466A) {
@@ -1763,14 +1763,14 @@ func_10FB6() {
   foreach(var_0C in level.var_13563.var_12B98) {
     var_0C stopsounds();
     var_0C givescorefortrophyblocks();
-    var_0C aiclearanim( % root, 0);
+    var_0C clearanim( % root, 0);
   }
 
   foreach(var_0F in level.var_13563.var_4D95) {
     if(isdefined(var_0F.var_A645)) {
       var_0F.var_A645 stopsounds();
       var_0F.var_A645 givescorefortrophyblocks();
-      var_0F.var_A645 aiclearanim( % root, 0);
+      var_0F.var_A645 clearanim( % root, 0);
       var_0F.var_A645 scripts\sp\utility::func_65DD("killcounter_animating");
     }
   }

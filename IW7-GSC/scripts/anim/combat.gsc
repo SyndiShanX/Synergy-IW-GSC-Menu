@@ -124,7 +124,7 @@ func_F8A3() {
   func_F8BD();
   func_F296();
   thread func_1108A();
-  self aiclearanim( % root, 0.2);
+  self clearanim( % root, 0.2);
   scripts\anim\combat_utility::func_FA8C(0.2);
   thread scripts\anim\combat_utility::func_1A3E();
   func_5123();
@@ -195,7 +195,7 @@ func_1109D() {
     scripts\anim\shared::func_1180E(scripts\anim\utility::func_B027("combat", "drop_rpg_crouch"));
   }
 
-  self aiclearanim( % root, 0.2);
+  self clearanim( % root, 0.2);
   scripts\anim\combat_utility::func_631A();
   func_F8BD();
   scripts\anim\combat_utility::func_10D9A();
@@ -708,10 +708,10 @@ func_5AC8(param_00, param_01) {
   }
 
   if(!isdefined(self.var_129B3)) {
-    self aiclearanim( % turn, 0.2);
+    self clearanim( % turn, 0.2);
     self setanimknob( % exposed_aiming, 1, 0.2, 1);
   } else {
-    self aiclearanim( % exposed_modern, 0.3);
+    self clearanim( % exposed_modern, 0.3);
   }
 
   if(isdefined(self.var_129A5)) {
@@ -743,7 +743,7 @@ func_129A1(param_00) {
   self _meth_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, param_00);
   self give_attacker_kill_rewards( % add_idle, 0, param_00);
   if(!scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-    self aiclearanim( % add_fire, 0.2);
+    self clearanim( % add_fire, 0.2);
   }
 }
 
@@ -760,7 +760,7 @@ func_FEEC() {
   }
 
   scripts\anim\combat_utility::func_FEDF();
-  self aiclearanim( % add_fire, 0.2);
+  self clearanim( % add_fire, 0.2);
 }
 
 func_FEDE() {
@@ -880,7 +880,7 @@ transitionto(param_00) {
       return;
     }
 
-    self aiclearanim( % root, 0.3);
+    self clearanim( % root, 0.3);
     scripts\anim\combat_utility::func_631A();
     if(param_00 == "stand") {
       var_03 = 2;
@@ -963,7 +963,7 @@ transitionto(param_00) {
         scripts\anim\weaponlist::refillclip();
       }
 
-      self aiclearanim( % reload, 0.2);
+      self clearanim( % reload, 0.2);
       self.sendclientmatchdata = 0;
       self notify("stop_trying_to_melee");
       self.a.var_6A1A = 0;
@@ -984,7 +984,7 @@ transitionto(param_00) {
       }
 
       var_03 = "reload_" + scripts\anim\combat_utility::_meth_81EB();
-      self aiclearanim( % root, 0.2);
+      self clearanim( % root, 0.2);
       self _meth_82EA(var_03, param_00, 1, 0.2, var_02);
       func_43E3(param_00, "run");
       thread func_C16A("abort_reload", var_03);
@@ -1039,7 +1039,7 @@ transitionto(param_00) {
       self _meth_82E4("weapon swap", param_00, % body, 1, 0.2, scripts\anim\combat_utility::func_6B9A());
       func_43E3(param_00, "run");
       donotetrackspostcallbackwithendon("weapon swap", ::func_89D2, "end_weapon_swap");
-      self aiclearanim(self.var_11317, 0.2);
+      self clearanim(self.var_11317, 0.2);
       self notify("facing_enemy_immediately");
       self notify("switched_to_sidearm");
       scripts\sp\gameskill::func_54C4();
@@ -1059,7 +1059,7 @@ transitionto(param_00) {
     func_89D2(param_00) {
       foreach(var_02 in param_00) {
         if(var_02 == "pistol_pickup") {
-          self aiclearanim(scripts\anim\utility::func_1F64("straight_level"), 0);
+          self clearanim(scripts\anim\utility::func_1F64("straight_level"), 0);
           scripts\anim\animset::func_F2BE();
           thread func_6A6E(0.25);
           continue;
@@ -1090,7 +1090,7 @@ transitionto(param_00) {
         donotetrackspostcallbackwithendon("weapon swap", ::func_89D7, "end_weapon_swap");
       }
 
-      self aiclearanim(self.var_11317, 0.2);
+      self clearanim(self.var_11317, 0.2);
       self notify("switched_to_lastweapon");
       scripts\sp\gameskill::func_54C4();
       return 1;
@@ -1099,7 +1099,7 @@ transitionto(param_00) {
     func_89D7(param_00) {
       foreach(var_02 in param_00) {
         if(var_02 == "pistol_putaway") {
-          self aiclearanim(scripts\anim\utility::func_1F64("straight_level"), 0);
+          self clearanim(scripts\anim\utility::func_1F64("straight_level"), 0);
           scripts\anim\animset::func_F2BE();
           thread scripts\anim\combat_utility::putgunbackinhandonkillanimscript();
           continue;
@@ -1274,5 +1274,5 @@ transitionto(param_00) {
 
     func_43D0() {
       self.facialidx = undefined;
-      self aiclearanim( % head, 0.2);
+      self clearanim( % head, 0.2);
     }

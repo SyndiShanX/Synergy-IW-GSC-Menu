@@ -80,7 +80,7 @@ onusedeployable(param_00) {
         [level.var_5222]
       ](1);
     } else {
-      _meth_836B(self, var_01.minigunweapon);
+      setviewmodeldepthoffield(self, var_01.minigunweapon);
     }
 
     scripts\mp\missions::processchallenge("ch_guninabox");
@@ -111,10 +111,10 @@ startpath(param_00) {
   }
 
   var_05 = scripts\mp\gametypes\sotf::getrandomattachments(var_05);
-  _meth_836B(param_00, var_05);
+  setviewmodeldepthoffield(param_00, var_05);
 }
 
-_meth_836B(param_00, param_01) {
+setviewmodeldepthoffield(param_00, param_01) {
   var_02 = param_00 getweaponslistprimaries();
   var_03 = 0;
   foreach(var_05 in var_02) {
