@@ -360,9 +360,9 @@ intelattachmentcount4pluskills(param_00) {
 func_99E3(param_00) {
   self endon("disconnect");
   while (!scripts\mp\intel::func_9E94()) {
-    if(self gold_teeth_hint_func()) {
+    if(self iswallrunning()) {
       var_01 = gettime();
-      while (self gold_teeth_hint_func()) {
+      while (self iswallrunning()) {
         wait(0.1);
       }
 

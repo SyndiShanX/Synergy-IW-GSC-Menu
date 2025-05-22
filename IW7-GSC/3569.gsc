@@ -179,7 +179,7 @@ func_BB89(param_00) {
 }
 
 func_BB6F() {
-  return self isonground() && !self gold_teeth_hint_func();
+  return self isonground() && !self iswallrunning();
 }
 
 func_BB95(param_00) {

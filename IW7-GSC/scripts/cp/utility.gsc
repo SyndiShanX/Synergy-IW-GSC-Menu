@@ -3310,7 +3310,7 @@ restore_weapons_status(param_00) {
     }
 
     if(isdefined(self.powersecondarygrenade) && self.powersecondarygrenade == var_03) {
-      self gold_tooth_3_pickup(var_03);
+      self assignweaponoffhandsecondary(var_03);
     }
 
     if(isdefined(self.specialoffhandgrenade) && self.specialoffhandgrenade == var_03) {

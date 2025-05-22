@@ -600,7 +600,7 @@ func_86CB(param_00) {
     var_01 = weaponaltweaponname(var_01);
   }
 
-  var_02 = level.player gold_teeth_hint_func() || !level.player isonground();
+  var_02 = level.player iswallrunning() || !level.player isonground();
   if(!var_02) {
     level.player allowmovement(0);
     wait(0.1);
@@ -1521,7 +1521,7 @@ func_12AB2() {
   var_00 = 4;
   for (;;) {
     level.player waittill("frag_pressed");
-    if(level.player gold_teeth_pickup_debug()) {
+    if(level.player func_8448()) {
       continue;
     }
 
@@ -2327,7 +2327,7 @@ func_2C8A() {
     return 0;
   }
 
-  if(level.player gold_teeth_pickup_debug()) {
+  if(level.player func_8448()) {
     return 0;
   }
 
@@ -2411,7 +2411,7 @@ func_2C8B() {
     return 0;
   }
 
-  if(level.player gold_teeth_pickup_debug()) {
+  if(level.player func_8448()) {
     return 0;
   }
 

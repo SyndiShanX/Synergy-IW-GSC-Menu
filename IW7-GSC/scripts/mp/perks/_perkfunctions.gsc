@@ -3598,9 +3598,9 @@ func_B944() {
   self endon("disconnect");
   self endon("momentum_unset");
   for (;;) {
-    if(!self issprinting() || self issprintsliding() || !self isonground() || self gold_teeth_hint_func()) {
+    if(!self issprinting() || self issprintsliding() || !self isonground() || self iswallrunning()) {
       wait(0.4);
-      if(!self issprinting() || self issprintsliding() || !self isonground() || self gold_teeth_hint_func()) {
+      if(!self issprinting() || self issprintsliding() || !self isonground() || self iswallrunning()) {
         self notify("momentum_reset");
         break;
       }
@@ -3782,7 +3782,7 @@ runadsawareness() {
         continue;
       }
 
-      if(var_01 isonground() && !var_01 issprinting() && !var_01 gold_teeth_hint_func() && !var_01 issprintsliding()) {
+      if(var_01 isonground() && !var_01 issprinting() && !var_01 iswallrunning() && !var_01 issprintsliding()) {
         continue;
       }
 

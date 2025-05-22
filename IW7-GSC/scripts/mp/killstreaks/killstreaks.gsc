@@ -461,7 +461,7 @@ func_392B(param_00, param_01) {
     return "KILLSTREAKS_CANNOT_BE_USED";
   }
 
-  if((scripts\mp\utility::func_9F2C(param_01.streakname) || scripts\mp\utility::func_9E90(param_01.streakname)) && !self isonground() || self gold_teeth_hint_func()) {
+  if((scripts\mp\utility::func_9F2C(param_01.streakname) || scripts\mp\utility::func_9E90(param_01.streakname)) && !self isonground() || self iswallrunning()) {
     return "KILLSTREAKS_CANNOT_BE_USED";
   }
 }

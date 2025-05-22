@@ -1555,7 +1555,7 @@ setwallrunquieterpassive() {
   self endon("unsetWallrunQuieter");
   thread wallrunquieterwatchfordeath();
   for (;;) {
-    if(self gold_teeth_hint_func() || !self isonground()) {
+    if(self iswallrunning() || !self isonground()) {
       if(!scripts\mp\utility::istrue(getpassivevalue("passive_wallrun_quieter"))) {
         setpassivevalue("passive_wallrun_quieter", 1);
         checkpassivemessage("passive_wallrun_quieter", "_start");
@@ -2355,7 +2355,7 @@ handlejumpsuperonkillpassive(param_00, param_01) {
     return;
   }
 
-  if(param_00 gold_teeth_hint_func()) {
+  if(param_00 iswallrunning()) {
     return;
   }
 

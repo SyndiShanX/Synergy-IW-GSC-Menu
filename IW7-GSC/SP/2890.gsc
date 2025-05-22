@@ -626,7 +626,7 @@ setlookatent(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(isdefined(param_02) && param_02 != "none") {
     level.player give_player_xp("flash");
     level.player giveweapon(param_02);
-    level.player gold_tooth_3_pickup(param_02);
+    level.player assignweaponoffhandsecondary(param_02);
   }
 
   if(isdefined(param_03) && param_03 != "none") {
@@ -637,7 +637,7 @@ setlookatent(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(isdefined(param_04) && param_04 != "none") {
     level.player give_player_xp("flash");
     level.player giveweapon(param_04);
-    level.player gold_tooth_3_pickup(param_04);
+    level.player assignweaponoffhandsecondary(param_04);
   }
 
   if(isdefined(param_05) && param_05 != "none") {

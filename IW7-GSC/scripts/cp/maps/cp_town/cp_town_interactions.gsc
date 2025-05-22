@@ -1180,7 +1180,7 @@ teleporttopaproom(param_00, param_01) {
   param_00 scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
   param_00 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
   scripts\cp\maps\cp_town\cp_town_fast_travel::move_player_through_portal_tube(param_00, var_02);
-  param_00 gold_teeth_pickup();
+  param_00 playershow();
   param_00.is_off_grid = 1;
   param_00 scripts\cp\powers\coop_powers::power_enablepower();
   param_00 set_in_pap_room(param_00, 1);

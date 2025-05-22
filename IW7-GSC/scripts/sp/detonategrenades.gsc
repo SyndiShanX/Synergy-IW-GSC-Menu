@@ -194,7 +194,7 @@ func_734F(param_00) {
   thread func_DBDB(var_04);
   earthquake(0.7, 0.8, var_04, 600);
   thread scripts\sp\utility::func_54EF(var_04);
-  if(level.player scripts\sp\utility::func_65DB("no_grenade_block_gesture") || level.player isthrowinggrenade() || level.player gold_teeth_pickup_debug()) {
+  if(level.player scripts\sp\utility::func_65DB("no_grenade_block_gesture") || level.player isthrowinggrenade() || level.player func_8448()) {
     return;
   }
 

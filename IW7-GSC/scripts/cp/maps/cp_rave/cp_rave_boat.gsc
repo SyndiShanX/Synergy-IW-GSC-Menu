@@ -140,7 +140,7 @@ teleport_to_hidden_room() {
   scripts\cp\powers\coop_powers::power_enablepower();
   self setorigin(var_00.origin);
   self setplayerangles(var_00.angles);
-  self gold_teeth_pickup();
+  self playershow();
   thread hidden_room_timer();
   level notify("hidden_room_portal_used");
   scripts\cp\maps\cp_rave\cp_rave_interactions::update_rave_mode_for_player(self);
@@ -218,7 +218,7 @@ teleport_to_safe_spot(param_00) {
     wait(0.1);
   }
 
-  param_00 gold_teeth_pickup();
+  param_00 playershow();
   param_00 unlink();
   param_00 dontinterpolate();
   param_00 setorigin(var_02.origin);

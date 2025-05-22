@@ -239,7 +239,7 @@ func_1271() {
     waittillframeend;
     level.player.var_AA2B = level.player.var_1180B;
     level.player.var_1180B = level.player _meth_8556();
-    if(level.player gold_teeth_pickup_debug()) {
+    if(level.player func_8448()) {
       level.player.var_1180A = 1;
       level.player.var_127C1 = level.player _meth_8556();
       wait(0.05);
@@ -365,7 +365,7 @@ func_142E(param_00, param_01) {
 
   if(level.player.var_110C0 && var_05 == 0 && level.player.var_110BA != "") {
     level.player giveweapon(level.player.var_110BA);
-    level.player gold_tooth_3_pickup(level.player.var_110BA);
+    level.player assignweaponoffhandsecondary(level.player.var_110BA);
     level.player setweaponammoclip(level.player.var_110BA, level.player.var_110BB);
     level.player.var_110BA = "";
     level.player.var_110BB = 0;
@@ -461,7 +461,7 @@ func_142E(param_00, param_01) {
     }
 
     level.player gonevo();
-    level.player gold_tooth_3_pickup(var_03[0]);
+    level.player assignweaponoffhandsecondary(var_03[0]);
     if(var_03.size > 1) {
       if(level.player.var_110C0) {
         level.player.var_110BB = level.player getrunningforwardpainanim(var_03[1]);

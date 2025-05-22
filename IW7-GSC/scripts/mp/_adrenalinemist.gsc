@@ -16,7 +16,7 @@ func_18A5(param_00) {
     return;
   }
 
-  if(self isonladder() || !self isonground() || self gold_teeth_hint_func()) {
+  if(self isonladder() || !self isonground() || self iswallrunning()) {
     param_00 delete();
     return;
   }

@@ -79,7 +79,7 @@ func_2835(param_00) {
 }
 
 func_2831(param_00, param_01) {
-  if(level.player scripts\sp\utility::func_65DB("no_grenade_block_gesture") || level.player isthrowinggrenade() || level.player gold_teeth_pickup_debug()) {
+  if(level.player scripts\sp\utility::func_65DB("no_grenade_block_gesture") || level.player isthrowinggrenade() || level.player func_8448()) {
     return;
   }
 

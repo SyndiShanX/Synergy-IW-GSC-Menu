@@ -693,7 +693,7 @@ func_10D8D(param_00, param_01) {
   var_09 scripts\mp\utility::_giveweapon("iw7_c8shutdown_mp");
   var_09 scripts\mp\utility::_giveweapon("iw7_c8destruct_mp");
   var_09 scripts\mp\utility::_giveweapon("iw7_c8offhandshield_mp", 0);
-  var_09 gold_tooth_3_pickup("iw7_c8offhandshield_mp");
+  var_09 assignweaponoffhandsecondary("iw7_c8offhandshield_mp");
   var_09 goodshootpos(var_09.mainweapon);
   var_09 scripts\engine\utility::allow_usability(0);
   var_09 scripts\mp\utility::giveperk("specialty_viewkickoverride");

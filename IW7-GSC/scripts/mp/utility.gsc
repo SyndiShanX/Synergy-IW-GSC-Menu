@@ -4033,7 +4033,7 @@ validateusestreak(param_00, param_01) {
     return 0;
   }
 
-  if((!self isonground() || self gold_teeth_hint_func()) && func_9F2C(param_00) || func_9D82(param_00) || func_9FB7(param_00) || func_9E90(param_00)) {
+  if((!self isonground() || self iswallrunning()) && func_9F2C(param_00) || func_9D82(param_00) || func_9FB7(param_00) || func_9E90(param_00)) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS_UNAVAILABLE");
     return 0;
   }

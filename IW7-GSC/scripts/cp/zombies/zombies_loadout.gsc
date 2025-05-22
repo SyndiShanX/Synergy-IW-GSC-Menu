@@ -654,9 +654,9 @@ func_B944() {
   self endon("disconnect");
   self endon("momentum_unset");
   for (;;) {
-    if(!self issprinting() || self issprintsliding() || !self isonground() || self gold_teeth_hint_func()) {
+    if(!self issprinting() || self issprintsliding() || !self isonground() || self iswallrunning()) {
       wait(0.25);
-      if(!self issprinting() || self issprintsliding() || !self isonground() || self gold_teeth_hint_func()) {
+      if(!self issprinting() || self issprintsliding() || !self isonground() || self iswallrunning()) {
         self notify("momentum_reset");
         break;
       }

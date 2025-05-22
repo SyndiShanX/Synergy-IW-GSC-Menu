@@ -370,7 +370,7 @@ checkvalidposition(param_00, param_01) {
 }
 
 checkvalidplacementstate(param_00) {
-  return !self gold_teeth_hint_func() && !self isonladder() && self isonground();
+  return !self iswallrunning() && !self isonladder() && self isonground();
 }
 
 placementfailed(param_00, param_01, param_02) {

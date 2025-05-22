@@ -604,7 +604,7 @@ teleport_to_portal_safe_spot(param_00, param_01) {
     wait(0.1);
   }
 
-  param_00 gold_teeth_pickup();
+  param_00 playershow();
   if(scripts\engine\utility::istrue(param_00.isrewinding) || isdefined(self.rewindmover)) {
     param_00 thread unlinkplayerafterduration();
   } else {
@@ -801,7 +801,7 @@ teleport_to_hidden_room() {
   self endon("left_hidden_room_early");
   var_00 = scripts\engine\utility::getstructarray("pap_spawners", "targetname");
   move_player_through_pap_tube(self, var_00);
-  self gold_teeth_pickup();
+  self playershow();
   scripts\cp\utility::adddamagemodifier("papRoom", 0, 0);
   self.is_off_grid = 1;
   self.disable_consumables = undefined;
@@ -894,7 +894,7 @@ teleport_to_safe_spot(param_00) {
     wait(0.1);
   }
 
-  param_00 gold_teeth_pickup();
+  param_00 playershow();
   param_00 unlink();
   param_00 dontinterpolate();
   param_00 setorigin(var_01.origin);

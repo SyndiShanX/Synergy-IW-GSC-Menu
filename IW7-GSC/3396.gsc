@@ -27,7 +27,7 @@ enter_afterlife_arcade(var_00) {
   var_00 laststandrevive();
   var_00 setstance("stand");
   var_00 takeallweapons();
-  var_00 gold_teeth_pickup();
+  var_00 playershow();
   var_00 scripts\cp\utility::_giveweapon("iw7_gunless_zm", undefined, undefined, 1);
   var_00 scripts\engine\utility::allow_melee(0);
   var_00 scripts\cp\zombies\zombies_loadout::set_player_photo_status(var_00, "afterlife");

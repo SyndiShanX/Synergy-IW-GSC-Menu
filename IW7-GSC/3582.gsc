@@ -43,7 +43,7 @@ func_637E(param_00) {
   func_E4C7();
   self setscriptablepartstate("rewindIdle", "neutral", 0);
   if(!scripts\mp\utility::istrue(level.broshotrunning)) {
-    self gold_teeth_pickup();
+    self playershow();
     if(!scripts\mp\utility::istrue(param_00)) {
       self setscriptablepartstate("jet_pack", "neutral", 0);
       self setscriptablepartstate("teamColorPins", "teamColorPins", 0);

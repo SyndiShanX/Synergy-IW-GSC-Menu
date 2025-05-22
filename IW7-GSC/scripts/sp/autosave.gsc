@@ -582,7 +582,7 @@ func_268C(param_00, param_01) {
     }
   }
 
-  if(self gold_teeth_hint_func()) {
+  if(self iswallrunning()) {
     return 0;
   }
 

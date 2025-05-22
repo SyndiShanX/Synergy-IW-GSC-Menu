@@ -340,13 +340,13 @@ func_A651(param_00, param_01, param_02, param_03, param_04, param_05) {
       }
     }
 
-    if(!param_01 isonground() && !param_01 gold_teeth_hint_func() && !self isonground() && !self gold_teeth_hint_func()) {
+    if(!param_01 isonground() && !param_01 iswallrunning() && !self isonground() && !self iswallrunning()) {
       if(var_12) {
         thread givekillreward("air_to_air_kill", param_00, param_02, param_03, param_01, "air_to_air_kill");
       }
     } else {
       if(var_12) {
-        if(self gold_teeth_hint_func()) {
+        if(self iswallrunning()) {
           thread givekillreward("wallkill", param_00, param_02, param_03, param_01, "wallrun_kill");
         } else if(isdeathfromabove(self, param_02, param_03, var_11, param_01)) {
           thread givekillreward("jumpkill", param_00, param_02, param_03, param_01, "air_kill");
@@ -367,7 +367,7 @@ func_A651(param_00, param_01, param_02, param_03, param_04, param_05) {
         }
       }
 
-      if(param_01 gold_teeth_hint_func()) {
+      if(param_01 iswallrunning()) {
         thread givekillreward("killonwall", param_00, param_02, param_03, param_01, "kill_wallrunner");
       } else if(isskeetshooter(self, param_02, param_03, var_11, param_01)) {
         thread givekillreward("killinair", param_00, param_02, param_03, param_01, "kill_jumper");

@@ -79,7 +79,7 @@ func_37D4() {
   }
 
   for (;;) {
-    if((self issprinting() || self gold_teeth_hint_func()) && !self ismeleeing() && !scripts\mp\killstreaks\_emp_common::isemped() && !self ismantling() && !self usebuttonpressed() && !self adsbuttonpressed() && !isdefined(self.var_9FF6) && !isdefined(self.var_6F43)) {
+    if((self issprinting() || self iswallrunning()) && !self ismeleeing() && !scripts\mp\killstreaks\_emp_common::isemped() && !self ismantling() && !self usebuttonpressed() && !self adsbuttonpressed() && !isdefined(self.var_9FF6) && !isdefined(self.var_6F43)) {
       func_37DA();
     } else {
       wait(1.5);
@@ -157,7 +157,7 @@ func_37E0() {
   self endon("removeArchetype");
   level endon("game_ended");
   for (;;) {
-    if((!self issprinting() && !self gold_teeth_hint_func() && !self isjumping() && !self ismantling()) || isdefined(self.var_9FF6) || isdefined(self.var_6F43)) {
+    if((!self issprinting() && !self iswallrunning() && !self isjumping() && !self ismantling()) || isdefined(self.var_9FF6) || isdefined(self.var_6F43)) {
       self notify("camo_off");
       self waittill("camo_on");
     }
@@ -202,7 +202,7 @@ func_37E2() {
   level endon("game_ended");
   self endon("removeArchetype");
   for (;;) {
-    if(self gold_teeth_hint_func()) {
+    if(self iswallrunning()) {
       self notify("camo_off");
       self waittill("camo_on");
     }
@@ -274,7 +274,7 @@ func_E8AC() {
   level endon("game_ended");
   self.var_138CE = undefined;
   for (;;) {
-    if(self gold_teeth_hint_func() && self getweaponrankinfominxp() > 0.3) {
+    if(self iswallrunning() && self getweaponrankinfominxp() > 0.3) {
       var_00 = self goal_position(0);
       var_01 = self energy_getmax(0);
       self goal_radius(0, var_01);

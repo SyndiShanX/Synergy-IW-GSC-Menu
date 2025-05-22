@@ -480,7 +480,7 @@ watch_for_rewind_triggered_on_completion() {
 
       scripts\cp\utility::removedamagemodifier("rewind_invulnerability", 0);
       self playanimscriptevent("power_exit", "rewind");
-      self gold_teeth_pickup();
+      self playershow();
       self setphasestatus(0);
       scripts\engine\utility::allow_melee(1);
       scripts\engine\utility::allow_weapon(1);
@@ -1173,7 +1173,7 @@ remove_influence_of_rewind_afterlife(param_00) {
 
     param_00 scripts\cp\utility::removedamagemodifier("rewind_invulnerability", 0);
     param_00 playanimscriptevent("power_exit", "rewind");
-    param_00 gold_teeth_pickup();
+    param_00 playershow();
     param_00 setphasestatus(0);
     param_00 scripts\engine\utility::allow_melee(1);
     param_00 scripts\engine\utility::allow_weapon(1);
@@ -3322,7 +3322,7 @@ completeplayerwarp(param_00, param_01, param_02, param_03, param_04) {
 
   scripts\cp\utility::removedamagemodifier("rewind_invulnerability", 0);
   self playanimscriptevent("power_exit", "rewind");
-  self gold_teeth_pickup();
+  self playershow();
   self setphasestatus(0);
   scripts\engine\utility::allow_melee(1);
   scripts\engine\utility::allow_weapon(1);

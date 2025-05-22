@@ -348,7 +348,7 @@ givepower(param_00, param_01, param_02, param_03, param_04) {
     self assignweaponoffhandprimary(var_10);
     self.powerprimarygrenade = var_10;
   } else if(var_06.slot == "secondary") {
-    self gold_tooth_3_pickup(var_10);
+    self assignweaponoffhandsecondary(var_10);
     self.powersecondarygrenade = var_10;
   }
 

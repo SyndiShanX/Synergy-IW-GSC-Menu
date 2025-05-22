@@ -2526,7 +2526,7 @@ func_3D61() {
     wait(0.05);
     var_05 = level.player.origin;
     var_06 = length(var_05 - var_04);
-    if(level.player gold_teeth_hint_func()) {
+    if(level.player iswallrunning()) {
       level.var_C538 = 0;
       var_02 = 0;
       var_03 = 0;

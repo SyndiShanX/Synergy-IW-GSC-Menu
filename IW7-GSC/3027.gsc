@@ -36,5 +36,5 @@ func_D31A(param_00, param_01, param_02) {
 
 func_D05B() {
   lib_0BCE::func_A2B1();
-  self gold_teeth_pickup();
+  self playershow();
 }

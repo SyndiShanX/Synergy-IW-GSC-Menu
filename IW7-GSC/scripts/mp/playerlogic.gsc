@@ -2576,7 +2576,7 @@ monitorwallrun() {
   self endon("death");
   self endon("disconnect");
   for (;;) {
-    if(self gold_teeth_hint_func()) {
+    if(self iswallrunning()) {
       self.var_AA43 = gettime();
     }
 

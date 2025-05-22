@@ -22,7 +22,7 @@ func_14FC() {}
 func_14F9() {
   self.var_14F6 = 1;
   self iprintlnbold("Anti-Air Blaster");
-  if(!self isonground() || self isjumping() || self gold_teeth_hint_func()) {
+  if(!self isonground() || self isjumping() || self iswallrunning()) {
     thread func_2B64();
   } else {
     thread func_2B62();
@@ -81,7 +81,7 @@ func_2B62() {
       continue;
     }
 
-    if(!var_03 isjumping() && !var_03 gold_teeth_hint_func()) {
+    if(!var_03 isjumping() && !var_03 iswallrunning()) {
       continue;
     }
 

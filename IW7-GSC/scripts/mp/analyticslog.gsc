@@ -186,7 +186,7 @@ logallplayerposthink() {
 
 getpathactionvalue() {
   var_00 = scripts\engine\utility::ter_op(isdefined(self.analyticslog.cachedactions), self.analyticslog.cachedactions, 0);
-  if(self gold_teeth_hint_func()) {
+  if(self iswallrunning()) {
     var_00 = var_00 | 32;
   }
 }

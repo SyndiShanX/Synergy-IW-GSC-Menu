@@ -713,7 +713,7 @@ func_D9A8(param_00) {
 }
 
 func_D995() {
-  if(self gold_teeth_hint_func()) {
+  if(self iswallrunning()) {
     func_D991("ch_darkops_epic_run");
     return;
   }
@@ -1512,7 +1512,7 @@ func_3BFF(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
           param_01 func_D991("ch_scorestreak_double_scarab");
         }
 
-        if(self gold_teeth_hint_func()) {
+        if(self iswallrunning()) {
           param_01 func_D991("ch_scarab_wall_kill");
         }
         break;
@@ -3392,14 +3392,14 @@ func_B9B4() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
-  var_00 = self isonground() && !self gold_teeth_hint_func();
+  var_00 = self isonground() && !self iswallrunning();
   var_01 = 0;
   for (;;) {
     if(scripts\mp\utility::istrue(level.hostmigration)) {
       level waittill("host_migration_end");
     }
 
-    if(self isonground() && !self gold_teeth_hint_func()) {
+    if(self isonground() && !self iswallrunning()) {
       var_00 = 1;
     } else {
       if(var_00) {

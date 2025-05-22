@@ -278,7 +278,7 @@ teleport_to_portal_safe_spot(param_00) {
     wait(0.1);
   }
 
-  param_00 gold_teeth_pickup();
+  param_00 playershow();
   if(scripts\engine\utility::istrue(param_00.isrewinding) || isdefined(self.rewindmover)) {
     param_00 thread unlinkplayerafterduration();
   } else {

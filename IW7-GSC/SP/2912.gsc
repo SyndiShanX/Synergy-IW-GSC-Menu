@@ -127,7 +127,7 @@ main() {
     var_06 = 1;
   }
 
-  if(level.player gold_teeth_hint_func()) {
+  if(level.player iswallrunning()) {
     var_07 = 1;
     var_06 = undefined;
   }

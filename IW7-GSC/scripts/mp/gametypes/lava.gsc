@@ -159,7 +159,7 @@ watchplayeronground() {
   self endon("disconnect");
   for (;;) {
     if(scripts\mp\utility::isreallyalive(self)) {
-      if(self isonground() & !self gold_teeth_hint_func()) {
+      if(self isonground() & !self iswallrunning()) {
         self dodamage(8, self.origin, self, undefined, "MOD_SUICIDE");
         wait(1);
       }
