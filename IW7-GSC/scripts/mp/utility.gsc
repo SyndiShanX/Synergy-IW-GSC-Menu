@@ -1080,7 +1080,7 @@ isinkillcam() {
   return self.clearstartpointtransients;
 }
 
-func_F8A0(param_00, param_01) {
+setuipostgamefade(param_00, param_01) {
   self endon("disconnect");
   if(!isdefined(self.var_6AB3)) {
     self.var_6AB3 = 0;

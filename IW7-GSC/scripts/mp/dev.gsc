@@ -325,7 +325,7 @@ func_53E2() {
       if(level.doingbroshot) {
         setomnvarforallclients("post_game_state", 6);
         wait(0.1);
-        scripts\mp\broshot::func_10D73();
+        scripts\mp\broshot::startbroshot();
       }
     }
 
@@ -335,7 +335,7 @@ func_53E2() {
       if(level.doingbroshot) {
         setomnvarforallclients("post_game_state", 6);
         wait(0.1);
-        level.players[0] scripts\mp\broshot::func_10D73();
+        level.players[0] scripts\mp\broshot::startbroshot();
       }
     }
 

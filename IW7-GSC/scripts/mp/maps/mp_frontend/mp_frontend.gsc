@@ -137,7 +137,7 @@ func_12DEB(param_00) {
 }
 
 func_12D9B() {
-  var_00 = level.var_1623.var_525D;
+  var_00 = level.active_camera.var_525D;
   self setdepthoffield(var_00[0], var_00[1], var_00[2], var_00[3], var_00[4], var_00[5]);
 }
 
@@ -196,7 +196,7 @@ func_37BB(param_00) {
   func_F289(var_01, var_02);
   level.var_4BF6 = param_00.index;
   level.var_4C01 = param_00.name;
-  thread scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, var_01.myfov, var_01.var_3F70, 0, 0.2, ::func_12DBB);
+  thread scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, var_01.myfov, var_01.var_3F70, 0, 0.2, ::func_12DBB);
 }
 
 func_37BA(param_00) {
@@ -214,7 +214,7 @@ func_37BA(param_00) {
       frontendscenecameracharacters(3);
       if(level.var_4C01 != "mlg.tv") {
         func_F289(level.var_37B0, level.var_37B0.basecam);
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, 20, level.var_37B0.var_3F70, 0.2, 0.2, ::func_12D9B);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, 20, level.var_37B0.var_3F70, 0.2, 0.2, ::func_12D9B);
       }
 
       level.var_4BF6 = undefined;
@@ -224,9 +224,9 @@ func_37BA(param_00) {
       frontendscenecameracharacters(0);
       func_F289(level.var_37B5, level.var_37B5.basecam);
       if(level.var_4C01 == "private_lobby_menu" || level.var_4C01 == "create_a_class") {
-        thread func_BD64(level.var_1623, 5000, ::func_12D9B);
+        thread func_BD64(level.active_camera, 5000, ::func_12D9B);
       } else {
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, 40, level.var_37B5.var_3F70, 0.2, 0.2, ::func_12DBB);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, 40, level.var_37B5.var_3F70, 0.2, 0.2, ::func_12DBB);
       }
 
       level.var_4BF6 = undefined;
@@ -236,9 +236,9 @@ func_37BA(param_00) {
       frontendscenecameracharacters(0);
       func_F289(level.var_37B5, level.var_37B5.var_AEB5);
       if(level.var_4C01 == "create_a_class" || level.var_4C01 == "private_lobby") {
-        thread func_BD64(level.var_1623, 5000, ::func_12D9B);
+        thread func_BD64(level.active_camera, 5000, ::func_12D9B);
       } else {
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, 40, level.var_37B5.var_3F70, 0.2, 0.2, ::func_12DBB);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, 40, level.var_37B5.var_3F70, 0.2, 0.2, ::func_12DBB);
       }
 
       level.var_4BF6 = undefined;
@@ -249,7 +249,7 @@ func_37BA(param_00) {
         var_01 = ishost(param_00.index);
         func_F289(var_01, var_01.var_369A);
         level.var_4BF6 = param_00.index;
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
       } else {
         var_02 = 5000;
         if(level.var_4C01 == "mission_team_lobby") {
@@ -266,7 +266,7 @@ func_37BA(param_00) {
         var_01 = ishost(param_00.index);
         func_F289(var_01, var_01.var_13C7B);
         level.var_4BF6 = param_00.index;
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
       } else {
         func_F289(level.var_1641, level.var_1641.var_13C7B);
         thread func_BD64(level.var_1641.var_13C7B, 5000, ::func_12D9B);
@@ -278,7 +278,7 @@ func_37BA(param_00) {
         var_01 = ishost(param_00.index);
         func_F289(var_01, var_01.var_AE63);
         level.var_4BF6 = param_00.index;
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
       } else {
         func_F289(level.var_1641, level.var_1641.var_AE63);
         thread func_BD64(level.var_1641.var_AE63, 5000, ::func_12D9B);
@@ -288,16 +288,16 @@ func_37BA(param_00) {
     case "lobby_members":
       level.var_4BF6 = undefined;
       func_F289(level.var_37B7, level.camera_lobby_members.basecam);
-      scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
+      scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
       break;
 
     case "rig_select":
       func_F289(level.var_37B7, level.var_37B7.basecam);
       if(level.var_4C01 == "rig_pick" || level.var_4C01 == "rig_trait_select" || level.var_4C01 == "rig_head_select" || level.var_4C01 == "rig_taunt_select") {
-        thread func_BD64(level.var_1623, 5000, ::func_12D9B);
+        thread func_BD64(level.active_camera, 5000, ::func_12D9B);
         frontendscenecamerafov(level.var_37B7.myfov, 0.1);
       } else {
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
       }
 
       level.var_4BF6 = undefined;
@@ -309,7 +309,7 @@ func_37BA(param_00) {
         thread func_BD64(level.var_37B8.basecam, 5000, ::func_12D9B);
         frontendscenecamerafov(level.var_37B8.myfov, 0.1);
       } else {
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
       }
       break;
 
@@ -324,7 +324,7 @@ func_37BA(param_00) {
         thread func_BD64(level.camera_rig_head.basecam, 5000, ::func_12D9B);
         frontendscenecamerafov(level.camera_rig_head.myfov, 0.1);
       } else {
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
       }
       break;
 
@@ -334,7 +334,7 @@ func_37BA(param_00) {
         thread func_BD64(level.camera_rig_taunt.basecam, 5000, ::func_12D9B);
         frontendscenecamerafov(level.camera_rig_taunt.myfov, 0.15);
       } else {
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
       }
       break;
 
@@ -343,7 +343,7 @@ func_37BA(param_00) {
       func_F289(var_01, var_01.var_282B);
       level.var_4BF6 = param_00.index;
       if(level.var_4C01 == "armory") {
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
       } else {
         if(level.var_4C01 == "loadout_select" || level.var_4C01 == "weapon_select") {
           var_02 = 5000;
@@ -368,25 +368,25 @@ func_37BA(param_00) {
         var_01 = ishost(param_00.index);
         func_F289(var_01, var_01.basecam);
         level.var_4BF6 = param_00.index;
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12DEB);
       }
       break;
 
     case "armory":
       func_F289(level.var_37A7, level.var_37A7.basecam);
-      scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
+      scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
       level.var_4BF6 = undefined;
       break;
 
     case "bro_shot":
       func_F289(level.camera_bro_shot, level.camera_bro_shot.basecam);
-      scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
+      scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12D9B);
       level.var_4BF6 = undefined;
       break;
 
     case "weapon_painter_select":
       func_F289(level.camera_weapon_painter, level.camera_weapon_painter.basecam);
-      scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12E4A);
+      scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, level.var_1641.myfov, level.var_1641.var_3F70, 0.2, 0.2, ::func_12E4A);
       break;
 
     case "mlg.tv":
@@ -397,9 +397,9 @@ func_37BA(param_00) {
       frontendscenecameracharacters(0);
       func_F289(level.camera_gamebattles_lobby, level.camera_gamebattles_lobby.basecam);
       if(level.var_4C01 == "create_a_class") {
-        thread func_BD64(level.var_1623, 5000, ::func_12D9B);
+        thread func_BD64(level.active_camera, 5000, ::func_12D9B);
       } else {
-        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.var_1623, 40, level.camera_gamebattles_lobby.var_3F70, 0.2, 0.2, ::func_12DBB);
+        scripts\cp_mp\frontendutils::frontend_camera_teleport(level.active_camera, 40, level.camera_gamebattles_lobby.var_3F70, 0.2, 0.2, ::func_12DBB);
       }
 
       level.var_4BF6 = undefined;
@@ -638,7 +638,7 @@ func_48AE() {
 
 func_F289(param_00, param_01) {
   level.var_1641 = param_00;
-  level.var_1623 = param_01;
+  level.active_camera = param_01;
 }
 
 setup_initial_entities() {

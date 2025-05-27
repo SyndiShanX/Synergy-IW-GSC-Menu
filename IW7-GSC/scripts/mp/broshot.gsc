@@ -82,7 +82,7 @@ initbroshot(param_00) {
   return 1;
 }
 
-func_10D73(param_00) {
+startbroshot(param_00) {
   if(!isdefined(param_00)) {
     param_00 = self;
   }
@@ -106,7 +106,7 @@ func_10D73(param_00) {
   }
 
   removeallcorpses();
-  level.var_1623 = var_01;
+  level.active_camera = var_01;
   level.camera_anchor = spawn("script_model", var_01.origin);
   level.camera_anchor setmodel("tag_origin");
   level.camera_anchor.angles = var_01.angles;
@@ -195,7 +195,7 @@ func_10D73(param_00) {
     }
 
     var_03 cameralinkto(level.camera_anchor, "tag_origin", 1);
-    var_03 thread scripts\mp\utility::func_F8A0(0);
+    var_03 thread scripts\mp\utility::setuipostgamefade(0);
     scripts\mp\utility::_visionsetnaked("", 0);
     if(!scripts\mp\utility::istrue(level.forcebroshot)) {
       var_03 thread fadetoblack(1.5);
@@ -386,7 +386,7 @@ camera_move_helper(param_00, param_01, param_02, param_03) {
   level.camera_anchor rotateto(param_00.angles, var_05);
   if(isdefined(param_03)) {
     wait(var_05 - param_03);
-    thread scripts\mp\utility::func_F8A0(param_03);
+    thread scripts\mp\utility::setuipostgamefade(param_03);
   }
 }
 

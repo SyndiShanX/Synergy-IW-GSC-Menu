@@ -89,7 +89,7 @@ watchforbootmoviecomplete() {
   for (;;) {
     level waittill("rigBootFinished");
     var_00++;
-    if(level.var_4533 <= var_00) {
+    if(level.connectingPlayers <= var_00) {
       level notify("allRigsBooted");
       break;
     }

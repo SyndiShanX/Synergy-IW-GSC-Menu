@@ -448,7 +448,7 @@ func_F770(param_00, param_01, param_02) {
 waittillkillcamover() {
   self endon("abort_killcam");
   if(level.showingfinalkillcam) {
-    thread scripts\mp\utility::func_F8A0(1, self.var_A63E - 0.5);
+    thread scripts\mp\utility::setuipostgamefade(1, self.var_A63E - 0.5);
   }
 
   wait(self.var_A63E - 0.05);

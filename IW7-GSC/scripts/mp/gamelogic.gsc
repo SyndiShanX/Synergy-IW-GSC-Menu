@@ -477,7 +477,7 @@ waitforplayers(var_00) {
   else
     var_03 = 0;
 
-  var_04 = level.func_4533 / 3;
+  var_04 = level.connectingPlayers / 3;
 
   for (;;) {
     if(isdefined(game["roundsPlayed"]) && game["roundsPlayed"]) {
@@ -495,7 +495,7 @@ waitforplayers(var_00) {
 
 prematchperiod() {
   level endon("game_ended");
-  level.func_4533 = getdvarint("party_partyPlayerCountNum");
+  level.connectingPlayers = getdvarint("party_partyPlayerCountNum");
 
   if(level.prematchperiod > 0)
     func_B415();
@@ -1363,7 +1363,7 @@ func_E761(var_00, var_01) {
     setomnvarforallclients("post_game_state", 2);
 
   foreach(var_05 in level.players)
-  var_05 thread scripts\mp\utility\game::func_F8A0(0.0);
+  var_05 thread scripts\mp\utility\game::setuipostgamefade(0.0);
 
   if(!var_01)
     wait(var_00);
@@ -2734,7 +2734,7 @@ func_6320(var_00, var_01, var_02) {
     level notify("spawning_intermission");
 
     foreach(var_04 in level.players) {
-      var_04 thread scripts\mp\utility\game::func_F8A0(0.0);
+      var_04 thread scripts\mp\utility\game::setuipostgamefade(0.0);
       var_04 thread scripts\mp\playerlogic::spawnintermission();
     }
   }
@@ -2761,7 +2761,7 @@ func_6320(var_00, var_01, var_02) {
   if(level.doingbroshot) {
     setomnvarforallclients("post_game_state", 6);
     wait 0.1;
-    var_06 = scripts\mp\broshot::func_10D73(var_00);
+    var_06 = scripts\mp\broshot::startbroshot(var_00);
     var_07 = undefined;
 
     foreach(var_04 in level.players) {
