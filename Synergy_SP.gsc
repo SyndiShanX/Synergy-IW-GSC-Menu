@@ -744,38 +744,38 @@ create_rainbow_color() {
 	level.rainbow_color = (0, 0, 0);
 	
 	while(true) {
-		if (y >= 0 && y < 258) {
+		if(y >= 0 && y < 258) {
 			r = 255;
 			g = 0;
 			b = x;
-		} else if (y >= 258 && y < 516) {
+		} else if(y >= 258 && y < 516) {
 			r = 255 - x;
 			g = 0;
 			b = 255;
-		} else if (y >= 516 && y < 774) {
+		} else if(y >= 516 && y < 774) {
 			r = 0;
 			g = x;
 			b = 255;
-		} else if (y >= 774 && y < 1032) {
+		} else if(y >= 774 && y < 1032) {
 			r = 0;
 			g = 255;
 			b = 255 - x;
-		} else if (y >= 1032 && y < 1290) {
+		} else if(y >= 1032 && y < 1290) {
 			r = x;
 			g = 255;
 			b = 0;
-		} else if (y >= 1290 && y < 1545) {
+		} else if(y >= 1290 && y < 1545) {
 			r = 255;
 			g = 255 - x;
 			b = 0;
 		}
 		
 		x += 3;
-		if (x > 255)
+		if(x > 255)
 			x = 0;
 		
 		y += 3;
-		if (y > 1545)
+		if(y > 1545)
 			y = 0;
 		
 		level.rainbow_color = (r/255, g/255, b/255);
@@ -959,25 +959,25 @@ menu_index() {
 			
 			forEach(weapon_id in self.syn["weapons"]["attachable_weapons"]) {
 				weapon = strTok(self getCurrentWeapon(), "+")[0];
-				if (weapon == "alt_iw7_fmg") {
+				if(weapon == "alt_iw7_fmg") {
 					weapon = "iw7_fmg";
-				} else if (weapon == "alt_iw7_sdfar") {
+				} else if(weapon == "alt_iw7_sdfar") {
 					weapon = "iw7_sdfar";
-				} else if (weapon == "iw7_g18r") {
+				} else if(weapon == "iw7_g18r") {
 					weapon = "iw7_g18";
-				} else if (weapon == "alt_iw7_ripper") {
+				} else if(weapon == "alt_iw7_ripper") {
 					weapon = "iw7_ripper";
-				} else if (weapon == "alt_iw7_ake") {
+				} else if(weapon == "alt_iw7_ake") {
 					weapon = "iw7_ake";
-				} else if (weapon == "alt_iw7_m8") {
+				} else if(weapon == "alt_iw7_m8") {
 					weapon = "iw7_m8";
-				} else if (weapon == "alt_iw7_ar57") {
+				} else if(weapon == "alt_iw7_ar57") {
 					weapon = "iw7_ar57";
-				} else if (weapon == "alt_iw7_mauler") {
+				} else if(weapon == "alt_iw7_mauler") {
 					weapon = "iw7_mauler";
-				} else if (weapon == "alt_iw7_sdflmg") {
+				} else if(weapon == "alt_iw7_sdflmg") {
 					weapon = "iw7_sdflmg";
-				} else if (weapon == "alt_iw7_lmg03") {
+				} else if(weapon == "alt_iw7_lmg03") {
 					weapon = "iw7_lmg03";
 				}
 				

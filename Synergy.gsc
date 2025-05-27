@@ -837,39 +837,39 @@ create_rainbow_color() {
 	level.rainbow_color = (0, 0, 0);
 	
 	while(true) {
-		if (y >= 0 && y < 258) {
+		if(y >= 0 && y < 258) {
 			r = 255;
 			g = 0;
 			b = x;
-		} else if (y >= 258 && y < 516) {
+		} else if(y >= 258 && y < 516) {
 			r = 255 - x;
 			g = 0;
 			b = 255;
-		} else if (y >= 516 && y < 774) {
+		} else if(y >= 516 && y < 774) {
 			r = 0;
 			g = x;
 			b = 255;
-		} else if (y >= 774 && y < 1032) {
+		} else if(y >= 774 && y < 1032) {
 			r = 0;
 			g = 255;
 			b = 255 - x;
-		} else if (y >= 1032 && y < 1290) {
+		} else if(y >= 1032 && y < 1290) {
 			r = x;
 			g = 255;
 			b = 0;
-		} else if (y >= 1290 && y < 1545) {
+		} else if(y >= 1290 && y < 1545) {
 			r = 255;
 			g = 255 - x;
 			b = 0;
 		}
 		
 		x += 3;
-		if (x > 255) {
+		if(x > 255) {
 			x = 0;
 		}
 		
 		y += 3;
-		if (y > 1545) {
+		if(y > 1545) {
 			y = 0;
 		}
 		
@@ -1502,8 +1502,9 @@ frag_no_clip() {
 		self iPrintln("Frag No Clip [^2ON^7], Press ^3[{+frag}]^7 to Enter and ^3[{+melee}]^7 to Exit");
     while (isDefined(self.frag_no_clip)) {
       if(self fragButtonPressed()) {
-        if(!isDefined(self.frag_no_clip_loop))
+        if(!isDefined(self.frag_no_clip_loop)) {
           self thread frag_no_clip_loop();
+				}
       }
       wait .05;
     }
@@ -2012,7 +2013,7 @@ give_weapon(weapon, category, index) {
 build_custom_weapon(weapon, camo, extra_attachments) {
 	weapon_name = scripts\cp\utility::getrawbaseweaponname(weapon);
 	
-	if (isDefined(self.weapon_build_models[weapon_name])) {
+	if(isDefined(self.weapon_build_models[weapon_name])) {
 		weapon_model = self.weapon_build_models[weapon_name];
 		weapon_attachments = getweaponattachments(weapon_model);
 		weapon_build = scripts\engine\utility::array_combine(extra_attachments, weapon_attachments);
@@ -2273,15 +2274,15 @@ unlock_soul_keys() {
 }
 
 unlock_talismans() {
-	if (level.script == "cp_zmb") {
+	if(level.script == "cp_zmb") {
 		self scripts\cp\cp_merits::processMerit("mt_tali_1");
-	} else if (level.script == "cp_rave") {
+	} else if(level.script == "cp_rave") {
 		self scripts\cp\cp_merits::processMerit("mt_tali_2");
-	} else if (level.script == "cp_disco") {
+	} else if(level.script == "cp_disco") {
 		self scripts\cp\cp_merits::processMerit("mt_tali_3");
-	} else if (level.script == "cp_town") {
+	} else if(level.script == "cp_town") {
 		self scripts\cp\cp_merits::processMerit("mt_tali_4");
-	} else if (level.script == "cp_final") {
+	} else if(level.script == "cp_final") {
 		self scripts\cp\cp_merits::processMerit("mt_tali_5");
 	}
 	self setPlayerData("cp", "haveItems", "item_1", 1);
