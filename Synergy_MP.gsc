@@ -1186,7 +1186,8 @@ frag_no_clip_loop() {
 
 	clip = spawn("script_origin", self.origin);
 	self playerLinkTo(clip);
-	if(!isDefined(self.godmode) || !self.godmode) {
+	
+	if(!isDefined(self.god_mode) || !self.god_mode) {
 		executeCommand("god");
 		wait .01;
 		iPrintString("");
