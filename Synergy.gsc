@@ -297,7 +297,7 @@ add_toggle(text, function, toggle, array, argument_1, argument_2, argument_3) {
 	
 	if(isDefined(array)) {
 		option.slider = true;
-		option.array  = array;
+		option.array = array;
 	}
 	
 	self.structure[self.structure.size] = option;
@@ -575,12 +575,13 @@ initial_monitor() {
 					}
 					
 					close_controls_menu();
+					clear_all();
 					
 					self open_menu();
 					wait .15;
 				}
 			} else {
-				menu   = self get_menu();
+				menu = self get_menu();
 				cursor = self get_cursor();
 				if(self meleeButtonPressed()) {
 					if(return_toggle(self.syn["utility"].interaction)) {
@@ -594,8 +595,7 @@ initial_monitor() {
 					}
 					
 					wait .75; // Knife Cooldown
-				}
-				else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
+				} else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
 					if(isDefined(self.structure) && self.structure.size >= 2) {
 						if(return_toggle(self.syn["utility"].interaction)) {
 							self playSoundToPlayer("zmb_powerup_activate", self);
@@ -607,8 +607,7 @@ initial_monitor() {
 						self update_scrolling(scrolling);
 					}
 					wait .15; // Scroll Cooldown
-				}
-				else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || self secondaryOffhandButtonPressed() && !self fragButtonPressed()) {
+				} else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || self secondaryOffhandButtonPressed() && !self fragButtonPressed()) {
 					if(return_toggle(self.structure[cursor].slider)) {
 						if(return_toggle(self.syn["utility"].interaction)) {
 							self playSoundToPlayer("zmb_wheel_wpn_acquired", self);
@@ -619,8 +618,7 @@ initial_monitor() {
 						self set_slider(scrolling);
 					}
 					wait .07;
-				}
-				else if(self useButtonPressed()) {
+				} else if(self useButtonPressed()) {
 					if(isDefined(self.structure[cursor].function)) {
 						if(return_toggle(self.syn["utility"].interaction)) {
 							self playSoundToPlayer("part_pickup", self);
@@ -658,8 +656,8 @@ open_menu(menu) {
 			
 	self.syn["hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 30, self.syn["utility"].color[5], 1, 1); // Outline
 	self.syn["hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 28, self.syn["utility"].color[1], 1, 2); // Main Background
-	self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
-	self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar Background
+	self.syn["hud"]["foreground"][0] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
+	self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar Background
 	
 	self set_menu(menu);
 	self create_option();
@@ -782,26 +780,26 @@ update_resize() {
 	adjust = (self.structure.size > self.syn["utility"].option_limit) ? int(((94 / self.structure.size) * limit)) : height;
 	position = (self.structure.size - 1) / (height - adjust);
 	if(!return_toggle(self.shader_option[self get_menu()])) {
-		if(!isDefined(self.syn["hud"]["foreground"][1])) {
-			self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
+		if(!isDefined(self.syn["hud"]["foreground"][0])) {
+			self.syn["hud"]["foreground"][0] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
 		}
 		
-		if(!isDefined(self.syn["hud"]["foreground"][2])) {
-			self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar
+		if(!isDefined(self.syn["hud"]["foreground"][1])) {
+			self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar
 		}
 	}
 	
-	self.syn["hud"]["background"][0] set_shader(self.syn["hud"]["background"][0].shader, self.syn["hud"]["background"][0].width, return_toggle(self.shader_option[self get_menu()]) ? 42 : (height + 16));
-	self.syn["hud"]["background"][1] set_shader(self.syn["hud"]["background"][1].shader, self.syn["hud"]["background"][1].width, return_toggle(self.shader_option[self get_menu()]) ? 40 : (height + 14));
-	self.syn["hud"]["foreground"][2] set_shader(self.syn["hud"]["foreground"][2].shader, self.syn["hud"]["foreground"][2].width, adjust);
+	self.syn["hud"]["background"][0] set_shader("white", self.syn["hud"]["background"][0].width, return_toggle(self.shader_option[self get_menu()]) ? 42 : (height + 16));
+	self.syn["hud"]["background"][1] set_shader("white", self.syn["hud"]["background"][1].width, return_toggle(self.shader_option[self get_menu()]) ? 40 : (height + 14));
+	self.syn["hud"]["foreground"][1] set_shader("white", self.syn["hud"]["foreground"][1].width, adjust);
 	
-	if(isDefined(self.syn["hud"]["foreground"][1])) {
-		self.syn["hud"]["foreground"][1].y = (self.syn["hud"]["text"][self get_cursor()].y - 2);
+	if(isDefined(self.syn["hud"]["foreground"][0])) {
+		self.syn["hud"]["foreground"][0].y = (self.syn["hud"]["text"][self get_cursor()].y - 2);
 	}
 	
-	self.syn["hud"]["foreground"][2].y = (self.syn["utility"].y_offset + 14);
+	self.syn["hud"]["foreground"][1].y = (self.syn["utility"].y_offset + 14);
 	if(self.structure.size > self.syn["utility"].option_limit) {
-	    self.syn["hud"]["foreground"][2].y += (self get_cursor() / position);
+			self.syn["hud"]["foreground"][1].y += (self get_cursor() / position);
 	}
 }
 
@@ -1492,69 +1490,68 @@ no_clip() {
 }
 
 frag_no_clip() {
-  self endon("disconnect");
-  self endon("game_ended");
+	self endon("disconnect");
+	self endon("game_ended");
 
-  if(!isDefined(self.frag_no_clip)) {
-    self.frag_no_clip = true;
+	if(!isDefined(self.frag_no_clip)) {
+		self.frag_no_clip = true;
 		self iPrintln("Frag No Clip [^2ON^7], Press ^3[{+frag}]^7 to Enter and ^3[{+melee}]^7 to Exit");
-    while (isDefined(self.frag_no_clip)) {
-      if(self fragButtonPressed()) {
-        if(!isDefined(self.frag_no_clip_loop)) {
-          self thread frag_no_clip_loop();
-				}
-      }
-      wait .05;
-    }
-  } else {
-    self.frag_no_clip = undefined;
+		while (isDefined(self.frag_no_clip)) {
+			if(self fragButtonPressed()) {
+				if(!isDefined(self.frag_no_clip_loop))
+					self thread frag_no_clip_loop();
+			}
+			wait .05;
+		}
+	} else {
+		self.frag_no_clip = undefined;
 		self iPrintln("Frag No Clip [^1OFF^7]");
 	}
 }
 
 frag_no_clip_loop() {
-  self endon("disconnect");
-  self endon("noclip_end");
-  self disableWeapons();
-  self disableOffHandWeapons();
-  self.frag_no_clip_loop = true;
+	self endon("disconnect");
+	self endon("noclip_end");
+	self disableWeapons();
+	self disableOffHandWeapons();
+	self.frag_no_clip_loop = true;
 
-  clip = spawn("script_origin", self.origin);
-  self playerLinkTo(clip);
-  if(!isDefined(self.godmode) || !self.godmode) {
-    executeCommand("god");
+	clip = spawn("script_origin", self.origin);
+	self playerLinkTo(clip);
+	if(!isDefined(self.godmode) || !self.godmode) {
+		executeCommand("god");
 		wait .01;
 		iPrintln("");
 		self.temp_god_mode = true;
 	}
 
-  while (true) {
-    vec = anglesToForward(self getPlayerAngles());
-    end = (vec[0] * 60, vec[1] * 60, vec[2] * 60);
-    if(self attackButtonPressed()) {
-      clip.origin = clip.origin + end;
+	while (true) {
+		vec = anglesToForward(self getPlayerAngles());
+		end = (vec[0] * 60, vec[1] * 60, vec[2] * 60);
+		if(self attackButtonPressed()) {
+			clip.origin = clip.origin + end;
 		}
-    if(self adsButtonPressed()) {
-      clip.origin = clip.origin - end;
+		if(self adsButtonPressed()) {
+			clip.origin = clip.origin - end;
 		}
-    if(self meleeButtonPressed()) {
-      break;
+		if(self meleeButtonPressed()) {
+			break;
 		}
-    wait .05;
-  }
+		wait .05;
+	}
 
-  clip delete();
-  self enableWeapons();
-  self enableOffhandWeapons();
+	clip delete();
+	self enableWeapons();
+	self enableOffhandWeapons();
 
-  if(self.temp_god_mode) {
-    executeCommand("god");
+	if(self.temp_god_mode) {
+		executeCommand("god");
 		wait .01;
 		iPrintln("");
 		self.temp_god_mode = undefined;
 	}
 
-  self.frag_no_clip_loop = undefined;
+	self.frag_no_clip_loop = undefined;
 }
 
 ufo_mode() {
@@ -1708,7 +1705,7 @@ forge_mode_loop() {
 					}
 				}
 				if(self fragButtonPressed()) {
-					while(self fragButtonPressed()) {   
+					while(self fragButtonPressed()) {	 
 						trace["entity"] rotateYaw(1, .01);
 						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
 						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
@@ -1716,7 +1713,7 @@ forge_mode_loop() {
 					}
 				}
 				if(self secondaryOffhandButtonPressed()) {
-					while(self secondaryOffhandButtonPressed()) {   
+					while(self secondaryOffhandButtonPressed()) {	 
 						trace["entity"] rotateRoll(1, .01);
 						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
 						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
@@ -1741,7 +1738,7 @@ freeze_box() {
 		self thread freeze_box_loop();
 	} else {
 		self iPrintln("Freeze Box [^1OFF^7]");
-		level.var_B162  = 1;
+		level.var_B162 = 1;
 		level.var_13D01 = 4;
 		level notify("stop_freeze_box");
 	}
@@ -2088,7 +2085,7 @@ one_shot_zombies() {
 		while(isDefined(self.one_shot_zombies)) {
 			forEach(zombie in get_zombies()) {
 				zombie.maxHealth = 1;
-				zombie.health	= zombie.maxHealth;
+				zombie.health = zombie.maxHealth;
 			}
 			wait 0.01;
 		}
@@ -2097,7 +2094,7 @@ one_shot_zombies() {
 		self.one_shot_zombies = undefined;
 		forEach(zombie in get_zombies()) {
 			zombie.maxHealth = level.prevHealth;
-			zombie.health	= level.prevHealth;
+			zombie.health = level.prevHealth;
 		}
 	}
 }
