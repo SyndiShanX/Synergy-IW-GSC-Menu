@@ -1,7 +1,6 @@
 #include scripts\cp\cp_weapon;
 
 init() {
-  level.private_match = !level.rankedmatch;
 	executeCommand("sv_cheats 1");
 
   level initial_precache();
@@ -2165,11 +2164,12 @@ build_custom_weapon(weapon, camo, extra_attachments) {
 
 take_weapon() {
 	self takeWeapon(self getCurrentWeapon());
-	self switchToWeapon(self getWeaponsListPrimaries()[1]);
+	self switchToWeapon(self getWeaponsListPrimaries()[0]);
 }
 
 drop_weapon() {
-	self dropitem(self getcurrentweapon());
+	self dropitem(self getCurrentWeapon());
+	self switchToWeapon(self getWeaponsListPrimaries()[0]);
 }
 
 // Zombie Options
