@@ -1830,12 +1830,6 @@ max_bank() {
 	}
 }
 
-set_xp_scale(xpScale) {
-	iPrintln("XP Multiplier Set to [^3" + xpScale + "x^7]");
-	self.xpScale = xpScale;
-	self.weaponxpscale = xpScale;
-}
-
 set_speed(value) {
 	setDvar("g_speed", value);
 }
@@ -2334,6 +2328,12 @@ set_prestige(value){
 set_rank(value) {
 	value--;
 	self setPlayerData("cp", "progression", "playerLevel", "xp", Int(TableLookup("cp/zombies/rankTable.csv", 0, value, (value == Int(TableLookup("cp/zombies/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
+}
+
+set_xp_scale(xpScale) {
+	iPrintln("XP Multiplier Set to [^3" + xpScale + "x^7]");
+	self.xpScale = xpScale;
+	self.weaponxpscale = xpScale;
 }
 
 set_max_weapons() {
