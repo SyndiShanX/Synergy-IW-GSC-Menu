@@ -1291,12 +1291,12 @@ watermark() {
 
 hide_ui() {
 	self.hide_ui = !return_toggle(self.hide_ui);
-	setDvar("cg_draw2d", !self.hide_ui);
+	executeCommand("cg_draw2D " + !self.hide_ui);
 }
 
 hide_weapon() {
 	self.hide_weapon = !return_toggle(self.hide_weapon);
-	setDvar("cg_drawgun", !self.hide_weapon);
+	executeCommand("cg_drawGun " + !self.hide_weapon);
 }
 
 // Basic Options
@@ -1379,7 +1379,7 @@ frag_no_clip_loop() {
 	self enableWeapons();
 	self enableOffhandWeapons();
 
-	if(self.temp_god_mode) {
+	if(isDefined(self.temp_god_mode)) {
 		executeCommand("god");
 		wait .01;
 		iPrintString("");
@@ -1444,25 +1444,11 @@ exo_movement() {
 	}
 }
 
-set_speed(value) {
-	executeCommand("g_speed " + value);
-}
-
-set_timescale(value) {
-	executeCommand("timescale " + value);
-}
-
-set_gravity(value) {
-	executeCommand("bg_gravity " + value);
-}
-
 forge_mode() {
 	self.forge_mode = !return_toggle(self.forge_mode);
 	if(self.forge_mode) {
-		iPrintString("Forge Mode [^2ON^7]");
+		iPrintString("Forge Mode [^2ON^7], Press ^3[{+speed_throw}]^7 to Pick Up/Drop Objects");
 		self thread forge_mode_loop();
-		wait 1;
-		iPrintString("Press [{+speed_throw}] To Pick Up/Drop Objects");
 	} else {
 		iPrintString("Forge Mode [^1OFF^7]");
 		self notify("stop_forge_mode");
@@ -1526,6 +1512,18 @@ fullbright() {
 		executeCommand("r_fullbright 0");
 		wait .01;
 	}
+}
+
+set_speed(value) {
+	executeCommand("g_speed " + value);
+}
+
+set_timescale(value) {
+	executeCommand("timescale " + value);
+}
+
+set_gravity(value) {
+	executeCommand("bg_gravity " + value);
 }
 
 // Weapon Options
