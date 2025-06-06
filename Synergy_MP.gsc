@@ -41,8 +41,6 @@ initial_variable() {
 	self.menu_color_green = 255;
 	self.menu_color_blue = 255;
 	self.color_theme = "rainbow";
-	self.map_name = getDvar("mapname");
-	self.outline_zombies = undefined;
 	
 	self.syn["visions"][0] = ["None", "AC-130", "AC-130 Enhanced", "AC-130 inverted", "Aftermath", "Aftermath Glow", "Aftermath Post", "Apex", "Default", "Default Night", "Night Vision", "Dronehive", "Endgame", "Europa", "Jackal", "MP Map Select", "Missile Cam", "MP Intro", "MP Outro", "MP Nuke", "MP Nuke Aftermath", "Frontier", "Out of Bounds", "Nuke Flash", "Optic Wave", "RC8", "Thor Bright", "Thor", "Venom Gas"];
 	self.syn["visions"][1] = ["", "ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "map_select_mp", "missilecam", "mpintro", "mpoutro", "mpnuke", "mpnuke_aftermath", "mp_frontier", "mp_out_of_bounds", "nuke_global_flash", "opticwave_mp", "rc8_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
@@ -1333,9 +1331,9 @@ god_mode() {
 	executeCommand("god");
 	wait .01;
 	if(self.god_mode) {
-		self iPrintString("God Mode [^2ON^7]");
+		iPrintString("God Mode [^2ON^7]");
 	} else {
-		self iPrintString("God Mode [^1OFF^7]");
+		iPrintString("God Mode [^1OFF^7]");
 	}
 }
 
@@ -1344,9 +1342,9 @@ no_clip() {
 	executecommand("noclip");
 	wait .01;
 	if(self.no_clip) {
-		self iPrintString("No Clip [^2ON^7]");
+		iPrintString("No Clip [^2ON^7]");
 	} else {
-		self iPrintString("No Clip [^1OFF^7]");
+		iPrintString("No Clip [^1OFF^7]");
 	}
 }
 
@@ -1421,19 +1419,19 @@ ufo_mode() {
 	executecommand("ufo");
 	wait .01;
 	if(self.ufo_mode) {
-		self iPrintString("UFO Mode [^2ON^7]");
+		iPrintString("UFO Mode [^2ON^7]");
 	} else {
-		self iPrintString("UFO Mode [^1OFF^7]");
+		iPrintString("UFO Mode [^1OFF^7]");
 	}
 }
 
 infinite_ammo() {
 	self.infinite_ammo = !return_toggle(self.infinite_ammo);
 	if(self.infinite_ammo) {
-		self iPrintString("Infinite Ammo [^2ON^7]");
+		iPrintString("Infinite Ammo [^2ON^7]");
 		self thread infinite_ammo_loop();
 	} else {
-		self iPrintString("Infinite Ammo [^1OFF^7]");
+		iPrintString("Infinite Ammo [^1OFF^7]");
 		self notify("stop_infinite_ammo");
 	}
 }
@@ -1457,12 +1455,12 @@ infinite_ammo_loop() {
 exo_movement() {
 	self.exo_movement = !return_toggle(self.exo_movement);
 	if(self.exo_movement) {
-		self iPrintString("Exo Movement [^1OFF^7]");
+		iPrintString("Exo Movement [^1OFF^7]");
 		self allowdoublejump(0);
 		self allowwallrun(0);
 		self allowdodge(0);
 	} else {
-		self iPrintString("Exo Movement [^2ON^7]");
+		iPrintString("Exo Movement [^2ON^7]");
 		self allowdoublejump(1);
 		self allowwallrun(1);
 		self allowdodge(1);
@@ -1472,12 +1470,12 @@ exo_movement() {
 out_of_bounds() {
 	self.out_of_bounds = !return_toggle(self.out_of_bounds);
 	if(!self.out_of_bounds) {
-		self iPrintString("Out of Bounds Popup [^1OFF^7]");
+		iPrintString("Out of Bounds Popup [^1OFF^7]");
 		foreach(barrier in self.out_of_bounds_barriers) {
 			barrier.origin = (0, 0, 999999);
 		}
 	} else {
-		self iPrintString("Out of Bounds Popup [^2ON^7]");
+		iPrintString("Out of Bounds Popup [^2ON^7]");
 		foreach(barrier in self.out_of_bounds_barriers) {
 			barrier.origin = barrier.oldorigin;
 		}
@@ -1487,10 +1485,10 @@ out_of_bounds() {
 earnable_nuke() {
 	self.earnable_nuke = !return_toggle(self.earnable_nuke);
 	if(self.earnable_nuke) {
-		self iPrintString("Earnable Nuke [^2ON^7]");
+		iPrintString("Earnable Nuke [^2ON^7]");
 		self thread earnable_nuke_loop();
 	} else {
-		self iPrintString("Earnable Nuke [^1OFF^7]");
+		iPrintString("Earnable Nuke [^1OFF^7]");
 		self notify("stop_earnable_nuke");
 	}
 }
@@ -1535,12 +1533,12 @@ set_gravity(value) {
 forge_mode() {
 	self.forge_mode = !return_toggle(self.forge_mode);
 	if(self.forge_mode) {
-		self iPrintString("Forge Mode [^2ON^7]");
+		iPrintString("Forge Mode [^2ON^7]");
 		self thread forge_mode_loop();
 		wait 1;
-		self iPrintString("Press [{+speed_throw}] To Pick Up/Drop Objects");
+		iPrintString("Press [{+speed_throw}] To Pick Up/Drop Objects");
 	} else {
-		self iPrintString("Forge Mode [^1OFF^7]");
+		iPrintString("Forge Mode [^1OFF^7]");
 		self notify("stop_forge_mode");
 	}
 }
@@ -1594,11 +1592,11 @@ forge_mode_loop() {
 fullbright() {
 	self.fullbright = !return_toggle(self.fullbright);
 	if(self.fullbright) {
-		self iPrintString("Fullbright [^2ON^7]");
+		iPrintString("Fullbright [^2ON^7]");
 		setdvar("r_fullbright", 1);
 		wait .01;
 	} else {
-		self iPrintString("Fullbright [^1OFF^7]");
+		iPrintString("Fullbright [^1OFF^7]");
 		setdvar("r_fullbright", 0);
 		wait .01;
 	}
@@ -1607,10 +1605,10 @@ fullbright() {
 third_person() {
 	self.third_person = !return_toggle(self.third_person);
 	if(self.third_person) {
-		self iPrintString("Third Person [^2ON^7]");
+		iPrintString("Third Person [^2ON^7]");
 		setdvar("camera_thirdPerson", 1);
 	} else {
-		self iPrintString("Third Person [^1OFF^7]");
+		iPrintString("Third Person [^1OFF^7]");
 		setdvar("camera_thirdPerson", 0);
 	}
 }
@@ -1716,7 +1714,7 @@ set_max_weapons() {
 		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "mpXP", 54300);
 		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "prestige", 3);
 		
-		self iPrintString("Set ^3" + weapon + "^7 to Max Level");
+		iPrintString("Set ^3" + weapon + "^7 to Max Level");
 
 		wait 0.175;
 	}
