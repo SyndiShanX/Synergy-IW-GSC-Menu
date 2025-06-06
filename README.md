@@ -28,7 +28,7 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 * Place it into `iw7-mod/custom_scripts/mp`
 
-* If you aren't the Host of the Game or the Menu won't Open, then Open `Synergy_MP.gsc` with a Text Editor and Replace `Username` on Line 5 with your Username
+* If you aren't the Host of the Game, the Menu won't work
 
 * You have to play with other Players or Bots, so the best option is to play Combat Training in the Public Match Section
 

@@ -1404,7 +1404,7 @@ frag_no_clip_loop() {
 	self enableWeapons();
 	self enableOffhandWeapons();
 
-	if(self.temp_god_mode) {
+	if(isDefined(self.temp_god_mode)) {
 		executeCommand("god");
 		wait .01;
 		iPrintString("");
@@ -1451,6 +1451,63 @@ infinite_ammo_loop() {
 }
 
 // Fun Options
+
+forge_mode() {
+	self.forge_mode = !return_toggle(self.forge_mode);
+	if(self.forge_mode) {
+		iPrintString("Forge Mode [^2ON^7], Press ^3[{+speed_throw}]^7 to Pick Up/Drop Objects");
+		self thread forge_mode_loop();
+	} else {
+		iPrintString("Forge Mode [^1OFF^7]");
+		self notify("stop_forge_mode");
+	}
+}
+
+forge_mode_loop() {
+	self endon("death");
+	self endon("stop_forge_mode");
+	while(true) {
+		trace = bulletTrace(self getTagOrigin("j_head"), self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 1000000, true, self);
+		if(isDefined(trace["entity"])) {
+			while(self adsButtonPressed()) {
+				trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
+				trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
+				wait .01;
+				
+				if(self attackButtonPressed()) {
+					while(self attackButtonPressed()) {
+						trace["entity"] rotatePitch(1, .01);
+						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
+						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
+						wait .01;
+					}
+				}
+				if(self fragButtonPressed()) {
+					while(self fragButtonPressed()) {	 
+						trace["entity"] rotateYaw(1, .01);
+						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
+						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
+						wait .01;
+					}
+				}
+				if(self secondaryOffhandButtonPressed()) {
+					while(self secondaryOffhandButtonPressed()) {	 
+						trace["entity"] rotateRoll(1, .01);
+						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
+						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
+						wait .01;
+					}
+				}
+				if(!isPlayer( trace["entity"]) && self meleeButtonPressed()) {
+					trace["entity"] delete();
+					wait .2;
+				}
+				wait .01;
+			}
+		}
+		wait .05;
+	}
+}
 
 exo_movement() {
 	self.exo_movement = !return_toggle(self.exo_movement);
@@ -1518,77 +1575,6 @@ earnable_nuke_loop() {
 	}
 }
 
-set_speed(value) {
-	setdvar("g_speed", value);
-}
-
-set_timescale(value) {
-	setDvar("timescale", value);
-}
-
-set_gravity(value) {
-	setDvar("bg_gravity", value);
-}
-
-forge_mode() {
-	self.forge_mode = !return_toggle(self.forge_mode);
-	if(self.forge_mode) {
-		iPrintString("Forge Mode [^2ON^7]");
-		self thread forge_mode_loop();
-		wait 1;
-		iPrintString("Press [{+speed_throw}] To Pick Up/Drop Objects");
-	} else {
-		iPrintString("Forge Mode [^1OFF^7]");
-		self notify("stop_forge_mode");
-	}
-}
-
-forge_mode_loop() {
-	self endon("death");
-	self endon("stop_forge_mode");
-	while(true) {
-		trace = bulletTrace(self getTagOrigin("j_head"), self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 1000000, true, self);
-		if(isDefined(trace["entity"])) {
-			while(self adsButtonPressed()) {
-				trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-				trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-				wait .01;
-				
-				if(self attackButtonPressed()) {
-					while(self attackButtonPressed()) {
-						trace["entity"] rotatePitch(1, .01);
-						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-						wait .01;
-					}
-				}
-				if(self fragButtonPressed()) {
-					while(self fragButtonPressed()) {	 
-						trace["entity"] rotateYaw(1, .01);
-						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-						wait .01;
-					}
-				}
-				if(self secondaryOffhandButtonPressed()) {
-					while(self secondaryOffhandButtonPressed()) {	 
-						trace["entity"] rotateRoll(1, .01);
-						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-						wait .01;
-					}
-				}
-				if(!isPlayer( trace["entity"]) && self meleeButtonPressed()) {
-					trace["entity"] delete();
-					wait .2;
-				}
-				wait .01;
-			}
-		}
-		wait .05;
-	}
-}
-
 fullbright() {
 	self.fullbright = !return_toggle(self.fullbright);
 	if(self.fullbright) {
@@ -1611,6 +1597,18 @@ third_person() {
 		iPrintString("Third Person [^1OFF^7]");
 		setdvar("camera_thirdPerson", 0);
 	}
+}
+
+set_speed(value) {
+	setdvar("g_speed", value);
+}
+
+set_timescale(value) {
+	setDvar("timescale", value);
+}
+
+set_gravity(value) {
+	setDvar("bg_gravity", value);
 }
 
 set_vision(vision) {

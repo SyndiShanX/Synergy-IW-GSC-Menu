@@ -1720,7 +1720,7 @@ frag_no_clip_loop() {
 	self enableWeapons();
 	self enableOffhandWeapons();
 
-	if(self.temp_god_mode) {
+	if(isDefined(self.temp_god_mode)) {
 		executeCommand("god");
 		wait .01;
 		iPrintln("");
@@ -1799,56 +1799,11 @@ set_points(value) {
 
 // Fun Options
 
-exo_movement() {
-	self.exo_movement = !return_toggle(self.exo_movement);
-	if(self.exo_movement) {
-		iPrintln("Exo Movement [^2ON^7]");
-		self allowdoublejump(1);
-		self allowwallrun(1);
-		self allowdodge(1);
-		self allowMantle(1);
-		self.disabledMantle = 0;
-	} else {
-		iPrintln("Exo Movement [^1OFF^7]");
-		self allowdoublejump(0);
-		self allowwallrun(0);
-		self allowdodge(0);
-		self allowMantle(0);
-		self.disabledMantle = 1;
-	}
-}
-
-max_bank() {
-	self.max_bank = !return_toggle(self.max_bank);
-	if(self.max_bank) {
-		iPrintln("Max Money in Bank [^2ON^7]");
-		self.old_bank = level.atm_amount_deposited;
-		level.atm_amount_deposited = 2147483647;
-	} else {
-		iPrintln("Max Money in Bank [^1OFF^7]");
-		level.atm_amount_deposited = self.old_bank;
-	}
-}
-
-set_speed(value) {
-	setDvar("g_speed", value);
-}
-
-set_timescale(value) {
-	setDvar("timescale", value);
-}
-
-set_gravity(value) {
-	setDvar("bg_gravity", value);
-}
-
 forge_mode() {
 	self.forge_mode = !return_toggle(self.forge_mode);
 	if(self.forge_mode) {
-		iPrintln("Forge Mode [^2ON^7]");
+		iPrintln("Forge Mode [^2ON^7], Press ^3[{+speed_throw}]^7 to Pick Up/Drop Objects");
 		self thread forge_mode_loop();
-		wait 1;
-		iPrintln("Press [{+speed_throw}] To Pick Up/Drop Objects");
 	} else {
 		iPrintln("Forge Mode [^1OFF^7]");
 		self notify("stop_forge_mode");
@@ -1901,6 +1856,37 @@ forge_mode_loop() {
 	}
 }
 
+exo_movement() {
+	self.exo_movement = !return_toggle(self.exo_movement);
+	if(self.exo_movement) {
+		iPrintln("Exo Movement [^2ON^7]");
+		self allowdoublejump(1);
+		self allowwallrun(1);
+		self allowdodge(1);
+		self allowMantle(1);
+		self.disabledMantle = 0;
+	} else {
+		iPrintln("Exo Movement [^1OFF^7]");
+		self allowdoublejump(0);
+		self allowwallrun(0);
+		self allowdodge(0);
+		self allowMantle(0);
+		self.disabledMantle = 1;
+	}
+}
+
+max_bank() {
+	self.max_bank = !return_toggle(self.max_bank);
+	if(self.max_bank) {
+		iPrintln("Max Money in Bank [^2ON^7]");
+		self.old_bank = level.atm_amount_deposited;
+		level.atm_amount_deposited = 2147483647;
+	} else {
+		iPrintln("Max Money in Bank [^1OFF^7]");
+		level.atm_amount_deposited = self.old_bank;
+	}
+}
+
 freeze_box() {
 	self.freeze_box = !return_toggle(self.freeze_box);
 	if(self.freeze_box) {
@@ -1948,6 +1934,18 @@ third_person() {
 		setDvar("camera_thirdPerson", 0);
 		scripts\cp\utility::setThirdPersonDOF(0);
 	}
+}
+
+set_speed(value) {
+	setDvar("g_speed", value);
+}
+
+set_timescale(value) {
+	setDvar("timescale", value);
+}
+
+set_gravity(value) {
+	setDvar("bg_gravity", value);
 }
 
 set_vision(vision) {
