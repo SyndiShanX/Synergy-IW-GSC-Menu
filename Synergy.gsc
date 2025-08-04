@@ -1,4 +1,6 @@
 #include scripts\cp\cp_weapon;
+#include scripts\cp\utility;
+#include scripts\engine\utility;
 
 init() {
 	executeCommand("sv_cheats 1");
@@ -20,10 +22,11 @@ initial_variable() {
 	self.cursor = [];
 	self.slider = [];
 	self.previous = [];
+	self.previous_option = undefined;
 
 	self.font = "default";
 	self.font_scale = 0.7;
-	self.option_limit = 10;
+	self.option_limit = 9;
 	self.option_spacing = 16;
 	self.x_offset = 175;
 	self.y_offset = 160;
@@ -289,6 +292,10 @@ initial_observer() {
 					if(self.interaction_enabled) {
 						self playSoundToPlayer("part_pickup", self);
 					}
+					
+					if(self.structure[cursor].function == ::new_menu) {
+						self.previous_option = self.structure[cursor].text;
+					}
 
 					if(isDefined(self.structure[cursor].array) || isDefined(self.structure[cursor].increment)) {
 						self thread execute_function(self.structure[cursor].function, isDefined(self.structure[cursor].array) ? self.structure[cursor].array[self.slider[(menu + "_" + cursor)]] : self.slider[(menu + "_" + cursor)], self.structure[cursor].parameter_1, self.structure[cursor].parameter_2);
@@ -314,7 +321,7 @@ event_system() {
 	level endon("game_ended");
 	self endon("disconnect");
 	for (;;) {
-		event_name = self scripts\engine\utility::waittill_any_return("spawned_player", "player_downed", "death", "joined_spectators");
+		event_name = self waittill_any_return("spawned_player", "player_downed", "death", "joined_spectators");
 		switch (event_name) {
 			case "spawned_player":
 				self.spawn_origin = self.origin;
@@ -360,7 +367,7 @@ event_system() {
 }
 
 session_expired() {
-	level waittill("game_ended");
+	level waitTill("game_ended");
 	level endon("game_ended");
 	foreach(index, player in level.players) {
 		if(!player has_access()) {
@@ -481,8 +488,8 @@ start_rainbow() {
 }
 
 create_text(text, font, font_scale, align_x, align_y, x_offset, y_offset, color, alpha, z_index, hide_when_in_menu) {
-	textElement = self scripts\cp\utility::createFontString(font, font_scale);
-	textElement scripts\cp\utility::setPoint(align_x, align_y, x_offset, y_offset);
+	textElement = self createFontString(font, font_scale);
+	textElement setPoint(align_x, align_y, x_offset, y_offset);
 
 	textElement.alpha = alpha;
 	textElement.sort = z_index;
@@ -534,8 +541,8 @@ create_shader(shader, align_x, align_y, x_offset, y_offset, width, height, color
 		shaderElement thread start_rainbow();
 	}
 
-	shaderElement scripts\cp\utility::setParent(level.uiParent);
-	shaderElement scripts\cp\utility::setPoint(align_x, align_y, x_offset, y_offset);
+	shaderElement setParent(level.uiParent);
+	shaderElement setPoint(align_x, align_y, x_offset, y_offset);
 	
 	shaderElement set_shader(shader, width, height);
 
@@ -1113,6 +1120,7 @@ menu_option() {
 			self add_option("Account Options", undefined, ::new_menu, "Account Options");
 			self add_option(self.syn["maps"][self.map_name] + " Options", undefined, ::new_menu, self.syn["maps"][self.map_name]);
 			self add_option("Teleport Options", undefined, ::new_menu, "Teleport Options");
+			self add_option("All Players", undefined, ::new_menu, "All Players");
 			
 			break;
 		case "Basic Options":
@@ -1152,7 +1160,6 @@ menu_option() {
 		case "Fun Options":
 			self add_menu(menu, menu.size);
 			
-			self add_toggle("Forge Mode", "Pick Up/Move some Objects", ::forge_mode, self.forge_mode);
 			self add_toggle("Exo Movement", "Enable/Disable Exo-Suits", ::exo_movement, self.exo_movement);
 			self add_toggle("Max Money in Bank", "Maxes out the Money in the ATM", ::max_bank, self.max_bank);
 			
@@ -1249,6 +1256,37 @@ menu_option() {
 			self add_toggle("Watermark", "Enable/Disable Watermark in the Top Left Corner", ::watermark, self.watermark);
 			self add_toggle("Hide UI", undefined, ::hide_ui, self.hide_ui);
 			self add_toggle("Hide Weapon", undefined, ::hide_weapon, self.hide_weapon);
+			
+			break;
+		case "All Players":
+			self add_menu(menu, menu.size);
+
+			foreach(player in level.players){
+				self add_option(player.name, undefined, ::new_menu, "Player Option", player);
+			}
+			
+			break;
+		case "Player Option":
+			self add_menu(menu, menu.size);
+
+			target = undefined;
+			foreach(player in level.players) {
+				if(player.name == self.previous_option) {
+					target = player;
+					break;
+				}
+			}
+
+			if(isDefined(target)) {
+				self add_option("Print", "Print Player Name", ::print_player_name, target);
+				self add_option("Kill", "Kill the Player", ::commit_suicide, target);
+				
+				if(!target isHost()) {
+					self add_option("Kick", "Kick the Player from the Game", ::kick_player, target);
+				}
+			} else {
+				self add_option("Player not found");
+			}
 			
 			break;
 		case "Give Perks":
@@ -1745,11 +1783,11 @@ infinite_ammo() {
 	self.infinite_ammo = !return_toggle(self.infinite_ammo);
 	if(self.infinite_ammo) {
 		iPrintln("Infinite Ammo [^2ON^7]");
-		scripts\cp\utility::enable_infinite_ammo(self.infinite_ammo);
+		enable_infinite_ammo(self.infinite_ammo);
 		self thread infinite_ammo_loop();
 	} else {
 		iPrintln("Infinite Ammo [^1OFF^7]");
-		scripts\cp\utility::enable_infinite_ammo(self.infinite_ammo);
+		enable_infinite_ammo(self.infinite_ammo);
 		self notify("stop_infinite_ammo");
 	}
 }
@@ -1798,63 +1836,6 @@ set_points(value) {
 }
 
 // Fun Options
-
-forge_mode() {
-	self.forge_mode = !return_toggle(self.forge_mode);
-	if(self.forge_mode) {
-		iPrintln("Forge Mode [^2ON^7], Press ^3[{+speed_throw}]^7 to Pick Up/Drop Objects");
-		self thread forge_mode_loop();
-	} else {
-		iPrintln("Forge Mode [^1OFF^7]");
-		self notify("stop_forge_mode");
-	}
-}
-
-forge_mode_loop() {
-	self endon("death");
-	self endon("stop_forge_mode");
-	while(true) {
-		trace = bulletTrace(self getTagOrigin("j_head"), self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 1000000, true, self);
-		if(isDefined(trace["entity"])) {
-			while(self adsButtonPressed()) {
-				trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-				trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-				wait .01;
-				
-				if(self attackButtonPressed()) {
-					while(self attackButtonPressed()) {
-						trace["entity"] rotatePitch(1, .01);
-						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-						wait .01;
-					}
-				}
-				if(self fragButtonPressed()) {
-					while(self fragButtonPressed()) {	 
-						trace["entity"] rotateYaw(1, .01);
-						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-						wait .01;
-					}
-				}
-				if(self secondaryOffhandButtonPressed()) {
-					while(self secondaryOffhandButtonPressed()) {	 
-						trace["entity"] rotateRoll(1, .01);
-						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-						wait .01;
-					}
-				}
-				if(!isPlayer( trace["entity"]) && self meleeButtonPressed()) {
-					trace["entity"] delete();
-					wait .2;
-				}
-				wait .01;
-			}
-		}
-		wait .05;
-	}
-}
 
 exo_movement() {
 	self.exo_movement = !return_toggle(self.exo_movement);
@@ -1928,11 +1909,11 @@ third_person() {
 	if(self.third_person) {
 		iPrintln("Third Person [^2ON^7]");
 		setDvar("camera_thirdPerson", 1);
-		scripts\cp\utility::setThirdPersonDOF(1);
+		setThirdPersonDOF(1);
 	} else {
 		iPrintln("Third Person [^1OFF^7]");
 		setDvar("camera_thirdPerson", 0);
-		scripts\cp\utility::setThirdPersonDOF(0);
+		setThirdPersonDOF(0);
 	}
 }
 
@@ -1952,6 +1933,18 @@ set_vision(vision) {
 	self visionSetNakedForPlayer("", 0.1);
 	wait .25;
 	self visionSetNakedForPlayer(vision, 0.1);
+}
+
+commit_suicide(target) {
+	target suicide();
+}
+
+kick_player(target) {
+	kick(target getEntityNumber());
+}
+
+print_player_name(target) {
+	iPrintln(target);
 }
 
 // Powerup Options
@@ -2114,7 +2107,7 @@ give_weapon(weapon, category, index) {
 	}
 	
 	if(self getCurrentWeapon() != weapon && self getWeaponsListPrimaries()[1] != weapon && self getWeaponsListPrimaries()[2] != weapon && self getWeaponsListPrimaries()[3] != weapon && self getWeaponsListPrimaries()[4] != weapon) {
-		if(self scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
+		if(self has_zombie_perk("perk_machine_more")) {
 			max_weapon_num = 4;
 		} else {
 			max_weapon_num = 3;
@@ -2140,16 +2133,16 @@ give_weapon(weapon, category, index) {
 }
 
 build_custom_weapon(weapon, camo, extra_attachments) {
-	weapon_name = scripts\cp\utility::getrawbaseweaponname(weapon);
+	weapon_name = getrawbaseweaponname(weapon);
 	
 	if(isDefined(self.weapon_build_models[weapon_name])) {
 		weapon_model = self.weapon_build_models[weapon_name];
 		weapon_attachments = getweaponattachments(weapon_model);
-		weapon_build = scripts\engine\utility::array_combine(extra_attachments, weapon_attachments);
-		weapon_custom = self scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(getweaponbasename(weapon), undefined, weapon_build, 1, camo);
+		weapon_build = array_combine(extra_attachments, weapon_attachments);
+		weapon_custom = self return_weapon_name_with_like_attachments(getweaponbasename(weapon), undefined, weapon_build, 1, camo);
 		return weapon_custom;
 	} else {
-		weapon_custom = scripts\engine\utility::array_combine(extra_attachments, weapon);
+		weapon_custom = array_combine(extra_attachments, weapon);
 		return weapon_custom;
 	}
 }
@@ -2258,14 +2251,14 @@ zombies_spawn() {
 	self.zombies_spawn = !return_toggle(self.zombies_spawn);
 	if(self.zombies_spawn) {
 		iPrintln("Disable Zombie Spawns [^2ON^7]");
-		scripts\engine\utility::flag_set("pause_wave_progression");
+		flag_set("pause_wave_progression");
 		level.zombies_paused = 1;
 		level.dont_resume_wave_after_solo_afterlife = 1;
 	} else {
 		iPrintln("Disable Zombie Spawns [^1OFF^7]");
 		level.dont_resume_wave_after_solo_afterlife = undefined;
 		level.zombies_paused = 0;
-		scripts\engine\utility::flag_clear("pause_wave_progression");
+		flag_clear("pause_wave_progression");
 	}
 }
 
@@ -2530,16 +2523,16 @@ move_ufo_to_center_portal() {
 		ufo setScriptablePartState("thrusters", "on");
 		wait(7);
 		ufo scriptModelPlayAnim("zmb_spaceland_ufo_idle");
-		scripts\engine\utility::flag_set("ufo_intro_reach_center_portal");
+		flag_set("ufo_intro_reach_center_portal");
 	} else {
 		level.ufo moveTo((647, 621, 901), 5);
-		level.ufo waittill("movedone");
+		level.ufo waitTill("movedone");
 	}
 }
 
 move_ufo_to_spawn() {
 	level.ufo moveTo((650, 2265, 901), 5);
-	level.ufo waittill("movedone");
+	level.ufo waitTill("movedone");
 }
 
 ufo_follow_player() {
@@ -2557,7 +2550,7 @@ ufo_follow_player_loop() {
 	self endon("stop_ufo_follow_player");
 	for(;;) {
 		level.ufo moveTo((level.players[0].origin[0], level.players[0].origin[1], 901), 5);
-		level.ufo waittill("movedone");
+		level.ufo waitTill("movedone");
 	}
 }
 
@@ -2622,8 +2615,8 @@ fuse_pick_up_monitor(param_00, param_01) {
 	}
 
 	level.num_fuse_in_possession++;
-	scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getStruct("pap_upgrade", "script_noteworthy"));
-	scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getStruct("weapon_upgrade", "script_noteworthy"));
+	scripts\cp\cp_interaction::add_to_current_interaction_list(getStruct("pap_upgrade", "script_noteworthy"));
+	scripts\cp\cp_interaction::remove_from_current_interaction_list(getStruct("weapon_upgrade", "script_noteworthy"));
 	level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
 	foreach(var_03 in level.players) {
 		var_03 setClientOmnvar("zm_special_item", 1);
@@ -2649,7 +2642,7 @@ enable_rave_mode() {
 }
 
 complete_vlad() {
-	scripts\engine\utility::flag_set("chains_unlocked");
+	flag_set("chains_unlocked");
 }
 
 // Shaolin Shuffle
@@ -2687,14 +2680,14 @@ attack_toggle_full_color() {
 // Beast from Beyond
 
 beast_open_sesame() {
-	scripts\engine\utility::flag_set("neil_head_found");
-	scripts\engine\utility::flag_set("neil_head_placed");
-	scripts\engine\utility::flag_set("restorepower_step1");
-	scripts\engine\utility::flag_set("power_on");
+	flag_set("neil_head_found");
+	flag_set("neil_head_placed");
+	flag_set("restorepower_step1");
+	flag_set("power_on");
 	level notify("power_on");
 	
-	scripts\cp\utility::set_quest_icon(6);
-	var_00 = scripts\engine\utility::getstructarray("neil_head","script_noteworthy");
+	set_quest_icon(6);
+	var_00 = getstructarray("neil_head","script_noteworthy");
 	foreach(var_02 in var_00) {
 		if(isDefined(var_02.headmodel)) {
 			var_02.headmodel delete();
@@ -2708,7 +2701,7 @@ beast_open_sesame() {
 }
 
 complete_venom_x() {
-	scripts\engine\utility::flag_set("completepuzzles_step4");
+	flag_set("completepuzzles_step4");
 	getent("venomx_locker_door","script_noteworthy") rotateTo((0,105,0),0.1);
 	level.completed_venomx_pap1_challenges = 1;
 	level.completed_venomx_pap2_challenges = 1;

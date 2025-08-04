@@ -1,5 +1,6 @@
 #include scripts\mp\utility;
 #include scripts\mp\weapons;
+#include scripts\engine\utility;
 
 init() {
 	executeCommand("sv_cheats 1");
@@ -21,6 +22,7 @@ initial_variable() {
 	self.cursor = [];
 	self.slider = [];
 	self.previous = [];
+	self.previous_option = undefined;
 
 	self.font = "default";
 	self.font_scale = 0.7;
@@ -144,6 +146,10 @@ initial_observer() {
 					if(self.interaction_enabled) {
 						self playSoundToPlayer("mp_killstreak_screen_start", self);
 					}
+					
+					if(self.structure[cursor].function == ::new_menu) {
+						self.previous_option = self.structure[cursor].text;
+					}
 
 					if(isDefined(self.structure[cursor].array) || isDefined(self.structure[cursor].increment)) {
 						self thread execute_function(self.structure[cursor].function, isDefined(self.structure[cursor].array) ? self.structure[cursor].array[self.slider[(menu + "_" + cursor)]] : self.slider[(menu + "_" + cursor)], self.structure[cursor].parameter_1, self.structure[cursor].parameter_2);
@@ -169,7 +175,7 @@ event_system() {
 	level endon("game_ended");
 	self endon("disconnect");
 	for (;;) {
-		event_name = self scripts\engine\utility::waittill_any_return("spawned_player", "player_downed", "death", "joined_spectators");
+		event_name = self waittill_any_return("spawned_player", "player_downed", "death", "joined_spectators");
 		switch (event_name) {
 			case "spawned_player":
 				self.spawn_origin = self.origin;
@@ -215,7 +221,7 @@ event_system() {
 }
 
 session_expired() {
-	level waittill("game_ended");
+	level waitTill("game_ended");
 	level endon("game_ended");
 	foreach(index, player in level.players) {
 		if(!player has_access()) {
@@ -970,6 +976,7 @@ menu_option() {
 			self add_option("Give Killstreaks", undefined, ::new_menu, "Give Killstreaks");
 			self add_option("Account Options", undefined, ::new_menu, "Account Options");
 			self add_option("Menu Options", undefined, ::new_menu, "Menu Options");
+			self add_option("All Players", undefined, ::new_menu, "All Players");
 			
 			break;
 		case "Basic Options":
@@ -990,8 +997,6 @@ menu_option() {
 			break;
 		case "Fun Options":
 			self add_menu(menu, menu.size);
-			
-			self add_toggle("Forge Mode", "Pick Up/Move some Objects", ::forge_mode, self.forge_mode);
 			
 			self add_toggle("Disable Exo Movement", "Disable/Enable Exo-Suits", ::exo_movement, self.exo_movement);
 			self add_toggle("Enable Out of Bounds Popup", "Enables/Disables the Out of Bounds Popup", ::out_of_bounds, self.out_of_bounds);
@@ -1052,6 +1057,37 @@ menu_option() {
 			self add_toggle("Watermark", "Enable/Disable Watermark in the Top Left Corner", ::watermark, self.watermark);
 			self add_toggle("Hide UI", undefined, ::hide_ui, self.hide_ui);
 			self add_toggle("Hide Weapon", undefined, ::hide_weapon, self.hide_weapon);
+			
+			break;
+		case "All Players":
+			self add_menu(menu, menu.size);
+
+			foreach(player in level.players){
+				self add_option(player.name, undefined, ::new_menu, "Player Option", player);
+			}
+			
+			break;
+		case "Player Option":
+			self add_menu(menu, menu.size);
+
+			target = undefined;
+			foreach(player in level.players) {
+				if(player.name == self.previous_option) {
+					target = player;
+					break;
+				}
+			}
+
+			if(isDefined(target)) {
+				self add_option("Print", "Print Player Name", ::iPrintString, target);
+				self add_option("Kill", "Kill the Player", ::commit_suicide, target);
+				
+				if(!target isHost()) {
+					self add_option("Kick", "Kick the Player from the Game", ::kick_player, target);
+				}
+			} else {
+				self add_option("Player not found");
+			}
 			
 			break;
 		case "Give Perks":
@@ -1437,8 +1473,8 @@ infinite_ammo() {
 }
 
 infinite_ammo_loop() {
-	self endOn("stop_infinite_ammo");
-	self endOn("game_ended");
+	self endon("stop_infinite_ammo");
+	self endon("game_ended");
 	
 	for(;;) {
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999);
@@ -1451,63 +1487,6 @@ infinite_ammo_loop() {
 }
 
 // Fun Options
-
-forge_mode() {
-	self.forge_mode = !return_toggle(self.forge_mode);
-	if(self.forge_mode) {
-		iPrintString("Forge Mode [^2ON^7], Press ^3[{+speed_throw}]^7 to Pick Up/Drop Objects");
-		self thread forge_mode_loop();
-	} else {
-		iPrintString("Forge Mode [^1OFF^7]");
-		self notify("stop_forge_mode");
-	}
-}
-
-forge_mode_loop() {
-	self endon("death");
-	self endon("stop_forge_mode");
-	while(true) {
-		trace = bulletTrace(self getTagOrigin("j_head"), self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 1000000, true, self);
-		if(isDefined(trace["entity"])) {
-			while(self adsButtonPressed()) {
-				trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-				trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-				wait .01;
-				
-				if(self attackButtonPressed()) {
-					while(self attackButtonPressed()) {
-						trace["entity"] rotatePitch(1, .01);
-						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-						wait .01;
-					}
-				}
-				if(self fragButtonPressed()) {
-					while(self fragButtonPressed()) {	 
-						trace["entity"] rotateYaw(1, .01);
-						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-						wait .01;
-					}
-				}
-				if(self secondaryOffhandButtonPressed()) {
-					while(self secondaryOffhandButtonPressed()) {	 
-						trace["entity"] rotateRoll(1, .01);
-						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-						wait .01;
-					}
-				}
-				if(!isPlayer( trace["entity"]) && self meleeButtonPressed()) {
-					trace["entity"] delete();
-					wait .2;
-				}
-				wait .01;
-			}
-		}
-		wait .05;
-	}
-}
 
 exo_movement() {
 	self.exo_movement = !return_toggle(self.exo_movement);
@@ -1551,8 +1530,8 @@ earnable_nuke() {
 }
 
 earnable_nuke_loop() {
-	self endOn("stop_earnable_nuke");
-	self endOn("game_ended");
+	self endon("stop_earnable_nuke");
+	self endon("game_ended");
 	
 	for(;;) {
 		if(self.previousKillNum < self.pers["cur_kill_streak"]) {
@@ -1579,11 +1558,11 @@ fullbright() {
 	self.fullbright = !return_toggle(self.fullbright);
 	if(self.fullbright) {
 		iPrintString("Fullbright [^2ON^7]");
-		setdvar("r_fullbright", 1);
+		setDvar("r_fullbright", 1);
 		wait .01;
 	} else {
 		iPrintString("Fullbright [^1OFF^7]");
-		setdvar("r_fullbright", 0);
+		setDvar("r_fullbright", 0);
 		wait .01;
 	}
 }
@@ -1592,15 +1571,15 @@ third_person() {
 	self.third_person = !return_toggle(self.third_person);
 	if(self.third_person) {
 		iPrintString("Third Person [^2ON^7]");
-		setdvar("camera_thirdPerson", 1);
+		setDvar("camera_thirdPerson", 1);
 	} else {
 		iPrintString("Third Person [^1OFF^7]");
-		setdvar("camera_thirdPerson", 0);
+		setDvar("camera_thirdPerson", 0);
 	}
 }
 
 set_speed(value) {
-	setdvar("g_speed", value);
+	setDvar("g_speed", value);
 }
 
 set_timescale(value) {
@@ -1615,6 +1594,14 @@ set_vision(vision) {
 	self visionSetNakedForPlayer("", 0.1);
 	wait .25;
 	self visionSetNakedForPlayer(vision, 0.1);
+}
+
+commit_suicide(target) {
+	target suicide();
+}
+
+kick_player(target) {
+	kick(target getEntityNumber());
 }
 
 // Killstreaks
@@ -1694,9 +1681,9 @@ set_rank(value) {
 
 set_xp_scale(xpScale) {
 	iPrintString("XP Multiplier Set to [^3" + xpScale + "x^7]");
-	setdvar("online_mp_xpscale", xpScale);
-	setdvar("online_mp_party_xpscale", xpScale);
-	setdvar("online_mp_weapon_xpscale", xpScale);
+	setDvar("online_mp_xpscale", xpScale);
+	setDvar("online_mp_party_xpscale", xpScale);
+	setDvar("online_mp_weapon_xpscale", xpScale);
 
 	self.rankxpmultipliers["online_mp_xpscale"] = xpScale;
 	self.weaponrankxpmultipliers["online_mp_party_weapon_xpscale"] = xpScale;
