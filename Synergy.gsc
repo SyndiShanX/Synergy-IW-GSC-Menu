@@ -1091,7 +1091,7 @@ update_progression() {
 update_scrollbar() {
 	maximum = min(self.structure.size, self.option_limit);
 	height = int((maximum * self.option_spacing));
-	adjustment = self.structure.size > self.option_limit ? ((180 / self.structure.size) * maximum) : height;
+	adjustment = self.structure.size > self.option_limit ? ((self.menu["foreground"].height / self.structure.size) * maximum) : height;
 	position = self.structure.size > self.option_limit ? ((self.structure.size - 1) / (height - adjustment)) : 0;
 	if(isDefined(self.menu["cursor"])) {
 		self.menu["cursor"].y = (self.menu["text"][self get_cursor()].y - 4);
@@ -1638,7 +1638,6 @@ modify_menu_position(offset, axis) {
 	}
 	self close_menu();
 	self open_menu();
-	self.menu["title"].x = 264.2;
 }
 
 set_menu_rainbow() {
