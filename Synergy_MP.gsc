@@ -8,6 +8,9 @@ init() {
 	level initial_precache();
 	level thread player_connect();
 	level thread create_rainbow_color();
+	
+	level.originalCallbackPlayerDamage = level.callbackPlayerDamage; //doktorSAS - Retropack
+	level.callbackPlayerDamage = ::player_damage_callback; // Retropack
 
 	level thread session_expired();
 }
@@ -262,7 +265,7 @@ player_damage_callback(inflictor, attacker, damage, flags, death_reason, weapon,
 		return;
 	}
 
-	[[level.OriginalCallbackPlayerDamage]](inflictor, attacker, damage, flags, death_reason, weapon, point, direction, hit_location, time_offset);
+	[[level.originalCallbackPlayerDamage]](inflictor, attacker, damage, flags, death_reason, weapon, point, direction, hit_location, time_offset);
 }
 
 player_downed(einflictor, eattacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
@@ -1382,8 +1385,6 @@ hide_weapon() {
 
 god_mode() {
 	self.god_mode = !return_toggle(self.god_mode);
-	executeCommand("god");
-	wait .01;
 	if(self.god_mode) {
 		iPrintString("God Mode [^2ON^7]");
 	} else {
@@ -1435,9 +1436,7 @@ frag_no_clip_loop() {
 	clip = spawn("script_origin", self.origin);
 	self playerLinkTo(clip);
 	if(!isDefined(self.god_mode) || !self.god_mode) {
-		executeCommand("god");
-		wait .01;
-		iPrintString("");
+		god_mode();
 		self.temp_god_mode = true;
 	}
 
@@ -1461,9 +1460,7 @@ frag_no_clip_loop() {
 	self enableOffhandWeapons();
 
 	if(isDefined(self.temp_god_mode)) {
-		executeCommand("god");
-		wait .01;
-		iPrintString("");
+		god_mode();
 		self.temp_god_mode = undefined;
 	}
 

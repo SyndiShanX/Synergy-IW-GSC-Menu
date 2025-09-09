@@ -285,7 +285,7 @@ player_damage_callback(inflictor, attacker, damage, flags, death_reason, weapon,
 		return;
 	}
 
-	[[level.OriginalCallbackPlayerDamage]](inflictor, attacker, damage, flags, death_reason, weapon, point, direction, hit_location, time_offset);
+	[[level.originalCallbackPlayerDamage]](inflictor, attacker, damage, flags, death_reason, weapon, point, direction, hit_location, time_offset);
 }
 
 player_downed(einflictor, eattacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
