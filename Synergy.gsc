@@ -974,10 +974,6 @@ display_option() {
 			self.menu["toggle"][0] = [];
 		}
 
-		if(!isDefined(self.menu["toggle"][1])) {
-			self.menu["toggle"][1] = [];
-		}
-
 		menu = self get_menu();
 		cursor = self get_cursor();
 		maximum = min(self.structure.size, self.option_limit);
@@ -991,7 +987,7 @@ display_option() {
 			if(isDefined(self.structure[index].toggle)) { // Toggle Off
 				self.menu["toggle"][0][index] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 14), (self.y_offset + ((a * self.option_spacing) + 19)), 10, 10, (0.25, 0.25, 0.25), 1, 9);
 				if(self.structure[index].toggle) { // Toggle On
-					self.menu["toggle"][1][index] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 13), (self.y_offset + ((a * self.option_spacing) + 20)), 8, 8, (1, 1, 1), 1, 10);
+					self.menu["toggle"][0][index].color = (1, 1, 1);
 				}
 			}
 
