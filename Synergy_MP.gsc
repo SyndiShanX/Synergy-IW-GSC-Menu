@@ -8,7 +8,7 @@ init() {
 	level initial_precache();
 	level thread player_connect();
 	level thread create_rainbow_color();
-	
+
 	level.originalCallbackPlayerDamage = level.callbackPlayerDamage; //doktorSAS - Retropack
 	level.callbackPlayerDamage = ::player_damage_callback; // Retropack
 
@@ -654,7 +654,7 @@ is_locked() {
 
 empty_option() {
 	option = ["Nothing To See Here!", "Quiet Here, Isn't It?", "Oops, Nothing Here Yet!", "Bit Empty, Don't You Think?"];
-	return option[randomInt(option.size)];
+	return option[randomint(option.size)];
 }
 
 empty_function() {}
@@ -1401,7 +1401,6 @@ no_clip() {
 
 frag_no_clip() {
 	self endon("disconnect");
-
 	self endon("game_ended");
 
 	if(!isDefined(self.frag_no_clip)) {
@@ -1423,7 +1422,6 @@ frag_no_clip() {
 
 frag_no_clip_loop() {
 	self endon("disconnect");
-
 	self endon("noclip_end");
 	self disableWeapons();
 	self disableOffHandWeapons();
@@ -1432,7 +1430,7 @@ frag_no_clip_loop() {
 	clip = spawn("script_origin", self.origin);
 	self playerLinkTo(clip);
 	if(!isDefined(self.god_mode) || !self.god_mode) {
-		god_mode();
+		self.god_mode = true;
 		self.temp_god_mode = true;
 	}
 
@@ -1456,7 +1454,7 @@ frag_no_clip_loop() {
 	self enableOffhandWeapons();
 
 	if(isDefined(self.temp_god_mode)) {
-		god_mode();
+		self.god_mode = false;
 		self.temp_god_mode = undefined;
 	}
 
@@ -1689,7 +1687,7 @@ set_prestige(value){
 
 set_rank(value) {
 	value--;
-	self setPlayerData("mp", "progression", "playerLevel", "xp", Int(TableLookup("mp/rankTable.csv", 0, value, (value == Int(TableLookup("mp/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
+	self setPlayerData("mp", "progression", "playerLevel", "xp", int(TableLookup("mp/rankTable.csv", 0, value, (value == int(TableLookup("mp/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
 }
 
 set_xp_scale(xpScale) {

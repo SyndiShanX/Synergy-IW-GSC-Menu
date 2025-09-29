@@ -664,7 +664,7 @@ is_locked() {
 
 empty_option() {
 	option = ["Nothing To See Here!", "Quiet Here, Isn't It?", "Oops, Nothing Here Yet!", "Bit Empty, Don't You Think?"];
-	return option[randomInt(option.size)];
+	return option[randomint(option.size)];
 }
 
 empty_function() {}
@@ -1329,7 +1329,6 @@ no_clip() {
 
 frag_no_clip() {
 	self endon("disconnect");
-
 	self endon("game_ended");
 
 	if(!isDefined(self.frag_no_clip)) {
@@ -1351,7 +1350,6 @@ frag_no_clip() {
 
 frag_no_clip_loop() {
 	self endon("disconnect");
-
 	self endon("noclip_end");
 	self disableWeapons();
 	self disableOffHandWeapons();
