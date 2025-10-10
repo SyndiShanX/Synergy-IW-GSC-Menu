@@ -9,6 +9,8 @@ init() {
 	level thread player_connect();
 	level thread create_rainbow_color();
 
+	wait 0.5;
+
 	level.originalCallbackPlayerDamage = level.callbackPlayerDamage; //doktorSAS - Retropack
 	level.callbackPlayerDamage = ::player_damage_callback; // Retropack
 
@@ -487,7 +489,7 @@ create_rainbow_color() {
 		}
 
 		level.rainbow_color = (r/255, g/255, b/255);
-		wait .05;
+		wait 0.05;
 	}
 }
 
@@ -497,7 +499,7 @@ start_rainbow() {
 	while(isDefined(self)) {
 		self fadeOverTime(.05);
 		self.color = level.rainbow_color;
-		wait .05;
+		wait 0.05;
 	}
 }
 
@@ -1707,7 +1709,7 @@ god_mode() {
 no_clip() {
 	self.no_clip = !return_toggle(self.no_clip);
 	executecommand("noclip");
-	wait .01;
+	wait 0.01;
 	if(self.no_clip) {
 		iPrintln("No Clip [^2ON^7]");
 	} else {
@@ -1728,7 +1730,7 @@ frag_no_clip() {
 					self thread frag_no_clip_loop();
 				}
 			}
-			wait .05;
+			wait 0.05;
 		}
 	} else {
 		self.frag_no_clip = undefined;
@@ -1762,7 +1764,7 @@ frag_no_clip_loop() {
 		if(self meleeButtonPressed()) {
 			break;
 		}
-		wait .05;
+		wait 0.05;
 	}
 
 	clip delete();
@@ -1780,7 +1782,7 @@ frag_no_clip_loop() {
 ufo_mode() {
 	self.ufo_mode = !return_toggle(self.ufo_mode);
 	executecommand("ufo");
-	wait .01;
+	wait 0.01;
 	if(self.ufo_mode) {
 		iPrintln("UFO Mode [^2ON^7]");
 	} else {
@@ -1811,7 +1813,7 @@ infinite_ammo_loop() {
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 		self scripts\cp\powers\coop_powers::power_adjustcharges(2, "primary", 2);
 		self scripts\cp\powers\coop_powers::power_adjustcharges(2, "secondary", 2);
-		wait .2;
+		wait 0.2;
 	}
 }
 
@@ -1905,11 +1907,11 @@ fullbright() {
 	if(self.fullbright) {
 		iPrintln("Fullbright [^2ON^7]");
 		setDvar("r_fullbright", 1);
-		wait .01;
+		wait 0.01;
 	} else {
 		iPrintln("Fullbright [^1OFF^7]");
 		setDvar("r_fullbright", 0);
-		wait .01;
+		wait 0.01;
 	}
 }
 
@@ -1940,7 +1942,7 @@ set_gravity(value) {
 
 set_vision(vision) {
 	self visionSetNakedForPlayer("", 0.1);
-	wait .25;
+	wait 0.25;
 	self visionSetNakedForPlayer(vision, 0.1);
 }
 
@@ -1981,9 +1983,9 @@ shoot_powerups_loop() {
 		while(self attackButtonPressed()) {
 			powerup = self.syn["powerups"][1][randomint(self.syn["powerups"][1].size)];
 			level scripts\cp\loot::drop_loot(self.origin + anglesToForward(self.angles) * 115, undefined, powerup, undefined, undefined, 0);
-			wait .5;
+			wait 0.5;
 		}
-		wait .05;
+		wait 0.05;
 	}
 }
 
@@ -2514,7 +2516,7 @@ play_ufo_start_vfx() {
 	playSoundAtPos((-1198, -2137, 1946), "zmb_ufo_break_free_ice");
 	playFx(level._effect["vfx_ufo_snow"], snow_vfx_1);
 	playFx(level._effect["vfx_ufo_snow"], snow_vfx_2);
-	wait .8;
+	wait 0.8;
 	playFx(level._effect["vfx_ufo_snow"], snow_vfx_3);
 }
 
@@ -2695,16 +2697,16 @@ beast_open_sesame() {
 	level notify("power_on");
 
 	set_quest_icon(6);
-	var_00 = getstructarray("neil_head","script_noteworthy");
-	foreach(var_02 in var_00) {
-		if(isDefined(var_02.headmodel)) {
-			var_02.headmodel delete();
+	heads = getStructArray("neil_head", "script_noteworthy");
+	foreach(head in heads) {
+		if(isDefined(head.headmodel)) {
+			head.headmodel delete();
 		}
 	}
 
 	foreach(door in level.allslidingdoors) {
 		door.player_opened = 1;
-		thread [[level.interactions[door.script_noteworthy].activation_func]](door,undefined);
+		thread [[level.interactions[door.script_noteworthy].activation_func]](door, undefined);
 	}
 }
 

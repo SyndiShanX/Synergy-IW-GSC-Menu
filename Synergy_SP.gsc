@@ -356,7 +356,7 @@ create_rainbow_color() {
 		}
 
 		level.rainbow_color = (r/255, g/255, b/255);
-		wait .05;
+		wait 0.05;
 	}
 }
 
@@ -366,7 +366,7 @@ start_rainbow() {
 	while(isDefined(self)) {
 		self fadeOverTime(.05);
 		self.color = level.rainbow_color;
-		wait .05;
+		wait 0.05;
 	}
 }
 
@@ -1308,7 +1308,7 @@ hide_weapon() {
 god_mode() {
 	self.god_mode = !return_toggle(self.god_mode);
 	executeCommand("god");
-	wait .01;
+	wait 0.01;
 	if(self.god_mode) {
 		iPrintString("God Mode [^2ON^7]");
 	} else {
@@ -1319,7 +1319,7 @@ god_mode() {
 no_clip() {
 	self.no_clip = !return_toggle(self.no_clip);
 	executecommand("noclip");
-	wait .01;
+	wait 0.01;
 	if(self.no_clip) {
 		iPrintString("No Clip [^2ON^7]");
 	} else {
@@ -1340,7 +1340,7 @@ frag_no_clip() {
 					self thread frag_no_clip_loop();
 				}
 			}
-			wait .05;
+			wait 0.05;
 		}
 	} else {
 		self.frag_no_clip = undefined;
@@ -1359,7 +1359,7 @@ frag_no_clip_loop() {
 	self playerLinkTo(clip);
 	if(!isDefined(self.god_mode) || !self.god_mode) {
 		executeCommand("god");
-		wait .01;
+		wait 0.01;
 		iPrintString("");
 		self.temp_god_mode = true;
 	}
@@ -1376,7 +1376,7 @@ frag_no_clip_loop() {
 		if(self meleeButtonPressed()) {
 			break;
 		}
-		wait .05;
+		wait 0.05;
 	}
 
 	clip delete();
@@ -1385,7 +1385,7 @@ frag_no_clip_loop() {
 
 	if(isDefined(self.temp_god_mode)) {
 		executeCommand("god");
-		wait .01;
+		wait 0.01;
 		iPrintString("");
 		self.temp_god_mode = undefined;
 	}
@@ -1396,7 +1396,7 @@ frag_no_clip_loop() {
 ufo_mode() {
 	self.ufo_mode = !return_toggle(self.ufo_mode);
 	executecommand("ufo");
-	wait .01;
+	wait 0.01;
 	if(self.ufo_mode) {
 		iPrintString("UFO Mode [^2ON^7]");
 	} else {
@@ -1423,7 +1423,7 @@ infinite_ammo_loop() {
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999);
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
-		wait .2;
+		wait 0.2;
 	}
 }
 
@@ -1453,11 +1453,11 @@ fullbright() {
 	if(self.fullbright) {
 		iPrintString("Fullbright [^2ON^7]");
 		executeCommand("r_fullbright 1");
-		wait .01;
+		wait 0.01;
 	} else {
 		iPrintString("Fullbright [^1OFF^7]");
 		executeCommand("r_fullbright 0");
-		wait .01;
+		wait 0.01;
 	}
 }
 
