@@ -50,8 +50,8 @@ initial_variable() {
 	self.map_name = getDvar("mapname");
 	self.outline_zombies = undefined;
 
-	self.syn["visions"][0] = ["None", "AC-130", "AC-130 Enhanced", "AC-130 inverted", "Aftermath", "Aftermath Glow", "Aftermath Post", "Apex", "Black & White", "Lobby", "Afterlife", "Zombies", "Zombies in Spaceland", "Zombies in Spaceland Black & White", "Zombies in Spaceland Ghost Path", "Zombies in Spaceland Basement", "Zombies in Spaceland Triton", "Default", "Default Night", "Night Vision", "Dronehive", "Endgame", "Europa", "Jackal", "Last Stand", "MP Map Select", "Missile Cam", "MP Intro", "MP Outro", "MP Nuke", "MP Nuke Aftermath", "Frontier", "Out of Bounds", "Nuke Flash", "Optic Wave", "RC8", "Thor Bright", "Thor", "Venom Gas"];
-	self.syn["visions"][1] = ["", "ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb_afterlife", "cp_zmb_alien", "cp_zmb", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpoutro", "mpnuke", "mpnuke_aftermath", "mp_frontier", "mp_out_of_bounds", "nuke_global_flash", "opticwave_mp", "rc8_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
+	self.syn["visions"][0] = ["", "ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb_afterlife", "cp_zmb_alien", "cp_zmb", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpoutro", "mpnuke", "mpnuke_aftermath", "mp_frontier", "mp_out_of_bounds", "nuke_global_flash", "opticwave_mp", "rc8_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
+	self.syn["visions"][1] = ["None", "AC-130", "AC-130 Enhanced", "AC-130 inverted", "Aftermath", "Aftermath Glow", "Aftermath Post", "Apex", "Black & White", "Lobby", "Afterlife", "Zombies", "Zombies in Spaceland", "Zombies in Spaceland Black & White", "Zombies in Spaceland Ghost Path", "Zombies in Spaceland Basement", "Zombies in Spaceland Triton", "Default", "Default Night", "Night Vision", "Dronehive", "Endgame", "Europa", "Jackal", "Last Stand", "MP Map Select", "Missile Cam", "MP Intro", "MP Outro", "MP Nuke", "MP Nuke Aftermath", "Frontier", "Out of Bounds", "Nuke Flash", "Optic Wave", "RC8", "Thor Bright", "Thor", "Venom Gas"];
 
 	self.syn["powerups"][0] = ["Nuke", "Max Ammo", "Instakill", "Double Money", "Carpenter", "Pack-a-Punch", "Fire Sale", "Infinite Ammo", "Infinite Grenades"];
 	self.syn["powerups"][1] = ["kill_50", "ammo_max", "instakill_30", "cash_2", "board_windows", "upgrade_weapons", "fire_30", "infinite_20", "grenade_30"];
@@ -1350,7 +1350,7 @@ menu_option() {
 			self add_menu(menu, menu.size);
 
 			for(i = 0; i < self.syn["visions"][0].size; i++) {
-				self add_option(self.syn["visions"][0][i], undefined, ::set_vision, self.syn["visions"][1][i]);
+				self add_option(self.syn["visions"][1][i], undefined, ::set_vision, self.syn["visions"][0][i]);
 			}
 
 			break;
@@ -2205,7 +2205,6 @@ spawn_zombie(archetype) {
 kill_all_zombies() {
 	foreach(zombie in get_zombies()) {
 		zombie doDamage(zombie.health + 999, zombie.origin, self, self, "MOD_UNKNOWN", "none");
-		iPrintln("");
 	}
 }
 
@@ -2287,7 +2286,7 @@ set_outline_color(color) {
 		self.outline_color = 5;
 	}
 
-	if(!isDefined(self.outline_zombies)) {
+	if(!isDefined(self.outline_zombies) && color != "None") {
 		iPrintln("Zombie ESP [^2ON^7]");
 		self.outline_zombies = true;
 		outline_zombies_loop();
@@ -2328,7 +2327,7 @@ set_prestige(value){
 
 set_rank(value) {
 	value--;
-	self setPlayerData("cp", "progression", "playerLevel", "xp", int(TableLookup("cp/zombies/rankTable.csv", 0, value, (value == int(TableLookup("cp/zombies/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
+	self setPlayerData("cp", "progression", "playerLevel", "xp", int(tableLookup("cp/zombies/rankTable.csv", 0, value, (value == int(tableLookup("cp/zombies/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
 }
 
 set_xp_scale(xpScale) {
@@ -2339,7 +2338,7 @@ set_xp_scale(xpScale) {
 
 set_max_weapons() {
 	for(x = 1; x < 62; x++) {
-		weapon = TableLookup("mp/statstable.csv", 0, x, 4);
+		weapon = tableLookup("mp/statstable.csv", 0, x, 4);
 
 		if(!isDefined(weapon) || weapon == "") {
 			continue;
