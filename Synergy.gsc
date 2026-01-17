@@ -266,6 +266,10 @@ initial_observer() {
 				while(self meleeButtonPressed()) {
 					wait 0.2;
 				}
+				
+				while(scripts\engine\utility::string_starts_with(self getCurrentWeapon(), "iw7_knife")) {
+					wait 0.2;
+				}
 			} else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
 				if(isDefined(self.structure) && self.structure.size >= 2) {
 					if(self.interaction_enabled) {
