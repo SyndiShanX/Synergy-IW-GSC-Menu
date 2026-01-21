@@ -277,10 +277,10 @@ initialize_menu() {
 						self.hud_created = true;
 
 						self.menu["title"] set_text("Controls");
-						self.menu["option_1"] set_text("Open: ^3ADS ^7and ^3Melee");
-						self.menu["option_2"] set_text("Scroll: ^3ADS ^7and ^3Shoot");
-						self.menu["option_3"] set_text("Select: ^3Interact ^7Back: ^3Melee");
-						self.menu["option_4"] set_text("Sliders: ^3Heal^7 ^7and ^3Equipment");
+						self.menu["option_1"] set_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]");
+						self.menu["option_2"] set_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]");
+						self.menu["option_3"] set_text("Select: ^3[{+activate}] ^7Back: ^3[{+melee}]");
+						self.menu["option_4"] set_text("Sliders: ^3[{+smoke}] ^7and ^3[{+frag}]");
 						self.menu["option_5"].alpha = 0;
 						self.menu["option_6"].alpha = 0;
 						self.menu["option_7"].alpha = 0;
