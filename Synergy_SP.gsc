@@ -1130,10 +1130,6 @@ menu_option() {
 			self add_increment("Green", "Set the Green Value for the Menu Outline Color", ::set_menu_color, 255, 1, 255, 1, "Green");
 			self add_increment("Blue", "Set the Blue Value for the Menu Outline Color", ::set_menu_color, 255, 1, 255, 1, "Blue");
 
-			self add_toggle("Watermark", "Enable/Disable Watermark in the Top Left Corner", ::watermark, self.watermark);
-			self add_toggle("Hide UI", undefined, ::hide_ui, self.hide_ui);
-			self add_toggle("Hide Weapon", undefined, ::hide_weapon, self.hide_weapon);
-
 			break;
 		case "Give Weapons":
 			self add_menu(menu);
@@ -1294,11 +1290,6 @@ set_menu_rainbow() {
 		self.menu["border"].color = self.color_theme;
 		self.menu["separator_1"].color = self.color_theme;
 		self.menu["separator_2"].color = self.color_theme;
-
-		if(isDefined(self.syn["watermark"])) {
-			self.syn["watermark"] thread start_rainbow();
-			self.syn["watermark"].color = self.color_theme;
-		}
 	}
 }
 
@@ -1325,37 +1316,6 @@ set_menu_color(value, color) {
 	self.menu["border"].color = self.color_theme;
 	self.menu["separator_1"].color = self.color_theme;
 	self.menu["separator_2"].color = self.color_theme;
-
-	if(isDefined(self.syn["watermark"])) {
-		self.syn["watermark"] notify("stop_rainbow");
-		self.syn["watermark"].rainbow_enabled = false;
-		self.syn["watermark"].color = self.color_theme;
-	}
-}
-
-watermark() {
-	self.watermark = !return_toggle(self.watermark);
-	if(self.watermark) {
-		iPrintString("Watermark [^2ON^7]");
-		if(!isDefined(self.syn["watermark"])) {
-			self.syn["watermark"] = self create_text("SyndiShanX", self.font, 1, "TOP_LEFT", "TOPCENTER", -425, 10, self.color_theme, 1, 3);
-		} else {
-			self.syn["watermark"].alpha = 1;
-		}
-	} else {
-		iPrintString("Watermark [^1OFF^7]");
-		self.syn["watermark"].alpha = 0;
-	}
-}
-
-hide_ui() {
-	self.hide_ui = !return_toggle(self.hide_ui);
-	setDvar("cg_draw2d", !self.hide_ui);
-}
-
-hide_weapon() {
-	self.hide_weapon = !return_toggle(self.hide_weapon);
-	setDvar("cg_drawgun", !self.hide_weapon);
 }
 
 // Basic Options
