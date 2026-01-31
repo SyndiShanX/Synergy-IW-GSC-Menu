@@ -353,14 +353,12 @@ input_manager() {
 					wait 0.2;
 				}
 			} else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
-
 				self playSoundToPlayer("zmb_powerup_activate", self);
 
 				scroll_cursor(set_variable(self attackButtonPressed(), "down", "up"));
 
 				wait (0.2);
 			} else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || !self fragButtonPressed() && self secondaryOffhandButtonPressed()) {
-
 				self playSoundToPlayer("mp_ability_ready_R1", self);
 
 				if(isDefined(self.structure[self.cursor_index].array) || isDefined(self.structure[self.cursor_index].increment)) {
@@ -374,7 +372,7 @@ input_manager() {
 				self.saved_trigger[self.current_menu] = self.previous_trigger;
 
 				self playSoundToPlayer("part_pickup", self);
-				
+
 				if(self.structure[self.cursor_index].command == ::new_menu) {
 					self.previous_option = self.structure[self.cursor_index].text;
 				}
@@ -2502,7 +2500,7 @@ cycle_ufo_loop() {
 	self endon("stop_cycle_ufo_colors");
 	for(;;) {
 		for(i = 1; i < 6; i++) {
-			level.ufo setmodel(get_ufo_model(i));
+			level.ufo setModel(get_ufo_model(i));
 			wait 0.5;
 		}
 	}
@@ -2530,10 +2528,10 @@ play_ufo_start_vfx() {
 	snow_vfx_2 = (-2164.96, -2780.52, 1923.13);
 	snow_vfx_3 = (-1710.99, -2499.7, 1618.13);
 	playSoundAtPos((-1198, -2137, 1946), "zmb_ufo_break_free_ice");
-	playFx(level._effect["vfx_ufo_snow"], snow_vfx_1);
-	playFx(level._effect["vfx_ufo_snow"], snow_vfx_2);
+	playFX(level._effect["vfx_ufo_snow"], snow_vfx_1);
+	playFX(level._effect["vfx_ufo_snow"], snow_vfx_2);
 	wait 0.8;
-	playFx(level._effect["vfx_ufo_snow"], snow_vfx_3);
+	playFX(level._effect["vfx_ufo_snow"], snow_vfx_3);
 }
 
 move_ufo_to_center_portal() {
@@ -2595,61 +2593,61 @@ toggle_clowns() {
 // Fuses
 
 drop_alien_fuses() {
-	var_00 = spawn("script_model", (657, 765, 105));
-	var_00 setModel("park_alien_gray_fuse");
-	var_00.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
-	var_01 = spawn("script_model", (641, 765, 105));
-	var_01 setModel("park_alien_gray_fuse");
-	var_01.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
-	var_01 thread delay_spawn_glow_vfx_on(var_01, "souvenir_glow");
-	var_01 thread item_keep_rotating(var_01);
-	var_00 thread delay_spawn_glow_vfx_on(var_00, "souvenir_glow");
-	var_00 thread item_keep_rotating(var_00);
-	var_00 thread fuse_pick_up_monitor(var_00, var_01);
+  fuse_1 = spawn("script_model", (657, 765, 105));
+  fuse_1 setModel("park_alien_gray_fuse");
+  fuse_1.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
+  fuse_2 = spawn("script_model", (641, 765, 105));
+  fuse_2 setModel("park_alien_gray_fuse");
+  fuse_2.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
+  fuse_2 thread delay_spawn_glow_vfx_on(fuse_2, "souvenir_glow");
+  fuse_2 thread item_keep_rotating(fuse_2);
+  fuse_1 thread delay_spawn_glow_vfx_on(fuse_1, "souvenir_glow");
+  fuse_1 thread item_keep_rotating(fuse_1);
+  fuse_1 thread fuse_pick_up_monitor(fuse_1, fuse_2);
 }
 
-delay_spawn_glow_vfx_on(param_00, param_01) {
-	param_00 endon("death");
-	wait(0.3);
-	playFxOnTag(level._effect[param_01], param_00, "tag_origin");
+delay_spawn_glow_vfx_on(fuse, vfx) {
+  fuse endon("death");
+  wait(0.3);
+  playFXOnTag(level._effect[vfx], fuse, "tag_origin");
 }
 
-item_keep_rotating(param_00) {
-	param_00 endon("death");
-	var_01 = param_00.angles;
-	for(;;) {
-		param_00 rotateTo(var_01 + (randomIntRange(-40, 40), randomIntRange(-40, 90), randomIntRange(-40, 90)), 3);
-		wait(3);
-	}
+item_keep_rotating(fuse) {
+  fuse endon("death");
+  angles = fuse.angles;
+  for(;;) {
+    fuse rotateTo(angles + (randomIntRange(-40, 40), randomIntRange(-40, 90), randomIntRange(-40, 90)), 3);
+    wait(3);
+  }
 }
 
-fuse_pick_up_monitor(param_00, param_01) {
-	param_00 endon("death");
-	param_00 makeUsable();
-	param_00 setHintString(&"CP_ZMB_UFO_PICK_UP_FUSE");
-	foreach(var_03 in level.players) {
-		var_03 thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
-	}
+fuse_pick_up_monitor(fuse_1, fuse_2) {
+  fuse_1 endon("death");
+  fuse_1 makeUsable();
+  fuse_1 setHintString(&"CP_ZMB_UFO_PICK_UP_FUSE");
+  foreach(player in level.players) {
+    player thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
+  }
 
-	for(;;) {
-		param_00 waittill("trigger", var_03);
-		if(isplayer(var_03)) {
-			var_03 playLocalSound("part_pickup");
-			var_03 thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_collect_alienfuse_2", "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
-			break;
-		}
-	}
+  for(;;) {
+    fuse_1 waittill("trigger", player);
+    if(isPlayer(player)) {
+      player playLocalSound("part_pickup");
+      player thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_collect_alienfuse_2", "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
+      break;
+    }
+  }
 
-	level.num_fuse_in_possession++;
-	scripts\cp\cp_interaction::add_to_current_interaction_list(getStruct("pap_upgrade", "script_noteworthy"));
-	scripts\cp\cp_interaction::remove_from_current_interaction_list(getStruct("weapon_upgrade", "script_noteworthy"));
-	level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
-	foreach(var_03 in level.players) {
-		var_03 setClientOmnvar("zm_special_item", 1);
-	}
+  level.num_fuse_in_possession++;
+  scripts\cp\cp_interaction::add_to_current_interaction_list(getStruct("pap_upgrade", "script_noteworthy"));
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(getStruct("weapon_upgrade", "script_noteworthy"));
+  level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
+  foreach(player in level.players) {
+    player setClientOmnvar("zm_special_item", 1);
+  }
 
-	param_01 delete();
-	param_00 delete();
+  fuse_2 delete();
+  fuse_1 delete();
 }
 
 // Rave in the Redwoods

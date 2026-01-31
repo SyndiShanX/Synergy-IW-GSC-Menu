@@ -194,14 +194,12 @@ input_manager() {
 					wait 0.2;
 				}
 			} else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
-
 				self playSoundToPlayer("mp_cranked_countdown", self);
 
 				scroll_cursor(set_variable(self attackButtonPressed(), "down", "up"));
 
 				wait (0.2);
 			} else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || !self fragButtonPressed() && self secondaryOffhandButtonPressed()) {
-
 				self playSoundToPlayer("mp_killstreak_warden_switch_mode", self);
 
 				if(isDefined(self.structure[self.cursor_index].array) || isDefined(self.structure[self.cursor_index].increment)) {

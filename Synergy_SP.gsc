@@ -222,14 +222,12 @@ input_manager() {
 					wait 0.2;
 				}
 			} else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
-
 				self playSound("plr_helmet_short_boot_up_lr", self);
 
 				scroll_cursor(set_variable(self attackButtonPressed(), "down", "up"));
 
 				wait (0.2);
 			} else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || !self fragButtonPressed() && self secondaryOffhandButtonPressed()) {
-
 				self playSound("armory_terminal_tick", self);
 
 				if(isDefined(self.structure[self.cursor_index].array) || isDefined(self.structure[self.cursor_index].increment)) {
@@ -1166,7 +1164,7 @@ menu_option() {
 				weapon = "iw7_lmg03";
 			}
 
-			forEach(weapon_id in self.syn["weapons"]["attachable_weapons"]) {
+			foreach(weapon_id in self.syn["weapons"]["attachable_weapons"]) {
 				if(weapon == weapon_id) {
 					for(i = 0; i < self.syn["weapons"]["attachments"][weapon][0].size; i++) {
 						self add_option(self.syn["weapons"]["attachments"][weapon][1][i], undefined, ::equip_attachment, weapon, self.syn["weapons"]["attachments"][weapon][0][i]);
@@ -1522,13 +1520,13 @@ equip_attachment(weapon, attachment) {
 		}
 	}
 
-	forEach(sight in self.syn["weapons"]["sights"]) {
+	foreach(sight in self.syn["weapons"]["sights"]) {
 		if(attachment == sight) {
 			attachment_sight = true;
 		}
 	}
 
-	forEach(sight in self.syn["weapons"]["sights"]) {
+	foreach(sight in self.syn["weapons"]["sights"]) {
 		for(i = 1; i < weapon_attachments.size; i++) {
 			if(weapon_attachments[i] == sight) {
 				replace_sight = true;
