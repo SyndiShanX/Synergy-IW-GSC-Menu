@@ -3,7 +3,7 @@
 init() {
 	executeCommand("sv_cheats 1");
 
-	precacheshader("ui_scrollbar_arrow_right");
+	precacheShader("ui_scrollbar_arrow_right");
 
 	level thread player_connect();
 	level thread create_rainbow_color();
@@ -42,7 +42,8 @@ initial_variables() {
 
 	self.syn["weapons"]["category"] = ["Assault Rifles", "Light Machine Guns", "Sniper Rifles", "Sub Machine Guns", "Shotguns", "Pistols", "Heavies"];
 
-	// Weapon IDs Plus Default Attachments
+	// Weapons
+
 	self.syn["weapons"]["assault_rifles"][0] =     ["iw7_ake", "iw7_m4", "iw7_ar57", "iw7_sdfar", "iw7_fmg+akimbofmg_sp+fmgscope"];
 	self.syn["weapons"]["light_machine_guns"][0] = ["iw7_mauler", "iw7_lmg03+lmg03scope", "iw7_sdflmg"];
 	self.syn["weapons"]["sniper_rifles"][0] =      ["iw7_kbs+kbsscope", "iw7_m8+m8scope_sp"];
@@ -50,7 +51,7 @@ initial_variables() {
 	self.syn["weapons"]["shotguns"][0] =           ["iw7_devastator", "iw7_sdfshotty+sdfshottyscope", "iw7_sonic+sonicscope"];
 	self.syn["weapons"]["pistols"][0] =            ["iw7_nrg", "iw7_emc", "iw7_g18"];
 	self.syn["weapons"]["heavies"][0] =            ["iw7_penetrationrail+penetrationrailscope_sp", "iw7_chargeshot+chargeshotscope", "iw7_lockon+lockonscope", "iw7_steeldragon", "iw7_atomizer+atomizerscope", "defaultweapon"];
-	// Weapon Names
+
 	self.syn["weapons"]["assault_rifles"][1] =     ["Volk", "NV4", "KBAR-32", "R3K", "Type-2"];
 	self.syn["weapons"]["light_machine_guns"][1] = ["Mauler", "Titan", "R.A.W."];
 	self.syn["weapons"]["sniper_rifles"][1] =      ["KBS Longbow", "EBR-800"];
@@ -58,6 +59,8 @@ initial_variables() {
 	self.syn["weapons"]["shotguns"][1] =           ["Reaver", "DCM-8", "Banshee"];
 	self.syn["weapons"]["pistols"][1] =            ["Oni", "EMC", "Kendall 44"];
 	self.syn["weapons"]["heavies"][1] =            ["Ballista EM3", "P-Law", "Spartan SA3", "F-SpAr Torch", "Eraser", "Default Weapon"];
+
+	// Attachments
 
 	self.syn["weapons"]["attachable_weapons"] = ["iw7_sdfar", "iw7_ake", "iw7_aker", "iw7_fmg", "iw7_m4", "iw7_ar57", "iw7_ripper", "iw7_fhr", "iw7_erad", "iw7_ump45l", "iw7_ump45", "iw7_crbl", "iw7_crb", "iw7_sdflmg", "iw7_mauler", "iw7_lmg03", "iw7_kbs", "iw7_m8", "iw7_devastator", "iw7_sdfshotty", "iw7_sonic", "iw7_g18r", "iw7_g18", "iw7_nrg", "iw7_emc"];
 
@@ -132,57 +135,57 @@ initialize_menu() {
 	self endon("disconnect");
 
 	for(;;) {
-	if(!self.hud_created) {
-		self freezeControls(false);
+		if(!self.hud_created) {
+			self freezeControls(false);
 
-		self thread input_manager();
+			self thread input_manager();
 
-		self.syn["string"] = self create_text("", "default", 1, "center", "top", 0, -100, (1, 1, 1), 1, 9999, false, true);
+			self.syn["string"] = self create_text("", "default", 1, "center", "top", 0, -100, (1, 1, 1), 1, 9999, false, true);
 
-		self.menu["border"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset - 1), (self.y_offset - 1), 226, 122, self.color_theme, 1, 1);
-		self.menu["background"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, self.y_offset, 224, 121, (0.075, 0.075, 0.075), 1, 2);
-		self.menu["separator_1"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset + 5.5), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
-		self.menu["separator_2"] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 220), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
-		self.menu["cursor"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, 215, 224, 16, (0.15, 0.15, 0.15), 0, 4);
+			self.menu["border"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset - 1), (self.y_offset - 1), 226, 122, self.color_theme, 1, 1);
+			self.menu["background"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, self.y_offset, 224, 121, (0.075, 0.075, 0.075), 1, 2);
+			self.menu["separator_1"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset + 5.5), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
+			self.menu["separator_2"] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 220), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
+			self.menu["cursor"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, 215, 224, 16, (0.15, 0.15, 0.15), 0, 4);
 
-		self.menu["title"] = self create_text("Title", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 94.5), (self.y_offset + 3), (1, 1, 1), 1, 10);
-		self.menu["description"] = self create_text("Description", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), (self.y_offset + (self.option_limit * 17.5)), (0.75, 0.75, 0.75), 0, 10);
+			self.menu["title"] = self create_text("Title", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 94.5), (self.y_offset + 3), (1, 1, 1), 1, 10);
+			self.menu["description"] = self create_text("Description", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), (self.y_offset + (self.option_limit * 17.5)), (0.75, 0.75, 0.75), 0, 10);
 
-		for(i = 1; i <= self.option_limit; i++) {
-			self.menu["toggle_" + i] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 11), ((self.y_offset + 4) + (i * 15)), 8, 8, (0.25, 0.25, 0.25), 0, 9);
-			self.menu["slider_" + i] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + (i * 15)), 224, 16, (0.25, 0.25, 0.25), 0, 5);
-			self.menu["option_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 1, 10);
-			self.menu["slider_text_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 132.5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 0, 10);
-			self.menu["submenu_icon_" + i] = self create_shader("ui_scrollbar_arrow_right", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 223), ((self.y_offset + 4) + (i * 15)), 7, 7, (0.5, 0.5, 0.5), 0, 10);
-		}
+			for(i = 1; i <= self.option_limit; i++) {
+				self.menu["toggle_" + i] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 11), ((self.y_offset + 4) + (i * 15)), 8, 8, (0.25, 0.25, 0.25), 0, 9);
+				self.menu["slider_" + i] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + (i * 15)), 224, 16, (0.25, 0.25, 0.25), 0, 5);
+				self.menu["option_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 1, 10);
+				self.menu["slider_text_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 132.5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 0, 10);
+				self.menu["submenu_icon_" + i] = self create_shader("ui_scrollbar_arrow_right", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 223), ((self.y_offset + 4) + (i * 15)), 7, 7, (0.5, 0.5, 0.5), 0, 10);
+			}
 
-		// Currently Disabled due to HUD Limit
-		self.menu["foreground"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + 15), 224, 106, (0.1, 0.1, 0.1), 1, 3);
+			// Currently Disabled due to HUD Limit
+			self.menu["foreground"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + 15), 224, 106, (0.1, 0.1, 0.1), 1, 3);
 
-		self.hud_created = true;
+			self.hud_created = true;
 
-		self.menu["title"] set_text("Controls");
-		self.menu["option_1"] set_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]");
-		self.menu["option_2"] set_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]");
-		self.menu["option_3"] set_text("Select: ^3[{+activate}] ^7Back: ^3[{+melee}]");
-		self.menu["option_4"] set_text("Sliders: ^3[{+smoke}] ^7and ^3[{+frag}]");
-		self.menu["option_5"].alpha = 0;
-		self.menu["option_6"].alpha = 0;
-		self.menu["option_7"].alpha = 0;
+			self.menu["title"] set_text("Controls");
+			self.menu["option_1"] set_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]");
+			self.menu["option_2"] set_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]");
+			self.menu["option_3"] set_text("Select: ^3[{+activate}] ^7Back: ^3[{+melee}]");
+			self.menu["option_4"] set_text("Sliders: ^3[{+smoke}] ^7and ^3[{+frag}]");
+			self.menu["option_5"].alpha = 0;
+			self.menu["option_6"].alpha = 0;
+			self.menu["option_7"].alpha = 0;
 
-		self.menu["border"] set_shader("white", self.menu["border"].width, 78);
-		self.menu["background"] set_shader("white", self.menu["background"].width, 76);
-		self.menu["foreground"] set_shader("white", self.menu["foreground"].width, 61);
+			self.menu["border"] set_shader("white", self.menu["border"].width, 78);
+			self.menu["background"] set_shader("white", self.menu["background"].width, 76);
+			self.menu["foreground"] set_shader("white", self.menu["foreground"].width, 61);
 
-		self.controls_menu_open = true;
+			self.controls_menu_open = true;
 
-		wait 8;
+			wait 8;
 
-		if(self.controls_menu_open) {
-			close_controls_menu();
+			if(self.controls_menu_open) {
+				close_controls_menu();
+			}
 		}
 	}
-}
 }
 
 input_manager() {
@@ -388,6 +391,15 @@ create_text(text, font, font_scale, align_x, align_y, x_offset, y_offset, color,
 	return textElement;
 }
 
+set_text(text) {
+	if(!isDefined(self) || !isDefined(text)) {
+		return;
+	}
+
+	self.text = text;
+	self setText(text);
+}
+
 create_shader(shader, align_x, align_y, x_offset, y_offset, width, height, color, alpha, z_index, hide_when_in_menu) {
 	shaderElement = newClientHudElem(self);
 	shaderElement.elemType = "icon";
@@ -421,15 +433,6 @@ create_shader(shader, align_x, align_y, x_offset, y_offset, width, height, color
 
 	self.element_result++;
 	return shaderElement;
-}
-
-set_text(text) {
-	if(!isDefined(self) || !isDefined(text)) {
-		return;
-	}
-
-	self.text = text;
-	self setText(text);
 }
 
 set_shader(shader, width, height) {
@@ -1364,6 +1367,7 @@ frag_no_clip() {
 frag_no_clip_loop() {
 	self endon("disconnect");
 	self endon("noclip_end");
+	
 	self disableWeapons();
 	self disableOffHandWeapons();
 	self.frag_no_clip_loop = true;
@@ -1495,7 +1499,7 @@ give_weapon(weapon) {
 			self takeweapon(self getCurrentWeapon());
 		}
 
-		self giveweapon(weapon);
+		self giveWeapon(weapon);
 		self switchToWeapon(weapon);
 	} else {
 		self switchToWeaponImmediate(weapon);

@@ -6,7 +6,7 @@
 init() {
 	executeCommand("sv_cheats 1");
 
-	precacheshader("ui_scrollbar_arrow_right");
+	precacheShader("ui_scrollbar_arrow_right");
 
 	level thread player_connect();
 	level thread create_rainbow_color();
@@ -51,7 +51,7 @@ initial_variables() {
 
 	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Specialist Weapons"];
 
-	// Weapon IDs Plus Default Attachments
+	// Weapons
 	self.syn["weapons"]["assault_rifles"][0] =     ["iw7_m4_mp", "iw7_sdfar_mp", "iw7_ar57_mp", "iw7_fmg_mp+akimbofmg+fmgscope_camo", "iw7_ake_mpr", "iw7_rvn_mp+meleervn+rvnscope", "iw7_vr_mp+vrscope", "iw7_gauss_mp+gaussscope", "iw7_erad_mp+eradscope_camo"];
 	self.syn["weapons"]["sub_machine_guns"][0] =   ["iw7_fhr_mp", "iw7_crb_mpl+crblscope_camo", "iw7_ripper_mpr+ripperrscope_camo", "iw7_ump45_mpl+ump45lscope_camo", "iw7_crdb_mp", "iw7_mp28_mp", "iw7_tacburst_mp+gltacburst+tacburstscope"];
 	self.syn["weapons"]["light_machine_guns"][0] = ["iw7_sdflmg_mp", "iw7_mauler_mp", "iw7_lmg03_mp+lmg03scope_camo", "iw7_minilmg_mp+minilmgscope", "iw7_unsalmg_mp"];
@@ -62,7 +62,7 @@ initial_variables() {
 	self.syn["weapons"]["classics"][0] =           ["iw7_m1c_mp", "iw7_g18c_mp", "iw7_ump45c_mp", "iw7_spasc_mp", "iw7_arclassic_mp+glarclassic", "iw7_cheytacc_mp+cheytacscope_camo"];
 	self.syn["weapons"]["melee"][0] =             ["iw7_fists_mp", "iw7_knife_mp", "iw7_axe_mpr_melee", "iw7_axe_mp", "iw7_katana_mp", "iw7_nunchucks_mp"];
 	self.syn["weapons"]["specialist"][0] =           ["iw7_atomizer_mp", "iw7_penetrationrail_mp+penetrationrailscope", "iw7_steeldragon_mp", "iw7_claw_mp", "iw7_blackholegun_mp+blackholegunscope"];
-	// Weapon Names
+
 	self.syn["weapons"]["assault_rifles"][1] =     ["NV4", "R3K", "KBAR-32", "Type-2", "Volk", "R-VN", "X-Con", "G-Rail", "Erad"];
 	self.syn["weapons"]["sub_machine_guns"][1] =   ["FHR-40", "Karma-45", "RPR Evo", "HVR", "VPR", "Trencher", "Raijin-EMX"];
 	self.syn["weapons"]["light_machine_guns"][1] = ["R.A.W.", "Mauler", "Titan", "Auger", "Atlas"];
@@ -75,10 +75,12 @@ initial_variables() {
 	self.syn["weapons"]["specialist"][1] =           ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun"];
 
 	// Perks
+
 	self.syn["perks"][0] = ["specialty_expanded_minimap", "specialty_blindeye", "specialty_blastshield", "specialty_dexterity", "specialty_ghost", "specialty_overclock",  "specialty_stun_resistance", "specialty_hardline", "specialty_momentum", "specialty_tracker", "specialty_coldblooded", "specialty_scavenger", "specialty_sprintfire", "specialty_bullet_outline", "specialty_empimmune", "specialty_marksman", "specialty_engineer", "specialty_quieter", "specialty_explosivebullets", "specialty_fasterlockon", "specialty_rearguard", "specialty_delaymine", "specialty_superpack", "specialty_spygame", "specialty_no_target", "specialty_localjammer"];
 	self.syn["perks"][1] = ["Recon", "Blind Eye", "Blast Shield", "Dexterity", "Ghost", "Overclock", "Tac Resist", "Hardline", "Momentum", "Tracker", "Cold Blooded", "Scavenger", "Gung-Ho", "Pin Point", "Hardwired", "Marksman", "Engineer", "Dead Silence", "Explosive Bullets", "Faster Launcher Lock-On", "Shield on Back", "Delay Mines", "Payload Pack", "No Player Name on Hover", "AI No Target", "Scrambler"];
 
 	// Killstreaks
+
 	self.syn["killstreaks"][0] = ["venom", "uav", "dronedrop", "counter_uav", "ball_drone_backup", "drone_hive", "precision_airstrike", "bombardment", "sentry_shock", "jackal", "directional_uav", "thor", "remote_c8", "minijackal", "nuke"];
 	self.syn["killstreaks"][1] = ["Scarab", "UAV", "Drone Package", "Counter UAV", "Vulture", "Trinity Rocket", "Scorchers", "Bombardment", "Shock Sentry", "Warden", "Advanced UAV", "T.H.O.R", "R-C8", "AP-3X", "Nuke"];
 }
@@ -363,6 +365,15 @@ create_text(text, font, font_scale, align_x, align_y, x_offset, y_offset, color,
 	return textElement;
 }
 
+set_text(text) {
+	if(!isDefined(self) || !isDefined(text)) {
+		return;
+	}
+
+	self.text = text;
+	self setText(text);
+}
+
 create_shader(shader, align_x, align_y, x_offset, y_offset, width, height, color, alpha, z_index, hide_when_in_menu) {
 	shaderElement = newClientHudElem(self);
 	shaderElement.elemType = "icon";
@@ -396,15 +407,6 @@ create_shader(shader, align_x, align_y, x_offset, y_offset, width, height, color
 
 	self.element_result++;
 	return shaderElement;
-}
-
-set_text(text) {
-	if(!isDefined(self) || !isDefined(text)) {
-		return;
-	}
-
-	self.text = text;
-	self setText(text);
 }
 
 set_shader(shader, width, height) {
@@ -1437,6 +1439,7 @@ frag_no_clip() {
 frag_no_clip_loop() {
 	self endon("disconnect");
 	self endon("noclip_end");
+	
 	self disableWeapons();
 	self disableOffHandWeapons();
 	self.frag_no_clip_loop = true;
@@ -1642,10 +1645,10 @@ set_difficulty(difficulty, target) {
 
 set_difficulty_loop(difficulty, target) {
 	target endon("disconnect");
-  level endon("game_ended");
+	level endon("game_ended");
 
-  for(;;) {
-    target waittill("spawned_player");
+	for(;;) {
+	  target waittill("spawned_player");
 
 		target.var_2D32 = difficulty;
 		target scripts\mp\bots\bots_util::bot_set_difficulty(difficulty);
@@ -1699,7 +1702,7 @@ give_weapon(weapon, category, index) {
 			self _takeweapon(self getCurrentWeapon());
 		}
 
-		self _giveweapon(weapon);
+		self _giveWeapon(weapon);
 		self _switchToWeapon(weapon);
 	} else {
 		self _switchToWeaponImmediate(weapon);
@@ -1716,7 +1719,7 @@ take_weapon() {
 }
 
 drop_weapon() {
-	self dropitem(self getCurrentWeapon());
+	self dropItem(self getCurrentWeapon());
 	self _switchToWeapon(self getWeaponsListPrimaries()[0]);
 }
 

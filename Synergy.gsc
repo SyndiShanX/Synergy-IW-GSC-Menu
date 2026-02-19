@@ -5,7 +5,7 @@
 init() {
 	executeCommand("sv_cheats 1");
 
-	precacheshader("ui_scrollbar_arrow_right");
+	precacheShader("ui_scrollbar_arrow_right");
 
 	level thread player_connect();
 	level thread create_rainbow_color();
@@ -57,7 +57,8 @@ initial_variables() {
 
 	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Specialist Weapons", "Map Specific Weapons", "Other Weapons"];
 
-	// Weapon IDs Plus 1 Default Attachment
+	// Weapons
+
 	self.syn["weapons"]["assault_rifles"][0] =     ["iw7_m4_zm", "iw7_sdfar_zm", "iw7_ar57_zm", "iw7_fmg_zm+akimbofmg_zm", "iw7_ake_zmr", "iw7_rvn_zm+meleervn", "iw7_vr_zm", "iw7_gauss_zm", "iw7_erad_zm"];
 	self.syn["weapons"]["sub_machine_guns"][0] =   ["iw7_fhr_zm", "iw7_crb_zml+crblscope_camo", "iw7_ripper_zmr", "iw7_ump45_zml+ump45lscope_camo", "iw7_crdb_zm", "iw7_mp28_zm", "iw7_tacburst_zm+gltacburst"];
 	self.syn["weapons"]["light_machine_guns"][0] = ["iw7_sdflmg_zm", "iw7_mauler_zm", "iw7_lmg03_zm", "iw7_minilmg_zm", "iw7_unsalmg_zm"];
@@ -66,9 +67,9 @@ initial_variables() {
 	self.syn["weapons"]["pistols"][0] =            ["iw7_emc_zm", "iw7_nrg_zm", "iw7_g18_zmr", "iw7_revolver_zm", "iw7_udm45_zm+udm45scope", "iw7_mag_zm"];
 	self.syn["weapons"]["launchers"][0] =          ["iw7_lockon_zm", "iw7_glprox_zm", "iw7_chargeshot_zm+chargeshotscope_camo"];
 	self.syn["weapons"]["classics"][0] =           ["iw7_m1c_zm", "iw7_g18c_zm", "iw7_ump45c_zm", "iw7_spasc_zm", "iw7_arclassic_zm", "iw7_cheytacc_zm"];
-	self.syn["weapons"]["melee"][0] =             ["iw7_axe_zm"];
-	self.syn["weapons"]["specialist"][0] =           ["iw7_atomizer_mp", "iw7_penetrationrail_mp+penetrationrailscope", "iw7_steeldragon_mp", "iw7_claw_mp", "iw7_blackholegun_mp+blackholegunscope"];
-	// Weapon Names
+	self.syn["weapons"]["melee"][0] =              ["iw7_axe_zm"];
+	self.syn["weapons"]["specialist"][0] =         ["iw7_atomizer_mp", "iw7_penetrationrail_mp+penetrationrailscope", "iw7_steeldragon_mp", "iw7_claw_mp", "iw7_blackholegun_mp+blackholegunscope"];
+
 	self.syn["weapons"]["assault_rifles"][1] =     ["NV4", "R3K", "KBAR-32", "Type-2", "Volk", "R-VN", "X-Con", "G-Rail", "Erad"];
 	self.syn["weapons"]["sub_machine_guns"][1] =   ["FHR-40", "Karma-45", "RPR Evo", "HVR", "VPR", "Trencher", "Raijin-EMX"];
 	self.syn["weapons"]["light_machine_guns"][1] = ["R.A.W.", "Mauler", "Titan", "Auger", "Atlas"];
@@ -77,152 +78,159 @@ initial_variables() {
 	self.syn["weapons"]["pistols"][1] =            ["EMC", "Oni", "Kendall 44", "Hailstorm", "UDM", "Stallion 44"];
 	self.syn["weapons"]["launchers"][1] =          ["Spartan SA3", "Howitzer", "P-Law"];
 	self.syn["weapons"]["classics"][1] =           ["M1", "Hornet", "MacTav-45", "S-Ravage", "OSA", "TF-141"];
-	self.syn["weapons"]["melee"][1] =             ["Axe"];
-	self.syn["weapons"]["specialist"][1] =           ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun"];
-	// Spaceland Weapons
-	self.syn["weapons"]["cp_zmb"][0] =	 ["iw7_forgefreeze_zm+forgefreezealtfire", "iw7_dischord_zm", "iw7_facemelter_zm", "iw7_headcutter_zm", "iw7_shredder_zm", "iw7_spaceland_wmd"];
-	self.syn["weapons"]["cp_zmb"][1] =   ["Forge Freeze", "Dischord", "Face Melter", "Head Cutter", "Shredder", "NX 2.0"];
-	// Rave in the Redwoods Weapons
-	self.syn["weapons"]["cp_rave"][0] =  ["iw7_golf_club_mp", "iw7_spiked_bat_mp", "iw7_two_headed_axe_mp", "iw7_machete_mp", "iw7_harpoon1_zm", "iw7_harpoon2_zm", "iw7_harpoon3_zm+akimbo", "iw7_harpoon4_zm"];
-	self.syn["weapons"]["cp_rave"][1] =  ["Golf Club", "Spiked Bat", "2 Headed Axe", "Machete", "Harpoon Gun 1", "Harpoon Gun 2", "Harpoon Gun 3", "Harpoon Gun 4"];
-	// Shaolin Shuffle Weapons
+	self.syn["weapons"]["melee"][1] =              ["Axe"];
+	self.syn["weapons"]["specialist"][1] =         ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun"];
+
+	self.syn["weapons"]["cp_zmb"][0] = ["iw7_forgefreeze_zm+forgefreezealtfire", "iw7_dischord_zm", "iw7_facemelter_zm", "iw7_headcutter_zm", "iw7_shredder_zm", "iw7_spaceland_wmd"];
+	self.syn["weapons"]["cp_zmb"][1] = ["Forge Freeze", "Dischord", "Face Melter", "Head Cutter", "Shredder", "NX 2.0"];
+
+	self.syn["weapons"]["cp_rave"][0] = ["iw7_golf_club_mp", "iw7_spiked_bat_mp", "iw7_two_headed_axe_mp", "iw7_machete_mp", "iw7_harpoon1_zm", "iw7_harpoon2_zm", "iw7_harpoon3_zm+akimbo", "iw7_harpoon4_zm"];
+	self.syn["weapons"]["cp_rave"][1] = ["Golf Club", "Spiked Bat", "2 Headed Axe", "Machete", "Harpoon Gun 1", "Harpoon Gun 2", "Harpoon Gun 3", "Harpoon Gun 4"];
+
 	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm"];
 	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks"];
-	// Attack of the Radioactive Thing Weapons
-	self.syn["weapons"]["cp_town"][0] =  ["iw7_cutie_zm"];
-	self.syn["weapons"]["cp_town"][1] =  ["Modular Atomic Disintegrator"];
-	// Beast from Beyond Weapons
+
+	self.syn["weapons"]["cp_town"][0] = ["iw7_cutie_zm"];
+	self.syn["weapons"]["cp_town"][1] = ["Modular Atomic Disintegrator"];
+
 	self.syn["weapons"]["cp_final"][0] = ["iw7_venomx_zm"];
 	self.syn["weapons"]["cp_final"][1] = ["Venom-X"];
-	// Misc Weapons
-	self.syn["weapons"]["other"][0] =    ["iw7_fists_zm", "iw7_entangler_zm"];
-	self.syn["weapons"]["other"][1] =    ["Fists", "Entangler"];
-	// Melee Weapons
-	self.syn["melee"]["cp_town"][0] =    ["iw7_knife_zm_cleaver", "iw7_knife_zm_crowbar"];
-	self.syn["melee"]["cp_town"][1] =    ["Cleaver", "Crowbar"];
+
+	self.syn["weapons"]["other"][0] = ["iw7_fists_zm", "iw7_entangler_zm"];
+	self.syn["weapons"]["other"][1] = ["Fists", "Entangler"];
+
+	self.syn["melee"]["cp_town"][0] = ["iw7_knife_zm_cleaver", "iw7_knife_zm_crowbar"];
+	self.syn["melee"]["cp_town"][1] = ["Cleaver", "Crowbar"];
+
 	// PaP Camos
-	self.syn["camos"]["cp_zmb"] =   ["+camo1", "+camo4"];
-	self.syn["camos"]["cp_rave"] =  ["+camo204", "+camo205"];
+
+	self.syn["camos"]["cp_zmb"] = ["+camo1", "+camo4"];
+	self.syn["camos"]["cp_rave"] = ["+camo204", "+camo205"];
 	self.syn["camos"]["cp_disco"] = ["+camo211", "+camo212"];
-	self.syn["camos"]["cp_town"] =  ["+camo92", "+camo93"];
+	self.syn["camos"]["cp_town"] = ["+camo92", "+camo93"];
 	self.syn["camos"]["cp_final"] = ["+camo32", "+camo34"];
 
-	// Spaceland Teleport Names
-	self.syn["Main Teleports"]["cp_zmb"][0] =            ["PaP Room", "Spawn", "Main Portal", "Afterlife Arcade"];
-	self.syn["Map Setup Teleports"]["cp_zmb"][0] =       ["Spawn Power", "Journey Power", "Kepler Power", "Polar Peak Power", "Arcade Power", "Journey Teleporter", "Kepler Teleporter", "Polar Peak Teleporter", "Arcade Teleporter"];
-	self.syn["Mystery Wheel Teleports"]["cp_zmb"][0] =   ["Journey 1", "Journey 2", "Journey 3", "Astrocade", "Polar Peak", "Kepler 1", "Kepler 2", "Kepler 3"];
-	self.syn["Main Quest Teleports"]["cp_zmb"][0] =      ["Calculator 1", "Calculator 2", "Calculator 3", "Boom Box 1", "Boom Box 2", "Boom Box 3", "Umbrella 1", "Umbrella 2", "Umbrella 3", "DJ Booth 1", "DJ Booth 2", "DJ Booth 3"];
-	self.syn["Extra Teleports"]["cp_zmb"][0] =           ["N31L's Head", "N31L Auxiliary Battery 1", "N31L Auxiliary Battery 2", "N31L Auxiliary Battery 3", "N31L Auxiliary Battery 4", "N31L Auxiliary Battery 5", "N31L Auxiliary Battery 6", "N31L Floppy Disk 1", "N31L Floppy Disk 2", "N31L Floppy Disk 3", "N31L Floppy Disk 4"];
-	// Spaceland Teleport Origins
-	self.syn["Main Teleports"]["cp_zmb"][1] =            [(-10245, 740, -1630), (465, 3680, 0), (650, 970, 0), (-9885, -70, -1795)];
-	self.syn["Map Setup Teleports"]["cp_zmb"][1] =       [(1075, 3720, 0), (4695, 1250, 115), (-1365, -65, 380), (-695, -2795, 560), (2390, -1825, 115), (3640, 1165, 55), (-2150, -35, 225), (-1490, -2650, 360), (2285, -1615, 115)];
-	self.syn["Mystery Wheel Teleports"]["cp_zmb"][1] =   [(1470, 1045, 0), (4065, 2135, 55), (3690, 420, 55), (2575, -865, 240), (955, -2260, 440), (-1950, 1830, 365), (-1900, -530, 380), (-845, -1492, 360)];
-	self.syn["Main Quest Teleports"]["cp_zmb"][1] =      [(540, 1060, 0), (-2520, 805, 365), (2960, -850, 240), (595, 2125, -65), (-1415, -175, 380), (1375, -590, -195), (155, -505, 0), (-1890, -3040, 360), (3640, 2335, 115), (-1000, 1495, 225), (-2710, -2480, 360), (2926, 1305, 0)];
-	self.syn["Extra Teleports"]["cp_zmb"][1] =           [(475, -265, 0), (-1800, -2825, 360), (-535, -3265, 390), (-757, -2415, 560), (-2775, 1565, 365), (-3045, 730, 365), (-1230, 1625, 225), (2425, -106, -196), (2495, -295, -196), (1920, -635, -196), (100, -1115, -252)];
-	// Spaceland Teleport Angles
-	self.syn["Main Teleports"]["cp_zmb"][2] =            [90, -90, -90];
-	self.syn["Map Setup Teleports"]["cp_zmb"][2] =       [-90, 0, -90, 90, 180, 0, -45, 20, -90];
-	self.syn["Mystery Wheel Teleports"]["cp_zmb"][2] =   [180, 90, 0, -90, 0, -45, -90, 0];
-	self.syn["Main Quest Teleports"]["cp_zmb"][2] =      [0, 0, 90, 45, 0, 90, 160, 90, -90, 0, -90, 0];
-	self.syn["Extra Teleports"]["cp_zmb"][2] =           [-90, 180, -90, 0, 0, 0, 90, 50, 60, -100, 135];
-	// Rave in the Redwoods Teleport Names
-	self.syn["Main Teleports"]["cp_rave"][0] =           ["PaP Room", "Spawn", "Cellar", "Kevin's Cabin", "Afterlife Arcade"];
-	self.syn["Mystery Wheel Teleports"]["cp_rave"][0] =  ["Rave Stage", "Dock", "Main Fire", "Mess Hall", "Cellar", "Bear Lodge", "Camp Wolf"];
-	// Rave in the Redwoods Teleport Origins
-	self.syn["Main Teleports"]["cp_rave"][1] =           [(-10245, 750, -1630), (-940, -1620, 225), (-395, -1815, 55), (-6035, 4890, 120), (-9885, -70, -1795)];
-	self.syn["Map Setup Teleports"]["cp_rave"][1] =      [(000, 000, 000), (000, 000, 000)];
-	self.syn["Mystery Wheel Teleports"]["cp_rave"][1] =  [(2205, -1390, -15), (-2900, 2275, -150), (145, 1125, 50), (-3355, -3365, 150), (-560, -1895, 55), (-950, -1150, 390), (-2585, -4575, 255)];
-	self.syn["Main Quest Teleports"]["cp_rave"][1] =     [(000, 000, 000), (000, 000, 000)];
-	self.syn["Extra Teleports"]["cp_rave"][1] =          [(000, 000, 000), (000, 000, 000)];
-	// Rave in the Redwoods Teleport Angles
-	self.syn["Main Teleports"]["cp_rave"][2] =           [90, 165, 130, 100, 0];
-	self.syn["Map Setup Teleports"]["cp_rave"][2] =      [0, 0];
-	self.syn["Mystery Wheel Teleports"]["cp_rave"][2] =  [100, 140, 90, -50, -180, -90, -75];
-	self.syn["Main Quest Teleports"]["cp_rave"][2] =     [0, 0];
-	self.syn["Extra Teleports"]["cp_rave"][2] =          [0, 0];
-	// Shaolin Shuffle Teleport Names
+	// Teleports
+
+	self.syn["Main Teleports"]["cp_zmb"][0] =          ["PaP Room", "Spawn", "Main Portal", "Afterlife Arcade"];
+	self.syn["Map Setup Teleports"]["cp_zmb"][0] =     ["Spawn Power", "Journey Power", "Kepler Power", "Polar Peak Power", "Arcade Power", "Journey Teleporter", "Kepler Teleporter", "Polar Peak Teleporter", "Arcade Teleporter"];
+	self.syn["Mystery Wheel Teleports"]["cp_zmb"][0] = ["Journey 1", "Journey 2", "Journey 3", "Astrocade", "Polar Peak", "Kepler 1", "Kepler 2", "Kepler 3"];
+	self.syn["Main Quest Teleports"]["cp_zmb"][0] =    ["Calculator 1", "Calculator 2", "Calculator 3", "Boom Box 1", "Boom Box 2", "Boom Box 3", "Umbrella 1", "Umbrella 2", "Umbrella 3", "DJ Booth 1", "DJ Booth 2", "DJ Booth 3"];
+	self.syn["Extra Teleports"]["cp_zmb"][0] =         ["N31L's Head", "N31L Auxiliary Battery 1", "N31L Auxiliary Battery 2", "N31L Auxiliary Battery 3", "N31L Auxiliary Battery 4", "N31L Auxiliary Battery 5", "N31L Auxiliary Battery 6", "N31L Floppy Disk 1", "N31L Floppy Disk 2", "N31L Floppy Disk 3", "N31L Floppy Disk 4"];
+
+	self.syn["Main Teleports"]["cp_zmb"][1] =          [(-10245, 740, -1630), (465, 3680, 0), (650, 970, 0), (-9885, -70, -1795)];
+	self.syn["Map Setup Teleports"]["cp_zmb"][1] =     [(1075, 3720, 0), (4695, 1250, 115), (-1365, -65, 380), (-695, -2795, 560), (2390, -1825, 115), (3640, 1165, 55), (-2150, -35, 225), (-1490, -2650, 360), (2285, -1615, 115)];
+	self.syn["Mystery Wheel Teleports"]["cp_zmb"][1] = [(1470, 1045, 0), (4065, 2135, 55), (3690, 420, 55), (2575, -865, 240), (955, -2260, 440), (-1950, 1830, 365), (-1900, -530, 380), (-845, -1492, 360)];
+	self.syn["Main Quest Teleports"]["cp_zmb"][1] =    [(540, 1060, 0), (-2520, 805, 365), (2960, -850, 240), (595, 2125, -65), (-1415, -175, 380), (1375, -590, -195), (155, -505, 0), (-1890, -3040, 360), (3640, 2335, 115), (-1000, 1495, 225), (-2710, -2480, 360), (2926, 1305, 0)];
+	self.syn["Extra Teleports"]["cp_zmb"][1] =         [(475, -265, 0), (-1800, -2825, 360), (-535, -3265, 390), (-757, -2415, 560), (-2775, 1565, 365), (-3045, 730, 365), (-1230, 1625, 225), (2425, -106, -196), (2495, -295, -196), (1920, -635, -196), (100, -1115, -252)];
+
+	self.syn["Main Teleports"]["cp_zmb"][2] =          [90, -90, -90];
+	self.syn["Map Setup Teleports"]["cp_zmb"][2] =     [-90, 0, -90, 90, 180, 0, -45, 20, -90];
+	self.syn["Mystery Wheel Teleports"]["cp_zmb"][2] = [180, 90, 0, -90, 0, -45, -90, 0];
+	self.syn["Main Quest Teleports"]["cp_zmb"][2] =    [0, 0, 90, 45, 0, 90, 160, 90, -90, 0, -90, 0];
+	self.syn["Extra Teleports"]["cp_zmb"][2] =         [-90, 180, -90, 0, 0, 0, 90, 50, 60, -100, 135];
+
+	self.syn["Main Teleports"]["cp_rave"][0] =          ["PaP Room", "Spawn", "Cellar", "Kevin's Cabin", "Afterlife Arcade"];
+	self.syn["Mystery Wheel Teleports"]["cp_rave"][0] = ["Rave Stage", "Dock", "Main Fire", "Mess Hall", "Cellar", "Bear Lodge", "Camp Wolf"];
+
+	self.syn["Main Teleports"]["cp_rave"][1] =          [(-10245, 750, -1630), (-940, -1620, 225), (-395, -1815, 55), (-6035, 4890, 120), (-9885, -70, -1795)];
+	self.syn["Map Setup Teleports"]["cp_rave"][1] =     [(000, 000, 000), (000, 000, 000)];
+	self.syn["Mystery Wheel Teleports"]["cp_rave"][1] = [(2205, -1390, -15), (-2900, 2275, -150), (145, 1125, 50), (-3355, -3365, 150), (-560, -1895, 55), (-950, -1150, 390), (-2585, -4575, 255)];
+	self.syn["Main Quest Teleports"]["cp_rave"][1] =    [(000, 000, 000), (000, 000, 000)];
+	self.syn["Extra Teleports"]["cp_rave"][1] =         [(000, 000, 000), (000, 000, 000)];
+
+	self.syn["Main Teleports"]["cp_rave"][2] =          [90, 165, 130, 100, 0];
+	self.syn["Map Setup Teleports"]["cp_rave"][2] =     [0, 0];
+	self.syn["Mystery Wheel Teleports"]["cp_rave"][2] = [100, 140, 90, -50, -180, -90, -75];
+	self.syn["Main Quest Teleports"]["cp_rave"][2] =    [0, 0];
+	self.syn["Extra Teleports"]["cp_rave"][2] =         [0, 0];
+
 	self.syn["Main Teleports"]["cp_disco"][0] =          ["PaP Room", "Spawn", "Sewer", "Afterlife Arcade"];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][0] = ["Alleyway", "Rooftop", "Garden", "Disco Roof", "Subway Station 1", "Subway Station 2", "Disco"];
 	self.syn["Extra Teleports"]["cp_disco"][0] =         ["Pink Cat Flier 1", "Pink Cat Flier 2", "Pink Cat Flier 3", "Pink Cat Flier 4", "Token"];
-	// Shaolin Shuffle Teleport Origins
+
 	self.syn["Main Teleports"]["cp_disco"][1] =          [(-10245, 750, -1630), (580, 3025, 285), (-875, 1820, 180), (-9885, -35, -1795)];
 	self.syn["Map Setup Teleports"]["cp_disco"][1] =     [(-1915, 4620, 750), (1590, 1290, 750), (-810, 765, 925), (-1110, 3435, 1120), (-1075, 2795, 260)];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][1] = [(105, 1300, 750), (15, 665, 935), (-3515, 1165, 975), (-2100, 2795, 1175), (375, 2065, 525), (-2450, 3610, 500), (-1185, 3735, 750)];
 	self.syn["Main Quest Teleports"]["cp_disco"][1] =    [(000, 000, 000), (000, 000, 000)];
 	self.syn["Extra Teleports"]["cp_disco"][1] =         [(000, 000, 000), (000, 000, 000)];
-	// Shaolin Shuffle Teleport Angles
+
 	self.syn["Main Teleports"]["cp_disco"][2] =          [90, -145, 90, 0];
 	self.syn["Map Setup Teleports"]["cp_disco"][2] =     [-180, -30, 90, 0, 180];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][2] = [-90, 90, -180, 180, -180, 90. -20];
 	self.syn["Main Quest Teleports"]["cp_disco"][2] =    [0, 0];
 	self.syn["Extra Teleports"]["cp_disco"][2] =         [0, 0];
-	// Attack of the Radioactive Thing Teleport Names
-	self.syn["Main Teleports"]["cp_town"][0] =           ["PaP Room", "Spawn", "Studio", "Afterlife Arcade"];
-	self.syn["Map Setup Teleports"]["cp_town"][0] =      ["Power Handle", "Power Station", "Telepad 1", "Telepad 2", "Telepad 3", "Telepad 4"];
-	self.syn["Mystery Wheel Teleports"]["cp_town"][0] =  ["Power Station", "Beach Mart", "RV Park", "Pool", "Studio", "Trail"];
-	self.syn["Main Quest Teleports"]["cp_town"][0] =     ["Elvira's Book", "Zombie Head", "Zombie Torso", "Zombie Arm 1", "Zombie Arm 2", "Zombie Leg"];
-	self.syn["Extra Teleports"]["cp_town"][0] =          ["Cleaver", "Crowbar", "M.A.D. Attachment 1", "M.A.D. Attachment 2", "M.A.D. Attachment 3"];
-	// Attack of the Radioactive Thing Teleport Origins
-	self.syn["Main Teleports"]["cp_town"][1] =           [(-10245, 750, -1630), (3939, -4515, 15), (235, -2555, 520), (-9885, -70, -1795)];
-	self.syn["Map Setup Teleports"]["cp_town"][1] =      [(3205, 1815, -105), (6440, -2770, 105), (5375, -2800, 195), (4795, -180, 330), (490, 4115, 395), (-937, -2695, 520)];
-	self.syn["Mystery Wheel Teleports"]["cp_town"][1] =  [(6440, -1955, 105), (6210, 1075, 330), (-790, 3840, 400), (-255, -590, 410), (-480, -3410, 515), (340, -4710, 255)];
-	self.syn["Main Quest Teleports"]["cp_town"][1] =     [(5405, -4720, -15), (-295, 3665, 425), (6245, -550, 335), (3205, 1815, -105), (470, 2200, 395), (-1175, -4219, 335)];
-	self.syn["Extra Teleports"]["cp_town"][1] =          [(6015, -820, 335), (1270, -130, 475), (-1055, 3505, 400), (4260, 1620, 335), (-130, -3045, 520)];
-	// Attack of the Radioactive Thing Teleport Angles
-	self.syn["Main Teleports"]["cp_town"][2] =           [90, 60, 0, 0];
-	self.syn["Map Setup Teleports"]["cp_town"][2] =      [65, 20, -160, -90, 100, -180];
-	self.syn["Mystery Wheel Teleports"]["cp_town"][2] =  [-65, 0, 150, 180, -90, -80];
-	self.syn["Main Quest Teleports"]["cp_town"][2] =     [45, -170, 75, 65, 30, 80];
-	self.syn["Extra Teleports"]["cp_town"][2] =          [-85, -30, 100, -180, 90];
-	// Beast from Beyond Teleport Names
+
+	self.syn["Main Teleports"]["cp_town"][0] =          ["PaP Room", "Spawn", "Studio", "Afterlife Arcade"];
+	self.syn["Map Setup Teleports"]["cp_town"][0] =     ["Power Handle", "Power Station", "Telepad 1", "Telepad 2", "Telepad 3", "Telepad 4"];
+	self.syn["Mystery Wheel Teleports"]["cp_town"][0] = ["Power Station", "Beach Mart", "RV Park", "Pool", "Studio", "Trail"];
+	self.syn["Main Quest Teleports"]["cp_town"][0] =    ["Elvira's Book", "Zombie Head", "Zombie Torso", "Zombie Arm 1", "Zombie Arm 2", "Zombie Leg"];
+	self.syn["Extra Teleports"]["cp_town"][0] =         ["Cleaver", "Crowbar", "M.A.D. Attachment 1", "M.A.D. Attachment 2", "M.A.D. Attachment 3"];
+
+	self.syn["Main Teleports"]["cp_town"][1] =          [(-10245, 750, -1630), (3939, -4515, 15), (235, -2555, 520), (-9885, -70, -1795)];
+	self.syn["Map Setup Teleports"]["cp_town"][1] =     [(3205, 1815, -105), (6440, -2770, 105), (5375, -2800, 195), (4795, -180, 330), (490, 4115, 395), (-937, -2695, 520)];
+	self.syn["Mystery Wheel Teleports"]["cp_town"][1] = [(6440, -1955, 105), (6210, 1075, 330), (-790, 3840, 400), (-255, -590, 410), (-480, -3410, 515), (340, -4710, 255)];
+	self.syn["Main Quest Teleports"]["cp_town"][1] =    [(5405, -4720, -15), (-295, 3665, 425), (6245, -550, 335), (3205, 1815, -105), (470, 2200, 395), (-1175, -4219, 335)];
+	self.syn["Extra Teleports"]["cp_town"][1] =         [(6015, -820, 335), (1270, -130, 475), (-1055, 3505, 400), (4260, 1620, 335), (-130, -3045, 520)];
+
+	self.syn["Main Teleports"]["cp_town"][2] =          [90, 60, 0, 0];
+	self.syn["Map Setup Teleports"]["cp_town"][2] =     [65, 20, -160, -90, 100, -180];
+	self.syn["Mystery Wheel Teleports"]["cp_town"][2] = [-65, 0, 150, 180, -90, -80];
+	self.syn["Main Quest Teleports"]["cp_town"][2] =    [45, -170, 75, 65, 30, 80];
+	self.syn["Extra Teleports"]["cp_town"][2] =         [-85, -30, 100, -180, 90];
+
 	self.syn["Main Teleports"]["cp_final"][0] =          ["PaP Room", "Spawn", "Control Room", "Theatre", "Afterlife Arcade"];
 	self.syn["Map Setup Teleports"]["cp_final"][0] =     ["N31L's Head", "N31L", "Open Theatre Portal"];
 	self.syn["Mystery Wheel Teleports"]["cp_final"][0] = ["Spawn", "Water Room", "Main Room", "Hallway", "Storage Room", "Theatre", "Outside"];
 	self.syn["Extra Teleports"]["cp_final"][0] =         ["PaP Bridge Part 1", "PaP Bridge Part 2", "PaP Bridge Part 3", "PaP Bridge", "Mephistopheles Arena"];
-	// Beast from Beyond Teleport Origins
+
 	self.syn["Main Teleports"]["cp_final"][1] =          [(5135, -5180, 285), (-760, 2920, 90), (730, 5065, 90), (5515, -4515, -20), (2080, -4520, 330)];
 	self.syn["Map Setup Teleports"]["cp_final"][1] =     [(-1210, 5040, -70), (45, 3840, 25), (1920, 3470, 15)];
 	self.syn["Mystery Wheel Teleports"]["cp_final"][1] = [(-90, 2880, 25), (-1215, 4755, -205), (645, 5710, 60), (1510, 4010, 15), (1470, 3565, -175), (5700, -4050, -70), (2185, 6275, 95)];
 	self.syn["Main Quest Teleports"]["cp_final"][1] =    [(000, 000, 000), (000, 000, 000)];
 	self.syn["Extra Teleports"]["cp_final"][1] =         [(-855, 5435, -70), (1755, 3110, -290), (4990, -6835, 50), (3465, 6640, 165), (-13300, -325, -105)];
-	// Beast from Beyond Teleport Angles
+
 	self.syn["Main Teleports"]["cp_final"][2] =          [90, 20, -45, 90, 0];
 	self.syn["Map Setup Teleports"]["cp_final"][2] =     [-155, 90, 90];
 	self.syn["Mystery Wheel Teleports"]["cp_final"][2] = [-90, -130, 180, 90, 60, 0, -50];
 	self.syn["Main Quest Teleports"]["cp_final"][2] =    [0, 0];
 	self.syn["Extra Teleports"]["cp_final"][2] =         [-55, 60, -100, 45, 0];
 
-	// Spaceland Zombies
-	self.syn["zombies"]["cp_zmb"][0] =   ["generic_zombie", "zombie_clown", "zombie_cop", "zombie_brute", "zombie_ghost", "the_hoff"];
-	self.syn["zombies"]["cp_zmb"][1] =   ["Normal Zombie", "Clown", "Cop", "Brute", "Ghost", "David Hasselhoff"];
-	// Rave in the Redwoods Zombies
-	self.syn["zombies"]["cp_rave"][0] =  ["generic_zombie", "lumberjack", "zombie_sasquatch", "slasher", "superslasher"];
-	self.syn["zombies"]["cp_rave"][1] =  ["Normal Zombie", "Lumberjack", "Sasquatch", "Slasher", "Super Slasher"];
-	// Shaolin Shuffle Zombies
+	// Zombies
+
+	self.syn["zombies"]["cp_zmb"][0] = ["generic_zombie", "zombie_clown", "zombie_cop", "zombie_brute", "zombie_ghost", "the_hoff"];
+	self.syn["zombies"]["cp_zmb"][1] = ["Normal Zombie", "Clown", "Cop", "Brute", "Ghost", "David Hasselhoff"];
+
+	self.syn["zombies"]["cp_rave"][0] = ["generic_zombie", "lumberjack", "zombie_sasquatch", "slasher", "superslasher"];
+	self.syn["zombies"]["cp_rave"][1] = ["Normal Zombie", "Lumberjack", "Sasquatch", "Slasher", "Super Slasher"];
+
 	self.syn["zombies"]["cp_disco"][0] = ["generic_zombie", "karatemaster", "skater", "ratking", "pamgrier"];
 	self.syn["zombies"]["cp_disco"][1] = ["Normal Zombie", "Karate Zombie", "Skater", "Rat King", "Pam Grier"];
-	// Attack of the Radioactive Thing Zombies
-	self.syn["zombies"]["cp_town"][0] =  ["generic_zombie", "crab_mini", "crab_brute", "crab_boss", "elvira"];
-	self.syn["zombies"]["cp_town"][1] =  ["Normal Zombie", "Crog", "Crog Brute", "Crog Boss", "Elvira"];
-	// Beast from Beyond Zombies
+
+	self.syn["zombies"]["cp_town"][0] = ["generic_zombie", "crab_mini", "crab_brute", "crab_boss", "elvira"];
+	self.syn["zombies"]["cp_town"][1] = ["Normal Zombie", "Crog", "Crog Brute", "Crog Boss", "Elvira"];
+
 	self.syn["zombies"]["cp_final"][0] = ["generic_zombie", "alien_goon", "alien_phantom", "alien_rhino", "dlc4_boss"];
 	self.syn["zombies"]["cp_final"][1] = ["Normal Zombie", "Cryptid", "Phantom", "Rhino", "Mephistopheles"];
 
-	// Common Perks
+	// Perks
+
 	self.syn["perks"][0] = ["perk_machine_revive", "perk_machine_tough", "perk_machine_rat_a_tat", "perk_machine_flash", "perk_machine_run", "perk_machine_boom", "perk_machine_more", "perk_machine_zap", "perk_machine_fwoosh"];
 	self.syn["perks"][1] = ["Up N' Atoms", "Tuff Nuff", "Bang Bangs", "Quickies", "Racin' Stripes", "Bombstoppers", "Mule Munchies", "Blue Bolts", "Trail Blazers"];
-	// Zombies in Spaceland Perk
+
 	self.syn["perks"]["cp_zmb"][0] = ["perk_machine_smack"];
 	self.syn["perks"]["cp_zmb"][1] = ["Slappy Taffy"];
-	// Shaolin Shuffle Extra Perk
+
 	self.syn["perks"]["cp_disco"][0] = ["perk_machine_deadeye"];
 	self.syn["perks"]["cp_disco"][1] = ["Deadeye Dewdrops"];
-	// Attack of the Radioactive Thing and Beast from Beyond Extra Perks
+
 	self.syn["perks"]["cp_town"][0] = ["perk_machine_smack", "perk_machine_deadeye", "perk_machine_change"];
 	self.syn["perks"]["cp_town"][1] = ["Slappy Taffy", "Deadeye Dewdrops", "Change Chews"];
 	self.syn["perks"]["cp_final"][0] = ["perk_machine_smack", "perk_machine_deadeye", "perk_machine_change"];
 	self.syn["perks"]["cp_final"][1] = ["Slappy Taffy", "Deadeye Dewdrops", "Change Chews"];
+
 	// Map Names
+
 	self.syn["maps"]["cp_zmb"] = "Zombies in Spaceland";
 	self.syn["maps"]["cp_rave"] = "Rave in the Redwoods";
 	self.syn["maps"]["cp_disco"] = "Shaolin Shuffle";
@@ -518,6 +526,15 @@ create_text(text, font, font_scale, align_x, align_y, x_offset, y_offset, color,
 	return textElement;
 }
 
+set_text(text) {
+	if(!isDefined(self) || !isDefined(text)) {
+		return;
+	}
+
+	self.text = text;
+	self setText(text);
+}
+
 create_shader(shader, align_x, align_y, x_offset, y_offset, width, height, color, alpha, z_index, hide_when_in_menu) {
 	shaderElement = newClientHudElem(self);
 	shaderElement.elemType = "icon";
@@ -551,15 +568,6 @@ create_shader(shader, align_x, align_y, x_offset, y_offset, width, height, color
 
 	self.element_result++;
 	return shaderElement;
-}
-
-set_text(text) {
-	if(!isDefined(self) || !isDefined(text)) {
-		return;
-	}
-
-	self.text = text;
-	self setText(text);
 }
 
 set_shader(shader, width, height) {
@@ -1754,6 +1762,7 @@ frag_no_clip() {
 frag_no_clip_loop() {
 	self endon("disconnect");
 	self endon("noclip_end");
+	
 	self disableWeapons();
 	self disableOffHandWeapons();
 	self.frag_no_clip_loop = true;
@@ -2179,7 +2188,7 @@ take_weapon() {
 }
 
 drop_weapon() {
-	self dropitem(self getCurrentWeapon());
+	self dropItem(self getCurrentWeapon());
 	self switchToWeapon(self getWeaponsListPrimaries()[0]);
 }
 
@@ -2593,61 +2602,61 @@ toggle_clowns() {
 // Fuses
 
 drop_alien_fuses() {
-  fuse_1 = spawn("script_model", (657, 765, 105));
-  fuse_1 setModel("park_alien_gray_fuse");
-  fuse_1.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
-  fuse_2 = spawn("script_model", (641, 765, 105));
-  fuse_2 setModel("park_alien_gray_fuse");
-  fuse_2.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
-  fuse_2 thread delay_spawn_glow_vfx_on(fuse_2, "souvenir_glow");
-  fuse_2 thread item_keep_rotating(fuse_2);
-  fuse_1 thread delay_spawn_glow_vfx_on(fuse_1, "souvenir_glow");
-  fuse_1 thread item_keep_rotating(fuse_1);
-  fuse_1 thread fuse_pick_up_monitor(fuse_1, fuse_2);
+	fuse_1 = spawn("script_model", (657, 765, 105));
+	fuse_1 setModel("park_alien_gray_fuse");
+	fuse_1.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
+	fuse_2 = spawn("script_model", (641, 765, 105));
+	fuse_2 setModel("park_alien_gray_fuse");
+	fuse_2.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
+	fuse_2 thread delay_spawn_glow_vfx_on(fuse_2, "souvenir_glow");
+	fuse_2 thread item_keep_rotating(fuse_2);
+	fuse_1 thread delay_spawn_glow_vfx_on(fuse_1, "souvenir_glow");
+	fuse_1 thread item_keep_rotating(fuse_1);
+	fuse_1 thread fuse_pick_up_monitor(fuse_1, fuse_2);
 }
 
 delay_spawn_glow_vfx_on(fuse, vfx) {
-  fuse endon("death");
-  wait(0.3);
-  playFXOnTag(level._effect[vfx], fuse, "tag_origin");
+	fuse endon("death");
+	wait(0.3);
+	playFXOnTag(level._effect[vfx], fuse, "tag_origin");
 }
 
 item_keep_rotating(fuse) {
-  fuse endon("death");
-  angles = fuse.angles;
-  for(;;) {
-    fuse rotateTo(angles + (randomIntRange(-40, 40), randomIntRange(-40, 90), randomIntRange(-40, 90)), 3);
-    wait(3);
-  }
+	fuse endon("death");
+	angles = fuse.angles;
+	for(;;) {
+	  fuse rotateTo(angles + (randomIntRange(-40, 40), randomIntRange(-40, 90), randomIntRange(-40, 90)), 3);
+	  wait(3);
+	}
 }
 
 fuse_pick_up_monitor(fuse_1, fuse_2) {
-  fuse_1 endon("death");
-  fuse_1 makeUsable();
-  fuse_1 setHintString(&"CP_ZMB_UFO_PICK_UP_FUSE");
-  foreach(player in level.players) {
-    player thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
-  }
+	fuse_1 endon("death");
+	fuse_1 makeUsable();
+	fuse_1 setHintString(&"CP_ZMB_UFO_PICK_UP_FUSE");
+	foreach(player in level.players) {
+	  player thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
+	}
 
-  for(;;) {
-    fuse_1 waittill("trigger", player);
-    if(isPlayer(player)) {
-      player playLocalSound("part_pickup");
-      player thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_collect_alienfuse_2", "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
-      break;
-    }
-  }
+	for(;;) {
+	  fuse_1 waittill("trigger", player);
+	  if(isPlayer(player)) {
+	    player playLocalSound("part_pickup");
+	    player thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_collect_alienfuse_2", "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
+	    break;
+	  }
+	}
 
-  level.num_fuse_in_possession++;
-  scripts\cp\cp_interaction::add_to_current_interaction_list(getStruct("pap_upgrade", "script_noteworthy"));
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(getStruct("weapon_upgrade", "script_noteworthy"));
-  level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
-  foreach(player in level.players) {
-    player setClientOmnvar("zm_special_item", 1);
-  }
+	level.num_fuse_in_possession++;
+	scripts\cp\cp_interaction::add_to_current_interaction_list(getStruct("pap_upgrade", "script_noteworthy"));
+	scripts\cp\cp_interaction::remove_from_current_interaction_list(getStruct("weapon_upgrade", "script_noteworthy"));
+	level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
+	foreach(player in level.players) {
+	  player setClientOmnvar("zm_special_item", 1);
+	}
 
-  fuse_2 delete();
-  fuse_1 delete();
+	fuse_2 delete();
+	fuse_1 delete();
 }
 
 // Rave in the Redwoods
