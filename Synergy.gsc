@@ -238,72 +238,64 @@ initial_variables() {
 	self.syn["maps"]["cp_final"] = "The Beast from Beyond";
 }
 
+create_menu() {
+	self freezeControls(false);
+
+	self thread input_manager();
+
+	self.menu["border"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset - 1), (self.y_offset - 1), 226, 122, self.color_theme, 1, 1);
+	self.menu["background"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, self.y_offset, 224, 121, (0.075, 0.075, 0.075), 1, 2);
+	self.menu["foreground"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + 15), 224, 106, (0.1, 0.1, 0.1), 1, 3);
+	self.menu["separator_1"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset + 5.5), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
+	self.menu["separator_2"] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 220), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
+	self.menu["cursor"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, 215, 224, 16, (0.15, 0.15, 0.15), 0, 4);
+
+	self.menu["title"] = self create_text("Title", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 94.5), (self.y_offset + 3), (1, 1, 1), 1, 10);
+	self.menu["description"] = self create_text("Description", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), (self.y_offset + (self.option_limit * 17.5)), (0.75, 0.75, 0.75), 0, 10);
+
+	for(i = 1; i <= self.option_limit; i++) {
+		self.menu["toggle_" + i] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 11), ((self.y_offset + 4) + (i * 15)), 8, 8, (0.25, 0.25, 0.25), 0, 9);
+		self.menu["slider_" + i] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + (i * 15)), 224, 16, (0.25, 0.25, 0.25), 0, 5);
+		self.menu["option_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 1, 10);
+		self.menu["slider_text_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 132.5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 0, 10);
+		self.menu["submenu_icon_" + i] = self create_shader("ui_scrollbar_arrow_right", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 223), ((self.y_offset + 4) + (i * 15)), 7, 7, (0.5, 0.5, 0.5), 0, 10);
+	}
+
+	self.hud_created = true;
+
+	self.menu["title"] set_text("Controls");
+	self.menu["option_1"] set_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]");
+	self.menu["option_2"] set_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]");
+	self.menu["option_3"] set_text("Select: ^3[{+activate}] ^7Back: ^3[{+melee}]");
+	self.menu["option_4"] set_text("Sliders: ^3[{+smoke}] ^7and ^3[{+frag}]");
+	self.menu["option_5"].alpha = 0;
+	self.menu["option_6"].alpha = 0;
+	self.menu["option_7"].alpha = 0;
+
+	self.menu["border"] set_shader("white", self.menu["border"].width, 78);
+	self.menu["background"] set_shader("white", self.menu["background"].width, 76);
+	self.menu["foreground"] set_shader("white", self.menu["foreground"].width, 61);
+
+	self.controls_menu_open = true;
+
+	wait 8;
+
+	if(self.controls_menu_open) {
+		close_controls_menu();
+	}
+}
+
 initialize_menu() {
 	level endon("game_ended");
 	self endon("disconnect");
-
+	
 	for(;;) {
 		event_name = self waittill_any_return("spawned_player", "player_downed", "death", "joined_spectators");
 		switch (event_name) {
 			case "spawned_player":
 				if(self isHost()) {
 					if(!self.hud_created) {
-						self freezeControls(false);
-
-						self thread input_manager();
-
-						//self.x_offset = 175;
-						//self.y_offset = 160;
-
-						self.menu["border"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset - 1), (self.y_offset - 1), 226, 122, self.color_theme, 1, 1);
-						self.menu["background"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, self.y_offset, 224, 121, (0.075, 0.075, 0.075), 1, 2);
-						self.menu["foreground"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + 15), 224, 106, (0.1, 0.1, 0.1), 1, 3);
-						self.menu["separator_1"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset + 5.5), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
-						self.menu["separator_2"] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 220), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
-						self.menu["cursor"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, 215, 224, 16, (0.15, 0.15, 0.15), 0, 4);
-						//self.menu["scrollbar"] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + (self.menu["background"].width + 1)), (self.y_offset + 16), 4, 16, (0.25, 0.25, 0.25), 1, 4);
-
-						self.menu["title"] = self create_text("Title", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 94.5), (self.y_offset + 3), (1, 1, 1), 1, 10);
-						self.menu["description"] = self create_text("Description", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), (self.y_offset + (self.option_limit * 17.5)), (0.75, 0.75, 0.75), 0, 10);
-
-						for(i = 1; i <= self.option_limit; i++) {
-							self.menu["toggle_" + i] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 11), ((self.y_offset + 4) + (i * 15)), 8, 8, (0.25, 0.25, 0.25), 0, 9);
-							self.menu["slider_" + i] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + (i * 15)), 224, 16, (0.25, 0.25, 0.25), 0, 5);
-							self.menu["option_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 1, 10);
-							self.menu["slider_text_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 132.5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 0, 10);
-							self.menu["submenu_icon_" + i] = self create_shader("ui_scrollbar_arrow_right", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 223), ((self.y_offset + 4) + (i * 15)), 7, 7, (0.5, 0.5, 0.5), 0, 10);
-						}
-
-						//self setClientOmnvar("element_id", 100001);
-						//self setClientOmnvar("element_x_start", (self.x_offset - 2));
-						//self setClientOmnvar("element_x_end", (self.x_offset + 452));
-						//self setClientOmnvar("element_y_start", (self.y_offset - 2));
-						//self setClientOmnvar("element_y_end", (self.y_offset + 244));
-						//self setClientOmnvar("element_alpha", 1);
-						//self setClientOmnvar("element_color", 255);
-
-						self.hud_created = true;
-
-						self.menu["title"] set_text("Controls");
-						self.menu["option_1"] set_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]");
-						self.menu["option_2"] set_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]");
-						self.menu["option_3"] set_text("Select: ^3[{+activate}] ^7Back: ^3[{+melee}]");
-						self.menu["option_4"] set_text("Sliders: ^3[{+smoke}] ^7and ^3[{+frag}]");
-						self.menu["option_5"].alpha = 0;
-						self.menu["option_6"].alpha = 0;
-						self.menu["option_7"].alpha = 0;
-
-						self.menu["border"] set_shader("white", self.menu["border"].width, 78);
-						self.menu["background"] set_shader("white", self.menu["background"].width, 76);
-						self.menu["foreground"] set_shader("white", self.menu["foreground"].width, 61);
-
-						self.controls_menu_open = true;
-
-						wait 8;
-
-						if(self.controls_menu_open) {
-							close_controls_menu();
-						}
+						self create_menu();
 					}
 				}
 				break;
@@ -320,11 +312,29 @@ initialize_menu() {
 	}
 }
 
+initialize_verified_menu() {
+	level endon("game_ended");
+	self endon("disconnect");
+
+	for(;;) {
+		if(self.access != "None") {
+			if(!self.hud_created) {
+				self initial_variables();
+
+				wait 0.25;
+
+				self create_menu();
+			}
+		}
+		wait 1;
+	}
+}
+
 input_manager() {
 	level endon("game_ended");
 	self endon("disconnect");
 
-	while(self isHost()) {
+	while(self.access != "None") {
 		if(!self.in_menu) {
 			if(self adsButtonPressed() && self meleeButtonPressed()) {
 				if(self.controls_menu_open) {
@@ -1277,6 +1287,8 @@ menu_option() {
 			self add_menu(menu);
 
 			self add_toggle("Exo Movement", "Enable/Disable Exo-Suits", ::exo_movement, self.exo_movement);
+			self add_toggle("Infinite Boost", "Enables Infinite Exo-Boost", ::infinite_boost, self.infinite_boost);
+
 			self add_toggle("Max Money in Bank", "Maxes out the Money in the ATM", ::max_bank, self.max_bank);
 
 			self add_toggle("Fullbright", "Removes all Shadows and Lighting", ::fullbright, self.fullbright);
@@ -1377,7 +1389,7 @@ menu_option() {
 			self add_menu(menu);
 
 			foreach(player in level.players) {
-				self add_option(player.name, undefined, ::new_menu, "Player Option", player);
+				self add_option(player.name, undefined, ::new_menu, "Player Option");
 			}
 
 			break;
@@ -1395,6 +1407,10 @@ menu_option() {
 			if(isDefined(target)) {
 				self add_option("Print", "Print Player Name", ::print_player_name, target);
 				self add_option("Kill", "Kill the Player", ::commit_suicide, target);
+
+				if(!target isHost() && target.access == "None") {
+					self add_option("Verify", "Give the Player Mod Menu Access", ::verify_player, target);
+				}
 
 				if(!target isHost()) {
 					self add_option("Kick", "Kick the Player from the Game", ::kick_player, target);
@@ -1762,7 +1778,7 @@ frag_no_clip() {
 frag_no_clip_loop() {
 	self endon("disconnect");
 	self endon("noclip_end");
-	
+
 	self disableWeapons();
 	self disableOffHandWeapons();
 	self.frag_no_clip_loop = true;
@@ -1889,6 +1905,26 @@ exo_movement() {
 	}
 }
 
+infinite_boost() {
+	self.infinite_boost = !return_toggle(self.infinite_boost);
+	if(self.infinite_boost) {
+		self thread infinite_boost_loop();
+	} else {
+		self notify("stop_infinite_boost");
+		self energy_setEnergy(0, self.doubleJumpEnergy);
+	}
+}
+
+infinite_boost_loop() {
+	self endon("stop_infinite_boost");
+	self endon("game_ended");
+
+	for(;;) {
+		self energy_setEnergy(0, 999);
+		wait 0.2;
+	}
+}
+
 max_bank() {
 	self.max_bank = !return_toggle(self.max_bank);
 	if(self.max_bank) {
@@ -1976,6 +2012,11 @@ print_player_name(target) {
 
 commit_suicide(target) {
 	target suicide();
+}
+
+verify_player(target) {
+	target.access = "Verified";
+	target thread initialize_verified_menu();
 }
 
 kick_player(target) {
@@ -2582,7 +2623,7 @@ ufo_follow_player() {
 ufo_follow_player_loop() {
 	self endon("stop_ufo_follow_player");
 	for(;;) {
-		level.ufo moveTo((level.players[0].origin[0], level.players[0].origin[1], 901), 5);
+		level.ufo moveTo((self.origin[0], self.origin[1], 901), 5);
 		level.ufo waittill("movedone");
 	}
 }
@@ -2592,8 +2633,8 @@ ufo_follow_player_loop() {
 toggle_clowns() {
 	foreach(zombie in level.spawned_enemies) {
 		if(isDefined(zombie.agent_type) && zombie.agent_type == "generic_zombie") {
-			zombie scripts\asm\zombie\zombie::turnintosuicidebomber(1);
-			zombie setavoidanceradius(4);
+			zombie scripts\asm\zombie\zombie::turnIntoSuicideBomber(1);
+			zombie setAvoidanceRadius(4);
 			wait(randomFloatRange(0.3, 0.7));
 		}
 	}
@@ -2625,8 +2666,8 @@ item_keep_rotating(fuse) {
 	fuse endon("death");
 	angles = fuse.angles;
 	for(;;) {
-	  fuse rotateTo(angles + (randomIntRange(-40, 40), randomIntRange(-40, 90), randomIntRange(-40, 90)), 3);
-	  wait(3);
+		fuse rotateTo(angles + (randomIntRange(-40, 40), randomIntRange(-40, 90), randomIntRange(-40, 90)), 3);
+		wait(3);
 	}
 }
 
@@ -2635,16 +2676,16 @@ fuse_pick_up_monitor(fuse_1, fuse_2) {
 	fuse_1 makeUsable();
 	fuse_1 setHintString(&"CP_ZMB_UFO_PICK_UP_FUSE");
 	foreach(player in level.players) {
-	  player thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
+		player thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
 	}
 
 	for(;;) {
-	  fuse_1 waittill("trigger", player);
-	  if(isPlayer(player)) {
-	    player playLocalSound("part_pickup");
-	    player thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_collect_alienfuse_2", "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
-	    break;
-	  }
+		fuse_1 waittill("trigger", player);
+		if(isPlayer(player)) {
+			player playLocalSound("part_pickup");
+			player thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_collect_alienfuse_2", "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
+			break;
+		}
 	}
 
 	level.num_fuse_in_possession++;
@@ -2652,7 +2693,7 @@ fuse_pick_up_monitor(fuse_1, fuse_2) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(getStruct("weapon_upgrade", "script_noteworthy"));
 	level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
 	foreach(player in level.players) {
-	  player setClientOmnvar("zm_special_item", 1);
+		player setClientOmnvar("zm_special_item", 1);
 	}
 
 	fuse_2 delete();

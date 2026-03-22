@@ -1102,6 +1102,7 @@ menu_option() {
 			self add_menu(menu);
 
 			self add_toggle("Disable Exo Movement", "Disable/Enable Exo-Suits", ::exo_movement, self.exo_movement);
+			self add_toggle("Infinite Boost", "Enables Infinite Exo-Boost", ::infinite_boost, self.infinite_boost);
 
 			self add_toggle("Fullbright", "Removes all Shadows and Lighting", ::fullbright, self.fullbright);
 
@@ -1462,6 +1463,26 @@ exo_movement() {
 		self allowdodge(1);
 		self allowMantle(0);
 		self.disabledMantle = 1;
+	}
+}
+
+infinite_boost() {
+	self.infinite_boost = !return_toggle(self.infinite_boost);
+	if(self.infinite_boost) {
+		self thread infinite_boost_loop();
+	} else {
+		self notify("stop_infinite_boost");
+		self energy_setEnergy(0, self.doubleJumpEnergy);
+	}
+}
+
+infinite_boost_loop() {
+	self endon("stop_infinite_boost");
+	self endon("game_ended");
+
+	for(;;) {
+		self energy_setEnergy(0, 999);
+	  wait 0.2;
 	}
 }
 
