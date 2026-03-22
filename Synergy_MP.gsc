@@ -45,6 +45,8 @@ initial_variables() {
 	self.previous_scrolling_offset = 0;
 	self.description_height = 0;
 	self.previous_option = undefined;
+	
+	self.out_of_bounds_barriers = getEntArray("OutOfBounds", "targetname");
 
 	self.syn["visions"][0] = ["None", "AC-130", "AC-130 Enhanced", "AC-130 inverted", "Aftermath", "Aftermath Glow", "Aftermath Post", "Apex", "Default", "Default Night", "Night Vision", "Dronehive", "Endgame", "Europa", "Jackal", "MP Map Select", "Missile Cam", "MP Intro", "MP Outro", "MP Nuke", "MP Nuke Aftermath", "Frontier", "Out of Bounds", "Nuke Flash", "Optic Wave", "RC8", "Thor Bright", "Thor", "Venom Gas"];
 	self.syn["visions"][1] = ["", "ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "map_select_mp", "missilecam", "mpintro", "mpoutro", "mpnuke", "mpnuke_aftermath", "mp_frontier", "mp_out_of_bounds", "nuke_global_flash", "opticwave_mp", "rc8_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
@@ -52,6 +54,7 @@ initial_variables() {
 	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Specialist Weapons"];
 
 	// Weapons
+
 	self.syn["weapons"]["assault_rifles"][0] =     ["iw7_m4_mp", "iw7_sdfar_mp", "iw7_ar57_mp", "iw7_fmg_mp+akimbofmg+fmgscope_camo", "iw7_ake_mpr", "iw7_rvn_mp+meleervn+rvnscope", "iw7_vr_mp+vrscope", "iw7_gauss_mp+gaussscope", "iw7_erad_mp+eradscope_camo"];
 	self.syn["weapons"]["sub_machine_guns"][0] =   ["iw7_fhr_mp", "iw7_crb_mpl+crblscope_camo", "iw7_ripper_mpr+ripperrscope_camo", "iw7_ump45_mpl+ump45lscope_camo", "iw7_crdb_mp", "iw7_mp28_mp", "iw7_tacburst_mp+gltacburst+tacburstscope"];
 	self.syn["weapons"]["light_machine_guns"][0] = ["iw7_sdflmg_mp", "iw7_mauler_mp", "iw7_lmg03_mp+lmg03scope_camo", "iw7_minilmg_mp+minilmgscope", "iw7_unsalmg_mp"];
@@ -60,8 +63,8 @@ initial_variables() {
 	self.syn["weapons"]["pistols"][0] =            ["iw7_emc_mp", "iw7_nrg_mp", "iw7_g18_mpr", "iw7_revolver_mp", "iw7_udm45_mp+udm45scope", "iw7_mag_mp"];
 	self.syn["weapons"]["launchers"][0] =          ["iw7_lockon_mp+lockonscope_camo", "iw7_glprox_mp+glproxscope_camo", "iw7_chargeshot_mp+chargeshotscope_camo", "iw7_venomx_mp+venomxalt_burst"];
 	self.syn["weapons"]["classics"][0] =           ["iw7_m1c_mp", "iw7_g18c_mp", "iw7_ump45c_mp", "iw7_spasc_mp", "iw7_arclassic_mp+glarclassic", "iw7_cheytacc_mp+cheytacscope_camo"];
-	self.syn["weapons"]["melee"][0] =             ["iw7_fists_mp", "iw7_knife_mp", "iw7_axe_mpr_melee", "iw7_axe_mp", "iw7_katana_mp", "iw7_nunchucks_mp"];
-	self.syn["weapons"]["specialist"][0] =           ["iw7_atomizer_mp", "iw7_penetrationrail_mp+penetrationrailscope", "iw7_steeldragon_mp", "iw7_claw_mp", "iw7_blackholegun_mp+blackholegunscope"];
+	self.syn["weapons"]["melee"][0] =              ["iw7_fists_mp", "iw7_knife_mp", "iw7_axe_mpr_melee", "iw7_axe_mp", "iw7_katana_mp", "iw7_nunchucks_mp"];
+	self.syn["weapons"]["specialist"][0] =         ["iw7_atomizer_mp", "iw7_penetrationrail_mp+penetrationrailscope", "iw7_steeldragon_mp", "iw7_claw_mp", "iw7_blackholegun_mp+blackholegunscope"];
 
 	self.syn["weapons"]["assault_rifles"][1] =     ["NV4", "R3K", "KBAR-32", "Type-2", "Volk", "R-VN", "X-Con", "G-Rail", "Erad"];
 	self.syn["weapons"]["sub_machine_guns"][1] =   ["FHR-40", "Karma-45", "RPR Evo", "HVR", "VPR", "Trencher", "Raijin-EMX"];
@@ -71,8 +74,8 @@ initial_variables() {
 	self.syn["weapons"]["pistols"][1] =            ["EMC", "Oni", "Kendall 44", "Hailstorm", "UDM", "Stallion 44"];
 	self.syn["weapons"]["launchers"][1] =          ["Spartan SA3", "Howitzer", "P-Law", "Venom-X"];
 	self.syn["weapons"]["classics"][1] =           ["M1", "Hornet", "MacTav-45", "S-Ravage", "OSA", "TF-141"];
-	self.syn["weapons"]["melee"][1] =             ["Fists", "Combat Knife", "Axe", "Fancy Axe", "Katana", "Nunchucks"];
-	self.syn["weapons"]["specialist"][1] =           ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun"];
+	self.syn["weapons"]["melee"][1] =              ["Fists", "Combat Knife", "Axe", "Fancy Axe", "Katana", "Nunchucks"];
+	self.syn["weapons"]["specialist"][1] =         ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun"];
 
 	// Perks
 
@@ -85,64 +88,67 @@ initial_variables() {
 	self.syn["killstreaks"][1] = ["Scarab", "UAV", "Drone Package", "Counter UAV", "Vulture", "Trinity Rocket", "Scorchers", "Bombardment", "Shock Sentry", "Warden", "Advanced UAV", "T.H.O.R", "R-C8", "AP-3X", "Nuke"];
 }
 
+create_menu() {
+	self freezeControls(false);
+
+	self thread input_manager();
+
+	self.syn["string"] = self create_text("", "default", 1, "center", "top", 0, -100, (1, 1, 1), 0, 9999, false, true);
+
+	self.menu["border"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset - 1), (self.y_offset - 1), 226, 122, self.color_theme, 1, 1);
+	self.menu["background"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, self.y_offset, 224, 121, (0.075, 0.075, 0.075), 1, 2);
+	self.menu["separator_1"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset + 5.5), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
+	self.menu["separator_2"] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 220), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
+	self.menu["cursor"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, 215, 224, 16, (0.15, 0.15, 0.15), 0, 4);
+
+	self.menu["title"] = self create_text("Title", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 94.5), (self.y_offset + 3), (1, 1, 1), 1, 10);
+	self.menu["description"] = self create_text("Description", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), (self.y_offset + (self.option_limit * 17.5)), (0.75, 0.75, 0.75), 0, 10);
+
+	for(i = 1; i <= self.option_limit; i++) {
+		self.menu["toggle_" + i] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 11), ((self.y_offset + 4) + (i * 15)), 8, 8, (0.25, 0.25, 0.25), 0, 9);
+		self.menu["slider_" + i] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + (i * 15)), 224, 16, (0.25, 0.25, 0.25), 0, 5);
+		self.menu["option_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 1, 10);
+		self.menu["slider_text_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 132.5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 0, 10);
+		self.menu["submenu_icon_" + i] = self create_shader("ui_scrollbar_arrow_right", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 223), ((self.y_offset + 4) + (i * 15)), 7, 7, (0.5, 0.5, 0.5), 0, 10);
+	}
+
+	self.menu["foreground"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + 15), 224, 106, (0.1, 0.1, 0.1), 1, 3);
+
+	self.hud_created = true;
+
+	self.menu["title"] set_text("Controls");
+	self.menu["option_1"] set_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]");
+	self.menu["option_2"] set_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]");
+	self.menu["option_3"] set_text("Select: ^3[{+activate}] ^7Back: ^3[{+melee}]");
+	self.menu["option_4"] set_text("Sliders: ^3[{+smoke}] ^7and ^3[{+frag}]");
+	self.menu["option_5"].alpha = 0;
+	self.menu["option_6"].alpha = 0;
+	self.menu["option_7"].alpha = 0;
+
+	self.menu["border"] set_shader("white", self.menu["border"].width, 78);
+	self.menu["background"] set_shader("white", self.menu["background"].width, 76);
+	self.menu["foreground"] set_shader("white", self.menu["foreground"].width, 61);
+
+	self.controls_menu_open = true;
+
+	wait 8;
+
+	if(self.controls_menu_open) {
+		close_controls_menu();
+	}
+}
+
 initialize_menu() {
 	level endon("game_ended");
 	self endon("disconnect");
-
+	
 	for(;;) {
 		event_name = self waittill_any_return("spawned_player", "player_downed", "death", "joined_spectators");
 		switch (event_name) {
 			case "spawned_player":
 				if(self isHost()) {
 					if(!self.hud_created) {
-						self freezeControls(false);
-
-						self thread input_manager();
-
-						self.syn["string"] = self create_text("", "default", 1, "center", "top", 0, -100, (1, 1, 1), 0, 9999, false, true);
-
-						self.menu["border"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset - 1), (self.y_offset - 1), 226, 122, self.color_theme, 1, 1);
-						self.menu["background"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, self.y_offset, 224, 121, (0.075, 0.075, 0.075), 1, 2);
-						self.menu["separator_1"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", (self.x_offset + 5.5), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
-						self.menu["separator_2"] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 220), (self.y_offset + 7.5), 42, 1, self.color_theme, 1, 10);
-						self.menu["cursor"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, 215, 224, 16, (0.15, 0.15, 0.15), 0, 4);
-
-						self.menu["title"] = self create_text("Title", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 94.5), (self.y_offset + 3), (1, 1, 1), 1, 10);
-						self.menu["description"] = self create_text("Description", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), (self.y_offset + (self.option_limit * 17.5)), (0.75, 0.75, 0.75), 0, 10);
-
-						for(i = 1; i <= self.option_limit; i++) {
-							self.menu["toggle_" + i] = self create_shader("white", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 11), ((self.y_offset + 4) + (i * 15)), 8, 8, (0.25, 0.25, 0.25), 0, 9);
-							self.menu["slider_" + i] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + (i * 15)), 224, 16, (0.25, 0.25, 0.25), 0, 5);
-							self.menu["option_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 1, 10);
-							self.menu["slider_text_" + i] = self create_text("", self.font, self.font_scale, "TOP_LEFT", "TOPCENTER", (self.x_offset + 132.5), ((self.y_offset + 4) + (i * 15)), (0.75, 0.75, 0.75), 0, 10);
-							self.menu["submenu_icon_" + i] = self create_shader("ui_scrollbar_arrow_right", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 223), ((self.y_offset + 4) + (i * 15)), 7, 7, (0.5, 0.5, 0.5), 0, 10);
-						}
-
-						// Currently Disabled due to HUD Limit
-						self.menu["foreground"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + 15), 224, 106, (0.1, 0.1, 0.1), 1, 3);
-
-						self.hud_created = true;
-
-						self.menu["title"] set_text("Controls");
-						self.menu["option_1"] set_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]");
-						self.menu["option_2"] set_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]");
-						self.menu["option_3"] set_text("Select: ^3[{+activate}] ^7Back: ^3[{+melee}]");
-						self.menu["option_4"] set_text("Sliders: ^3[{+smoke}] ^7and ^3[{+frag}]");
-						self.menu["option_5"].alpha = 0;
-						self.menu["option_6"].alpha = 0;
-						self.menu["option_7"].alpha = 0;
-
-						self.menu["border"] set_shader("white", self.menu["border"].width, 78);
-						self.menu["background"] set_shader("white", self.menu["background"].width, 76);
-						self.menu["foreground"] set_shader("white", self.menu["foreground"].width, 61);
-
-						self.controls_menu_open = true;
-
-						wait 8;
-
-						if(self.controls_menu_open) {
-							close_controls_menu();
-						}
+						self create_menu();
 					}
 				}
 				break;
@@ -159,11 +165,29 @@ initialize_menu() {
 	}
 }
 
+initialize_verified_menu() {
+	level endon("game_ended");
+	self endon("disconnect");
+
+	for(;;) {
+		if(self.access != "None") {
+			if(!self.hud_created) {
+				self initial_variables();
+
+				wait 0.25;
+
+				self create_menu();
+			}
+		}
+		wait 1;
+	}
+}
+
 input_manager() {
 	level endon("game_ended");
 	self endon("disconnect");
 
-	while(self isHost()) {
+	while(self.access != "None") {
 		if(!self.in_menu) {
 			if(self adsButtonPressed() && self meleeButtonPressed()) {
 				if(self.controls_menu_open) {
@@ -196,12 +220,14 @@ input_manager() {
 					wait 0.2;
 				}
 			} else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
+
 				self playSoundToPlayer("mp_cranked_countdown", self);
 
 				scroll_cursor(set_variable(self attackButtonPressed(), "down", "up"));
 
 				wait (0.2);
 			} else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || !self fragButtonPressed() && self secondaryOffhandButtonPressed()) {
+
 				self playSoundToPlayer("mp_killstreak_warden_switch_mode", self);
 
 				if(isDefined(self.structure[self.cursor_index].array) || isDefined(self.structure[self.cursor_index].increment)) {
@@ -1095,7 +1121,9 @@ menu_option() {
 			self add_menu(menu);
 
 			self add_toggle("Disable Exo Movement", "Disable/Enable Exo-Suits", ::exo_movement, self.exo_movement);
-			self add_toggle("Enable Out of Bounds Popup", "Enables/Disables the Out of Bounds Popup", ::out_of_bounds, self.out_of_bounds);
+			self add_toggle("Infinite Boost", "Enables Infinite Exo-Boost", ::infinite_boost, self.infinite_boost);
+
+			self add_toggle("Disable Out of Bounds Popup", undefined, ::out_of_bounds, self.out_of_bounds);
 
 			self add_toggle("Earnable Nuke", "Gives you a Nuke when you reach a 25 Kill Streak", ::earnable_nuke, self.earnable_nuke);
 
@@ -1176,6 +1204,10 @@ menu_option() {
 			if(isDefined(target)) {
 				self add_option("Print", "Print Player Name", ::print_player_name, target);
 				self add_option("Kill", "Kill the Player", ::commit_suicide, target);
+
+				if(!target isHost() && !isBot(target) && target.access == "None") {
+					self add_option("Verify", "Give the Player Mod Menu Access", ::verify_player, target);
+				}
 
 				if(isBot(target)) {
 					self add_array("Set Difficulty", undefined, ::set_difficulty, ["Recruit", "Regular", "Hardened", "Veteran"], target);
@@ -1439,7 +1471,7 @@ frag_no_clip() {
 frag_no_clip_loop() {
 	self endon("disconnect");
 	self endon("noclip_end");
-	
+
 	self disableWeapons();
 	self disableOffHandWeapons();
 	self.frag_no_clip_loop = true;
@@ -1531,15 +1563,36 @@ exo_movement() {
 	}
 }
 
+infinite_boost() {
+	self.infinite_boost = !return_toggle(self.infinite_boost);
+	if(self.infinite_boost) {
+		self thread infinite_boost_loop();
+	} else {
+		self notify("stop_infinite_boost");
+		self energy_setEnergy(0, self.doubleJumpEnergy);
+	}
+}
+
+infinite_boost_loop() {
+	self endon("stop_infinite_boost");
+	self endon("game_ended");
+
+	for(;;) {
+		self energy_setEnergy(0, 999);
+		wait 0.2;
+	}
+}
+
 out_of_bounds() {
 	self.out_of_bounds = !return_toggle(self.out_of_bounds);
-	if(!self.out_of_bounds) {
-		iPrintString("Out of Bounds Popup [^1OFF^7]");
+	if(self.out_of_bounds) {
+		iPrintString("Disable Out of Bounds Popup [^2ON^7]");
 		foreach(barrier in self.out_of_bounds_barriers) {
+			barrier.oldorigin = barrier.origin;
 			barrier.origin = (0, 0, 999999);
 		}
 	} else {
-		iPrintString("Out of Bounds Popup [^2ON^7]");
+		iPrintString("Disable Out of Bounds Popup [^1OFF^7]");
 		foreach(barrier in self.out_of_bounds_barriers) {
 			barrier.origin = barrier.oldorigin;
 		}
@@ -1634,6 +1687,11 @@ commit_suicide(target) {
 	target suicide();
 }
 
+verify_player(target) {
+	target.access = "Verified";
+	target thread initialize_verified_menu();
+}
+
 kick_player(target) {
 	kick(target getEntityNumber());
 }
@@ -1648,7 +1706,7 @@ set_difficulty_loop(difficulty, target) {
 	level endon("game_ended");
 
 	for(;;) {
-	  target waittill("spawned_player");
+		target waittill("spawned_player");
 
 		target.var_2D32 = difficulty;
 		target scripts\mp\bots\bots_util::bot_set_difficulty(difficulty);
