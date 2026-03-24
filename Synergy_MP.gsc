@@ -281,8 +281,10 @@ player_connect() {
 
 		player.access = player isHost() ? "Host" : "None";
 
-		player initial_variables();
-		player thread initialize_menu();
+		if(player isHost()) {
+			player initial_variables();
+			player thread initialize_menu();
+		}
 	}
 }
 
