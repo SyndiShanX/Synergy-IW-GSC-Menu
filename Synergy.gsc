@@ -288,7 +288,7 @@ create_menu() {
 initialize_menu() {
 	level endon("game_ended");
 	self endon("disconnect");
-	
+
 	for(;;) {
 		event_name = self waittill_any_return("spawned_player", "player_downed", "death", "joined_spectators");
 		switch (event_name) {
@@ -426,8 +426,10 @@ player_connect() {
 
 		player.access = player isHost() ? "Host" : "None";
 
-		player initial_variables();
-		player thread initialize_menu();
+		if(player isHost()) {
+			player initial_variables();
+			player thread initialize_menu();
+		}
 	}
 }
 

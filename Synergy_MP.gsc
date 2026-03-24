@@ -45,7 +45,7 @@ initial_variables() {
 	self.previous_scrolling_offset = 0;
 	self.description_height = 0;
 	self.previous_option = undefined;
-	
+
 	self.out_of_bounds_barriers = getEntArray("OutOfBounds", "targetname");
 
 	self.syn["visions"][0] = ["None", "AC-130", "AC-130 Enhanced", "AC-130 inverted", "Aftermath", "Aftermath Glow", "Aftermath Post", "Apex", "Default", "Default Night", "Night Vision", "Dronehive", "Endgame", "Europa", "Jackal", "MP Map Select", "Missile Cam", "MP Intro", "MP Outro", "MP Nuke", "MP Nuke Aftermath", "Frontier", "Out of Bounds", "Nuke Flash", "Optic Wave", "RC8", "Thor Bright", "Thor", "Venom Gas"];
@@ -141,7 +141,7 @@ create_menu() {
 initialize_menu() {
 	level endon("game_ended");
 	self endon("disconnect");
-	
+
 	for(;;) {
 		event_name = self waittill_any_return("spawned_player", "player_downed", "death", "joined_spectators");
 		switch (event_name) {
@@ -281,8 +281,10 @@ player_connect() {
 
 		player.access = player isHost() ? "Host" : "None";
 
-		player initial_variables();
-		player thread initialize_menu();
+		if(player isHost()) {
+			player initial_variables();
+			player thread initialize_menu();
+		}
 	}
 }
 
