@@ -112,6 +112,7 @@ create_menu() {
 		self.menu["submenu_icon_" + i] = self create_shader("ui_scrollbar_arrow_right", "TOP_RIGHT", "TOPCENTER", (self.x_offset + 223), ((self.y_offset + 4) + (i * 15)), 7, 7, (0.5, 0.5, 0.5), 0, 10);
 	}
 
+	// Currently Disabled due to HUD Limit
 	self.menu["foreground"] = self create_shader("white", "TOP_LEFT", "TOPCENTER", self.x_offset, (self.y_offset + 15), 224, 106, (0.1, 0.1, 0.1), 1, 3);
 
 	self.hud_created = true;
@@ -612,46 +613,6 @@ in_array(array, item) {
 	return false;
 }
 
-clean_name(name) {
-	if(!isDefined(name) || name == "") {
-		return;
-	}
-
-	illegal = ["^A", "^B", "^F", "^H", "^I", "^0", "^1", "^2", "^3", "^4", "^5", "^6", "^7", "^8", "^9", "^:"];
-	new_string = "";
-	for(a = 0; a < name.size; a++) {
-		if(a < (name.size - 1)) {
-			if(in_array(illegal, (name[a] + name[(a + 1)]))) {
-				a += 2;
-				if(a >= name.size) {
-					break;
-				}
-			}
-		}
-
-		if(isDefined(name[a]) && a < name.size) {
-			new_string += name[a];
-		}
-	}
-
-	return new_string;
-}
-
-get_name() {
-	name = self.name;
-	if(name[0] != "[") {
-		return name;
-	}
-
-	for(a = (name.size - 1); a >= 0; a--) {
-		if(name[a] == "]") {
-			break;
-		}
-	}
-
-	return getSubStr(name, (a + 1));
-}
-
 player_damage_callback(inflictor, attacker, damage, flags, death_reason, weapon, point, direction, hit_location, time_offset) {
 	self endon("disconnect");
 
@@ -1107,9 +1068,7 @@ menu_option() {
 			self add_menu(menu);
 
 			self add_toggle("God Mode", "Makes you Invincible", ::god_mode, self.god_mode);
-			self add_toggle("No Clip", "Fly through the Map", ::no_clip, self.no_clip);
 			self add_toggle("Frag No Clip", "Fly through the Map using (^3[{+frag}]^7)", ::frag_no_clip, self.frag_no_clip);
-			self add_toggle("UFO", "Fly Straight through the Map", ::ufo_mode, self.ufo_mode);
 			self add_toggle("Infinite Ammo", "Gives you Infinite Ammo and Infinite Grenades", ::infinite_ammo, self.infinite_ammo);
 
 			self add_option("Give All Perks", undefined, ::give_all_perks);
@@ -1325,108 +1284,6 @@ menu_option() {
 			break;
 	}
 }
-
-player_option(menu, player) {
-	if(!isDefined(menu) || !isDefined(player) || !isPlayer(player)) {
-		menu = "Error";
-	}
-
-	switch (menu) {
-		case "Player Option":
-			self add_menu(clean_name(player get_name()));
-			break;
-		case "Error":
-			self add_menu();
-			self add_option("Oops, Something Went Wrong!", "Condition: Undefined");
-			break;
-		default:
-			error = true;
-			if(error) {
-				self add_menu("Critical Error");
-				self add_option("Oops, Something Went Wrong!", "Condition: Menu Index");
-			}
-			break;
-	}
-}
-
-// Menu Options
-
-iPrintString(string) {
-	if(!isDefined(self.syn["string"])) {
-		self.syn["string"] = self create_text(string, "default", 1, "center", "top", 0, -100, (1, 1, 1), 1, 9999, false, true);
-	} else {
-		self.syn["string"] set_text(string);
-	}
-	self.syn["string"] notify("stop_hud_fade");
-	self.syn["string"].alpha = 1;
-	self.syn["string"] setText(string);
-	self.syn["string"] thread fade_hud(0, 2.5);
-}
-
-fade_hud(alpha, time) {
-	self endon("stop_hud_fade");
-	self fadeOverTime(time);
-	self.alpha = alpha;
-	wait time;
-}
-
-modify_menu_position(offset, axis) {
-	if(axis == "x") {
-		self.x_offset = 175 + offset;
-	} else {
-		self.y_offset = 160 + offset;
-	}
-	self close_menu();
-	self open_menu();
-}
-
-set_menu_rainbow() {
-	if(!isString(self.color_theme)) {
-		self.color_theme = "rainbow";
-		self.menu["border"] thread start_rainbow();
-		self.menu["separator_1"] thread start_rainbow();
-		self.menu["separator_2"] thread start_rainbow();
-		self.menu["border"].color = self.color_theme;
-		self.menu["separator_1"].color = self.color_theme;
-		self.menu["separator_2"].color = self.color_theme;
-	}
-}
-
-set_menu_color(value, color) {
-	if(color == "Red") {
-		self.menu_color_red = value;
-		iPrintString(color + " Changed to " + value);
-	} else if(color == "Green") {
-		self.menu_color_green = value;
-		iPrintString(color + " Changed to " + value);
-	} else if(color == "Blue") {
-		self.menu_color_blue = value;
-		iPrintString(color + " Changed to " + value);
-	} else {
-		iPrintString(value + " | " + color);
-	}
-	self.color_theme = (self.menu_color_red / 255, self.menu_color_green / 255, self.menu_color_blue / 255);
-	self.menu["border"] notify("stop_rainbow");
-	self.menu["separator_1"] notify("stop_rainbow");
-	self.menu["separator_2"] notify("stop_rainbow");
-	self.menu["border"].rainbow_enabled = false;
-	self.menu["separator_1"].rainbow_enabled = false;
-	self.menu["separator_2"].rainbow_enabled = false;
-	self.menu["border"].color = self.color_theme;
-	self.menu["separator_1"].color = self.color_theme;
-	self.menu["separator_2"].color = self.color_theme;
-}
-
-hide_ui() {
-	self.hide_ui = !return_toggle(self.hide_ui);
-	setDvar("cg_draw2d", !self.hide_ui);
-}
-
-hide_weapon() {
-	self.hide_weapon = !return_toggle(self.hide_weapon);
-	setDvar("cg_drawgun", !self.hide_weapon);
-}
-
 // Basic Options
 
 god_mode() {
@@ -1435,17 +1292,6 @@ god_mode() {
 		iPrintString("God Mode [^2ON^7]");
 	} else {
 		iPrintString("God Mode [^1OFF^7]");
-	}
-}
-
-no_clip() {
-	self.no_clip = !return_toggle(self.no_clip);
-	executecommand("noclip");
-	wait 0.01;
-	if(self.no_clip) {
-		iPrintString("No Clip [^2ON^7]");
-	} else {
-		iPrintString("No Clip [^1OFF^7]");
 	}
 }
 
@@ -1510,17 +1356,6 @@ frag_no_clip_loop() {
 	}
 
 	self.frag_no_clip_loop = undefined;
-}
-
-ufo_mode() {
-	self.ufo_mode = !return_toggle(self.ufo_mode);
-	executecommand("ufo");
-	wait 0.01;
-	if(self.ufo_mode) {
-		iPrintString("UFO Mode [^2ON^7]");
-	} else {
-		iPrintString("UFO Mode [^1OFF^7]");
-	}
 }
 
 infinite_ammo() {
@@ -1679,46 +1514,6 @@ set_vision(vision) {
 	self visionSetNakedForPlayer(vision, 0.1);
 }
 
-// Player Options
-
-print_player_name(target) {
-	iPrintString(target);
-}
-
-commit_suicide(target) {
-	target suicide();
-}
-
-verify_player(target) {
-	target.access = "Verified";
-	target thread initialize_verified_menu();
-}
-
-kick_player(target) {
-	kick(target getEntityNumber());
-}
-
-set_difficulty(difficulty, target) {
-	difficulty = tolower(difficulty);
-	target thread set_difficulty_loop(difficulty, target);
-}
-
-set_difficulty_loop(difficulty, target) {
-	target endon("disconnect");
-	level endon("game_ended");
-
-	for(;;) {
-		target waittill("spawned_player");
-
-		target.var_2D32 = difficulty;
-		target scripts\mp\bots\bots_util::bot_set_difficulty(difficulty);
-	}
-}
-
-get_difficulty(target) {
-	iPrintString(target.difficulty);
-}
-
 // Killstreaks
 
 give_killstreak(streak) {
@@ -1840,4 +1635,185 @@ complete_active_contracts() {
 
 		wait 0.01;
 	}
+}
+
+// Menu Options
+
+iPrintString(string) {
+	if(!isDefined(self.syn["string"])) {
+		self.syn["string"] = self create_text(string, "default", 1, "center", "top", 0, -100, (1, 1, 1), 1, 9999, false, true);
+	} else {
+		self.syn["string"] set_text(string);
+	}
+	self.syn["string"] notify("stop_hud_fade");
+	self.syn["string"].alpha = 1;
+	self.syn["string"] setText(string);
+	self.syn["string"] thread fade_hud(0, 2.5);
+}
+
+fade_hud(alpha, time) {
+	self endon("stop_hud_fade");
+	self fadeOverTime(time);
+	self.alpha = alpha;
+	wait time;
+}
+
+modify_menu_position(offset, axis) {
+	if(axis == "x") {
+		self.x_offset = 175 + offset;
+	} else {
+		self.y_offset = 160 + offset;
+	}
+	self close_menu();
+	self open_menu();
+}
+
+set_menu_rainbow() {
+	if(!isString(self.color_theme)) {
+		self.color_theme = "rainbow";
+		self.menu["border"] thread start_rainbow();
+		self.menu["separator_1"] thread start_rainbow();
+		self.menu["separator_2"] thread start_rainbow();
+		self.menu["border"].color = self.color_theme;
+		self.menu["separator_1"].color = self.color_theme;
+		self.menu["separator_2"].color = self.color_theme;
+	}
+}
+
+set_menu_color(value, color) {
+	if(color == "Red") {
+		self.menu_color_red = value;
+		iPrintString(color + " Changed to " + value);
+	} else if(color == "Green") {
+		self.menu_color_green = value;
+		iPrintString(color + " Changed to " + value);
+	} else if(color == "Blue") {
+		self.menu_color_blue = value;
+		iPrintString(color + " Changed to " + value);
+	} else {
+		iPrintString(value + " | " + color);
+	}
+	self.color_theme = (self.menu_color_red / 255, self.menu_color_green / 255, self.menu_color_blue / 255);
+	self.menu["border"] notify("stop_rainbow");
+	self.menu["separator_1"] notify("stop_rainbow");
+	self.menu["separator_2"] notify("stop_rainbow");
+	self.menu["border"].rainbow_enabled = false;
+	self.menu["separator_1"].rainbow_enabled = false;
+	self.menu["separator_2"].rainbow_enabled = false;
+	self.menu["border"].color = self.color_theme;
+	self.menu["separator_1"].color = self.color_theme;
+	self.menu["separator_2"].color = self.color_theme;
+}
+
+hide_ui() {
+	self.hide_ui = !return_toggle(self.hide_ui);
+	setDvar("cg_draw2d", !self.hide_ui);
+}
+
+hide_weapon() {
+	self.hide_weapon = !return_toggle(self.hide_weapon);
+	setDvar("cg_drawgun", !self.hide_weapon);
+}
+
+// Player Options
+
+player_option(menu, player) {
+	if(!isDefined(menu) || !isDefined(player) || !isPlayer(player)) {
+		menu = "Error";
+	}
+
+	switch (menu) {
+		case "Player Option":
+			self add_menu(clean_name(player get_name()));
+			break;
+		case "Error":
+			self add_menu();
+			self add_option("Oops, Something Went Wrong!", "Condition: Undefined");
+			break;
+		default:
+			error = true;
+			if(error) {
+				self add_menu("Critical Error");
+				self add_option("Oops, Something Went Wrong!", "Condition: Menu Index");
+			}
+			break;
+	}
+}
+
+get_name() {
+	name = self.name;
+	if(name[0] != "[") {
+		return name;
+	}
+
+	for(a = (name.size - 1); a >= 0; a--) {
+		if(name[a] == "]") {
+			break;
+		}
+	}
+
+	return getSubStr(name, (a + 1));
+}
+
+clean_name(name) {
+	if(!isDefined(name) || name == "") {
+		return;
+	}
+
+	illegal = ["^A", "^B", "^F", "^H", "^I", "^0", "^1", "^2", "^3", "^4", "^5", "^6", "^7", "^8", "^9", "^:"];
+	new_string = "";
+	for(a = 0; a < name.size; a++) {
+		if(a < (name.size - 1)) {
+			if(in_array(illegal, (name[a] + name[(a + 1)]))) {
+				a += 2;
+				if(a >= name.size) {
+					break;
+				}
+			}
+		}
+
+		if(isDefined(name[a]) && a < name.size) {
+			new_string += name[a];
+		}
+	}
+
+	return new_string;
+}
+
+print_player_name(target) {
+	iPrintString(target);
+}
+
+commit_suicide(target) {
+	target suicide();
+}
+
+verify_player(target) {
+	target.access = "Verified";
+	target thread initialize_verified_menu();
+}
+
+kick_player(target) {
+	kick(target getEntityNumber());
+}
+
+set_difficulty(difficulty, target) {
+	difficulty = tolower(difficulty);
+	target thread set_difficulty_loop(difficulty, target);
+}
+
+set_difficulty_loop(difficulty, target) {
+	target endon("disconnect");
+	level endon("game_ended");
+
+	for(;;) {
+		target waittill("spawned_player");
+
+		target.var_2D32 = difficulty;
+		target scripts\mp\bots\bots_util::bot_set_difficulty(difficulty);
+	}
+}
+
+get_difficulty(target) {
+	iPrintString(target.difficulty);
 }

@@ -35,6 +35,7 @@ initial_variables() {
 	self.y_offset = 160;
 
 	self.point_increment = 100;
+	self.round_increment = 1;
 	self.map_name = getDvar("mapname");
 	self.color_theme = "rainbow";
 	self.menu_color_red = 0;
@@ -757,46 +758,6 @@ in_array(array, item) {
 	return false;
 }
 
-clean_name(name) {
-	if(!isDefined(name) || name == "") {
-		return;
-	}
-
-	illegal = ["^A", "^B", "^F", "^H", "^I", "^0", "^1", "^2", "^3", "^4", "^5", "^6", "^7", "^8", "^9", "^:"];
-	new_string = "";
-	for(a = 0; a < name.size; a++) {
-		if(a < (name.size - 1)) {
-			if(in_array(illegal, (name[a] + name[(a + 1)]))) {
-				a += 2;
-				if(a >= name.size) {
-					break;
-				}
-			}
-		}
-
-		if(isDefined(name[a]) && a < name.size) {
-			new_string += name[a];
-		}
-	}
-
-	return new_string;
-}
-
-get_name() {
-	name = self.name;
-	if(name[0] != "[") {
-		return name;
-	}
-
-	for(a = (name.size - 1); a >= 0; a--) {
-		if(name[a] == "]") {
-			break;
-		}
-	}
-
-	return getSubStr(name, (a + 1));
-}
-
 player_damage_callback(inflictor, attacker, damage, flags, death_reason, weapon, point, direction, hit_location, time_offset) {
 	self endon("disconnect");
 
@@ -887,7 +848,7 @@ add_toggle(text, description, command, variable, parameter_1, parameter_2) {
 	self.structure[self.structure.size] = option;
 }
 
-add_array(text, description, command, array, parameter_1, parameter_2, parameter_3) {
+add_array(text, description, command, array, show_options, parameter_1, parameter_2, parameter_3) {
 	option = spawnStruct();
 	option.text = text;
 	if(isDefined(description)) {
@@ -902,6 +863,11 @@ add_array(text, description, command, array, parameter_1, parameter_2, parameter
 		option.array = [];
 	} else {
 		option.array = array;
+	}
+	if(isDefined(show_options)) {
+		option.show_options = show_options;
+	} else {
+		option.show_options = true;
 	}
 	if(isDefined(parameter_1)) {
 		option.parameter_1 = parameter_1;
@@ -1180,7 +1146,11 @@ set_options() {
 					self.slider[(self.current_menu + "_" + x)] = set_variable(self.slider[(self.current_menu + "_" + x)] > (self.structure[x].array.size - 1), 0, (self.structure[x].array.size - 1));
 				}
 
-				slider_text = self.structure[x].array[self.slider[(self.current_menu + "_" + x)]] + " [" + (self.slider[(self.current_menu + "_" + x)] + 1) + "/" + self.structure[x].array.size + "]";
+				if(self.structure[x].show_options) {
+					slider_text = self.structure[x].array[self.slider[(self.current_menu + "_" + x)]] + " [" + (self.slider[(self.current_menu + "_" + x)] + 1) + "/" + self.structure[x].array.size + "]";
+				} else {
+					slider_text = self.structure[x].array[self.slider[(self.current_menu + "_" + x)]];
+				}
 
 				self.menu["slider_text_" + i] set_text(slider_text);
 			} else if(isDefined(self.structure[x].increment) && (self.cursor_index) == x) {
@@ -1255,9 +1225,7 @@ menu_option() {
 			self add_menu(menu);
 
 			self add_toggle("God Mode", "Makes you Invincible", ::god_mode, self.god_mode);
-			self add_toggle("No Clip", "Fly through the Map", ::no_clip, self.no_clip);
 			self add_toggle("Frag No Clip", "Fly through the Map using (^3[{+frag}]^7)", ::frag_no_clip, self.frag_no_clip);
-			self add_toggle("UFO", "Fly Straight through the Map", ::ufo_mode, self.ufo_mode);
 			self add_toggle("Infinite Ammo", "Gives you Infinite Ammo and Infinite Grenades", ::infinite_ammo, self.infinite_ammo);
 			self add_toggle("Self Revive", "Auto-Revive when Entering Last Stand", ::self_revive, self.self_revive);
 
@@ -1318,7 +1286,8 @@ menu_option() {
 
 			self add_toggle("No Target", "Zombies won't Target You", ::no_target, self.no_target);
 
-			self add_increment("Set Round", undefined, ::set_round, 1, 1, 255, 1);
+			self add_increment("Set Round", undefined, ::set_round, 1, 1, 9999, self.round_increment);
+			self add_array("Set Round Increment", undefined, ::set_round_increment, [1, 10, 20, 30, 40, 50], false);
 
 			self add_option("Spawn Zombies", undefined, ::new_menu, "Spawn Zombies");
 			self add_option("Kill All Zombies", undefined, ::kill_all_zombies);
@@ -1652,88 +1621,6 @@ menu_option() {
 	}
 }
 
-player_option(menu, player) {
-	if(!isDefined(menu) || !isDefined(player) || !isPlayer(player)) {
-		menu = "Error";
-	}
-
-	switch (menu) {
-		case "Player Option":
-			self add_menu(clean_name(player get_name()));
-			break;
-		case "Error":
-			self add_menu();
-			self add_option("Oops, Something Went Wrong!", "Condition: Undefined");
-			break;
-		default:
-			error = true;
-			if(error) {
-				self add_menu("Critical Error");
-				self add_option("Oops, Something Went Wrong!", "Condition: Menu Index");
-			}
-			break;
-	}
-}
-
-// Menu Options
-
-modify_menu_position(offset, axis) {
-	if(axis == "x") {
-		self.x_offset = 175 + offset;
-	} else {
-		self.y_offset = 160 + offset;
-	}
-	self close_menu();
-	self open_menu();
-}
-
-set_menu_rainbow() {
-	if(!isString(self.color_theme)) {
-		self.color_theme = "rainbow";
-		self.menu["border"] thread start_rainbow();
-		self.menu["separator_1"] thread start_rainbow();
-		self.menu["separator_2"] thread start_rainbow();
-		self.menu["border"].color = self.color_theme;
-		self.menu["separator_1"].color = self.color_theme;
-		self.menu["separator_2"].color = self.color_theme;
-	}
-}
-
-set_menu_color(value, color) {
-	if(color == "Red") {
-		self.menu_color_red = value;
-		iPrintln(color + " Changed to " + value);
-	} else if(color == "Green") {
-		self.menu_color_green = value;
-		iPrintln(color + " Changed to " + value);
-	} else if(color == "Blue") {
-		self.menu_color_blue = value;
-		iPrintln(color + " Changed to " + value);
-	} else {
-		iPrintln(value + " | " + color);
-	}
-	self.color_theme = (self.menu_color_red / 255, self.menu_color_green / 255, self.menu_color_blue / 255);
-	self.menu["border"] notify("stop_rainbow");
-	self.menu["separator_1"] notify("stop_rainbow");
-	self.menu["separator_2"] notify("stop_rainbow");
-	self.menu["border"].rainbow_enabled = false;
-	self.menu["separator_1"].rainbow_enabled = false;
-	self.menu["separator_2"].rainbow_enabled = false;
-	self.menu["border"].color = self.color_theme;
-	self.menu["separator_1"].color = self.color_theme;
-	self.menu["separator_2"].color = self.color_theme;
-}
-
-hide_ui() {
-	self.hide_ui = !return_toggle(self.hide_ui);
-	setDvar("cg_draw2d", !self.hide_ui);
-}
-
-hide_weapon() {
-	self.hide_weapon = !return_toggle(self.hide_weapon);
-	setDvar("cg_drawgun", !self.hide_weapon);
-}
-
 // Basic Options
 
 god_mode() {
@@ -1742,17 +1629,6 @@ god_mode() {
 		iPrintln("God Mode [^2ON^7]");
 	} else {
 		iPrintln("God Mode [^1OFF^7]");
-	}
-}
-
-no_clip() {
-	self.no_clip = !return_toggle(self.no_clip);
-	executecommand("noclip");
-	wait 0.01;
-	if(self.no_clip) {
-		iPrintln("No Clip [^2ON^7]");
-	} else {
-		iPrintln("No Clip [^1OFF^7]");
 	}
 }
 
@@ -1817,17 +1693,6 @@ frag_no_clip_loop() {
 	}
 
 	self.frag_no_clip_loop = undefined;
-}
-
-ufo_mode() {
-	self.ufo_mode = !return_toggle(self.ufo_mode);
-	executecommand("ufo");
-	wait 0.01;
-	if(self.ufo_mode) {
-		iPrintln("UFO Mode [^2ON^7]");
-	} else {
-		iPrintln("UFO Mode [^1OFF^7]");
-	}
 }
 
 infinite_ammo() {
@@ -2008,6 +1873,69 @@ set_vision(vision) {
 
 // Player Options
 
+player_option(menu, player) {
+	if(!isDefined(menu) || !isDefined(player) || !isPlayer(player)) {
+		menu = "Error";
+	}
+
+	switch (menu) {
+		case "Player Option":
+			self add_menu(clean_name(player get_name()));
+			break;
+		case "Error":
+			self add_menu();
+			self add_option("Oops, Something Went Wrong!", "Condition: Undefined");
+			break;
+		default:
+			error = true;
+			if(error) {
+				self add_menu("Critical Error");
+				self add_option("Oops, Something Went Wrong!", "Condition: Menu Index");
+			}
+			break;
+	}
+}
+
+get_name() {
+	name = self.name;
+	if(name[0] != "[") {
+		return name;
+	}
+
+	for(a = (name.size - 1); a >= 0; a--) {
+		if(name[a] == "]") {
+			break;
+		}
+	}
+
+	return getSubStr(name, (a + 1));
+}
+
+clean_name(name) {
+	if(!isDefined(name) || name == "") {
+		return;
+	}
+
+	illegal = ["^A", "^B", "^F", "^H", "^I", "^0", "^1", "^2", "^3", "^4", "^5", "^6", "^7", "^8", "^9", "^:"];
+	new_string = "";
+	for(a = 0; a < name.size; a++) {
+		if(a < (name.size - 1)) {
+			if(in_array(illegal, (name[a] + name[(a + 1)]))) {
+				a += 2;
+				if(a >= name.size) {
+					break;
+				}
+			}
+		}
+
+		if(isDefined(name[a]) && a < name.size) {
+			new_string += name[a];
+		}
+	}
+
+	return new_string;
+}
+
 print_player_name(target) {
 	iPrintln(target);
 }
@@ -2054,6 +1982,65 @@ shoot_powerups_loop() {
 		}
 		wait 0.05;
 	}
+}
+
+// Menu Options
+
+modify_menu_position(offset, axis) {
+	if(axis == "x") {
+		self.x_offset = 175 + offset;
+	} else {
+		self.y_offset = 160 + offset;
+	}
+	self close_menu();
+	self open_menu();
+}
+
+set_menu_rainbow() {
+	if(!isString(self.color_theme)) {
+		self.color_theme = "rainbow";
+		self.menu["border"] thread start_rainbow();
+		self.menu["separator_1"] thread start_rainbow();
+		self.menu["separator_2"] thread start_rainbow();
+		self.menu["border"].color = self.color_theme;
+		self.menu["separator_1"].color = self.color_theme;
+		self.menu["separator_2"].color = self.color_theme;
+	}
+}
+
+set_menu_color(value, color) {
+	if(color == "Red") {
+		self.menu_color_red = value;
+		iPrintln(color + " Changed to " + value);
+	} else if(color == "Green") {
+		self.menu_color_green = value;
+		iPrintln(color + " Changed to " + value);
+	} else if(color == "Blue") {
+		self.menu_color_blue = value;
+		iPrintln(color + " Changed to " + value);
+	} else {
+		iPrintln(value + " | " + color);
+	}
+	self.color_theme = (self.menu_color_red / 255, self.menu_color_green / 255, self.menu_color_blue / 255);
+	self.menu["border"] notify("stop_rainbow");
+	self.menu["separator_1"] notify("stop_rainbow");
+	self.menu["separator_2"] notify("stop_rainbow");
+	self.menu["border"].rainbow_enabled = false;
+	self.menu["separator_1"].rainbow_enabled = false;
+	self.menu["separator_2"].rainbow_enabled = false;
+	self.menu["border"].color = self.color_theme;
+	self.menu["separator_1"].color = self.color_theme;
+	self.menu["separator_2"].color = self.color_theme;
+}
+
+hide_ui() {
+	self.hide_ui = !return_toggle(self.hide_ui);
+	setDvar("cg_draw2d", !self.hide_ui);
+}
+
+hide_weapon() {
+	self.hide_weapon = !return_toggle(self.hide_weapon);
+	setDvar("cg_drawgun", !self.hide_weapon);
 }
 
 // Weapon Options
@@ -2249,7 +2236,11 @@ no_target() {
 }
 
 set_round(value) {
-	level.wave_num = value;
+	level.wave_num = (value - 1);
+}
+
+set_round_increment(value) {
+	self.round_increment = value;
 }
 
 get_zombies() {
