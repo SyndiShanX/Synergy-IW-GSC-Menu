@@ -794,7 +794,7 @@ get_title_width(title) {
 	return title_width;
 }
 
-add_menu(title) {
+set_title(title) {
 	self.menu["title"] set_text(title);
 
 	title_width = get_title_width(title);
@@ -1067,7 +1067,7 @@ menu_option() {
 	menu = self.current_menu;
 	switch(menu) {
 		case "Synergy":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_option("Basic Options", undefined, ::new_menu, "Basic Options");
 			self add_option("Fun Options", undefined, ::new_menu, "Fun Options");
@@ -1079,7 +1079,7 @@ menu_option() {
 
 			break;
 		case "Basic Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_toggle("God Mode", "Makes you Invincible", ::god_mode, self.god_mode);
 			self add_toggle("Frag No Clip", "Fly through the Map using (^3[{+frag}]^7)", ::frag_no_clip, self.frag_no_clip);
@@ -1093,7 +1093,7 @@ menu_option() {
 
 			break;
 		case "Fun Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_toggle("Disable Exo Movement", "Disable/Enable Exo-Suits", ::exo_movement, self.exo_movement);
 			self add_toggle("Infinite Boost", "Enables Infinite Exo-Boost", ::infinite_boost, self.infinite_boost);
@@ -1113,7 +1113,7 @@ menu_option() {
 
 			break;
 		case "Weapon Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_option("Give Weapons", undefined, ::new_menu, "Give Weapons");
 
@@ -1122,7 +1122,7 @@ menu_option() {
 
 			break;
 		case "Give Killstreaks":
-			self add_menu(menu, menu.size, 1);
+			self set_title(menu, menu.size, 1);
 
 			for(i = 0; i < self.syn["killstreaks"][0].size; i++) {
 				self add_option(self.syn["killstreaks"][1][i], undefined, ::give_killstreak, self.syn["killstreaks"][0][i]);
@@ -1130,7 +1130,7 @@ menu_option() {
 
 			break;
 		case "Account Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_increment("Set Prestige", undefined, ::set_prestige, 0, 0, 30, 1);
 			self add_increment("Set Level", undefined, ::set_rank, 1, 1, 55, 1);
@@ -1142,7 +1142,7 @@ menu_option() {
 
 			break;
 		case "Menu Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_increment("Move Menu X", "Move the Menu around Horizontally", ::modify_menu_position, 0, -600, 20, 10, "x");
 			self add_increment("Move Menu Y", "Move the Menu around Vertically", ::modify_menu_position, 0, -100, 30, 10, "y");
@@ -1158,7 +1158,7 @@ menu_option() {
 
 			break;
 		case "All Players":
-			self add_menu(menu, menu.size);
+			self set_title(menu, menu.size);
 
 			foreach(player in level.players){
 				self add_option(player.name, undefined, ::new_menu, "Player Option");
@@ -1166,7 +1166,7 @@ menu_option() {
 
 			break;
 		case "Player Option":
-			self add_menu(menu, menu.size);
+			self set_title(menu, menu.size);
 
 			target = undefined;
 			foreach(player in level.players) {
@@ -1198,7 +1198,7 @@ menu_option() {
 
 			break;
 		case "Give Perks":
-			self add_menu(menu);
+			self set_title(menu);
 
 			for(i = 0; i < self.syn["perks"][0].size; i++) {
 				self add_option(self.syn["perks"][1][i], undefined, ::give_perk, self.syn["perks"][0][i], 0);
@@ -1206,7 +1206,7 @@ menu_option() {
 
 			break;
 		case "Take Perks":
-			self add_menu(menu);
+			self set_title(menu);
 
 			for(i = 0; i < self.syn["perks"][0].size; i++) {
 				self add_option(self.syn["perks"][1][i], undefined, ::take_perk, self.syn["perks"][0][i]);
@@ -1214,7 +1214,7 @@ menu_option() {
 
 			break;
 		case "Give Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			for(i = 0; i < self.syn["weapons"]["category"].size; i++) {
 				self add_option(self.syn["weapons"]["category"][i], undefined, ::new_menu, self.syn["weapons"]["category"][i]);
@@ -1222,7 +1222,7 @@ menu_option() {
 
 			break;
 		case "Visions":
-			self add_menu(menu);
+			self set_title(menu);
 
 			for(i = 0; i < self.syn["visions"][0].size; i++) {
 				self add_option(self.syn["visions"][0][i], undefined, ::set_vision, self.syn["visions"][1][i]);
@@ -1230,61 +1230,61 @@ menu_option() {
 
 			break;
 		case "Assault Rifles":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("assault_rifles");
 
 			break;
 		case "Sub Machine Guns":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("sub_machine_guns");
 
 			break;
 		case "Light Machine Guns":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("light_machine_guns");
 
 			break;
 		case "Sniper Rifles":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("sniper_rifles");
 
 			break;
 		case "Shotguns":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("shotguns");
 
 			break;
 		case "Pistols":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("pistols");
 
 			break;
 		case "Launchers":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("launchers");
 
 			break;
 		case "Classic Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("classics");
 
 			break;
 		case "Melee Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("melee");
 
 			break;
 		case "Specialist Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("specialist");
 
@@ -1738,16 +1738,16 @@ player_option(menu, player) {
 
 	switch (menu) {
 		case "Player Option":
-			self add_menu(clean_name(player get_name()));
+			self set_title(clean_name(player get_name()));
 			break;
 		case "Error":
-			self add_menu();
+			self set_title();
 			self add_option("Oops, Something Went Wrong!", "Condition: Undefined");
 			break;
 		default:
 			error = true;
 			if(error) {
-				self add_menu("Critical Error");
+				self set_title("Critical Error");
 				self add_option("Oops, Something Went Wrong!", "Condition: Menu Index");
 			}
 			break;

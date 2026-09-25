@@ -34,8 +34,6 @@ initial_variables() {
 	self.x_offset = 175;
 	self.y_offset = 160;
 
-	self.point_increment = 100;
-	self.round_increment = 1;
 	self.map_name = getDvar("mapname");
 	self.color_theme = "rainbow";
 	self.menu_color_red = 0;
@@ -48,6 +46,8 @@ initial_variables() {
 	self.description_height = 0;
 	self.previous_option = undefined;
 
+	self.point_increment = 100;
+	self.round_increment = 1;
 	self.outline_zombies = undefined;
 
 	self.syn["visions"][0] = ["", "ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb_afterlife", "cp_zmb_alien", "cp_zmb", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpoutro", "mpnuke", "mpnuke_aftermath", "mp_frontier", "mp_out_of_bounds", "nuke_global_flash", "opticwave_mp", "rc8_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
@@ -939,7 +939,7 @@ get_title_width(title) {
 	return title_width;
 }
 
-add_menu(title) {
+set_title(title) {
 	self.menu["title"] set_text(title);
 
 	title_width = get_title_width(title);
@@ -1102,7 +1102,7 @@ set_options() {
 	for(i = 1; i <= self.option_limit; i++) {
 		self.menu["toggle_" + i].alpha = 0;
 		self.menu["submenu_icon_" + i].alpha = 0;
-	
+
 		self.menu["option_" + i] set_text("");
 	}
 
@@ -1154,7 +1154,7 @@ set_options() {
 					slider_text = self.structure[x].array[self.slider[(self.current_menu + "_" + x)]];
 				}
 
-				self.menu["slider_text_" + i] set_text(slider_text);
+				self.menu["slider_text"] set_text(slider_text);
 			} else if(isDefined(self.structure[x].increment) && (self.cursor_index) == x) {
 				if(!isDefined(self.slider[(self.current_menu + "_" + x)])) {
 					self.slider[(self.current_menu + "_" + x)] = 0;
@@ -1212,7 +1212,7 @@ menu_option() {
 	menu = self.current_menu;
 	switch(menu) {
 		case "Synergy":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_option("Basic Options", undefined, ::new_menu, "Basic Options");
 			self add_option("Fun Options", undefined, ::new_menu, "Fun Options");
@@ -1227,22 +1227,23 @@ menu_option() {
 
 			break;
 		case "Basic Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_toggle("God Mode", "Makes you Invincible", ::god_mode, self.god_mode);
 			self add_toggle("Frag No Clip", "Fly through the Map using (^3[{+frag}]^7)", ::frag_no_clip, self.frag_no_clip);
 			self add_toggle("Infinite Ammo", "Gives you Infinite Ammo and Infinite Grenades", ::infinite_ammo, self.infinite_ammo);
+	    self add_toggle("Unlimited Sprint", undefined, ::unlimited_sprint, self.unlimited_sprint);
 			self add_toggle("Self Revive", "Auto-Revive when Entering Last Stand", ::self_revive, self.self_revive);
 
 			self add_option("Give Perks", undefined, ::new_menu, "Give Perks");
 			self add_option("Take Perks", undefined, ::new_menu, "Take Perks");
 			self add_option("Give Perma Perkaholic", "Gives you all Perks that won't go away after dying", ::give_perkaholic);
 
-			self add_increment("Set Points", undefined, ::set_points, 500, 0, 100000, 500);
+			self add_option("Point Options", undefined, ::new_menu, "Point Options");
 
 			break;
 		case "Weapon Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_option("Give Weapons", undefined, ::new_menu, "Give Weapons");
 
@@ -1259,7 +1260,7 @@ menu_option() {
 
 			break;
 		case "Fun Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_toggle("Exo Movement", "Enable/Disable Exo-Suits", ::exo_movement, self.exo_movement);
 			self add_toggle("Infinite Boost", "Enables Infinite Exo-Boost", ::infinite_boost, self.infinite_boost);
@@ -1277,7 +1278,7 @@ menu_option() {
 
 			break;
 		case "Powerup Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_toggle("Shoot Powerups", undefined, ::shoot_powerups, self.shoot_powerups);
 
@@ -1287,7 +1288,7 @@ menu_option() {
 
 			break;
 		case "Zombie Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_toggle("No Target", "Zombies won't Target You", ::no_target, self.no_target);
 
@@ -1306,7 +1307,7 @@ menu_option() {
 
 			break;
 		case "Teleport Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			map = self.map_name;
 
@@ -1329,7 +1330,7 @@ menu_option() {
 
 			break;
 		case "Account Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_increment("Set Prestige", undefined, ::set_prestige, 0, 0, 20, 1);
 			self add_increment("Set Level", undefined, ::set_rank, 1, 1, 999, 1);
@@ -1346,7 +1347,7 @@ menu_option() {
 
 			break;
 		case "Menu Options":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_increment("Move Menu X", "Move the Menu around Horizontally", ::modify_menu_position, 0, -600, 20, 10, "x");
 			self add_increment("Move Menu Y", "Move the Menu around Vertically", ::modify_menu_position, 0, -100, 30, 10, "y");
@@ -1362,7 +1363,7 @@ menu_option() {
 
 			break;
 		case "All Players":
-			self add_menu(menu);
+			self set_title(menu);
 
 			foreach(player in level.players) {
 				self add_option(player.name, undefined, ::new_menu, "Player Option");
@@ -1370,7 +1371,7 @@ menu_option() {
 
 			break;
 		case "Player Option":
-			self add_menu(menu);
+			self set_title(menu);
 
 			target = undefined;
 			foreach(player in level.players) {
@@ -1397,7 +1398,7 @@ menu_option() {
 
 			break;
 		case "Give Perks":
-			self add_menu(menu);
+			self set_title(menu);
 
 			map = self.map_name;
 
@@ -1413,7 +1414,7 @@ menu_option() {
 
 			break;
 		case "Take Perks":
-			self add_menu(menu);
+			self set_title(menu);
 
 			map = self.map_name;
 
@@ -1429,15 +1430,25 @@ menu_option() {
 
 			break;
 		case "Give Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			for(i = 0; i < self.syn["weapons"]["category"].size; i++) {
 				self add_option(self.syn["weapons"]["category"][i], undefined, ::new_menu, self.syn["weapons"]["category"][i]);
 			}
 
 			break;
+		case "Point Options":
+			self set_title(menu);
+
+			self add_increment("Set Point Increment", undefined, ::set_point_increment, 100, 100, 10000, 100);
+
+			self add_increment("Set Points", undefined, ::set_points, 500, 0, 100000, self.point_increment);
+			self add_increment("Add Points", undefined, ::add_points, 500, 500, 100000, self.point_increment);
+			self add_increment("Take Points", undefined, ::take_points, 500, 500, 100000, self.point_increment);
+
+			break;
 		case "Visions":
-			self add_menu(menu);
+			self set_title(menu);
 
 			for(i = 0; i < self.syn["visions"][0].size; i++) {
 				self add_option(self.syn["visions"][1][i], undefined, ::set_vision, self.syn["visions"][0][i]);
@@ -1445,7 +1456,7 @@ menu_option() {
 
 			break;
 		case "Spawn Zombies":
-			self add_menu(menu);
+			self set_title(menu);
 
 			map = self.map_name;
 
@@ -1455,7 +1466,7 @@ menu_option() {
 
 			break;
 		case "Map Setup Teleports":
-			self add_menu(menu);
+			self set_title(menu);
 
 			map = self.map_name;
 
@@ -1465,7 +1476,7 @@ menu_option() {
 
 			break;
 		case "Mystery Wheel Teleports":
-			self add_menu(menu);
+			self set_title(menu);
 
 			map = self.map_name;
 
@@ -1475,7 +1486,7 @@ menu_option() {
 
 			break;
 		case "Main Quest Teleports":
-			self add_menu(menu);
+			self set_title(menu);
 
 			map = self.map_name;
 
@@ -1485,7 +1496,7 @@ menu_option() {
 
 			break;
 		case "Extra Teleports":
-			self add_menu(menu);
+			self set_title(menu);
 
 			map = self.map_name;
 
@@ -1495,7 +1506,7 @@ menu_option() {
 
 			break;
 		case "Zombies in Spaceland":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_increment("Give Tickets", undefined, ::give_tickets, 50, 50, 950, 50);
 			self add_option("Turn on Power & Open Doors", undefined, scripts\cp\zombies\direct_boss_fight::open_sesame);
@@ -1508,7 +1519,7 @@ menu_option() {
 
 			break;
 		case "Rave in the Redwoods":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_option("Turn on Power & Open Doors", undefined, scripts\cp\zombies\direct_boss_fight::open_sesame);
 			self add_toggle("Rave Mode", undefined, ::enable_rave_mode, self.enable_rave_mode);
@@ -1516,76 +1527,76 @@ menu_option() {
 
 			break;
 		case "Shaolin Shuffle":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_option("Turn on Power & Open Doors", undefined, scripts\cp\zombies\direct_boss_fight::open_sesame);
 			self add_toggle("Unlimited Chi", undefined, ::unlimited_chi, self.unlimited_chi);
 
 			break;
 		case "Attack of the Radioactive Thing":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_option("Open Doors", undefined, scripts\cp\zombies\direct_boss_fight::open_sesame);
 			self add_toggle("Full Color", undefined, ::attack_toggle_full_color, self.full_color);
 
 			break;
 		case "The Beast from Beyond":
-			self add_menu(menu);
+			self set_title(menu);
 
 			self add_option("Turn on Power & Open Doors", undefined, ::beast_open_sesame);
 			self add_option("Complete Venom-X Quest", undefined, ::complete_venom_x);
 
 			break;
 		case "Assault Rifles":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("assault_rifles");
 
 			break;
 		case "Sub Machine Guns":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("sub_machine_guns");
 
 			break;
 		case "Light Machine Guns":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("light_machine_guns");
 
 			break;
 		case "Sniper Rifles":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("sniper_rifles");
 
 			break;
 		case "Shotguns":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("shotguns");
 
 			break;
 		case "Pistols":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("pistols");
 
 			break;
 		case "Launchers":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("launchers");
 
 			break;
 		case "Classic Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("classics");
 
 			break;
 		case "Melee Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("melee");
 
@@ -1599,19 +1610,19 @@ menu_option() {
 
 			break;
 		case "Specialist Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("specialist");
 
 			break;
 		case "Map Specific Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons(self.map_name);
 
 			break;
 		case "Other Weapons":
-			self add_menu(menu);
+			self set_title(menu);
 
 			load_weapons("other");
 
@@ -1727,6 +1738,18 @@ infinite_ammo_loop() {
 	}
 }
 
+unlimited_sprint() {
+	self.unlimited_sprint = !return_toggle(self.unlimited_sprint);
+	if(self.unlimited_sprint) {
+	  iPrintln("Unlimited Sprint [^2ON^7]");
+	} else {
+	  iPrintln("Unlimited Sprint [^1OFF^7]");
+	}
+	if(!_hasperk("specialty_marathon")) {
+		giveperk("specialty_marathon");
+	}
+}
+
 self_revive() {
 	self.self_revive = !return_toggle(self.self_revive);
 	if(self.self_revive) {
@@ -1752,8 +1775,20 @@ give_perkaholic() {
 	scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::give_gns_base_reward(self);
 }
 
+set_point_increment(value) {
+	self.point_increment = value;
+}
+
 set_points(value) {
 	self setPlayerData("cp", "alienSession", "currency", value);
+}
+
+add_points(value) {
+	self setPlayerData("cp", "alienSession", "currency", (self getRankedPlayerData("cp", "alienSession", "currency") + value));
+}
+
+take_points(value) {
+	self setPlayerData("cp", "alienSession", "currency", (self getRankedPlayerData("cp", "alienSession", "currency") - value));
 }
 
 // Fun Options
@@ -1885,16 +1920,16 @@ player_option(menu, player) {
 
 	switch (menu) {
 		case "Player Option":
-			self add_menu(clean_name(player get_name()));
+			self set_title(clean_name(player get_name()));
 			break;
 		case "Error":
-			self add_menu();
+			self set_title();
 			self add_option("Oops, Something Went Wrong!", "Condition: Undefined");
 			break;
 		default:
 			error = true;
 			if(error) {
-				self add_menu("Critical Error");
+				self set_title("Critical Error");
 				self add_option("Oops, Something Went Wrong!", "Condition: Menu Index");
 			}
 			break;

@@ -822,7 +822,7 @@ get_title_width(title) {
 	return title_width;
 }
 
-add_menu(title) {
+set_title(title) {
 	self.menu["title"] set_text(title);
 
 	title_width = get_title_width(title);
@@ -1095,7 +1095,7 @@ menu_option() {
 	menu = self.current_menu;
 	switch(menu) {
 	  case "Synergy":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    self add_option("Basic Options", undefined, ::new_menu, "Basic Options");
 	    self add_option("Fun Options", undefined, ::new_menu, "Fun Options");
@@ -1104,15 +1104,16 @@ menu_option() {
 
 	    break;
 	  case "Basic Options":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    self add_toggle("God Mode", "Makes you Invincible", ::god_mode, self.god_mode);
 	    self add_toggle("Frag No Clip", "Fly through the Map using (^3[{+frag}]^7)", ::frag_no_clip, self.frag_no_clip);
 	    self add_toggle("Infinite Ammo", "Gives you Infinite Ammo and Infinite Grenades", ::infinite_ammo, self.infinite_ammo);
+	    self add_toggle("Unlimited Sprint", undefined, ::unlimited_sprint, self.unlimited_sprint);
 
 	    break;
 	  case "Fun Options":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    self add_toggle("Disable Exo Movement", "Disable/Enable Exo-Suits", ::exo_movement, self.exo_movement);
 			self add_toggle("Infinite Boost", "Enables Infinite Exo-Boost", ::infinite_boost, self.infinite_boost);
@@ -1125,7 +1126,7 @@ menu_option() {
 
 	    break;
 	  case "Weapon Options":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    self add_option("Give Weapons", undefined, ::new_menu, "Give Weapons");
 	    self add_option("Give Attachments", undefined, ::new_menu, "Give Attachments");
@@ -1134,7 +1135,7 @@ menu_option() {
 
 	    break;
 	  case "Menu Options":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    self add_increment("Move Menu X", "Move the Menu around Horizontally", ::modify_menu_position, 0, -600, 20, 10, "x");
 	    self add_increment("Move Menu Y", "Move the Menu around Vertically", ::modify_menu_position, 0, -100, 30, 10, "y");
@@ -1147,7 +1148,7 @@ menu_option() {
 
 	    break;
 	  case "Give Weapons":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    for(i = 0; i < self.syn["weapons"]["category"].size; i++) {
 	      self add_option(self.syn["weapons"]["category"][i], undefined, ::new_menu, self.syn["weapons"]["category"][i]);
@@ -1155,7 +1156,7 @@ menu_option() {
 
 	    break;
 	  case "Give Attachments":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    weapon = strTok(self getCurrentWeapon(), "+")[0];
 
@@ -1191,43 +1192,43 @@ menu_option() {
 
 	    break;
 	  case "Assault Rifles":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    load_weapons("assault_rifles");
 
 	    break;
 	  case "Sub Machine Guns":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    load_weapons("sub_machine_guns");
 
 	    break;
 	  case "Light Machine Guns":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    load_weapons("light_machine_guns");
 
 	    break;
 	  case "Sniper Rifles":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    load_weapons("sniper_rifles");
 
 	    break;
 	  case "Shotguns":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    load_weapons("shotguns");
 
 	    break;
 	  case "Pistols":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    load_weapons("pistols");
 
 	    break;
 	  case "Heavies":
-	    self add_menu(menu);
+	    self set_title(menu);
 
 	    load_weapons("heavies");
 
@@ -1336,6 +1337,17 @@ infinite_ammo_loop() {
 	  self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
 	  self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 	  wait 0.2;
+	}
+}
+
+unlimited_sprint() {
+	self.unlimited_sprint = !return_toggle(self.unlimited_sprint);
+	if(self.unlimited_sprint) {
+	  iPrintString("Unlimited Sprint [^2ON^7]");
+	  executeCommand("player_sprintUnlimited 1");
+	} else {
+	  iPrintString("Unlimited Sprint [^1OFF^7]");
+	  executeCommand("player_sprintUnlimited 0");
 	}
 }
 
